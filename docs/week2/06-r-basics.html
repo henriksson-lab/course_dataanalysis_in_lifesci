@@ -467,7 +467,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#todays-question" id="toc-todays-question" class="nav-link active" data-scroll-target="#todays-question">Today’s question</a></li>
   <li><a href="#start-with-a-calculation" id="toc-start-with-a-calculation" class="nav-link" data-scroll-target="#start-with-a-calculation">Start with a calculation</a></li>
   <li><a href="#one-name-can-hold-several-values" id="toc-one-name-can-hold-several-values" class="nav-link" data-scroll-target="#one-name-can-hold-several-values">One name can hold several values</a></li>
-  <li><a href="#your-practical" id="toc-your-practical" class="nav-link" data-scroll-target="#your-practical">Your practical</a></li>
+  <li><a href="#your-practical" id="toc-your-practical" class="nav-link" data-scroll-target="#your-practical">Your practical</a>
+  <ul class="collapse">
+  <li><a href="#alternative-ratio-exercise-how-much-product-was-collected" id="toc-alternative-ratio-exercise-how-much-product-was-collected" class="nav-link" data-scroll-target="#alternative-ratio-exercise-how-much-product-was-collected">Alternative ratio exercise: how much product was collected?</a></li>
+  </ul></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
   </ul>
 </nav>
@@ -544,10 +547,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Keep the three-plant calculation in <code>day06.R</code> and explain the units in comments.</li>
 <li>Add a fourth plant that grew from 21 to 39 mm. Extend <strong>both</strong> vectors, rerun the calculation, and check <code>length(growth_mm)</code>.</li>
-<li>Calculate each plant’s final/initial ratio in an object called <code>length_ratio</code>. Write a comment explaining how the ratio differs from growth in mm.</li>
+<li>Choose one ratio exercise: calculate each plant’s final/initial ratio in an object called <code>length_ratio</code>, explaining how it differs from growth in mm; <strong>or</strong> use the product-yield calculation below. Both practise division and named inputs; you do not need to do both.</li>
 <li>Change the first final length from 37 to 38 mm. Predict which growth value changes and check your prediction.</li>
 <li>Save the script, restart R through <strong>Session → Restart R</strong>, and run its lines from the top. Everything it needs should be in the script.</li>
 </ol>
+<section id="alternative-ratio-exercise-how-much-product-was-collected" class="level3">
+<h3 class="anchored" data-anchor-id="alternative-ratio-exercise-how-much-product-was-collected">Alternative ratio exercise: how much product was collected?</h3>
+<p>In a synthesis, starting materials are used to make a product. For this simulated example, the maximum possible product mass has already been calculated for you: <strong>1.00 g</strong>. Call it <code>theoretical_mass_g</code>. The collected dry product has mass <strong>0.62 g</strong>, called <code>isolated_mass_g</code>. Assume this collected material is pure product for this simplified calculation. You do not need a reaction equation.</p>
+<p><strong>Percentage yield</strong> means the collected product as a percentage of the supplied maximum. Compute <code>100 × isolated mass / theoretical mass</code>, using the same mass unit for both. Put this calculation in <code>day06.R</code> if you chose this alternative:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>theoretical_mass_g <span class="ot">&lt;-</span> <span class="fl">1.00</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>isolated_mass_g <span class="ot">&lt;-</span> <span class="fl">0.62</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>yield_percent <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> isolated_mass_g <span class="sc">/</span> theoretical_mass_g</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>yield_percent</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The answer is <strong>62%</strong>. The gram units cancel in the ratio. Predict the result if collected mass changes to 0.70 g, then rerun; it should be <strong>70%</strong>. Add a comment explaining why 0.62 g is a mass and 62% is a proportion relative to a maximum. A larger percentage does not establish greater purity or safety. This is numerical practice, not instructions for carrying out a chemical experiment.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -564,6 +578,7 @@ Hint: an object is not found
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="check-your-understanding" class="level2">
 <h2 class="anchored" data-anchor-id="check-your-understanding">Check your understanding</h2>

@@ -33,6 +33,10 @@ title: "Glossary: words we use in this course"
 | Technical replicate | A repeated measurement of the same underlying sample |
 | Missing value | A measurement that is unavailable; represented by `NA` in R |
 | Raw data | The original supplied measurements, preserved without overwriting |
+| Theoretical mass | In the organic practice, the supplied maximum possible product mass for a run |
+| Isolated mass | In the organic practice, the dry product collected, assumed pure for the simplified calculation |
+| Percentage yield | 100 × isolated mass / theoretical mass, using the same mass units |
+| Percentage point | A difference on a percentage scale: 70% minus 60% is 10 percentage points |
 | Derived data | Values calculated or cleaned from the originals with documented code |
 | Render / Knit | Run a report's code and combine results with its text to create a document |
 | Reproducibility | Being able to regenerate a result from its stated inputs, code, and environment |

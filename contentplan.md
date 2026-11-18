@@ -31,7 +31,17 @@ Chemistry can provide laboratory contexts, but students must not need to have
 completed Fundamentals of Chemistry (5KE165) to understand what to compute.
 Each exercise supplies definitions, quantities, units, constants, the formula,
 and calculation instructions. See [the chemistry context note](instructor/chemistry-context.md)
-for investigated placements; these are proposals, not yet lesson changes.
+for investigated placements. Its day 19 dilution correction is now implemented;
+the other general-chemistry mass, dilution-table, and volume-reading tasks remain
+proposals.
+
+Selected organic-laboratory transfer choices are now implemented separately:
+supplied sample-label searches, percentage yield from provided masses, variation
+between independent runs, and an alternative descriptive report. The
+[organic-context review](instructor/organic-context-review.md) maps all 25 exercise
+reviews. These choices replace repeated practice, preserve the biology sequence,
+and assume neither completion of the shortened 7.5 ECTS Organic Chemistry 1 nor
+knowledge of reaction mechanisms, synthesis planning, or spectral assignments.
 
 Biology provides the question from the first day. Use short explanations of the
 organism, measurement, and experiment so that students do not need biology from

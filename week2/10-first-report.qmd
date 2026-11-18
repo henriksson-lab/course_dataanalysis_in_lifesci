@@ -79,7 +79,8 @@ Create these sections in `first-report.Rmd`:
 4. **Interpretation:** write three or four sentences describing the pattern,
    variation, and an important limitation. No p-value is needed.
 
-Now render from a restarted session:
+Now restart R and run this in the **R Console**, not inside the report (a report
+must not try to render itself):
 
 ```{r}
 rmarkdown::render("first-report.Rmd", output_dir = "reports")

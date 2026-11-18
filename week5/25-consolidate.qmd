@@ -105,7 +105,8 @@ Write a sentence responding to each situation. No new test is required.
 Return to the report from day 23 or one that still needs work. Starting from a
 fresh session, render it without running console code first. Check that it has:
 
-- A biological question and an independent experimental unit.
+- A biological or laboratory question and the correct independent experimental
+  unit: a flask for duckweed or a synthesis run for the organic alternative.
 - The input filename, measurement units, and missing-data account.
 - A readable plot of observations and a small relevant summary.
 - An appropriately directed comparison or a line fit, if the question needs it.
@@ -116,6 +117,10 @@ fresh session, render it without running console code first. Check that it has:
 If these work reliably, use the time to repeat them on an earlier dataset rather
 than adding another statistical method. Discuss with a peer which parts would
 change for a new biology practical and which parts would stay the same.
+
+If you chose the organic alternative on day 23, use `organic-study.Rmd` and
+`data/organic-recovery.csv` here. Its descriptive group means and SD are enough;
+a new test is not needed. Higher yield alone cannot demonstrate higher purity.
 
 ## Station 5 — local and remote, when available
 

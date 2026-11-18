@@ -11,6 +11,13 @@ the relationship to compute, assumptions, and a worked/checkable result.
 Prior chemistry can make an example familiar; it cannot supply missing steps.
 See `instructor/chemistry-context.md` for investigated insertion points.
 
+Organic Chemistry 1 (5KE231) is planned at 7.5 ECTS in 2027. Detailed content
+remains unconfirmed; do not assume the full 15-credit predecessor's mechanisms,
+synthesis planning, or spectral assignments. Organic examples use supplied
+sample labels and basic product masses/yield, with no prior chemistry needed.
+Use context choices to replace repeated practice, not add required workload.
+See `instructor/organic-exercise-contract.md` for the shared data and review scope.
+
 ## Authoring conventions
 
 - Daily student pages live in `week1/01-files.qmd` through the named day 25 page.

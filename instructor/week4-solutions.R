@@ -80,6 +80,18 @@ ggsave(file.path(out, "day19-residuals.png"), residual_plot, width = 6, height =
 print(coef(calibration_fit))
 print(unknowns)
 
+# Day 19 transfer: a new in-range diluted measurement, not extrapolated U3.
+diluted_absorbance <- 0.520
+dilution_factor <- 10.00 / 1.00
+stopifnot(diluted_absorbance >= min(standards$absorbance),
+          diluted_absorbance <= max(standards$absorbance))
+diluted_mg_l <- unname((diluted_absorbance - intercept) / slope)
+original_mg_l <- diluted_mg_l * dilution_factor
+stopifnot(abs(diluted_mg_l - 7.404227212) < 1e-6,
+          abs(original_mg_l - 74.04227212) < 1e-5,
+          is.na(unknowns$concentration_mg_l[unknowns$sample_id == "U3"]))
+print(c(diluted_mg_l = diluted_mg_l, original_mg_l = original_mg_l))
+
 # Day 20: observational association, not causal manipulation.
 leaves <- read_csv("data/leaf-mass.csv", show_col_types = FALSE)
 leaf_fit <- lm(dry_mass_mg ~ leaf_area_cm2, data = leaves)

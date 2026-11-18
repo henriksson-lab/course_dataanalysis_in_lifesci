@@ -39,6 +39,11 @@ assert not missing, f"Broken local links: {missing}"
 assert not (ROOT / "docs/instructor").exists(), "Instructor material was published"
 assert not (ROOT / "docs/contentplan.html").exists(), "Internal plan was published"
 
+for download in (ROOT / "downloads").glob("*.zip"):
+    assert download.read_bytes() == (ROOT / "docs/downloads" / download.name).read_bytes(), (
+        f"Published archive differs from checked download: {download.name}"
+    )
+
 with ZipFile(ROOT / "downloads/course-files.zip") as archive:
     assert archive.testzip() is None
     names = archive.namelist()
@@ -74,4 +79,18 @@ with tempfile.TemporaryDirectory(prefix="introcomputing-shell-") as directory:
     with ZipFile(workspace / "lab-copy.zip") as archive:
         assert archive.read("lab-data/treated-samples.txt").decode() == matches
 
-print("25 lessons built; local links/resources resolve; student archives and shell workflow pass.")
+with tempfile.TemporaryDirectory(prefix="introcomputing-organic-") as directory:
+    workspace = Path(directory)
+    subprocess.run(["unzip", str(ROOT / "downloads/organic-lab.zip"), "-d", str(workspace)],
+                   check=True, capture_output=True)
+    matches = subprocess.run(["grep", "-F", "ester", "inventory.tsv"], cwd=workspace,
+                             check=True, capture_output=True, text=True).stdout
+    assert len(matches.splitlines()) == 2
+    assert "O02" in matches and "O03" in matches
+    with (workspace / "inventory.tsv").open() as handle:
+        inventory = list(csv.DictReader(handle, delimiter="\t"))
+    assert len(inventory) == 4
+    assert (workspace / "organic-recovery.csv").read_bytes() == (ROOT / "data/organic-recovery.csv").read_bytes()
+    assert "100 * isolated_mass_g / theoretical_mass_g" in (ROOT / "data/README.md").read_text()
+
+print("25 lessons built; local links/resources resolve; student archives and both shell workflows pass.")

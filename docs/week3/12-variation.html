@@ -469,6 +469,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#variance-measures-spread-around-the-mean" id="toc-variance-measures-spread-around-the-mean" class="nav-link" data-scroll-target="#variance-measures-spread-around-the-mean">Variance measures spread around the mean</a></li>
   <li><a href="#apply-the-descriptions-to-plants" id="toc-apply-the-descriptions-to-plants" class="nav-link" data-scroll-target="#apply-the-descriptions-to-plants">Apply the descriptions to plants</a></li>
   <li><a href="#your-practical" id="toc-your-practical" class="nav-link" data-scroll-target="#your-practical">Your practical</a></li>
+  <li><a href="#transfer-choice-variation-in-collected-product" id="toc-transfer-choice-variation-in-collected-product" class="nav-link" data-scroll-target="#transfer-choice-variation-in-collected-product">Transfer choice: variation in collected product</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
   </ul>
 </nav>
@@ -566,9 +567,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Work through the three-measurement variance by hand, then compare with R.</li>
 <li>Predict the mean and SD if every value in <code>close_mm</code> increases by 10 mm. Check using <code>mean(close_mm + 10)</code> and <code>sd(close_mm + 10)</code>.</li>
 <li>Predict what happens if lengths are converted from mm to cm by dividing by ten. Check the mean, variance, and SD in the new units.</li>
-<li>Calculate the treated group’s mean, median, variance, and SD. Write two sentences comparing centre and spread with the control group.</li>
+<li>Calculate the treated group’s mean, median, variance, and SD. Write two sentences comparing centre and spread with the control group. The teacher may substitute the organic-laboratory transfer task below for this step; you do not need to complete both.</li>
 <li>Add a note explaining why “the average plant grew 15.3 mm” does not mean every control plant grew exactly that amount.</li>
 </ol>
+</section>
+<section id="transfer-choice-variation-in-collected-product" class="level2">
+<h2 class="anchored" data-anchor-id="transfer-choice-variation-in-collected-product">Transfer choice: variation in collected product</h2>
+<p>An organic synthesis is an experiment intended to make a product. In our simulated <code>data/organic-recovery.csv</code>, each row is one independent run. The supplied <strong>theoretical mass</strong> is the maximum product mass possible from that run’s starting materials; you do not need to derive it. <strong>Isolated mass</strong> is the dry product actually collected, assumed pure for this simplified calculation. Both are in grams. Calculate <strong>percentage yield</strong> as <code>100 × isolated mass / theoretical mass</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>organic <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/organic-recovery.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">yield_percent =</span> <span class="dv">100</span> <span class="sc">*</span> isolated_mass_g <span class="sc">/</span> theoretical_mass_g)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>standard_runs <span class="ot">&lt;-</span> <span class="fu">filter</span>(organic, protocol <span class="sc">==</span> <span class="st">"standard"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(standard_runs<span class="sc">$</span>yield_percent)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(standard_runs<span class="sc">$</span>yield_percent)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(standard_runs<span class="sc">$</span>yield_percent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Y01 gives <code>100 × 0.62 / 1.00 = 62%</code>. For the six standard-protocol runs, the mean is about <strong>68.67%</strong>, variance <strong>18.67 squared percentage points</strong>, and SD <strong>4.32 percentage points</strong>. A difference from 62% to 70% is eight percentage points, not an eight-percent relative increase. Repeat the summaries for the modified protocol and describe centre and spread in two sentences.</p>
+<p>The runs used different starting amounts, so raw collected grams do not make the same comparison as percentage yield. A higher yield alone does not establish greater purity or a generally better method. Save this calculation in today’s script; no knowledge of reaction mechanisms is needed.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">

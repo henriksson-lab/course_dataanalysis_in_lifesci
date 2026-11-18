@@ -20,6 +20,14 @@ print(data.frame(initial_mm, final_mm, growth_mm, length_ratio))
 stopifnot(identical(growth_mm, c(18, 18, 15, 18)))
 # Growth is an absolute change in mm; ratio has no length unit.
 
+# Day 6 alternative ratio exercise: maximum product mass is supplied.
+theoretical_mass_g <- 1.00
+isolated_mass_g <- 0.62
+yield_percent <- 100 * isolated_mass_g / theoretical_mass_g
+stopifnot(yield_percent == 62,
+          100 * 0.70 / theoretical_mass_g == 70)
+# Collected dry mass is assumed pure here; yield does not establish purity.
+
 # Day 7: an imported observation has a design and units, not just a type.
 seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE)
 stopifnot(nrow(seedlings) == 24, ncol(seedlings) == 4,
@@ -57,6 +65,23 @@ ggsave(file.path(out, "seedling-growth.png"), growth_plot, width = 6, height = 4
 ggsave(file.path(out, "initial-growth.png"), initial_growth_plot, width = 6, height = 4)
 write_csv(growth_table, file.path(out, "seedling-growth.csv"))
 write_csv(treated_growth, file.path(out, "treated-growth.csv"))
+
+# Day 8 alternative transfer: a derived percentage and a plot, not another test.
+organic <- read_csv("data/organic-recovery.csv", show_col_types = FALSE)
+organic <- mutate(organic,
+                  yield_percent = 100 * isolated_mass_g / theoretical_mass_g)
+expected_yields <- c(62, 70, 68, 74, 66, 72, 72, 78, 76, 82, 74, 80)
+stopifnot(nrow(organic) == 12, anyDuplicated(organic$run_id) == 0,
+          !anyNA(organic), all(organic$theoretical_mass_g > 0),
+          all(organic$isolated_mass_g >= 0),
+          isTRUE(all.equal(organic$yield_percent, expected_yields)),
+          organic$yield_percent[organic$run_id == "Y01"] == 62)
+print(organic)
+organic_plot <- ggplot(organic, aes(protocol, yield_percent)) +
+  geom_point(position = position_jitter(width = 0.08, height = 0, seed = 8)) +
+  labs(x = "Protocol", y = "Isolated product yield (%)") + theme_minimal()
+write_csv(organic, file.path(out, "organic-yields.csv"))
+ggsave(file.path(out, "organic-yields.png"), organic_plot, width = 6, height = 4)
 
 # Days 9–10: generate and render a self-contained worked source.
 report <- c(

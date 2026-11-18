@@ -100,6 +100,86 @@ writeLines(c(
 rmarkdown::render(source_file, output_dir = out, knit_root_dir = root,
                   envir = new.env(parent = globalenv()), quiet = TRUE)
 
+# Day 23 organic-laboratory alternative: descriptive, one outcome per run.
+organic <- read_csv("data/organic-recovery.csv", show_col_types = FALSE) |>
+  mutate(yield_percent = 100 * isolated_mass_g / theoretical_mass_g)
+organic_summary <- organic |>
+  group_by(protocol) |>
+  summarise(n = n(), mean_yield_percent = mean(yield_percent),
+            sd_percentage_points = sd(yield_percent), .groups = "drop")
+standard_yield <- organic |> filter(protocol == "standard") |> pull(yield_percent)
+modified_yield <- organic |> filter(protocol == "modified") |> pull(yield_percent)
+organic_difference_pp <- mean(modified_yield) - mean(standard_yield)
+stopifnot(nrow(organic) == 12, anyDuplicated(organic$run_id) == 0,
+          !anyNA(organic), all(organic$theoretical_mass_g > 0),
+          all(organic$yield_percent >= 0 & organic$yield_percent <= 100),
+          length(standard_yield) == 6, length(modified_yield) == 6,
+          abs(organic$yield_percent[organic$run_id == "Y01"] - 62) < 1e-10,
+          abs(mean(standard_yield) - 68.6666666667) < 1e-8,
+          abs(mean(modified_yield) - 77) < 1e-10,
+          abs(sd(standard_yield) - 4.320493799) < 1e-8,
+          abs(sd(modified_yield) - 3.741657387) < 1e-8,
+          abs(organic_difference_pp - 8.3333333333) < 1e-8)
+print(organic_summary)
+print(organic_difference_pp)
+write_csv(organic_summary, file.path(out, "organic-summary.csv"))
+organic_plot <- ggplot(organic, aes(protocol, yield_percent)) +
+  geom_point(position = position_jitter(width = 0.08, height = 0, seed = 23)) +
+  labs(x = "Protocol label", y = "Isolated product yield (%)") + theme_minimal()
+ggsave(file.path(out, "organic-yields.png"), organic_plot, width = 6, height = 4)
+
+# Complete alternative report: no confidence interval or test is required.
+organic_source <- file.path(out, "organic-study.Rmd")
+writeLines(c(
+  '---', 'title: "Product yield: a descriptive teaching study"',
+  'output: html_document', '---', '',
+  '# Question and context', '',
+  'How does percentage product yield vary among runs and between protocol labels?',
+  'These simulated data describe 12 independently performed synthesis runs, six',
+  'randomly assigned each protocol. Theoretical mass is the supplied maximum',
+  'product mass for each run. Isolated mass is collected dry product, assumed',
+  'pure only for this simplified exercise. No reaction equation is needed.', '',
+  '# Methods and checks', '',
+  'Yield (%) = 100 times isolated mass (g) divided by theoretical mass (g).',
+  'Because starting scales differ, yields are compared instead of raw masses.',
+  'The independent unit is the synthesis run, not a repeat weighing.', '',
+  '```{r setup, include=FALSE}',
+  'library(readr)', 'library(dplyr)', 'library(ggplot2)', '```', '',
+  '```{r import}',
+  'organic <- read_csv("data/organic-recovery.csv", show_col_types = FALSE)',
+  'nrow(organic)', 'anyDuplicated(organic$run_id)',
+  'organic |> count(protocol)', 'sum(is.na(organic))',
+  'all(organic$theoretical_mass_g > 0)',
+  'organic <- organic |>',
+  '  mutate(yield_percent = 100 * isolated_mass_g / theoretical_mass_g)',
+  'group_summary <- organic |> group_by(protocol) |>',
+  '  summarise(n = n(), mean_yield_percent = mean(yield_percent),',
+  '            sd_percentage_points = sd(yield_percent), .groups = "drop")',
+  'modified_mean <- group_summary$mean_yield_percent[group_summary$protocol == "modified"]',
+  'standard_mean <- group_summary$mean_yield_percent[group_summary$protocol == "standard"]',
+  'difference_pp <- modified_mean - standard_mean', '```', '',
+  'There were `r nrow(organic)` unique runs and no missing measurements.', '',
+  '# Results', '', '```{r table}',
+  'knitr::kable(group_summary, digits = 2,',
+  '  caption = "Means in percent; SD in percentage points.")', '```', '',
+  '```{r figure, fig.cap="Each point is one independent synthesis run. Horizontal displacement only separates overlapping points."}',
+  'ggplot(organic, aes(protocol, yield_percent)) +',
+  '  geom_point(position = position_jitter(width = 0.08, height = 0, seed = 23)) +',
+  '  labs(x = "Protocol label", y = "Isolated product yield (%)") + theme_minimal()',
+  '```', '',
+  'The observed modified-minus-standard mean difference was',
+  '`r round(difference_pp, 2)` percentage points. The groups overlap.', '',
+  '# Interpretation and limitations', '',
+  'The modified protocol had a higher observed mean yield in these simulated',
+  'runs. SD describes variation among runs, not uncertainty in a protocol effect.',
+  'This is a descriptive comparison without a hypothesis test or confidence',
+  'interval. The simplified purity assumption is not a purity measurement.',
+  'Yield alone does not establish purity, safety, sustainability, or general',
+  'superiority, and these teaching data are not evidence for a real process.'
+), organic_source)
+rmarkdown::render(organic_source, output_dir = out, knit_root_dir = root,
+                  envir = new.env(parent = globalenv()), quiet = TRUE)
+
 # Day 25: the repaired growth calculation.
 seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE) |>
   mutate(growth_mm = final_mm - initial_mm)

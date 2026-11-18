@@ -468,6 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#choose-and-state-which-input-you-use" id="toc-choose-and-state-which-input-you-use" class="nav-link" data-scroll-target="#choose-and-state-which-input-you-use">Choose and state which input you use</a></li>
   <li><a href="#build-the-report-in-a-clear-order" id="toc-build-the-report-in-a-clear-order" class="nav-link" data-scroll-target="#build-the-report-in-a-clear-order">Build the report in a clear order</a></li>
   <li><a href="#write-with-the-question-in-view" id="toc-write-with-the-question-in-view" class="nav-link" data-scroll-target="#write-with-the-question-in-view">Write with the question in view</a></li>
+  <li><a href="#alternative-context-report-collected-product-yield" id="toc-alternative-context-report-collected-product-yield" class="nav-link" data-scroll-target="#alternative-context-report-collected-product-yield">Alternative context: report collected-product yield</a></li>
   <li><a href="#your-practical-and-a-reader-check" id="toc-your-practical-and-a-reader-check" class="nav-link" data-scroll-target="#your-practical-and-a-reader-check">Your practical and a reader check</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
   </ul>
@@ -499,6 +500,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="todays-question">Today’s question</h2>
 <p>Can a reader understand the seedling measurements, their variation, and the limits of our description? A useful biological report does not need a significance test on every page. Today you will make the data handling, figure, summary, and interpretation fit together.</p>
 <p>Save a new source document, <code>descriptive-report.Rmd</code>, at the project root. You may copy your first report’s structure, but deliberately revise its methods and interpretation. Keep <code>data/</code> paths relative to this root. The supplied measurements are simulated. Plants received a control or nutrient treatment and were measured seven days apart; the nutrient formulation is unspecified.</p>
+<p>Produce <strong>one</strong> descriptive report today. The teacher may choose the organic laboratory alternative below instead of the seedling report. In that case save <code>organic-report.Rmd</code> at the same project root and use its stated variables and units throughout; do not mix the two datasets in one set of results.</p>
 </section>
 <section id="choose-and-state-which-input-you-use" class="level2">
 <h2 class="anchored" data-anchor-id="choose-and-state-which-input-you-use">Choose and state which input you use</h2>
@@ -546,16 +548,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>A useful description distinguishes three ideas: group averages differ in this sample; plants vary within each group; and sample descriptions do not quantify all uncertainty about a treatment effect. You can report observed values with units and identify the independent unit without declaring a universal result.</p>
 <p>For the complete data, the group means are about 15.3 mm for controls and 21.5 mm for treated plants. Check your table rather than copying these numbers into prose without verification. The treated group also has more spread in these data. Do not say that every treated plant outgrew every control plant: the individual observations overlap.</p>
 </section>
+<section id="alternative-context-report-collected-product-yield" class="level2">
+<h2 class="anchored" data-anchor-id="alternative-context-report-collected-product-yield">Alternative context: report collected-product yield</h2>
+<p>Use this in place of the seedling report if selected. The question is: <strong>what percentage of the supplied maximum product mass was collected in each run, and how does it vary between protocols?</strong> All data are simulated. A synthesis run is one independently carried-out product-making experiment. Twelve independent runs were randomly assigned to two protocols, six to each. A protocol is a specified method; no knowledge of its chemical steps is required here.</p>
+<p><code>theoretical_mass_g</code> is the supplied maximum possible product mass for that run’s starting amounts. <code>isolated_mass_g</code> is the dry collected product mass, assumed pure for this simplified calculation. Both are in grams. Calculate percentage yield with <code>100 * isolated_mass_g / theoretical_mass_g</code>, so Y01 is <code>100 * 0.62 / 1.00 = 62%</code>. Theoretical masses differ with starting scale; compare the percentages, not the raw masses. You do not need to balance a reaction or calculate a theoretical mass yourself.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>organic <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/organic-recovery.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">yield_percent =</span> <span class="dv">100</span> <span class="sc">*</span> isolated_mass_g <span class="sc">/</span> theoretical_mass_g)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>organic_summary <span class="ot">&lt;-</span> organic <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(protocol) <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_runs =</span> <span class="fu">n</span>(), <span class="at">mean_yield_percent =</span> <span class="fu">mean</span>(yield_percent),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_percentage_points =</span> <span class="fu">sd</span>(yield_percent), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>organic_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Follow the same report order: import and check IDs, labels, numeric masses, missing values, and positive theoretical masses; calculate yield; show a table and individual-run plot; then interpret centre, spread, and overlap. Both groups have six available runs. Mean yields are about 68.67% and 77.00%; SDs are about 4.32 and 3.74 <strong>percentage points</strong> for standard and modified protocols. Label the y-axis “Isolated product yield (%)” and identify one point as one run. Do not call repeated weighings of one product batch independent runs.</p>
+<p>This is descriptive work: no t-test is needed. A higher mean yield does not establish greater purity, safety, environmental benefit, or superiority in other reactions. Write a limitation tied to the small simulated set and the assumed purity. Keep the source and data together so the report can render from scratch.</p>
+</section>
 <section id="your-practical-and-a-reader-check" class="level2">
 <h2 class="anchored" data-anchor-id="your-practical-and-a-reader-check">Your practical and a reader check</h2>
 <ol type="1">
 <li>Complete the report with a question, data/design paragraph, methods, table, figure, and interpretation. Keep it short enough that each part earns its place.</li>
-<li>Include the number of independent plants and state what the figure’s symbols represent. Name any exclusions or missing measurements.</li>
+<li>Include the number of independent plants, or independent synthesis runs for the alternative, and state what the figure’s symbols represent. Name any exclusions or missing measurements.</li>
 <li>Restart R and run this command in the <strong>R Console</strong>, not in a code chunk inside the report (a report must not try to render itself):</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"descriptive-report.Rmd"</span>, <span class="at">output_dir =</span> <span class="st">"reports"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"descriptive-report.Rmd"</span>, <span class="at">output_dir =</span> <span class="st">"reports"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>For the organic alternative, replace the quoted filename with <code>"organic-report.Rmd"</code>; render only the report you chose.</p>
 <ol start="4" type="1">
 <li>Ask a partner to read the HTML. Can they identify the units, input file, observational unit, main pattern, and main limitation without opening RStudio?</li>
 <li>If remote R access is available, locate the project on that computer and repeat the render there using the supplied connection instructions. First identify whether the R session and data are local or remote. Otherwise, repeat from a newly opened local project; do not invent connection details.</li>
@@ -595,7 +614,7 @@ A good limitation is specific
 </div>
 </div>
 </div>
-<p><strong>Keep:</strong> <code>descriptive-report.Rmd</code> and its HTML, with the code and data needed to render it. Next: <a href="../week4/16-comparisons.html">from description to a comparison</a>.</p>
+<p><strong>Keep:</strong> your chosen <code>descriptive-report.Rmd</code> or <code>organic-report.Rmd</code> and its HTML, with the code and data needed to render it. Next: <a href="../week4/16-comparisons.html">from description to a comparison</a>.</p>
 
 
 </section>

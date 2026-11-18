@@ -15,6 +15,11 @@ interpretation. Keep `data/` paths relative to this root. The supplied measureme
 are simulated. Plants received a control or nutrient treatment and were measured
 seven days apart; the nutrient formulation is unspecified.
 
+Produce **one** descriptive report today. The teacher may choose the organic
+laboratory alternative below instead of the seedling report. In that case save
+`organic-report.Rmd` at the same project root and use its stated variables and
+units throughout; do not mix the two datasets in one set of results.
+
 ## Choose and state which input you use
 
 Use **`data/seedlings.csv` for the core report**. It contains 24 complete plant
@@ -88,18 +93,62 @@ prose without verification. The treated group also has more spread in these
 data. Do not say that every treated plant outgrew every control plant: the
 individual observations overlap.
 
+## Alternative context: report collected-product yield
+
+Use this in place of the seedling report if selected. The question is: **what
+percentage of the supplied maximum product mass was collected in each run, and
+how does it vary between protocols?** All data are simulated. A synthesis run
+is one independently carried-out product-making experiment. Twelve independent
+runs were randomly assigned to two protocols, six to each. A protocol is a
+specified method; no knowledge of its chemical steps is required here.
+
+`theoretical_mass_g` is the supplied maximum possible product mass for that
+run's starting amounts. `isolated_mass_g` is the dry collected product mass,
+assumed pure for this simplified calculation. Both are in grams. Calculate
+percentage yield with `100 * isolated_mass_g / theoretical_mass_g`, so Y01 is
+`100 * 0.62 / 1.00 = 62%`. Theoretical masses differ with starting scale;
+compare the percentages, not the raw masses. You do not need to balance a
+reaction or calculate a theoretical mass yourself.
+
+```{r}
+organic <- read_csv("data/organic-recovery.csv", show_col_types = FALSE) |>
+  mutate(yield_percent = 100 * isolated_mass_g / theoretical_mass_g)
+organic_summary <- organic |>
+  group_by(protocol) |>
+  summarise(n_runs = n(), mean_yield_percent = mean(yield_percent),
+            sd_percentage_points = sd(yield_percent), .groups = "drop")
+organic_summary
+```
+
+Follow the same report order: import and check IDs, labels, numeric masses,
+missing values, and positive theoretical masses; calculate yield; show a table
+and individual-run plot; then interpret centre, spread, and overlap. Both groups
+have six available runs. Mean yields are about 68.67% and 77.00%; SDs are about
+4.32 and 3.74 **percentage points** for standard and modified protocols.
+Label the y-axis “Isolated product yield (%)” and identify one point as one run.
+Do not call repeated weighings of one product batch independent runs.
+
+This is descriptive work: no t-test is needed. A higher mean yield does not
+establish greater purity, safety, environmental benefit, or superiority in other
+reactions. Write a limitation tied to the small simulated set and the assumed
+purity. Keep the source and data together so the report can render from scratch.
+
 ## Your practical and a reader check
 
 1. Complete the report with a question, data/design paragraph, methods, table,
    figure, and interpretation. Keep it short enough that each part earns its place.
-2. Include the number of independent plants and state what the figure's symbols
-   represent. Name any exclusions or missing measurements.
+2. Include the number of independent plants, or independent synthesis runs for
+   the alternative, and state what the figure's symbols represent. Name any
+   exclusions or missing measurements.
 3. Restart R and run this command in the **R Console**, not in a code chunk
    inside the report (a report must not try to render itself):
 
 ```{r}
 rmarkdown::render("descriptive-report.Rmd", output_dir = "reports")
 ```
+
+For the organic alternative, replace the quoted filename with
+`"organic-report.Rmd"`; render only the report you chose.
 
 4. Ask a partner to read the HTML. Can they identify the units, input file,
    observational unit, main pattern, and main limitation without opening RStudio?
@@ -127,5 +176,6 @@ sample without yet estimating uncertainty in a treatment difference. Missing
 observations, when present, should also be counted and discussed.
 :::
 
-**Keep:** `descriptive-report.Rmd` and its HTML, with the code and data needed to
-render it. Next: [from description to a comparison](../week4/16-comparisons.qmd).
+**Keep:** your chosen `descriptive-report.Rmd` or `organic-report.Rmd` and its
+HTML, with the code and data needed to render it.
+Next: [from description to a comparison](../week4/16-comparisons.qmd).

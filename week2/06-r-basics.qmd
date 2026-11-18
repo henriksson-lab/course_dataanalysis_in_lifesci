@@ -92,12 +92,39 @@ Description and Examples rather than every option.
 1. Keep the three-plant calculation in `day06.R` and explain the units in comments.
 2. Add a fourth plant that grew from 21 to 39 mm. Extend **both** vectors, rerun
    the calculation, and check `length(growth_mm)`.
-3. Calculate each plant's final/initial ratio in an object called `length_ratio`.
-   Write a comment explaining how the ratio differs from growth in mm.
+3. Choose one ratio exercise: calculate each plant's final/initial ratio in an
+   object called `length_ratio`, explaining how it differs from growth in mm;
+   **or** use the product-yield calculation below. Both practise division and
+   named inputs; you do not need to do both.
 4. Change the first final length from 37 to 38 mm. Predict which growth value
    changes and check your prediction.
 5. Save the script, restart R through **Session → Restart R**, and run its lines
    from the top. Everything it needs should be in the script.
+
+### Alternative ratio exercise: how much product was collected?
+
+In a synthesis, starting materials are used to make a product. For this
+simulated example, the maximum possible product mass has already been calculated
+for you: **1.00 g**. Call it `theoretical_mass_g`. The collected dry product has
+mass **0.62 g**, called `isolated_mass_g`. Assume this collected material is pure
+product for this simplified calculation. You do not need a reaction equation.
+
+**Percentage yield** means the collected product as a percentage of the supplied
+maximum. Compute `100 × isolated mass / theoretical mass`, using the same mass
+unit for both. Put this calculation in `day06.R` if you chose this alternative:
+
+```{r}
+theoretical_mass_g <- 1.00
+isolated_mass_g <- 0.62
+yield_percent <- 100 * isolated_mass_g / theoretical_mass_g
+yield_percent
+```
+
+The answer is **62%**. The gram units cancel in the ratio. Predict the result
+if collected mass changes to 0.70 g, then rerun; it should be **70%**. Add a
+comment explaining why 0.62 g is a mass and 62% is a proportion relative to a
+maximum. A larger percentage does not establish greater purity or safety. This
+is numerical practice, not instructions for carrying out a chemical experiment.
 
 ::: {.callout-tip collapse="true"}
 ## Hint: an object is not found

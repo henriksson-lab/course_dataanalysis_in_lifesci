@@ -95,8 +95,36 @@ the panels; small samples warrant cautious descriptions.
    are stable and which apparent details depend on the bins.
 4. If you completed day 11, summarise `output/seedlings-cleaned.csv`. Check the
    distinction between `n_plants` and `n_observed`. Explain why its control mean
-   need not exactly match the complete clean teaching dataset's mean.
+   need not exactly match the complete clean teaching dataset's mean. If the
+   teacher selects the organic transfer below instead, substitute it for this
+   step rather than adding a second analysis.
 5. Draft a caption that identifies the observational unit, units, and symbols.
+
+## Transfer choice: summarise product yield
+
+In `data/organic-recovery.csv`, one row is one independently carried-out
+product-making experiment, or synthesis run. The supplied `theoretical_mass_g`
+is its maximum possible product mass; `isolated_mass_g` is dry collected
+product, assumed pure for this simplified exercise. Both are in grams. Derive
+`yield_percent = 100 * isolated_mass_g / theoretical_mass_g`; the first run is
+`100 * 0.62 / 1.00 = 62%`. No chemical reaction calculation is required.
+
+Import the file, derive yield, then adapt today's grouped-summary pattern to
+group by `protocol`. Report the number of runs, mean percentage yield, and SD
+in **percentage points**. Adapt the individual-point plot to show yield by
+protocol. Do not plot group summaries as though they were individual runs.
+Save `output/organic-yield-summary.csv`, `output/organic-yield-summary.png`, and
+its caption instead of the extra cleaned-seedling summary.
+
+::: {.callout-tip collapse="true"}
+## Hint: keep the denominator and the experimental unit
+
+Use `mutate(yield_percent = 100 * isolated_mass_g / theoretical_mass_g)`,
+then `group_by(protocol)` and `summarise()`. Both groups have six independent
+runs. The standard mean is about 68.67% and the modified mean is 77.00%; show
+the individual values before interpreting the difference. Different starting
+scales mean that comparing raw grams would answer a different question.
+:::
 
 ::: {.callout-tip collapse="true"}
 ## Hint: keep object roles clear

@@ -469,6 +469,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#add-a-clearly-identified-mean" id="toc-add-a-clearly-identified-mean" class="nav-link" data-scroll-target="#add-a-clearly-identified-mean">Add a clearly identified mean</a></li>
   <li><a href="#a-histogram-answers-a-different-question" id="toc-a-histogram-answers-a-different-question" class="nav-link" data-scroll-target="#a-histogram-answers-a-different-question">A histogram answers a different question</a></li>
   <li><a href="#your-practical" id="toc-your-practical" class="nav-link" data-scroll-target="#your-practical">Your practical</a></li>
+  <li><a href="#transfer-choice-summarise-product-yield" id="toc-transfer-choice-summarise-product-yield" class="nav-link" data-scroll-target="#transfer-choice-summarise-product-yield">Transfer choice: summarise product yield</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
   </ul>
 </nav>
@@ -556,11 +557,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Reproduce the summary table and dot plot. Check one group mean using <code>filter()</code> and <code>mean()</code> as on day 12.</li>
 <li>Save the table as <code>output/growth-summary.csv</code> and the plot as <code>output/growth-summary.png</code>, using <code>write_csv()</code> and <code>ggsave()</code>.</li>
 <li>Change the histogram’s bin width from 4 to 2, then 6. Describe which features are stable and which apparent details depend on the bins.</li>
-<li>If you completed day 11, summarise <code>output/seedlings-cleaned.csv</code>. Check the distinction between <code>n_plants</code> and <code>n_observed</code>. Explain why its control mean need not exactly match the complete clean teaching dataset’s mean.</li>
+<li>If you completed day 11, summarise <code>output/seedlings-cleaned.csv</code>. Check the distinction between <code>n_plants</code> and <code>n_observed</code>. Explain why its control mean need not exactly match the complete clean teaching dataset’s mean. If the teacher selects the organic transfer below instead, substitute it for this step rather than adding a second analysis.</li>
 <li>Draft a caption that identifies the observational unit, units, and symbols.</li>
 </ol>
+</section>
+<section id="transfer-choice-summarise-product-yield" class="level2">
+<h2 class="anchored" data-anchor-id="transfer-choice-summarise-product-yield">Transfer choice: summarise product yield</h2>
+<p>In <code>data/organic-recovery.csv</code>, one row is one independently carried-out product-making experiment, or synthesis run. The supplied <code>theoretical_mass_g</code> is its maximum possible product mass; <code>isolated_mass_g</code> is dry collected product, assumed pure for this simplified exercise. Both are in grams. Derive <code>yield_percent = 100 * isolated_mass_g / theoretical_mass_g</code>; the first run is <code>100 * 0.62 / 1.00 = 62%</code>. No chemical reaction calculation is required.</p>
+<p>Import the file, derive yield, then adapt today’s grouped-summary pattern to group by <code>protocol</code>. Report the number of runs, mean percentage yield, and SD in <strong>percentage points</strong>. Adapt the individual-point plot to show yield by protocol. Do not plot group summaries as though they were individual runs. Save <code>output/organic-yield-summary.csv</code>, <code>output/organic-yield-summary.png</code>, and its caption instead of the extra cleaned-seedling summary.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: keep the denominator and the experimental unit
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use <code>mutate(yield_percent = 100 * isolated_mass_g / theoretical_mass_g)</code>, then <code>group_by(protocol)</code> and <code>summarise()</code>. Both groups have six independent runs. The standard mean is about 68.67% and the modified mean is 77.00%; show the individual values before interpreting the difference. Different starting scales mean that comparing raw grams would answer a different question.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -569,7 +591,7 @@ Hint: keep object roles clear
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><code>write_csv(group_summary, "output/growth-summary.csv")</code> saves the summary, while <code>ggsave("output/growth-summary.png", plot = group_plot, width = 6, height = 4)</code> saves the plot. These outputs have different purposes. Check <code>names()</code> if a layer mentions a column absent from the table used by that layer.</p>
 </div>
@@ -579,7 +601,7 @@ Hint: keep object roles clear
 <section id="check-your-understanding" class="level2">
 <h2 class="anchored" data-anchor-id="check-your-understanding">Check your understanding</h2>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -588,7 +610,7 @@ Why show individual dots?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Dots reveal how many observations overlap, where unusual values lie, and how measurements vary around each mean. A higher mean does not mean every treated plant grew more than every control plant. The repaired dataset retains twelve control plants but only eleven observed control growth values.</p>
 </div>

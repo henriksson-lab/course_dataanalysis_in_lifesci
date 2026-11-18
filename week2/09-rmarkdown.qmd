@@ -62,7 +62,8 @@ rendering. You can begin with ordinary prose and add inline calculations later.
 
 Save the source, then choose **Knit**. Rendering runs the chunks in document
 order and creates an HTML file. For an explicit equivalent command from the R
-Console, use:
+Console, use the following command. Do not put it inside `report.Rmd`: a report
+must not try to render itself.
 
 ```{r}
 rmarkdown::render("report.Rmd", output_dir = "reports")

@@ -10,6 +10,7 @@ to it. Read the [project setup guide](../intro/r-rstudio.qmd) for step-by-step h
 | --- | --- | --- |
 | [course-files.zip](course-files.zip) | R practicals, weeks 2–5 | An RStudio project, all datasets and dictionaries, a working `report.Rmd`, and output folders |
 | [lab-data.zip](lab-data.zip) | Command line, week 1 | A README, a sample manifest, four small measurement files, and field notes |
+| [organic-lab.zip](organic-lab.zip) | Alternative command-line practice | Supplied organic sample labels, a product-recovery table, README, and dictionary; no prior chemistry needed |
 | [Starter R Markdown](../report.Rmd) | Inspect or replace the template | The same working first report supplied in the project ZIP |
 | [Data dictionary](../data/README.md) | Understand the biological design | Units, identifiers, missing values, and independent experimental units |
 
@@ -21,3 +22,9 @@ The shell practice archive is separate. On Windows, the Ubuntu home folder and
 your normal Windows Documents folder are different locations. A remote computer
 is another location again. Practise transferring one small file deliberately;
 do not assume these copies synchronise.
+
+The course project also includes `data/organic-recovery.csv`, for short organic
+laboratory transfer exercises. It supplies the maximum possible and collected
+product masses, with the calculation defined in each exercise. Choose a transfer
+option where a lesson offers it; you do not need to complete every context or
+have taken another chemistry course.

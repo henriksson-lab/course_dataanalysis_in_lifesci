@@ -467,7 +467,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#repeat-a-useful-workflow" id="toc-repeat-a-useful-workflow" class="nav-link active" data-scroll-target="#repeat-a-useful-workflow">Repeat a useful workflow</a></li>
   <li><a href="#practical-1-a-fresh-investigation-folder" id="toc-practical-1-a-fresh-investigation-folder" class="nav-link" data-scroll-target="#practical-1-a-fresh-investigation-folder">Practical 1: a fresh investigation folder</a></li>
   <li><a href="#practical-2-make-a-package-another-person-can-inspect" id="toc-practical-2-make-a-package-another-person-can-inspect" class="nav-link" data-scroll-target="#practical-2-make-a-package-another-person-can-inspect">Practical 2: make a package another person can inspect</a></li>
-  <li><a href="#practical-3-explain-your-files-to-a-partner" id="toc-practical-3-explain-your-files-to-a-partner" class="nav-link" data-scroll-target="#practical-3-explain-your-files-to-a-partner">Practical 3: explain your files to a partner</a></li>
+  <li><a href="#practical-3-choose-one-transfer-check" id="toc-practical-3-choose-one-transfer-check" class="nav-link" data-scroll-target="#practical-3-choose-one-transfer-check">Practical 3: choose one transfer check</a>
+  <ul class="collapse">
+  <li><a href="#explain-the-seedling-files-to-a-partner" id="toc-explain-the-seedling-files-to-a-partner" class="nav-link" data-scroll-target="#explain-the-seedling-files-to-a-partner">Explain the seedling files to a partner</a></li>
+  <li><a href="#or-find-records-in-a-small-organic-laboratory-inventory" id="toc-or-find-records-in-a-small-organic-laboratory-inventory" class="nav-link" data-scroll-target="#or-find-records-in-a-small-organic-laboratory-inventory">Or: find records in a small organic-laboratory inventory</a></li>
+  </ul></li>
   <li><a href="#meet-r-and-rstudio" id="toc-meet-r-and-rstudio" class="nav-link" data-scroll-target="#meet-r-and-rstudio">Meet R and RStudio</a></li>
   <li><a href="#from-a-plot-to-a-report" id="toc-from-a-plot-to-a-report" class="nav-link" data-scroll-target="#from-a-plot-to-a-report">From a plot to a report</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
@@ -580,23 +584,61 @@ Copy and rename commands
 <p><code>zip</code> creates an archive. <code>-r</code> includes the folder’s contents recursively, including any nested folders. <code>unzip -l</code> lets you inspect the package, then extraction into <code>review</code> tests what a recipient would receive. You should find <code>context.txt</code>, <code>findings.txt</code>, and <code>treated-samples.txt</code> inside <code>review/report</code>. Open <code>findings.txt</code> from there and check it is readable.</p>
 <p>An archive is a snapshot of the files included when it was created or updated. Editing the ordinary <code>report/findings.txt</code> does not automatically update the ZIP. Make a new clearly named package after making changes. An archive stored only next to its originals is still vulnerable if the whole computer is lost.</p>
 </section>
-<section id="practical-3-explain-your-files-to-a-partner" class="level2">
-<h2 class="anchored" data-anchor-id="practical-3-explain-your-files-to-a-partner">Practical 3: explain your files to a partner</h2>
+<section id="practical-3-choose-one-transfer-check" class="level2">
+<h2 class="anchored" data-anchor-id="practical-3-choose-one-transfer-check">Practical 3: choose one transfer check</h2>
+<p>Choose the partner explanation below <strong>or</strong> the organic-laboratory file task that follows. They practise the same file skills; you do not need to do both.</p>
+<section id="explain-the-seedling-files-to-a-partner" class="level3">
+<h3 class="anchored" data-anchor-id="explain-the-seedling-files-to-a-partner">Explain the seedling files to a partner</h3>
 <p>Take turns. Point to the original archive, extracted source files, selected records, your findings, and the final report archive. Explain the role of each. Ask your partner to locate a particular measurement file using the manifest. Check the path rather than relying on a file that happened to be open already.</p>
 <p>If the supported remote environment is ready, repeat just the navigation and inspection part there. Use the provided transfer route to move a small file, then identify the local and remote copies. If it is not ready, this step waits; the local practical still stands on its own.</p>
+</section>
+<section id="or-find-records-in-a-small-organic-laboratory-inventory" class="level3">
+<h3 class="anchored" data-anchor-id="or-find-records-in-a-small-organic-laboratory-inventory">Or: find records in a small organic-laboratory inventory</h3>
+<p>An inventory is a list of samples. Our simulated organic-chemistry inventory already labels each sample with a class, such as <code>alcohol</code> or <code>ester</code>. These are supplied text labels; you do not need to recognise a molecular structure or know its reactions. The task is simply to find the records labelled <code>ester</code>.</p>
+<ol type="1">
+<li>Download <a href="../downloads/organic-lab.zip">organic-lab.zip</a> and locate it in your file manager. As on day 4, open <code>~/introcomputing-shell</code> graphically and copy the download there. A browser download is not automatically in Ubuntu.</li>
+<li>Return to that workspace in the shell, list the archive before extracting, then extract to a fresh <code>organic-lab</code> folder and enter it. Read <code>README.txt</code> and <code>DICTIONARY.txt</code> with <code>less</code> before inspecting <code>inventory.tsv</code>.</li>
+<li>Use <code>grep -F ester inventory.tsv</code> to print matching records. Save them in <code>ester-samples.txt</code> and use a pipe to count them. Locate the saved extract in the file manager, then explain which file remained unchanged.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: the same commands, different filenames
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/introcomputing-shell</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> <span class="at">-l</span> organic-lab.zip</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> organic-lab.zip <span class="at">-d</span> organic-lab</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> organic-lab</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> README.txt</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> DICTIONARY.txt</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> inventory.tsv</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-F</span> ester inventory.tsv <span class="op">&gt;</span> ester-samples.txt</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-F</span> ester inventory.tsv <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>There are four sample records plus a header. Two records match: O02 and O03. The header does not contain <code>ester</code>. This command matches literal text, not chemical structures or a particular table column. The extracted <code>organic-recovery.csv</code> is for later calculations; you do not need to analyse it today. If the extraction folder already exists, inspect it and use a fresh name.</p>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="meet-r-and-rstudio" class="level2">
 <h2 class="anchored" data-anchor-id="meet-r-and-rstudio">Meet R and RStudio</h2>
 <p>R is a language and computing environment for working with data. RStudio is an application that provides an editor, an R console, and other tools around R. The editor holds saved instructions; the console runs them. A terminal is a shell prompt, not an R console.</p>
 <p>Open RStudio using the <a href="../intro/r-rstudio.html">R/RStudio setup instructions</a>. If it is not installed yet, watch the demonstration and use setup support before week 2. In the <strong>R console</strong>, enter:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fl">44.3</span> <span class="sc">-</span> <span class="fl">25.7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fl">44.3</span> <span class="sc">-</span> <span class="fl">25.7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>R should return <code>18.6</code>: the increase in length of plant P01, in millimetres. The console might print <code>[1]</code> before the answer. That marks the position of the first displayed element; it is not part of the measurement.</p>
 <p>Enter this small supplied example in the R console:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>initial_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">25.7</span>, <span class="fl">24.3</span>, <span class="fl">18.0</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>final_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">44.3</span>, <span class="fl">32.3</span>, <span class="fl">32.9</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(initial_mm, final_mm,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Initial length (mm)"</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Final length (mm)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>initial_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">25.7</span>, <span class="fl">24.3</span>, <span class="fl">18.0</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>final_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">44.3</span>, <span class="fl">32.3</span>, <span class="fl">32.9</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(initial_mm, final_mm,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Initial length (mm)"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Final length (mm)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>c(...)</code> pieces collect three values. <code>&lt;-</code> gives each collection a name. <code>plot(...)</code> makes a scatter plot: each point is one plant with an initial and a final length. We will learn these ideas carefully next week; today identify the axes and check that there are three points. This example includes only three plants, not the full experiment.</p>
 <p>Do not paste <code>cd</code>, <code>grep</code>, or <code>unzip</code> at the R prompt. Likewise, do not paste R calculations into the Ubuntu shell and expect R to run them automatically. When a command fails, first identify which program is reading it.</p>
 </section>
@@ -607,7 +649,7 @@ Copy and rename commands
 <section id="check-your-understanding" class="level2">
 <h2 class="anchored" data-anchor-id="check-your-understanding">Check your understanding</h2>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -616,14 +658,14 @@ Why inspect an archive after making it?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The name of the ZIP does not guarantee what it contains. Listing and extracting it checks the folder structure and the actual saved files a recipient gets.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -632,13 +674,13 @@ Where should <code>grep</code> run, and where should <code>44.3 - 25.7</code> ru
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Use <code>grep</code> in the terminal’s shell. Enter the calculation in the R console. The prompt tells you which program is waiting for instructions; learn to check it before entering a command.</p>
 </div>
 </div>
 </div>
-<p><strong>Save today:</strong> a tested <code>report-bundle.zip</code> and the ordinary <code>report</code> folder. Add one sentence to <code>findings.txt</code> explaining how the package differs from its extracted contents. Repackage it if you want that change included in the ZIP.</p>
+<p><strong>Save today:</strong> a tested <code>report-bundle.zip</code> and the ordinary <code>report</code> folder. Add one sentence to <code>findings.txt</code> explaining how the package differs from its extracted contents. Repackage it if you want that change included in the ZIP. If you chose the inventory transfer check, also keep <code>organic-lab/ester-samples.txt</code> in the shell workspace.</p>
 <p>Next: <a href="../week2/06-r-basics.html">R objects, calculations, and vectors</a>.</p>
 
 

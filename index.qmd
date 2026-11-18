@@ -10,6 +10,9 @@ We start with files and folders. You do not need previous programming experience
 Each lesson combines an explanation, a worked example, and a practical where you
 save something you can find and use again. The biology includes seedling growth,
 photosynthesis, calibration measurements, and a small duckweed experiment.
+Short transfer choices also use basic organic-laboratory records, such as the
+percentage of a supplied maximum product mass collected. Each exercise explains
+the required quantities and calculation; prior chemistry is not required.
 
 ::: {.callout-note}
 All course datasets are simulated teaching data. They help us practise a workflow;

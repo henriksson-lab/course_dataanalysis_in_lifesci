@@ -70,4 +70,22 @@ write("pixels.csv", [f"x{i + 1}" for i in range(8)], [
     [210 if (row - 3.5) ** 2 + (col - 3.5) ** 2 < 7 else 25 for col in range(8)]
     for row in range(8)
 ])
-print("Generated eight CSV datasets and a DNA text file in data/.")
+organic_rows = []
+for group, yields in [("standard", [62, 70, 68, 74, 66, 72]),
+                      ("modified", [72, 78, 76, 82, 74, 80])]:
+    for index, percent in enumerate(yields):
+        theoretical = [1.0, 1.5, 2.0, 1.0, 1.5, 2.0][index]
+        organic_rows.append([f"Y{len(organic_rows) + 1:02d}", group,
+                             theoretical, round(theoretical * percent / 100, 3)])
+write("organic-recovery.csv",
+      ["run_id", "protocol", "theoretical_mass_g", "isolated_mass_g"], organic_rows)
+with (DATA / "organic-inventory.tsv").open("w", newline="") as handle:
+    writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
+    writer.writerow(["sample_id", "sample_class", "note"])
+    writer.writerows([
+        ["O01", "alcohol", "supplied class label"],
+        ["O02", "ester", "supplied class label"],
+        ["O03", "ester", "supplied class label"],
+        ["O04", "carboxylic-acid", "supplied class label"],
+    ])
+print("Generated nine CSV datasets, an inventory TSV, and a DNA text file in data/.")

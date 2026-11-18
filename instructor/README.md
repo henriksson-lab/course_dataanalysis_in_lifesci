@@ -8,10 +8,16 @@ This is draft teaching content, not an approved syllabus or a fixed timetable.
 
 ## Where to start evaluating
 
-The [chemistry context investigation](chemistry-context.md) proposes short
-insertions in days 6, 8, 12, and 19. These must be understandable without prior
-chemistry: all terms, inputs, units, relationships, and requested calculations
-are supplied. The proposals have not yet changed the daily student lessons.
+The [chemistry context investigation](chemistry-context.md) proposed short
+insertions in days 6, 8, 12, and 19. Its day 19 dilution correction is now
+implemented. The other general-chemistry mass, dilution-table, and volume-reading
+ideas remain proposals. All chemistry exercises must supply terms, inputs,
+units, relationships, and requested calculations without prior chemistry.
+
+The [organic-exercise review](organic-context-review.md) records the implemented
+basic laboratory alternatives and links the parallel reviews of all 25 days.
+These use the 2027 Organic Chemistry 1 scope of 7.5 ECTS as a reason to keep
+contexts elementary; they do not assume the full older 15-credit course.
 
 Open `docs/index.html` or run `make preview` from the repository root. The sidebar
 contains all 25 daily lessons. The source-of-truth teaching sequence remains
@@ -42,11 +48,13 @@ and workflow before adapting the prose into recordings or slides.
 - A small Quarto website following the sibling course's Cosmo/docked-sidebar
   structure. Website code execution is disabled; example figures are generated
   separately from the actual teaching datasets.
-- Eight CSV datasets and a tiny DNA string, all simulated. The data dictionary
+- Nine CSV datasets, an organic sample-label TSV, and a tiny DNA string, all
+  simulated. The data dictionary
   identifies units, experimental units, and missing values. A separate source
   note justifies the planted data-quality corrections.
 - A complete student project ZIP with a working root-level `report.Rmd`, plus
-  a separate ZIP for the terminal practical. Neither contains instructor files.
+  separate seedling and organic ZIPs for terminal practice. None contains
+  instructor files.
 - Windows Ubuntu/WSL and Mac Terminal instructions; R/RStudio setup; conceptual
   remote-access guidance with the service-dependent steps clearly pending.
 - Four reference pages: terminal commands, R, basic statistical interpretation,

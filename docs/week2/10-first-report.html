@@ -535,7 +535,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Results:</strong> include the labelled individual-plant figure and a small number of calculated facts that help answer the question. Use inline R for at least one result if you are comfortable; correct prose is more important than novelty.</li>
 <li><strong>Interpretation:</strong> write three or four sentences describing the pattern, variation, and an important limitation. No p-value is needed.</li>
 </ol>
-<p>Now render from a restarted session:</p>
+<p>Now restart R and run this in the <strong>R Console</strong>, not inside the report (a report must not try to render itself):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"first-report.Rmd"</span>, <span class="at">output_dir =</span> <span class="st">"reports"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

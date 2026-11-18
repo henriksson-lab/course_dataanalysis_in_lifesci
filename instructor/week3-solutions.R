@@ -149,6 +149,86 @@ source_path <- file.path(out, "descriptive-report.Rmd")
 writeLines(report, source_path)
 rmarkdown::render(source_path, output_dir = out, knit_root_dir = root,
                   envir = new.env(parent = globalenv()), quiet = TRUE)
+
+# Organic-laboratory transfer choices for days 12–15. These replace selected
+# practice, not the seedling core or an additional required report.
+organic <- read_csv("data/organic-recovery.csv", show_col_types = FALSE) |>
+  mutate(yield_percent = 100 * isolated_mass_g / theoretical_mass_g)
+stopifnot(nrow(organic) == 12, anyDuplicated(organic$run_id) == 0,
+          !anyNA(organic), all(organic$theoretical_mass_g > 0),
+          all(organic$isolated_mass_g >= 0),
+          all(organic$yield_percent <= 100))
+standard_runs <- organic |> filter(protocol == "standard")
+modified_runs <- organic |> filter(protocol == "modified")
+organic_summary <- organic |>
+  group_by(protocol) |>
+  summarise(n_runs = n(), mean_yield_percent = mean(yield_percent),
+            variance_percentage_points2 = var(yield_percent),
+            sd_percentage_points = sd(yield_percent), .groups = "drop")
+stopifnot(nrow(standard_runs) == 6, nrow(modified_runs) == 6,
+          abs(organic$yield_percent[organic$run_id == "Y01"] - 62) < 1e-10,
+          abs(mean(standard_runs$yield_percent) - 68.6666666667) < 1e-8,
+          abs(var(standard_runs$yield_percent) - 18.6666666667) < 1e-8,
+          abs(sd(standard_runs$yield_percent) - 4.32049379894) < 1e-8,
+          abs(mean(modified_runs$yield_percent) - 77) < 1e-10,
+          abs(sd(modified_runs$yield_percent) - sqrt(14)) < 1e-10)
+print(organic_summary)
+write_csv(organic_summary, file.path(out, "organic-yield-summary.csv"))
+organic_plot <- ggplot(organic, aes(protocol, yield_percent)) +
+  geom_point(position = position_jitter(width = 0.08, height = 0, seed = 13)) +
+  labs(x = "Protocol", y = "Isolated product yield (%)",
+       caption = "Each point is one independent synthesis run. All data are simulated.") +
+  theme_minimal()
+ggsave(file.path(out, "organic-yield-summary.png"), organic_plot,
+       width = 6, height = 4)
+
+# Day 15 alternative: source includes its own input and calculations, preserving
+# root-relative paths when students place the .Rmd beside their .Rproj file.
+organic_report <- c(
+  '---', 'title: "Descriptive report: collected-product yield"',
+  'output: html_document', '---', '', '## Question and design', '',
+  'How does collected-product yield vary among runs and between protocols?',
+  'These simulated data describe twelve independent product-making experiments,',
+  'or synthesis runs, randomly assigned to standard or modified protocol, six each.',
+  'Theoretical mass is the supplied maximum product mass for the starting',
+  'materials. Isolated mass is dry collected product, assumed pure here.',
+  'Both are in grams. The different starting scales make percentage yield',
+  'more comparable than raw collected grams.', '', '## Methods and checks', '',
+  'Yield was calculated as 100 times isolated mass divided by theoretical mass.',
+  'We checked identifiers, protocol labels, missing values, and positive',
+  'theoretical masses. SD describes variation among independent runs,',
+  'not uncertainty in a protocol mean.', '', '```{r import}',
+  'library(readr)', 'library(dplyr)', 'library(ggplot2)',
+  'organic <- read_csv("data/organic-recovery.csv", show_col_types = FALSE)',
+  'anyDuplicated(organic$run_id)', 'organic |> count(protocol)',
+  'sum(is.na(organic$theoretical_mass_g))',
+  'sum(is.na(organic$isolated_mass_g))',
+  'sum(organic$theoretical_mass_g <= 0)',
+  'organic <- mutate(organic,',
+  '                  yield_percent = 100 * isolated_mass_g / theoretical_mass_g)',
+  '```', '', '## Results', '', '```{r summary}',
+  'organic_summary <- organic |> group_by(protocol) |>',
+  '  summarise(n_runs = n(), mean_yield_percent = mean(yield_percent),',
+  '            sd_percentage_points = sd(yield_percent), .groups = "drop")',
+  'knitr::kable(organic_summary, digits = 2,',
+  '             caption = "Mean yield in percent; SD in percentage points.")',
+  '```', '', '```{r figure, fig.cap="Each point represents one independent synthesis run. Values are simulated."}',
+  'ggplot(organic, aes(protocol, yield_percent)) +',
+  '  geom_point(position = position_jitter(width = 0.08, height = 0, seed = 13)) +',
+  '  labs(x = "Protocol", y = "Isolated product yield (%)") + theme_minimal()',
+  '```', '', '## Interpretation and limits', '',
+  'Mean isolated yield was about 68.67% with the standard protocol and 77.00%',
+  'with the modified protocol. Their SDs were about 4.32 and 3.74 percentage',
+  'points, respectively. Individual results overlap between protocols.',
+  'This descriptive report does not estimate uncertainty in the mean difference.',
+  'The comparison concerns a small simulated set and assumes pure dry product.',
+  'Yield alone cannot establish greater purity, safety, environmental benefit,',
+  'or superiority in other reactions. We have not inferred a reaction mechanism.'
+)
+organic_source_path <- file.path(out, "organic-report.Rmd")
+writeLines(organic_report, organic_source_path)
+rmarkdown::render(organic_source_path, output_dir = out, knit_root_dir = root,
+                  envir = new.env(parent = globalenv()), quiet = TRUE)
 if ("--figures" %in% commandArgs(trailingOnly = TRUE)) {
   file.copy(file.path(out, c("variation-examples.png", "sampling-means.png")),
             file.path("week3", c("variation-examples.png", "sampling-means.png")),

@@ -122,6 +122,42 @@ the calibration range; do not present an extrapolated value as a valid result.
 A real laboratory might dilute the sample and measure it again using its assay
 protocol. Do not invent a dilution correction without such a measurement.
 
+## Transfer question: a newly measured dilution
+
+Use this short calculation as a transfer check, rather than doing another
+complete calibration exercise. A **dilution** mixes some original solution with
+solvent to reach a larger final total volume. Assume that no measured substance
+is lost or reacts. Its concentration is reduced by the factor
+`final total volume / original-sample volume`.
+
+A separate unknown was outside the instrument range. A new measurement is now
+provided: **1.00 mL** of the original was diluted to a **total of 10.00 mL**, and
+the diluted reading was **0.520**. This is not an instruction to add 10 mL of
+solvent, and it is not a new reading for U3. All data remain simulated.
+
+1. Check that 0.520 is inside the measured standard-reading range.
+2. Use the fitted line to calculate the diluted concentration in mg/L.
+3. Multiply by `10.00 / 1.00` to estimate the original concentration.
+4. State why this differs from extrapolating a line beyond its measured range.
+
+::: {.callout-tip collapse="true"}
+## Hint and numerical check
+
+```r
+diluted_absorbance <- 0.520
+dilution_factor <- 10.00 / 1.00
+diluted_mg_l <- (diluted_absorbance - intercept) / slope
+original_mg_l <- diluted_mg_l * dilution_factor
+c(diluted_mg_l = diluted_mg_l, original_mg_l = original_mg_l)
+```
+
+Using unrounded coefficients, the estimates are about **7.40 mg/L** diluted and
+**74.04 mg/L** original. The diluted reading is within range; the original
+estimate follows from that new reading and a stated dilution factor. This does
+not make U3's old out-of-range reading valid. Full measurement, dilution, and
+calibration uncertainty are still omitted from these point estimates.
+:::
+
 ## Practical and saved work
 
 Create `calibration-report.Rmd` at the project root. Explain what a standard is,

@@ -469,6 +469,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#fit-the-line-in-r" id="toc-fit-the-line-in-r" class="nav-link" data-scroll-target="#fit-the-line-in-r">Fit the line in R</a></li>
   <li><a href="#check-deviations-from-the-line" id="toc-check-deviations-from-the-line" class="nav-link" data-scroll-target="#check-deviations-from-the-line">Check deviations from the line</a></li>
   <li><a href="#estimate-the-unknowns-within-the-calibration-range" id="toc-estimate-the-unknowns-within-the-calibration-range" class="nav-link" data-scroll-target="#estimate-the-unknowns-within-the-calibration-range">Estimate the unknowns within the calibration range</a></li>
+  <li><a href="#transfer-question-a-newly-measured-dilution" id="toc-transfer-question-a-newly-measured-dilution" class="nav-link" data-scroll-target="#transfer-question-a-newly-measured-dilution">Transfer question: a newly measured dilution</a></li>
   <li><a href="#practical-and-saved-work" id="toc-practical-and-saved-work" class="nav-link" data-scroll-target="#practical-and-saved-work">Practical and saved work</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
   </ul>
@@ -582,11 +583,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The <code>&amp;</code> requires both range conditions. <code>if_else()</code> assigns a numeric missing value, <code>NA_real_</code>, to unsupported estimates. U1 is about 4.17 mg/L and U2 about 7.40 mg/L. U3 exceeds the largest measured standard reading. Report it as outside the calibration range; do not present an extrapolated value as a valid result. A real laboratory might dilute the sample and measure it again using its assay protocol. Do not invent a dilution correction without such a measurement.</p>
 </section>
+<section id="transfer-question-a-newly-measured-dilution" class="level2">
+<h2 class="anchored" data-anchor-id="transfer-question-a-newly-measured-dilution">Transfer question: a newly measured dilution</h2>
+<p>Use this short calculation as a transfer check, rather than doing another complete calibration exercise. A <strong>dilution</strong> mixes some original solution with solvent to reach a larger final total volume. Assume that no measured substance is lost or reacts. Its concentration is reduced by the factor <code>final total volume / original-sample volume</code>.</p>
+<p>A separate unknown was outside the instrument range. A new measurement is now provided: <strong>1.00 mL</strong> of the original was diluted to a <strong>total of 10.00 mL</strong>, and the diluted reading was <strong>0.520</strong>. This is not an instruction to add 10 mL of solvent, and it is not a new reading for U3. All data remain simulated.</p>
+<ol type="1">
+<li>Check that 0.520 is inside the measured standard-reading range.</li>
+<li>Use the fitted line to calculate the diluted concentration in mg/L.</li>
+<li>Multiply by <code>10.00 / 1.00</code> to estimate the original concentration.</li>
+<li>State why this differs from extrapolating a line beyond its measured range.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint and numerical check
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>diluted_absorbance <span class="ot">&lt;-</span> <span class="fl">0.520</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dilution_factor <span class="ot">&lt;-</span> <span class="fl">10.00</span> <span class="sc">/</span> <span class="fl">1.00</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>diluted_mg_l <span class="ot">&lt;-</span> (diluted_absorbance <span class="sc">-</span> intercept) <span class="sc">/</span> slope</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>original_mg_l <span class="ot">&lt;-</span> diluted_mg_l <span class="sc">*</span> dilution_factor</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">diluted_mg_l =</span> diluted_mg_l, <span class="at">original_mg_l =</span> original_mg_l)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Using unrounded coefficients, the estimates are about <strong>7.40 mg/L</strong> diluted and <strong>74.04 mg/L</strong> original. The diluted reading is within range; the original estimate follows from that new reading and a stated dilution factor. This does not make U3’s old out-of-range reading valid. Full measurement, dilution, and calibration uncertainty are still omitted from these point estimates.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="practical-and-saved-work" class="level2">
 <h2 class="anchored" data-anchor-id="practical-and-saved-work">Practical and saved work</h2>
 <p>Create <code>calibration-report.Rmd</code> at the project root. Explain what a standard is, include the line and residual plots, describe the slope with units, and report the two supported concentration estimates. Explain why U3 needs another step. State that these simple inverse estimates omit full calibration uncertainty. Save the table with <code>write_csv(unknowns, "output/day19-unknowns.csv")</code> and both figures with <code>ggsave()</code>. Render after restarting R.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -595,7 +628,7 @@ Hint: which way round is the model?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We prepared concentration and measured absorbance, so we fit absorbance as the response. We then rearrange that fitted line. Fitting concentration as a response is a different regression and is not the workflow used here.</p>
 </div>

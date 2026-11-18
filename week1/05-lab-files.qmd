@@ -94,7 +94,12 @@ Editing the ordinary `report/findings.txt` does not automatically update the
 ZIP. Make a new clearly named package after making changes. An archive stored
 only next to its originals is still vulnerable if the whole computer is lost.
 
-## Practical 3: explain your files to a partner
+## Practical 3: choose one transfer check
+
+Choose the partner explanation below **or** the organic-laboratory file task
+that follows. They practise the same file skills; you do not need to do both.
+
+### Explain the seedling files to a partner
 
 Take turns. Point to the original archive, extracted source files, selected
 records, your findings, and the final report archive. Explain the role of each.
@@ -105,6 +110,45 @@ If the supported remote environment is ready, repeat just the navigation and
 inspection part there. Use the provided transfer route to move a small file,
 then identify the local and remote copies. If it is not ready, this step waits;
 the local practical still stands on its own.
+
+### Or: find records in a small organic-laboratory inventory
+
+An inventory is a list of samples. Our simulated organic-chemistry inventory
+already labels each sample with a class, such as `alcohol` or `ester`. These are
+supplied text labels; you do not need to recognise a molecular structure or know
+its reactions. The task is simply to find the records labelled `ester`.
+
+1. Download [organic-lab.zip](../downloads/organic-lab.zip) and locate it in your
+   file manager. As on day 4, open `~/introcomputing-shell` graphically and copy
+   the download there. A browser download is not automatically in Ubuntu.
+2. Return to that workspace in the shell, list the archive before extracting,
+   then extract to a fresh `organic-lab` folder and enter it. Read `README.txt`
+   and `DICTIONARY.txt` with `less` before inspecting `inventory.tsv`.
+3. Use `grep -F ester inventory.tsv` to print matching records. Save them in
+   `ester-samples.txt` and use a pipe to count them. Locate the saved extract
+   in the file manager, then explain which file remained unchanged.
+
+::: {.callout-tip collapse="true"}
+## Hint: the same commands, different filenames
+
+```bash
+cd ~/introcomputing-shell
+unzip -l organic-lab.zip
+unzip organic-lab.zip -d organic-lab
+cd organic-lab
+less README.txt
+less DICTIONARY.txt
+head inventory.tsv
+grep -F ester inventory.tsv > ester-samples.txt
+grep -F ester inventory.tsv | wc -l
+```
+
+There are four sample records plus a header. Two records match: O02 and O03.
+The header does not contain `ester`. This command matches literal text, not
+chemical structures or a particular table column. The extracted
+`organic-recovery.csv` is for later calculations; you do not need to analyse it
+today. If the extraction folder already exists, inspect it and use a fresh name.
+:::
 
 ## Meet R and RStudio
 
@@ -173,5 +217,7 @@ it before entering a command.
 **Save today:** a tested `report-bundle.zip` and the ordinary `report` folder.
 Add one sentence to `findings.txt` explaining how the package differs from its
 extracted contents. Repackage it if you want that change included in the ZIP.
+If you chose the inventory transfer check, also keep `organic-lab/ester-samples.txt`
+in the shell workspace.
 
 Next: [R objects, calculations, and vectors](../week2/06-r-basics.qmd).

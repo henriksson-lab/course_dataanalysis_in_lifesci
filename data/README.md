@@ -120,3 +120,49 @@ illustrate character data; there is no sequence-analysis workflow.
 intensities, from 0 (black) to 255 (white). Each cell is one pixel, not a plant or
 biological replicate. Values 25 and 210 form a simple bright object against a
 dark background. The table is a teaching image, not a microscope measurement.
+
+## organic-recovery.csv — a basic organic-laboratory transfer example
+
+This is an alternative practice dataset, not a requirement to have studied
+organic chemistry. Twelve independent synthesis runs were randomly allocated
+one of two fictional collection protocols, `standard` or `modified`, six each.
+A synthesis makes a product from starting materials; collecting that product
+may leave less material than a theoretical maximum. We supply that maximum for
+every run: no reaction equation or chemical calculation is needed to obtain it.
+Runs used different starting scales, so their maximum masses differ.
+
+| Column | Meaning |
+| --- | --- |
+| `run_id` | Unique independent-run identifier Y01–Y12 |
+| `protocol` | Randomly assigned collection protocol, `standard` or `modified` |
+| `theoretical_mass_g` | Supplied maximum possible product mass for that run, grams |
+| `isolated_mass_g` | Mass of dry collected product, grams; assumed pure for this simplified example |
+
+Calculate **percentage yield** as
+`yield_percent = 100 * isolated_mass_g / theoretical_mass_g`.
+For Y01, 0.62 g collected from a maximum of 1.00 g gives 62%. Compare percentages
+when comparing differently scaled runs; larger raw mass alone need not mean
+greater yield. There are no missing values in this dataset. Preserve the raw
+mass columns and save calculated values separately.
+
+Each row is one independent run, not a repeat weighing of the same material.
+The six values per protocol can describe run-to-run variation. Three readings
+from one run would not be three independent runs. We assume the supplied mass
+and simplified purity conditions; the dataset does not establish actual purity,
+the reason for losses, or a protocol's general safety or sustainability. A
+higher yield alone establishes none of those things. No wet-lab procedure is
+specified or required.
+
+## organic-inventory.tsv — supplied sample labels, not structure identification
+
+This text table has one header and four records. Its columns are `sample_id`,
+`sample_class`, and `note`. IDs O01–O04 identify fictional samples; the classes
+are supplied labels: O01 `alcohol`, O02/O03 `ester`, O04 `carboxylic-acid`.
+The words name classes of organic compounds, but the exercise only searches
+already assigned text labels. No structures, reactions, or chemical
+classification knowledge are needed. There are two records containing the
+literal text `ester`; the header and other notes do not contain that term.
+
+The separate `organic-lab.zip` packages this inventory as `inventory.tsv`, the
+recovery CSV, and short explanatory notes for a command-line transfer exercise.
+It is an alternative to repeated seedling-file practice, not a new software unit.

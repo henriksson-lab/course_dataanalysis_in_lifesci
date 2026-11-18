@@ -86,7 +86,11 @@ estimates and approximates a standard error in this toy sampling process.
    relationship between sample size and spread remain?
 3. Draw a small diagram for each design: twelve independent pots; one pot with
    twelve ruler readings; two trays with twelve plants each and tray-level
-   treatment. Label the unit assigned to treatment.
+   treatment. Label the unit assigned to treatment. As an alternative to the
+   one-pot diagram, draw one synthesis run whose collected product is weighed
+   twelve times: there is one independently prepared run, not twelve. In the
+   simulated organic dataset, six separately prepared runs were randomly
+   assigned to each protocol; those runs provide independent protocol units.
 4. Write an explanation for a lab partner: “We have many measurements, but our
    number of independently treated units is ...”. Complete it for each design.
 5. Save a two-sentence explanation of the difference between SD among plants

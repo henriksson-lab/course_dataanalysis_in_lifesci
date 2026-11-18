@@ -105,9 +105,41 @@ those are not a requirement for prose.
 3. Predict what happens if lengths are converted from mm to cm by dividing by
    ten. Check the mean, variance, and SD in the new units.
 4. Calculate the treated group's mean, median, variance, and SD. Write two
-   sentences comparing centre and spread with the control group.
+   sentences comparing centre and spread with the control group. The teacher
+   may substitute the organic-laboratory transfer task below for this step;
+   you do not need to complete both.
 5. Add a note explaining why “the average plant grew 15.3 mm” does not mean
    every control plant grew exactly that amount.
+
+## Transfer choice: variation in collected product
+
+An organic synthesis is an experiment intended to make a product. In our
+simulated `data/organic-recovery.csv`, each row is one independent run. The
+supplied **theoretical mass** is the maximum product mass possible from that
+run's starting materials; you do not need to derive it. **Isolated mass** is the
+dry product actually collected, assumed pure for this simplified calculation.
+Both are in grams. Calculate **percentage yield** as
+`100 × isolated mass / theoretical mass`.
+
+```{r}
+organic <- read_csv("data/organic-recovery.csv", show_col_types = FALSE) |>
+  mutate(yield_percent = 100 * isolated_mass_g / theoretical_mass_g)
+standard_runs <- filter(organic, protocol == "standard")
+mean(standard_runs$yield_percent)
+var(standard_runs$yield_percent)
+sd(standard_runs$yield_percent)
+```
+
+Y01 gives `100 × 0.62 / 1.00 = 62%`. For the six standard-protocol runs,
+the mean is about **68.67%**, variance **18.67 squared percentage points**, and
+SD **4.32 percentage points**. A difference from 62% to 70% is eight percentage
+points, not an eight-percent relative increase. Repeat the summaries for the
+modified protocol and describe centre and spread in two sentences.
+
+The runs used different starting amounts, so raw collected grams do not make
+the same comparison as percentage yield. A higher yield alone does not establish
+greater purity or a generally better method. Save this calculation in today's
+script; no knowledge of reaction mechanisms is needed.
 
 ::: {.callout-tip collapse="true"}
 ## Hint: use the units to check yourself

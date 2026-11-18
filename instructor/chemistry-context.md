@@ -1,8 +1,14 @@
 # Chemistry contexts: findings and proposed insertions
 
-These are investigated proposals, not changes already made to student lessons.
+These are investigated proposals. The day 19 dilution correction is now
+implemented; the other general-chemistry tasks below remain proposals.
 Use chemistry to reinforce the existing computing outcomes without adding a
 prerequisite, another week, new packages, or a separate chemistry track.
+
+The subsequent [organic-context review](organic-context-review.md) implements
+selected basic organic-laboratory alternatives. Its yield exercises are distinct
+from the proposed general-chemistry mass/dilution tasks here. Consult that review
+for implemented placements; the volume-reading task here remains a proposal.
 
 ## Evidence
 

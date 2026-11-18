@@ -13,13 +13,22 @@ check by running the work, not an adjective you add to the title.
 revised report, its HTML, and a `reports/reproduction-log.txt`. A peer can help;
 if working alone, use a separately extracted copy and a fresh R session.
 
+Use the study you selected on day 23. The folder example below uses duckweed;
+for the organic alternative, substitute `organic-study.Rmd`, its HTML, and
+`data/organic-recovery.csv`. Keep the data dictionary in either case. You only
+need to reproduce one report.
+
 ## 1. Close the gaps in the report
 
 Read the report as if you had not conducted the exercise. Does it identify the
-biological question, simulated study design, independent units, data source,
+biological or laboratory question, simulated study design, independent units, data source,
 missing measurement, methods, and conclusion? Are figure axes and the comparison
 direction labelled? Can you distinguish SD among flasks from uncertainty in the
 estimated difference?
+
+For the descriptive organic alternative, check SD among independent synthesis
+runs and the observed difference in percentage points. No test or confidence
+interval was required, so do not add one just to fill a report heading.
 
 Replace notes such as “insert result here” with your interpretation. Keep enough
 code to reproduce the result. For this course, visible code is helpful; hiding

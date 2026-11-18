@@ -469,7 +469,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#select-observations-and-variables" id="toc-select-observations-and-variables" class="nav-link" data-scroll-target="#select-observations-and-variables">Select observations and variables</a></li>
   <li><a href="#map-columns-to-a-figure" id="toc-map-columns-to-a-figure" class="nav-link" data-scroll-target="#map-columns-to-a-figure">Map columns to a figure</a></li>
   <li><a href="#save-something-another-application-can-read" id="toc-save-something-another-application-can-read" class="nav-link" data-scroll-target="#save-something-another-application-can-read">Save something another application can read</a></li>
-  <li><a href="#your-practical" id="toc-your-practical" class="nav-link" data-scroll-target="#your-practical">Your practical</a></li>
+  <li><a href="#your-practical" id="toc-your-practical" class="nav-link" data-scroll-target="#your-practical">Your practical</a>
+  <ul class="collapse">
+  <li><a href="#alternative-transfer-task-a-derived-yield-column" id="toc-alternative-transfer-task-a-derived-yield-column" class="nav-link" data-scroll-target="#alternative-transfer-task-a-derived-yield-column">Alternative transfer task: a derived yield column</a></li>
+  </ul></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
   </ul>
 </nav>
@@ -572,12 +575,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Recreate both plots from the start of the script and calculate P02’s growth by hand to check the subtraction.</li>
 <li>Save a table containing only treated plants’ IDs and growth measurements.</li>
-<li>Make a plot of initial length against growth. Label both axes with mm.</li>
+<li>Choose one transfer task: make a plot of initial length against growth with axes labelled in mm, <strong>or</strong> adapt the same workflow to the organic-product table below. Do one, not both.</li>
 <li>Write two sentences: one describing a visible pattern, one identifying a question the plot alone cannot settle.</li>
 <li>Restart R and run the script. Confirm the saved files still open afterwards.</li>
 </ol>
+<section id="alternative-transfer-task-a-derived-yield-column" class="level3">
+<h3 class="anchored" data-anchor-id="alternative-transfer-task-a-derived-yield-column">Alternative transfer task: a derived yield column</h3>
+<p>Our simulated table <code>data/organic-recovery.csv</code> records twelve separate runs of an organic synthesis, six assigned to each of two protocols, <code>standard</code> and <code>modified</code>. A run is one independently performed preparation. These labels identify procedures; you do not need to know their chemical steps.</p>
+<p>Each row supplies a <code>theoretical_mass_g</code>: the maximum product mass from that run’s starting materials. <code>isolated_mass_g</code> is collected dry product, assumed pure for this simplified exercise. Both are grams. Calculate <code>yield_percent = 100 × isolated_mass_g / theoretical_mass_g</code>. You are given the maximum and do not need to derive it from a reaction. The first run, Y01, has 1.00 g maximum and 0.62 g collected, so its yield is <strong>62%</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>organic <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/organic-recovery.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>organic <span class="ot">&lt;-</span> <span class="fu">mutate</span>(organic,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">yield_percent =</span> <span class="dv">100</span> <span class="sc">*</span> isolated_mass_g <span class="sc">/</span> theoretical_mass_g)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(organic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The runs started at different scales, so larger collected mass alone need not mean a greater yield. Inspect the supplied dictionary in <code>data/README.md</code>. Make a plot with protocol on x and percentage yield on y, using the familiar individual-point pattern. Label its y-axis “Isolated product yield (%)”. Save the derived table to <code>output/organic-yields.csv</code> and your plot to <code>output/organic-yields.png</code>. Keep its import and calculation in <code>day08.R</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: adapt the roles, not just the title
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use <code>organic</code> as the plot’s data, <code>protocol</code> for x, and <code>yield_percent</code> for y. Choose horizontal jitter with zero vertical jitter as above. Use <code>write_csv()</code> for the derived table and <code>ggsave()</code> for the figure. Expect 12 rows, no missing masses, and Y01 at 62%. A plot shows these results; it does not establish that one protocol is generally better or that a higher yield means purer product.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -586,17 +616,18 @@ Hint: a plot or file is missing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Printing <code>growth_plot</code> shows the plot; assigning it alone may not. Check <code>getwd()</code> and <code>dir.exists("output")</code> if saving fails. If a column is not found, check <code>names(seedlings)</code> and run the earlier <code>mutate()</code> line.</p>
 </div>
 </div>
 </div>
 </section>
+</section>
 <section id="check-your-understanding" class="level2">
 <h2 class="anchored" data-anchor-id="check-your-understanding">Check your understanding</h2>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -605,13 +636,13 @@ Why keep the raw table?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>A derived table lets someone trace the calculation back to the recorded lengths. P02 grew 8.0 mm. Selecting columns is not selecting plants; <code>select()</code> and <code>filter()</code> act on different parts of the table.</p>
 </div>
 </div>
 </div>
-<p><strong>Keep:</strong> <code>day08.R</code>, your derived tables, and figures in <code>output/</code>. Next: <a href="../week2/09-rmarkdown.html">put explanation and code in one report</a>.</p>
+<p><strong>Keep:</strong> <code>day08.R</code>, your derived tables, and figures in <code>output/</code>. If you chose the organic transfer, its two <code>organic-yields</code> outputs replace the extra initial-length-versus-growth figure; retain the main seedling work. Next: <a href="../week2/09-rmarkdown.html">put explanation and code in one report</a>.</p>
 
 
 </section>

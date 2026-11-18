@@ -28,6 +28,14 @@ practise the same actions several times, with gradually less guidance. Later
 courses will develop biological theory and bioinformatics tools; this course
 does not teach database searching, sequence alignment, or omics analysis.
 
+Prior chemistry courses are not required to understand an exercise. Chemistry
+contexts supply all definitions, inputs, constants, units, and calculation
+relationships. For example, percentage yield means 100 times the collected mass
+divided by a supplied maximum possible mass. You are practising data handling
+and interpretation, not deriving a chemical reaction. Where a practical offers
+a choice of biological or organic-laboratory data, complete one route rather
+than treating both as additional required reports.
+
 ## A lesson is a study unit, not a full day of new lectures
 
 The numbered lessons suggest a five-week progression. Spend substantial time

@@ -109,10 +109,50 @@ disk are different things. Locate and open both saved outputs in the file manage
 1. Recreate both plots from the start of the script and calculate P02's growth
    by hand to check the subtraction.
 2. Save a table containing only treated plants' IDs and growth measurements.
-3. Make a plot of initial length against growth. Label both axes with mm.
+3. Choose one transfer task: make a plot of initial length against growth with
+   axes labelled in mm, **or** adapt the same workflow to the organic-product
+   table below. Do one, not both.
 4. Write two sentences: one describing a visible pattern, one identifying a
    question the plot alone cannot settle.
 5. Restart R and run the script. Confirm the saved files still open afterwards.
+
+### Alternative transfer task: a derived yield column
+
+Our simulated table `data/organic-recovery.csv` records twelve separate runs of
+an organic synthesis, six assigned to each of two protocols, `standard` and
+`modified`. A run is one independently performed preparation. These labels
+identify procedures; you do not need to know their chemical steps.
+
+Each row supplies a `theoretical_mass_g`: the maximum product mass from that
+run's starting materials. `isolated_mass_g` is collected dry product, assumed
+pure for this simplified exercise. Both are grams. Calculate
+`yield_percent = 100 × isolated_mass_g / theoretical_mass_g`. You are given the
+maximum and do not need to derive it from a reaction. The first run, Y01, has
+1.00 g maximum and 0.62 g collected, so its yield is **62%**.
+
+```{r}
+organic <- read_csv("data/organic-recovery.csv", show_col_types = FALSE)
+organic <- mutate(organic,
+                  yield_percent = 100 * isolated_mass_g / theoretical_mass_g)
+head(organic)
+```
+
+The runs started at different scales, so larger collected mass alone need not
+mean a greater yield. Inspect the supplied dictionary in `data/README.md`.
+Make a plot with protocol on x and percentage yield on y, using the familiar
+individual-point pattern. Label its y-axis “Isolated product yield (%)”. Save
+the derived table to `output/organic-yields.csv` and your plot to
+`output/organic-yields.png`. Keep its import and calculation in `day08.R`.
+
+::: {.callout-tip collapse="true"}
+## Hint: adapt the roles, not just the title
+
+Use `organic` as the plot's data, `protocol` for x, and `yield_percent` for y.
+Choose horizontal jitter with zero vertical jitter as above. Use `write_csv()`
+for the derived table and `ggsave()` for the figure. Expect 12 rows, no missing
+masses, and Y01 at 62%. A plot shows these results; it does not establish that
+one protocol is generally better or that a higher yield means purer product.
+:::
 
 ::: {.callout-tip collapse="true"}
 ## Hint: a plot or file is missing
@@ -133,4 +173,6 @@ P02 grew 8.0 mm. Selecting columns is not selecting plants; `select()` and
 :::
 
 **Keep:** `day08.R`, your derived tables, and figures in `output/`.
+If you chose the organic transfer, its two `organic-yields` outputs replace the
+extra initial-length-versus-growth figure; retain the main seedling work.
 Next: [put explanation and code in one report](09-rmarkdown.qmd).

@@ -533,7 +533,7 @@ Growth is final minus initial length, measured in millimetres.
 </section>
 <section id="render-rather-than-assembling-results-by-hand" class="level2">
 <h2 class="anchored" data-anchor-id="render-rather-than-assembling-results-by-hand">Render, rather than assembling results by hand</h2>
-<p>Save the source, then choose <strong>Knit</strong>. Rendering runs the chunks in document order and creates an HTML file. For an explicit equivalent command from the R Console, use:</p>
+<p>Save the source, then choose <strong>Knit</strong>. Rendering runs the chunks in document order and creates an HTML file. For an explicit equivalent command from the R Console, use the following command. Do not put it inside <code>report.Rmd</code>: a report must not try to render itself.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"report.Rmd"</span>, <span class="at">output_dir =</span> <span class="st">"reports"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

@@ -1,0 +1,13 @@
+run_id,protocol,theoretical_mass_g,isolated_mass_g
+Y01,standard,1.0,0.62
+Y02,standard,1.5,1.05
+Y03,standard,2.0,1.36
+Y04,standard,1.0,0.74
+Y05,standard,1.5,0.99
+Y06,standard,2.0,1.44
+Y07,modified,1.0,0.72
+Y08,modified,1.5,1.17
+Y09,modified,2.0,1.52
+Y10,modified,1.0,0.82
+Y11,modified,1.5,1.11
+Y12,modified,2.0,1.6

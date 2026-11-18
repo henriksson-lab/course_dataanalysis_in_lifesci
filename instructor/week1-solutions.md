@@ -158,6 +158,33 @@ length on horizontal axis and final length on vertical axis. These three P01–P
 records are controls; do not present their plot as a treatment comparison. The
 purpose is distinguishing R console, editor, and shell and seeing a future result.
 
+### Day 5 alternative partner task: organic inventory
+
+This replaces the partner explanation exercise; it is not extra required work.
+Use the separate `organic-lab.zip` download so the original `lab-data.zip`
+fixture and its treated-sample answers stay unchanged. Students must first use
+the file manager to copy the downloaded ZIP into `~/introcomputing-shell`,
+including the Windows/Ubuntu bridge. From that workspace:
+
+```bash
+unzip -l organic-lab.zip
+unzip organic-lab.zip -d organic-lab
+cd organic-lab
+less README.txt
+less DICTIONARY.txt
+head inventory.tsv
+grep -F ester inventory.tsv > ester-samples.txt
+grep -F ester inventory.tsv | wc -l
+```
+
+Expected: four sample records and five newline-terminated lines including the
+header. O02 and O03 have the supplied class label `ester`, giving two matching
+lines. No structure recognition or reaction knowledge is required. Search is
+literal substring matching; it does not identify chemical classes itself.
+Students locate their saved extract and the untouched inventory. The other
+archive file, organic-recovery.csv, is for later numerical work, not a hidden
+week1 calculation requirement.
+
 ## Quick formative observations
 
 Ask a student to show the actual folder, identify an unchanged source file,
