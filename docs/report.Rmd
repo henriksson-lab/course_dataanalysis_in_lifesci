@@ -1,0 +1,72 @@
+---
+title: "Seedling growth: a first report"
+author: "Replace with your name"
+output:
+  html_document:
+    toc: true
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 6, fig.height = 4)
+library(readr)
+library(dplyr)
+library(ggplot2)
+```
+
+# Question
+
+These are simulated teaching data from 24 independently potted seedlings,
+randomly assigned to control or nutrient treatment. Length was measured at the
+start and after seven days. What does growth look like in the two groups?
+
+Replace or extend this paragraph as you work through the course.
+
+# Data and methods
+
+The plant/pot is the independent experimental unit. Length and growth are in
+millimetres. Growth is final length minus initial length. The raw input is kept
+in `data/seedlings.csv` and is not edited by this report.
+
+```{r import}
+seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE)
+seedlings <- seedlings |>
+  mutate(growth_mm = final_mm - initial_mm)
+nrow(seedlings)
+```
+
+# Results
+
+There are `r nrow(seedlings)` plants in the input table.
+
+```{r group-summary}
+group_summary <- seedlings |>
+  group_by(treatment) |>
+  summarise(
+    n = n(),
+    mean_growth_mm = mean(growth_mm),
+    sd_growth_mm = sd(growth_mm),
+    .groups = "drop"
+  )
+knitr::kable(group_summary, digits = 2,
+             caption = "Growth summaries. SD describes variation among plants.")
+```
+
+```{r growth-plot, fig.cap="Seven-day growth of individual seedlings. Points are individual plants; horizontal displacement only separates overlapping points."}
+ggplot(seedlings, aes(x = treatment, y = growth_mm)) +
+  geom_point(position = position_jitter(width = 0.08, height = 0, seed = 7)) +
+  labs(x = "Nutrient allocation", y = "Growth over seven days (mm)") +
+  theme_minimal()
+```
+
+# Interpretation
+
+Write two or three sentences about the direction of the observed difference,
+variation among plants, and what these simulated observations do and do not
+establish. The template deliberately leaves this interpretation for you.
+
+# Reproducibility
+
+Save this file in the project root, beside `introcomputing.Rproj`. Restart R and
+use **Knit** to produce an HTML file. All objects used above are created in this
+document. Keep the `.Rmd` and its input files with the HTML report.

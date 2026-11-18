@@ -1,0 +1,132 @@
+---
+title: "Day 12 — An average does not describe every plant"
+---
+
+## Today's question
+
+Two groups can have the same average growth yet look very different. How can we
+say where measurements are centred and how much individual plants vary? Today
+we use small numbers first, then connect them to the seedling experiment.
+
+## Mean and median answer slightly different questions
+
+The **mean** adds all observed values and divides by their number. The **median**
+is the middle of the ordered values, or the mean of the middle two for an even
+number of values. Both describe a centre; neither replaces the observations.
+
+```{r}
+growth_mm <- c(12, 14, 16)
+mean(growth_mm)
+median(growth_mm)
+```
+
+Both results are 14 mm. Now inspect a more uneven set:
+
+```{r}
+uneven_mm <- c(10, 10, 10, 100)
+mean(uneven_mm)
+median(uneven_mm)
+```
+
+The mean is 32.5 mm and median 10 mm. Neither is an arithmetic error. The large
+observation affects the mean strongly. Investigate whether a large value is
+supported by the source record; do not delete it simply to make the mean and
+median agree. The appropriate description depends on the question and shape
+of the measurements.
+
+## Variance measures spread around the mean
+
+For the three measurements 12, 14, and 16 mm, the deviations from their mean are
+−2, 0, and 2 mm. Their sum is zero, so an ordinary mean deviation would hide the
+spread. Squaring deviations prevents positive and negative values cancelling.
+
+The **sample variance** adds squared deviations and divides by one less than the
+number of observations. The choice of this denominator helps estimate population
+variance from a sample; a derivation is beyond this course.
+
+```{r}
+growth_mm <- c(12, 14, 16)
+deviations_mm <- growth_mm - mean(growth_mm)
+squared_deviations <- deviations_mm^2
+sum(squared_deviations) / (length(growth_mm) - 1)
+var(growth_mm)
+sd(growth_mm)
+```
+
+The squared deviations are 4, 0, and 4. Their sum divided by 2 is **4 mm²**, the
+sample variance. The **standard deviation**, or SD, is its square root: **2 mm**.
+SD is expressed in the original measurement's units, which makes it easier to
+interpret alongside the mean. Variance uses squared units. Neither is the error
+in the mean or a claim that every plant lies within one SD.
+
+```{r}
+close_mm <- c(13, 14, 15)
+spread_mm <- c(8, 14, 20)
+mean(close_mm)
+mean(spread_mm)
+sd(close_mm)
+sd(spread_mm)
+```
+
+Both means are 14 mm. The SDs are 1 and 6 mm. The second set varies more among
+observations. A group with larger spread is not automatically measured less
+carefully: organisms can really differ. Measurement noise and biological
+variation can both contribute to observed spread.
+
+![Two toy groups share a mean of 14 mm but differ in spread. Dots are measurements; the dashed line is their common mean.](variation-examples.png)
+
+## Apply the descriptions to plants
+
+Use the clean supplied table today so that variation is not confused with the
+repair exercise. Recreate all prerequisites in `day12-variation.R`.
+
+```{r}
+library(readr)
+library(dplyr)
+seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE) |>
+  mutate(growth_mm = final_mm - initial_mm)
+control <- filter(seedlings, treatment == "control")
+mean(control$growth_mm)
+median(control$growth_mm)
+var(control$growth_mm)
+sd(control$growth_mm)
+```
+
+The control mean is about 15.3 mm and its SD about 3.19 mm. Report them with
+units and a sensible number of decimals; extra decimal places do not create
+more precise measurements. R may display more digits to help calculation, but
+those are not a requirement for prose.
+
+## Your practical
+
+1. Work through the three-measurement variance by hand, then compare with R.
+2. Predict the mean and SD if every value in `close_mm` increases by 10 mm.
+   Check using `mean(close_mm + 10)` and `sd(close_mm + 10)`.
+3. Predict what happens if lengths are converted from mm to cm by dividing by
+   ten. Check the mean, variance, and SD in the new units.
+4. Calculate the treated group's mean, median, variance, and SD. Write two
+   sentences comparing centre and spread with the control group.
+5. Add a note explaining why “the average plant grew 15.3 mm” does not mean
+   every control plant grew exactly that amount.
+
+::: {.callout-tip collapse="true"}
+## Hint: use the units to check yourself
+
+Adding a constant shifts the centre but leaves deviations unchanged. Dividing
+lengths by ten divides the mean and SD by ten, but divides variance by one
+hundred. Check `?var` and `?sd` for the functions' definitions and missing-value
+arguments.
+:::
+
+## Check your understanding
+
+::: {.callout-note collapse="true"}
+## Which spread is larger?
+
+The treated SD is about 4.87 mm, larger than the control SD. This describes
+variation among these plants; it does not by itself quantify uncertainty in the
+difference between group means. We will separate those questions next.
+:::
+
+**Keep:** `day12-variation.R` and the interpretation in comments or report notes.
+Next: [summarise groups while still showing individuals](13-group-summaries.qmd).

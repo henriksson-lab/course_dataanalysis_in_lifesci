@@ -1,0 +1,126 @@
+---
+title: "Day 11 — Check the table before trusting the answer"
+---
+
+## Today's question
+
+What if a length was entered in the wrong unit, a plant appears twice, or a
+measurement is missing? R can calculate a precise-looking answer from a poor
+table. Our job is to check what the values mean and leave a record of justified
+repairs. Never edit the supplied raw file to make a calculation look convenient.
+
+Today's `data/seedlings-messy.csv` contains deliberately planted errors. Read
+[`data/field-notes.txt`](../data/field-notes.txt), which provides the source-record information needed to
+resolve them. This is a teaching exercise in verification, not a rule that
+unusual observations must be wrong.
+
+## Inspect before converting
+
+Create `day11-cleaning.R` in the project root. Read every column as text so that
+mixed entries remain visible. Keep leading/trailing spaces for this inspection.
+
+```{r}
+library(readr)
+library(dplyr)
+raw <- read_csv("data/seedlings-messy.csv", show_col_types = FALSE,
+                col_types = cols(.default = col_character()), trim_ws = FALSE)
+dim(raw)
+unique(raw$treatment)
+filter(raw, plant_id %in% c("P01", "P06", "P18", "P21"))
+```
+
+`cols(.default = col_character())` requests text columns instead of guessing.
+`unique()` shows distinct values, so `"control"` and `"Control"` can be noticed.
+`%in%` asks whether a value belongs to the listed set of IDs. A CSV importer may
+normally trim surrounding spaces; we temporarily keep them so we can see the
+problem rather than mistake automatic tidying for a clean source.
+
+The file has 25 rows although the study has 24 plants. Confirm the duplicated ID:
+
+```{r}
+raw |> count(plant_id) |> filter(n > 1)
+```
+
+`count()` counts rows by the named column. Repeated IDs can be legitimate if a
+table has one row per time point. Here the protocol says one row per plant, so
+we inspect both P01 rows and the source record before deciding what to do.
+
+## Make evidence-based repairs
+
+The supplied field notes establish the following:
+
+- The two P01 rows are an accidental duplicate of the same record.
+- `Control` means `control`, and a trailing space on a treatment is accidental.
+- P18's initial length is 18.7 **mm**; its cell includes the unit as text.
+- P21's source record gives final length **43.8 mm**, not the entered 4.38.
+- P06's final measurement is unavailable. There is no supported replacement.
+
+The number 4.38 alone would not justify multiplying by ten. The source record
+authorises that correction. Similarly, missing P06 is not a length of zero.
+
+```{r}
+cleaned <- raw |>
+  mutate(treatment = tolower(trimws(treatment)),
+         initial_mm = if_else(plant_id == "P18", "18.7", initial_mm),
+         final_mm = if_else(plant_id == "P21", "43.8", final_mm)) |>
+  distinct() |>
+  mutate(initial_mm = parse_double(initial_mm),
+         final_mm = parse_double(final_mm),
+         growth_mm = final_mm - initial_mm)
+```
+
+`trimws()` removes surrounding whitespace, and `tolower()` standardises letters
+in these documented labels. `if_else(condition, yes, no)` makes the stated
+replacement only for the identified record. `distinct()` removes exact repeated
+rows; we use it only after confirming the import duplication. `parse_double()`
+turns verified number text into numeric values, preserving missing values.
+These are worked repair instructions, not functions to memorise today.
+
+## Check the repaired table
+
+```{r}
+nrow(cleaned)
+anyDuplicated(cleaned$plant_id)
+sum(is.na(cleaned$growth_mm))
+cleaned |> count(treatment)
+write_csv(cleaned, "output/seedlings-cleaned.csv")
+```
+
+Expect 24 rows, zero duplicated IDs, and one missing growth value. Both groups
+still contain 12 plants, but the control group has only 11 observed growth values.
+Counting enrolled plants and counting usable measurements answer different
+questions. Keep the raw file, repair script, and field notes so another person
+can trace these decisions.
+
+## Your practical
+
+1. Run the inspection steps before the repair block. Write comments recording
+   what prompted each check.
+2. Run the repairs and verify the expected counts. Inspect P06, P18, and P21.
+3. Calculate the mean of `cleaned$growth_mm` with and without `na.rm = TRUE`.
+   Explain what each result means; do not replace the missing value.
+4. Save a short `output/cleaning-notes.txt` explaining the evidence for each
+   change and the observation left unavailable.
+5. Restart R, rerun your script, and confirm the original CSV has 25 rows while
+   the derived CSV has 24. Different row counts are expected and documented.
+
+::: {.callout-tip collapse="true"}
+## Hint: avoid silently losing records
+
+Inspect `raw |> filter(plant_id == "P01")` before using `distinct()`. Do not use
+`distinct(plant_id, .keep_all = TRUE)` to discard different records merely because
+they share an ID. Real disagreements need investigation.
+:::
+
+## Check your understanding
+
+::: {.callout-note collapse="true"}
+## What makes a repair justified?
+
+A check identifies a question; the source record supports the repair. A very
+small or large value may be real. Omitting missing values from a calculation
+does not make their absence disappear from the report.
+:::
+
+**Keep:** `day11-cleaning.R`, the derived CSV, and your cleaning notes.
+Next: [describe variation](12-variation.qmd).

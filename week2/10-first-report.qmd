@@ -1,0 +1,125 @@
+---
+title: "Day 10 — A first biological report"
+---
+
+## Today's question
+
+What can we say about seedling growth from the measurements alone? Today is
+practice in carrying an analysis from saved data to a readable result. No new
+statistical test is required. The purpose is to combine skills you have already
+used and notice where you still need a reference or help.
+
+Open your course project and save a copy of `report.Rmd` as `first-report.Rmd`
+in the **project root**. Keeping both source files there preserves the familiar
+`data/` paths. Your generated HTML can go into `reports/`.
+
+## What a reader needs
+
+A reader who was not in the room needs to know the question, what was measured,
+how you calculated the result, and what the figure shows. A list of function
+calls is not a methods explanation. “We calculated change in length as final
+minus initial length for each plant” explains the calculation in biological
+terms. The code makes the calculation repeatable.
+
+The supplied experiment has 24 independently potted seedlings, twelve randomly
+assigned to each group. Initial and final measurements come from the same
+plant, seven days apart. The treatment label `treated` denotes a nutrient
+treatment; the nutrient formulation is unspecified. Do not invent details
+beyond the dictionary. These are simulated measurements.
+
+Start with the familiar analysis:
+
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE)
+seedlings <- mutate(seedlings, growth_mm = final_mm - initial_mm)
+```
+
+Put these lines in a code chunk before any result that depends on them. Give the
+reader a few simple checks:
+
+```{r}
+nrow(seedlings)
+sum(is.na(seedlings$growth_mm))
+range(seedlings$growth_mm)
+```
+
+The file has 24 plants and no missing growth values. The minimum and maximum are
+measurements, not plausible bounds for every seedling in nature. The range
+summarises this dataset; it is sensitive to unusual observations.
+
+## A figure worth discussing
+
+Recreate the plot of growth against treatment from day 8. Show every plant, label
+the growth axis in mm, and explain that each dot represents one independently
+potted plant. Include the caption and discuss the visible overlap between groups.
+
+A useful opening could be: “Growth varied among individual plants in both
+groups.” Follow it with something specific you can see. Avoid declaring that a
+treatment “works” on the strength of a higher-looking cloud of points. We have
+not yet considered how much uncertainty surrounds a group comparison.
+
+You can compute a simple mean for all plants using `mean(seedlings$growth_mm)`.
+Make clear that this combines treatments and does not answer whether they differ.
+We will calculate and interpret group summaries during week 3.
+
+## Your practical: four short sections
+
+Create these sections in `first-report.Rmd`:
+
+1. **Question and data:** state the question, the number of plants, the treatment
+   allocation, and that these are simulated data. Explain the meaning of a row.
+2. **Methods:** explain how the file was imported and how growth was derived.
+   Include working code with relative paths. Say what the units are.
+3. **Results:** include the labelled individual-plant figure and a small number
+   of calculated facts that help answer the question. Use inline R for at least
+   one result if you are comfortable; correct prose is more important than novelty.
+4. **Interpretation:** write three or four sentences describing the pattern,
+   variation, and an important limitation. No p-value is needed.
+
+Now render from a restarted session:
+
+```{r}
+rmarkdown::render("first-report.Rmd", output_dir = "reports")
+```
+
+If it fails, work from the first error. Do not repeatedly run random Console
+commands until it happens to work. Add missing prerequisites to the report.
+
+## Transfer to a second table
+
+With remaining practice time, inspect `data/leaf-mass.csv`. It records one leaf
+from each of 18 independent plants, with area in square centimetres and dry mass
+in milligrams. Make an area-versus-mass scatter plot in a script called
+`leaf-first-look.R`. Use the actual column names from `names(leaves)` and do not
+subtract quantities with different units. A larger mass and a larger area may
+be associated; one does not establish that one causes the other.
+
+::: {.callout-tip collapse="true"}
+## Hint: adapting the plot
+
+Start with `leaves <- read_csv("data/leaf-mass.csv", show_col_types = FALSE)`.
+Then map `leaf_area_cm2` to x and `dry_mass_mg` to y. The same plotting structure
+can serve a different question when you deliberately change the table, columns,
+labels, and explanation.
+:::
+
+## Completion check
+
+Ask a partner to open the HTML without RStudio. Can they identify the question,
+units, meaning of a dot, and the main limitation? Then check your own source:
+can it render after restarting R? These checks concern readability and
+reproducibility, not marks.
+
+::: {.callout-note collapse="true"}
+## Self-check
+
+The `.Rmd` should contain the imports, derived column, and plot. The HTML should
+contain sentences that make sense without reading every code line. A personal
+path such as a username-specific Desktop location makes the report less portable.
+:::
+
+**Keep:** `first-report.Rmd`, its HTML, and `leaf-first-look.R` if completed.
+Next: [what happens when a laboratory table is imperfect?](../week3/11-data-quality.qmd)

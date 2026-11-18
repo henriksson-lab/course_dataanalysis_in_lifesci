@@ -1,0 +1,38 @@
+---
+title: "Glossary: words we use in this course"
+---
+
+| Word | Meaning here |
+| --- | --- |
+| File | A named, saved collection of information, such as text, measurements, or a picture |
+| Folder / directory | A container organising files and other folders |
+| File system | The way an operating system stores and organises files and directories |
+| Path | An address locating a file or directory on a particular computer |
+| Extension | A filename ending such as `.csv`, `.R`, `.Rmd`, or `.html`, indicating its intended format |
+| Home directory | The starting personal folder for an account on a computer |
+| Working directory | The folder relative paths currently start from |
+| Operating system | Software managing the computer and the applications running on it |
+| CPU | The processor that carries out instructions |
+| RAM / memory | Working storage used by running programs; save work to persistent files |
+| Process | A running instance of a program |
+| Bit / byte | A bit is 0 or 1; a byte contains eight bits, with 256 possible patterns |
+| Terminal | A window or interface through which you interact with a shell |
+| Shell | A program interpreting commands such as `cd` and `ls` |
+| Console | In this course, usually the R interface that reads R expressions |
+| Local / remote | On your current laptop / on another computer reached over a network |
+| SSH | A secure connection to a remote shell |
+| Remote desktop | A graphical session on a remote computer |
+| Archive | A package containing files and folders, for example a ZIP |
+| CSV / TSV | Text tables whose fields are separated by commas / tabs |
+| Object | A named value held in an R session |
+| Function | A named operation applied to inputs, such as `mean()` |
+| Argument | An input or setting given to a function or command |
+| Package | A collection of R functions and related resources |
+| Observation | A recorded measurement or set of measurements; not necessarily an independent replicate |
+| Experimental unit | The independently allocated entity, such as a pot or culture flask |
+| Technical replicate | A repeated measurement of the same underlying sample |
+| Missing value | A measurement that is unavailable; represented by `NA` in R |
+| Raw data | The original supplied measurements, preserved without overwriting |
+| Derived data | Values calculated or cleaned from the originals with documented code |
+| Render / Knit | Run a report's code and combine results with its text to create a document |
+| Reproducibility | Being able to regenerate a result from its stated inputs, code, and environment |

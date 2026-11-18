@@ -1,0 +1,177 @@
+---
+title: "Day 5 — Share laboratory files, then meet R"
+---
+
+## Repeat a useful workflow
+
+Today you will repeat yesterday's investigation with fewer prompts. Repetition
+helps make file handling a tool you can rely on. The biological task remains:
+identify the treated samples and prepare a small package that another person
+can understand.
+
+We then meet R, which will calculate and plot the measurements. The terminal
+and R console are different places to enter instructions; recognising the
+difference will prevent a common beginner problem.
+
+## Practical 1: a fresh investigation folder
+
+Return to your shell workspace:
+
+```bash
+cd ~/introcomputing-shell
+pwd
+```
+
+Use commands from the previous lessons to do the following. Read the whole list
+once before starting.
+
+1. Create a fresh folder called `day5`.
+2. Copy `lab-data.zip` into it and move into `day5`.
+3. List the archive's contents without extracting it.
+4. Extract it into a folder called `lab-data` inside `day5`.
+5. Enter the extracted folder and read the README.
+6. Print the treated sample records and save them as `treated-samples.txt`.
+7. Count the matching records using a pipe. Explain why the result is two.
+
+::: {.callout-tip collapse="true"}
+## Help me get started without doing everything
+
+From the workspace use `mkdir day5`, `cp lab-data.zip day5/`, then `cd day5`.
+The slash after `day5/` makes it clear that this destination is a directory.
+Use `unzip -l lab-data.zip` before `unzip lab-data.zip -d lab-data`.
+If a name already exists, inspect it before choosing whether to reuse it.
+:::
+
+::: {.callout-tip collapse="true"}
+## I cannot remember the search commands
+
+Inside the extracted folder use `grep -F treated samples.tsv`. Add
+`> treated-samples.txt` to save the output, or `| wc -l` to count it. Do not
+redirect output into `samples.tsv`: that is the original input.
+:::
+
+## Practical 2: make a package another person can inspect
+
+Inside the extracted `lab-data` folder, make a folder called `report`. Copy
+`treated-samples.txt` into it. Copy `README.txt` into it with the destination
+name `context.txt`. These copies keep the original files available.
+
+Through the file manager, add `report/findings.txt` with four short statements:
+the number of samples, which received treatment, what the measurements mean,
+and what you have **not** yet analysed. For example, identifying a treated
+sample does not establish that its treatment changed growth.
+
+::: {.callout-tip collapse="true"}
+## Copy and rename commands
+
+```bash
+mkdir report
+cp treated-samples.txt report/
+cp README.txt report/context.txt
+```
+
+Create your own findings text in a plain-text editor. Check its saved location
+with `ls report` before packaging the folder.
+:::
+
+Create and inspect a ZIP package:
+
+```bash
+zip -r report-bundle.zip report/
+unzip -l report-bundle.zip
+unzip report-bundle.zip -d review
+ls review/report
+```
+
+`zip` creates an archive. `-r` includes the folder's contents recursively,
+including any nested folders. `unzip -l` lets you inspect the package, then
+extraction into `review` tests what a recipient would receive. You should find
+`context.txt`, `findings.txt`, and `treated-samples.txt` inside `review/report`.
+Open `findings.txt` from there and check it is readable.
+
+An archive is a snapshot of the files included when it was created or updated.
+Editing the ordinary `report/findings.txt` does not automatically update the
+ZIP. Make a new clearly named package after making changes. An archive stored
+only next to its originals is still vulnerable if the whole computer is lost.
+
+## Practical 3: explain your files to a partner
+
+Take turns. Point to the original archive, extracted source files, selected
+records, your findings, and the final report archive. Explain the role of each.
+Ask your partner to locate a particular measurement file using the manifest.
+Check the path rather than relying on a file that happened to be open already.
+
+If the supported remote environment is ready, repeat just the navigation and
+inspection part there. Use the provided transfer route to move a small file,
+then identify the local and remote copies. If it is not ready, this step waits;
+the local practical still stands on its own.
+
+## Meet R and RStudio
+
+R is a language and computing environment for working with data. RStudio is an
+application that provides an editor, an R console, and other tools around R.
+The editor holds saved instructions; the console runs them. A terminal is a
+shell prompt, not an R console.
+
+Open RStudio using the [R/RStudio setup instructions](../intro/r-rstudio.qmd).
+If it is not installed yet, watch the demonstration and use setup support before
+week 2. In the **R console**, enter:
+
+```r
+44.3 - 25.7
+```
+
+R should return `18.6`: the increase in length of plant P01, in millimetres.
+The console might print `[1]` before the answer. That marks the position of the
+first displayed element; it is not part of the measurement.
+
+Enter this small supplied example in the R console:
+
+```r
+initial_mm <- c(25.7, 24.3, 18.0)
+final_mm <- c(44.3, 32.3, 32.9)
+plot(initial_mm, final_mm,
+     xlab = "Initial length (mm)",
+     ylab = "Final length (mm)")
+```
+
+The `c(...)` pieces collect three values. `<-` gives each collection a name.
+`plot(...)` makes a scatter plot: each point is one plant with an initial and
+a final length. We will learn these ideas carefully next week; today identify
+the axes and check that there are three points. This example includes only
+three plants, not the full experiment.
+
+Do not paste `cd`, `grep`, or `unzip` at the R prompt. Likewise, do not paste
+R calculations into the Ubuntu shell and expect R to run them automatically.
+When a command fails, first identify which program is reading it.
+
+## From a plot to a report
+
+The teacher will show a complete HTML report generated from saved measurements
+and an R Markdown file. Notice the biological question, code, figure with units,
+and a written interpretation. The goal is to make these together so that the
+report can be produced again when new measurements arrive. You will build your
+first version next week.
+
+## Check your understanding
+
+::: {.callout-note collapse="true"}
+## Why inspect an archive after making it?
+
+The name of the ZIP does not guarantee what it contains. Listing and extracting
+it checks the folder structure and the actual saved files a recipient gets.
+:::
+
+::: {.callout-note collapse="true"}
+## Where should `grep` run, and where should `44.3 - 25.7` run?
+
+Use `grep` in the terminal's shell. Enter the calculation in the R console.
+The prompt tells you which program is waiting for instructions; learn to check
+it before entering a command.
+:::
+
+**Save today:** a tested `report-bundle.zip` and the ordinary `report` folder.
+Add one sentence to `findings.txt` explaining how the package differs from its
+extracted contents. Repackage it if you want that change included in the ZIP.
+
+Next: [R objects, calculations, and vectors](../week2/06-r-basics.qmd).

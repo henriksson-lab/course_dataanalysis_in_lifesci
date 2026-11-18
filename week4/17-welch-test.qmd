@@ -1,0 +1,124 @@
+---
+title: "Day 17 — A guided Welch t-test"
+---
+
+## Today's question
+
+Our sample shows about 6.22 mm more growth in the treated group. How uncertain is
+that estimated difference, and how does the experiment compare with an equal-means
+model? We will add a **Welch two-sample t-test** to yesterday's report. We use this
+method for two independent groups and do not require their variances to be equal.
+
+Open the project and `comparison.Rmd`. Run its import and preparation chunks so
+that `seedlings`, `treated`, and `control` exist. All code needed to create these
+objects must remain in the report: a successful console session is not enough.
+
+## Check the design before calling a function
+
+Each value in `treated` is one plant's growth; each value in `control` is another
+plant's growth. The groups are independent, treatments were randomly assigned,
+and we have not selected plants according to whether their growth supports our
+expectations. Inspect yesterday's plot for severe skew, questionable values, or
+one observation dominating a group. With small groups, these features can make
+the usual interval and test unreliable. Seek advice when the method looks
+unsuitable; do not delete valid extreme observations to improve a p-value.
+
+The test does not repair dependence, biased sampling, or measurement errors. We
+are using a small, deliberately simple dataset to learn an analysis workflow.
+
+## Run the comparison in the direction we stated
+
+```{r}
+comparison <- t.test(treated, control, var.equal = FALSE,
+                     alternative = "two.sided", conf.level = 0.95)
+comparison
+```
+
+The first vector is treated, the second control. The confidence interval therefore
+describes **treated minus control**. `var.equal = FALSE` explicitly selects Welch's
+method. The other arguments make our two-sided question and interval level visible.
+You can inspect arguments with `?t.test`; the
+[R documentation](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html)
+also describes the returned result.
+
+For these simulated data, key parts of the output are approximately:
+
+```text
+Welch Two Sample t-test
+p-value = 0.001517
+95 percent confidence interval:
+ 2.701  9.732
+sample estimates:
+mean of x  mean of y
+ 21.4917    15.2750
+```
+
+Small printing differences are normal. The `t` statistic and degrees of freedom
+are part of the calculation; you do not need to derive them here. Concentrate on
+the question, difference, interval, and assumptions.
+
+## Read the result in a useful order
+
+First state the **estimated effect**: treated plants grew on average 6.22 mm more
+than controls in our sample. Then state its **95% confidence interval**: about
+2.70 to 9.73 mm for the population mean difference, under the model assumptions.
+
+The interval expresses uncertainty in a mean difference. It is not a range
+containing 95% of individual plants. A 95% confidence procedure would cover the
+true difference in about 95% of repeated experiments under its assumptions. This
+particular interval either covers that fixed difference or does not; we do not
+know which. Values near the interval's centre fit the data better than more
+distant values, rather than all values in the interval being equally plausible.
+
+Finally report the p-value, about 0.0015. An equal-means model would rarely produce
+a two-sided t statistic at least this extreme under the assumptions. This is
+evidence against equal population means in this model. It is not a 99.85%
+probability that the treatment works, and it does not tell us whether 6 mm matters
+biologically. That judgment needs the organism, duration, and purpose of the study.
+
+## Practical: extend your report
+
+Add a Methods paragraph naming the two independent groups, growth calculation,
+direction of comparison, and Welch two-sample t-test. Keep the individual-point
+plot. Add the test chunk and a Results paragraph with the two means, sample sizes,
+estimated difference, interval, and p-value. A possible structure is:
+
+> In these simulated observations, mean growth was … in … and … in … . The
+> estimated treated-minus-control difference was … mm (95% confidence interval
+> … to … mm; Welch two-sample t-test, p = …). This suggests … under … .
+
+Use your own words for the last sentence. Do not report only “significant”.
+
+Extract numbers rather than retyping a long printout:
+
+```{r}
+mean(treated) - mean(control)
+comparison$conf.int
+comparison$p.value
+```
+
+The `$` selects a named component of the result. The interval's two endpoints
+are the lower and upper limits in the direction we selected. If you later use a
+formula interface, check its group order carefully; the sign may reverse.
+
+::: {.callout-tip collapse="true"}
+## Hint: what if the interval includes zero?
+
+Zero represents equal population means for this comparison. An interval spanning
+zero would show that the data do not resolve the direction at this confidence
+level. It would not establish equivalence or prove that there is no effect.
+:::
+
+## Check your understanding
+
+1. Which has units of millimetres: the difference, the interval, or the p-value?
+   **The first two; a p-value has no measurement units.**
+2. Does group SD describe uncertainty in the difference? **No; SD describes
+   individual spread within a group.**
+3. If all these plants came from one shared pot per treatment, would the same
+   analysis be justified? **No; the independent-unit assumption would change.**
+
+Restart R and render the report. **Leave with:** an updated `comparison.Rmd`
+and HTML that explain both the size and uncertainty of the estimated effect.
+
+Next: [Day 18 — The same plant measured twice](18-paired.qmd).

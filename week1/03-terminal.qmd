@@ -1,0 +1,194 @@
+---
+title: "Day 3 — The terminal describes the same folders"
+---
+
+## Why type commands?
+
+The terminal gives us another way to ask the computer to work with files. It
+becomes useful when we repeat a task, inspect many text records, or work on a
+remote computer. The folders have not become a new kind of object: we are
+describing the same locations using words instead of clicks.
+
+Today we will create a small shell workspace and move between its folders.
+Tomorrow it will hold files from a biological laboratory exercise.
+
+## Open the right terminal
+
+Follow the supported [Windows/Mac setup page](../intro/ubuntu-windows.qmd).
+Windows students use **Ubuntu** for these commands. Mac students use **Terminal**.
+If local installation is unavailable, the teacher will help arrange a supported
+environment. Do not spend the lesson trying to repair system settings alone.
+
+On Windows, Ubuntu has a different home folder from Windows itself. For this
+week's terminal exercises we deliberately use a separate folder in the Ubuntu
+home directory. Our native RStudio project will stay in the laptop Documents
+folder. We will practise transferring a file between these places explicitly.
+
+A **shell** reads a command and starts the requested program. The **terminal**
+is the window through which we interact with the shell. You might see something
+like this:
+
+```text
+anna@laptop:~$
+```
+
+This is a **prompt**. It means the shell is ready. Your prompt will differ and
+may end with `%` on a Mac. **Do not type the prompt, `$`, or `%` from an example.**
+Type the command and press Enter once to run it.
+
+## Worked example: where am I?
+
+Run each line separately:
+
+```bash
+pwd
+ls
+```
+
+`pwd` prints the current working directory. It might print `/home/anna` in
+Ubuntu or `/Users/anna` on a Mac. These are examples, not text to type.
+`ls` lists the names inside the current directory. Your list need not match
+anyone else's.
+
+Now create our workspace:
+
+```bash
+cd
+mkdir -p introcomputing-shell/practice
+cd introcomputing-shell
+pwd
+ls
+```
+
+`cd` means change directory; without a destination, it takes you home. `mkdir`
+means make directory. The option `-p` allows it to create the parent folder too
+and to accept folders that already exist. The final `ls` should include
+`practice`. An empty folder is still a real folder.
+
+## Check it in the file manager
+
+**In Ubuntu on Windows**, run:
+
+```bash
+explorer.exe .
+```
+
+**In Mac Terminal**, run:
+
+```bash
+open .
+```
+
+The dot means the current directory. The graphical window should show the
+`practice` folder. Leave this window open for the next exercise. On a remote
+Linux system these laptop-specific commands are not the remote file-transfer
+method; follow the supplied remote instructions instead.
+
+## Practical 1: make a map and follow it
+
+From `introcomputing-shell`, run:
+
+```bash
+cd practice
+mkdir seedlings
+mkdir observations
+ls
+cd seedlings
+pwd
+cd ..
+pwd
+```
+
+`..` means the parent directory. The two `pwd` results should end in
+`/practice/seedlings` and `/practice`. Compare the file manager with this tree:
+
+```text
+introcomputing-shell/
+└── practice/
+    ├── seedlings/
+    └── observations/
+```
+
+Use the graphical window to open `seedlings`. Does this make the terminal move
+there too? Run `pwd` to check. Each window can have its own current location.
+Clicking in one does not automatically change the other.
+
+## Commands, arguments, and options
+
+In `cd seedlings`, `cd` is the command and `seedlings` is its argument: the
+destination. In `ls -l`, `-l` is an option asking for a longer listing. You do
+not need to interpret every column yet; identify which column contains names.
+
+Try these from `practice`:
+
+```bash
+ls -l
+cd observations
+ls
+```
+
+An empty listing from `ls` means there are no visible entries to list. It does
+not mean the command failed. Many commands report success by simply returning
+to the prompt.
+
+## Practical 2: recover from an ordinary mistake
+
+Return to `practice` with `cd ..`, then try `cd Observations`. We created `observations` with a
+lowercase `o`. Ubuntu distinguishes uppercase and lowercase names. Many Macs
+do not distinguish them on their default disk, so this may work there. Always
+match the actual spelling so your work transfers between computers.
+
+Now deliberately try:
+
+```bash
+cd no-such-folder
+```
+
+Read the message. The folder is missing; your computer has not broken. Run `pwd`
+and `ls` before trying again. Ask “where am I, and what is actually here?”
+
+::: {.callout-tip collapse="true"}
+## I'm lost. How can I return to the workspace?
+
+Run `cd ~/introcomputing-shell`, then `pwd`. `~` is shorthand for your home
+directory. This route works even if you have navigated into several nested
+folders. Do not replace it with someone else's username.
+:::
+
+## Small keyboard habits that save effort
+
+- **Tab:** type the first few letters of a folder, then Tab to complete a name
+  when it is unambiguous. Try `cd pra` then Tab from the workspace.
+- **Up arrow:** recall a previous command. Read it before running it again.
+- **Ctrl+C:** interrupt a running command or clear a partly typed command.
+  This is different from copying selected text. Ubuntu terminal windows commonly
+  use Ctrl+Shift+C/V for copying and pasting; Mac uses Command+C/V.
+- **Quotes:** keep a name containing spaces together, for example
+  `mkdir "field notes"`. Without quotes those words can become separate arguments.
+
+We are not using deletion commands today. Practise on the supplied workspace,
+and ask before removing something you did not mean to create.
+
+## Check your understanding
+
+::: {.callout-note collapse="true"}
+## What changes when I run `cd`? What stays unchanged?
+
+The terminal's current working directory changes. The files do not move, and
+other windows need not change location. `pwd` checks the new starting point.
+:::
+
+::: {.callout-note collapse="true"}
+## Why can `ls` work without printing any filenames?
+
+The directory may be empty. Compare with an error, which normally includes a
+message explaining the problem. Read the output rather than assuming silence
+is failure.
+:::
+
+**Save today:** the shell workspace and its folder tree. In a plain-text file
+called `navigation-notes.txt` inside that workspace, record the full path printed
+by `pwd`, your route back from home, and three commands with their meanings.
+Create the note through the graphical window if that is easiest.
+
+Next: [open an archive of laboratory files](04-inspect-archive.qmd).

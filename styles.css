@@ -1,0 +1,8 @@
+/* The course uses the sibling scaffold's Cosmo theme and docked navigation. */
+.sidebar-item-section > .sidebar-item-container .sidebar-item-text {
+  font-weight: 650;
+}
+main { max-width: 58rem; }
+.callout { margin-block: 1.25rem; }
+pre { border-radius: 0.3rem; }
+table { font-size: 0.96rem; }

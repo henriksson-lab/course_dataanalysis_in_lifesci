@@ -1,0 +1,190 @@
+---
+title: "Windows: install Ubuntu; Mac: open Terminal"
+---
+
+We will use a **terminal** to give the computer short written instructions.
+On Windows we use Ubuntu, a version of Linux, through **Windows Subsystem for
+Linux (WSL)**. Mac users can use the Terminal application already on their Mac.
+
+You do not need to understand the commands yet. This page gets you ready for
+the first exercises. Installation help will be provided during the course.
+
+## Windows: install Ubuntu
+
+### 1. Prepare
+
+Save your work: installation may require restarting your computer. You need an
+internet connection and permission to install software. On a university-managed
+computer, ask the teaching team if administrator access is unavailable.
+
+Use Windows 11 for this setup. Microsoft's installation command also supports
+Windows 10 version 2004 (build 19041) or later; if you have an older system,
+ask for help choosing a supported course environment.
+
+### 2. Open PowerShell as administrator
+
+Open **Start**, type **PowerShell**, right-click **Windows PowerShell**, and
+choose **Run as administrator**. Accept the Windows permission prompt.
+
+PowerShell is a Windows command window. We use it for installation; later
+Linux exercises belong in Ubuntu.
+
+### 3. Install
+
+In **PowerShell**, type this command and press **Enter**:
+
+```powershell
+wsl --install -d Ubuntu
+```
+
+Wait for it to finish and restart the computer if requested. This installs
+Ubuntu alongside your Windows applications using WSL.
+
+These steps follow [Microsoft's WSL installation instructions](https://learn.microsoft.com/en-us/windows/wsl/install).
+
+### 4. Open Ubuntu and create your Linux account
+
+After restarting, open **Start**, search for **Ubuntu**, and open it. First
+startup may take a little time.
+
+When asked, choose a Linux username, for example `anna`, using lowercase letters.
+Then choose a password and enter it again when prompted. This is a separate
+account from your Windows account.
+
+**Nothing appears while you type the password, not even dots.** This is normal.
+Type it and press Enter. Keep the password somewhere secure; do not send it to
+a teacher or include it in a screenshot.
+
+When setup finishes, you should see a line ending in a prompt, often `$`.
+The prompt means Ubuntu is waiting for a command. Do not type the `$` itself.
+
+The account and password behaviour is described in
+[Microsoft's environment setup guide](https://learn.microsoft.com/en-us/windows/wsl/setup/environment).
+
+### 5. Check Ubuntu
+
+In **Ubuntu**, run these commands one at a time:
+
+```bash
+whoami
+pwd
+uname -s
+```
+
+`whoami` should show your Linux username. `pwd` shows your current folder,
+usually `/home/` followed by your username. `uname -s` should print `Linux`.
+
+To check WSL itself, open **PowerShell** and run:
+
+```powershell
+wsl --list --verbose
+```
+
+Look for an Ubuntu entry with `2` in the VERSION column. A running or stopped
+state is normal. If your installation shows version 1, bring it to the setup
+session so we can help check it.
+
+### 6. Opening Ubuntu next time
+
+Open **Ubuntu** from Start. You normally do not need administrator mode for
+course exercises. Closing its window does not delete your saved files.
+
+## Mac: use Terminal directly
+
+Open **Finder**, then **Applications → Utilities → Terminal**. You can also
+search for Terminal with Spotlight. You do not need to install Ubuntu.
+
+Run the same three commands:
+
+```bash
+whoami
+pwd
+uname -s
+```
+
+Your home folder is usually `/Users/` followed by your username, and `uname -s`
+prints `Darwin`, the underlying macOS system. That is expected. macOS is not
+Linux, but the basic commands we use work in both environments. A prompt ending
+in `%` is also normal on a Mac.
+
+Commands labelled **Ubuntu only**, such as `apt`, do not belong in Mac Terminal.
+
+## First exercise: a folder you can find again
+
+On Windows use **Ubuntu**; on Mac use **Terminal**. Run one line at a time:
+
+```bash
+cd
+mkdir -p introcomputing/first-session
+cd introcomputing/first-session
+pwd
+ls
+```
+
+- `cd` on its own takes you to your home folder.
+- `mkdir -p` creates the named folders if they do not already exist.
+- `cd introcomputing/first-session` moves into that folder.
+- `pwd` prints its full location, called its **path**.
+- `ls` lists what is inside. A new, empty folder produces no listed filenames.
+
+Now see the **same folder** in a graphical file manager:
+
+**Windows — run in Ubuntu:**
+
+```bash
+explorer.exe .
+```
+
+**Mac — run in Terminal:**
+
+```bash
+open .
+```
+
+The dot means “the folder I am in now”. The file-manager window and the terminal
+are showing the same place in two different ways.
+
+Close the terminal, reopen it, and find your folder again:
+
+```bash
+cd ~/introcomputing/first-session
+pwd
+```
+
+Here `~` is shorthand for your home folder. Being able to return to saved work
+is part of being ready, even when the folder is still empty.
+
+## Windows and Ubuntu have different home folders
+
+On Windows, Ubuntu's `/home/anna` is different from Windows' `C:\Users\anna`.
+A file downloaded by your Windows browser does not automatically appear in your
+Ubuntu home folder. For terminal exercises, use the Ubuntu home folder we just
+created. We will practise locating downloads and transferring files together.
+
+You can reach Ubuntu files through `explorer.exe .`, or by entering `\\wsl$`
+in File Explorer's address bar and opening your Ubuntu distribution.
+See [Microsoft's guide to Windows and Linux file systems](https://learn.microsoft.com/en-us/windows/wsl/filesystems).
+
+R and RStudio will have separate setup instructions. You do not need to install
+them inside Ubuntu to complete this page.
+
+## If something goes wrong
+
+| What you see | What to do |
+| --- | --- |
+| Windows asks for an administrator password you do not have | Ask the teaching team or the computer's administrator. |
+| Installation appears stuck at 0% | In administrator PowerShell, try `wsl --install --web-download -d Ubuntu`, as described in Microsoft's installation guide. |
+| A message mentions virtualisation or an optional component | Save the exact error and ask for setup help; settings may need an administrator. |
+| Password typing appears to do nothing | No visible characters is normal. Type the password and press Enter. |
+| `explorer.exe` is not found | Check that you are in Ubuntu on Windows. On Mac use `open .`; on a remote computer neither command is the course file-transfer method. |
+| A Linux command gives an unexpected PowerShell error | Open Ubuntu from Start and try there. |
+
+Bring the error message and the step you reached to the setup session. If local
+installation is unavailable, we will help you use the course's
+[remote Linux environment](remote-linux.qmd); connection details will follow.
+
+## Ready for the first session
+
+You can open the correct terminal, run `pwd`, create a folder, view that folder
+in a file manager, and return to it after reopening the terminal. You do not
+need to memorise the commands yet.

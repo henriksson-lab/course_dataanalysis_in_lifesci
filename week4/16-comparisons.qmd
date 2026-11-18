@@ -1,0 +1,136 @@
+---
+title: "Day 16 — What does a difference between groups mean?"
+---
+
+## Today's question
+
+Does the treatment change how much a seedling grows? We already know how to
+describe the plants we measured. Today we distinguish a difference **in our
+sample** from evidence about a wider process. We begin with plants and pictures,
+then add statistical language. No new test is needed today.
+
+Open `introcomputing.Rproj`. Use the clean, simulated `data/seedlings.csv`, not
+your data-repair exercise. Each row is one independently potted plant. Twelve
+plants were randomly assigned to each group and measured before and after the
+same growth period. The outcome is growth in millimetres. The treatment label
+describes an experimental condition; these teaching data do not establish a
+claim about any actual product or organism.
+
+## Start with the question and the independent unit
+
+Our comparison is **mean growth in treated plants minus mean growth in control
+plants**. State that direction now: a positive difference means greater growth
+in the treated group. Keep it the same in your code and report.
+
+The independent experimental unit is a plant in its own pot. Measuring one plant
+three times with a ruler may improve the measurement; it does not create three
+independent plants. Similarly, the initial and final measurements belong to the
+same plant. We subtract them to obtain one growth value per plant, then compare
+growth between the two independent treatment groups.
+
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE)
+seedlings <- seedlings |>
+  mutate(growth_mm = final_mm - initial_mm)
+
+group_summary <- seedlings |>
+  group_by(treatment) |>
+  summarise(n = n(), mean_growth_mm = mean(growth_mm),
+            sd_growth_mm = sd(growth_mm), .groups = "drop")
+group_summary
+```
+
+The control mean is about 15.28 mm; the treated mean is about 21.49 mm. Both
+groups contain 12 plants. Their observed difference is about 6.22 mm. A difference
+is a number with units, not merely a label such as “significant”.
+
+## Show the observations before summarising the evidence
+
+```{r}
+growth_plot <- ggplot(seedlings, aes(x = treatment, y = growth_mm)) +
+  geom_point(position = position_jitter(width = 0.08, height = 0, seed = 16)) +
+  labs(x = "Treatment group", y = "Growth over the study period (mm)") +
+  theme_minimal()
+growth_plot
+```
+
+![Individual growth values in the supplied simulated dataset. The slight horizontal displacement separates overlapping dots.](figures/day16-growth.png)
+
+The small horizontal displacement separates overlapping dots. It does not change
+their heights. You can see variation among individuals and overlap between the
+groups. Overlap does not automatically mean that the group means are equal;
+separated means do not mean that every treated plant grew more than every control
+plant. Compare both statements against the picture.
+
+## A sample difference is not the whole story
+
+If we repeated the experiment with another set of plants, we would get another
+difference. Random variation can produce unequal sample means even when the
+underlying group means are equal. Tomorrow's test asks whether the observed
+difference is difficult to reconcile with a particular equal-means model.
+
+The **null hypothesis** for this exercise is that the population mean growth is
+the same under the two conditions. A **two-sided alternative** allows a difference
+in either direction. We choose a two-sided question before looking for the most
+favourable result.
+
+A **p-value** describes how often a result at least as extreme as the one
+observed would arise under the null model and its assumptions. For the t-test,
+“extreme” refers to the test statistic, which compares the mean difference with
+its estimated sampling uncertainty. A p-value is not the probability that the
+null hypothesis is true, and it does not measure the biological importance of a
+difference.
+
+## Practical: prepare a comparison report
+
+Save a copy of the root-level `report.Rmd` as `comparison.Rmd`, also at the
+project root so its `data/` paths work. Keep your earlier reports. In this new
+file:
+
+1. Write the biological question, outcome units, and independent experimental unit.
+2. Add the import, growth calculation, group summary, and individual-point plot.
+3. Calculate the treated-minus-control difference with the following explicit
+   extraction. `pull()` takes one column out of a table as a vector.
+
+```{r}
+treated <- seedlings |>
+  filter(treatment == "treated") |>
+  pull(growth_mm)
+control <- seedlings |>
+  filter(treatment == "control") |>
+  pull(growth_mm)
+
+observed_difference <- mean(treated) - mean(control)
+observed_difference
+```
+
+4. Write two sentences: one describes the sample difference, and one says what
+   still remains uncertain about the wider population.
+5. Save the figure with `ggsave("output/day16-growth.png", growth_plot,
+   width = 6, height = 4)` and render the report to HTML.
+
+::: {.callout-tip collapse="true"}
+## Hint: check a surprising sign
+
+Read `mean(treated)` and `mean(control)` separately. The order in a subtraction
+matters. A negative result from `mean(control) - mean(treated)` would describe
+the reverse comparison, not a contradictory biological result.
+:::
+
+## Check your understanding
+
+- Can we conclude that every treated plant grew more? **No; look at the dots.**
+- Are 12 plants each measured twice 24 independent replicates per group?
+  **No; repeated measurements stay attached to their plant.**
+- Does an observed mean difference alone tell us its sampling uncertainty?
+  **No; variability and sample size matter as well.**
+
+**Leave with:** `comparison.Rmd`, its rendered HTML, and
+`output/day16-growth.png`. Your report should currently describe the observations
+without pretending that a test has already been performed.
+
+Next: [Day 17 — A guided Welch t-test](17-welch-test.qmd).

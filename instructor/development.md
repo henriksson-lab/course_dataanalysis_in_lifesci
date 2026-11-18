@@ -1,0 +1,82 @@
+# Shared teaching contract
+
+This is a first teaching draft, not an approved syllabus or an examination plan.
+Students have no assumed file-system or programming knowledge. The current
+five-week sequence is in `contentplan.md`.
+
+Chemistry contexts must be self-contained. Completion of Fundamentals of
+Chemistry (5KE165), or recall of a chemical formula or method, is not required
+to understand an instruction. Supply definitions, inputs, constants, units,
+the relationship to compute, assumptions, and a worked/checkable result.
+Prior chemistry can make an example familiar; it cannot supply missing steps.
+See `instructor/chemistry-context.md` for investigated insertion points.
+
+## Authoring conventions
+
+- Daily student pages live in `week1/01-files.qmd` through the named day 25 page.
+  Every page needs explanation, a worked example, a biological practical,
+  actionable hints, a completion check, and an explicit deliverable. Do not
+  substitute lists of topics for teaching content. Use ordinary HTML pages.
+- Website pages are Quarto; student reports are R Markdown. Teach these as
+  different things. Students never need to author Quarto for this course.
+- Students download `downloads/course-files.zip`, extract the enclosed
+  `introcomputing-course/` folder, and use it as their project root. It contains
+  `introcomputing.Rproj`, `data/`, `output/`, `report.Rmd`, and `reports/`.
+  R code paths are always relative to that root: `data/seedlings.csv`.
+- Teach base R object handling first, then `readr::read_csv`, `dplyr` functions,
+  and `ggplot2`. Use the base pipe `|>` sparingly and explain it at first use.
+  Prefer `data =` explicitly in statistical functions. Avoid switching between
+  equivalent syntaxes. Statistics use `stats::t.test` and `stats::lm`.
+- All data are simulated teaching data generated with fixed seeds. Each CSV has
+  a dictionary and experimental-design description in `data/README.md`.
+- `seedlings.csv`: `plant_id`, `treatment` (`control`/`treated`),
+  `initial_mm`, `final_mm`. Twenty-four independently potted seedlings, twelve
+  per group; treatment randomly assigned. Derived `growth_mm = final_mm - initial_mm`.
+- `seedlings-messy.csv`: same schema; known planted errors documented privately
+  in `instructor/data-notes.md` and explained to students as a repair exercise.
+- `calibration.csv`: `standard_id`, `concentration_mg_l`, `absorbance`.
+  `unknowns.csv`: `sample_id`, `absorbance`. Standards are prepared solutions;
+  these are calibration points, not independent treatment replicates.
+- `paired.csv`: `plant_id`, `before_umol_m2_s`, `after_umol_m2_s`.
+  Ten independent plants, the same plant measured twice after changing light.
+  Order is not counterbalanced: causal claims need this limitation.
+- `leaf-mass.csv`: `plant_id`, `leaf_area_cm2`, `dry_mass_mg`.
+  One leaf from each of eighteen independent plants. Observational association.
+- `duckweed.csv`: `flask_id`, `treatment` (`control`/`nutrient`), `biomass_mg`.
+  Twenty independent culture flasks, ten per randomised group, one harvest.
+  One nutrient measurement is missing after a spill; never replace it by zero.
+- `samples.tsv` in the shell archive: `sample_id`, `treatment`, `file`.
+  Two control and two treated records; header contains no `treated` token.
+  `downloads/lab-data.zip` extracts into a user-chosen `lab-data/` folder, with
+  README.txt, samples.tsv, measurements/ and field-notes/.
+- `dna.txt`: a tiny single-line DNA string, no FASTA parsing needed.
+  `pixels.csv`: 8 x 8 numeric values with a header; use `as.matrix(read.csv(...))`.
+- Never require software beyond R/RStudio, the small R package set,
+  terminal utilities (`zip`, `unzip`, `grep`, etc.), and supported remote access.
+  No ImageMagick, csvkit, SLiM, bioinformatics databases, or specialist tools.
+- No actual remote hostname, account procedure, scheduler command, or desktop
+  product is known. Explain SSH and file location; retain clearly marked setup
+  dependencies. No executable example may pretend an invented host is real.
+- Instructor solutions go in `instructor/`; exclude them from the website and
+  student downloads. Hints and short self-check answers may be student-visible.
+  Do not introduce assessment requirements or grades.
+- Root agent owns navigation, shared data/assets, setup pages, week 5,
+  validation, and packaging. Workers own only their assigned week directories
+  and named instructor solution files.
+
+## Daily filenames
+
+Week 1: `01-files`, `02-folders-computers`, `03-terminal`, `04-inspect-archive`,
+`05-lab-files`.
+
+Week 2: `06-r-basics`, `07-import`, `08-transform-plot`, `09-rmarkdown`,
+`10-first-report`.
+
+Week 3: `11-data-quality`, `12-variation`, `13-group-summaries`,
+`14-replicates-uncertainty`, `15-descriptive-report`.
+
+Week 4: `16-comparisons`, `17-welch-test`, `18-paired`, `19-calibration`,
+`20-association`.
+
+Week 5: `21-remote-workflow`, `22-data-representations`, `23-mini-study`,
+`24-reproduce`, `25-consolidate`.

@@ -1,0 +1,125 @@
+---
+title: "Day 7 — Read a table and find out what it means"
+---
+
+## Today's question
+
+We have lengths from 24 seedlings. Twelve independently potted plants were
+randomly assigned to a control group and twelve to a treatment group. Each plant
+was measured at the beginning and end of the same observation period. Can we
+bring the measurements into R without losing their meaning?
+
+Open `introcomputing.Rproj` in the extracted course folder. Its `data/` subfolder
+contains the supplied files and a `README.md` explaining them. A **CSV** is a
+text file in which commas separate columns. Its first line is a header naming
+those columns. The file is storage; importing creates an R object in memory.
+
+## Start from a known place
+
+Create `day07.R` in the project root. Run:
+
+```{r}
+getwd()
+file.exists("data/seedlings.csv")
+```
+
+`getwd()` reports R's working directory. It should be your extracted project
+folder, not the `data` folder. The second line should return `TRUE`. The relative
+path `data/seedlings.csv` means “inside data, find seedlings.csv, starting here”.
+Your full home-folder path differs from a classmate's; this relative path can
+stay the same when they open their own project.
+
+If `file.exists()` returns `FALSE`, inspect the folder in the file manager. A
+common problem is opening the ZIP rather than an extracted project, or an extra
+folder layer. Avoid solving this by inserting your personal absolute path into
+every line of code. Open the correct project instead.
+
+## Import and inspect
+
+The `readr` package provides a table importer. Packages add functions to R;
+installing a package puts it on disk, while `library()` loads it for this session.
+The [software setup page](../intro/r-rstudio.qmd) explains installation. Loading is needed again after
+restarting R.
+
+```{r}
+library(readr)
+seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE)
+head(seedlings)
+dim(seedlings)
+names(seedlings)
+str(seedlings)
+```
+
+`read_csv()` returns a table, displayed as a **tibble**. `head()` shows its first
+rows, not the complete dataset. `dim()` gives 24 rows and 4 columns. `names()`
+returns column names. `str()` describes structure and types: `plant_id` and
+`treatment` are text; the two lengths are numeric. Suppressing the type message
+with `show_col_types = FALSE` does not remove the need to check types.
+
+Read the first row aloud: plant P01 is in the control group; its initial length
+was 25.7 mm and its final length 44.3 mm. Each **row** represents one plant, each
+**column** one variable. Two lengths from the same row are measurements on the
+same plant, not two independent plants.
+
+```{r}
+seedlings$initial_mm
+length(seedlings$initial_mm)
+mean(seedlings$initial_mm)
+```
+
+`$` selects a named column from the table, giving a vector. The length is 24. A
+mean without a unit is incomplete: the average initial length is measured in mm.
+The numbers cannot tell you whether the file used mm or cm; the dictionary and
+measurement protocol provide that information.
+
+## Missing is different from zero
+
+A missing measurement is represented by `NA` after import. `NA` means not
+available. It does not mean zero length, no growth, or a control treatment.
+
+```{r}
+example_mm <- c(12, NA, 18)
+mean(example_mm)
+mean(example_mm, na.rm = TRUE)
+is.na(example_mm)
+```
+
+The first mean is `NA`: R will not silently pretend all measurements are known.
+The second is 15 mm, calculated from two observed values. `na.rm = TRUE` requests
+omitting missing values for this calculation. A report must still explain how
+many observations were missing and why, if known.
+
+## Your practical
+
+1. Import `seedlings.csv` and save the import and inspection commands in `day07.R`.
+2. Record in comments the row count, column count, column meanings, and units.
+3. Inspect `tail(seedlings)` to see the last rows. Find P24 and its treatment.
+4. Use `sum(is.na(seedlings$final_mm))` to count missing final measurements.
+5. Import `data/leaf-mass.csv` into `leaves`, inspect it, and use its dictionary
+   to explain what one row represents. Do not assume it has the seedling columns.
+6. Restart R and run your script from the top. The raw CSV files should remain
+   exactly as supplied.
+
+::: {.callout-tip collapse="true"}
+## Hint: a function is not found
+
+Run `library(readr)` before `read_csv()`. If loading fails because the package is
+not installed, use the setup instructions or ask for help. For column names,
+copy from `names(seedlings)`; `initial_mm` and `initial` are different names.
+:::
+
+## Check your understanding
+
+Why is the header not a plant? Why does the file's name not tell R the units?
+Why should the script work from a classmate's project folder?
+
+::: {.callout-note collapse="true"}
+## Check your answers
+
+The header labels columns rather than containing an observation. Units are
+metadata supplied by people; R only sees column names and values. The script uses
+relative paths and the same documented folder structure rather than your username.
+There are no missing final lengths in the clean seedling dataset.
+:::
+
+**Keep:** `day07.R`. Next: [calculate growth and draw a figure](08-transform-plot.qmd).

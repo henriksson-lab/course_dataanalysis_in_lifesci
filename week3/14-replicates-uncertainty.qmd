@@ -1,0 +1,116 @@
+---
+title: "Day 14 — More readings are not always more independent evidence"
+---
+
+## Today's question
+
+Would measuring the same plant ten times tell us as much about other plants as
+measuring ten different plants? The answer changes how we count evidence and
+interpret an average. Today is about experimental reasoning, supported by a
+small simulation provided for you to run. You do not need to write simulations.
+
+## Identify what was independently sampled or treated
+
+In the seedling experiment, plants are grown in separate pots and treatment is
+randomly assigned to plants. The plant is our independent experimental unit.
+An **independent biological replicate** provides another unit relevant to the
+question. A **technical replicate** repeats measurement of the same material,
+helping reveal measurement variation.
+
+Three ruler readings of P01 can help assess how consistently it was measured.
+They do not turn it into three independently treated plants. Similarly, 100 cells
+from one organism are not automatically 100 independent organisms, and ten time
+points from one culture are not ten independent cultures. The unit follows the
+design and biological question, not the number of rows in a spreadsheet.
+
+Imagine a nutrient treatment assigned to two trays, each holding twelve plants.
+If each tray receives a single shared treatment, the tray is a treatment unit.
+Treating all 24 plants as independently randomised units would overstate the
+independent treatment information. More data rows cannot repair that design.
+
+## Spread among plants versus uncertainty in a mean
+
+SD describes how much measured plants vary. **Sampling uncertainty** concerns how
+our estimated mean would change if we repeated the sampling process. Even when
+a population's spread stays the same, a mean based on more independent plants
+typically varies less from sample to sample.
+
+Here is a teacher-provided demonstration. The clean seedling growth measurements
+serve as a fixed toy population for repeated sampling. This is not a new
+experiment and is not evidence about all plants in nature. Sampling with
+replacement is used to illustrate repeated draws from a fixed distribution.
+
+Save the block in `day14-sampling.R`, then run it unchanged first:
+
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE) |>
+  mutate(growth_mm = final_mm - initial_mm)
+population_mm <- seedlings$growth_mm
+set.seed(14)
+means_4 <- replicate(400, mean(sample(population_mm, size = 4, replace = TRUE)))
+means_16 <- replicate(400, mean(sample(population_mm, size = 16, replace = TRUE)))
+sampling <- data.frame(mean_mm = c(means_4, means_16),
+                       sample_size = rep(c("4 plants", "16 plants"), each = 400))
+ggplot(sampling, aes(x = mean_mm)) +
+  geom_histogram(binwidth = 1, colour = "white") +
+  facet_wrap(~ sample_size, ncol = 1) +
+  labs(x = "Mean growth in one simulated sample (mm)",
+       y = "Number of simulated samples") +
+  theme_minimal()
+sd(population_mm)
+sd(means_4)
+sd(means_16)
+```
+
+`sample()` draws a sample; `replicate()` repeats the calculation 400 times.
+`replace = TRUE` allows a source value to be drawn more than once. `set.seed()`
+sets the starting state of the random-number generator so the demonstration can
+be repeated exactly. The resulting 400 means are summaries of simulated samples,
+not 400 newly measured plants.
+
+Notice the horizontal axis: each value is a **sample mean**. Compare its spread
+between sample sizes. Do not confuse `sd(means_16)` with SD among the 16 plants
+inside one particular sample. The former describes variation among repeated
+estimates and approximates a standard error in this toy sampling process.
+
+## Your practical
+
+![Repeated sample means from samples of sixteen plants cluster more tightly than means from samples of four. The source distribution is fixed in this toy demonstration.](sampling-means.png)
+
+1. Before running the demonstration, predict which sample means will spread out
+   more. Compare the plot and printed SDs with your prediction.
+2. Change the random seed to 25 and rerun. Exact bins change; does the main
+   relationship between sample size and spread remain?
+3. Draw a small diagram for each design: twelve independent pots; one pot with
+   twelve ruler readings; two trays with twelve plants each and tray-level
+   treatment. Label the unit assigned to treatment.
+4. Write an explanation for a lab partner: “We have many measurements, but our
+   number of independently treated units is ...”. Complete it for each design.
+5. Save a two-sentence explanation of the difference between SD among plants
+   and uncertainty in a group mean for your report.
+
+::: {.callout-tip collapse="true"}
+## Hint: keep the sampling target fixed
+
+Both `means_4` and `means_16` draw from the same `population_mm`. A larger sample
+does not alter those source values or their SD. It changes how much the repeated
+sample means vary. These combined-treatment values are only a teaching population;
+this simulation is not a treatment comparison.
+:::
+
+## Check your understanding
+
+::: {.callout-note collapse="true"}
+## Is a precise mean enough?
+
+No. Repeated measurements may be biased, dependent, or drawn from an unrepresentative
+source. A narrow sampling distribution does not establish that the sampling
+process answers the intended biological question. Independent units and an
+appropriate design still matter.
+:::
+
+**Keep:** `day14-sampling.R`, your replicate diagrams, and the two-sentence explanation.
+Next: [write a descriptive report](15-descriptive-report.qmd).

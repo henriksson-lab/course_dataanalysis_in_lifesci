@@ -1,0 +1,149 @@
+---
+title: "Day 22 — a sequence is text; an image is numbers"
+---
+
+## Today's question
+
+Is a computer handling something fundamentally different when it stores a DNA
+sequence or a picture? The information has different meanings, but we can reuse
+familiar ideas: characters, numbers, vectors, tables, and saved files.
+
+This is a short breadth session. We will not search a database, align sequences,
+or learn an image-analysis package. Allow time afterwards to practise earlier
+reports. Save today's code as `representations.R` in the project root, and two
+or three explanatory sentences in `reports/representations.txt`.
+
+## 1. A DNA sequence as character data
+
+At the storage level, files are sequences of bytes. A **bit** has two possible
+values, 0 or 1; a **byte** contains eight bits, giving 256 possible patterns.
+Software interprets those patterns using a format: they might encode text,
+brightness, or something else. The file extension helps applications choose how
+to read a file, but renaming `photo.jpg` to `photo.csv` does not convert its contents.
+We will interpret information through its format, not learn binary arithmetic.
+
+DNA can be represented with letters A, C, G, and T. Our file is a tiny invented
+string, not a real gene. It is one line of plain text; the final newline separates
+lines in the file and is not an extra DNA base.
+
+Run in **R**, with the course project open:
+
+```r
+dna <- readLines("data/dna.txt")
+dna
+nchar(dna)
+```
+
+`readLines()` reads text lines; here it produces one character string. `nchar()`
+counts its characters. Compare with `length(dna)`, which is 1: one stored string
+is different from forty separate character elements.
+
+To count individual letters, split that string:
+
+```r
+bases <- strsplit(dna, split = "")[[1]]
+length(bases)
+table(bases)
+```
+
+This new line is a supplied small example, not syntax to memorise. `strsplit()`
+returns a collection of results, one for each input string. `[[1]]` selects the
+first result. An empty `split` separates every character. `table()` then counts
+the occurrences of each different letter.
+
+**Try it:** copy the printed sequence into a quoted R string, change one A to a
+G, and repeat the counts. Predict which counts change before running the code.
+Keep the supplied file unchanged. A total count of letters does not reveal what
+a sequence does in an organism; meaning needs biological context.
+
+::: {.callout-tip collapse="true"}
+## Hint: one string versus many letters
+
+`length(c("ACG", "TT"))` is 2 because the vector has two strings.
+`nchar(c("ACG", "TT"))` gives 3 and 2. Ask which of these questions you want
+before interpreting a count.
+:::
+
+## 2. A small image as a table
+
+A grayscale image can be stored as rows and columns of brightness values.
+Our deliberately tiny teaching image has eight rows and eight columns. On its
+0–255 scale, 0 means black and 255 means white; it is not a measurement in mm.
+One byte can represent one intensity on that scale. The 64 intensities would
+need 64 bytes if stored directly as one byte each. Our CSV is larger because
+it stores the digits as text, plus commas, a header, and line endings. The same
+information can have different file sizes in different representations.
+
+```r
+pixels <- as.matrix(read.csv("data/pixels.csv"))
+dim(pixels)
+pixels
+pixels[1, 1]
+pixels[4, 4]
+```
+
+`read.csv()` is used here to obtain a simple numeric table for the supplied
+matrix demonstration; ordinary course tables still use `read_csv()`.
+`as.matrix()` represents this all-numeric table as a rectangular matrix.
+`pixels[4, 4]` selects row 4, column 4. A pixel is a location in the image, not
+an independent organism.
+
+To display the values, the following supplied code converts brightness to a
+0–1 grayscale representation and draws it:
+
+```r
+plot.new()
+rasterImage(as.raster(pixels / 255), 0, 0, 1, 1)
+```
+
+The bright central object should be visible. The 0 and 1 coordinates specify the
+plotting region, not a calibrated physical scale. You cannot turn its pixel area
+into square millimetres without knowing the image calibration.
+
+## 3. Count a visibly defined region
+
+```r
+bright <- pixels > 100
+bright
+sum(bright)
+mean(bright)
+```
+
+The comparison produces a matrix of `TRUE`/`FALSE` values. In a sum, R counts
+`TRUE` as 1 and `FALSE` as 0. `mean(bright)` is therefore the fraction of pixels
+above 100. We are reusing logical comparisons from table filtering.
+For this supplied image, 24 of 64 pixels are above 100: the fraction is 0.375.
+
+**Try it:** compare thresholds 50, 100, and 220. Which pixels count as bright?
+Explain why this constructed two-level image is unusually easy to separate.
+Real microscope images may have noise, uneven lighting, and overlapping objects;
+a bright region is not automatically one cell.
+
+::: {.callout-tip collapse="true"}
+## Hint: a quick check without new syntax
+
+Use `sum(pixels > 50)`, then replace 50 with 100 and 220. The image contains
+only 25 and 210. Predict the outcome from these values before running each line.
+:::
+
+## Interpretation and limits
+
+Write one sentence answering each question:
+
+1. What is represented by a DNA character, a matrix cell, and a plant-table row?
+2. What extra information would you need to call a bright area a cell?
+3. Why is the number of pixels not an appropriate sample size for a test of a
+   treatment applied to one plant?
+
+::: {.callout-note collapse="true"}
+## Short answers
+
+A DNA character represents a base label; a pixel cell represents brightness at
+a location; our plant-table row records measurements of one plant. Image
+interpretation needs acquisition context, scale, and biological validation.
+Pixels from one image are spatially related measurements, and one treated plant
+remains one experimental unit regardless of its number of pixels.
+:::
+
+**Before you finish:** rerun `representations.R` from a fresh R session and save
+your explanatory notes. Next: [a small integrated study](23-mini-study.qmd).

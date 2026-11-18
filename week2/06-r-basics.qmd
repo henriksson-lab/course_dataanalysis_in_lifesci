@@ -1,0 +1,125 @@
+---
+title: "Day 6 — Let R keep track of a calculation"
+---
+
+## Today's question
+
+A seedling was 20 mm long at the start of an experiment and 37 mm long at the
+end. How much did it grow? The answer is simple; our task is to make the computer
+keep a readable, repeatable record of how we obtained it. All plant measurements
+in this course are simulated teaching data, not results from a real experiment.
+
+Open the extracted `introcomputing-course` folder and double-click
+`introcomputing.Rproj`. R is the program that calculates. RStudio is the workspace
+we use to write instructions, run R, inspect results, and prepare reports. Its
+**Console** accepts R instructions. An **R script** is a saved text file containing
+instructions. The terminal from week 1 accepts shell commands; do not type `ls`
+into the R Console or R expressions into the Ubuntu shell.
+
+## Start with a calculation
+
+Type the following in the R Console, pressing Enter after each line. Do not type
+the Console's `>` prompt. The `[1]` in an answer labels the first printed element;
+it is not part of your measurement.
+
+```{r}
+37 - 20
+20 * 2
+37 / 20
+```
+
+You should obtain 17, 40, and 1.85. The last value is a ratio, not a change in mm.
+The calculation can be correct while answering the wrong biological question.
+
+Now choose **File → New File → R Script**, save it as `day06.R` in the project
+folder, and put this in the script:
+
+```{r}
+# Measurements are lengths in millimetres.
+initial_mm <- 20
+final_mm <- 37
+growth_mm <- final_mm - initial_mm
+growth_mm
+```
+
+`<-` assigns the result on its right to a named **object** on its left. Read it as
+“store this value under this name”. A line beginning with `#` is a comment for
+people. R ignores the comment. To run a line from the editor, place the cursor
+on it and use **Run**. Saving a script does not run it; running a script does not
+save changes in the editor.
+
+If RStudio is not ready, use the [R and RStudio setup page](../intro/r-rstudio.qmd).
+Keep the [R reference sheet](../reference/r.qmd) open while practising.
+
+Object names are case-sensitive. `growth_mm` and `Growth_mm` are different names.
+An object in the Environment pane is in this R session's memory. The script is a
+file on storage. Reopening the script does not recreate the object until you run
+the instructions.
+
+## One name can hold several values
+
+`c()` combines values into a **vector**, an ordered collection. Functions have
+names followed by parentheses; the values inside are their arguments.
+
+```{r}
+initial_mm <- c(20, 22, 19)
+final_mm <- c(37, 40, 34)
+growth_mm <- final_mm - initial_mm
+growth_mm
+mean(growth_mm)
+length(growth_mm)
+```
+
+The growth values are 17, 18, and 15 mm. R subtracts position by position here.
+`mean()` calculates their average, approximately 16.67 mm. `length()` counts
+values and gives 3. This only makes biological sense because both vectors list
+the same three plants in the same order. Matching observations matters.
+
+Numbers, text, and logical values are different kinds of data:
+
+```{r}
+plant_id <- c("P01", "P02", "P03")
+growth_mm > 16
+```
+
+The comparison gives `TRUE TRUE FALSE`. Quotation marks identify text; `"20"` is
+text whereas `20` is a number. Plant IDs belong in text even if they contain
+numbers. To open help for a function, run `?mean` in the Console and read its
+Description and Examples rather than every option.
+
+## Your practical
+
+1. Keep the three-plant calculation in `day06.R` and explain the units in comments.
+2. Add a fourth plant that grew from 21 to 39 mm. Extend **both** vectors, rerun
+   the calculation, and check `length(growth_mm)`.
+3. Calculate each plant's final/initial ratio in an object called `length_ratio`.
+   Write a comment explaining how the ratio differs from growth in mm.
+4. Change the first final length from 37 to 38 mm. Predict which growth value
+   changes and check your prediction.
+5. Save the script, restart R through **Session → Restart R**, and run its lines
+   from the top. Everything it needs should be in the script.
+
+::: {.callout-tip collapse="true"}
+## Hint: an object is not found
+
+Check the spelling, including capitals, and run the line that creates the object.
+An editor line has no effect until it runs. If the Console shows `+`, an expression
+is unfinished: check quotes or parentheses, or press Esc to cancel it.
+:::
+
+## Check your understanding
+
+- What survives restarting R: an unsaved object or a saved script?
+- Why is `mean(plant_id)` not a useful operation?
+- What must be true for two vectors to be subtracted position by position?
+
+::: {.callout-note collapse="true"}
+## Check your answers
+
+The saved script survives; objects must be recreated. IDs name plants rather
+than measure quantities, so an average ID has no meaning. The vectors must refer
+to corresponding observations in the same order and have compatible lengths.
+:::
+
+**Keep:** `day06.R`, with the four-plant example and comments about units.
+Next: [import a whole table](07-import.qmd).

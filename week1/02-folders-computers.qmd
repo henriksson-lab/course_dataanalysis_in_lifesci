@@ -1,0 +1,157 @@
+---
+title: "Day 2 — Folders, paths, and the working computer"
+---
+
+## Start by finding yesterday's work
+
+Open the file manager and find `day01-notes.txt` using the folders, rather than
+the editor's recent-file list. Tell a partner which route you took. Being able
+to explain where a file lives will help when your analysis later reports “file
+not found”.
+
+Our biological question is still about seedling growth. Today we organise the
+experiment so that someone else can identify the original observations and the
+results we produce from them.
+
+## Folders form a tree
+
+A folder can contain files and more folders. We can draw part of our project
+as a tree. Indentation shows what is inside what:
+
+```text
+introcomputing-course/
+├── introcomputing.Rproj
+├── report.Rmd
+├── data/
+│   ├── README.md
+│   └── seedlings.csv
+├── output/
+│   └── seedlings-practice.csv
+└── reports/
+    └── day01-notes.txt
+```
+
+This drawing omits other supplied datasets. `data` and `reports` are neighbours:
+neither is inside the other. Their **parent folder** is `introcomputing-course`.
+That folder is the **project root** because it is the starting point for this
+project's organisation. It is not the root of the entire computer.
+
+In the file manager, open `reports`, go up to its parent, and then enter `data`.
+Watch the address bar on Windows or the folder path in Finder. In Finder,
+**View → Show Path Bar** can make the route easier to see.
+
+## A path gives the route to a file
+
+A **path** describes a location. These examples are illustrations: your username
+and exact Documents location will differ.
+
+```text
+Windows: C:\Users\anna\Documents\introcomputing-course\data\seedlings.csv
+Mac:     /Users/anna/Documents/introcomputing-course/data/seedlings.csv
+Linux:   /home/anna/introcomputing-course/data/seedlings.csv
+```
+
+An **absolute path** starts from the file system's root or drive and specifies
+the whole route. A **relative path** starts from an agreed current folder. From
+inside `introcomputing-course`, `data/seedlings.csv` means “enter `data`, then
+find `seedlings.csv`”. From inside `reports`, that same relative path would ask
+for a `data` folder *inside reports*, where it does not exist.
+
+This is why we need to know our **current working directory**: the folder from
+which a program interprets relative paths. Next lesson we will ask the terminal
+to print it. Relative paths will let us move a whole project without changing
+every filename in the analysis.
+
+## Practical 1: give directions through the tree
+
+Work in pairs. One person has the file-manager window; the other gives directions.
+
+1. Start in the project root. Find the original seedling table.
+2. Start in `reports`. Find the practice copy in `output`.
+3. Return to the project root. Create a folder called `practice`.
+4. Inside it, create `field-notes` and `figures`.
+5. Copy yesterday's note into `field-notes` and rename the copy
+   `seedling-observations.txt`.
+6. Draw the new part of the tree on paper. Swap roles and navigate from the
+   drawing alone.
+
+Prefer informative names with simple letters, numbers, and hyphens for this
+course. `seedling-observations.txt` is easier to interpret than `new2.txt`.
+We will learn to handle spaces too; simple names reduce avoidable typing errors.
+
+::: {.callout-tip collapse="true"}
+## I moved the whole project and now see two copies
+
+First locate each copy and inspect its contents. A copy operation leaves the
+original in place; a move changes the location. Ask the teacher to help choose
+one working project before continuing. Do not delete a folder merely because
+its name looks similar to another.
+:::
+
+## What happens when you open a file?
+
+Your laptop has several parts with different jobs:
+
+| Part | Job in our seedling example |
+| --- | --- |
+| Storage, such as an SSD | Holds the saved CSV and report between sessions. |
+| Memory, or RAM | Holds information the running application is using now. |
+| Processor, or CPU | Carries out instructions, such as calculating increases. |
+| Operating system | Manages files, memory, devices, and running programs; Windows, macOS, and Linux are examples. |
+| Application | Provides a particular tool, such as an editor, browser, or RStudio. |
+
+Opening a CSV lets an application read its saved contents. Editing text changes
+the application's current working version. Saving writes that version to a file.
+An unsaved change may disappear when an application closes, even though the
+previously saved file remains. A **process** is a running instance of a program.
+An application installed on storage and a process using memory are related but
+different things.
+
+## Practical 2: test the difference between editing and saving
+
+Use `practice/field-notes/seedling-observations.txt`, not the original note.
+
+1. Open the practice note and add “The plants were measured twice.”
+2. Save, close, and reopen it. Confirm that the sentence remains.
+3. Add “This line is an unsaved experiment.” Close the editor and choose to
+   discard the change if asked. Reopen the file and inspect the result.
+
+Some editors save automatically or restore unsaved documents. If yours restores
+the sentence, discuss that behaviour with a teacher rather than treating it as
+proof that saving never matters. The important check is what is actually in the
+saved file, and where the editor saved it.
+
+## Where do local, cloud, and remote files live?
+
+A **local** file is on the computer you are using. A cloud service may keep a
+copy elsewhere and synchronise it with your laptop. A **remote Linux computer**
+is another computer we will log into. Its home folder is separate from yours.
+Opening its desktop does not automatically copy your downloads to it.
+
+An archive in the same folder as the originals is convenient for sharing, but
+it is not protection against losing the whole laptop. Keep another copy using
+the university's supported backup or storage service once the teaching team
+identifies it. Check that a copy completed and that you can retrieve it.
+
+## Check your understanding
+
+::: {.callout-note collapse="true"}
+## From the project root, what is the relative path to yesterday's note?
+
+`reports/day01-notes.txt`. From inside `reports`, its name alone is sufficient:
+`day01-notes.txt`. The file did not move; your starting location changed.
+:::
+
+::: {.callout-note collapse="true"}
+## Does more RAM automatically provide more room for saved photographs?
+
+No. RAM supports running work; persistent storage holds saved files. They have
+different jobs. We will see this again when R objects disappear after restarting
+R but the saved data file is still present.
+:::
+
+**Save today:** add `reports/day02-map.txt` with a simple folder tree, the path
+to `seedlings.csv`, and one sentence distinguishing RAM from storage. Keep the
+`practice` folder for later navigation exercises.
+
+Next: [navigate these ideas in a terminal](03-terminal.qmd).

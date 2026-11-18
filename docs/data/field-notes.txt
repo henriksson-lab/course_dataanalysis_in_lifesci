@@ -1,0 +1,18 @@
+SIMULATED SOURCE-RECORD NOTES: seedlings-messy.csv
+
+The original spreadsheet export has known transcription/import problems.
+These notes are evidence for specific corrections, not rules for deleting
+unexpected biological results.
+
+- P03: 'Control' is the same allocation as 'control'.
+- P06: final length was not recorded in this version of the practical.
+  The original reading is unavailable. Keep final_mm missing.
+- P15: the trailing space in 'treated ' is an export mistake; allocation is treated.
+- P18: initial length was recorded as '18.7 mm'. The measured value is 18.7 mm.
+- P21: final length was transcribed in centimetres into the millimetre column.
+  The source notebook records 43.8 mm. Correct this cell to 43.8, with a note.
+- P01: the identical final row is an accidentally repeated import of the same
+  plant record. Keep one record for P01, and document the duplicate removal.
+
+No other values have been confirmed as transcription errors. A low or high
+measurement by itself is not sufficient reason to change or exclude it.

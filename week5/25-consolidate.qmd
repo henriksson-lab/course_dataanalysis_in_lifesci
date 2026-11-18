@@ -1,0 +1,138 @@
+---
+title: "Day 25 — practise the complete workflow"
+---
+
+## Today's purpose
+
+There is no new statistical method today. Use the time to practise the actions
+you want to be dependable in later biology practicals: locate measurements,
+check them, make a useful figure, explain variation, and produce a report that
+another person can open and reproduce. Written examination design is outside
+these teaching materials.
+
+Choose the station where you need practice first. Everyone should eventually
+complete the file recovery, R recovery, and interpretation checks. Use reference
+pages freely: fluency includes knowing where to find an explanation.
+
+## Station 1 — find and inspect the laboratory files
+
+Download a fresh copy of [lab-data.zip](../downloads/lab-data.zip) and locate it.
+In your shell workspace, inspect the archive, extract it into a new folder, read
+the README, locate the sample manifest, and find the treated records. Before
+running a pipe, predict how many matching records it should count.
+
+Save an extract named `treated-samples.txt`, then locate it in a file manager.
+Explain what `>` changed and whether the source manifest was modified. Package
+the extracted folder into a new archive placed outside it; list the archive and
+confirm the text extract was included.
+
+::: {.callout-tip collapse="true"}
+## Hint: the small vocabulary is enough
+
+Use `pwd`, `ls`, `cd`, `unzip -l`, `unzip … -d …`, `less`, `grep -F`, `wc -l`,
+and `zip -r`. Check the [terminal reference](../reference/terminal.qmd). The
+manifest has two treated records; its header is not one of them.
+:::
+
+## Station 2 — repair a small R analysis
+
+The following is deliberately broken code shown as text. Do not copy it into a
+working report unchanged. Find at least three problems, then write a corrected
+version in `recovery.R` in your project root:
+
+```text
+seedling <- read_csv("seedlings.csv")
+seedlings <- mutate(seedlings, growth_mm = final_mm + initial_mm)
+mean(seedlings$Growth_mm)
+```
+
+Consider package loading, file location, object names, case, and the meaning of
+growth. Confirm the repaired calculation using P01: initial length 25.7 mm,
+final length 44.3 mm. Save a labelled plot without changing raw data.
+
+::: {.callout-note collapse="true"}
+## A working repair
+
+```r
+library(readr)
+library(dplyr)
+library(ggplot2)
+seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE)
+seedlings <- seedlings |>
+  mutate(growth_mm = final_mm - initial_mm)
+mean(seedlings$growth_mm)
+```
+
+P01 grew 18.6 mm. The original used a wrong relative path, inconsistent object
+names, addition rather than subtraction, and inconsistent column case. It also
+did not establish that `readr` and `dplyr` were loaded in this session.
+:::
+
+## Station 3 — explain before calculating
+
+Write a sentence responding to each situation. No new test is required.
+
+1. One treated plant has 100 cells measured; one control plant also has 100.
+   A student says there are 100 independent replicates per group. What is wrong?
+2. Two groups have the same mean but one has twice the SD. What can you say
+   about their observations?
+3. A missing biomass value is replaced with zero. Why can that change the
+   biological meaning of the analysis?
+4. A treatment-minus-control estimate is 3 mm with a 95% interval of −2 to 8 mm.
+   Does this establish no effect?
+5. An unknown sample gives absorbance greater than the largest calibration
+   standard. What should happen before reporting its concentration?
+6. A fitted leaf-area/mass slope is positive. Does it prove that changing area
+   experimentally will produce the same change in mass?
+
+::: {.callout-note collapse="true"}
+## Compare your reasoning
+
+1. There is only one independent treated and one independent control plant;
+   cells within them do not supply independent treatment allocation.
+2. Spread differs even though the means match. Equal means do not imply
+   identical observations or distributions.
+3. Unknown biomass and genuinely absent biomass are different observations.
+   Zero invents a value and can shift the mean, SD, and comparison.
+4. No: the interval includes zero and effects in both directions. Explain the
+   range of compatible values rather than declaring equality.
+5. Flag it as beyond range; dilute and remeasure using the assay protocol.
+6. No: this is an observational association. Other plant properties may vary too.
+:::
+
+## Station 4 — your complete report
+
+Return to the report from day 23 or one that still needs work. Starting from a
+fresh session, render it without running console code first. Check that it has:
+
+- A biological question and an independent experimental unit.
+- The input filename, measurement units, and missing-data account.
+- A readable plot of observations and a small relevant summary.
+- An appropriately directed comparison or a line fit, if the question needs it.
+- An interpretation with size, variation or uncertainty, and a limitation.
+- Relative input paths, all required code, and an HTML output you can locate
+  beside the source or in the documented `reports/` output folder.
+
+If these work reliably, use the time to repeat them on an earlier dataset rather
+than adding another statistical method. Discuss with a peer which parts would
+change for a new biology practical and which parts would stay the same.
+
+## Station 5 — local and remote, when available
+
+Identify the computer and folder behind an SSH session, locate a supplied file,
+disconnect, reconnect, and find it again. Locate the designated shared folder
+through remote desktop and transfer one output to your laptop. If access is
+still pending, record this as an outstanding practical skill; completing local
+stations does not complete the remote-access task.
+
+## Your handover to the next biology course
+
+Save `reports/next-lab.txt` with a short workflow you can reuse: where to store
+raw data, how to open a project, which checks to make, how to choose a figure,
+and how to render and back up your report. Include one question you would ask a
+lab teacher before analysing a dataset, such as “what was independently assigned
+to treatment?” or “what do blank cells mean?”
+
+**Before you finish:** locate the final report, source, input, and backup without
+using a recent-files menu. Keep the [reference pages](../reference/r.qmd) and your
+working project template for later practicals.

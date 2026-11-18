@@ -1,0 +1,57 @@
+---
+title: "Statistics reference: describe, compare, and interpret"
+---
+
+Start with the biological question and the independent experimental unit.
+Neither a large table nor a small p-value can repair a design with no
+independent replication.
+
+| Quantity | What it describes | Units / interpretation |
+| --- | --- | --- |
+| Mean | The arithmetic average of measurements | Same units as the measurement |
+| Median | The middle of the sorted measurements | Same units; less affected by a single extreme |
+| Sample variance | Squared deviations from the mean, summed and divided by n − 1 | Squared measurement units |
+| Sample SD | Square root of the sample variance | Spread among measurements, in their original units |
+| Standard error of a mean | Estimated sampling variability of a mean | Common introductory estimate: SD / square root of n for independent observations |
+| Confidence interval | Uncertainty in an estimated quantity under a model | A procedure that covers the fixed population quantity in 95% of repeated samples for a 95% interval, when assumptions hold |
+
+An interval around the mean does not describe where 95% of individual plants
+will fall. Adding technical repeats of the same plant does not add independent
+plants to the sample size.
+
+## The two comparisons taught here
+
+**Independent groups:** separate plants/pots allocated to control and treatment.
+Use a guided Welch two-sample t-test for the difference in mean growth. Define
+the direction before reporting it, such as treated minus control.
+
+**Paired observations:** the same plant before and after a change. Compute
+after minus before within each plant, then analyse the differences. Correctly
+matching identifiers is essential; row order in two files is not evidence of
+matching pairs.
+
+Both approaches need independent experimental units or pairs. For small samples,
+inspect unusual observations and strong skew. A test is conditional on its
+assumptions; you are not learning an automatic test-selection algorithm.
+
+A p-value is the probability, under the null model and its assumptions, of a
+test statistic at least as extreme as the observed one. It is not the probability
+that the null hypothesis is true. Report the estimated difference, its units,
+confidence interval, sample sizes, and a biological interpretation. A small
+p-value does not establish a large or causal effect; a large one does not
+establish equality.
+
+## A straight line
+
+In `lm(y ~ x, data = table)`, the intercept is fitted y at x = 0 and the slope
+is the fitted change in y for a one-unit increase in x. The slope's units are
+y-units per x-unit. The residual is observed y minus fitted y.
+
+For calibration, standards have known x values; invert the fitted line to obtain
+an unknown concentration from its signal, only within a supported range. This
+simple calculation provides a point estimate, without full uncertainty
+propagation. For an observational biological association, the slope does not
+establish what would happen if we intervened to change x.
+
+See [week 3](../week3/12-variation.qmd) and
+[week 4](../week4/16-comparisons.qmd) for worked examples.

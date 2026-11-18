@@ -1,0 +1,140 @@
+---
+title: "Day 24 — can someone else render your report?"
+---
+
+## Today's question
+
+A result that appears on your screen may depend on objects you created hours
+ago or a file stored outside your project. Today you will find those dependencies
+and produce a folder someone else can use. Reproducibility is a property you
+check by running the work, not an adjective you add to the title.
+
+**You need:** yesterday's `.Rmd`, its data, and your project folder. Save the
+revised report, its HTML, and a `reports/reproduction-log.txt`. A peer can help;
+if working alone, use a separately extracted copy and a fresh R session.
+
+## 1. Close the gaps in the report
+
+Read the report as if you had not conducted the exercise. Does it identify the
+biological question, simulated study design, independent units, data source,
+missing measurement, methods, and conclusion? Are figure axes and the comparison
+direction labelled? Can you distinguish SD among flasks from uncertainty in the
+estimated difference?
+
+Replace notes such as “insert result here” with your interpretation. Keep enough
+code to reproduce the result. For this course, visible code is helpful; hiding
+code cannot correct a missing explanation.
+
+## 2. Render after restarting
+
+Save the `.Rmd`, restart R in RStudio, then use **Knit** without manually running
+analysis lines in the console first. Restarting removes session objects, while
+saved input files remain. If the render fails, locate the named chunk and read
+the first meaningful error before changing several things at once.
+
+| Failure | Likely dependency | Repair |
+| --- | --- | --- |
+| `object 'duckweed' not found` | Import happened only in the console | Put import code before analysis chunks |
+| A function is unavailable | Package was loaded only interactively | Add its `library()` call to setup |
+| Input path cannot be opened | Personal absolute path or missing project files | Use `data/duckweed.csv` and include that file |
+| Export fails | Destination directory was not included | Include the empty output folder or create it explicitly |
+| Old text contradicts new numbers | Result was manually typed and not updated | Check interpretation and use inline results where useful |
+
+Do not add `install.packages()` to fix every render: software installation is
+separate setup. Tell the reader which packages are needed.
+
+## 3. Package the necessary inputs and source
+
+Create a folder named `report-share` **outside** your working project using the
+file manager. Copy the following into it:
+
+```text
+report-share/
+├── introcomputing.Rproj
+├── duckweed-report.Rmd
+├── duckweed-report.html
+├── README.txt
+├── data/
+│   ├── duckweed.csv
+│   └── README.md
+└── output/
+    └── README.txt
+```
+
+Keep the data dictionary so the recipient knows the study design. The output
+folder is needed if the report explicitly saves a figure there. Exclude session
+files, credentials, and unrelated personal work. Write a short README stating
+that the data are simulated, required packages, the file to render, and the
+expected HTML output. The HTML alone is readable but is not the source analysis.
+
+In a **shell**, from the folder containing `report-share`, make a ZIP:
+
+```bash
+zip -r report-share.zip report-share/
+unzip -l report-share.zip
+```
+
+On Windows you may first use File Explorer to copy `report-share` into the Ubuntu
+shell workspace. Check its location before running the command. Native RStudio
+still uses the Windows copy. If you revise that Windows copy, copy the revised
+files into Ubuntu again before creating a replacement ZIP; the copies do not
+synchronise. Copy the finished ZIP back to a normal Windows folder before
+extracting it for the native RStudio check below. The archive should be outside the folder being
+archived; do not package a folder containing its own growing ZIP.
+
+## 4. Reproduce from a different location
+
+Exchange the ZIP with a peer using the supported course sharing route. Extract
+it into a new folder, open its `.Rproj`, and render the `.Rmd` in a fresh R
+session. Do not silently fix the author's source before trying it.
+
+If working alone, rename the new parent folder so its path differs from the
+original. This checks that the report does not depend on a personal absolute
+path. A second folder on your own laptop checks portability, but does not fully
+test differences between software environments.
+
+Compare the numerical results, group counts, and interpretation. Plot layout
+may vary slightly across software versions; a jitter seed helps point placement
+stay consistent. Record the software information if results differ:
+
+```r
+sessionInfo()
+```
+
+You can put this in a report appendix or save its output in your log. You do not
+need to understand every entry: R version and loaded package versions help
+another person investigate a difference.
+
+::: {.callout-tip collapse="true"}
+## Hint: the project opens, but input is still missing
+
+Look at the recipient's actual extracted folder tree. A `.Rproj` file does not
+contain the data; it sets the project context. A shortcut to your original data
+folder is also not a transferred dataset. Include the ordinary CSV itself.
+:::
+
+## What to record
+
+In `reports/reproduction-log.txt`, write the source archive name, destination
+folder, whether rendering succeeded before fixes, any exact error, the correction,
+and whether the rerun reproduced the key values. Thank your peer by making their
+feedback actionable, not by rating the appearance of their report.
+
+## Check your understanding
+
+1. Why can a report work after “Run All” but fail for a recipient?
+2. Does a ZIP stored on the same disk protect against losing that disk?
+3. What does a successful fresh-folder render establish?
+
+::: {.callout-note collapse="true"}
+## Short answers
+
+1. It may rely on session state, personal paths, or files not included in the ZIP.
+2. No. A separate supported backup is needed for that failure.
+3. That the supplied source and inputs can regenerate the report in the tested
+   environment. It does not prove that the biological design or interpretation
+   is correct, or that every future software version will behave identically.
+:::
+
+**Before you finish:** retain the corrected report, tested ZIP, and a copy on the
+supported backup storage. Next: [consolidation and error recovery](25-consolidate.qmd).

@@ -1,0 +1,132 @@
+---
+title: "Install R and RStudio; open your course project"
+---
+
+R performs calculations. RStudio is the application in which we write code,
+inspect results, and make reports. Install both on your laptop, or use the
+supported remote applications when access details are provided.
+
+These steps are for native Windows or macOS applications. Windows students do
+not need to install a second copy of R inside Ubuntu/WSL. The Linux command-line
+setup is [a separate page](ubuntu-windows.qmd).
+
+## 1. Install R
+
+Go to [CRAN's R downloads](https://cloud.r-project.org/) and choose your operating
+system. On Windows choose the **base** installation, then the standard installer.
+On Mac choose the installer matching your Mac's processor and supported macOS
+version; **About This Mac** identifies the processor. If the choices are unclear,
+bring your computer to the setup session. Install R before RStudio.
+
+R is available for Windows, macOS, and Linux through
+[the R Project and CRAN](https://www.r-project.org/).
+
+## 2. Install RStudio Desktop
+
+Download the free **RStudio Desktop** installer from
+[Posit](https://posit.co/download/rstudio-desktop/). Choose your operating system,
+install it, then open **RStudio**. You do not need to purchase a product or create
+a cloud account. Check the download page's current system requirements if your
+computer is older. RStudio requires an R installation, as explained in
+[Posit's download guide](https://docs.posit.co/ide/user/download.html).
+
+Find the **Console** pane. Its prompt is usually `>`. Type:
+
+```r
+2 + 3
+```
+
+Press Enter. The result should be `[1] 5`. The `[1]` labels the first element
+printed; it is not part of your answer or something you type.
+
+## 3. Install the small package set
+
+Packages add functions to R. In the **R console**, run this once while connected
+to the internet:
+
+```r
+install.packages(c("readr", "dplyr", "ggplot2", "rmarkdown", "knitr"))
+```
+
+Wait until the prompt returns. Keep installation commands out of your analysis
+and report: they change the computer's setup and need not run every time.
+Load packages in each new analysis session using `library()`.
+
+If asked to compile packages from source on Windows or Mac, ask for help using
+the available binary packages. Installing compilers is not a course exercise.
+
+## 4. Download and extract the course folder
+
+If you extracted the course folder during day 1, reuse that same folder and
+continue with step 4 below. Do not make a second project just for this setup check.
+
+1. If you do not already have it, download [course-files.zip](../downloads/course-files.zip).
+2. Find it in your browser's downloads, then show it in the file manager.
+3. On Windows, right-click and choose **Extract All**; on Mac, double-click the
+   ZIP. Move the extracted `introcomputing-course` folder to a place you can
+   find again, such as Documents. Extract the whole folder, not a single file.
+4. Inside the extracted folder, open `introcomputing.Rproj` in RStudio. A ZIP
+   preview in Windows is not an extracted project.
+
+Your folder should look like this:
+
+```text
+introcomputing-course/
+├── introcomputing.Rproj
+├── report.Rmd
+├── START-HERE.txt
+├── data/
+│   ├── README.md
+│   ├── seedlings.csv
+│   └── ...
+├── output/
+└── reports/
+```
+
+The `.Rproj` file tells RStudio which folder is this project. Data remain ordinary
+files inside it. In the R console run:
+
+```r
+getwd()
+file.exists("data/seedlings.csv")
+```
+
+The first result should end with `introcomputing-course`; the second should be
+`TRUE`. `data/seedlings.csv` means “inside the data folder of this project”.
+Do not replace it with a path containing your own username.
+
+## 5. Check packages and the first report
+
+```r
+library(readr)
+library(dplyr)
+library(ggplot2)
+packageVersion("rmarkdown")
+```
+
+If these commands finish without an error, open `report.Rmd` from RStudio's
+Files pane and click **Knit**. A report with a table and a growth plot should
+appear. Its data are simulated. You will learn to explain and modify this report
+in week 2; you are checking the installation now.
+
+R Markdown uses Pandoc to make the output document; RStudio supplies it. You do
+not need a PDF/LaTeX installation for our HTML reports.
+[R Markdown's installation documentation](https://rmarkdown.rstudio.com/docs/)
+describes these dependencies.
+
+## If something goes wrong
+
+| Symptom | First check |
+| --- | --- |
+| RStudio cannot find R | Check that R installed successfully before RStudio. |
+| “There is no package called …” | Run the package installation line in the R console, then load the package again. |
+| `file.exists()` is `FALSE` | Open the extracted `.Rproj`; look for an extra nested folder after extraction. |
+| The console shows `+` instead of `>` | An expression is unfinished. Press Esc and check closing quotes or brackets. |
+| Knit reports “object not found” | The report needs code creating the object; an object made only in the console is insufficient. |
+| An installation or permissions error persists | Save the exact error and use the setup session; the remote route is an alternative once available. |
+
+Please show the exact error and the step you reached. Do not send passwords or
+authentication codes. On a managed computer, use the approved software route
+with support from the teaching team.
+
+Next: [Day 6 — your first R calculations](../week2/06-r-basics.qmd).

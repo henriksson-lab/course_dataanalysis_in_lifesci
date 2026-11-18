@@ -1,0 +1,99 @@
+---
+title: "R reference: the small vocabulary we use"
+---
+
+These examples assume that you opened the extracted course `.Rproj` file.
+Use **RStudio's R console** for R, not a terminal waiting for shell commands.
+Save reusable code in an R script or your `.Rmd` report.
+
+## Objects and functions
+
+```r
+lengths_mm <- c(12, 15, 18)
+mean(lengths_mm)
+sd(lengths_mm)
+length(lengths_mm)
+```
+
+`<-` assigns a value to a name. `c()` combines values into a vector.
+`mean()` computes an arithmetic mean, `sd()` a sample standard deviation, and
+`length()` the number of elements. Text needs quotes, as in `"control"`.
+R is case-sensitive: `Length` and `length` are different names.
+
+## Import, inspect, and calculate
+
+```r
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE)
+head(seedlings)
+names(seedlings)
+nrow(seedlings)
+glimpse(seedlings)
+
+seedlings <- seedlings |>
+  mutate(growth_mm = final_mm - initial_mm)
+```
+
+`|>` means “take this result and pass it to the next function”. `mutate()` adds
+or changes columns. A calculation creates a derived measurement; it does not
+change the original CSV unless you explicitly write a file.
+
+```r
+treated <- seedlings |>
+  filter(treatment == "treated")
+
+summary_table <- seedlings |>
+  group_by(treatment) |>
+  summarise(n = n(), mean_mm = mean(growth_mm), sd_mm = sd(growth_mm),
+            .groups = "drop")
+```
+
+`==` compares values; it does not assign. `filter()` selects rows.
+`group_by()` tells `summarise()` which groups to summarise. For missing data,
+report both available and missing counts rather than silently dropping records.
+
+## A plot and an exported file
+
+```r
+growth_plot <- ggplot(seedlings, aes(x = treatment, y = growth_mm)) +
+  geom_point(position = position_jitter(width = 0.08, height = 0, seed = 7)) +
+  labs(x = "Allocation", y = "Seven-day growth (mm)") +
+  theme_minimal()
+growth_plot
+ggsave("output/growth.png", plot = growth_plot, width = 6, height = 4, dpi = 150)
+write_csv(summary_table, "output/growth-summary.csv")
+```
+
+The `+` joins layers in a ggplot. Horizontal jitter separates overlapping
+points; `height = 0` preserves their measured values. `ggsave()` needs an output
+folder that already exists; the course project includes one.
+
+## Missing is not zero
+
+```r
+x <- c(10, NA, 20)
+is.na(x)
+sum(is.na(x))
+sum(!is.na(x))
+mean(x, na.rm = TRUE)
+```
+
+`NA` denotes an unavailable value. `na.rm = TRUE` computes from available
+observations; it does not justify missingness or replace a report of how many
+were missing. The mean here is 15 from two available values.
+
+## Error recovery
+
+| Message or symptom | Check |
+| --- | --- |
+| “object not found” | Spelling, case, and whether the line creating it ran |
+| “could not find function” | Whether the right package was loaded |
+| “cannot open file” | Project, path, filename case, and local versus remote computer |
+| Console prompt is `+` | Unfinished quotes/brackets; press Esc and fix the expression |
+| Report fails but console works | An object or package may exist only in your interactive session |
+
+Use `?mean`, `?t.test`, or `?lm` to open R's help for a named function. Ask for
+help with the exact error and the smallest relevant code, without credentials.

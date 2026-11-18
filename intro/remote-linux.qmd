@@ -1,0 +1,71 @@
+---
+title: "Remote Linux: SSH and remote desktop"
+---
+
+We will also use HPC2N or another remote Linux environment. A **remote computer**
+is a computer you connect to over the network. Your laptop displays the session;
+the remote computer runs the programs and stores the files you save there.
+
+::: {.callout-note}
+## Connection details will follow
+
+The teaching team will provide the service, account instructions, login address,
+authentication steps, remote-desktop route, and file-transfer instructions.
+There is no course login command to run on this page yet.
+:::
+
+## Two ways to work remotely
+
+| Connection | What you see | What you use it for |
+| --- | --- | --- |
+| SSH | A terminal on the remote computer | Navigate folders and run commands. |
+| Remote desktop | A graphical workspace on the remote computer | Use a file manager and the applications provided for the course. |
+
+Both give access to a remote environment. Whether they share exactly the same
+files depends on how the service is configured; the course instructions will
+identify the folders to use.
+
+## What SSH means
+
+SSH is a way to log in securely to another computer. The usual command has
+this shape:
+
+```text
+ssh your-username@remote-computer-address
+```
+
+This is an explanation of the shape, not a working course command. We will
+supply the actual address and explain any additional authentication steps.
+
+On Windows you can start SSH from Ubuntu; on Mac use Terminal. Once connected,
+commands such as `pwd` and `ls` act on the remote computer. Use `exit` to leave
+the SSH session and return to your local shell.
+
+The first connection may ask you to trust the remote computer's host key. Follow
+the course's verification instructions before accepting it. Password prompts may
+show no characters while you type. Never share passwords or authentication codes.
+
+## Always ask: which computer am I using?
+
+| Question | Why it matters |
+| --- | --- |
+| Is this terminal local or remote? | It determines where commands run. |
+| Which folder am I in? | `pwd` gives the location on that computer. |
+| Where did I save the data or report? | Saving remotely does not automatically create a laptop copy. |
+| Where is RStudio running? | R needs access to files in its own environment. |
+
+A browser download on your laptop, a file in local Ubuntu, and a file on HPC2N
+can be three separate copies. Identical filenames do not make them the same file.
+Opening a remote desktop does not automatically transfer your laptop's files.
+
+## What we will practise when access is ready
+
+1. Sign in using the supplied instructions and identify the remote computer.
+2. Use `pwd` and `ls`, create a practice folder, and locate a supplied dataset.
+3. Leave the SSH session with `exit`, then reconnect and find the folder again.
+4. Open the supported remote desktop and find the designated course files.
+5. Transfer a small file using the supported route and identify both copies.
+6. Open the provided R environment and locate a rendered report.
+
+These are small introductory exercises. Instructions about where programs may
+run and how to end the remote-desktop session will accompany the service details.

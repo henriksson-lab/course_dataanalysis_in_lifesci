@@ -1,0 +1,145 @@
+---
+title: "Day 23 — plan and analyse a small biological study"
+---
+
+## The question
+
+Duckweed is a small aquatic plant that grows as floating fronds. In our simulated
+study, twenty separate flasks started with equal amounts of duckweed. Ten flasks
+were randomly allocated additional nutrients; ten were controls. Final dry
+biomass was measured after seven days. **How does biomass differ between the
+two allocations, and how uncertain is that estimated difference?**
+
+This is guided practice, not an additional examination. Use the workflow you
+already know with a new dataset. Your deliverable is `duckweed-report.Rmd`, saved
+in the project root, and its rendered HTML. Keep the original CSV intact.
+
+## 1. Read the design before the numbers
+
+Open the [data dictionary](../data/README.md), then locate `data/duckweed.csv`.
+The columns are `flask_id`, `treatment`, and `biomass_mg`. The two allocation
+labels are `control` and `nutrient`. One nutrient flask, F17, was spilled before
+weighing, so its final biomass is unavailable.
+
+In a few sentences, state the question, independent experimental unit, outcome
+and units, and what happened to F17. Fronds in one flask share their environment;
+counting them as separate independent replicates would misrepresent the design.
+
+Before analysis, predict the kind of output needed: a plot showing flasks, a
+summary by group, and an estimate of nutrient minus control mean biomass with
+its confidence interval. You are not trying to make a p-value small.
+
+## 2. Make a report that runs from its own code
+
+Copy the starter `report.Rmd` using **Save As**, naming the copy
+`duckweed-report.Rmd` in the same project root. Replace the title and biological
+description. Remove seedling-specific chunks and interpretations before adding
+duckweed code. Load the same three packages in the setup chunk.
+
+Begin with an import and inspection:
+
+```r
+library(readr)
+library(dplyr)
+library(ggplot2)
+duckweed <- read_csv("data/duckweed.csv", show_col_types = FALSE)
+glimpse(duckweed)
+```
+
+Check row count, distinct identifiers, group labels, missing measurements, and
+the plausible range of biomass. Record checks as evidence, not simply “the data
+were checked”. Do not change the missing F17 value to zero or delete the entire
+row from your original input.
+
+::: {.callout-tip collapse="true"}
+## Hint: count missing and available measurements
+
+Within `group_by(treatment)`, use `summarise()` with `n()`,
+`sum(!is.na(biomass_mg))`, and `sum(is.na(biomass_mg))`. The number of rows and
+the number of usable measurements are different here. Use `na.rm = TRUE` for
+the mean and SD, while still reporting the missing count.
+:::
+
+## 3. Make the descriptive result first
+
+Create a group summary with available n, mean, and SD, all clearly labelled.
+Make a plot of individual biomass measurements by allocation, using only the
+available measurements for plotted y values. State how many are unavailable in
+the caption. A separate `available` object makes the exclusion explicit:
+
+```r
+available <- duckweed |>
+  filter(!is.na(biomass_mg))
+```
+
+Use the plot to ask whether the groups differ in location, how much overlap
+there is, and whether an observation needs checking against source records.
+No source evidence identifies another value as erroneous. Do not remove a value
+merely because it looks inconvenient.
+
+::: {.callout-tip collapse="true"}
+## Hint: adapt a familiar plot
+
+Start with the week 3 individual-point plot. Change the data to `available`, x to
+`treatment`, y to `biomass_mg`, and the y-axis label to “Dry biomass after seven
+days (mg)”. Use horizontal jitter only, so vertical positions stay accurate.
+:::
+
+## 4. Estimate the difference
+
+Explain why an independent comparison is appropriate and why this is not a
+paired before/after analysis. Inspect the individual measurements for severe
+skew or an influential point; seek advice if the simple model appears unsuitable.
+Use the guided Welch approach from week 4.
+Extract nutrient and control vectors and give them in that order to `t.test()`
+so that the difference is nutrient minus control. The missing F17 measurement
+is absent from `available`, not replaced with an invented value.
+
+::: {.callout-tip collapse="true"}
+## Hint: preserve the stated comparison direction
+
+```r
+nutrient <- available |>
+  filter(treatment == "nutrient")
+control <- available |>
+  filter(treatment == "control")
+comparison <- t.test(nutrient$biomass_mg, control$biomass_mg)
+comparison
+```
+
+Read the two means and compute their difference explicitly. `comparison$conf.int`
+is the confidence interval for the difference in the order used above.
+:::
+
+## 5. Write the interpretation before polishing
+
+Use a short paragraph containing the observed direction and size of the
+difference in mg, the available sample sizes, the confidence interval, and the
+p-value with an explanation tied to the question. Add a limitation concerning
+the missing measurement and the conditions of this small simulated experiment.
+
+Distinguish “these observations support a difference under this model” from
+“nutrients always produce this change in all plants”. If an interval includes
+zero, report the uncertainty; do not translate it into proof of no effect.
+Neither outcome needs rescuing by trying other tests.
+
+## Completion check
+
+- Could a reader identify the flask as the independent unit without opening code?
+- Are measurements missing for 1 flask, with 19 available in total?
+- Does the plot show observations and units, and explain the missing value?
+- Does the direction of the reported difference agree with the code and means?
+- Does every object used in the report originate in its chunks?
+
+::: {.callout-note collapse="true"}
+## Self-check answers that do not depend on your conclusion
+
+There are 20 rows and unique flask IDs. Ten control and nine nutrient flasks
+have biomass measurements. F17 remains a documented missing value. A positive
+nutrient-minus-control estimate means greater mean biomass in nutrient flasks.
+The conclusion still depends on design, assumptions, uncertainty, and context.
+:::
+
+**Before you finish:** save a first rendered report and a note of anything that
+failed. Tomorrow we will test whether someone else can reproduce it:
+[Day 24](24-reproduce.qmd).

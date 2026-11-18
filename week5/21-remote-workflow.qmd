@@ -1,0 +1,155 @@
+---
+title: "Day 21 — the same workflow on another computer"
+---
+
+## Today's question
+
+You saved a report on a remote computer. Where is it, and how can you bring it
+back? Today joins the command-line work from week 1 with the R reports you can
+now make. The key skill is tracking the computer, folder, and copy of a file.
+
+**You need:** the course project, a working local R setup, and the course's
+remote-access instructions when issued. Save a short `reports/remote-log.txt`
+with the locations and checks below. Never record passwords or login codes.
+
+::: {.callout-note}
+## Remote connection details are pending
+
+HPC2N or another Linux environment will be used. The hostname, account route,
+authentication, remote desktop, transfer method, permitted execution location,
+and supported R application will be provided separately. Do not guess a host or
+run work on an arbitrary login node. Until access is available, complete the
+local rehearsal below; it practises file handling, but is not evidence that you
+have completed the remote connection skill.
+:::
+
+## 1. Draw the locations before connecting
+
+A path identifies a place **on a particular computer**. `/home/anna/course`
+and `C:\Users\Anna\Documents\course` need not contain the same files. Two
+identical-looking folder names on different computers do not synchronise.
+
+```text
+Laptop                         Remote Linux environment
+course project                 course project (a separate copy)
+  data/seedlings.csv              data/seedlings.csv
+  report.Rmd                     report.Rmd
+  report.html                    report.html
+          -- supported transfer -->
+          <-- supported transfer --
+```
+
+SSH provides a shell on the remote system. A remote desktop provides a graphical
+workspace. These are interfaces, not automatic transfer services. The course
+instructions will confirm whether both sessions share the same home directory.
+
+In your log, draw two boxes, label the laptop and the service, and leave space
+for the actual project paths. Keep the log free of credentials.
+
+## 2. Connect, find your work, and return
+
+Use the supplied SSH command from Ubuntu on Windows or Terminal on Mac. Its
+general form is shown below as a description, **not a command to copy**:
+
+```text
+ssh your-course-username@the-provided-host
+```
+
+Follow the supplied host-key verification and authentication instructions.
+After connecting, run these commands in the remote shell:
+
+```bash
+hostname
+pwd
+ls
+```
+
+`hostname` identifies the machine answering you; a service may use more than one
+machine. `pwd` identifies your current directory there. Record the service and
+folder. Make a practice folder using `mkdir -p introcomputing-practice`, then
+enter it with `cd introcomputing-practice`. Run `pwd` again.
+
+Run `exit` to disconnect. You should return to the local shell, where `pwd`
+refers to your laptop. Reconnect using the supported route and find the practice
+folder again. Persisting files belong to saved storage, not to the terminal window.
+
+## 3. Find the same designated folder from remote desktop
+
+Open the remote desktop using the course guide. Locate the designated course
+folder in its file manager. Compare the full location with the SSH session.
+Do they share it? Record your observation rather than assuming they must.
+
+Transfer the course ZIP using the supported upload or file-transfer method,
+extract it, and open its `.Rproj` in the provided R environment. If the service
+uses a browser-based R application, follow its course-specific project route.
+
+In the **remote R console**, run:
+
+```r
+getwd()
+file.exists("data/seedlings.csv")
+```
+
+The second result should be `TRUE`. If it is `FALSE`, locate the project and
+its data before attempting analysis. A path from the laptop will not repair a
+missing remote input.
+
+## 4. Produce one result and transfer it back
+
+Open `report.Rmd` and render its HTML output using the provided R application.
+If R, packages, and Pandoc have been configured in the remote shell, the teaching
+team may instead ask you to run:
+
+```bash
+Rscript -e 'rmarkdown::render("report.Rmd")'
+```
+
+Run this only from the project root in the supported execution environment.
+It asks R to render the saved document; it does not use objects in an already
+open interactive session. This is the same analysis, with a different way to
+start it. On Windows, local Ubuntu does not necessarily have R installed; use
+native RStudio there rather than installing another R just for this command.
+
+Transfer the resulting HTML back to your laptop into a folder you can name.
+Open the downloaded copy in your browser. Record both paths and the transfer
+direction. An HTML result is convenient to read, but the source `.Rmd` and input
+data are still needed to reproduce it.
+
+## Local rehearsal while remote access is pending
+
+In the file manager, copy the complete extracted course folder to a separately
+named `introcomputing-rehearsal` folder. Open that copy's `.Rproj`, verify
+`getwd()`, render the report, and locate the HTML. This rehearses a portable
+project, not a remote computer. In your log write “local rehearsal only” and
+list the remote tasks still to complete.
+
+::: {.callout-tip collapse="true"}
+## Hint: the file exists, but R cannot find it
+
+Check three things in order: which computer R is running on, the result of
+`getwd()`, and the actual path beneath that folder. Look for an extra folder
+created during extraction. Do not solve this by copying your personal absolute
+path into the report.
+:::
+
+## Check your understanding
+
+1. Does `exit` delete the files you saved remotely?
+2. You rendered remotely, but local Downloads is empty. Is that evidence the
+   render failed?
+3. Can a remote shell use a laptop's `data/` folder without any transfer or
+   configured sharing?
+
+::: {.callout-note collapse="true"}
+## Short answers
+
+1. No: it ends the shell/session; saved files remain subject to the service's
+   storage policy.
+2. No: the output may still be on the remote computer. Check its location and
+   transfer it.
+3. Not automatically. File access must be explicitly provided or files transferred.
+:::
+
+**Before you finish:** save your location log, mark any pending access-dependent
+steps, and identify the report copy you opened. End the desktop session using the
+service's instructions. Next: [DNA and images as data](22-data-representations.qmd).

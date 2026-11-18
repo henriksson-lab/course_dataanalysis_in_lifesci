@@ -1,0 +1,127 @@
+---
+title: "Day 9 — Make a report that runs its own calculations"
+---
+
+## Today's question
+
+Can someone read our explanation, inspect our calculation, and see the figure
+without copying results manually? An **R Markdown report** combines ordinary text
+with executable R code. Rendering turns that source document into a readable HTML
+report. An HTML report can be opened in a browser; the editable source ends in
+`.Rmd` and should be kept too.
+
+These course webpages are built with Quarto. Your reports use R Markdown. You do
+not need to create a Quarto document or learn a second report system.
+
+## Open the supplied template
+
+Open the project and then `report.Rmd` from its root folder. First save an
+unchanged backup if you want one. Keep your working `.Rmd` at the project root so
+that `data/seedlings.csv` points to the supplied data. Moving it into `reports/`
+would change the relative location of the data during an ordinary knit.
+
+The template has a short header between `---` lines, including a title and
+`output: html_document`. That header configures the document. Leave the output
+format unchanged for now. A heading in ordinary text starts with `#`, while a
+code comment starting with `#` lives inside a code chunk. Their location matters.
+
+Here is a minimal complete report. The three-backtick fences in the box belong
+in your `.Rmd` file.
+
+<pre><code>---
+title: "Seedling growth"
+output: html_document
+---
+
+## Question
+
+How much did the seedlings grow during the observation period?
+
+&#96;&#96;&#96;{r import}
+library(readr)
+library(dplyr)
+seedlings &lt;- read_csv("data/seedlings.csv", show_col_types = FALSE)
+seedlings &lt;- mutate(seedlings, growth_mm = final_mm - initial_mm)
+&#96;&#96;&#96;
+
+There are &#96;r nrow(seedlings)&#96; plants in the dataset.
+
+&#96;&#96;&#96;{r mean-growth}
+mean(seedlings$growth_mm)
+&#96;&#96;&#96;
+
+Growth is final minus initial length, measured in millimetres.
+</code></pre>
+
+The fences mark where an R **chunk** starts and ends. Chunk labels such as `import` are names
+for sections of code and must be unique within a report. The inline expression
+in the sentence inserts a calculated result into prose; R executes it during
+rendering. You can begin with ordinary prose and add inline calculations later.
+
+## Render, rather than assembling results by hand
+
+Save the source, then choose **Knit**. Rendering runs the chunks in document
+order and creates an HTML file. For an explicit equivalent command from the R
+Console, use:
+
+```{r}
+rmarkdown::render("report.Rmd", output_dir = "reports")
+```
+
+`rmarkdown::render` calls a function in the `rmarkdown` package without loading
+all of that package's functions. Its `output_dir` puts the rendered result in
+`reports/`; the `.Rmd` stays at the project root. The Knit button may initially
+put its HTML next to the source instead. Both are HTML reports; locate the
+actual file rather than assuming it appeared in a particular folder.
+
+A report must contain its imports and calculations. An object you created only
+in the Console may let a chunk run interactively, yet be absent during knitting.
+The saved source must be sufficient to rebuild the result from the saved data.
+
+## Add a figure and its meaning
+
+In your report, load `ggplot2` and reuse the growth plot from day 8. Give the
+figure a caption by starting its chunk with this line:
+
+<pre><code>&#96;&#96;&#96;{r growth-figure, fig.cap="Each point represents one independently potted seedling."}
+# Put the plotting code here.
+&#96;&#96;&#96;
+</code></pre>
+
+Replace the comment with the plotting code, keeping both chunk fences. Write a sentence below the figure
+explaining what the vertical axis measures. A caption identifies what a figure
+shows; the surrounding text explains why it matters. Code can be visible in this
+first report so that your method is easy to inspect.
+
+## Your practical
+
+1. Render the supplied template before changing it. Confirm the HTML opens.
+2. Change its title, question, and author information; save and render again.
+3. Put the import, growth calculation, and labelled plot in chunks in the right
+   order. Remove repeated chunks that create the same object unnecessarily.
+4. Add methods explaining what one row represents and how growth was calculated.
+5. Deliberately misspell a column name, render, and read the error's chunk name.
+   Fix the spelling and render successfully. Practise recovery, not memorisation.
+6. Restart R and render the document again using the command above.
+
+::: {.callout-tip collapse="true"}
+## Hint: rendering stops
+
+Read the first useful error and its chunk label. Check that the document loads
+packages before using their functions, imports the data before calculating, and
+uses the exact filename and column names. Check every chunk has an opening and
+closing fence. Ask for help with the error text; never attach passwords.
+:::
+
+## Check your understanding
+
+::: {.callout-note collapse="true"}
+## Which files do you keep?
+
+Keep the `.Rmd` source, its input data, and the generated HTML. HTML is convenient
+for reading; it does not replace the source needed to update the analysis.
+Changing a number in the prose by hand would break the link to its calculation.
+:::
+
+**Keep:** your saved `report.Rmd` and a successfully rendered HTML report.
+Next: [write your first complete short report](10-first-report.qmd).

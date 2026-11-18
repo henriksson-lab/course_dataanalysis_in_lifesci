@@ -1,0 +1,76 @@
+---
+title: "Terminal reference: find, inspect, and package files"
+---
+
+Use Ubuntu on Windows, Terminal on Mac, or the terminal provided remotely.
+Do not type the prompt (`$` or `%`). Commands act on the computer to which the
+current shell belongs. Type `pwd` whenever you are unsure where you are.
+
+| Command | Meaning | Example |
+| --- | --- | --- |
+| `pwd` | Print the current folder's absolute path | `pwd` |
+| `ls` | List names in a folder | `ls measurements` |
+| `cd` | Change folder; no argument means home | `cd ~/introcomputing-shell` |
+| `mkdir` | Create a folder | `mkdir practice` |
+| `cp` | Copy a file | `cp notes.txt notes-copy.txt` |
+| `mv` | Move or rename | `mv notes-copy.txt day1.txt` |
+| `head` | Show the first few lines | `head samples.tsv` |
+| `less` | Read text a screen at a time; `q` quits | `less README.txt` |
+| `grep -F` | Show lines containing literal text | `grep -F treated samples.tsv` |
+| `wc -l` | Count newline-terminated lines | `wc -l samples.tsv` |
+| `unzip -l` | List a ZIP's contents without extracting | `unzip -l lab-data.zip` |
+| `unzip … -d …` | Extract into a named folder | `unzip lab-data.zip -d lab-data` |
+| `zip -r` | Package a folder and its contents | `zip -r report-bundle.zip report/` |
+| `ssh` | Connect to a remote shell | Use the supplied course connection command when available |
+| `exit` | End this shell; in SSH, return to the local shell | `exit` |
+
+Some commands overwrite existing files. Practise in the course workspace and
+read the destination name before pressing Enter. We do not need recursive
+deletion commands for the core practicals.
+
+## Paths and punctuation
+
+```text
+~                        your home folder on this computer
+.                        the current folder
+..                       the parent folder
+data/seedlings.csv       a relative path from the current folder
+/home/anna/course        an example absolute path on Linux
+```
+
+`cd ..` moves one level up. A filename containing spaces needs quoting, for
+example `less "field notes.txt"`. Use simple filenames with hyphens or
+underscores in your own work. Use Tab to complete names and the up arrow to
+recall a command. Ctrl+C interrupts a running command; it is not the copy shortcut.
+
+## A pipe connects programs
+
+```bash
+grep -F treated samples.tsv | wc -l
+```
+
+`grep` outputs matching lines. The `|` passes those lines to `wc` as input.
+There is no intermediate saved file. In our manifest, the answer is 2 because
+two records contain `treated`. This count is meaningful because each record is
+one line and the header does not contain the search term.
+
+## Redirection saves output
+
+```bash
+grep -F treated samples.tsv > treated-samples.txt
+```
+
+The `>` writes to a file instead of the screen and replaces existing contents
+at that path. `>>` appends, but we do not need it for this practical. The search
+does not parse a table or understand treatment groups: it matches text. It would
+also match `untreated` if that label occurred in the file.
+
+## Connect graphical and terminal views
+
+In Ubuntu on Windows, `explorer.exe .` opens the current folder in File Explorer.
+On a Mac, `open .` opens it in Finder. These are local conveniences, not remote
+file-transfer commands. The remote desktop and file-transfer instructions will
+identify the supported remote route.
+
+See [week 1](../week1/01-files.qmd) for guided practice and
+[remote access](../intro/remote-linux.qmd) for the local/remote distinction.

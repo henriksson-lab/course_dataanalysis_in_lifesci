@@ -1,0 +1,129 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - overview.qmd
+    - intro/*.qmd
+    - downloads/index.qmd
+    - reference/*.qmd
+    - week1/*.qmd
+    - week2/*.qmd
+    - week3/*.qmd
+    - week4/*.qmd
+    - week5/*.qmd
+  resources:
+    - downloads/*.zip
+    - data/*
+    - report.Rmd
+
+website:
+  title: "Data Analysis in Life Sciences"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: overview.qmd
+        text: Course overview
+      - href: downloads/index.qmd
+        text: Downloads
+  sidebar:
+    style: docked
+    search: true
+    contents:
+      - href: index.qmd
+        text: Home
+      - section: "Getting started"
+        contents:
+          - href: overview.qmd
+            text: Course overview
+          - href: intro/ubuntu-windows.qmd
+            text: "Windows: install Ubuntu / Mac: open Terminal"
+          - href: intro/r-rstudio.qmd
+            text: "R, RStudio, and your project"
+          - href: intro/remote-linux.qmd
+            text: "Remote Linux and SSH"
+          - href: downloads/index.qmd
+            text: "Download the course files"
+      - section: "Week 1: files and computers"
+        contents:
+          - href: week1/01-files.qmd
+            text: "1. Files: save, find, reopen"
+          - href: week1/02-folders-computers.qmd
+            text: "2. Folders and how computers work"
+          - href: week1/03-terminal.qmd
+            text: "3. The terminal"
+          - href: week1/04-inspect-archive.qmd
+            text: "4. Unpack and inspect lab data"
+          - href: week1/05-lab-files.qmd
+            text: "5. Find samples and package results"
+      - section: "Week 2: R and a first report"
+        contents:
+          - href: week2/06-r-basics.qmd
+            text: "6. First calculations in R"
+          - href: week2/07-import.qmd
+            text: "7. Import a biological table"
+          - href: week2/08-transform-plot.qmd
+            text: "8. Calculate and plot growth"
+          - href: week2/09-rmarkdown.qmd
+            text: "9. R Markdown"
+          - href: week2/10-first-report.qmd
+            text: "10. Your first complete report"
+      - section: "Week 3: measurements and variation"
+        contents:
+          - href: week3/11-data-quality.qmd
+            text: "11. Check and repair data"
+          - href: week3/12-variation.qmd
+            text: "12. Mean, variance, and SD"
+          - href: week3/13-group-summaries.qmd
+            text: "13. Group summaries and figures"
+          - href: week3/14-replicates-uncertainty.qmd
+            text: "14. Replicates and uncertainty"
+          - href: week3/15-descriptive-report.qmd
+            text: "15. A descriptive biological report"
+      - section: "Week 4: comparisons and lines"
+        contents:
+          - href: week4/16-comparisons.qmd
+            text: "16. Compare independent groups"
+          - href: week4/17-welch-test.qmd
+            text: "17. A guided Welch t-test"
+          - href: week4/18-paired.qmd
+            text: "18. The same plants measured twice"
+          - href: week4/19-calibration.qmd
+            text: "19. Fit a calibration line"
+          - href: week4/20-association.qmd
+            text: "20. Leaf area and mass"
+      - section: "Week 5: reproduce and transfer"
+        contents:
+          - href: week5/21-remote-workflow.qmd
+            text: "21. Work on a remote computer"
+          - href: week5/22-data-representations.qmd
+            text: "22. DNA and images as data"
+          - href: week5/23-mini-study.qmd
+            text: "23. A small biological study"
+          - href: week5/24-reproduce.qmd
+            text: "24. Reproduce a report"
+          - href: week5/25-consolidate.qmd
+            text: "25. Practise the full workflow"
+      - section: "References"
+        contents:
+          - href: reference/terminal.qmd
+            text: Terminal commands
+          - href: reference/r.qmd
+            text: R commands
+          - href: reference/statistics.qmd
+            text: Statistics and interpretation
+          - href: reference/glossary.qmd
+            text: Glossary
+
+format:
+  html:
+    toc: true
+    code-copy: true
+    code-overflow: wrap
+    highlight-style: github
+    theme: cosmo
+    css: styles.css
+
+execute:
+  eval: false

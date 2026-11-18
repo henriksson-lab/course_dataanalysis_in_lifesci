@@ -1,0 +1,131 @@
+---
+title: "Day 15 — Describe the experiment without overstating it"
+---
+
+## Today's question
+
+Can a reader understand the seedling measurements, their variation, and the limits
+of our description? A useful biological report does not need a significance test
+on every page. Today you will make the data handling, figure, summary, and
+interpretation fit together.
+
+Save a new source document, `descriptive-report.Rmd`, at the project root. You
+may copy your first report's structure, but deliberately revise its methods and
+interpretation. Keep `data/` paths relative to this root. The supplied measurements
+are simulated. Plants received a control or nutrient treatment and were measured
+seven days apart; the nutrient formulation is unspecified.
+
+## Choose and state which input you use
+
+Use **`data/seedlings.csv` for the core report**. It contains 24 complete plant
+records. Include a data-quality note explaining the checks you performed: unique
+plant IDs, allowed treatment labels, numeric length columns, and missing-value
+counts. A statement that “R loaded the file” is not a data-quality check.
+
+If the teacher asks you to report the repaired day 11 data instead, include the
+repair code or source it from a saved script within the project. Do not read a
+derived file that cannot be recreated from the shared raw data. State which
+source you used and retain the unavailable P06 observation; do not silently mix
+results from the repaired and complete datasets.
+
+## Build the report in a clear order
+
+Use this order inside the report:
+
+1. Load packages and import the input file.
+2. Inspect its structure and document relevant data checks.
+3. Derive `growth_mm = final_mm - initial_mm`.
+4. Calculate the grouped summary with sample counts, mean, median, and SD.
+5. Draw the individual-plant figure with group means.
+6. Explain the centre, spread, overlap, and limitations in ordinary language.
+
+Here is a compact data-check block that can appear after import:
+
+```{r}
+library(readr)
+library(dplyr)
+seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE)
+anyDuplicated(seedlings$plant_id)
+seedlings |> count(treatment)
+sum(is.na(seedlings$initial_mm))
+sum(is.na(seedlings$final_mm))
+seedlings <- mutate(seedlings, growth_mm = final_mm - initial_mm)
+```
+
+`anyDuplicated()` returns zero when it finds no duplicate; a positive result
+identifies the position of the first duplicate, not a count of duplicates.
+Include only checking output that helps the reader, but keep the code available
+in the source. Reuse your day 13 summary and figure rather than replacing them
+with a screenshot of the RStudio Environment pane.
+
+A table in an R Markdown chunk can be displayed neatly with:
+
+```{r}
+group_summary <- seedlings |>
+  group_by(treatment) |>
+  summarise(n_observed = sum(!is.na(growth_mm)),
+            mean_mm = mean(growth_mm, na.rm = TRUE),
+            median_mm = median(growth_mm, na.rm = TRUE),
+            sd_mm = sd(growth_mm, na.rm = TRUE), .groups = "drop")
+knitr::kable(group_summary, digits = 2,
+             caption = "Observed growth and variation by treatment; lengths in mm.")
+```
+
+The table is generated from code. If the data change, the rendered table can
+change too. A caption must distinguish SD among plants from uncertainty in the
+mean. This report has SD, not confidence intervals.
+
+## Write with the question in view
+
+A useful description distinguishes three ideas: group averages differ in this
+sample; plants vary within each group; and sample descriptions do not quantify
+all uncertainty about a treatment effect. You can report observed values with
+units and identify the independent unit without declaring a universal result.
+
+For the complete data, the group means are about 15.3 mm for controls and 21.5 mm
+for treated plants. Check your table rather than copying these numbers into
+prose without verification. The treated group also has more spread in these
+data. Do not say that every treated plant outgrew every control plant: the
+individual observations overlap.
+
+## Your practical and a reader check
+
+1. Complete the report with a question, data/design paragraph, methods, table,
+   figure, and interpretation. Keep it short enough that each part earns its place.
+2. Include the number of independent plants and state what the figure's symbols
+   represent. Name any exclusions or missing measurements.
+3. Restart R and run this command in the **R Console**, not in a code chunk
+   inside the report (a report must not try to render itself):
+
+```{r}
+rmarkdown::render("descriptive-report.Rmd", output_dir = "reports")
+```
+
+4. Ask a partner to read the HTML. Can they identify the units, input file,
+   observational unit, main pattern, and main limitation without opening RStudio?
+5. If remote R access is available, locate the project on that computer and
+   repeat the render there using the supplied connection instructions. First
+   identify whether the R session and data are local or remote. Otherwise,
+   repeat from a newly opened local project; do not invent connection details.
+
+::: {.callout-tip collapse="true"}
+## Hint: reproducibility is a file relationship
+
+An HTML file beside an `.Rmd` is not enough if the source expects data in your
+personal Downloads folder. Keep the documented project structure, original data,
+and source together. The fresh-session render reveals missing dependencies.
+:::
+
+## Check your understanding
+
+::: {.callout-note collapse="true"}
+## A good limitation is specific
+
+“The sample is small” is less informative than naming the independent unit,
+noting overlap or variation, and explaining that today's report describes the
+sample without yet estimating uncertainty in a treatment difference. Missing
+observations, when present, should also be counted and discussed.
+:::
+
+**Keep:** `descriptive-report.Rmd` and its HTML, with the code and data needed to
+render it. Next: [from description to a comparison](../week4/16-comparisons.qmd).

@@ -1,0 +1,143 @@
+---
+title: "Day 1 — Find, save, and reopen your laboratory files"
+---
+
+## Today's biological question
+
+Did seedlings grow differently after a treatment? Before we calculate anything,
+we need to know which measurements belong to which plant and where those
+measurements are saved. A useful analysis starts with finding the right file.
+
+Our measurements are **simulated teaching data**, not observations from an actual
+experiment. Imagine 24 seedlings, each in its own pot. Twelve pots received a
+treatment and twelve were controls. We measured each plant at the beginning and
+end. The treatment was assigned randomly. A control is a comparison group: it
+helps us judge what might have happened without the treatment.
+
+Today you will download the course files, identify a table of measurements, and
+find your work again after closing every window. No programming is needed.
+
+## A file is different from the application that opens it
+
+A **file** is a saved collection of information with a name. A photograph, a
+table of measurements, and a written report can each be files. An
+**application** is a program that opens or changes files. The same table can be
+opened by several applications.
+
+For example, `seedlings.csv` is a file. Excel, a text editor, and R can all read
+it. Closing Excel does not delete the saved file. Deleting the saved file is a
+different action. A file can also exist without any application displaying it.
+
+A **folder**, also called a directory, groups files and other folders. Your
+computer's **file system** organises these folders and records where files are
+stored. You can explore it using **File Explorer** on Windows or **Finder** on
+Mac. A browser such as Firefox or Safari displays websites; it is a different
+application from the file manager.
+
+## Practical 1: download and locate the course folder
+
+1. Download [the course files](../downloads/course-files.zip).
+2. Open the browser's downloads list. Use its option to show the download in
+   File Explorer or Finder. Notice the folder's name, usually **Downloads**.
+3. Find `course-files.zip`. A ZIP archive is a package containing files and
+   folders. On Windows, right-click it and choose **Extract All**. On Mac,
+   double-click it to extract it. If the browser already extracted it, locate
+   the resulting folder instead.
+4. Find the extracted folder called `introcomputing-course`. Move this ordinary
+   folder into **Documents** using the file manager. Do not work inside the ZIP's
+   preview window.
+5. Open `introcomputing-course`. You should see a `data` folder, an `output`
+   folder, a `reports` folder, `report.Rmd`, and `introcomputing.Rproj`.
+6. Open `data` and find `seedlings.csv`. Keep this file unchanged.
+
+Your computer may have a cloud-managed Documents folder. Tell the teacher if it
+does: we will check that your course files are actually available on the laptop,
+including when the network is disconnected. A shortcut or a cloud icon is not
+the same thing as a complete local copy.
+
+::: {.callout-tip collapse="true"}
+## I see two course folders. Which should I use?
+
+Extraction can create an extra outer folder. Open folders until you find the one
+that directly contains `data`, `output`, and `introcomputing.Rproj`. That is the
+project folder. Move that whole folder together. Ask for help if filenames end
+in `(1)` because you downloaded several copies; choose one working copy rather
+than guessing between them later.
+:::
+
+## Reading names and extensions
+
+The final part of a filename, such as `.csv` or `.jpg`, is its **extension**.
+It gives a clue about the format of the saved information. A CSV is a text table
+in which commas separate values. Changing the name `seedlings.csv` to
+`seedlings.jpg` would not turn measurements into a photograph.
+
+Make extensions visible. In Windows File Explorer, look for **View → Show →
+File name extensions**; older versions place the checkbox directly under View.
+In Finder, use **Settings → Advanced → Show all filename extensions**.
+Menu wording can vary. Ask for help if you cannot find the setting.
+
+## Practical 2: open a copy in two ways
+
+1. Copy `data/seedlings.csv` and paste the copy into `output`.
+2. Rename the copy `seedlings-practice.csv`. Confirm that it still ends in `.csv`.
+3. Open this practice copy. If a spreadsheet opens automatically, notice its
+   rows and columns, then close it **without saving changes**.
+4. Right-click the practice file and choose **Open with** a text editor, such as
+   Notepad on Windows or TextEdit on Mac. Do not save changes here either.
+
+The first lines should contain the following information:
+
+```text
+plant_id,treatment,initial_mm,final_mm
+P01,control,25.7,44.3
+P02,control,24.3,32.3
+```
+
+The first line is a **header** naming the columns. The next line describes plant
+P01. Its initial length was 25.7 millimetres and its final length was 44.3
+millimetres. A spreadsheet displays the commas as column boundaries; the text
+editor displays the commas themselves. Both applications opened the same file.
+
+Discuss: did P01 grow by 44.3 mm, or did it end at 44.3 mm? Its increase was
+44.3 − 25.7 = 18.6 mm. Keeping the meaning and units of a measurement matters
+as much as knowing how to open its file.
+
+## Practical 3: save a note you can find again
+
+Open a plain-text editor and write three short sentences: what a row represents,
+what the length units are, and where the original measurements are stored. Use
+**Save As** and save the note as `day01-notes.txt` in `reports`.
+
+On Mac, choose **Format → Make Plain Text** in TextEdit before saving. On either
+system, check the resulting filename in the file manager. It should not secretly
+end in `.txt.txt` or `.rtf`.
+
+Close the editor and all file-manager windows. Open the file manager again and
+navigate from Documents to your note. Open it. If you can only find it through
+an application's “recent files” list, repeat the folder route once more.
+
+## Check your understanding
+
+Try answering before opening the explanation.
+
+::: {.callout-note collapse="true"}
+## Does closing an application delete the file? What did copying create?
+
+Closing an application does not delete a saved file. Copying created another
+file. Changes to your practice copy would not automatically change the original.
+Neither copy is protected against losing the computer if both are stored only
+on that computer.
+:::
+
+::: {.callout-note collapse="true"}
+## Why keep `data/seedlings.csv` unchanged?
+
+It is our starting record. Later we will describe changes in code so that someone
+else can repeat the analysis and see what happened to the original measurements.
+:::
+
+**Save today:** `reports/day01-notes.txt` and `output/seedlings-practice.csv`.
+Be ready to show their locations without relying on “recent files”.
+
+Next: [folders, paths, and what a computer does](02-folders-computers.qmd).
