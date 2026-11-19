@@ -28,74 +28,8 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #24292e;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #24292e; } /* Normal */
-    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
-    code span.an { color: #6a737d; } /* Annotation */
-    code span.at { color: #d73a49; } /* Attribute */
-    code span.bn { color: #005cc5; } /* BaseN */
-    code span.bu { color: #d73a49; } /* BuiltIn */
-    code span.cf { color: #d73a49; } /* ControlFlow */
-    code span.ch { color: #032f62; } /* Char */
-    code span.cn { color: #005cc5; } /* Constant */
-    code span.co { color: #6a737d; } /* Comment */
-    code span.cv { color: #6a737d; } /* CommentVar */
-    code span.do { color: #6a737d; } /* Documentation */
-    code span.dt { color: #d73a49; } /* DataType */
-    code span.dv { color: #005cc5; } /* DecVal */
-    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
-    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
-    code span.fl { color: #005cc5; } /* Float */
-    code span.fu { color: #6f42c1; } /* Function */
-    code span.im { color: #032f62; } /* Import */
-    code span.in { color: #6a737d; } /* Information */
-    code span.kw { color: #d73a49; } /* Keyword */
-    code span.op { color: #24292e; } /* Operator */
-    code span.ot { color: #6f42c1; } /* Other */
-    code span.pp { color: #d73a49; } /* Preprocessor */
-    code span.re { color: #6a737d; } /* RegionMarker */
-    code span.sc { color: #005cc5; } /* SpecialChar */
-    code span.ss { color: #032f62; } /* SpecialString */
-    code span.st { color: #032f62; } /* String */
-    code span.va { color: #e36209; } /* Variable */
-    code span.vs { color: #032f62; } /* VerbatimString */
-    code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-fa0e33e6dd574061e1681ec846127080.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -233,26 +167,30 @@ Data Analysis in Life Sciences
 <section id="what-is-in-the-archive" class="slide level2">
 <h2>What is in the archive?</h2>
 <div class="columns">
-<div class="column" style="width:45%;">
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> <span class="at">-l</span> lab-data.zip</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> lab-data.zip <span class="at">-d</span> lab-data</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lab-data</span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> README.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="column" style="width:58%;">
+<pre class="text"><code>$ unzip -l lab-data.zip
+Archive:  lab-data.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+      309  1980-01-01 00:00   README.txt
+       29  1980-01-01 00:00   measurements/S01.csv
+       29  1980-01-01 00:00   measurements/S02.csv
+       29  1980-01-01 00:00   measurements/S03.csv
+       29  1980-01-01 00:00   measurements/S04.csv
+      157  1980-01-01 00:00   samples.tsv
+       37  1980-01-01 00:00   field-notes/day1.txt
+       40  1980-01-01 00:00   field-notes/day7.txt
+---------                     -------
+      659                     8 files</code></pre>
+</div><div class="column" style="width:42%;">
 <ul>
-<li><code>-l</code> <strong>lists</strong> without unpacking.</li>
-<li><code>-d lab-data</code> names the folder to unpack into.</li>
-<li>The ZIP stays as it was. Press <strong>q</strong> to leave <code>less</code>.</li>
+<li><code>unzip -l</code> <strong>lists</strong> what is inside without unpacking anything.</li>
+<li>8 files: a README, a manifest <code>samples.tsv</code>, four measurement files, and two field notes.</li>
+<li>Look before you unpack: you now know what you received and where each file will end up.</li>
 </ul>
-</div><div class="column" style="width:55%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extract-archive.svg" style="width:100.0%"></p>
-<figcaption>Extracting lab-data.zip creates a folder of ordinary files: README, the samples.tsv manifest, four measurement files and field notes, while the archive itself stays.</figcaption>
-</figure>
-</div>
 </div></div>
 <aside class="notes">
-<p>First copy the browser download into ~/introcomputing-shell with the file manager (explorer.exe . on Ubuntu/Windows, open . on Mac); Downloads is not the terminal’s workspace. Read the README aloud: four pots, lengths in mm after seven days. If unzip asks to replace files, answer n and extract to a fresh folder name.</p>
+<p>First copy the browser download into ~/introcomputing-shell with the file manager (explorer.exe . on Ubuntu/Windows, open . on Mac); Downloads is not the terminal’s workspace. The dates are 1980 because the archive was built with fixed timestamps; ignore them.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -265,27 +203,66 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-manifest-links-samples-to-files" class="slide level2">
-<h2>The manifest links samples to files</h2>
+<section id="unpack-it-into-its-own-folder" class="slide level2">
+<h2>Unpack it into its own folder</h2>
 <div class="columns">
-<div class="column" style="width:45%;">
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 samples.tsv</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> samples.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>One header line names the columns: <code>sample_id</code>, <code>treatment</code>, <code>file</code>.</li>
-<li><code>wc -l</code> prints <strong>5</strong>: header + <strong>4 samples</strong>.</li>
-<li>Columns are separated by tabs (TSV).</li>
-</ul>
-</div><div class="column" style="width:55%;">
+<div class="column" style="width:55%;">
+<pre class="text"><code>$ unzip lab-data.zip -d lab-data
+Archive:  lab-data.zip
+  inflating: lab-data/README.txt
+  inflating: lab-data/measurements/S01.csv
+  ...
+$ cd lab-data
+$ ls
+field-notes  measurements  README.txt  samples.tsv
+$ cat README.txt
+SIMULATED LAB-GROUP DATA
+Four independent seedling pots, two control and
+two nutrient-treated. ... Lengths are millimetres.</code></pre>
+</div><div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="header-lines.svg" style="width:100.0%"></p>
-<figcaption>The manifest has one header line and four sample lines, each pointing to a measurement file.</figcaption>
+<p><img data-src="extract-archive.svg" style="width:100.0%"></p>
+<figcaption>Extracting lab-data.zip creates a folder of ordinary files: README, the samples.tsv manifest, four measurement files and field notes, while the archive itself stays.</figcaption>
 </figure>
 </div>
+<p><code>-d lab-data</code> names the folder. The ZIP itself stays as it was.</p>
 </div></div>
 <aside class="notes">
-<p>Ask before running wc -l: how many lines? Students often say 4. The header is not a sample. A CSV is the same idea with commas.</p>
+<p>Read the README aloud: four pots, lengths in mm after seven days. If unzip asks to replace files, answer n and extract to a fresh folder name. less README.txt works too (press q to leave); cat is simpler for a short file.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-manifest-which-file-belongs-to-which-sample" class="slide level2">
+<h2>The manifest: which file belongs to which sample</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<pre class="text"><code>$ cat samples.tsv
+sample_id   treatment   file
+S01         control     measurements/S01.csv
+S02         control     measurements/S02.csv
+S03         treated     measurements/S03.csv
+S04         treated     measurements/S04.csv
+$ wc -l samples.tsv
+5 samples.tsv</code></pre>
+</div><div class="column" style="width:45%;">
+<ul>
+<li>The first line is a <strong>header</strong> naming the columns. Columns are separated by tabs (a TSV file).</li>
+<li>Each other line is one sample, with its group and the file holding its measurement.</li>
+<li><code>wc -l</code> counts <strong>5 lines</strong>: the header plus <strong>4 samples</strong>.</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>Ask before running wc -l: how many lines? Students often say 4. The header is not a sample. A CSV is the same idea with commas. For a long file, head -n 3 samples.tsv shows just the start.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -300,16 +277,26 @@ Data Analysis in Life Sciences
 </section>
 <section id="which-samples-were-treated" class="slide level2">
 <h2>Which samples were treated?</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<pre class="text"><code>$ grep -F treated samples.tsv
+S03         treated     measurements/S03.csv
+S04         treated     measurements/S04.csv</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="grep-selection.svg" height="330"></p>
+<p><img data-src="grep-selection.svg" style="width:100.0%"></p>
 <figcaption>grep prints only the lines that contain treated: S03 and S04.</figcaption>
 </figure>
 </div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-F</span> treated samples.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>grep</code> prints the lines that contain the text. <code>-F</code> means plain text, not a pattern. Answer: <strong>S03 and S04</strong>.</p>
+</div><div class="column" style="width:45%;">
+<ul>
+<li><code>grep</code> prints only the lines that contain the text <code>treated</code>.</li>
+<li><code>-F</code> means: search for exactly these letters.</li>
+<li>Answer: <strong>S03 and S04</strong>. The header and the control lines are not printed.</li>
+</ul>
+</div></div>
 <aside class="notes">
-<p>The header and the control lines are not printed. Point out that grep does not know about columns; it just looks for the letters t-r-e-a-t-e-d anywhere on the line. We test that limit in two slides.</p>
+<p>Point out that grep does not know about columns; it just looks for the letters t-r-e-a-t-e-d anywhere on the line. We test that limit in two slides.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -325,24 +312,27 @@ Data Analysis in Life Sciences
 <section id="count-with-a-pipe-save-with" class="slide level2">
 <h2>Count with a pipe, save with <code>&gt;</code></h2>
 <div class="columns">
-<div class="column" style="width:50%;">
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-F</span> treated samples.tsv <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-F</span> treated samples.tsv <span class="op">&gt;</span> treated-samples.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li><code>|</code> passes grep’s lines to <code>wc -l</code>: <strong>2</strong>.</li>
-<li><code>&gt;</code> writes them into a new file. The manifest is unchanged.</li>
-<li><code>&gt;</code> <strong>replaces</strong> what was in the file. Never write to the input: <code>&gt; samples.tsv</code> can empty it.</li>
-</ul>
-</div><div class="column" style="width:50%;">
+<div class="column" style="width:55%;">
+<pre class="text"><code>$ grep -F treated samples.tsv | wc -l
+2
+$ grep -F treated samples.tsv &gt; treated-samples.txt
+$ cat treated-samples.txt
+S03         treated     measurements/S03.csv
+S04         treated     measurements/S04.csv</code></pre>
+</div><div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="pipe-stream.svg" style="width:100.0%"></p>
 <figcaption>Four sample lines go into grep, two matching lines come out, and wc -l counts 2.</figcaption>
 </figure>
 </div>
+<ul>
+<li><code>|</code> sends grep’s lines into <code>wc -l</code>: <strong>2</strong>.</li>
+<li><code>&gt;</code> sends them into a file instead; <code>cat</code> shows it. <code>&gt;</code> <strong>replaces</strong> an existing file, so never write to your input.</li>
+</ul>
 </div></div>
 <aside class="notes">
-<p>Open treated-samples.txt with less: two lines and no header. Ask which file changed (only the new one). Do not demonstrate input = output on real files; just explain the danger.</p>
+<p>Ask which file changed: only the new one. Do not demonstrate input = output on real files; just explain the danger.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -357,15 +347,22 @@ Data Analysis in Life Sciences
 </section>
 <section id="grep-matches-text-not-meaning" class="slide level2">
 <h2><code>grep</code> matches text, not meaning</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="grep-substring.svg" height="330"></p>
-<figcaption>In a copy where S01 is labelled untreated, grep -F treated selects S01 as well as S03 and S04.</figcaption>
-</figure>
-</div>
-<p>If S01 were labelled <code>untreated</code>, the count would be <strong>3</strong>: <code>untreated</code> contains <code>treated</code>. Look at the lines selected, not only at the number.</p>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>Suppose S01 had been labelled <code>untreated</code>:</p>
+<pre class="text"><code>$ grep -F treated search-trap.tsv
+S01         untreated   measurements/S01.csv
+S03         treated     measurements/S03.csv
+S04         treated     measurements/S04.csv</code></pre>
+</div><div class="column" style="width:45%;">
+<ul>
+<li><code>untreated</code> contains the letters <code>treated</code>, so S01 is selected too, and the count would be <strong>3</strong>.</li>
+<li>grep cannot know what a word means.</li>
+<li>Always look at the lines it selected, not only at the number.</li>
+</ul>
+</div></div>
 <aside class="notes">
-<p>Students make this trap file themselves in the exercises, on a copy (search-trap.tsv). The real manifest still gives 2. This is the main reason to print the lines before counting.</p>
+<p>Students make this trap file themselves in the exercises, on a copy (search-trap.tsv). The real manifest still gives 2.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -382,40 +379,13 @@ Data Analysis in Life Sciences
 <h2>Are the treated seedlings longer?</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> measurements/S03.csv</span>
-<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> measurements/S01.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Sample</th>
-<th>Group</th>
-<th>Length (mm)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>S01</td>
-<td>control</td>
-<td>32.1</td>
-</tr>
-<tr class="even">
-<td>S02</td>
-<td>control</td>
-<td>35.2</td>
-</tr>
-<tr class="odd">
-<td>S03</td>
-<td>treated</td>
-<td>42.4</td>
-</tr>
-<tr class="even">
-<td>S04</td>
-<td>treated</td>
-<td>39.8</td>
-</tr>
-</tbody>
-</table>
-<p>Both treated pots are longer. Two pots per group is a hint, not yet a result.</p>
+<pre class="text"><code>$ cat measurements/S01.csv
+sample_id,length_mm
+S01,32.1
+$ cat measurements/S03.csv
+sample_id,length_mm
+S03,42.4</code></pre>
+<p>Doing the same for all four: controls <strong>32.1</strong> and <strong>35.2</strong> mm, treated <strong>42.4</strong> and <strong>39.8</strong> mm.</p>
 </div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -424,6 +394,7 @@ Data Analysis in Life Sciences
 </figure>
 </div>
 </div></div>
+<p>Both treated pots are longer, but two pots per group is a hint, not yet a result.</p>
 <aside class="notes">
 <p>The file column of the manifest gives each path. Units come from the README, not from the file. With so few pots we cannot conclude much; the 24-plant dataset in week 2 and the comparisons in week 4 address the question properly.</p>
 <style type="text/css">
@@ -440,18 +411,30 @@ Data Analysis in Life Sciences
 </section>
 <section id="work-on-a-copy" class="slide level2">
 <h2>Work on a copy</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<pre class="text"><code>$ mkdir working
+$ cp samples.tsv working/samples-copy.tsv
+$ mv working/samples-copy.tsv working/manifest-practice.tsv
+$ ls working
+manifest-practice.tsv
+$ ls
+field-notes  measurements  README.txt
+samples.tsv  treated-samples.txt  working</code></pre>
+</div><div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="copy-rename.svg" height="320"></p>
+<p><img data-src="copy-rename.svg" style="width:100.0%"></p>
 <figcaption>cp makes a second file in working/, mv renames that copy, and the original samples.tsv is untouched.</figcaption>
 </figure>
 </div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> working</span>
-<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> samples.tsv working/samples-copy.tsv</span>
-<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> working/samples-copy.tsv working/manifest-practice.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>cp</code> copies, <code>mv</code> renames or moves. Both silently replace an existing file with the same name.</p>
+<ul>
+<li><code>cp</code> copies, <code>mv</code> renames. They print nothing when they work, so check with <code>ls</code>.</li>
+<li>The original <code>samples.tsv</code> is unchanged.</li>
+</ul>
+</div></div>
 <aside class="notes">
-<p>Ask which files exist after each line. The original stays; only the copy is renamed. Students then write working/observations.txt with today’s answers.</p>
+<p>Ask which files exist after each line. Students then write working/observations.txt with today’s answers.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -467,20 +450,25 @@ Data Analysis in Life Sciences
 <section id="when-a-listed-file-is-missing" class="slide level2">
 <h2>When a listed file is missing</h2>
 <div class="columns">
-<div class="column" style="width:45%;">
-<ul>
-<li>The manifest lists <code>measurements/S04.csv</code>, but the folder has <code>S04-renamed.csv</code>.</li>
-<li><code>head measurements/S04.csv</code> fails: <em>No such file or directory</em>.</li>
-<li>Look inside: it contains <code>S04,39.8</code>. Now you know it is S04 and can restore the name with <code>mv</code>.</li>
-<li>If the contents did not tell you, ask the lab group rather than guess.</li>
-</ul>
-</div><div class="column" style="width:55%;">
+<div class="column" style="width:58%;">
+<pre class="text"><code>$ head measurements/S04.csv
+head: cannot open 'measurements/S04.csv' for
+reading: No such file or directory
+$ ls measurements
+S01.csv  S02.csv  S03.csv  S04-renamed.csv
+$ cat measurements/S04-renamed.csv
+sample_id,length_mm
+S04,39.8</code></pre>
+</div><div class="column" style="width:42%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="manifest-path.svg" style="width:100.0%"></p>
 <figcaption>The manifest expects measurements/S04.csv while the folder holds S04-renamed.csv, whose contents still say S04 and 39.8.</figcaption>
 </figure>
 </div>
+<ul>
+<li>The manifest promises <code>S04.csv</code>; someone renamed it. The contents confirm it is S04, so restore the name with <code>mv</code>.</li>
+</ul>
 </div></div>
 <aside class="notes">
 <p>In the exercise students rename the file themselves in a copied folder (received-check), so they know the cause. The point: a manifest says what should be there; check that the files really are.</p>

@@ -95,7 +95,7 @@ Demonstrate with a report whose import line has been run only in the Console: wo
 Copy into a new `report-share` folder **outside** your project:
 
 - `introcomputing.Rproj`
-- `duckweed-report.Rmd` and its HTML
+- your report, here `duckweed-report.Rmd`, and its HTML
 - `data/duckweed.csv` and `data/README.md`
 - `output/` if the report saves there
 - a `README.txt`: data simulated, file to render, packages needed
@@ -113,38 +113,74 @@ For the organic alternative: organic-study.Rmd and data/organic-recovery.csv. Le
 
 ## Pack the folder as a ZIP
 
-![report-share and report-share-v1.zip sit side by side in Documents; zip -r packs the folder into the ZIP next to it.](share-zip.svg){height=300}
-
-```bash
-zip -r report-share-v1.zip report-share/
-unzip -l report-share-v1.zip
+:::: {.columns}
+::: {.column width="58%"}
+```text
+$ ls
+report-share
+$ zip -r report-share-v1.zip report-share/
+  adding: report-share/ (stored 0%)
+  adding: report-share/output/ (stored 0%)
+  adding: report-share/output/README.txt (stored 0%)
+  adding: report-share/README.txt (deflated 19%)
+  adding: report-share/duckweed-report.html (deflated 66%)
+  adding: report-share/duckweed-report.Rmd (deflated 14%)
+  adding: report-share/introcomputing.Rproj (deflated 26%)
+  adding: report-share/data/ (stored 0%)
+  adding: report-share/data/README.md (deflated 61%)
+  adding: report-share/data/duckweed.csv (deflated 59%)
+$ ls
+report-share
+report-share-v1.zip
 ```
+:::
+::: {.column width="42%"}
+![report-share and report-share-v1.zip sit side by side in Documents; zip -r packs the folder into the ZIP next to it.](share-zip.svg){width="100%"}
 
-Run this from the folder that **contains** `report-share`, so the ZIP is saved beside it, not inside it. `-r` packs everything inside; `unzip -l` checks what went in. Use a new name for every ZIP.
+- Run it from the folder that **contains** `report-share` (here Documents), so the ZIP lands beside it, not inside it.
+- `-r` packs the folder with everything inside it; `zip` names each file it adds.
+- `ls` shows the new ZIP. Use a new name for every version.
+:::
+::::
 
 ::: notes
-A ZIP inside the folder it packs would be packed into the next ZIP. Re-running zip with an existing name updates that archive and can keep files you have since deleted, so new names (v1, v2) are simpler. Windows students: copy report-share into Ubuntu first, and copy the finished ZIP back to Windows for the RStudio test.
+"deflated 66%" means that file was compressed to about a third of its size. A ZIP inside the folder it packs would be packed into the next ZIP. Re-running zip with an existing name updates that archive and can keep files you have since deleted, so new names (v1, v2) are simpler. Windows students: copy report-share into Ubuntu first, and copy the finished ZIP back to Windows for the RStudio test. The output was captured from a real run on a demonstration copy.
 :::
 
 ## Test 2: open it as the receiver would
 
 :::: {.columns}
-::: {.column width="45%"}
-```bash
-unzip report-share-v1.zip -d receiver-v1
-```
-
-- Extraction keeps the packed folder: one extra level.
-- Open `receiver-v1/report-share/introcomputing.Rproj`, restart R, Knit.
-- Expect the same counts (10 and 9) and means (32.28 and 39.63 mg).
-:::
 ::: {.column width="55%"}
+```text
+$ unzip -l report-share-v1.zip
+Archive:  report-share-v1.zip
+  Length      Date    Time    Name
+...
+      397  2026-11-19 16:45   report-share/data/duckweed.csv
+   638418                     10 files
+$ unzip report-share-v1.zip -d receiver-v1
+Archive:  report-share-v1.zip
+   creating: receiver-v1/report-share/
+...
+  inflating: receiver-v1/report-share/data/duckweed.csv
+$ ls receiver-v1
+report-share
+$ ls receiver-v1/report-share
+data  duckweed-report.html  duckweed-report.Rmd
+introcomputing.Rproj  output  README.txt
+```
+:::
+::: {.column width="45%"}
 ![Extracting into receiver-v1 adds a level: the report is at receiver-v1/report-share/duckweed-report.Rmd.](receiver-nesting.svg){width="100%"}
+
+- `unzip -l` lists the 10 entries without unpacking: is everything there?
+- Extraction keeps the packed folder: **one extra level**.
+- Open `receiver-v1/report-share/introcomputing.Rproj`, restart R, Knit. Expect 10 and 9 flasks, means 32.28 and 39.63 mg.
 :::
 ::::
 
 ::: notes
-Check the project name in RStudio's corner: it is easy to Knit the original by mistake. Jittered point positions may move slightly between computers; numbers should not. If they differ, save sessionInfo() in the log: it lists R and package versions.
+The listing comes from a demonstration copy with a short report; your file sizes will differ. Check the project name in RStudio's corner: it is easy to Knit the original by mistake. Jittered point positions may move slightly between computers; numbers should not.
 :::
 
 ## Two fresh starts test different things
@@ -189,19 +225,15 @@ Ask students to say where their backup is. If the university storage is not set 
 
 ## It renders ≠ it is right
 
-:::: {.columns}
-::: {.column width="45%"}
-In two disposable copies:
+Two tests, each in a disposable copy of the project:
 
-- Rename `data/duckweed.csv`: Knit **stops** with an error naming the file.
-- Write "All 20 flasks had a measured biomass.": Knit **succeeds**, but only 19 were weighed.
+| What you change | Does Knit work? | Is the report right? |
+|---|---|---|
+| Rename `data/duckweed.csv` | **No**: it stops with an error naming the file | — |
+| Add the sentence "All 20 flasks had a measured biomass." | **Yes**: the HTML looks fine | **No**: only 19 were weighed (F17 spilled) |
 
-R notices a missing file. It cannot notice a wrong sentence. A reader has to check claims against the numbers.
-:::
-::: {.column width="55%"}
-![Running successfully and being scientifically supported are separate: a report can run and still make an unsupported claim.](runs-versus-valid.svg){width="100%"}
-:::
-::::
+- R notices a missing file. It cannot notice a wrong sentence.
+- After every render, read the claims against the numbers in the tables and figures.
 
 ::: notes
 After restoring the file name, check that the means are back to 32.28 and 39.63 mg; an absent error message is not the same as the right result. Delete the disposable copies so a deliberately false sentence never ends up in the shared ZIP.

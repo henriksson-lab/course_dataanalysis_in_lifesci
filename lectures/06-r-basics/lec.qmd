@@ -52,14 +52,16 @@ Many published analyses cannot be repeated because they were done by clicking. N
 
 :::: {.columns}
 ::: {.column width="42%"}
-In the Console, after the `>` prompt:
+Type after the `>` prompt in the Console and press Enter:
 
-```r
-37 - 20
-37 / 20
+```text
+> 37 - 20
+[1] 17
+> 37 / 20
+[1] 1.85
 ```
 
-- `[1] 17` and `[1] 1.85`. `[1]` just numbers the first value printed.
+- `[1]` just numbers the first value printed.
 - **17 mm** is the growth. **1.85** is a ratio with no unit: the plant ended 1.85 times as long.
 - Both calculations are correct. Pick the one that answers your question.
 :::
@@ -76,42 +78,45 @@ Ask students to predict both results before running. A calculation can be right 
 
 :::: {.columns}
 ::: {.column width="45%"}
-```r
-# Lengths in millimetres
-initial_mm <- 20
-final_mm <- 37
-growth_mm <- final_mm - initial_mm
-growth_mm
+```text
+> initial_mm <- 20
+> final_mm <- 37
+> growth_mm <- final_mm - initial_mm
+> growth_mm
+[1] 17
 ```
 
-- Read `<-` as "store this under this name".
-- The name now appears in the **Environment** pane.
-- `#` starts a comment for people; R ignores it.
+- Read `<-` as "store this under this name". Storing prints nothing; typing the name prints the value.
+- The names appear in the **Environment** pane.
 - Capitals matter: `Growth_mm` is a different name.
 :::
 ::: {.column width="55%"}
-![A calculation is stored in a named object in memory, while the script on disk holds the instructions.](named-object.svg){width="100%"}
+![The script day06.R on disk holds the three instructions; running them puts initial_mm, final_mm and growth_mm with their values into R's memory.](script-and-memory.svg){width="100%"}
 :::
 ::::
 
+Write these lines in a script, `day06.R`, and press **Run** on each: the line is sent to the Console and appears there after `>`, as above.
+
 ::: notes
-Write this in a new script, File → New File → R Script, saved as day06.R in the project folder. Run each line with Run (Ctrl+Enter / Cmd+Enter). Putting the unit in the name (_mm) is a habit that prevents mistakes later.
+File → New File → R Script, saved as day06.R in the project folder. Run = Ctrl+Enter / Cmd+Enter. In the script, add a comment line starting with # saying the lengths are in mm; R skips comments. Putting the unit in the name (_mm) is a habit that prevents mistakes later.
 :::
 
 ## A stored result does not update itself
 
 :::: {.columns}
 ::: {.column width="45%"}
-```r
-final_mm <- 39
-growth_mm      # still 17
-growth_mm <- final_mm - initial_mm
-growth_mm      # now 19
+```text
+> final_mm <- 39
+> growth_mm
+[1] 17
+> growth_mm <- final_mm - initial_mm
+> growth_mm
+[1] 19
 ```
 
-- A name holds a **value**, not a live formula as in a spreadsheet cell.
-- Change an input, then **rerun the lines that use it**.
-- Safest: run the whole script from the top.
+- The final length changed, but `growth_mm` still says 17: a name holds a **value**, not a formula as in a spreadsheet cell.
+- Rerun the subtraction and it says 19.
+- Safest: after changing an input, run the whole script from the top.
 :::
 ::: {.column width="55%"}
 ![After the final length changes, the stored growth stays 17 until the subtraction is run again.](stale-value.svg){width="100%"}
@@ -124,30 +129,46 @@ Ask for a prediction before printing growth_mm the first time. This is the most 
 
 ## Saved script versus objects in memory
 
+:::: {.columns}
+::: {.column width="45%"}
+```text
+> growth_mm
+[1] 17 18 15
+
+Restarting R session...
+
+> growth_mm
+Error: object 'growth_mm' not found
+```
+
+After **Session → Restart R**, the object is gone. The saved `day06.R` is still there: select all its lines and **Run**, and `growth_mm` comes back.
+:::
+::: {.column width="55%"}
 - **Saving** the script writes instructions to disk. It does not run them.
 - **Running** a line creates objects in memory. It does not save the script.
-- Restart R (**Session → Restart R**): the objects are gone, the saved script is not.
-- So after reopening, run the script from the top. Everything it needs must be in it.
-
-Test it today: save `day06.R`, restart R, run all lines. Does `growth_mm` come back?
+- So everything a result needs must be **in the script**, in the right order.
+- Test it today: save `day06.R`, restart R, run all lines.
+:::
+::::
 
 ::: notes
-This is the same disk versus memory distinction from week 1. Unsaved editor changes may be recoverable, but do not rely on it. A script that works only after some unrecorded Console typing is not a complete record.
+This is the same disk versus memory distinction from week 1 and Day 5. Unsaved editor changes may be recoverable, but do not rely on it. A script that works only after some unrecorded Console typing is not a complete record. "Restarting R session..." is what RStudio prints in the Console on restart.
 :::
 
 ## Several plants in one name
 
 :::: {.columns}
 ::: {.column width="45%"}
-```r
-initial_mm <- c(20, 22, 19)
-final_mm <- c(37, 40, 34)
-growth_mm <- final_mm - initial_mm
-growth_mm
+```text
+> initial_mm <- c(20, 22, 19)
+> final_mm <- c(37, 40, 34)
+> growth_mm <- final_mm - initial_mm
+> growth_mm
+[1] 17 18 15
 ```
 
-- `c()` combines values into a **vector**.
-- R subtracts **position by position**: 17, 18, 15 mm.
+- `c()` combines values into a **vector**: one name, several values.
+- R subtracts **position by position**: 37 − 20, 40 − 22, 34 − 19.
 - This is right only if both vectors list the **same plants in the same order**.
 :::
 ::: {.column width="55%"}
@@ -163,41 +184,50 @@ Work through the second plant: 40 − 22 = 18. R does not know which plant is wh
 
 :::: {.columns}
 ::: {.column width="50%"}
-```r
-mean(growth_mm)
-length(growth_mm)
-growth_mm > 16
-plant_id <- c("P01", "P02", "P03")
+```text
+> mean(growth_mm)
+[1] 16.66667
+> length(growth_mm)
+[1] 3
+> growth_mm > 16
+[1]  TRUE  TRUE FALSE
+> plant_id <- c("P01", "P02", "P03")
+> mean(plant_id)
+[1] NA
+Warning message:
+In mean.default(plant_id) :
+  argument is not numeric or logical: returning NA
 ```
 :::
 ::: {.column width="50%"}
-- `mean()` gives **16.67 mm**; `length()` gives **3** plants.
-- `growth_mm > 16` gives `TRUE TRUE FALSE`: yes/no answers, not new measurements.
-- Text goes in quotes. `"20"` is text, `20` is a number.
-- `mean(plant_id)` makes no sense: IDs are labels, not measurements.
+- A **function** is a name with brackets: `mean()` averages, `length()` counts.
+- Mean growth **16.67 mm**, from **3** plants.
+- `> 16` answers yes/no for each plant: the first two grew more than 16 mm.
+- Text goes in quotes. Averaging plant IDs makes no sense, and R says so.
 :::
 ::::
 
-A **function** is a name followed by brackets: `mean(...)`. Run `?mean` to open its help page.
+Run `?mean` to open the help page for a function.
 
 ::: notes
-Read the help's Description and Examples, not every option. Plant IDs contain digits but are still labels; storing them as text keeps R from treating them as numbers.
+Read the help's Description and Examples, not every option. Plant IDs contain digits but are labels; the warning is R's way of saying the request makes no sense.
 :::
 
 ## Wrong order, wrong answer, no warning
 
 :::: {.columns}
-::: {.column width="42%"}
-```r
-final_wrong <- c(34, 37, 40)
-final_wrong - initial_mm
+::: {.column width="45%"}
+```text
+> final_wrong <- c(34, 37, 40)
+> final_wrong - initial_mm
+[1] 14 15 21
 ```
 
-- Gives **14, 15, 21** instead of 17, 18, 15.
-- Same values, same length, so R raises no error.
+- The same final lengths in a different order give **14, 15, 21** instead of 17, 18, 15.
+- Same length, so R raises no error.
 - Only you know which plant each position belongs to. Keep the order matched.
 :::
-::: {.column width="58%"}
+::: {.column width="55%"}
 ![Reordering one vector changes which initial and final lengths are paired.](vector-shuffle.svg){width="100%"}
 :::
 ::::
@@ -210,14 +240,18 @@ Equal lengths are necessary but do not prove matching plants. From Day 7 we keep
 
 :::: {.columns}
 ::: {.column width="45%"}
-```r
-growth_cm <- growth_mm / 10
-mean(growth_mm)   # 16.67
-mean(growth_cm)   # 1.667
+```text
+> growth_cm <- growth_mm / 10
+> growth_cm
+[1] 1.7 1.8 1.5
+> mean(growth_mm)
+[1] 16.66667
+> mean(growth_cm)
+[1] 1.666667
 ```
 
 - Dividing by 10 converts mm to cm. Store it under a **new name** ending `_cm`.
-- Renaming an object or an axis to "cm" without dividing would be wrong by a factor of 10.
+- Calling the mm values "cm" without dividing would be wrong by a factor of 10.
 :::
 ::: {.column width="55%"}
 ![A growth of 18.6 mm relabelled as cm is wrong; converted it becomes 1.86 cm.](../10-first-report/unit-label-check.svg){width="100%"}
@@ -225,41 +259,53 @@ mean(growth_cm)   # 1.667
 ::::
 
 ::: notes
-Keep the original values. A changed label does not change the numbers. The figure uses plant P01 from the course data (18.6 mm).
+Keep the original values. A changed label does not change the numbers. The figure uses plant P01 from the course data (18.6 mm), which students meet on Day 7.
 :::
 
 ## The same habit for a lab calculation
 
 :::: {.columns}
-::: {.column width="45%"}
-```r
-mass_g <- 0.2922
-molar_mass_g_mol <- 58.44
-volume_l <- 100 / 1000
-amount_mol <- mass_g / molar_mass_g_mol
-1000 * amount_mol / volume_l   # 50 mmol/L
+::: {.column width="47%"}
+```text
+> mass_g <- 0.2922
+> molar_mass_g_mol <- 58.44
+> volume_l <- 100 / 1000
+> amount_mol <- mass_g / molar_mass_g_mol
+> amount_mol
+[1] 0.005
+> 1000 * amount_mol / volume_l
+[1] 50
 ```
-
-- Every input has a name with its unit.
-- Each step can be checked on its own.
 :::
-::: {.column width="55%"}
+::: {.column width="53%"}
 ![Mass divided by molar mass gives amount; amount divided by volume gives concentration, 50 mmol/L.](solution-units.svg){width="100%"}
 :::
 ::::
 
-Doubling the mass gives 100 mmol/L; doubling the volume gives 25 mmol/L.
+0.2922 g of sodium chloride in 100 mL is **50 mmol/L**. A **mole** is a unit of amount of substance; the **molar mass** (g/mol) says what one mole weighs. Every input has a name with its unit, so each step can be checked.
 
 ::: notes
-A mole is a unit of chemical amount; molar mass is grams per mole. All values are supplied; no chemistry background is needed. The alternative ratio exercise is a product yield: 100 × 0.62 g / 1.00 g = 62%.
+All values are supplied; no chemistry background is needed. Doubling the mass gives 100 mmol/L; doubling the volume gives 25 mmol/L. The alternative ratio exercise is a product yield: 100 × 0.62 g / 1.00 g = 62%.
 :::
 
 ## When something goes wrong
 
-- **`object 'growth_mm' not found`**: check the spelling and capitals, then run the line that creates it.
-- **A `+` prompt** instead of `>`: R is waiting for the rest of a line. Check quotes and brackets, or press Esc.
-- **An old result**: did you rerun the lines after changing an input?
+:::: {.columns}
+::: {.column width="45%"}
+```text
+> Growth_mm
+Error: object 'Growth_mm' not found
+> mean(c(1, 2)
++ 
+```
+:::
+::: {.column width="55%"}
+- **`object ... not found`**: check spelling and capitals (here `Growth_mm` instead of `growth_mm`), or run the line that creates it.
+- **A `+` prompt**: R is waiting for the rest of the line, here a closing bracket. Finish it, or press Esc.
+- **An old result**: rerun the lines after changing an input.
 - **Lost track?** Restart R and run the script from the top.
+:::
+::::
 
 ::: notes
 Teach checking the dependency (which line creates this object?) instead of running random lines until the error goes away.

@@ -101,24 +101,28 @@ The supplied template has this structure. Students should not have to type the f
 ## Render it
 
 :::: {.columns}
-::: {.column width="42%"}
-Save, then click **Knit**. Or type in the **Console**:
-
-```r
-rmarkdown::render("report.Rmd",
-                  output_dir = "reports")
+::: {.column width="50%"}
+```text
+> rmarkdown::render("report.Rmd",
++                   output_dir = "reports")
+processing file: report.Rmd
+...
+Output created: reports/report.html
+> list.files("reports")
+[1] "report.html"
 ```
-
-- Never put this line inside the report: a report must not render itself.
-- `output_dir` puts the HTML in `reports/`; the `.Rmd` stays in the project folder.
 :::
-::: {.column width="58%"}
-![The report source, the original data and the HTML output have different roles and are kept together.](three-files.svg){width="100%"}
+::: {.column width="50%"}
+- Save, then click **Knit**, or type the line on the left in the **Console**.
+- R runs every chunk, then writes `reports/report.html`. Open it in a browser:
+- Never put the render line inside the report: it would try to render itself.
 :::
 ::::
 
+![The rendered report.html in a browser: title, question text, the code, and a table and plot of growth by group.](../05-meet-r/report-preview.png){width="88%" fig-align="center"}
+
 ::: notes
-Knit may put the HTML next to the source instead; find the actual file rather than assuming. rmarkdown::render calls the render function from the rmarkdown package without loading the whole package.
+The real printout is longer (a progress line for each chunk and a long pandoc command); students only need the last line, "Output created". Knit may put the HTML next to the source instead; find the actual file rather than assuming. rmarkdown::render calls the render function from the rmarkdown package without loading the whole package. The screenshot is the supplied template students rendered on Day 5.
 :::
 
 ## Chunks run from top to bottom
@@ -180,40 +184,61 @@ Inline R removes stale copied numbers, but it cannot fix a description of the wr
 
 ## A figure with a caption
 
-<pre><code>&#96;&#96;&#96;{r growth-figure, fig.cap="Each point is one independently potted seedling."}
-ggplot(seedlings, aes(x = treatment, y = growth_mm)) +
-  geom_point(position = position_jitter(width = 0.08, height = 0, seed = 8)) +
-  labs(x = "Treatment", y = "Change in seedling length (mm)")
+:::: {.columns}
+::: {.column width="52%"}
+<pre><code>&#96;&#96;&#96;{r growth-figure, fig.cap="Each point is
+  one independently potted seedling."}
+ggplot(seedlings,
+       aes(x = treatment, y = growth_mm)) +
+  geom_point(position = position_jitter(
+    width = 0.08, height = 0, seed = 8)) +
+  labs(x = "Treatment",
+       y = "Change in seedling length (mm)")
 &#96;&#96;&#96;
 </code></pre>
 
-- Reuse the plotting code from Day 8; add `library(ggplot2)` to the first chunk.
-- The **caption** says what the figure shows. A sentence below it says what you see in it.
+- The plotting code from Day 8, as a chunk. Add `library(ggplot2)` to the first chunk.
+- `fig.cap` becomes the caption under the figure.
+:::
+::: {.column width="48%"}
+![The figure this chunk draws in the report: growth of each seedling by treatment.](growth-figure.png){width="100%"}
+
+The caption says what the figure shows. A sentence below it says what you see: growth varies within both groups, and the groups overlap.
+:::
+::::
 
 ::: notes
-Code can stay visible in these first reports so the method is easy to inspect. The caption names the unit of observation; the prose interprets.
+In the real file the fig.cap text is on one line; it is wrapped here to fit the slide. Without theme_minimal() ggplot uses its default grey background, as here. Code can stay visible in these first reports so the method is easy to inspect.
 :::
 
 ## When rendering stops: read the first error
 
 :::: {.columns}
-::: {.column width="45%"}
-The message names the **chunk**. Check, in order:
-
-1. Is the package loaded (`library()`) before use?
-2. Are file and column names spelt exactly right?
-3. Is the object made in an **earlier** chunk?
-4. Are all chunk labels unique, every fence closed?
-
-Change one thing, render again.
-:::
 ::: {.column width="55%"}
-![Two chunks both labelled import stop the render; giving them different labels fixes it.](chunk-collision.svg){width="100%"}
+```text
+> rmarkdown::render("report.Rmd")
+processing file: report.Rmd
+1/2
+2/2 [import]
+Error:
+! 'data/seedling.csv' does not exist in current
+  working directory:
+  '.../introcomputing-course'.
+...
+Quitting from report.Rmd:10-14 [import]
+Execution halted
+```
+:::
+::: {.column width="45%"}
+- The error says **what** went wrong: the file name is misspelt (`seedling`, not `seedlings`).
+- `Quitting from ... [import]` says **where**: the chunk labelled `import`.
+- Other common causes: a missing `library()`, an object made only in a **later** chunk, two chunks with the same label.
+- Change one thing, render again.
 :::
 ::::
 
 ::: notes
-In the workshop copy students break one thing at a time (duplicate label, misspelt file, plot before calculation), record the message and the repair in reports/render-recovery.txt, and restore a working render each time. Recovery, not memorising messages.
+Real output from the minimal report on the "Inside an .Rmd" slide with the file name misspelt; the full path and the backtrace lines are trimmed. A duplicated label gives "Duplicate chunk label 'import'". In the workshop copy students break one thing at a time, record the message and the repair in reports/render-recovery.txt, and restore a working render each time.
 :::
 
 ## Sharing the `.Rmd` alone is not enough

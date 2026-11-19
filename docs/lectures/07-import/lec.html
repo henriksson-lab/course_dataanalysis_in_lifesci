@@ -28,74 +28,8 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #24292e;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #24292e; } /* Normal */
-    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
-    code span.an { color: #6a737d; } /* Annotation */
-    code span.at { color: #d73a49; } /* Attribute */
-    code span.bn { color: #005cc5; } /* BaseN */
-    code span.bu { color: #d73a49; } /* BuiltIn */
-    code span.cf { color: #d73a49; } /* ControlFlow */
-    code span.ch { color: #032f62; } /* Char */
-    code span.cn { color: #005cc5; } /* Constant */
-    code span.co { color: #6a737d; } /* Comment */
-    code span.cv { color: #6a737d; } /* CommentVar */
-    code span.do { color: #6a737d; } /* Documentation */
-    code span.dt { color: #d73a49; } /* DataType */
-    code span.dv { color: #005cc5; } /* DecVal */
-    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
-    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
-    code span.fl { color: #005cc5; } /* Float */
-    code span.fu { color: #6f42c1; } /* Function */
-    code span.im { color: #032f62; } /* Import */
-    code span.in { color: #6a737d; } /* Information */
-    code span.kw { color: #d73a49; } /* Keyword */
-    code span.op { color: #24292e; } /* Operator */
-    code span.ot { color: #6f42c1; } /* Other */
-    code span.pp { color: #d73a49; } /* Preprocessor */
-    code span.re { color: #6a737d; } /* RegionMarker */
-    code span.sc { color: #005cc5; } /* SpecialChar */
-    code span.ss { color: #032f62; } /* SpecialString */
-    code span.st { color: #032f62; } /* String */
-    code span.va { color: #e36209; } /* Variable */
-    code span.vs { color: #032f62; } /* VerbatimString */
-    code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-fa0e33e6dd574061e1681ec846127080.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -295,15 +229,17 @@ Data Analysis in Life Sciences
 <section id="first-is-r-looking-in-the-right-folder" class="slide level2">
 <h2>First: is R looking in the right folder?</h2>
 <div class="columns">
-<div class="column" style="width:45%;">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">file.exists</span>(<span class="st">"data/seedlings.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="column" style="width:47%;">
+<pre class="text"><code>&gt; getwd()
+[1] "C:/Users/anna/Documents/introcomputing-course"
+&gt; file.exists("data/seedlings.csv")
+[1] TRUE</code></pre>
 <ul>
-<li><code>getwd()</code> should print your <strong>project folder</strong>, not <code>data</code>.</li>
-<li>The second line should print <code>TRUE</code>.</li>
+<li><code>getwd()</code> prints the folder R works in: your <strong>project folder</strong>. Your path starts differently.</li>
+<li><code>TRUE</code>: there is a <code>data/seedlings.csv</code> inside it.</li>
 <li><code>data/seedlings.csv</code> is a <strong>relative path</strong>: it starts from the project folder, so it works on a classmate’s computer too.</li>
 </ul>
-</div><div class="column" style="width:55%;">
+</div><div class="column" style="width:53%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="project-relative-path.svg" style="width:100.0%"></p>
@@ -329,24 +265,33 @@ Data Analysis in Life Sciences
 <section id="import-and-inspect" class="slide level2">
 <h2>Import and inspect</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings.csv"</span>,</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>                      <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(seedlings)</span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(seedlings)</span>
-<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(seedlings)</span>
-<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(seedlings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column" style="width:50%;">
+<div class="column" style="width:58%;">
+<pre class="text"><code>&gt; library(readr)
+&gt; seedlings &lt;- read_csv("data/seedlings.csv",
++                       show_col_types = FALSE)
+&gt; dim(seedlings)
+[1] 24  4
+&gt; head(seedlings)
+# A tibble: 6 × 4
+  plant_id treatment initial_mm final_mm
+  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;
+1 P01      control         25.7     44.3
+2 P02      control         24.3     32.3
+3 P03      control         18       32.9
+4 P04      control         22.2     40.2
+5 P05      control         19.6     33  
+6 P06      control         24.7     40.7</code></pre>
+</div><div class="column" style="width:42%;">
 <ul>
-<li><code>library(readr)</code> loads the importer. Installed once; loaded in every new session.</li>
-<li><code>head()</code> shows the first 6 rows only, not the whole table.</li>
-<li><code>dim()</code>: <strong>24 rows, 4 columns</strong>.</li>
-<li><code>str()</code>: <code>plant_id</code> and <code>treatment</code> are text (<code>chr</code>); the lengths are numbers (<code>num</code>).</li>
+<li><code>library(readr)</code> loads the package that has <code>read_csv()</code>. Installed once; loaded in every new session.</li>
+<li><code>read_csv()</code> reads the file into a <strong>table</strong> called <code>seedlings</code>. It prints nothing.</li>
+<li><code>dim()</code>: <strong>24 rows, 4 columns</strong>. All 24 plants arrived.</li>
+<li><code>head()</code> shows the first 6 rows only. A <strong>tibble</strong> is R’s name for this kind of table.</li>
+<li>Under each column name, its type: <code>&lt;chr&gt;</code> is text, <code>&lt;dbl&gt;</code> is a number.</li>
 </ul>
 </div></div>
 <aside class="notes">
-<p>read_csv returns a tibble, a kind of table. show_col_types = FALSE only hides a message; it does not replace looking at the types with str(). Have students copy column names from names() rather than typing from memory.</p>
+<p>show_col_types = FALSE only hides a message; it does not replace looking at the types. names(seedlings) lists the column names, and str(seedlings) gives the same type information in another layout. Have students copy column names from names() rather than typing from memory.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -393,17 +338,27 @@ Data Analysis in Life Sciences
 </section>
 <section id="one-column-one-vector" class="slide level2">
 <h2>One column, one vector</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>seedlings<span class="sc">$</span>initial_mm</span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(seedlings<span class="sc">$</span>initial_mm)    <span class="co"># 24</span></span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(seedlings<span class="sc">$</span>initial_mm)      <span class="co"># 22.47</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="columns">
+<div class="column" style="width:56%;">
+<pre class="text"><code>&gt; seedlings$initial_mm
+ [1] 25.7 24.3 18.0 22.2 19.6 24.7 21.2 23.7
+ [9] 25.9 23.2 24.6 22.9 24.0 22.1 20.9 21.5
+[17] 25.4 18.7 22.2 18.4 23.6 21.4 22.7 22.4
+&gt; length(seedlings$initial_mm)
+[1] 24
+&gt; mean(seedlings$initial_mm)
+[1] 22.47083</code></pre>
+</div><div class="column" style="width:44%;">
 <ul>
 <li><code>$</code> picks one column by name and gives a vector, like those on Day 6.</li>
-<li>24 values: one per plant. The header is not counted.</li>
-<li>The mean initial length is <strong>22.47 mm</strong>. Always give the unit: R only sees numbers.</li>
+<li><code>[9]</code> and <code>[17]</code> at the line starts number the values: the 9th, the 17th.</li>
+<li>24 values, one per plant.</li>
+<li>Mean initial length <strong>22.47 mm</strong>. Always add the unit: R only sees numbers.</li>
 <li>This mean mixes both groups, so it says nothing yet about the treatment.</li>
 </ul>
+</div></div>
 <aside class="notes">
-<p>Ask students to say the result as a full sentence with unit and what was averaged. Comparing the groups is Day 8 and week 3.</p>
+<p>The line breaks in the vector print depend on the width of the Console; the [n] labels shift accordingly. Ask students to say the result as a full sentence with unit and what was averaged.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -419,17 +374,22 @@ Data Analysis in Life Sciences
 <section id="missing-is-not-zero" class="slide level2">
 <h2>Missing is not zero</h2>
 <div class="columns">
-<div class="column" style="width:45%;">
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="cn">NA</span>, <span class="dv">20</span>))                <span class="co"># NA</span></span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="cn">NA</span>, <span class="dv">20</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)  <span class="co"># 15</span></span>
-<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">20</span>))                 <span class="co"># 10</span></span>
-<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(seedlings<span class="sc">$</span>final_mm))     <span class="co"># 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="column" style="width:47%;">
+<pre class="text"><code>&gt; mean(c(10, NA, 20))
+[1] NA
+&gt; mean(c(10, NA, 20), na.rm = TRUE)
+[1] 15
+&gt; mean(c(10, 0, 20))
+[1] 10
+&gt; sum(is.na(seedlings$final_mm))
+[1] 0</code></pre>
 <ul>
-<li><code>NA</code> = not available: no reading exists.</li>
+<li><code>NA</code> = not available: no reading exists. R will not guess, so the mean is <code>NA</code>.</li>
 <li><code>na.rm = TRUE</code> leaves it out: mean of <strong>two</strong> values.</li>
-<li>Writing 0 instead invents a plant of zero length.</li>
+<li>Writing 0 invents a plant of zero length.</li>
+<li><code>seedlings</code> has <strong>0</strong> missing final lengths.</li>
 </ul>
-</div><div class="column" style="width:55%;">
+</div><div class="column" style="width:53%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="missing-zero-means.svg" style="width:100.0%"></p>
@@ -438,7 +398,7 @@ Data Analysis in Life Sciences
 </div>
 </div></div>
 <aside class="notes">
-<p>R refuses to give a mean when a value is NA unless asked: it will not pretend all values are known. In a report, say how many values were missing and why if known. seedlings.csv is complete; the messy version on Day 11 is not.</p>
+<p>is.na() gives TRUE for each missing value and sum() counts the TRUEs. In a report, say how many values were missing and why if known. The messy version on Day 11 has missing values.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -451,18 +411,61 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="worked-example-a-second-study" class="slide level2">
-<h2>Worked example: a second study</h2>
+<section id="worked-example-a-second-classs-data" class="slide level2">
+<h2>Worked example: a second class’s data</h2>
 <div class="columns">
-<div class="column" style="width:48%;">
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings-transfer.csv"</span>,</span>
-<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(transfer)                       <span class="co"># 18 4</span></span>
-<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(transfer)</span>
-<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(transfer<span class="sc">$</span>plant_id))   <span class="co"># 18</span></span>
-<span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(transfer<span class="sc">$</span>treatment)           <span class="co"># 9 9</span></span>
-<span id="cb5-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(transfer<span class="sc">$</span>final_mm))       <span class="co"># 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column" style="width:52%;">
+<div class="column" style="width:58%;">
+<pre class="text"><code>&gt; transfer &lt;- read_csv("data/seedlings-transfer.csv",
++                      show_col_types = FALSE)
+&gt; dim(transfer)
+[1] 18  4
+&gt; tail(transfer, 3)
+# A tibble: 3 × 4
+  plant_id treatment initial_mm final_mm
+  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;
+1 T16      treated         20       39.9
+2 T17      treated         21       36  
+3 T18      treated         21.6     43  </code></pre>
+</div><div class="column" style="width:42%;">
+<ul>
+<li>Another class repeated the experiment with 18 seedlings. Its description promises <strong>9 plants per group</strong>, lengths in mm.</li>
+<li>A new name, <code>transfer</code>, so <code>seedlings</code> is not overwritten.</li>
+<li><code>dim()</code>: <strong>18 rows, 4 columns</strong>, the same columns as before.</li>
+<li><code>tail()</code> shows the <strong>last</strong> rows, where <code>head()</code> cannot see problems.</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>This is day07-inspection.R in the exercises. Ask students what they expect before each line.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="does-it-match-its-description" class="slide level2">
+<h2>Does it match its description?</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<pre class="text"><code>&gt; length(unique(transfer$plant_id))
+[1] 18
+&gt; table(transfer$treatment)
+
+control treated 
+      9       9 
+&gt; sum(is.na(transfer$final_mm))
+[1] 0</code></pre>
+<ul>
+<li><code>unique()</code> keeps each ID once: <strong>18 different plants</strong>, none listed twice.</li>
+<li><code>table()</code> counts each group: <strong>9 and 9</strong>.</li>
+<li>Nothing missing. The table is what the study description promises.</li>
+</ul>
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="transfer-inventory.svg" style="width:100.0%"></p>
@@ -470,12 +473,8 @@ Data Analysis in Life Sciences
 </figure>
 </div>
 </div></div>
-<ul>
-<li>A new name, <code>transfer</code>, so the 24-plant <code>seedlings</code> table is not overwritten.</li>
-<li>18 rows, 18 distinct IDs, 9 per group, nothing missing: what the study description promises.</li>
-</ul>
 <aside class="notes">
-<p>tail shows the last rows; head alone could hide problems at the end. unique() counts distinct IDs; repeated IDs would prompt investigation here because the design has one row per plant. Random allocation is stated in the design, not visible in the rows.</p>
+<p>Repeated IDs would prompt investigation here because the design has one row per plant. Random allocation is stated in the design, not visible in the rows.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -495,8 +494,13 @@ Data Analysis in Life Sciences
 <ul>
 <li>Two studies can have the <strong>same column names</strong>. Both import without errors.</li>
 <li>Check the numbers against the description: 24 plants or 18? 12 or 9 per group?</li>
-<li>Same for a lab table: <code>solutions.csv</code> has <strong>6 rows, 5 columns</strong>. Mass (g) and molar mass (g/mol) are both numbers, but adding them is meaningless.</li>
+<li>Same for a lab table:</li>
 </ul>
+<pre class="text"><code>&gt; solutions &lt;- read_csv("data/solutions.csv",
++                       show_col_types = FALSE)
+&gt; dim(solutions)
+[1] 6 5</code></pre>
+<p>Mass (g) and molar mass (g/mol) are both numbers there, but adding them would be meaningless.</p>
 </div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>

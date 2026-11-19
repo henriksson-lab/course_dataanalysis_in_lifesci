@@ -28,74 +28,8 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #24292e;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #24292e; } /* Normal */
-    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
-    code span.an { color: #6a737d; } /* Annotation */
-    code span.at { color: #d73a49; } /* Attribute */
-    code span.bn { color: #005cc5; } /* BaseN */
-    code span.bu { color: #d73a49; } /* BuiltIn */
-    code span.cf { color: #d73a49; } /* ControlFlow */
-    code span.ch { color: #032f62; } /* Char */
-    code span.cn { color: #005cc5; } /* Constant */
-    code span.co { color: #6a737d; } /* Comment */
-    code span.cv { color: #6a737d; } /* CommentVar */
-    code span.do { color: #6a737d; } /* Documentation */
-    code span.dt { color: #d73a49; } /* DataType */
-    code span.dv { color: #005cc5; } /* DecVal */
-    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
-    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
-    code span.fl { color: #005cc5; } /* Float */
-    code span.fu { color: #6f42c1; } /* Function */
-    code span.im { color: #032f62; } /* Import */
-    code span.in { color: #6a737d; } /* Information */
-    code span.kw { color: #d73a49; } /* Keyword */
-    code span.op { color: #24292e; } /* Operator */
-    code span.ot { color: #6f42c1; } /* Other */
-    code span.pp { color: #d73a49; } /* Preprocessor */
-    code span.re { color: #6a737d; } /* RegionMarker */
-    code span.sc { color: #005cc5; } /* SpecialChar */
-    code span.ss { color: #032f62; } /* SpecialString */
-    code span.st { color: #032f62; } /* String */
-    code span.va { color: #e36209; } /* Variable */
-    code span.vs { color: #032f62; } /* VerbatimString */
-    code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-fa0e33e6dd574061e1681ec846127080.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -232,29 +166,22 @@ Data Analysis in Life Sciences
 </section>
 <section id="growth-is-a-new-column-not-an-edit" class="slide level2">
 <h2>Growth is a new column, not an edit</h2>
-<div class="columns">
-<div class="column" style="width:45%;">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings.csv"</span>,</span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>                      <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">mutate</span>(seedlings,</span>
-<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>First load the packages: <code>library(readr)</code>, <code>library(dplyr)</code>, <code>library(ggplot2)</code>. (<code>dplyr</code> prints a note about “masked” functions; that is normal.)</p>
+<pre class="text"><code>&gt; seedlings &lt;- read_csv("data/seedlings.csv", show_col_types = FALSE)
+&gt; seedlings &lt;- mutate(seedlings, growth_mm = final_mm - initial_mm)
+&gt; head(seedlings, 3)
+# A tibble: 3 × 5
+  plant_id treatment initial_mm final_mm growth_mm
+  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 P01      control         25.7     44.3      18.6
+2 P02      control         24.3     32.3       8  
+3 P03      control         18       32.9      14.9</code></pre>
 <ul>
-<li>P01: 44.3 − 25.7 = <strong>18.6 mm</strong>. P02: <strong>8.0 mm</strong>.</li>
-<li>The CSV on disk is unchanged; the table in R gains a fifth column.</li>
+<li><code>mutate()</code> adds a column calculated from the others: now <strong>5 columns</strong>. P01: 44.3 − 25.7 = <strong>18.6 mm</strong>; P02: <strong>8 mm</strong>.</li>
+<li>The CSV file on disk is unchanged; only the table in R has the new column.</li>
 </ul>
-</div><div class="column" style="width:55%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="derived-column.svg" style="width:100.0%"></p>
-<figcaption>A growth column is calculated from each plant’s final and initial lengths, keeping the original columns.</figcaption>
-</figure>
-</div>
-</div></div>
 <aside class="notes">
-<p>Save in day08.R. mutate() looks for final_mm and initial_mm inside the table and returns a new table, which we assign back to seedlings. Ask students to check P02 by hand. Growth is change; final_mm is size: a plant can start large and grow little. A negative growth would deserve checking, not deletion.</p>
+<p>Save in day08.R. mutate() looks for final_mm and initial_mm inside the table and returns a new table, which we store back under seedlings. R prints 8 rather than 8.0. Growth is change; final_mm is size: a plant can start large and grow little. A negative growth would deserve checking, not deletion.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -270,26 +197,30 @@ Data Analysis in Life Sciences
 <section id="which-plants-which-columns" class="slide level2">
 <h2>Which plants? Which columns?</h2>
 <div class="columns">
-<div class="column" style="width:45%;">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>control_plants <span class="ot">&lt;-</span> <span class="fu">filter</span>(seedlings,</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>  treatment <span class="sc">==</span> <span class="st">"control"</span>)</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>growth_table <span class="ot">&lt;-</span> <span class="fu">select</span>(seedlings,</span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>  plant_id, treatment, growth_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="column" style="width:50%;">
+<pre class="text"><code>&gt; control_plants &lt;- filter(seedlings,
++   treatment == "control")
+&gt; nrow(control_plants)
+[1] 12
+&gt; growth_table &lt;- select(seedlings,
++   plant_id, treatment, growth_mm)
+&gt; dim(growth_table)
+[1] 24  3</code></pre>
 <ul>
-<li><code>filter()</code> keeps <strong>rows</strong> (plants): <code>control_plants</code> has <strong>12 rows</strong>.</li>
-<li><code>select()</code> keeps <strong>columns</strong> (variables): <code>growth_table</code> is <strong>24 × 3</strong>.</li>
-<li><code>==</code> asks “is it equal?”; <code>&lt;-</code> stores. Do not mix them up.</li>
+<li><code>filter()</code> keeps <strong>rows</strong> (plants) that meet a condition: the <strong>12</strong> controls.</li>
+<li><code>select()</code> keeps the <strong>columns</strong> you name: all 24 plants, now 3 columns.</li>
 </ul>
-</div><div class="column" style="width:55%;">
+</div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="rows-and-columns.svg" style="width:100.0%"></p>
 <figcaption>Treated rows are kept by filtering, then only the ID and growth columns are kept by selecting.</figcaption>
 </figure>
 </div>
+<p><code>==</code> asks “is it equal?”; <code>&lt;-</code> stores. <code>"control"</code> is in quotes because it is a text label.</p>
 </div></div>
 <aside class="notes">
-<p>Predict the row and column counts before running each line. Quotes mark the text label “control”; it must match the spelling in the data exactly.</p>
+<p>Predict the row and column counts before running each line. The label must match the spelling in the data exactly. The figure shows the same two operations on three example rows.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -304,27 +235,26 @@ Data Analysis in Life Sciences
 </section>
 <section id="read-the-steps-from-left-to-right" class="slide level2">
 <h2>Read the steps from left to right</h2>
-<div class="columns">
-<div class="column" style="width:48%;">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>longer_control <span class="ot">&lt;-</span> seedlings <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="st">"control"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(growth_mm <span class="sc">&gt;</span> <span class="dv">15</span>)</span>
-<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(longer_control)   <span class="co"># 7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>&gt; longer_control &lt;- seedlings |&gt;
++   filter(treatment == "control") |&gt;
++   filter(growth_mm &gt; 15)
+&gt; longer_control
+# A tibble: 7 × 5
+  plant_id treatment initial_mm final_mm growth_mm
+  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 P01      control         25.7     44.3      18.6
+2 P04      control         22.2     40.2      18  
+3 P06      control         24.7     40.7      16  
+4 P07      control         21.2     38.3      17.1
+5 P09      control         25.9     41.2      15.3
+6 P10      control         23.2     41.9      18.7
+7 P12      control         22.9     40.4      17.5</code></pre>
 <ul>
-<li><code>|&gt;</code> (the <strong>pipe</strong>) passes the table on to the next step.</li>
-<li>Read it as: take seedlings, <em>then</em> keep controls, <em>then</em> keep growth above 15 mm.</li>
-<li>7 of the 12 control plants grew more than 15 mm.</li>
+<li><code>|&gt;</code> (the <strong>pipe</strong>) passes the table on to the next step. Read it as: take <code>seedlings</code>, <em>then</em> keep the controls, <em>then</em> keep growth above 15 mm.</li>
+<li>The answer: <strong>7</strong> of the 12 control plants grew more than 15 mm. The <code>+</code> at the line starts is R saying “the instruction continues”.</li>
 </ul>
-</div><div class="column" style="width:52%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="table-operations.svg" style="width:100.0%"></p>
-<figcaption>Filtering keeps whole rows; selecting keeps whole columns.</figcaption>
-</figure>
-</div>
-</div></div>
 <aside class="notes">
-<p>The pipe is a convenience for writing steps in order; it does not change what they do. When something goes wrong, run the chain one step at a time.</p>
+<p>The pipe is a convenience for writing steps in order; it does not change what they do. When something goes wrong, run the chain one step at a time. table-operations.svg was dropped from this slide; the printed table shows the filter result directly.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -340,27 +270,28 @@ Data Analysis in Life Sciences
 <section id="a-plot-maps-columns-to-positions" class="slide level2">
 <h2>A plot maps columns to positions</h2>
 <div class="columns">
-<div class="column" style="width:48%;">
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>size_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(seedlings,</span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> initial_mm, <span class="at">y =</span> final_mm,</span>
-<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>        <span class="at">colour =</span> treatment)) <span class="sc">+</span></span>
-<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Initial seedling length (mm)"</span>,</span>
-<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Final seedling length (mm)"</span>,</span>
-<span id="cb4-7"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">"Treatment"</span>) <span class="sc">+</span></span>
-<span id="cb4-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb4-9"><a aria-hidden="true" tabindex="-1"></a>size_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column" style="width:52%;">
+<div class="column" style="width:46%;">
+<pre class="text"><code>&gt; size_plot &lt;- ggplot(seedlings,
++     aes(x = initial_mm, y = final_mm,
++         colour = treatment)) +
++   geom_point(size = 2) +
++   labs(x = "Initial seedling length (mm)",
++        y = "Final seedling length (mm)",
++        colour = "Treatment") +
++   theme_minimal()
+&gt; size_plot</code></pre>
+<p>Typing <code>size_plot</code> draws the figure on the right in the Plots pane.</p>
+</div><div class="column" style="width:54%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="initial-final.svg" style="width:100.0%"></p>
-<figcaption>Final against initial length for the 24 seedlings, coloured by treatment.</figcaption>
+<p><img data-src="size-plot.png" style="width:100.0%"></p>
+<figcaption>Final against initial length for the 24 seedlings, coloured by treatment, as drawn by size_plot.</figcaption>
 </figure>
 </div>
 </div></div>
-<p><code>aes()</code> says which column goes where. Each point is one plant. <code>+</code> adds a layer; <code>labs()</code> gives axis names <strong>with units</strong>.</p>
+<p><code>aes()</code> says which column goes where: x, y and colour. Each point is one plant. <code>geom_point()</code> draws points, <code>labs()</code> names the axes <strong>with units</strong>, and <code>+</code> adds each part.</p>
 <aside class="notes">
-<p>Read the axes before the pattern. Colour shows a group label, not a measurement. This plot is about final size; it does not show growth directly, and it cannot show that starting longer causes ending longer.</p>
+<p>Read the axes before the pattern. Colour shows a group label, not a measurement. This plot is about final size; it does not show growth directly, and it cannot show that starting longer causes ending longer. Treated plants sit mostly higher, but the x-axis is initial length, not group.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -408,28 +339,29 @@ Data Analysis in Life Sciences
 <section id="show-every-plants-growth" class="slide level2">
 <h2>Show every plant’s growth</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>growth_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(seedlings,</span>
-<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> growth_mm)) <span class="sc">+</span></span>
-<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(</span>
-<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">seed =</span> <span class="dv">8</span>)) <span class="sc">+</span></span>
-<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Treatment"</span>,</span>
-<span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Change in seedling length (mm)"</span>) <span class="sc">+</span></span>
-<span id="cb5-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb5-8"><a aria-hidden="true" tabindex="-1"></a>growth_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="column" style="width:48%;">
+<pre class="text"><code>&gt; growth_plot &lt;- ggplot(seedlings,
++     aes(x = treatment, y = growth_mm)) +
++   geom_point(position = position_jitter(
++     width = 0.08, height = 0, seed = 8)) +
++   labs(x = "Treatment",
++        y = "Change in seedling length (mm)") +
++   theme_minimal()
+&gt; growth_plot</code></pre>
 <ul>
-<li><strong>Jitter</strong> spreads points sideways so they don’t hide each other. <code>height = 0</code>: no value moves up or down.</li>
+<li><strong>Jitter</strong> spreads points a little sideways so they don’t hide each other. <code>height = 0</code>: no value moves up or down.</li>
 </ul>
-</div><div class="column" style="width:50%;">
+</div><div class="column" style="width:52%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../../week2/seedling-growth.png" style="width:100.0%"></p>
-<figcaption>Growth of each seedling by treatment; the two groups overlap.</figcaption>
+<figcaption>Growth of each seedling by treatment, as drawn by growth_plot; the two groups overlap.</figcaption>
 </figure>
 </div>
+<p>Controls grew 8.0–18.7 mm, treated plants 12.2–30.8 mm: treated tend higher, but the groups overlap.</p>
 </div></div>
 <aside class="notes">
-<p>Ask: what is one dot? (one plant). What does higher mean? (more growth, mm). Do the groups overlap? (yes: control 8.0 to 18.7 mm, treated 12.2 to 30.8 mm). Treated values tend to be higher; whether that is more than chance is a question for week 4. seed = 8 makes the sideways spread the same every time.</p>
+<p>Ask: what is one dot? (one plant). What does higher mean? (more growth, mm). Whether the difference is more than chance is a question for week 4. seed = 8 makes the sideways spread the same every time.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -470,17 +402,33 @@ Data Analysis in Life Sciences
 </section>
 <section id="save-files-other-programs-can-open" class="slide level2">
 <h2>Save files other programs can open</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/seedling-growth.png"</span>, <span class="at">plot =</span> growth_plot,</span>
-<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">dpi =</span> <span class="dv">150</span>)</span>
-<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(growth_table, <span class="st">"output/seedling-growth.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="columns">
+<div class="column" style="width:55%;">
+<pre class="text"><code>&gt; ggsave("output/seedling-growth.png",
++        plot = growth_plot,
++        width = 6, height = 4, dpi = 150)
+&gt; write_csv(growth_table,
++           "output/seedling-growth.csv")
+&gt; list.files("output")
+[1] "seedling-growth.csv" "seedling-growth.png"
+&gt; read_csv("output/seedling-growth.csv",
++          show_col_types = FALSE)
+# A tibble: 24 × 3
+   plant_id treatment growth_mm
+   &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt;
+ 1 P01      control        18.6
+ 2 P02      control         8  
+...</code></pre>
+</div><div class="column" style="width:45%;">
 <ul>
-<li><code>growth_plot</code> is an object in memory. <code>ggsave()</code> writes a <strong>PNG image</strong> to disk.</li>
-<li><code>write_csv()</code> writes a <strong>table</strong> to disk. An image is not a table, and vice versa.</li>
-<li>Both overwrite a file with the same name without asking. Use clear names; never write into <code>data/</code>.</li>
-<li>Open both files from the file manager to check they exist.</li>
+<li><code>ggsave()</code> writes the plot as a <strong>PNG image</strong>; <code>write_csv()</code> writes the table as a <strong>CSV file</strong>. Both print nothing.</li>
+<li><code>list.files("output")</code> shows the two new files.</li>
+<li>Reading the CSV back shows all <strong>24 rows</strong>, as saved.</li>
+<li>An existing file with the same name is replaced without asking. Never write into <code>data/</code>.</li>
 </ul>
+</div></div>
 <aside class="notes">
-<p>The output/ folder is part of the supplied project. If saving fails, check getwd() and dir.exists(“output”).</p>
+<p>The output/ folder is part of the supplied project. If saving fails, check getwd() and dir.exists(“output”). Open the PNG in the file manager too. If output/ already contains other files, list.files shows them as well.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -496,23 +444,31 @@ Data Analysis in Life Sciences
 <section id="worked-example-the-same-steps-on-new-data" class="slide level2">
 <h2>Worked example: the same steps on new data</h2>
 <div class="columns">
-<div class="column" style="width:55%;">
-<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings-transfer.csv"</span>,</span>
-<span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
-<span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(transfer)                       <span class="co"># 18</span></span>
-<span id="cb7-5"><a aria-hidden="true" tabindex="-1"></a>treated <span class="ot">&lt;-</span> <span class="fu">filter</span>(transfer, treatment <span class="sc">==</span> <span class="st">"treated"</span>)</span>
-<span id="cb7-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(treated)                        <span class="co"># 9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column" style="width:45%;">
-<ul>
-<li>T01: 40.3 − 25.3 = <strong>15.0 mm</strong>. Check one plant by hand.</li>
-<li>Adding a column keeps all 18 plants.</li>
-<li>Change the names, labels and file names; the steps stay the same.</li>
-</ul>
+<div class="column" style="width:52%;">
+<pre class="text"><code>&gt; transfer &lt;- read_csv(
++     "data/seedlings-transfer.csv",
++     show_col_types = FALSE) |&gt;
++   mutate(growth_mm = final_mm - initial_mm)
+&gt; nrow(transfer)
+[1] 18
+&gt; transfer$growth_mm[1]
+[1] 15
+&gt; treated &lt;- filter(transfer,
++   treatment == "treated")
+&gt; nrow(treated)
+[1] 9</code></pre>
+<p>The first plant, T01: 40.3 − 25.3 = <strong>15 mm</strong>. All 18 plants kept; 9 treated.</p>
+</div><div class="column" style="width:48%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="transfer-growth.png" style="width:100.0%"></p>
+<figcaption>Growth of the 18 transfer-study seedlings by treatment, drawn with the same plotting code.</figcaption>
+</figure>
+</div>
+<p>Same plotting code with <code>transfer</code>: controls 10.8–17.4 mm, treated 15.0–21.4 mm. Again they overlap.</p>
 </div></div>
-<p>Then plot growth by group and save as <code>output/transfer-...</code> so nothing from the main study is overwritten.</p>
 <aside class="notes">
-<p>This is day08-transfer.R in the exercises. Compare with the main study: what changed (object names, row counts, file names), what stayed the same (operations).</p>
+<p>This is day08-transfer.R in the exercises. Compare with the main study: what changed (object names, row counts, file names output/transfer-…), what stayed the same (operations).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -527,29 +483,23 @@ Data Analysis in Life Sciences
 </section>
 <section id="same-steps-for-a-lab-calculation" class="slide level2">
 <h2>Same steps for a lab calculation</h2>
-<div class="columns">
-<div class="column" style="width:48%;">
-<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a>dilutions <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/dilutions.csv"</span>,</span>
-<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>                      <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stock_volume_ml =</span></span>
-<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a>           target_mmol_l <span class="sc">*</span> final_volume_ml <span class="sc">/</span></span>
-<span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a>           stock_mmol_l,</span>
-<span id="cb8-6"><a aria-hidden="true" tabindex="-1"></a>         <span class="at">possible_by_dilution =</span></span>
-<span id="cb8-7"><a aria-hidden="true" tabindex="-1"></a>           target_mmol_l <span class="sc">&lt;=</span> stock_mmol_l)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>&gt; dilutions &lt;- read_csv("data/dilutions.csv", show_col_types = FALSE) |&gt;
++   mutate(stock_volume_ml = target_mmol_l * final_volume_ml / stock_mmol_l,
++          possible_by_dilution = target_mmol_l &lt;= stock_mmol_l)
+&gt; select(dilutions, solution_id, stock_volume_ml, possible_by_dilution)
+# A tibble: 4 × 3
+  solution_id stock_volume_ml possible_by_dilution
+  &lt;chr&gt;                 &lt;dbl&gt; &lt;lgl&gt;               
+1 D01                     2.5 TRUE                
+2 D02                     5   TRUE                
+3 D03                    10   TRUE                
+4 D04                   100   FALSE               </code></pre>
 <ul>
-<li>D01–D03 need <strong>2.5, 5 and 10 mL</strong> stock.</li>
-<li>D04 needs <strong>100 mL</strong> for a 50 mL final volume: impossible. Keep the row and <strong>flag</strong> it.</li>
+<li>A <strong>stock</strong> is a solution of known concentration; <strong>diluting</strong> adds liquid up to a final volume. Stock volume = target × final volume / stock.</li>
+<li>D04 needs <strong>100 mL</strong> of stock for 50 mL of solution: impossible, because its target (200 mmol/L) is stronger than its stock (100 mmol/L). <code>&lt;=</code> flags it <code>FALSE</code>; keep the row.</li>
 </ul>
-</div><div class="column" style="width:52%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="dilution-feasibility.svg" style="width:100.0%"></p>
-<figcaption>Calculated stock volume against final volume for four dilution requests; D04 needs more stock than its final volume.</figcaption>
-</figure>
-</div>
-</div></div>
 <aside class="notes">
-<p>A stock is a solution of known concentration; dilution adds solvent up to a final total volume. D04’s target, 200 mmol/L, is above its stock, 100 mmol/L. A formula can produce a number for a request that cannot be carried out. The organic-yield alternative uses the same mutate step: Y01 yield = 100 × 0.62 / 1.00 = 62%.</p>
+<p>&lt;= means “less than or equal to”; the new column holds TRUE/FALSE (<lgl>). A formula can produce a number for a request that cannot be carried out. The organic-yield alternative uses the same mutate step: Y01 yield = 100 × 0.62 / 1.00 = 62%. dilution-feasibility.svg is no longer used on this slide; the printed table carries the result.</lgl></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

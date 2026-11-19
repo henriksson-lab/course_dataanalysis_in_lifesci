@@ -107,3 +107,57 @@ d.text(680, 455, "change the data → render again", size=21, fill=TEAL)
 d.save(out("09-rmarkdown", "copy-paste-stale.svg"))
 
 print("wrote row-limit.svg, click-vs-script.svg, copy-paste-stale.svg")
+
+
+# --- Day 6: a named value in memory, the instructions in a saved script ------
+d = Drawing(1100, 480, "The script on disk holds the instructions; running them puts named values in R's memory")
+d.path("M20,70 h430 l30,30 v250 h-460 Z", fill="#eef2ff", stroke=BLUE, width=3)
+d.text(250, 50, "day06.R (saved on disk)", size=24, anchor="middle", weight="bold")
+for i, line in enumerate(["initial_mm <- 20", "final_mm <- 37", "growth_mm <- final_mm - initial_mm"]):
+    d.parts.append(f'<text x="35" y="{140 + i * 50}" font-family="DejaVu Sans Mono, monospace" '
+                   f'font-size="19" fill="{INK}">{line.replace("<", "&lt;")}</text>')
+d.arrow(500, 225, 610, 225)
+d.text(555, 205, "Run", size=24, anchor="middle", fill=TEAL, weight="bold")
+d.rect(620, 70, 440, 280, fill=PALE, stroke=TEAL)
+d.text(840, 50, "R memory (Environment pane)", size=24, anchor="middle", weight="bold")
+for i, (name, val) in enumerate([("initial_mm", "20"), ("final_mm", "37"), ("growth_mm", "17")]):
+    d.text(660, 140 + i * 70, name, size=26)
+    d.text(1000, 140 + i * 70, val, size=26, anchor="end", weight="bold")
+d.text(250, 420, "stays when R restarts", size=23, anchor="middle", fill=TEAL)
+d.text(840, 420, "gone when R restarts", size=23, anchor="middle", fill=RED)
+d.save(out("06-r-basics", "script-and-memory.svg"))
+
+# --- R plots made by exactly the code shown on the slides --------------------
+R_PLOTS = r'''
+suppressPackageStartupMessages({library(readr); library(dplyr); library(ggplot2)})
+seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE)
+seedlings <- mutate(seedlings, growth_mm = final_mm - initial_mm)
+# Day 8: size_plot as written on the slide
+size_plot <- ggplot(seedlings,
+    aes(x = initial_mm, y = final_mm,
+        colour = treatment)) +
+  geom_point(size = 2) +
+  labs(x = "Initial seedling length (mm)",
+       y = "Final seedling length (mm)",
+       colour = "Treatment") +
+  theme_minimal()
+ggsave("lectures/08-transform-plot/size-plot.png", size_plot, width = 5, height = 3.5, dpi = 180)
+# Day 8 worked example: transfer growth by group
+transfer <- read_csv("data/seedlings-transfer.csv", show_col_types = FALSE) |>
+  mutate(growth_mm = final_mm - initial_mm)
+transfer_plot <- ggplot(transfer, aes(x = treatment, y = growth_mm)) +
+  geom_point(position = position_jitter(width = 0.08, height = 0, seed = 8)) +
+  labs(x = "Treatment", y = "Change in seedling length (mm)") +
+  theme_minimal()
+ggsave("lectures/08-transform-plot/transfer-growth.png", transfer_plot, width = 5, height = 3.5, dpi = 180)
+# Day 9: the figure chunk as written on the slide (no theme)
+growth_figure <- ggplot(seedlings, aes(x = treatment, y = growth_mm)) +
+  geom_point(position = position_jitter(width = 0.08, height = 0, seed = 8)) +
+  labs(x = "Treatment", y = "Change in seedling length (mm)")
+ggsave("lectures/09-rmarkdown/growth-figure.png", growth_figure, width = 5, height = 3.5, dpi = 180)
+'''
+import subprocess, tempfile  # noqa: E402
+with tempfile.NamedTemporaryFile("w", suffix=".R", delete=False) as fh:
+    fh.write(R_PLOTS)
+subprocess.run(["Rscript", fh.name], cwd=ROOT, check=True)
+print("wrote size-plot.png, transfer-growth.png, growth-figure.png")

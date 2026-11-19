@@ -102,78 +102,143 @@ The plan takes a few lines and prevents most errors later. For the organic route
 Ask students to say the unit out loud before they calculate anything. This is also the first question to ask a lab teacher about any new dataset.
 :::
 
-## Import, check, and keep the missing flask
+## Import and check the flasks
 
 :::: {.columns}
-::: {.column width="50%"}
-```r
-library(readr)
-library(dplyr)
-library(ggplot2)
-duckweed <- read_csv("data/duckweed.csv",
-                     show_col_types = FALSE)
-glimpse(duckweed)
-available <- duckweed |>
-  filter(!is.na(biomass_mg))
+::: {.column width="58%"}
+```text
+> duckweed <- read_csv("data/duckweed.csv", show_col_types = FALSE)
+> glimpse(duckweed)
+Rows: 20
+Columns: 3
+$ flask_id   <chr> "F01", "F02", "F03", "F04", "F05", "F06", …
+$ treatment  <chr> "control", "control", "control", "control",…
+$ biomass_mg <dbl> 36.4, 38.0, 34.9, 36.1, 25.8, 35.6, 29.5, 1…
+> count(duckweed, treatment)
+# A tibble: 2 × 2
+  treatment     n
+  <chr>     <int>
+1 control      10
+2 nutrient     10
+> duckweed$flask_id[is.na(duckweed$biomass_mg)]
+[1] "F17"
 ```
-
-- Expect **20 rows**, 20 unique `flask_id`s, labels `control` and `nutrient`.
-- F17 was spilled: **10 control + 9 nutrient** measurements available.
 :::
-::: {.column width="50%"}
+::: {.column width="42%"}
 ![Twenty flasks were started, ten per group; F17 in the nutrient group was spilled, leaving 19 measurements.](missing-flask.svg){width="100%"}
+
+- `glimpse()`: 20 flasks, 3 columns, biomass is a number (`dbl`).
+- `count()`: 10 flasks per group, as designed.
+- `is.na()` finds the flask without a biomass: **F17**, spilled before weighing. Missing is not zero.
 :::
 ::::
 
 ::: notes
-A zero for F17 would invent a very low biomass and drag the nutrient mean down. Keep the raw table unchanged; the `available` object makes the exclusion visible. Record checks as findings ("20 rows, 1 missing: F17, spilled"), not as "data were checked".
+(After library(readr), library(dplyr), library(ggplot2).) A zero for F17 would invent a very low biomass and drag the nutrient mean down. Record checks as findings ("20 rows, 1 missing: F17, spilled"), not as "data were checked".
 :::
 
-## Plot the flasks, then compare
+## Plot every flask that was weighed
 
 :::: {.columns}
-::: {.column width="45%"}
-```r
-nutrient <- available |>
-  filter(treatment == "nutrient")
-control <- available |>
-  filter(treatment == "control")
-comparison <- t.test(nutrient$biomass_mg,
-                     control$biomass_mg)
+::: {.column width="50%"}
+```text
+> available <- duckweed |>
++   filter(!is.na(biomass_mg))
+> count(available, treatment)
+# A tibble: 2 × 2
+  treatment     n
+  <chr>     <int>
+1 control      10
+2 nutrient      9
 ```
 
-- Means: nutrient **39.63 mg**, control **32.28 mg**.
-- Nutrient − control: **7.35 mg**, 95% CI **2.27 to 12.44 mg**, Welch p ≈ **0.007**.
-- The groups **overlap**: F11 (nutrient) is below several controls.
+```r
+ggplot(available, aes(x = treatment, y = biomass_mg)) +
+  geom_point(position = position_jitter(
+    width = 0.08, height = 0, seed = 23)) +
+  labs(x = "Treatment",
+       y = "Dry biomass after seven days (mg)") +
+  theme_minimal()
+```
+
+- `available` drops F17 for the plot; `duckweed` keeps its row.
+- The groups **overlap**: nutrient F11 (31.7 mg) is below most controls.
 :::
-::: {.column width="55%"}
-![Individual duckweed biomass values by group with group means as diamonds; nutrient flasks are higher on average but the groups overlap.](duckweed.svg){width="100%"}
+::: {.column width="50%"}
+![The plot made by this code: individual duckweed biomass values for 10 control and 9 nutrient flasks; nutrient values are higher on average but overlap with the controls.](duckweed-ggplot.png){width="100%"}
 :::
 ::::
 
 ::: notes
-The order of the two vectors sets the direction: nutrient minus control. The interval concerns the mean difference, not 95% of flasks. The low control F08 (19.8 mg) has no recorded error, so it stays.
+Jitter moves points sideways only (height = 0), so the biomass values stay exact. The low control F08 (19.8 mg) has no recorded error, so it stays.
+:::
+
+## Compare in a stated direction
+
+:::: {.columns}
+::: {.column width="58%"}
+```text
+> nutrient <- available |> filter(treatment == "nutrient")
+> control <- available |> filter(treatment == "control")
+> comparison <- t.test(nutrient$biomass_mg,
++                      control$biomass_mg)
+> comparison
+
+        Welch Two Sample t-test
+
+data:  nutrient$biomass_mg and control$biomass_mg
+t = 3.0522, df = 16.936, p-value = 0.007229
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+  2.268932 12.437735
+sample estimates:
+mean of x mean of y
+ 39.63333  32.28000
+```
+:::
+::: {.column width="42%"}
+- Nutrient first, so the result is **nutrient − control**.
+- Means **39.63** and **32.28 mg**: a difference of **7.35 mg**.
+- 95% CI **2.27 to 12.44 mg**: the whole interval is above zero.
+- p = **0.007**: a difference this large would be rare if nutrients changed nothing.
+- n = 9 and 10 flasks: report them, R does not print them.
+:::
+::::
+
+::: notes
+The interval concerns the mean difference, not 95% of flasks. This is the Welch test from Day 17 on new data; nothing new to learn, only to apply.
 :::
 
 ## Organic route: compare yields, not grams
 
 :::: {.columns}
-::: {.column width="45%"}
-- Runs started at different scales, so compare **percentages**:
-
-  `yield_percent = 100 * isolated_mass_g / theoretical_mass_g`
-
-- Check Y01 by hand: 100 × 0.62 / 1.00 = **62 %**.
-- Means: standard **68.67 %**, modified **77.00 %** (SD 4.32 and 3.74 percentage points).
-- Difference: **8.33 percentage points**, modified − standard. No test needed.
-:::
 ::: {.column width="55%"}
+```text
+> organic <- read_csv("data/organic-recovery.csv",
++                     show_col_types = FALSE) |>
++   mutate(yield_percent = 100 * isolated_mass_g /
++                          theoretical_mass_g)
+> organic |>
++   group_by(protocol) |>
++   summarise(n = n(), mean_yield = mean(yield_percent),
++             sd_yield = sd(yield_percent))
+# A tibble: 2 × 4
+  protocol     n mean_yield sd_yield
+  <chr>    <int>      <dbl>    <dbl>
+1 modified     6       77       3.74
+2 standard     6       68.7     4.32
+```
+
+- Runs started at different scales, so compare **percent yield**. Y01: 100 × 0.62 / 1.00 = 62 %.
+- Modified − standard: **8.33 percentage points**. No test needed.
+:::
+::: {.column width="45%"}
 ![Individual product yields for six standard and six modified runs, with group means as diamonds.](organic-yields.svg){width="100%"}
 :::
 ::::
 
 ::: notes
-8.33 percentage points is not an 8.33% relative increase. Higher yield does not show higher purity: purity was assumed, not measured.
+R prints 68.7 for 68.67. 8.33 percentage points is not an 8.33% relative increase. Higher yield does not show higher purity: purity was assumed, not measured.
 :::
 
 ## Write a result paragraph someone can check

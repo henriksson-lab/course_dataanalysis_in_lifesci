@@ -76,15 +76,13 @@ Read the axes before the trend. Ask: is there any sign of curvature, or of one p
 
 ## Fit the line in R
 
-```r
-library(readr)
-library(dplyr)
-library(ggplot2)
-leaves <- read_csv("data/leaf-mass.csv", show_col_types = FALSE)
-leaf_fit <- lm(dry_mass_mg ~ leaf_area_cm2, data = leaves)
-coef(leaf_fit)
-#>   (Intercept) leaf_area_cm2
-#>      9.476606      4.110117
+```text
+> library(readr)
+> leaves <- read_csv("data/leaf-mass.csv", show_col_types = FALSE)
+> leaf_fit <- lm(dry_mass_mg ~ leaf_area_cm2, data = leaves)
+> coef(leaf_fit)
+  (Intercept) leaf_area_cm2 
+     9.476606      4.110117 
 ```
 
 - Same `lm()` as Day 19: response (mass) on the left of `~`, area on the right.

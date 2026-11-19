@@ -90,7 +90,7 @@ for limit, text, colour, y in [(65_536, "old .xls limit: 65,536 rows", RED, 5.3)
     ax.axvline(limit, color=colour, linestyle="--", linewidth=2)
     ax.text(limit * 1.2, y, text, color=colour, fontsize=14, va="center",
             bbox=dict(facecolor="white", edgecolor="none", pad=1))
-ax.set_xlabel("How many items, one per spreadsheet row (log scale: each step is ×10)")
+ax.set_xlabel("Number of rows needed (log scale)")
 fig.tight_layout()
 fig.savefig(OUT / "data-scale.svg", format="svg", bbox_inches="tight")
 plt.close(fig)

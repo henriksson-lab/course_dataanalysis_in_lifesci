@@ -73,3 +73,53 @@ for x, values, colour in [(0, available, TEAL), (1, invented, RED)]:
 ax.set(xticks=[0, 1], xticklabels=labels, ylabel='Mean growth, all plants (mm)',
        xlim=(-0.5, 1.5), ylim=(15, 20))
 save(fig, '11-data-quality', 'zero-invented.svg')
+
+
+# ggplot figures that match the code shown on the slides exactly (rendered by R).
+import subprocess  # noqa: E402
+
+R_FIGURES = r'''
+suppressPackageStartupMessages({library(readr); library(dplyr); library(ggplot2)})
+seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE) |>
+  mutate(growth_mm = final_mm - initial_mm)
+group_summary <- seedlings |>
+  group_by(treatment) |>
+  summarise(n_plants = n(), n_observed = sum(!is.na(growth_mm)),
+            mean_mm = mean(growth_mm, na.rm = TRUE),
+            median_mm = median(growth_mm, na.rm = TRUE),
+            sd_mm = sd(growth_mm, na.rm = TRUE), .groups = "drop")
+group_plot <- ggplot(seedlings, aes(x = treatment, y = growth_mm)) +
+  geom_point(position = position_jitter(width = 0.08, height = 0, seed = 13),
+             alpha = 0.75) +
+  geom_point(data = group_summary, aes(x = treatment, y = mean_mm),
+             inherit.aes = FALSE, shape = 18, size = 4, colour = "darkred") +
+  labs(x = "Treatment", y = "Change in seedling length (mm)") +
+  theme_minimal(base_size = 14)
+ggsave("lectures/13-group-summaries/group-plot.png", group_plot,
+       width = 6, height = 4, dpi = 150, bg = "white")
+hist_plot <- ggplot(seedlings, aes(x = growth_mm)) +
+  geom_histogram(binwidth = 4, boundary = 0, colour = "white") +
+  facet_wrap(~ treatment, ncol = 1) +
+  labs(x = "Change in seedling length (mm)", y = "Number of plants") +
+  theme_minimal(base_size = 14)
+ggsave("lectures/13-group-summaries/group-histogram.png", hist_plot,
+       width = 6, height = 4.5, dpi = 150, bg = "white")
+transfer <- read_csv("data/seedlings-transfer.csv", show_col_types = FALSE) |>
+  mutate(growth_mm = final_mm - initial_mm)
+set.seed(14)
+means_3 <- replicate(400, mean(sample(transfer$growth_mm, size = 3, replace = TRUE)))
+means_12 <- replicate(400, mean(sample(transfer$growth_mm, size = 12, replace = TRUE)))
+transfer_sampling <- data.frame(mean_mm = c(means_3, means_12),
+  sample_size = factor(rep(c("3 plants", "12 plants"), each = 400),
+                       levels = c("3 plants", "12 plants")))
+sampling_plot <- ggplot(transfer_sampling, aes(x = mean_mm)) +
+  geom_histogram(binwidth = 0.5, colour = "white") +
+  facet_wrap(~ sample_size, ncol = 1) +
+  labs(x = "Mean growth in one simulated sample (mm)",
+       y = "Number of simulated samples") +
+  theme_minimal(base_size = 14)
+ggsave("lectures/14-replicates-uncertainty/transfer-sampling-means.png",
+       sampling_plot, width = 6, height = 4.5, dpi = 150, bg = "white")
+'''
+subprocess.run(['Rscript', '-e', R_FIGURES], cwd=ROOT, check=True)
+print('wrote ggplot figures for days 13 and 14')

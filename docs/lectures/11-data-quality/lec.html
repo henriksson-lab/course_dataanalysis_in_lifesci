@@ -28,74 +28,8 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #24292e;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #24292e; } /* Normal */
-    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
-    code span.an { color: #6a737d; } /* Annotation */
-    code span.at { color: #d73a49; } /* Attribute */
-    code span.bn { color: #005cc5; } /* BaseN */
-    code span.bu { color: #d73a49; } /* BuiltIn */
-    code span.cf { color: #d73a49; } /* ControlFlow */
-    code span.ch { color: #032f62; } /* Char */
-    code span.cn { color: #005cc5; } /* Constant */
-    code span.co { color: #6a737d; } /* Comment */
-    code span.cv { color: #6a737d; } /* CommentVar */
-    code span.do { color: #6a737d; } /* Documentation */
-    code span.dt { color: #d73a49; } /* DataType */
-    code span.dv { color: #005cc5; } /* DecVal */
-    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
-    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
-    code span.fl { color: #005cc5; } /* Float */
-    code span.fu { color: #6f42c1; } /* Function */
-    code span.im { color: #032f62; } /* Import */
-    code span.in { color: #6a737d; } /* Information */
-    code span.kw { color: #d73a49; } /* Keyword */
-    code span.op { color: #24292e; } /* Operator */
-    code span.ot { color: #6f42c1; } /* Other */
-    code span.pp { color: #d73a49; } /* Preprocessor */
-    code span.re { color: #6a737d; } /* RegionMarker */
-    code span.sc { color: #005cc5; } /* SpecialChar */
-    code span.ss { color: #032f62; } /* SpecialString */
-    code span.st { color: #032f62; } /* String */
-    code span.va { color: #e36209; } /* Variable */
-    code span.vs { color: #032f62; } /* VerbatimString */
-    code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-fa0e33e6dd574061e1681ec846127080.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -262,41 +196,6 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="what-is-wrong-with-this-export" class="slide level2">
-<h2>What is wrong with this export?</h2>
-<div class="columns">
-<div class="column" style="width:45%;">
-<p>The study has <strong>24 plants</strong>; <code>data/seedlings-messy.csv</code> has <strong>25 rows</strong>.</p>
-<ul>
-<li><strong>P01</strong> appears twice: one plant, two identical rows.</li>
-<li>Treatment is written <code>control</code>, <code>Control</code> and <code>treated</code> (with a trailing space).</li>
-<li><strong>P18</strong>’s initial length is the text <code>18.7 mm</code>.</li>
-<li><strong>P21</strong>’s final length is 4.38 (centimetres).</li>
-<li><strong>P06</strong> has no final length.</li>
-</ul>
-<p><code>data/field-notes.txt</code> records what actually happened for each case.</p>
-</div><div class="column" style="width:55%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="duplicate-record.svg" style="width:100.0%"></p>
-<figcaption>One plant, P01, produces two identical file records that point to the same measured plant.</figcaption>
-</figure>
-</div>
-</div></div>
-<aside class="notes">
-<p>Open the CSV in a text editor first so students see the raw characters. A repeated ID is a question, not automatically an error: in a design with one row per time point, repeated IDs are expected. Here the protocol says one row per plant, and the field notes confirm that the second P01 row is an import duplicate.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
 <section id="keep-the-original-repair-in-a-script" class="slide level2">
 <h2>Keep the original; repair in a script</h2>
 <div class="columns">
@@ -331,20 +230,65 @@ Data Analysis in Life Sciences
 </section>
 <section id="inspect-the-entries-as-text-first" class="slide level2">
 <h2>Inspect the entries as text first</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings-messy.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">.default =</span> <span class="fu">col_character</span>()), <span class="at">trim_ws =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(raw)                                   <span class="co"># 25 rows, 4 columns</span></span>
-<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(raw<span class="sc">$</span>treatment)                      <span class="co"># "control" "Control" "treated" "treated "</span></span>
-<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>raw <span class="sc">|&gt;</span> <span class="fu">count</span>(plant_id) <span class="sc">|&gt;</span> <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)    <span class="co"># P01 appears twice</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>&gt; raw &lt;- read_csv("data/seedlings-messy.csv", show_col_types = FALSE,
++                 col_types = cols(.default = col_character()),
++                 trim_ws = FALSE)
+&gt; dim(raw)
+[1] 25  4
+&gt; unique(raw$treatment)
+[1] "control"  "Control"  "treated"  "treated "
+&gt; raw |&gt; count(plant_id) |&gt; filter(n &gt; 1)
+# A tibble: 1 × 2
+  plant_id     n
+  &lt;chr&gt;    &lt;int&gt;
+1 P01          2</code></pre>
 <ul>
-<li><code>col_character()</code> reads every column as text, so <code>18.7 mm</code> and <code>4.38</code> stay visible instead of being guessed or turned into missing values.</li>
-<li><code>trim_ws = FALSE</code> keeps the trailing space in <code>"treated "</code>; the default would hide it.</li>
-<li><code>count()</code> finds repeated IDs. Then look at <strong>both P01 rows in full</strong> before deciding anything.</li>
+<li><code>dim()</code>: <strong>25 rows</strong>, 4 columns, but the study has 24 plants.</li>
+<li><code>unique()</code> lists each different value once: <strong>four spellings</strong> of two treatments. Reading every column as text (<code>col_character()</code>) and keeping spaces (<code>trim_ws = FALSE</code>) makes <code>"treated "</code> visible.</li>
+<li><code>count()</code> counts the rows for each plant ID; <code>filter(n &gt; 1)</code> keeps IDs that occur more than once: <strong>P01</strong>.</li>
 </ul>
 <aside class="notes">
-<p>Demonstrate the printed output and point at the quoted “treated” value. We are not asking beginners to memorise importer options; explain why these options help inspect this particular file. If two rows shared an ID but disagreed in a measurement, they would need investigation, not arbitrary deletion.</p>
+<p>Run this live after loading readr and dplyr (library(readr), library(dplyr)), as at the top of day11-cleaning.R. Point at the quoted “treated” with its space. We are not asking beginners to memorise importer options; explain why these options help inspect this particular file.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="look-at-the-rows-that-need-a-decision" class="slide level2">
+<h2>Look at the rows that need a decision</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<pre class="text"><code>&gt; filter(raw, plant_id == "P01")
+# A tibble: 2 × 4
+  plant_id treatment initial_mm final_mm
+  &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;
+1 P01      control   25.7       44.3
+2 P01      control   25.7       44.3
+&gt; filter(raw, plant_id %in% c("P06", "P18", "P21"))
+# A tibble: 3 × 4
+  plant_id treatment initial_mm final_mm
+  &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;
+1 P06      control   24.7       &lt;NA&gt;
+2 P18      treated   18.7 mm    39.7
+3 P21      treated   23.6       4.38</code></pre>
+</div><div class="column" style="width:45%;">
+<ul>
+<li><strong>P01:</strong> two identical rows. The field notes say the import repeated it: one plant.</li>
+<li><strong>P06:</strong> no final length (<code>&lt;NA&gt;</code> = not available). The reading was never recorded.</li>
+<li><strong>P18:</strong> the initial length is text with a unit, <code>18.7 mm</code>.</li>
+<li><strong>P21:</strong> final 4.38 is shorter than the start, 23.6. The notebook says <strong>43.8 mm</strong>.</li>
+<li><code>%in%</code> keeps the rows whose ID is in the list.</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>Each row is checked against data/field-notes.txt before anything is changed. In a design with one row per time point, a repeated ID would be normal; here the protocol says one row per plant. If the two P01 rows had disagreed, they would need investigation rather than deletion.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -423,19 +367,25 @@ Data Analysis in Life Sciences
 </section>
 <section id="the-repair-step-by-step" class="slide level2">
 <h2>The repair, step by step</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>cleaned <span class="ot">&lt;-</span> raw <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">treatment =</span> <span class="fu">tolower</span>(<span class="fu">trimws</span>(treatment)),                       <span class="co"># P03, P15 labels</span></span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>         <span class="at">initial_mm =</span> <span class="fu">if_else</span>(plant_id <span class="sc">==</span> <span class="st">"P18"</span>, <span class="st">"18.7"</span>, initial_mm),  <span class="co"># unit text removed</span></span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>         <span class="at">final_mm =</span> <span class="fu">if_else</span>(plant_id <span class="sc">==</span> <span class="st">"P21"</span>, <span class="st">"43.8"</span>, final_mm)) <span class="sc">|&gt;</span>   <span class="co"># notebook value</span></span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">|&gt;</span>                                                         <span class="co"># identical P01 row</span></span>
-<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">initial_mm =</span> <span class="fu">parse_double</span>(initial_mm),</span>
-<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a>         <span class="at">final_mm =</span> <span class="fu">parse_double</span>(final_mm),</span>
-<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a>         <span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>&gt; cleaned &lt;- raw |&gt;
++   mutate(treatment = tolower(trimws(treatment)),
++          initial_mm = if_else(plant_id == "P18", "18.7", initial_mm),
++          final_mm = if_else(plant_id == "P21", "43.8", final_mm)) |&gt;
++   distinct() |&gt;
++   mutate(initial_mm = parse_double(initial_mm),
++          final_mm = parse_double(final_mm),
++          growth_mm = final_mm - initial_mm)
+&gt; filter(cleaned, plant_id %in% c("P06", "P18", "P21"))
+# A tibble: 3 × 5
+  plant_id treatment initial_mm final_mm growth_mm
+  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 P06      control         24.7     NA        NA
+2 P18      treated         18.7     39.7      21
+3 P21      treated         23.6     43.8      20.2</code></pre>
 <ul>
-<li><code>trimws()</code> removes edge spaces; <code>tolower()</code> makes <code>Control</code> into <code>control</code>.</li>
-<li><code>if_else()</code> changes <strong>one identified record</strong> only, never “every small value”.</li>
-<li><code>distinct()</code> removes rows that are identical in every column; we use it only because the P01 rows are identical and the notes confirm the duplicate.</li>
-<li>P06 stays missing: <code>parse_double()</code> keeps the blank as <code>NA</code>.</li>
+<li><code>trimws()</code> removes edge spaces and <code>tolower()</code> turns <code>Control</code> into <code>control</code>. <code>if_else()</code> changes <strong>only the named plant</strong>.</li>
+<li><code>distinct()</code> drops the identical second P01 row. <code>parse_double()</code> turns the text into numbers (<code>&lt;dbl&gt;</code>); the blank becomes <code>NA</code>.</li>
+<li>P21 now grew <strong>20.2 mm</strong>; P06’s growth stays unknown.</li>
 </ul>
 <aside class="notes">
 <p>Each line maps to one sentence in the field notes; ask students to say which. distinct(plant_id, .keep_all = TRUE) would silently keep one of two disagreeing records and is not used here. The raw object and the CSV on disk are unchanged.</p>
@@ -455,14 +405,18 @@ Data Analysis in Life Sciences
 <h2>Count records and usable measurements separately</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(cleaned)                 <span class="co"># 24 plants</span></span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(cleaned<span class="sc">$</span>growth_mm)) <span class="co"># 1 unknown</span></span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(cleaned<span class="sc">$</span>growth_mm)       <span class="co"># NA</span></span>
-<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(cleaned<span class="sc">$</span>growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>                              <span class="co"># 18.49 (23 plants)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>&gt; nrow(cleaned)
+[1] 24
+&gt; sum(is.na(cleaned$growth_mm))
+[1] 1
+&gt; mean(cleaned$growth_mm)
+[1] NA
+&gt; mean(cleaned$growth_mm, na.rm = TRUE)
+[1] 18.48696</code></pre>
 <ul>
-<li><code>NA</code> from <code>mean()</code> is R telling you a value is unknown. Good.</li>
-<li><code>na.rm = TRUE</code> gives the mean of the <strong>23 available</strong> growths. Report it as such: “n = 23 of 24 plants”.</li>
+<li><code>is.na()</code> marks unknown values; <code>sum()</code> counts them: <strong>1</strong>.</li>
+<li><code>mean()</code> gives <code>NA</code>: one value is unknown, so R will not guess.</li>
+<li><code>na.rm = TRUE</code> (“remove NA”) averages the <strong>23 available</strong> growths. Report it as “n = 23 of 24 plants”.</li>
 </ul>
 </div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
@@ -473,7 +427,7 @@ Data Analysis in Life Sciences
 </div>
 </div></div>
 <aside class="notes">
-<p>Ask students to predict both mean calls before running them. The first returns NA; the second is about 18.49 mm across 23 available growth values, both groups combined. Control has 12 records but 11 usable growths. Removing a missing value inside a mean does not remove it from the report.</p>
+<p>Ask students to predict both mean calls before running them. 18.49 mm is the mean of both groups combined. Control has 12 records but 11 usable growths. Removing a missing value inside a mean does not remove it from the report.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -488,16 +442,26 @@ Data Analysis in Life Sciences
 </section>
 <section id="save-read-back-and-check-the-file-on-disk" class="slide level2">
 <h2>Save, read back, and check the file on disk</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(cleaned, <span class="st">"output/seedlings-cleaned.csv"</span>)</span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>check_copy <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"output/seedlings-cleaned.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(check_copy)                      <span class="co"># 24</span></span>
-<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">anyDuplicated</span>(check_copy<span class="sc">$</span>plant_id)    <span class="co"># 0: no repeated ID</span></span>
-<span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(check_copy<span class="sc">$</span>growth_mm))      <span class="co"># 1: P06</span></span>
-<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a>check_copy <span class="sc">|&gt;</span> <span class="fu">count</span>(treatment)        <span class="co"># control 12, treated 12</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="columns">
+<div class="column" style="width:58%;">
+<pre class="text"><code>&gt; write_csv(cleaned, "output/seedlings-cleaned.csv")
+&gt; list.files("output")
+[1] "seedlings-cleaned.csv"
+&gt; check_copy &lt;- read_csv("output/seedlings-cleaned.csv",
++                        show_col_types = FALSE)
+&gt; nrow(check_copy)
+[1] 24
+&gt; anyDuplicated(check_copy$plant_id)
+[1] 0
+&gt; sum(is.na(check_copy$growth_mm))
+[1] 1</code></pre>
+</div><div class="column" style="width:42%;">
 <ul>
-<li>An object in the Environment pane is not the file a colleague receives. Check the <strong>saved</strong> file.</li>
-<li>Then restart R and rerun the whole script: the raw CSV still has 25 rows, the derived CSV has 24. That difference is expected and documented.</li>
+<li><code>write_csv()</code> prints nothing. <code>list.files()</code> shows the new file in <code>output/</code>.</li>
+<li>Reading it back checks the <strong>saved file</strong>, the one a colleague receives: 24 plants, no repeated ID (<code>anyDuplicated()</code> gives 0), one unknown growth.</li>
+<li>Then restart R and rerun the whole script. The raw CSV still has 25 rows; the cleaned CSV has 24.</li>
 </ul>
+</div></div>
 <aside class="notes">
 <p>The output folder already exists in the course project. Restarting R is the test that the script, not leftover console work, produces the file. Students also write output/cleaning-notes.txt describing each change and the value left unknown.</p>
 <style type="text/css">

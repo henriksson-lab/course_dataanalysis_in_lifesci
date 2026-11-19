@@ -1154,7 +1154,7 @@ Hint: <code>file.exists()</code> says <code>FALSE</code>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(seedlings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The table is now an object called <code>seedlings</code> in R’s memory; the file on disk is unchanged. <code>head()</code> shows its first six rows. <code>dim()</code> gives <strong>24 rows and 4 columns</strong>, so all 24 plants arrived. <code>names()</code> lists the columns, <code>plant_id</code>, <code>treatment</code>, <code>initial_mm</code> and <code>final_mm</code>, and <code>str()</code> shows their types: <code>plant_id</code> and <code>treatment</code> are text (<code>chr</code>), the two lengths are numbers (<code>num</code>). <code>show_col_types = FALSE</code> only hides a message; it does not check anything for you.</p>
-<p>Read the first row aloud: plant <strong>P01</strong>, in the <strong>control</strong> group, was <strong>25.7 mm</strong> at the start and <strong>44.3 mm</strong> seven days later. Each row is one plant and each column one variable. The two lengths in a row are the same plant measured twice, so the table describes 24 plants, not 48.</p>
+<p>The first row says that plant <strong>P01</strong>, in the <strong>control</strong> group, was <strong>25.7 mm</strong> long at the start and <strong>44.3 mm</strong> seven days later. Each row is one plant and each column one variable. The two lengths in a row are the same plant measured twice, so the table describes 24 plants, not 48.</p>
 </section>
 <section id="one-column-at-a-time" class="level2">
 <h2 class="anchored" data-anchor-id="one-column-at-a-time">One column at a time</h2>

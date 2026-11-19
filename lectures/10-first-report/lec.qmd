@@ -79,17 +79,29 @@ All of this comes from data/README.md, not from R. The nutrient formulation is u
 
 > "Growth was calculated as final minus initial length for each plant, in mm."
 
-That tells a reader more than "we used `mutate()`". The code still belongs in the report so the calculation can be rerun:
+That tells a reader more than "we used `mutate()`". The code still goes in the report, so the calculation can be rerun, followed by three simple checks:
 
-```r
-seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE)
-seedlings <- mutate(seedlings, growth_mm = final_mm - initial_mm)
-nrow(seedlings)                    # 24
-sum(is.na(seedlings$growth_mm))    # 0
-range(seedlings$growth_mm)         # 8.0 30.8
+:::: {.columns}
+::: {.column width="55%"}
+```text
+> seedlings <- read_csv("data/seedlings.csv",
++                       show_col_types = FALSE)
+> seedlings <- mutate(seedlings,
++   growth_mm = final_mm - initial_mm)
+> nrow(seedlings)
+[1] 24
+> sum(is.na(seedlings$growth_mm))
+[1] 0
+> range(seedlings$growth_mm)
+[1]  8.0 30.8
 ```
-
-Simple checks like these tell the reader the data are complete: 24 plants, nothing missing.
+:::
+::: {.column width="45%"}
+- **24** plants: all of them are there.
+- **0** missing growth values: every plant was measured twice.
+- Growth from **8.0 to 30.8 mm**: every plant grew, and no value looks like a typing error.
+:::
+::::
 
 ::: notes
 The range describes these 24 plants, not all seedlings in nature, and is sensitive to a single unusual plant. Keep library() calls in the first chunk.
@@ -165,24 +177,30 @@ The .Rproj file sets the working folder; it does not contain the data. Personal 
 ## Test it like a stranger would
 
 :::: {.columns}
-::: {.column width="45%"}
+::: {.column width="55%"}
 Restart R, then in the **Console**:
 
-```r
-rmarkdown::render("first-report.Rmd",
-                  output_dir = "reports")
+```text
+> rmarkdown::render("first-report.Rmd",
++                   output_dir = "reports")
+processing file: first-report.Rmd
+...
+Output created: reports/first-report.html
+> list.files("reports")
+[1] "first-report.html"
 ```
 
-- Fails? Fix the source, not the Console.
-- Then copy the project to another folder, open **that** `.Rproj`, and render again.
+`Output created`, and the file is in `reports/`: the report runs from the saved files alone. If it fails, fix the `.Rmd`, not the Console.
 :::
-::: {.column width="55%"}
+::: {.column width="45%"}
 ![A copied project keeps the report and its data folder together and is tested with a fresh render.](portable-root.svg){width="100%"}
+
+Then copy the whole project folder somewhere else, open **that** `.Rproj`, and render again. If it works there, it will work for someone else.
 :::
 ::::
 
 ::: notes
-A successful fresh render shows the report is reproducible here; it does not show the interpretation is right. On Windows, use the native project in Documents, not a copy inside Ubuntu.
+The chunk names in the progress lines come from the supplied template (setup, import, group-summary, growth-plot); students' own reports will show their own labels. A successful fresh render shows the report is reproducible here; it does not show the interpretation is right. On Windows, use the native project in Documents, not a copy inside Ubuntu.
 :::
 
 ## Read the HTML as the reader

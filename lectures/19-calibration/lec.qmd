@@ -79,15 +79,20 @@ The direction is deliberate: the measured quantity is the response. Later we rea
 
 ## Fit the line in R
 
-```r
-library(readr)
-library(dplyr)
-library(ggplot2)
-standards <- read_csv("data/calibration.csv", show_col_types = FALSE)
-calibration_fit <- lm(absorbance ~ concentration_mg_l, data = standards)
-coef(calibration_fit)
-#>        (Intercept) concentration_mg_l
-#>         0.03957143         0.06488571
+```text
+> standards <- read_csv("data/calibration.csv", show_col_types = FALSE)
+> standards
+# A tibble: 6 × 3
+  standard_id concentration_mg_l absorbance
+  <chr>                    <dbl>      <dbl>
+1 S1                           0      0.041
+2 S2                           2      0.164
+...
+6 S6                          10      0.687
+> calibration_fit <- lm(absorbance ~ concentration_mg_l, data = standards)
+> coef(calibration_fit)
+       (Intercept) concentration_mg_l
+        0.03957143         0.06488571
 ```
 
 - `~` reads "explained by": response on the left, the prepared variable on the right.
@@ -139,28 +144,32 @@ Trace with a finger: across from the measured reading to the line, then down to 
 
 ## Estimate only inside the standards
 
-```r
-unknowns <- read_csv("data/unknowns.csv", show_col_types = FALSE)
-intercept <- coef(calibration_fit)[1]
-slope <- coef(calibration_fit)[2]
-unknowns <- unknowns |>
-  mutate(within_range = absorbance >= min(standards$absorbance) &
-                        absorbance <= max(standards$absorbance),
-         concentration_mg_l = if_else(
-           within_range, (absorbance - intercept) / slope, NA_real_))
+```text
+> unknowns <- read_csv("data/unknowns.csv", show_col_types = FALSE)
+> intercept <- coef(calibration_fit)[1]; slope <- coef(calibration_fit)[2]
+> unknowns <- unknowns |>
++   mutate(within_range = absorbance >= min(standards$absorbance) &
++                         absorbance <= max(standards$absorbance),
++          concentration_mg_l = if_else(
++            within_range, (absorbance - intercept) / slope, NA_real_))
+> unknowns
+# A tibble: 3 × 4
+  sample_id absorbance within_range concentration_mg_l
+  <chr>          <dbl> <lgl>                     <dbl>
+1 U1              0.31 TRUE                       4.17
+2 U2              0.52 TRUE                       7.40
+3 U3              0.9  FALSE                     NA
+> write_csv(unknowns, "output/day19-unknowns.csv")
+> list.files("output")
+[1] "day19-unknowns.csv"
 ```
 
-| sample_id | absorbance | within_range | concentration_mg_l |
-|---|---|---|---|
-| U1 | 0.310 | TRUE | 4.17 |
-| U2 | 0.520 | TRUE | 7.40 |
-| U3 | 0.900 | FALSE | NA |
-
-- The standards read **0.041 to 0.687**. U3 is above the highest standard, so it gets `NA` instead of a number.
-- The row stays in the table with its reading, so the reason for the missing estimate is visible.
+- The standards read **0.041 to 0.687**. `within_range` is `TRUE` only between those; `&` means both conditions must hold.
+- U3 is above the highest standard, so `if_else()` gives `NA` instead of a number. Its row and reading stay in the table.
+- `write_csv()` prints nothing; `list.files()` shows the saved file.
 
 ::: notes
-`&` requires both conditions. `NA_real_` is a numeric missing value. This is the table saved as output/day19-unknowns.csv in the practical.
+`NA_real_` is a numeric missing value. This is the table saved as output/day19-unknowns.csv in the practical. Ask students to predict which rows will be TRUE before showing the printout.
 :::
 
 ## Why not just calculate U3?

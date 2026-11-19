@@ -28,74 +28,8 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #24292e;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #24292e; } /* Normal */
-    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
-    code span.an { color: #6a737d; } /* Annotation */
-    code span.at { color: #d73a49; } /* Attribute */
-    code span.bn { color: #005cc5; } /* BaseN */
-    code span.bu { color: #d73a49; } /* BuiltIn */
-    code span.cf { color: #d73a49; } /* ControlFlow */
-    code span.ch { color: #032f62; } /* Char */
-    code span.cn { color: #005cc5; } /* Constant */
-    code span.co { color: #6a737d; } /* Comment */
-    code span.cv { color: #6a737d; } /* CommentVar */
-    code span.do { color: #6a737d; } /* Documentation */
-    code span.dt { color: #d73a49; } /* DataType */
-    code span.dv { color: #005cc5; } /* DecVal */
-    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
-    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
-    code span.fl { color: #005cc5; } /* Float */
-    code span.fu { color: #6f42c1; } /* Function */
-    code span.im { color: #032f62; } /* Import */
-    code span.in { color: #6a737d; } /* Information */
-    code span.kw { color: #d73a49; } /* Keyword */
-    code span.op { color: #24292e; } /* Operator */
-    code span.ot { color: #6f42c1; } /* Other */
-    code span.pp { color: #d73a49; } /* Preprocessor */
-    code span.re { color: #6a737d; } /* RegionMarker */
-    code span.sc { color: #005cc5; } /* SpecialChar */
-    code span.ss { color: #032f62; } /* SpecialString */
-    code span.st { color: #032f62; } /* String */
-    code span.va { color: #e36209; } /* Variable */
-    code span.vs { color: #032f62; } /* VerbatimString */
-    code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-fa0e33e6dd574061e1681ec846127080.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -292,25 +226,33 @@ Data Analysis in Life Sciences
 </section>
 <section id="run-the-comparison-in-the-direction-we-named" class="slide level2">
 <h2>Run the comparison in the direction we named</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>treated <span class="ot">&lt;-</span> <span class="fu">filter</span>(seedlings, treatment <span class="sc">==</span> <span class="st">"treated"</span>)<span class="sc">$</span>growth_mm</span>
-<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">filter</span>(seedlings, treatment <span class="sc">==</span> <span class="st">"control"</span>)<span class="sc">$</span>growth_mm</span>
-<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">t.test</span>(treated, control,</span>
-<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">var.equal =</span> <span class="cn">FALSE</span>,          <span class="co"># Welch: spreads may differ</span></span>
-<span id="cb1-10"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">alternative =</span> <span class="st">"two.sided"</span>,  <span class="co"># a difference in either direction counts</span></span>
-<span id="cb1-11"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb1-12"><a aria-hidden="true" tabindex="-1"></a>comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="columns">
+<div class="column" style="width:60%;">
+<pre class="text"><code>&gt; comparison &lt;- t.test(treated, control, var.equal = FALSE,
++                      alternative = "two.sided",
++                      conf.level = 0.95)
+&gt; comparison
+
+        Welch Two Sample t-test
+
+data:  treated and control
+t = 3.7012, df = 18.986, p-value = 0.001517
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 2.700984 9.732349
+sample estimates:
+mean of x mean of y
+ 21.49167  15.27500</code></pre>
+</div><div class="column" style="width:40%;">
 <ul>
-<li>The <strong>first vector minus the second</strong>: here <strong>treated − control</strong>. The order of arguments sets the sign.</li>
-<li><code>var.equal = FALSE</code> is already the default; writing it makes the method visible to a reader.</li>
-<li>Save the result as an object so you can extract numbers: <code>comparison$conf.int</code>, <code>comparison$p.value</code>.</li>
+<li><code>treated</code> and <code>control</code> are the two vectors of 12 growth values from Day 16.</li>
+<li>R subtracts the <strong>second from the first</strong>: <strong>treated − control</strong>. The order sets the sign.</li>
+<li><code>var.equal = FALSE</code> (Welch: spreads may differ) and <code>alternative = "two.sided"</code> (either direction counts) are the defaults; writing them makes the method visible.</li>
+<li><code>comparison</code> keeps the result, so you can reuse its numbers later.</li>
 </ul>
+</div></div>
 <aside class="notes">
-<p>This builds on Day 16’s comparison.Rmd, which already creates the treated and control vectors. Students should run it, not copy numbers from the slide. Emphasise naming the direction in words before running the code, so that the sign of the output is a check rather than a surprise.</p>
+<p>This builds on Day 16’s comparison.Rmd, which already creates the treated and control vectors with pull(). Students should run it, not copy numbers from the slide. Emphasise naming the direction in words before running the code, so that the sign of the output is a check rather than a surprise. The next slide goes through the printout line by line.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -363,13 +305,13 @@ Data Analysis in Life Sciences
 <td><code>t</code></td>
 <td>3.70</td>
 <td>none</td>
-<td>Estimate divided by its standard error</td>
+<td>Estimate ÷ its standard error (its expected variation)</td>
 </tr>
 <tr class="odd">
 <td><code>df</code></td>
 <td>19.0</td>
 <td>none</td>
-<td>Welch’s approximate degrees of freedom</td>
+<td>Degrees of freedom; just report it</td>
 </tr>
 <tr class="even">
 <td><code>p-value</code></td>
@@ -399,8 +341,13 @@ Data Analysis in Life Sciences
 </section>
 <section id="the-estimate-and-its-confidence-interval" class="slide level2">
 <h2>The estimate and its confidence interval</h2>
-
-<img data-src="difference-interval.svg" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">The estimate 6.22 mm and 95 percent confidence interval 2.70–9.73 mm are shown against zero difference.</p><ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="difference-interval.svg" height="330"></p>
+<figcaption>The estimate 6.22 mm and 95 percent confidence interval 2.70–9.73 mm are shown against zero difference.</figcaption>
+</figure>
+</div>
+<ul>
 <li>Estimate <strong>6.22 mm</strong>; 95% CI <strong>2.70 to 9.73 mm</strong>.</li>
 <li><strong>Zero</strong> marks “no difference between population means”. This interval lies entirely above zero.</li>
 <li>The interval is about the <strong>mean difference</strong>, not about individual plants: it does not contain 95% of plants.</li>
@@ -514,26 +461,34 @@ Data Analysis in Life Sciences
 <h2>Direction is a choice; reversing it flips the interval</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>reverse <span class="ot">&lt;-</span> <span class="fu">t.test</span>(control, treated)</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>comparison<span class="sc">$</span>conf.int   <span class="co">#  2.70   9.73</span></span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>reverse<span class="sc">$</span>conf.int      <span class="co"># -9.73  -2.70</span></span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>comparison<span class="sc">$</span>p.value    <span class="co">#  0.0015</span></span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>reverse<span class="sc">$</span>p.value       <span class="co">#  0.0015</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>&gt; reverse &lt;- t.test(control, treated)
+&gt; comparison$conf.int
+[1] 2.700984 9.732349
+attr(,"conf.level")
+[1] 0.95
+&gt; reverse$conf.int
+[1] -9.732349 -2.700984
+attr(,"conf.level")
+[1] 0.95
+&gt; comparison$p.value
+[1] 0.001517127
+&gt; reverse$p.value
+[1] 0.001517127</code></pre>
 <ul>
-<li>Same data, opposite sign: <strong>control − treated</strong>.</li>
-<li>The two-sided p-value is <strong>unchanged</strong>.</li>
-<li>Keep the direction you <strong>stated in advance</strong> as the reported result; save the check in a separate object.</li>
+<li><code>$conf.int</code> and <code>$p.value</code> take one part out of a saved result. R also prints the level (0.95) as a label.</li>
+<li>Same data, opposite sign: <strong>control − treated</strong>. The two-sided p-value is <strong>unchanged</strong>.</li>
 </ul>
 </div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="extended-reversed-interval.svg" style="width:100.0%"></p>
-<figcaption>The same comparison in opposite directions produces reflected confidence intervals.</figcaption>
+<figcaption>The same comparison in opposite directions produces mirror-image confidence intervals: 2.70 to 9.73 millimetres and minus 9.73 to minus 2.70 millimetres.</figcaption>
 </figure>
 </div>
+<p>Report the direction you <strong>stated in advance</strong>; keep the check in a separate object.</p>
 </div></div>
 <aside class="notes">
-<p>This is not a new experiment, only the same contrast described in the other direction. The function’s argument order determines the sign, not an object name such as treatment_effect. Using a separate object keeps the primary result intact in the report.</p>
+<p>This is not a new experiment, only the same contrast described in the other direction. The argument order determines the sign, not an object name such as treatment_effect. Using a separate object keeps the primary result intact in the report.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -582,8 +537,13 @@ Data Analysis in Life Sciences
 </section>
 <section id="when-the-interval-includes-zero" class="slide level2">
 <h2>When the interval includes zero</h2>
-
-<img data-src="extended-uncertain-case.svg" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">An illustrative 2 mm difference has a 95% interval from −1 to 5 mm, covering zero and both directions.</p><ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-uncertain-case.svg" height="330"></p>
+<figcaption>An illustrative 2 mm difference has a 95% interval from −1 to 5 mm, covering zero and both directions.</figcaption>
+</figure>
+</div>
+<ul>
 <li>Illustrative small study: estimate 2 mm, 95% CI <strong>−1 to 5 mm</strong>.</li>
 <li>Both a small harmful and a moderate helpful effect remain compatible with the data.</li>
 <li><strong>Including zero is not proof of no effect.</strong> “Not significant” means <em>inconclusive here</em>, not <em>equal</em>.</li>
@@ -650,43 +610,34 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="worked-example-a-second-classs-study" class="slide level2 smaller">
+<section id="worked-example-a-second-classs-study" class="slide level2">
 <h2>Worked example: a second class’s study</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings-transfer.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>new_treated <span class="ot">&lt;-</span> transfer <span class="sc">|&gt;</span> <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="st">"treated"</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(growth_mm)</span>
-<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>new_control <span class="ot">&lt;-</span> transfer <span class="sc">|&gt;</span> <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="st">"control"</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(growth_mm)</span>
-<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>transfer_test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(new_treated, new_control)</span>
-<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a>transfer_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Quantity</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Plants per group</td>
-<td>9 and 9</td>
-</tr>
-<tr class="even">
-<td>Estimate (treated − control)</td>
-<td><strong>4.21 mm</strong></td>
-</tr>
-<tr class="odd">
-<td>95% CI</td>
-<td><strong>1.95 to 6.47 mm</strong></td>
-</tr>
-<tr class="even">
-<td>Welch p-value</td>
-<td><strong>0.0012</strong></td>
-</tr>
-</tbody>
-</table>
-<p>“Treated seedlings grew 4.21 mm more on average (95% CI 1.95–6.47 mm; Welch, p ≈ 0.0012; 9 per group).”</p>
+<div class="columns">
+<div class="column" style="width:58%;">
+<pre class="text"><code>&gt; transfer_test &lt;- t.test(new_treated, new_control)
+&gt; transfer_test
+
+        Welch Two Sample t-test
+...
+t = 3.9668, df = 15.004, p-value = 0.00124
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 1.948441 6.473782
+sample estimates:
+mean of x mean of y
+ 17.86667  13.65556</code></pre>
+</div><div class="column" style="width:42%;">
+<ul>
+<li><code>new_treated</code> and <code>new_control</code> are the second class’s growth values, made with <code>filter()</code> and <code>pull()</code> as on Day 16. 9 plants per group. Estimate: 17.87 − 13.66 = <strong>4.21 mm</strong>.</li>
+<li>95% CI <strong>1.95 to 6.47 mm</strong>; p ≈ <strong>0.0012</strong>.</li>
+</ul>
+<p><strong>Result:</strong> “Treated seedlings grew 4.21 mm more on average (95% CI 1.95–6.47 mm; Welch two-sided test, p ≈ 0.0012; 9 per group).”</p>
+<ul>
+<li>A smaller estimate than the main study, yet a <strong>narrower</strong> interval: these plants vary less.</li>
+</ul>
+</div></div>
 <aside class="notes">
-<p>Use transfer from its own saved import and growth calculation in transfer-comparison.Rmd, not leftover console objects. Have students write the result sentence before showing the last line. Point out the estimate is smaller than the main study’s, yet the interval is narrower: less plant-to-plant variation.</p>
+<p>Use transfer from its own saved import and growth calculation in transfer-comparison.Rmd, not leftover console objects. Have students write the result sentence before showing it. Transfer SDs are about 1.94 and 2.53 mm, against 4.87 and 3.19 mm in the main study.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

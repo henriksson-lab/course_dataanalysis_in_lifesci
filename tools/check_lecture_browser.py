@@ -145,7 +145,10 @@ for deck in sorted(ROOT.glob("lectures/*/lec.qmd")):
                box.top < area.top - 4 || box.left < area.left - 4))
             .map(({el,box}) => ({tag:el.tagName, text:el.innerText?.slice(0,90),
               bottom:Math.round(box.bottom-area.bottom), right:Math.round(box.right-area.right)}));
-          return {title:slide.querySelector('h1,h2')?.textContent, outside};
+          const clipped = [...slide.querySelectorAll('pre, pre code, div.sourceCode')]
+            .filter(el => el.scrollHeight > el.clientHeight + 2 || el.scrollWidth > el.clientWidth + 2)
+            .map(el => ({tag:'clipped-code', text:el.innerText.slice(0,60)}));
+          return {title:slide.querySelector('h1,h2')?.textContent, outside: outside.concat(clipped)};
         })()""")
         if result["outside"]:
             overflows.append({"deck": deck.parent.name, "slide": number+1, **result})

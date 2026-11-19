@@ -26,7 +26,7 @@ A thesis student treats three plants, measures a leaf on each plant ten times, a
 
 - The **experimental unit** is the thing that independently received the treatment: here, a plant in its own pot.
 - **Technical replicates** (re-measuring the same plant) check the measurement; **biological replicates** (more plants) tell us about plants.
-- The **SD** describes how plants vary; a **sampling distribution** shows how much a *mean* would vary between repeated samples.
+- The **SD** describes how plants vary; a simulation shows how much a *mean* would vary if we repeated the experiment with new plants.
 - A **precise** estimate can still be **wrong** if the sampling or measurement is biased.
 
 This is a reasoning day, supported by a short supplied simulation. Days 16–18 rely on counting independent units correctly.
@@ -106,41 +106,53 @@ This is a schematic counterexample, not the course experiment. Ask how many trea
 Go through each row with the class before revealing the last column. Ask in which design technical repeats would still be useful: for example, checking that the ruler reading is repeatable before starting the real experiment.
 :::
 
-## Two kinds of spread
+## A simulation, step 1: one imagined experiment
 
-:::: {.columns}
-::: {.column width="40%"}
-- **SD among plants:** how much individual plants differ. It does not shrink with more plants; plants are as variable as they are.
-- **Sampling uncertainty:** how much the **mean** would change if we took a new sample of plants. This *does* shrink with more independent plants.
-- Read the horizontal axis: individual values, or **means**?
-:::
-::: {.column width="60%"}
-![Three histograms on one scale: individual growth values are widely spread, means of four draws less so, and means of sixteen draws cluster tightly.](values-versus-estimates.svg){width="100%"}
-:::
-::::
+We cannot repeat the experiment hundreds of times, but R can imitate it. The 24 measured growth values serve as a small "population" to draw plants from.
 
-::: notes
-This figure is generated from the course values with a fixed illustrative random generator; exact bins need not match the R demonstration. The concept is the narrower distribution of means from larger samples. Distinguish SD among means from SD among the plants within one sample.
-:::
-
-## A simulation: draw many samples, compute many means
-
-```r
-seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE) |>
-  mutate(growth_mm = final_mm - initial_mm)
-population_mm <- seedlings$growth_mm          # 24 values used as a toy population
-set.seed(14)                                  # makes the random draws repeatable
-means_4 <- replicate(400, mean(sample(population_mm, size = 4, replace = TRUE)))
-means_16 <- replicate(400, mean(sample(population_mm, size = 16, replace = TRUE)))
-sd(population_mm); sd(means_4); sd(means_16)  # 5.13  2.44  1.24
+```text
+> population_mm <- seedlings$growth_mm
+> length(population_mm)
+[1] 24
+> set.seed(14)
+> sample(population_mm, size = 4, replace = TRUE)
+[1] 15.3 15.3 14.5 20.1
+> mean(c(15.3, 15.3, 14.5, 20.1))
+[1] 16.3
 ```
 
-- `sample(..., size = 4, replace = TRUE)` draws 4 values; a value may be drawn twice.
-- `replicate(400, ...)`: repeat "draw a sample, take its mean" 400 times.
-- The result is **400 means**, not 400 new plants. The 24 recorded plants never change.
+- `sample()` draws **4 values** at random: one imagined experiment with 4 plants. Its mean is **16.3 mm**.
+- `replace = TRUE` allows the same value to be drawn twice (here 15.3).
+- `set.seed(14)` fixes the random draws, so everyone gets the same numbers.
 
 ::: notes
-Load readr, dplyr and ggplot2 first, and keep the block in day14-sampling.R as in the practical; the practical also plots the two sets of means. Students are not asked to write loops or a sampling algorithm; they need to understand source, draw size, replacement, repetitions and seed. This is a teaching demonstration with a toy population, not a new experiment or a claim about nature.
+The seedlings table is imported as usual first (read_csv plus mutate for growth_mm, with readr and dplyr loaded), exactly as in day14-sampling.R. This is a teaching demonstration: the 24 plants stand in for a population; it is not a new experiment. Ask: if we drew another 4, would the mean be 16.3 again?
+:::
+
+## A simulation, step 2: 400 imagined experiments
+
+```text
+> set.seed(14)
+> means_4 <- replicate(400,
++   mean(sample(population_mm, size = 4, replace = TRUE)))
+> means_16 <- replicate(400,
++   mean(sample(population_mm, size = 16, replace = TRUE)))
+> head(means_4)
+[1] 16.300 19.500 22.275 14.625 22.475 17.900
+> sd(population_mm)
+[1] 5.125695
+> sd(means_4)
+[1] 2.443503
+> sd(means_16)
+[1] 1.242049
+```
+
+- `replicate(400, ...)` repeats "draw a sample, take its mean" **400 times**. The first mean is the 16.3 from step 1.
+- `means_4` holds **400 means**, not 400 plants. The 24 recorded plants never change.
+- Plants vary with SD **5.13 mm**; means of 4 plants with **2.44 mm**; means of 16 plants with **1.24 mm**.
+
+::: notes
+Students are not asked to write loops or a sampling algorithm; they need to understand source, draw size, replacement, repetitions and seed. The practical's day14-sampling.R also draws the histogram on the next slide from these two vectors.
 :::
 
 ## Larger samples give more stable means
@@ -159,6 +171,23 @@ Load readr, dplyr and ggplot2 first, and keep the block in day14-sampling.R as i
 
 ::: notes
 The SD of the means approximates what is later called the standard error. Change the seed to 25 in the practical: exact numbers change, the relationship between sample size and spread stays. Choosing a convenient seed is not evidence for anything.
+:::
+
+## Two kinds of spread
+
+:::: {.columns}
+::: {.column width="40%"}
+- **SD among plants:** how much individual plants differ. It does not shrink with more plants; plants are as variable as they are.
+- **Sampling uncertainty:** how much the **mean** would change if we took a new sample of plants. This *does* shrink with more independent plants.
+- Read the horizontal axis: individual values, or **means**?
+:::
+::: {.column width="60%"}
+![Three histograms on one scale: individual growth values are widely spread, means of four draws less so, and means of sixteen draws cluster tightly.](values-versus-estimates.svg){width="100%"}
+:::
+::::
+
+::: notes
+This figure is generated from the course values with a fixed illustrative random generator; exact bins need not match the R demonstration. The concept is the narrower distribution of means from larger samples. Distinguish SD among means from SD among the plants within one sample.
 :::
 
 ## Simulation settings are not sample size
@@ -202,29 +231,34 @@ This schematic uses a known 5 mm shift for illustration; it does not diagnose bi
 ## Same idea, new source: the second class
 
 :::: {.columns}
-::: {.column width="45%"}
-```r
-transfer <- read_csv("data/seedlings-transfer.csv",
-                     show_col_types = FALSE) |>
-  mutate(growth_mm = final_mm - initial_mm)
-set.seed(14)
-means_3 <- replicate(400, mean(sample(
-  transfer$growth_mm, size = 3, replace = TRUE)))
-means_12 <- replicate(400, mean(sample(
-  transfer$growth_mm, size = 12, replace = TRUE)))
-sd(means_3); sd(means_12)   # 1.69  0.83
+::: {.column width="55%"}
+```text
+> transfer <- read_csv("data/seedlings-transfer.csv",
++                      show_col_types = FALSE) |>
++   mutate(growth_mm = final_mm - initial_mm)
+> sd(transfer$growth_mm)
+[1] 3.076885
+> set.seed(14)
+> means_3 <- replicate(400, mean(sample(
++   transfer$growth_mm, size = 3, replace = TRUE)))
+> means_12 <- replicate(400, mean(sample(
++   transfer$growth_mm, size = 12, replace = TRUE)))
+> sd(means_3)
+[1] 1.689439
+> sd(means_12)
+[1] 0.8295651
 ```
 
-- 18 recorded plants (SD **3.08 mm**) as a toy source.
-- Means of 3 draws vary about **twice** as much as means of 12.
+- 18 recorded plants (SD **3.08 mm**) as the source.
+- Means of 3 plants vary about **twice** as much as means of 12.
 :::
-::: {.column width="55%"}
-![Histograms of simulated sample means from the transfer source: means of 12 draws vary less than means of 3 draws.](extended-transfer-sampling.svg){width="100%"}
+::: {.column width="45%"}
+![Histograms of the 400 means in means_3 and means_12: means of 12 plants cluster between about 14 and 18 millimetres, means of 3 plants spread from about 11 to 20.](transfer-sampling-means.png){width="100%"}
 :::
 ::::
 
 ::: notes
-The transfer source combines both groups only to illustrate sampling; it is not a treatment comparison or a confidence interval. Students keep the two results in separate objects and save them as output/day14-transfer-sampling.csv.
+The transfer source combines both groups only to illustrate sampling; it is not a treatment comparison. Students keep the two results in separate objects and save them as output/day14-transfer-sampling.csv.
 :::
 
 ## Summary {.smaller}

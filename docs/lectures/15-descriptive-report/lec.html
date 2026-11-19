@@ -28,74 +28,8 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #24292e;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #24292e; } /* Normal */
-    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
-    code span.an { color: #6a737d; } /* Annotation */
-    code span.at { color: #d73a49; } /* Attribute */
-    code span.bn { color: #005cc5; } /* BaseN */
-    code span.bu { color: #d73a49; } /* BuiltIn */
-    code span.cf { color: #d73a49; } /* ControlFlow */
-    code span.ch { color: #032f62; } /* Char */
-    code span.cn { color: #005cc5; } /* Constant */
-    code span.co { color: #6a737d; } /* Comment */
-    code span.cv { color: #6a737d; } /* CommentVar */
-    code span.do { color: #6a737d; } /* Documentation */
-    code span.dt { color: #d73a49; } /* DataType */
-    code span.dv { color: #005cc5; } /* DecVal */
-    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
-    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
-    code span.fl { color: #005cc5; } /* Float */
-    code span.fu { color: #6f42c1; } /* Function */
-    code span.im { color: #032f62; } /* Import */
-    code span.in { color: #6a737d; } /* Information */
-    code span.kw { color: #d73a49; } /* Keyword */
-    code span.op { color: #24292e; } /* Operator */
-    code span.ot { color: #6f42c1; } /* Other */
-    code span.pp { color: #d73a49; } /* Preprocessor */
-    code span.re { color: #6a737d; } /* RegionMarker */
-    code span.sc { color: #005cc5; } /* SpecialChar */
-    code span.ss { color: #032f62; } /* SpecialString */
-    code span.st { color: #032f62; } /* String */
-    code span.va { color: #e36209; } /* Variable */
-    code span.vs { color: #032f62; } /* VerbatimString */
-    code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-fa0e33e6dd574061e1681ec846127080.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -297,21 +231,34 @@ Data Analysis in Life Sciences
 </section>
 <section id="data-and-methods-show-the-checks" class="slide level2">
 <h2>Data and methods: show the checks</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">anyDuplicated</span>(seedlings<span class="sc">$</span>plant_id)   <span class="co"># 0: each plant ID appears once</span></span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="sc">|&gt;</span> <span class="fu">count</span>(treatment)       <span class="co"># control 12, treated 12</span></span>
-<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(seedlings<span class="sc">$</span>initial_mm))    <span class="co"># 0 missing</span></span>
-<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(seedlings<span class="sc">$</span>final_mm))      <span class="co"># 0 missing</span></span>
-<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">mutate</span>(seedlings, <span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="columns">
+<div class="column" style="width:55%;">
+<pre class="text"><code>&gt; seedlings &lt;- read_csv("data/seedlings.csv",
++                       show_col_types = FALSE)
+&gt; anyDuplicated(seedlings$plant_id)
+[1] 0
+&gt; seedlings |&gt; count(treatment)
+# A tibble: 2 × 2
+  treatment     n
+  &lt;chr&gt;     &lt;int&gt;
+1 control      12
+2 treated      12
+&gt; sum(is.na(seedlings$initial_mm))
+[1] 0
+&gt; sum(is.na(seedlings$final_mm))
+[1] 0
+&gt; seedlings &lt;- mutate(seedlings,
++                     growth_mm = final_mm - initial_mm)</code></pre>
+</div><div class="column" style="width:45%;">
 <ul>
-<li>These are Day 11’s checks, now <strong>inside the report</strong>: a reader sees what was checked and the result.</li>
-<li><code>anyDuplicated()</code> returns 0 when there is no repeated ID; a positive number is the <strong>position</strong> of the first repeat.</li>
-<li>In the text: “24 plants (12 per group), no missing lengths, growth = final − initial length (mm).”</li>
+<li>These are Day 11’s checks, now <strong>inside the report</strong>, so a reader sees what was checked and what came out.</li>
+<li><code>anyDuplicated()</code> gives <strong>0</strong>: no plant ID is repeated.</li>
+<li><strong>12 plants per group</strong>, <strong>no missing lengths</strong>.</li>
+<li>In the methods text: “24 plants (12 per group), no missing lengths; growth = final − initial length (mm).”</li>
 </ul>
+</div></div>
 <aside class="notes">
-<p>Include only checking output that helps the reader; keep the code in the source either way. If the repaired Day 11 file is used, the methods must state the source and that P06 is unavailable, and every count must use 23 usable growths.</p>
+<p>Include only checking output that helps the reader; keep the code in the source either way. A positive anyDuplicated() result would be the position of the first repeated ID. If the repaired Day 11 file is used, the methods must state the source and that P06 is unavailable, and every count must use 23 usable growths.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -327,31 +274,34 @@ Data Analysis in Life Sciences
 <section id="results-a-table-and-a-figure-that-agree" class="slide level2">
 <h2>Results: a table and a figure that agree</h2>
 <div class="columns">
-<div class="column" style="width:48%;">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>group_summary <span class="ot">&lt;-</span> seedlings <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(treatment) <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_observed =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(growth_mm)),</span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_mm =</span> <span class="fu">mean</span>(growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">median_mm =</span> <span class="fu">median</span>(growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_mm =</span> <span class="fu">sd</span>(growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
-<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(group_summary, <span class="at">digits =</span> <span class="dv">2</span>,</span>
-<span id="cb2-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Growth by treatment; lengths in mm."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="column" style="width:52%;">
+<pre class="text"><code>&gt; group_summary &lt;- seedlings |&gt;
++   group_by(treatment) |&gt;
++   summarise(n_observed = sum(!is.na(growth_mm)),
++     mean_mm = mean(growth_mm, na.rm = TRUE),
++     median_mm = median(growth_mm, na.rm = TRUE),
++     sd_mm = sd(growth_mm, na.rm = TRUE),
++     .groups = "drop")
+&gt; knitr::kable(group_summary, digits = 2)
+
+|treatment | n_observed| mean_mm| median_mm| sd_mm|
+|:---------|----------:|-------:|---------:|-----:|
+|control   |         12|   15.28|     15.65|  3.19|
+|treated   |         12|   21.49|     20.85|  4.87|</code></pre>
 <ul>
-<li><code>knitr::kable()</code> prints a tidy table, rounded to 2 decimals.</li>
-<li>The table is made <strong>by code</strong>: if the data change, the table changes too.</li>
+<li>In the Console <code>kable()</code> prints this text; in the rendered report it becomes a <strong>neat table</strong>, rounded to 2 decimals.</li>
 </ul>
-</div><div class="column" style="width:52%;">
+</div><div class="column" style="width:48%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../13-group-summaries/individuals-and-means.svg" style="width:100.0%"></p>
-<figcaption>Individual growth measurements as small dots, with red diamonds marking the control mean of 15.28 and the treated mean of 21.49 millimetres.</figcaption>
+<p><img data-src="../13-group-summaries/group-plot.png" style="width:100.0%"></p>
+<figcaption>The Day 13 figure: one dot per plant and a red diamond at each group mean, 15.28 millimetres for control and 21.49 for treated.</figcaption>
 </figure>
 </div>
-<p>Reuse the Day 13 figure: plants as dots, means as diamonds, a caption with n and units.</p>
+<p>The figure from Day 13, with a caption naming the unit, the symbols and n.</p>
 </div></div>
 <aside class="notes">
-<p>Control: n 12, mean 15.28, median 15.65, SD 3.19 mm; treated: n 12, mean 21.49, median 20.85, SD 4.87 mm. A caption must make clear that SD describes spread among plants; this report has no confidence intervals. Do not paste a screenshot of the Environment pane.</p>
+<p>The table is calculated when the report renders, so if the data change, the table changes with them. A caption must make clear that SD describes spread among plants; this report has no confidence intervals. Do not paste a screenshot of the Environment pane.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -454,24 +404,29 @@ Data Analysis in Life Sciences
 <section id="keep-the-report-where-its-paths-work" class="slide level2">
 <h2>Keep the report where its paths work</h2>
 <div class="columns">
-<div class="column" style="width:42%;">
+<div class="column" style="width:45%;">
 <ul>
 <li>Save <code>descriptive-report.Rmd</code> at the <strong>project root</strong>, beside <code>data/</code> and <code>output/</code>.</li>
 <li>Then <code>"data/seedlings.csv"</code> means the same file on every computer that has the project.</li>
 <li>A path like <code>C:/Users/anna/Downloads/...</code> works only on Anna’s laptop.</li>
-<li>Render from the <strong>R Console</strong>, putting the HTML into <code>reports/</code>:</li>
+<li>Render from the <strong>R Console</strong>; <code>output_dir</code> puts the HTML into <code>reports/</code>.</li>
 </ul>
-<p><code>rmarkdown::render("descriptive-report.Rmd", output_dir = "reports")</code></p>
-</div><div class="column" style="width:58%;">
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="portable-project.svg" style="width:100.0%"></p>
+<p><img data-src="portable-project.svg" style="width:90.0%"></p>
 <figcaption>The report source sits at the project root beside its data and output folders; a personal absolute path would not move with the folder.</figcaption>
 </figure>
 </div>
 </div></div>
+<pre class="text"><code>&gt; rmarkdown::render("descriptive-report.Rmd", output_dir = "reports")
+processing file: descriptive-report.Rmd
+...
+Output created: reports/descriptive-report.html
+&gt; list.files("reports")
+[1] "descriptive-report.html"</code></pre>
 <aside class="notes">
-<p>Knitting resolves relative paths from the report’s own folder, so moving the .Rmd into reports/ would break data/ paths. The output_dir argument places the HTML in reports/ while the source stays at the root. Never put a render call inside the report itself: a report must not try to render itself.</p>
+<p>Render prints a progress log; the line to look for is “Output created”. Knitting resolves relative paths from the report’s own folder, so moving the .Rmd into reports/ would break data/ paths. Never put a render call inside the report itself: a report must not try to render itself.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

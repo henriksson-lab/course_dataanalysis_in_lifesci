@@ -40,117 +40,184 @@ The archive is a small, separate practice dataset (four pots), not the 24-plant 
 ## What is in the archive?
 
 :::: {.columns}
-::: {.column width="45%"}
-```bash
-unzip -l lab-data.zip
-unzip lab-data.zip -d lab-data
-cd lab-data
-less README.txt
+::: {.column width="58%"}
+```text
+$ unzip -l lab-data.zip
+Archive:  lab-data.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+      309  1980-01-01 00:00   README.txt
+       29  1980-01-01 00:00   measurements/S01.csv
+       29  1980-01-01 00:00   measurements/S02.csv
+       29  1980-01-01 00:00   measurements/S03.csv
+       29  1980-01-01 00:00   measurements/S04.csv
+      157  1980-01-01 00:00   samples.tsv
+       37  1980-01-01 00:00   field-notes/day1.txt
+       40  1980-01-01 00:00   field-notes/day7.txt
+---------                     -------
+      659                     8 files
 ```
-
-- `-l` **lists** without unpacking.
-- `-d lab-data` names the folder to unpack into.
-- The ZIP stays as it was. Press **q** to leave `less`.
 :::
-::: {.column width="55%"}
-![Extracting lab-data.zip creates a folder of ordinary files: README, the samples.tsv manifest, four measurement files and field notes, while the archive itself stays.](extract-archive.svg){width="100%"}
+::: {.column width="42%"}
+- `unzip -l` **lists** what is inside without unpacking anything.
+- 8 files: a README, a manifest `samples.tsv`, four measurement files, and two field notes.
+- Look before you unpack: you now know what you received and where each file will end up.
 :::
 ::::
 
 ::: notes
-First copy the browser download into ~/introcomputing-shell with the file manager (explorer.exe . on Ubuntu/Windows, open . on Mac); Downloads is not the terminal's workspace. Read the README aloud: four pots, lengths in mm after seven days. If unzip asks to replace files, answer n and extract to a fresh folder name.
+First copy the browser download into ~/introcomputing-shell with the file manager (explorer.exe . on Ubuntu/Windows, open . on Mac); Downloads is not the terminal's workspace. The dates are 1980 because the archive was built with fixed timestamps; ignore them.
 :::
 
-## The manifest links samples to files
+## Unpack it into its own folder
 
 :::: {.columns}
-::: {.column width="45%"}
-```bash
-head -n 3 samples.tsv
-wc -l samples.tsv
-```
-
-- One header line names the columns: `sample_id`, `treatment`, `file`.
-- `wc -l` prints **5**: header + **4 samples**.
-- Columns are separated by tabs (TSV).
-:::
 ::: {.column width="55%"}
-![The manifest has one header line and four sample lines, each pointing to a measurement file.](header-lines.svg){width="100%"}
+```text
+$ unzip lab-data.zip -d lab-data
+Archive:  lab-data.zip
+  inflating: lab-data/README.txt
+  inflating: lab-data/measurements/S01.csv
+  ...
+$ cd lab-data
+$ ls
+field-notes  measurements  README.txt  samples.tsv
+$ cat README.txt
+SIMULATED LAB-GROUP DATA
+Four independent seedling pots, two control and
+two nutrient-treated. ... Lengths are millimetres.
+```
+:::
+::: {.column width="45%"}
+![Extracting lab-data.zip creates a folder of ordinary files: README, the samples.tsv manifest, four measurement files and field notes, while the archive itself stays.](extract-archive.svg){width="100%"}
+
+`-d lab-data` names the folder. The ZIP itself stays as it was.
 :::
 ::::
 
 ::: notes
-Ask before running wc -l: how many lines? Students often say 4. The header is not a sample. A CSV is the same idea with commas.
+Read the README aloud: four pots, lengths in mm after seven days. If unzip asks to replace files, answer n and extract to a fresh folder name. less README.txt works too (press q to leave); cat is simpler for a short file.
+:::
+
+## The manifest: which file belongs to which sample
+
+:::: {.columns}
+::: {.column width="55%"}
+```text
+$ cat samples.tsv
+sample_id   treatment   file
+S01         control     measurements/S01.csv
+S02         control     measurements/S02.csv
+S03         treated     measurements/S03.csv
+S04         treated     measurements/S04.csv
+$ wc -l samples.tsv
+5 samples.tsv
+```
+:::
+::: {.column width="45%"}
+- The first line is a **header** naming the columns. Columns are separated by tabs (a TSV file).
+- Each other line is one sample, with its group and the file holding its measurement.
+- `wc -l` counts **5 lines**: the header plus **4 samples**.
+:::
+::::
+
+::: notes
+Ask before running wc -l: how many lines? Students often say 4. The header is not a sample. A CSV is the same idea with commas. For a long file, head -n 3 samples.tsv shows just the start.
 :::
 
 ## Which samples were treated?
 
-![grep prints only the lines that contain treated: S03 and S04.](grep-selection.svg){height=330}
-
-```bash
-grep -F treated samples.tsv
+:::: {.columns}
+::: {.column width="55%"}
+```text
+$ grep -F treated samples.tsv
+S03         treated     measurements/S03.csv
+S04         treated     measurements/S04.csv
 ```
 
-`grep` prints the lines that contain the text. `-F` means plain text, not a pattern. Answer: **S03 and S04**.
+![grep prints only the lines that contain treated: S03 and S04.](grep-selection.svg){width="100%"}
+:::
+::: {.column width="45%"}
+- `grep` prints only the lines that contain the text `treated`.
+- `-F` means: search for exactly these letters.
+- Answer: **S03 and S04**. The header and the control lines are not printed.
+:::
+::::
 
 ::: notes
-The header and the control lines are not printed. Point out that grep does not know about columns; it just looks for the letters t-r-e-a-t-e-d anywhere on the line. We test that limit in two slides.
+Point out that grep does not know about columns; it just looks for the letters t-r-e-a-t-e-d anywhere on the line. We test that limit in two slides.
 :::
 
 ## Count with a pipe, save with `>`
 
 :::: {.columns}
-::: {.column width="50%"}
-```bash
-grep -F treated samples.tsv | wc -l
-grep -F treated samples.tsv > treated-samples.txt
+::: {.column width="55%"}
+```text
+$ grep -F treated samples.tsv | wc -l
+2
+$ grep -F treated samples.tsv > treated-samples.txt
+$ cat treated-samples.txt
+S03         treated     measurements/S03.csv
+S04         treated     measurements/S04.csv
 ```
-
-- `|` passes grep's lines to `wc -l`: **2**.
-- `>` writes them into a new file. The manifest is unchanged.
-- `>` **replaces** what was in the file. Never write to the input: `> samples.tsv` can empty it.
 :::
-::: {.column width="50%"}
+::: {.column width="45%"}
 ![Four sample lines go into grep, two matching lines come out, and wc -l counts 2.](pipe-stream.svg){width="100%"}
+
+- `|` sends grep's lines into `wc -l`: **2**.
+- `>` sends them into a file instead; `cat` shows it. `>` **replaces** an existing file, so never write to your input.
 :::
 ::::
 
 ::: notes
-Open treated-samples.txt with less: two lines and no header. Ask which file changed (only the new one). Do not demonstrate input = output on real files; just explain the danger.
+Ask which file changed: only the new one. Do not demonstrate input = output on real files; just explain the danger.
 :::
 
 ## `grep` matches text, not meaning
 
-![In a copy where S01 is labelled untreated, grep -F treated selects S01 as well as S03 and S04.](grep-substring.svg){height=330}
+:::: {.columns}
+::: {.column width="55%"}
+Suppose S01 had been labelled `untreated`:
 
-If S01 were labelled `untreated`, the count would be **3**: `untreated` contains `treated`. Look at the lines selected, not only at the number.
+```text
+$ grep -F treated search-trap.tsv
+S01         untreated   measurements/S01.csv
+S03         treated     measurements/S03.csv
+S04         treated     measurements/S04.csv
+```
+:::
+::: {.column width="45%"}
+- `untreated` contains the letters `treated`, so S01 is selected too, and the count would be **3**.
+- grep cannot know what a word means.
+- Always look at the lines it selected, not only at the number.
+:::
+::::
 
 ::: notes
-Students make this trap file themselves in the exercises, on a copy (search-trap.tsv). The real manifest still gives 2. This is the main reason to print the lines before counting.
+Students make this trap file themselves in the exercises, on a copy (search-trap.tsv). The real manifest still gives 2.
 :::
 
 ## Are the treated seedlings longer?
 
 :::: {.columns}
 ::: {.column width="45%"}
-```bash
-head measurements/S03.csv
-head measurements/S01.csv
+```text
+$ cat measurements/S01.csv
+sample_id,length_mm
+S01,32.1
+$ cat measurements/S03.csv
+sample_id,length_mm
+S03,42.4
 ```
 
-| Sample | Group | Length (mm) |
-|---|---|---|
-| S01 | control | 32.1 |
-| S02 | control | 35.2 |
-| S03 | treated | 42.4 |
-| S04 | treated | 39.8 |
-
-Both treated pots are longer. Two pots per group is a hint, not yet a result.
+Doing the same for all four: controls **32.1** and **35.2** mm, treated **42.4** and **39.8** mm.
 :::
 ::: {.column width="55%"}
 ![Lengths of the four seedlings after seven days: controls S01 32.1 and S02 35.2 mm, treated S03 42.4 and S04 39.8 mm.](four-lengths.svg){width="100%"}
 :::
 ::::
+
+Both treated pots are longer, but two pots per group is a hint, not yet a result.
 
 ::: notes
 The file column of the manifest gives each path. Units come from the README, not from the file. With so few pots we cannot conclude much; the 24-plant dataset in week 2 and the comparisons in week 4 address the question properly.
@@ -158,31 +225,50 @@ The file column of the manifest gives each path. Units come from the README, not
 
 ## Work on a copy
 
-![cp makes a second file in working/, mv renames that copy, and the original samples.tsv is untouched.](copy-rename.svg){height=320}
-
-```bash
-mkdir working
-cp samples.tsv working/samples-copy.tsv
-mv working/samples-copy.tsv working/manifest-practice.tsv
+:::: {.columns}
+::: {.column width="55%"}
+```text
+$ mkdir working
+$ cp samples.tsv working/samples-copy.tsv
+$ mv working/samples-copy.tsv working/manifest-practice.tsv
+$ ls working
+manifest-practice.tsv
+$ ls
+field-notes  measurements  README.txt
+samples.tsv  treated-samples.txt  working
 ```
+:::
+::: {.column width="45%"}
+![cp makes a second file in working/, mv renames that copy, and the original samples.tsv is untouched.](copy-rename.svg){width="100%"}
 
-`cp` copies, `mv` renames or moves. Both silently replace an existing file with the same name.
+- `cp` copies, `mv` renames. They print nothing when they work, so check with `ls`.
+- The original `samples.tsv` is unchanged.
+:::
+::::
 
 ::: notes
-Ask which files exist after each line. The original stays; only the copy is renamed. Students then write working/observations.txt with today's answers.
+Ask which files exist after each line. Students then write working/observations.txt with today's answers.
 :::
 
 ## When a listed file is missing
 
 :::: {.columns}
-::: {.column width="45%"}
-- The manifest lists `measurements/S04.csv`, but the folder has `S04-renamed.csv`.
-- `head measurements/S04.csv` fails: *No such file or directory*.
-- Look inside: it contains `S04,39.8`. Now you know it is S04 and can restore the name with `mv`.
-- If the contents did not tell you, ask the lab group rather than guess.
+::: {.column width="58%"}
+```text
+$ head measurements/S04.csv
+head: cannot open 'measurements/S04.csv' for
+reading: No such file or directory
+$ ls measurements
+S01.csv  S02.csv  S03.csv  S04-renamed.csv
+$ cat measurements/S04-renamed.csv
+sample_id,length_mm
+S04,39.8
+```
 :::
-::: {.column width="55%"}
+::: {.column width="42%"}
 ![The manifest expects measurements/S04.csv while the folder holds S04-renamed.csv, whose contents still say S04 and 39.8.](manifest-path.svg){width="100%"}
+
+- The manifest promises `S04.csv`; someone renamed it. The contents confirm it is S04, so restore the name with `mv`.
 :::
 ::::
 

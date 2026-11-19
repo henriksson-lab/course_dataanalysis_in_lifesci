@@ -28,74 +28,8 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #24292e;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #24292e; } /* Normal */
-    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
-    code span.an { color: #6a737d; } /* Annotation */
-    code span.at { color: #d73a49; } /* Attribute */
-    code span.bn { color: #005cc5; } /* BaseN */
-    code span.bu { color: #d73a49; } /* BuiltIn */
-    code span.cf { color: #d73a49; } /* ControlFlow */
-    code span.ch { color: #032f62; } /* Char */
-    code span.cn { color: #005cc5; } /* Constant */
-    code span.co { color: #6a737d; } /* Comment */
-    code span.cv { color: #6a737d; } /* CommentVar */
-    code span.do { color: #6a737d; } /* Documentation */
-    code span.dt { color: #d73a49; } /* DataType */
-    code span.dv { color: #005cc5; } /* DecVal */
-    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
-    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
-    code span.fl { color: #005cc5; } /* Float */
-    code span.fu { color: #6f42c1; } /* Function */
-    code span.im { color: #032f62; } /* Import */
-    code span.in { color: #6a737d; } /* Information */
-    code span.kw { color: #d73a49; } /* Keyword */
-    code span.op { color: #24292e; } /* Operator */
-    code span.ot { color: #6f42c1; } /* Other */
-    code span.pp { color: #d73a49; } /* Preprocessor */
-    code span.re { color: #6a737d; } /* RegionMarker */
-    code span.sc { color: #005cc5; } /* SpecialChar */
-    code span.ss { color: #032f62; } /* SpecialString */
-    code span.st { color: #032f62; } /* String */
-    code span.va { color: #e36209; } /* Variable */
-    code span.vs { color: #032f62; } /* VerbatimString */
-    code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-fa0e33e6dd574061e1681ec846127080.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -267,7 +201,7 @@ Data Analysis in Life Sciences
 <div class="columns">
 <div class="column" style="width:42%;">
 <ul>
-<li>A CPU has a few <strong>cores</strong>; each can work on a separate task. <code>parallel::detectCores()</code> counts them.</li>
+<li>A CPU has a few <strong>cores</strong> (typically 4–16 in a laptop); each can work on a separate task. In the practical you look up how many yours has.</li>
 <li>A <strong>GPU</strong> has thousands of simple cores doing the same small calculation at once.</li>
 <li>GPUs are used for images, video and deep learning (for example protein-structure prediction).</li>
 <li>This course runs on the CPU. You will hear about GPUs later; you do not need one here.</li>
@@ -365,7 +299,7 @@ Data Analysis in Life Sciences
 <figcaption>One DNA letter in a text file takes 1 byte, one grey pixel takes 1 byte, and one number in R takes 8 bytes.</figcaption>
 </figure>
 </div>
-<p>A <strong>byte</strong> = 8 bits = one of 256 patterns. 1 kB = 1,000 bytes; 1 MB = 1,000,000; 1 GB = 1,000,000,000.</p>
+<p>A <strong>bit</strong> is a single 0 or 1. A <strong>byte</strong> is 8 bits: 256 possible patterns, enough for one letter or a whole number from 0 to 255. 1 kB = 1,000 bytes; 1 MB = 1,000,000; 1 GB = 1,000,000,000.</p>
 <aside class="notes">
 <p>Three numbers carry the whole lecture: a letter of text is 1 byte, a pixel in an 8-bit grayscale image is 1 byte, and a number in R is 8 bytes. We use decimal units (1 MB = one million bytes), as disk makers do. Some programs use 1,024-based units; the difference does not matter for rough estimates.</p>
 <style type="text/css">
@@ -403,54 +337,68 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="check-the-rule-in-r" class="slide level2 smaller">
-<h2>Check the rule in R</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000000</span>)</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(<span class="fu">object.size</span>(x), <span class="at">units =</span> <span class="st">"MB"</span>, <span class="at">standard =</span> <span class="st">"SI"</span>)     <span class="co"># "8 MB"</span></span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">21</span>)</span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
-<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>big <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="fu">round</span>(<span class="fu">rnorm</span>(n <span class="sc">*</span> <span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">20</span>, <span class="at">sd =</span> <span class="dv">4</span>), <span class="dv">1</span>), <span class="at">ncol =</span> <span class="dv">10</span>))</span>
-<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(<span class="fu">object.size</span>(big), <span class="at">units =</span> <span class="st">"MB"</span>, <span class="at">standard =</span> <span class="st">"SI"</span>)   <span class="co"># "8 MB"</span></span>
-<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(big, <span class="st">"output/big-measurements.csv"</span>)</span>
-<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a><span class="fu">file.size</span>(<span class="st">"output/big-measurements.csv"</span>) <span class="sc">/</span> <span class="fl">1e6</span>            <span class="co"># 4.79</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Object</th>
-<th>Prediction</th>
-<th>R says</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1,000,000 numbers</td>
-<td>8 MB</td>
-<td>8,000,048 bytes</td>
-</tr>
-<tr class="even">
-<td>100,000 rows × 10 columns, in R</td>
-<td>8 MB</td>
-<td>8.0 MB</td>
-</tr>
-<tr class="odd">
-<td>same table as CSV</td>
-<td>≈ 5 MB (5 characters per value)</td>
-<td>4.79 MB</td>
-</tr>
-<tr class="even">
-<td><code>data/seedlings.csv</code>: file / object</td>
-<td>tiny</td>
-<td>592 bytes / 6,968 bytes</td>
-</tr>
-</tbody>
-</table>
+<section id="check-the-rule-in-r-one-million-numbers" class="slide level2">
+<h2>Check the rule in R: one million numbers</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<pre class="text"><code>&gt; x &lt;- rnorm(1000000)
+&gt; object.size(x)
+8000048 bytes
+&gt; format(object.size(x), units = "MB", standard = "SI")
+[1] "8 MB"
+&gt; seedlings &lt;- read_csv("data/seedlings.csv",
++                       show_col_types = FALSE)
+&gt; file.size("data/seedlings.csv")
+[1] 592
+&gt; object.size(seedlings)
+6968 bytes</code></pre>
+</div><div class="column" style="width:45%;">
 <ul>
-<li><code>object.size()</code> = bytes in RAM; <code>file.size()</code> = bytes on disk.</li>
-<li>For a 24-row table, R’s bookkeeping is bigger than the data. The rule is for <strong>large</strong> tables.</li>
+<li><code>rnorm(1000000)</code> makes one million random numbers. Prediction: 1,000,000 × 8 = 8,000,000 bytes. R says <strong>8,000,048</strong>: the rule works, plus 48 bytes of bookkeeping.</li>
+<li><code>object.size()</code> = bytes in <strong>RAM</strong>; <code>file.size()</code> = bytes on <strong>disk</strong>.</li>
+<li>The 24-plant table is 592 bytes on disk but 6,968 in R: for a tiny table R’s bookkeeping (names, types) outweighs the 96 numbers. The rule is for <strong>large</strong> tables.</li>
 </ul>
+</div></div>
 <aside class="notes">
-<p>Students run exactly this code in the practical, so the numbers match theirs. The extra 48 bytes for x are a fixed header. The seedlings tibble is 6,968 bytes because column names, types and the read_csv column specification are stored alongside 96 values.</p>
+<p>Students run exactly this in the practical, so the numbers match theirs (rnorm values differ, the size does not). standard = “SI” means 1 MB = 1,000,000 bytes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-larger-table-in-ram-and-on-disk" class="slide level2">
+<h2>A larger table, in RAM and on disk</h2>
+<div class="columns">
+<div class="column" style="width:58%;">
+<pre class="text"><code>&gt; set.seed(21)
+&gt; n &lt;- 100000
+&gt; big &lt;- data.frame(matrix(round(rnorm(n * 10, mean = 20,
++                                      sd = 4), 1), ncol = 10))
+&gt; dim(big)
+[1] 100000     10
+&gt; format(object.size(big), units = "MB", standard = "SI")
+[1] "8 MB"
+&gt; write_csv(big, "output/big-measurements.csv")
+&gt; file.size("output/big-measurements.csv") / 1e6
+[1] 4.793725</code></pre>
+</div><div class="column" style="width:42%;">
+<ul>
+<li>100,000 rows × 10 columns of measurements such as <code>19.3</code>.</li>
+<li><strong>In R:</strong> predicted 100,000 × 10 × 8 = 8 MB; R says <strong>8 MB</strong>.</li>
+<li><strong>As CSV:</strong> about 5 characters per value (<code>19.3,</code>), so ≈ 5 MB; the file is <strong>4.79 MB</strong>.</li>
+<li><code>write_csv()</code> prints nothing, so <code>file.size()</code> shows what it wrote.</li>
+<li>Same data, two sizes: here the file is <strong>smaller</strong> than the object.</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>set.seed(21) makes everyone’s random numbers identical. matrix(…, ncol = 10) arranges the numbers in 10 columns; data.frame turns them into a table. 1e6 is one million, so dividing by it gives MB.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -521,24 +469,34 @@ Data Analysis in Life Sciences
 <section id="dna-is-text-one-byte-per-letter" class="slide level2">
 <h2>DNA is text: one byte per letter</h2>
 <div class="columns">
-<div class="column" style="width:40%;">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="st">"data/dna.txt"</span>)</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(dna)                  <span class="co"># 40</span></span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">file.size</span>(<span class="st">"data/dna.txt"</span>)   <span class="co"># 41</span></span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>bases <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(dna, <span class="at">split =</span> <span class="st">""</span>)[[<span class="dv">1</span>]]</span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bases)  <span class="co"># A 11, C 9, G 9, T 11</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="column" style="width:52%;">
+<pre class="text"><code>&gt; dna &lt;- readLines("data/dna.txt")
+&gt; dna
+[1] "ACGTACGTTTAGCCGATATACCGGTTAAACGTACGCGTAT"
+&gt; nchar(dna)
+[1] 40
+&gt; file.size("data/dna.txt")
+[1] 41
+&gt; bases &lt;- strsplit(dna, split = "")[[1]]
+&gt; table(bases)
+bases
+ A  C  G  T
+11  9  9 11</code></pre>
 <ul>
-<li>40 letters + a line ending = 41 bytes.</li>
-<li>Human genome: <strong>3.1 billion letters ≈ 3.1 GB</strong> as text.</li>
-<li>Split into separate letters in R, each costs 8 bytes: <strong>≈ 25 GB</strong>.</li>
+<li><code>nchar()</code> counts letters: 40. The file has 41 bytes: one per letter plus the line ending.</li>
+<li><code>strsplit()</code> cuts the text into single letters; <code>table()</code> counts each base.</li>
 </ul>
-</div><div class="column" style="width:60%;">
+</div><div class="column" style="width:48%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="dna-scale.svg" style="width:100.0%"></p>
 <figcaption>The 40-letter course file takes 41 bytes; the human genome as text takes about 3.1 GB, and about 25 GB as separate letters in R.</figcaption>
 </figure>
 </div>
+<ul>
+<li>Human genome: <strong>3.1 billion letters ≈ 3.1 GB</strong> as text.</li>
+<li>As separate letters in R, 8 bytes each: <strong>≈ 25 GB</strong>.</li>
+</ul>
 </div></div>
 <aside class="notes">
 <p>The sequence in data/dna.txt is invented. strsplit returns a list; [[1]] takes its first element. In R, object.size(dna) is 152 bytes and object.size(bases) is 592 bytes: separate letters cost 8 bytes each. Genome tools store sequences compactly and read them piece by piece rather than loading everything as one R vector.</p>

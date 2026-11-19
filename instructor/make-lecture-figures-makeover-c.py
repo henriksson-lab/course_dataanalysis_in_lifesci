@@ -81,3 +81,18 @@ ax.set_ylim(10, 46)
 ax.text(1.5, 12, 'diamonds: group means', ha='right', fontsize=13, color=INK)
 save(fig, '25-consolidate', 'a11-highlight.svg')
 print('Wrote pairing-intervals.svg and a11-highlight.svg')
+
+# Day 23: the ggplot shown on the slide, made by exactly that R code.
+import subprocess  # noqa: E402
+r_code = r'''
+suppressPackageStartupMessages({library(readr); library(dplyr); library(ggplot2)})
+duckweed <- read_csv("data/duckweed.csv", show_col_types = FALSE)
+available <- duckweed |> filter(!is.na(biomass_mg))
+p <- ggplot(available, aes(x = treatment, y = biomass_mg)) +
+  geom_point(position = position_jitter(width = 0.08, height = 0, seed = 23)) +
+  labs(x = "Treatment", y = "Dry biomass after seven days (mg)") +
+  theme_minimal()
+ggsave("lectures/23-mini-study/duckweed-ggplot.png", p, width = 5, height = 4, dpi = 150)
+'''
+subprocess.run(['Rscript', '-e', r_code], cwd=ROOT, check=True)
+print('Wrote duckweed-ggplot.png')

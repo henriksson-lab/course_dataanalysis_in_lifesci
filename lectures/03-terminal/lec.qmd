@@ -69,53 +69,58 @@ The username in the prompt is only an example. Distinguish the command from its 
 ## Where am I? What is here?
 
 :::: {.columns}
-::: {.column width="50%"}
-```bash
-cd
-mkdir -p introcomputing-shell/practice
-cd introcomputing-shell
-pwd
-ls
+::: {.column width="52%"}
+```text
+$ cd
+$ mkdir -p introcomputing-shell/practice
+$ cd introcomputing-shell
+$ pwd
+/home/anna/introcomputing-shell
+$ ls
+practice
 ```
 :::
-::: {.column width="50%"}
-- `cd` alone takes you to your **home** folder.
-- `mkdir -p` makes the folder, and its parent if needed.
-- `pwd` prints where you are, e.g. `/home/anna/introcomputing-shell`.
-- `ls` lists what is here. You should see `practice`.
+::: {.column width="48%"}
+- `cd` alone takes you to your **home** folder. It prints nothing.
+- `mkdir -p` makes the folder `introcomputing-shell` and `practice` inside it. Also silent.
+- `pwd` prints where you are now.
+- `ls` lists what is here: the new `practice` folder.
 :::
 ::::
 
-Run one line at a time and read what each line prints.
+Your path starts differently (`/Users/anna` on a Mac); it should **end** in `introcomputing-shell`.
 
 ::: notes
-Pause after pwd and ask several students what their path ends with. The beginning differs per person (/home/anna, /Users/anna); the end should be introcomputing-shell. Browser Downloads may be elsewhere: we are not working there.
+Pause after pwd and ask several students what their path ends with. The beginning differs per person; the end should be introcomputing-shell. Browser Downloads may be elsewhere: we are not working there. -p also means mkdir does not complain if the folder exists already.
 :::
 
 ## Move down, and back up
 
 :::: {.columns}
-::: {.column width="42%"}
-```bash
-cd practice
-mkdir seedlings
-mkdir observations
-cd seedlings
-pwd
-cd ..
-pwd
+::: {.column width="45%"}
+```text
+$ cd practice
+$ mkdir seedlings
+$ mkdir observations
+$ ls
+observations  seedlings
+$ cd seedlings
+$ pwd
+/home/anna/introcomputing-shell/practice/seedlings
+$ cd ..
+$ pwd
+/home/anna/introcomputing-shell/practice
 ```
-
-- `..` means the folder **one level up**; `~` means your home folder.
-- Before each `pwd`, predict how the path will end.
 :::
-::: {.column width="58%"}
+::: {.column width="55%"}
 ![cd moves into child folders; cd .. returns to the parent folder.](navigate-tree.svg){width="100%"}
+
+`..` means the folder **one level up**; `~` means your home folder.
 :::
 ::::
 
 ::: notes
-Expected endings: /practice/seedlings, then /practice. cd only moves into folders that already exist; it does not create anything.
+Before each pwd, ask students to predict how the path will end. cd only moves into folders that already exist; it does not create anything.
 :::
 
 ## Each window has its own location
@@ -139,6 +144,13 @@ Open a second terminal and run pwd in both. These opening commands are local con
 
 :::: {.columns}
 ::: {.column width="42%"}
+```text
+$ cd observations
+$ ls
+$ pwd
+/home/anna/introcomputing-shell/practice/observations
+```
+
 - `ls` in an empty folder prints **nothing**. The folder exists; it is just empty.
 - Many commands, such as `mkdir`, print nothing when they work.
 - A real problem prints a **message**: read it.
@@ -155,41 +167,56 @@ Run ls inside observations, then contrast with cd no-such-folder on the next sli
 ## When a command fails, you stay put
 
 :::: {.columns}
-::: {.column width="42%"}
-```bash
-cd no-such-folder
-pwd
-cd ~/introcomputing-shell
+::: {.column width="52%"}
+```text
+$ pwd
+/home/anna/introcomputing-shell/practice
+$ cd no-such-folder
+bash: cd: no-such-folder: No such file or directory
+$ pwd
+/home/anna/introcomputing-shell/practice
+$ cd Observations
+bash: cd: Observations: No such file or directory
+$ cd ~/introcomputing-shell
+$ pwd
+/home/anna/introcomputing-shell
 ```
-
-- The error says the folder does not exist. You are still where you were.
-- Check spelling and capitals: `Observations` is not `observations` on Ubuntu.
-- Lost? `cd ~/introcomputing-shell` brings you back.
 :::
-::: {.column width="58%"}
-![A failed cd leaves the current folder unchanged.](failed-cd.svg){width="100%"}
+::: {.column width="48%"}
+- The error names the folder it could not find. `pwd` shows you **did not move**.
+- Capitals matter: the folder is `observations`, so `Observations` fails on Ubuntu.
+- Lost? `cd ~/introcomputing-shell` brings you back from anywhere.
 :::
 ::::
 
 ::: notes
-Ubuntu distinguishes upper and lower case; a default Mac disk often does not. Match the real spelling anyway so the work transfers to other computers. Do not teach deleting or "repairing" anything to recover from a typo; ask "where am I and what is here?" (pwd, ls).
+A Mac with its default disk may accept Observations; match the real spelling anyway so work transfers. On a Mac with zsh the message reads "cd: no such file or directory: no-such-folder". Do not teach deleting or "repairing" anything to recover from a typo; ask "where am I and what is here?" (pwd, ls). The failed-cd.svg figure is no longer needed here; the session shows it.
 :::
 
 ## Spaces split a name in two
 
 :::: {.columns}
-::: {.column width="42%"}
-- The shell splits what you type at spaces. `mkdir field notes` makes **two** folders.
-- Quotes keep the words together: `mkdir "field notes"`.
-- Easier: use names without spaces, such as `field-notes`.
+::: {.column width="45%"}
+```text
+$ mkdir field notes
+$ ls
+field  notes
+$ mkdir "field notes"
+$ ls
+field  'field notes'  notes
+```
+
+- Without quotes the shell splits at the space: **two** folders.
+- With quotes: **one** folder, `field notes`. (`ls` shows it in quotes.)
+- Easier: names without spaces, such as `field-notes`.
 :::
-::: {.column width="58%"}
+::: {.column width="55%"}
 ![Unquoted mkdir field notes creates two folders; quoted "field notes" creates one.](quoted-arguments.svg){width="100%"}
 :::
 ::::
 
 ::: notes
-Demonstrate only in the practice folder. Ask students how many folders each line creates before running it.
+Demonstrate only in the practice folder. Ask students how many folders each line creates before running it. Older systems print the spaced name without quotes.
 :::
 
 ## Keys that save typing
@@ -208,19 +235,24 @@ Show each key live. Students who press Ctrl+C to copy and see their command disa
 ## Worked example: a route between neighbours
 
 :::: {.columns}
-::: {.column width="42%"}
-You are in `results/notes` and want `inputs`:
+::: {.column width="50%"}
+The folders were made with `mkdir -p` beforehand.
 
-```bash
-cd ../../inputs
-pwd
+```text
+$ cd route-challenge/results/notes
+$ pwd
+/home/anna/introcomputing-shell/route-challenge/results/notes
+$ cd ../../inputs
+$ pwd
+/home/anna/introcomputing-shell/route-challenge/inputs
 ```
 
-- Up once to `results`, up again to the workspace, then into `inputs`.
-- A route only works from the starting folder it was written for. Write down the start too.
+`../../inputs`: up to `results`, up to `route-challenge`, then into `inputs`.
 :::
-::: {.column width="58%"}
+::: {.column width="50%"}
 ![From notes, the route to inputs goes up two levels and then into inputs.](route-two-starts.svg){width="100%"}
+
+A route only works from the folder it was written for, so write down the start too.
 :::
 ::::
 

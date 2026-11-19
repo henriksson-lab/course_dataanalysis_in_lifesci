@@ -28,74 +28,8 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #24292e;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #24292e; } /* Normal */
-    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
-    code span.an { color: #6a737d; } /* Annotation */
-    code span.at { color: #d73a49; } /* Attribute */
-    code span.bn { color: #005cc5; } /* BaseN */
-    code span.bu { color: #d73a49; } /* BuiltIn */
-    code span.cf { color: #d73a49; } /* ControlFlow */
-    code span.ch { color: #032f62; } /* Char */
-    code span.cn { color: #005cc5; } /* Constant */
-    code span.co { color: #6a737d; } /* Comment */
-    code span.cv { color: #6a737d; } /* CommentVar */
-    code span.do { color: #6a737d; } /* Documentation */
-    code span.dt { color: #d73a49; } /* DataType */
-    code span.dv { color: #005cc5; } /* DecVal */
-    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
-    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
-    code span.fl { color: #005cc5; } /* Float */
-    code span.fu { color: #6f42c1; } /* Function */
-    code span.im { color: #032f62; } /* Import */
-    code span.in { color: #6a737d; } /* Information */
-    code span.kw { color: #d73a49; } /* Keyword */
-    code span.op { color: #24292e; } /* Operator */
-    code span.ot { color: #6f42c1; } /* Other */
-    code span.pp { color: #d73a49; } /* Preprocessor */
-    code span.re { color: #6a737d; } /* RegionMarker */
-    code span.sc { color: #005cc5; } /* SpecialChar */
-    code span.ss { color: #032f62; } /* SpecialString */
-    code span.st { color: #032f62; } /* String */
-    code span.va { color: #e36209; } /* Variable */
-    code span.vs { color: #032f62; } /* VerbatimString */
-    code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-fa0e33e6dd574061e1681ec846127080.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -324,22 +258,34 @@ Data Analysis in Life Sciences
 </section>
 <section id="in-r-check-the-pairs-then-compute-the-change" class="slide level2">
 <h2>In R: check the pairs, then compute the change</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>paired <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/paired.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">anyDuplicated</span>(paired<span class="sc">$</span>plant_id)        <span class="co"># 0: every plant appears once</span></span>
-<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>paired <span class="ot">&lt;-</span> paired <span class="sc">|&gt;</span></span>
-<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">change_umol_m2_s =</span> after_umol_m2_s <span class="sc">-</span> before_umol_m2_s)</span>
-<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(paired<span class="sc">$</span>change_umol_m2_s)         <span class="co"># 1.983</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="columns">
+<div class="column" style="width:62%;">
+<pre class="text"><code>&gt; paired &lt;- read_csv("data/paired.csv", show_col_types = FALSE)
+&gt; anyDuplicated(paired$plant_id)
+[1] 0
+&gt; paired &lt;- paired |&gt;
++   mutate(change_umol_m2_s = after_umol_m2_s - before_umol_m2_s)
+&gt; paired
+# A tibble: 10 × 4
+   plant_id before_umol_m2_s after_umol_m2_s change_umol_m2_s
+   &lt;chr&gt;               &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+ 1 L01                  5.87            6.95             1.08
+ 2 L02                  7.75           11.9              4.17
+ 3 L03                  8.81           10.1              1.31
+...
+10 L10                  6.03            8.31             2.28
+&gt; mean(paired$change_umol_m2_s)
+[1] 1.983</code></pre>
+</div><div class="column" style="width:38%;">
 <ul>
-<li><code>anyDuplicated()</code> returns 0 when no identifier is repeated: ten rows, ten plants.</li>
-<li>The new column holds <strong>one change per plant</strong>; L01’s should be +1.08. Check one by hand.</li>
+<li><code>anyDuplicated()</code> prints <code>0</code>: no plant ID appears twice, so ten rows are ten plants.</li>
+<li><code>mutate()</code> adds a fourth column with <strong>one change per plant</strong>. L01: 6.95 − 5.87 = 1.08, as by hand.</li>
 <li>The mean change is <strong>1.983 µmol m⁻² s⁻¹</strong>.</li>
+<li>R shows 11.92 as <code>11.9</code>: the printout rounds, the stored value does not.</li>
 </ul>
+</div></div>
 <aside class="notes">
-<p>These are the object and column names used in the practical page and paired-report.Rmd. Have students run it and compare L01 with the hand calculation before going further.</p>
+<p>These are the object and column names used in the practical page and paired-report.Rmd (after library(readr), library(dplyr)). The printout was trimmed with … between L03 and L10. Have students run it and compare L01 with the hand calculation before going further.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -386,53 +332,35 @@ Data Analysis in Life Sciences
 </section>
 <section id="the-paired-t-test" class="slide level2">
 <h2>The paired t-test</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>paired_comparison <span class="ot">&lt;-</span> <span class="fu">t.test</span>(paired<span class="sc">$</span>after_umol_m2_s,</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>                            paired<span class="sc">$</span>before_umol_m2_s,</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>                            <span class="at">paired =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>paired_comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<table class="caption-top">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>R prints</th>
-<th>Value</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>mean difference</code></td>
-<td><strong>1.983</strong> µmol m⁻² s⁻¹</td>
-<td>Estimated mean change, after − before</td>
-</tr>
-<tr class="even">
-<td><code>95 percent confidence interval</code></td>
-<td><strong>1.255 to 2.711</strong> µmol m⁻² s⁻¹</td>
-<td>Uncertainty in the <strong>mean</strong> change</td>
-</tr>
-<tr class="odd">
-<td><code>t</code>, <code>df</code></td>
-<td>6.16, 9</td>
-<td>df = 10 pairs − 1</td>
-</tr>
-<tr class="even">
-<td><code>p-value</code></td>
-<td><strong>0.00017</strong></td>
-<td>How surprising, if the true mean change were zero</td>
-</tr>
-</tbody>
-</table>
+<div class="columns">
+<div class="column" style="width:55%;">
+<pre class="text"><code>&gt; paired_comparison &lt;- t.test(paired$after_umol_m2_s,
++                             paired$before_umol_m2_s,
++                             paired = TRUE)
+&gt; paired_comparison
+
+        Paired t-test
+
+data:  paired$after_umol_m2_s and paired$before_umol_m2_s
+t = 6.1613, df = 9, p-value = 0.0001664
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 1.254935 2.711065
+sample estimates:
+mean difference
+          1.983</code></pre>
+</div><div class="column" style="width:45%;">
 <ul>
-<li><code>paired = TRUE</code> matches position 1 with position 1, and so on. That is why the rows must hold true pairs.</li>
-<li>The same numbers come from <code>t.test(paired$change_umol_m2_s, mu = 0)</code>: a paired test <strong>is</strong> a test of the changes against zero. It is one analysis, not two pieces of evidence.</li>
-<li>The interval is about the <strong>mean</strong> change; individual plants changed from 1.08 to 4.17.</li>
+<li><code>paired = TRUE</code> matches the first after with the first before, and so on: the rows must hold true pairs.</li>
+<li><strong>Estimate:</strong> mean change <strong>1.983</strong> µmol m⁻² s⁻¹, after − before.</li>
+<li><strong>95% CI: 1.25 to 2.71</strong>: uncertainty in the <strong>mean</strong> change. Single plants changed by 1.08 to 4.17.</li>
+<li><strong>p = 0.00017</strong>: a change this large would be very rare if the true mean change were zero.</li>
+<li><code>df = 9</code>: ten pairs minus one.</li>
+<li><code>t.test(paired$change_umol_m2_s, mu = 0)</code> prints the same numbers: it is the same analysis.</li>
 </ul>
+</div></div>
 <aside class="notes">
-<p>First vector after, second before, so the estimate is after minus before. Ten independent units, not twenty. Run the one-sample version live and show that estimate, interval and p agree to the last digit. Do not present the second call as confirming evidence.</p>
+<p>First vector after, second before, so the estimate is after minus before. Ten independent units, not twenty. Run the one-sample version live and show that estimate, interval and p agree. Do not present the second call as confirming evidence. The t value is the mean change divided by its standard error; no need to calculate it by hand.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

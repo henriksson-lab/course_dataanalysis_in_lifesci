@@ -55,28 +55,7 @@ Motivate from the student's own future: every lab spreadsheet, field sheet and i
 This is the motivation for the whole day. Ask: if this mean went into a report, who would notice? Usually nobody, until a reviewer or a repeat experiment disagrees. The treated means are computed after the other documented repairs (labels, P18, duplicate). The correction of P21 is justified by the notebook entry, not by the fact that the value looks small.
 :::
 
-## What is wrong with this export?
 
-:::: {.columns}
-::: {.column width="45%"}
-The study has **24 plants**; `data/seedlings-messy.csv` has **25 rows**.
-
-- **P01** appears twice: one plant, two identical rows.
-- Treatment is written `control`, `Control` and `treated ` (with a trailing space).
-- **P18**'s initial length is the text `18.7 mm`.
-- **P21**'s final length is 4.38 (centimetres).
-- **P06** has no final length.
-
-`data/field-notes.txt` records what actually happened for each case.
-:::
-::: {.column width="55%"}
-![One plant, P01, produces two identical file records that point to the same measured plant.](duplicate-record.svg){width="100%"}
-:::
-::::
-
-::: notes
-Open the CSV in a text editor first so students see the raw characters. A repeated ID is a question, not automatically an error: in a design with one row per time point, repeated IDs are expected. Here the protocol says one row per plant, and the field notes confirm that the second P01 row is an import duplicate.
-:::
 
 ## Keep the original; repair in a script
 
@@ -98,22 +77,60 @@ A hand-edited spreadsheet loses the record of what was changed. A script is a re
 
 ## Inspect the entries as text first
 
-```r
-library(readr)
-library(dplyr)
-raw <- read_csv("data/seedlings-messy.csv", show_col_types = FALSE,
-                col_types = cols(.default = col_character()), trim_ws = FALSE)
-dim(raw)                                   # 25 rows, 4 columns
-unique(raw$treatment)                      # "control" "Control" "treated" "treated "
-raw |> count(plant_id) |> filter(n > 1)    # P01 appears twice
+```text
+> raw <- read_csv("data/seedlings-messy.csv", show_col_types = FALSE,
++                 col_types = cols(.default = col_character()),
++                 trim_ws = FALSE)
+> dim(raw)
+[1] 25  4
+> unique(raw$treatment)
+[1] "control"  "Control"  "treated"  "treated "
+> raw |> count(plant_id) |> filter(n > 1)
+# A tibble: 1 × 2
+  plant_id     n
+  <chr>    <int>
+1 P01          2
 ```
 
-- `col_character()` reads every column as text, so `18.7 mm` and `4.38` stay visible instead of being guessed or turned into missing values.
-- `trim_ws = FALSE` keeps the trailing space in `"treated "`; the default would hide it.
-- `count()` finds repeated IDs. Then look at **both P01 rows in full** before deciding anything.
+- `dim()`: **25 rows**, 4 columns, but the study has 24 plants.
+- `unique()` lists each different value once: **four spellings** of two treatments. Reading every column as text (`col_character()`) and keeping spaces (`trim_ws = FALSE`) makes `"treated "` visible.
+- `count()` counts the rows for each plant ID; `filter(n > 1)` keeps IDs that occur more than once: **P01**.
 
 ::: notes
-Demonstrate the printed output and point at the quoted "treated " value. We are not asking beginners to memorise importer options; explain why these options help inspect this particular file. If two rows shared an ID but disagreed in a measurement, they would need investigation, not arbitrary deletion.
+Run this live after loading readr and dplyr (library(readr), library(dplyr)), as at the top of day11-cleaning.R. Point at the quoted "treated " with its space. We are not asking beginners to memorise importer options; explain why these options help inspect this particular file.
+:::
+
+## Look at the rows that need a decision
+
+:::: {.columns}
+::: {.column width="55%"}
+```text
+> filter(raw, plant_id == "P01")
+# A tibble: 2 × 4
+  plant_id treatment initial_mm final_mm
+  <chr>    <chr>     <chr>      <chr>
+1 P01      control   25.7       44.3
+2 P01      control   25.7       44.3
+> filter(raw, plant_id %in% c("P06", "P18", "P21"))
+# A tibble: 3 × 4
+  plant_id treatment initial_mm final_mm
+  <chr>    <chr>     <chr>      <chr>
+1 P06      control   24.7       <NA>
+2 P18      treated   18.7 mm    39.7
+3 P21      treated   23.6       4.38
+```
+:::
+::: {.column width="45%"}
+- **P01:** two identical rows. The field notes say the import repeated it: one plant.
+- **P06:** no final length (`<NA>` = not available). The reading was never recorded.
+- **P18:** the initial length is text with a unit, `18.7 mm`.
+- **P21:** final 4.38 is shorter than the start, 23.6. The notebook says **43.8 mm**.
+- `%in%` keeps the rows whose ID is in the list.
+:::
+::::
+
+::: notes
+Each row is checked against data/field-notes.txt before anything is changed. In a design with one row per time point, a repeated ID would be normal; here the protocol says one row per plant. If the two P01 rows had disagreed, they would need investigation rather than deletion.
 :::
 
 ## A suspicious value is a question, not a verdict
@@ -154,21 +171,27 @@ A measured zero growth would mean that initial and final readings were equal: a 
 
 ## The repair, step by step
 
-```r
-cleaned <- raw |>
-  mutate(treatment = tolower(trimws(treatment)),                       # P03, P15 labels
-         initial_mm = if_else(plant_id == "P18", "18.7", initial_mm),  # unit text removed
-         final_mm = if_else(plant_id == "P21", "43.8", final_mm)) |>   # notebook value
-  distinct() |>                                                         # identical P01 row
-  mutate(initial_mm = parse_double(initial_mm),
-         final_mm = parse_double(final_mm),
-         growth_mm = final_mm - initial_mm)
+```text
+> cleaned <- raw |>
++   mutate(treatment = tolower(trimws(treatment)),
++          initial_mm = if_else(plant_id == "P18", "18.7", initial_mm),
++          final_mm = if_else(plant_id == "P21", "43.8", final_mm)) |>
++   distinct() |>
++   mutate(initial_mm = parse_double(initial_mm),
++          final_mm = parse_double(final_mm),
++          growth_mm = final_mm - initial_mm)
+> filter(cleaned, plant_id %in% c("P06", "P18", "P21"))
+# A tibble: 3 × 5
+  plant_id treatment initial_mm final_mm growth_mm
+  <chr>    <chr>          <dbl>    <dbl>     <dbl>
+1 P06      control         24.7     NA        NA
+2 P18      treated         18.7     39.7      21
+3 P21      treated         23.6     43.8      20.2
 ```
 
-- `trimws()` removes edge spaces; `tolower()` makes `Control` into `control`.
-- `if_else()` changes **one identified record** only, never "every small value".
-- `distinct()` removes rows that are identical in every column; we use it only because the P01 rows are identical and the notes confirm the duplicate.
-- P06 stays missing: `parse_double()` keeps the blank as `NA`.
+- `trimws()` removes edge spaces and `tolower()` turns `Control` into `control`. `if_else()` changes **only the named plant**.
+- `distinct()` drops the identical second P01 row. `parse_double()` turns the text into numbers (`<dbl>`); the blank becomes `NA`.
+- P21 now grew **20.2 mm**; P06's growth stays unknown.
 
 ::: notes
 Each line maps to one sentence in the field notes; ask students to say which. distinct(plant_id, .keep_all = TRUE) would silently keep one of two disagreeing records and is not used here. The raw object and the CSV on disk are unchanged.
@@ -178,16 +201,20 @@ Each line maps to one sentence in the field notes; ask students to say which. di
 
 :::: {.columns}
 ::: {.column width="45%"}
-```r
-nrow(cleaned)                 # 24 plants
-sum(is.na(cleaned$growth_mm)) # 1 unknown
-mean(cleaned$growth_mm)       # NA
-mean(cleaned$growth_mm, na.rm = TRUE)
-                              # 18.49 (23 plants)
+```text
+> nrow(cleaned)
+[1] 24
+> sum(is.na(cleaned$growth_mm))
+[1] 1
+> mean(cleaned$growth_mm)
+[1] NA
+> mean(cleaned$growth_mm, na.rm = TRUE)
+[1] 18.48696
 ```
 
-- `NA` from `mean()` is R telling you a value is unknown. Good.
-- `na.rm = TRUE` gives the mean of the **23 available** growths. Report it as such: "n = 23 of 24 plants".
+- `is.na()` marks unknown values; `sum()` counts them: **1**.
+- `mean()` gives `NA`: one value is unknown, so R will not guess.
+- `na.rm = TRUE` ("remove NA") averages the **23 available** growths. Report it as "n = 23 of 24 plants".
 :::
 ::: {.column width="55%"}
 ![Both groups retain twelve plant records; one control plant lacks a usable growth value, giving 11 available control growths and 12 treated.](available-counts.svg){width="100%"}
@@ -195,22 +222,33 @@ mean(cleaned$growth_mm, na.rm = TRUE)
 ::::
 
 ::: notes
-Ask students to predict both mean calls before running them. The first returns NA; the second is about 18.49 mm across 23 available growth values, both groups combined. Control has 12 records but 11 usable growths. Removing a missing value inside a mean does not remove it from the report.
+Ask students to predict both mean calls before running them. 18.49 mm is the mean of both groups combined. Control has 12 records but 11 usable growths. Removing a missing value inside a mean does not remove it from the report.
 :::
 
 ## Save, read back, and check the file on disk
 
-```r
-write_csv(cleaned, "output/seedlings-cleaned.csv")
-check_copy <- read_csv("output/seedlings-cleaned.csv", show_col_types = FALSE)
-nrow(check_copy)                      # 24
-anyDuplicated(check_copy$plant_id)    # 0: no repeated ID
-sum(is.na(check_copy$growth_mm))      # 1: P06
-check_copy |> count(treatment)        # control 12, treated 12
+:::: {.columns}
+::: {.column width="58%"}
+```text
+> write_csv(cleaned, "output/seedlings-cleaned.csv")
+> list.files("output")
+[1] "seedlings-cleaned.csv"
+> check_copy <- read_csv("output/seedlings-cleaned.csv",
++                        show_col_types = FALSE)
+> nrow(check_copy)
+[1] 24
+> anyDuplicated(check_copy$plant_id)
+[1] 0
+> sum(is.na(check_copy$growth_mm))
+[1] 1
 ```
-
-- An object in the Environment pane is not the file a colleague receives. Check the **saved** file.
-- Then restart R and rerun the whole script: the raw CSV still has 25 rows, the derived CSV has 24. That difference is expected and documented.
+:::
+::: {.column width="42%"}
+- `write_csv()` prints nothing. `list.files()` shows the new file in `output/`.
+- Reading it back checks the **saved file**, the one a colleague receives: 24 plants, no repeated ID (`anyDuplicated()` gives 0), one unknown growth.
+- Then restart R and rerun the whole script. The raw CSV still has 25 rows; the cleaned CSV has 24.
+:::
+::::
 
 ::: notes
 The output folder already exists in the course project. Restarting R is the test that the script, not leftover console work, produces the file. Students also write output/cleaning-notes.txt describing each change and the value left unknown.

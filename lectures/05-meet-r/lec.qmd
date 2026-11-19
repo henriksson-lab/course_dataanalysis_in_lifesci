@@ -90,11 +90,11 @@ RStudio also has a Terminal tab next to the Console. It is a shell, like the one
 ::: {.column width="50%"}
 In the **Console**:
 
-```r
-44.3 - 25.7
-```
-```
+```text
+> 44.3 - 25.7
 [1] 18.6
+> 32.3 - 24.3
+[1] 8
 ```
 
 P01 grew from 25.7 mm to 44.3 mm: **18.6 mm**.
@@ -102,7 +102,7 @@ P01 grew from 25.7 mm to 44.3 mm: **18.6 mm**.
 ::: {.column width="50%"}
 - `[1]` marks the first value printed. It is not part of the answer.
 - A `+` prompt means R waits for the rest. Finish the line, or press **Esc**.
-- Try P02: 32.3 − 24.3 gives `8`.
+- P02 grew 32.3 − 24.3 = **8 mm**.
 :::
 ::::
 
@@ -114,15 +114,17 @@ Everyone types this, not only watches. Then show the + prompt by typing "44.3 -"
 
 :::: {.columns}
 ::: {.column width="45%"}
-```r
-seedlings <- read.csv("data/seedlings.csv")
-plot(seedlings$initial_mm, seedlings$final_mm,
-     xlab = "Initial length (mm)",
-     ylab = "Final length (mm)")
+```text
+> seedlings <- read.csv("data/seedlings.csv")
+> nrow(seedlings)
+[1] 24
+> plot(seedlings$initial_mm, seedlings$final_mm,
++      xlab = "Initial length (mm)",
++      ylab = "Final length (mm)")
 ```
 
-- One point per plant: 24 points.
-- `seedlings` appears in **Environment**: 24 obs. of 4 variables.
+- The first line reads the file and prints nothing; `nrow()` confirms **24** plants.
+- `plot()` draws the figure on the right in the **Plots** pane: one point per plant.
 - Up is *final* length, not growth.
 :::
 ::: {.column width="55%"}

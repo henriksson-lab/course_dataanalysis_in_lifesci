@@ -28,74 +28,8 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #24292e;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #24292e; } /* Normal */
-    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
-    code span.an { color: #6a737d; } /* Annotation */
-    code span.at { color: #d73a49; } /* Attribute */
-    code span.bn { color: #005cc5; } /* BaseN */
-    code span.bu { color: #d73a49; } /* BuiltIn */
-    code span.cf { color: #d73a49; } /* ControlFlow */
-    code span.ch { color: #032f62; } /* Char */
-    code span.cn { color: #005cc5; } /* Constant */
-    code span.co { color: #6a737d; } /* Comment */
-    code span.cv { color: #6a737d; } /* CommentVar */
-    code span.do { color: #6a737d; } /* Documentation */
-    code span.dt { color: #d73a49; } /* DataType */
-    code span.dv { color: #005cc5; } /* DecVal */
-    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
-    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
-    code span.fl { color: #005cc5; } /* Float */
-    code span.fu { color: #6f42c1; } /* Function */
-    code span.im { color: #032f62; } /* Import */
-    code span.in { color: #6a737d; } /* Information */
-    code span.kw { color: #d73a49; } /* Keyword */
-    code span.op { color: #24292e; } /* Operator */
-    code span.ot { color: #6f42c1; } /* Other */
-    code span.pp { color: #d73a49; } /* Preprocessor */
-    code span.re { color: #6a737d; } /* RegionMarker */
-    code span.sc { color: #005cc5; } /* SpecialChar */
-    code span.ss { color: #032f62; } /* SpecialString */
-    code span.st { color: #032f62; } /* String */
-    code span.va { color: #e36209; } /* Variable */
-    code span.vs { color: #032f62; } /* VerbatimString */
-    code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-fa0e33e6dd574061e1681ec846127080.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -290,20 +224,68 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="repair-a-broken-analysis" class="slide level2">
-<h2>Repair a broken analysis</h2>
-<pre class="text"><code>seedling &lt;- read_csv("seedlings.csv")
-seedlings &lt;- mutate(seedlings, growth_mm = final_mm + initial_mm)
-mean(seedlings$Growth_mm)</code></pre>
-<p>What is wrong?</p>
+<section id="repair-a-broken-analysis-read-the-errors" class="slide level2">
+<h2>Repair a broken analysis: read the errors</h2>
+<p>This code should give the mean growth of the seedlings. In a fresh R session it fails:</p>
+<pre class="text"><code>&gt; seedling &lt;- read_csv("seedlings.csv")
+Error in read_csv("seedlings.csv") : could not find function "read_csv"
+&gt; library(readr)
+&gt; seedling &lt;- read_csv("seedlings.csv")
+Error in (function (path, write = FALSE, call = caller_env())  :
+  'seedlings.csv' does not exist in current working directory: ...
+&gt; seedling &lt;- read_csv("data/seedlings.csv", show_col_types = FALSE)
+&gt; seedlings &lt;- mutate(seedlings, growth_mm = final_mm + initial_mm)
+Error in mutate(seedlings, growth_mm = final_mm + initial_mm) :
+  could not find function "mutate"
+&gt; library(dplyr)
+&gt; seedlings &lt;- mutate(seedlings, growth_mm = final_mm + initial_mm)
+Error : object 'seedlings' not found</code></pre>
 <ul>
-<li><strong>Path:</strong> the file is in <code>data/</code>: <code>"data/seedlings.csv"</code>.</li>
-<li><strong>Names:</strong> <code>seedling</code> versus <code>seedlings</code>; <code>growth_mm</code> versus <code>Growth_mm</code> (R is case sensitive).</li>
-<li><strong>Meaning:</strong> growth is final <strong>minus</strong> initial. P01: 44.3 − 25.7 = <strong>18.6 mm</strong>.</li>
-<li><strong>Packages:</strong> <code>library(readr)</code> and <code>library(dplyr)</code> must come first.</li>
+<li><strong>could not find function:</strong> the package is not loaded; add <code>library()</code>.</li>
+<li><strong>does not exist in current working directory:</strong> wrong path; the file is in <code>data/</code>.</li>
+<li><strong>object not found:</strong> a name typed differently: <code>seedling</code> was created, <code>seedlings</code> was used.</li>
 </ul>
 <aside class="notes">
-<p>Let students find the problems before revealing them. The last one is the most important: code can run without error and still compute the wrong biology. Checking one row by hand catches it.</p>
+<p>Read each error aloud and ask what it means before moving on. Fix one thing at a time and run again; the next error only appears once the previous one is fixed. The “…” hides the student’s own project path. dplyr also prints a message about masked functions when loaded; it is not an error and was left out here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="code-that-runs-can-still-be-wrong" class="slide level2">
+<h2>Code that runs can still be wrong</h2>
+<div class="columns">
+<div class="column" style="width:62%;">
+<pre class="text"><code>&gt; seedlings &lt;- mutate(seedling, growth_mm = final_mm + initial_mm)
+&gt; mean(seedlings$Growth_mm)
+[1] NA
+Warning messages:
+1: Unknown or uninitialised column: `Growth_mm`.
+2: In mean.default(seedlings$Growth_mm) :
+  argument is not numeric or logical: returning NA
+&gt; mean(seedlings$growth_mm)
+[1] 63.325
+&gt; seedlings &lt;- mutate(seedling, growth_mm = final_mm - initial_mm)
+&gt; seedlings$growth_mm[1]
+[1] 18.6
+&gt; mean(seedlings$growth_mm)
+[1] 18.38333</code></pre>
+</div><div class="column" style="width:38%;">
+<ul>
+<li><code>Growth_mm</code> with a capital G is a different name, so R warns and returns <code>NA</code>.</li>
+<li>With <code>+</code>, R calculates without complaint: <strong>63.3 mm</strong> “growth” for seedlings about 20–45 mm long. Nonsense, but no error.</li>
+<li>Check one plant by hand. P01: 44.3 − 25.7 = <strong>18.6 mm</strong>. With <code>-</code> the first value matches; mean growth is <strong>18.38 mm</strong>.</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>This is the most important lesson of the station: R catches typing mistakes, not biology mistakes. Ask students to say why 63 mm cannot be growth. The repaired script goes in recovery.R.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -383,16 +365,20 @@ mean(seedlings$Growth_mm)</code></pre>
 <section id="investigate-a-high-value" class="slide level2">
 <h2>Investigate a high value</h2>
 <div class="columns">
-<div class="column" style="width:42%;">
+<div class="column" style="width:52%;">
+<pre class="text"><code>&gt; algae &lt;- read_csv("data/algae.csv", show_col_types = FALSE)
+&gt; algae |&gt; arrange(desc(biomass_mg)) |&gt; head(3)
+# A tibble: 3 × 3
+  culture_id treatment  biomass_mg
+  &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
+1 A11        reference        41.7
+2 A17        supplement       39
+3 A15        supplement       38.3</code></pre>
 <ul>
-<li>Algae data: reference culture <strong>A11 = 41.7 mg</strong>, the largest value in the file.</li>
-<li>The data dictionary records a spill for A19, but <strong>nothing wrong with A11</strong>.</li>
-<li>So A11 stays in the <strong>primary</strong> result.</li>
-<li>To see how much it matters, make a <strong>separate</strong> object:</li>
+<li><code>arrange(desc())</code> sorts from largest to smallest: <strong>A11, 41.7 mg</strong>, a reference culture, is the highest of all 24.</li>
+<li>The data dictionary records a spill for A19 but <strong>nothing wrong with A11</strong>, so A11 stays in the <strong>primary</strong> result.</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>algae_without_a11 <span class="ot">&lt;-</span> <span class="fu">filter</span>(algae,</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>  culture_id <span class="sc">!=</span> <span class="st">"A11"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column" style="width:58%;">
+</div><div class="column" style="width:48%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="a11-highlight.svg" style="width:100.0%"></p>
@@ -417,21 +403,29 @@ mean(seedlings$Growth_mm)</code></pre>
 <section id="how-much-does-a11-change-the-result" class="slide level2">
 <h2>How much does A11 change the result?</h2>
 <div class="columns">
-<div class="column" style="width:42%;">
+<div class="column" style="width:55%;">
+<pre class="text"><code>&gt; algae |&gt; group_by(treatment) |&gt;
++   summarise(mean_mg = mean(biomass_mg, na.rm = TRUE))
+# A tibble: 2 × 2
+  treatment  mean_mg
+  &lt;chr&gt;        &lt;dbl&gt;
+1 reference     28.2
+2 supplement    33.9
+&gt; algae_without_a11 &lt;- filter(algae, culture_id != "A11")
+&gt; algae_without_a11 |&gt; group_by(treatment) |&gt;
++   summarise(mean_mg = mean(biomass_mg, na.rm = TRUE))
+# A tibble: 2 × 2
+  treatment  mean_mg
+  &lt;chr&gt;        &lt;dbl&gt;
+1 reference     27.0
+2 supplement    33.9</code></pre>
+</div><div class="column" style="width:45%;">
 <ul>
-<li><strong>Primary</strong> (all available): reference <strong>28.20</strong>, supplement <strong>33.92 mg</strong>; difference <strong>5.72 mg</strong>.</li>
-<li><strong>Sensitivity check</strong> (A11 omitted): reference <strong>26.97 mg</strong>; difference <strong>6.95 mg</strong>.</li>
-<li>The supplement mean does not change; the reference n drops from 12 to 11.</li>
-<li>Report the primary result. Label the check “A11 omitted <strong>without evidence of error</strong>”.</li>
-<li>Three different issues: A19 <strong>missing</strong>, A11 <strong>high but recorded</strong>, and the study’s simplifying <strong>assumptions</strong>.</li>
+<li><strong>Primary</strong> (all available): supplement − reference = 33.92 − 28.20 = <strong>5.72 mg</strong>.</li>
+<li><strong>Without A11</strong> (a separate object; the data file is untouched): 33.92 − 26.97 = <strong>6.95 mg</strong>. Only the reference mean changes, and the reference group drops from 12 to 11 cultures.</li>
+<li>Report the primary result. Label the second “A11 omitted <strong>without evidence of error</strong>”.</li>
+<li>Three different issues: A19 <strong>missing</strong>, A11 <strong>high but recorded</strong>, and a small simulated study.</li>
 </ul>
-</div><div class="column" style="width:58%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="sensitivity-check.svg" style="width:100.0%"></p>
-<figcaption>The observed supplement-minus-reference difference is 5.72 mg with all available data and 6.95 mg when A11 is omitted; the diagnostic does not replace the primary analysis.</figcaption>
-</figure>
-</div>
 </div></div>
 <aside class="notes">
 <p>Record the steps in reports/final-investigation.txt. After rendering, check that the main figure and inline numbers come from the primary data, not from a diagnostic object left in memory.</p>

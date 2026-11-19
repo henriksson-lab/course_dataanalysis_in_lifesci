@@ -89,24 +89,37 @@ Do one subtraction on the board. Insist on writing the direction in words ("afte
 
 ## In R: check the pairs, then compute the change
 
-```r
-library(readr)
-library(dplyr)
-library(ggplot2)
-paired <- read_csv("data/paired.csv", show_col_types = FALSE)
-anyDuplicated(paired$plant_id)        # 0: every plant appears once
-
-paired <- paired |>
-  mutate(change_umol_m2_s = after_umol_m2_s - before_umol_m2_s)
-mean(paired$change_umol_m2_s)         # 1.983
+:::: {.columns}
+::: {.column width="62%"}
+```text
+> paired <- read_csv("data/paired.csv", show_col_types = FALSE)
+> anyDuplicated(paired$plant_id)
+[1] 0
+> paired <- paired |>
++   mutate(change_umol_m2_s = after_umol_m2_s - before_umol_m2_s)
+> paired
+# A tibble: 10 × 4
+   plant_id before_umol_m2_s after_umol_m2_s change_umol_m2_s
+   <chr>               <dbl>           <dbl>            <dbl>
+ 1 L01                  5.87            6.95             1.08
+ 2 L02                  7.75           11.9              4.17
+ 3 L03                  8.81           10.1              1.31
+...
+10 L10                  6.03            8.31             2.28
+> mean(paired$change_umol_m2_s)
+[1] 1.983
 ```
-
-- `anyDuplicated()` returns 0 when no identifier is repeated: ten rows, ten plants.
-- The new column holds **one change per plant**; L01's should be +1.08. Check one by hand.
+:::
+::: {.column width="38%"}
+- `anyDuplicated()` prints `0`: no plant ID appears twice, so ten rows are ten plants.
+- `mutate()` adds a fourth column with **one change per plant**. L01: 6.95 − 5.87 = 1.08, as by hand.
 - The mean change is **1.983 µmol m⁻² s⁻¹**.
+- R shows 11.92 as `11.9`: the printout rounds, the stored value does not.
+:::
+::::
 
 ::: notes
-These are the object and column names used in the practical page and paired-report.Rmd. Have students run it and compare L01 with the hand calculation before going further.
+These are the object and column names used in the practical page and paired-report.Rmd (after library(readr), library(dplyr)). The printout was trimmed with ... between L03 and L10. Have students run it and compare L01 with the hand calculation before going further.
 :::
 
 ## Look at the ten changes
@@ -129,26 +142,38 @@ The y-axis is the change, not the after reading. This is the plot students save 
 
 ## The paired t-test
 
-```r
-paired_comparison <- t.test(paired$after_umol_m2_s,
-                            paired$before_umol_m2_s,
-                            paired = TRUE)
-paired_comparison
+:::: {.columns}
+::: {.column width="55%"}
+```text
+> paired_comparison <- t.test(paired$after_umol_m2_s,
++                             paired$before_umol_m2_s,
++                             paired = TRUE)
+> paired_comparison
+
+        Paired t-test
+
+data:  paired$after_umol_m2_s and paired$before_umol_m2_s
+t = 6.1613, df = 9, p-value = 0.0001664
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 1.254935 2.711065
+sample estimates:
+mean difference
+          1.983
 ```
-
-| R prints | Value | Meaning |
-|---|---|---|
-| `mean difference` | **1.983** µmol m⁻² s⁻¹ | Estimated mean change, after − before |
-| `95 percent confidence interval` | **1.255 to 2.711** µmol m⁻² s⁻¹ | Uncertainty in the **mean** change |
-| `t`, `df` | 6.16, 9 | df = 10 pairs − 1 |
-| `p-value` | **0.00017** | How surprising, if the true mean change were zero |
-
-- `paired = TRUE` matches position 1 with position 1, and so on. That is why the rows must hold true pairs.
-- The same numbers come from `t.test(paired$change_umol_m2_s, mu = 0)`: a paired test **is** a test of the changes against zero. It is one analysis, not two pieces of evidence.
-- The interval is about the **mean** change; individual plants changed from 1.08 to 4.17.
+:::
+::: {.column width="45%"}
+- `paired = TRUE` matches the first after with the first before, and so on: the rows must hold true pairs.
+- **Estimate:** mean change **1.983** µmol m⁻² s⁻¹, after − before.
+- **95% CI: 1.25 to 2.71**: uncertainty in the **mean** change. Single plants changed by 1.08 to 4.17.
+- **p = 0.00017**: a change this large would be very rare if the true mean change were zero.
+- `df = 9`: ten pairs minus one.
+- `t.test(paired$change_umol_m2_s, mu = 0)` prints the same numbers: it is the same analysis.
+:::
+::::
 
 ::: notes
-First vector after, second before, so the estimate is after minus before. Ten independent units, not twenty. Run the one-sample version live and show that estimate, interval and p agree to the last digit. Do not present the second call as confirming evidence.
+First vector after, second before, so the estimate is after minus before. Ten independent units, not twenty. Run the one-sample version live and show that estimate, interval and p agree. Do not present the second call as confirming evidence. The t value is the mean change divided by its standard error; no need to calculate it by hand.
 :::
 
 ## Why not use Day 17's Welch test?

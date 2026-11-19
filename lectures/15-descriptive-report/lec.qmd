@@ -77,53 +77,70 @@ Distinguish methods (what was done) from results (what was found). A caption nam
 
 ## Data and methods: show the checks
 
-```r
-library(readr)
-library(dplyr)
-seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE)
-anyDuplicated(seedlings$plant_id)   # 0: each plant ID appears once
-seedlings |> count(treatment)       # control 12, treated 12
-sum(is.na(seedlings$initial_mm))    # 0 missing
-sum(is.na(seedlings$final_mm))      # 0 missing
-seedlings <- mutate(seedlings, growth_mm = final_mm - initial_mm)
+:::: {.columns}
+::: {.column width="55%"}
+```text
+> seedlings <- read_csv("data/seedlings.csv",
++                       show_col_types = FALSE)
+> anyDuplicated(seedlings$plant_id)
+[1] 0
+> seedlings |> count(treatment)
+# A tibble: 2 × 2
+  treatment     n
+  <chr>     <int>
+1 control      12
+2 treated      12
+> sum(is.na(seedlings$initial_mm))
+[1] 0
+> sum(is.na(seedlings$final_mm))
+[1] 0
+> seedlings <- mutate(seedlings,
++                     growth_mm = final_mm - initial_mm)
 ```
-
-- These are Day 11's checks, now **inside the report**: a reader sees what was checked and the result.
-- `anyDuplicated()` returns 0 when there is no repeated ID; a positive number is the **position** of the first repeat.
-- In the text: "24 plants (12 per group), no missing lengths, growth = final − initial length (mm)."
+:::
+::: {.column width="45%"}
+- These are Day 11's checks, now **inside the report**, so a reader sees what was checked and what came out.
+- `anyDuplicated()` gives **0**: no plant ID is repeated.
+- **12 plants per group**, **no missing lengths**.
+- In the methods text: "24 plants (12 per group), no missing lengths; growth = final − initial length (mm)."
+:::
+::::
 
 ::: notes
-Include only checking output that helps the reader; keep the code in the source either way. If the repaired Day 11 file is used, the methods must state the source and that P06 is unavailable, and every count must use 23 usable growths.
+Include only checking output that helps the reader; keep the code in the source either way. A positive anyDuplicated() result would be the position of the first repeated ID. If the repaired Day 11 file is used, the methods must state the source and that P06 is unavailable, and every count must use 23 usable growths.
 :::
 
 ## Results: a table and a figure that agree
 
 :::: {.columns}
-::: {.column width="48%"}
-```r
-group_summary <- seedlings |>
-  group_by(treatment) |>
-  summarise(n_observed = sum(!is.na(growth_mm)),
-    mean_mm = mean(growth_mm, na.rm = TRUE),
-    median_mm = median(growth_mm, na.rm = TRUE),
-    sd_mm = sd(growth_mm, na.rm = TRUE),
-    .groups = "drop")
-knitr::kable(group_summary, digits = 2,
-  caption = "Growth by treatment; lengths in mm.")
+::: {.column width="52%"}
+```text
+> group_summary <- seedlings |>
++   group_by(treatment) |>
++   summarise(n_observed = sum(!is.na(growth_mm)),
++     mean_mm = mean(growth_mm, na.rm = TRUE),
++     median_mm = median(growth_mm, na.rm = TRUE),
++     sd_mm = sd(growth_mm, na.rm = TRUE),
++     .groups = "drop")
+> knitr::kable(group_summary, digits = 2)
+
+|treatment | n_observed| mean_mm| median_mm| sd_mm|
+|:---------|----------:|-------:|---------:|-----:|
+|control   |         12|   15.28|     15.65|  3.19|
+|treated   |         12|   21.49|     20.85|  4.87|
 ```
 
-- `knitr::kable()` prints a tidy table, rounded to 2 decimals.
-- The table is made **by code**: if the data change, the table changes too.
+- In the Console `kable()` prints this text; in the rendered report it becomes a **neat table**, rounded to 2 decimals.
 :::
-::: {.column width="52%"}
-![Individual growth measurements as small dots, with red diamonds marking the control mean of 15.28 and the treated mean of 21.49 millimetres.](../13-group-summaries/individuals-and-means.svg){width="100%"}
+::: {.column width="48%"}
+![The Day 13 figure: one dot per plant and a red diamond at each group mean, 15.28 millimetres for control and 21.49 for treated.](../13-group-summaries/group-plot.png){width="100%"}
 
-Reuse the Day 13 figure: plants as dots, means as diamonds, a caption with n and units.
+The figure from Day 13, with a caption naming the unit, the symbols and n.
 :::
 ::::
 
 ::: notes
-Control: n 12, mean 15.28, median 15.65, SD 3.19 mm; treated: n 12, mean 21.49, median 20.85, SD 4.87 mm. A caption must make clear that SD describes spread among plants; this report has no confidence intervals. Do not paste a screenshot of the Environment pane.
+The table is calculated when the report renders, so if the data change, the table changes with them. A caption must make clear that SD describes spread among plants; this report has no confidence intervals. Do not paste a screenshot of the Environment pane.
 :::
 
 ## Interpretation: claims at the level of the evidence
@@ -173,21 +190,28 @@ The literal inline code is shown with escaped characters so this slide does not 
 ## Keep the report where its paths work
 
 :::: {.columns}
-::: {.column width="42%"}
+::: {.column width="45%"}
 - Save `descriptive-report.Rmd` at the **project root**, beside `data/` and `output/`.
 - Then `"data/seedlings.csv"` means the same file on every computer that has the project.
 - A path like `C:/Users/anna/Downloads/...` works only on Anna's laptop.
-- Render from the **R Console**, putting the HTML into `reports/`:
-
-`rmarkdown::render("descriptive-report.Rmd", output_dir = "reports")`
+- Render from the **R Console**; `output_dir` puts the HTML into `reports/`.
 :::
-::: {.column width="58%"}
-![The report source sits at the project root beside its data and output folders; a personal absolute path would not move with the folder.](portable-project.svg){width="100%"}
+::: {.column width="55%"}
+![The report source sits at the project root beside its data and output folders; a personal absolute path would not move with the folder.](portable-project.svg){width="90%"}
 :::
 ::::
 
+```text
+> rmarkdown::render("descriptive-report.Rmd", output_dir = "reports")
+processing file: descriptive-report.Rmd
+...
+Output created: reports/descriptive-report.html
+> list.files("reports")
+[1] "descriptive-report.html"
+```
+
 ::: notes
-Knitting resolves relative paths from the report's own folder, so moving the .Rmd into reports/ would break data/ paths. The output_dir argument places the HTML in reports/ while the source stays at the root. Never put a render call inside the report itself: a report must not try to render itself.
+Render prints a progress log; the line to look for is "Output created". Knitting resolves relative paths from the report's own folder, so moving the .Rmd into reports/ would break data/ paths. Never put a render call inside the report itself: a report must not try to render itself.
 :::
 
 ## Render from files, not from memory

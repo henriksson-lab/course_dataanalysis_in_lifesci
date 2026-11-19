@@ -70,8 +70,8 @@ columns**, so all 24 plants arrived. `names()` lists the columns, `plant_id`,
 `plant_id` and `treatment` are text (`chr`), the two lengths are numbers (`num`).
 `show_col_types = FALSE` only hides a message; it does not check anything for you.
 
-Read the first row aloud: plant **P01**, in the **control** group, was **25.7 mm**
-at the start and **44.3 mm** seven days later. Each row is one plant and each
+The first row says that plant **P01**, in the **control** group, was **25.7 mm**
+long at the start and **44.3 mm** seven days later. Each row is one plant and each
 column one variable. The two lengths in a row are the same plant measured twice,
 so the table describes 24 plants, not 48.
 

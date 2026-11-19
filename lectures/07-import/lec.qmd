@@ -74,17 +74,19 @@ Same disk versus memory distinction as week 1 and Day 6. Open seedlings.csv in a
 ## First: is R looking in the right folder?
 
 :::: {.columns}
-::: {.column width="45%"}
-```r
-getwd()
-file.exists("data/seedlings.csv")
+::: {.column width="47%"}
+```text
+> getwd()
+[1] "C:/Users/anna/Documents/introcomputing-course"
+> file.exists("data/seedlings.csv")
+[1] TRUE
 ```
 
-- `getwd()` should print your **project folder**, not `data`.
-- The second line should print `TRUE`.
+- `getwd()` prints the folder R works in: your **project folder**. Your path starts differently.
+- `TRUE`: there is a `data/seedlings.csv` inside it.
 - `data/seedlings.csv` is a **relative path**: it starts from the project folder, so it works on a classmate's computer too.
 :::
-::: {.column width="55%"}
+::: {.column width="53%"}
 ![The course project folder contains data with seedlings.csv, next to output and reports.](project-relative-path.svg){width="100%"}
 :::
 ::::
@@ -98,27 +100,36 @@ Common causes of FALSE: working inside the ZIP preview, an extra folder level fr
 ## Import and inspect
 
 :::: {.columns}
-::: {.column width="50%"}
-```r
-library(readr)
-seedlings <- read_csv("data/seedlings.csv",
-                      show_col_types = FALSE)
-head(seedlings)
-dim(seedlings)
-names(seedlings)
-str(seedlings)
+::: {.column width="58%"}
+```text
+> library(readr)
+> seedlings <- read_csv("data/seedlings.csv",
++                       show_col_types = FALSE)
+> dim(seedlings)
+[1] 24  4
+> head(seedlings)
+# A tibble: 6 × 4
+  plant_id treatment initial_mm final_mm
+  <chr>    <chr>          <dbl>    <dbl>
+1 P01      control         25.7     44.3
+2 P02      control         24.3     32.3
+3 P03      control         18       32.9
+4 P04      control         22.2     40.2
+5 P05      control         19.6     33  
+6 P06      control         24.7     40.7
 ```
 :::
-::: {.column width="50%"}
-- `library(readr)` loads the importer. Installed once; loaded in every new session.
-- `head()` shows the first 6 rows only, not the whole table.
-- `dim()`: **24 rows, 4 columns**.
-- `str()`: `plant_id` and `treatment` are text (`chr`); the lengths are numbers (`num`).
+::: {.column width="42%"}
+- `library(readr)` loads the package that has `read_csv()`. Installed once; loaded in every new session.
+- `read_csv()` reads the file into a **table** called `seedlings`. It prints nothing.
+- `dim()`: **24 rows, 4 columns**. All 24 plants arrived.
+- `head()` shows the first 6 rows only. A **tibble** is R's name for this kind of table.
+- Under each column name, its type: `<chr>` is text, `<dbl>` is a number.
 :::
 ::::
 
 ::: notes
-read_csv returns a tibble, a kind of table. show_col_types = FALSE only hides a message; it does not replace looking at the types with str(). Have students copy column names from names() rather than typing from memory.
+show_col_types = FALSE only hides a message; it does not replace looking at the types. names(seedlings) lists the column names, and str(seedlings) gives the same type information in another layout. Have students copy column names from names() rather than typing from memory.
 :::
 
 ## What does one row mean?
@@ -141,69 +152,117 @@ Read P01's row aloud. The header is not an observation. Units, random allocation
 
 ## One column, one vector
 
-```r
-seedlings$initial_mm
-length(seedlings$initial_mm)    # 24
-mean(seedlings$initial_mm)      # 22.47
+:::: {.columns}
+::: {.column width="56%"}
+```text
+> seedlings$initial_mm
+ [1] 25.7 24.3 18.0 22.2 19.6 24.7 21.2 23.7
+ [9] 25.9 23.2 24.6 22.9 24.0 22.1 20.9 21.5
+[17] 25.4 18.7 22.2 18.4 23.6 21.4 22.7 22.4
+> length(seedlings$initial_mm)
+[1] 24
+> mean(seedlings$initial_mm)
+[1] 22.47083
 ```
-
+:::
+::: {.column width="44%"}
 - `$` picks one column by name and gives a vector, like those on Day 6.
-- 24 values: one per plant. The header is not counted.
-- The mean initial length is **22.47 mm**. Always give the unit: R only sees numbers.
+- `[9]` and `[17]` at the line starts number the values: the 9th, the 17th.
+- 24 values, one per plant.
+- Mean initial length **22.47 mm**. Always add the unit: R only sees numbers.
 - This mean mixes both groups, so it says nothing yet about the treatment.
+:::
+::::
 
 ::: notes
-Ask students to say the result as a full sentence with unit and what was averaged. Comparing the groups is Day 8 and week 3.
+The line breaks in the vector print depend on the width of the Console; the [n] labels shift accordingly. Ask students to say the result as a full sentence with unit and what was averaged.
 :::
 
 ## Missing is not zero
 
 :::: {.columns}
-::: {.column width="45%"}
-```r
-mean(c(10, NA, 20))                # NA
-mean(c(10, NA, 20), na.rm = TRUE)  # 15
-mean(c(10, 0, 20))                 # 10
-sum(is.na(seedlings$final_mm))     # 0
+::: {.column width="47%"}
+```text
+> mean(c(10, NA, 20))
+[1] NA
+> mean(c(10, NA, 20), na.rm = TRUE)
+[1] 15
+> mean(c(10, 0, 20))
+[1] 10
+> sum(is.na(seedlings$final_mm))
+[1] 0
 ```
 
-- `NA` = not available: no reading exists.
+- `NA` = not available: no reading exists. R will not guess, so the mean is `NA`.
 - `na.rm = TRUE` leaves it out: mean of **two** values.
-- Writing 0 instead invents a plant of zero length.
+- Writing 0 invents a plant of zero length.
+- `seedlings` has **0** missing final lengths.
 :::
-::: {.column width="55%"}
+::: {.column width="53%"}
 ![Leaving out one unavailable reading gives a mean of 15; a genuine zero gives a mean of 10.](missing-zero-means.svg){width="100%"}
 :::
 ::::
 
 ::: notes
-R refuses to give a mean when a value is NA unless asked: it will not pretend all values are known. In a report, say how many values were missing and why if known. seedlings.csv is complete; the messy version on Day 11 is not.
+is.na() gives TRUE for each missing value and sum() counts the TRUEs. In a report, say how many values were missing and why if known. The messy version on Day 11 has missing values.
 :::
 
-## Worked example: a second study
+## Worked example: a second class's data
 
 :::: {.columns}
-::: {.column width="48%"}
-```r
-transfer <- read_csv("data/seedlings-transfer.csv",
-                     show_col_types = FALSE)
-dim(transfer)                       # 18 4
-tail(transfer)
-length(unique(transfer$plant_id))   # 18
-table(transfer$treatment)           # 9 9
-sum(is.na(transfer$final_mm))       # 0
+::: {.column width="58%"}
+```text
+> transfer <- read_csv("data/seedlings-transfer.csv",
++                      show_col_types = FALSE)
+> dim(transfer)
+[1] 18  4
+> tail(transfer, 3)
+# A tibble: 3 × 4
+  plant_id treatment initial_mm final_mm
+  <chr>    <chr>          <dbl>    <dbl>
+1 T16      treated         20       39.9
+2 T17      treated         21       36  
+3 T18      treated         21.6     43  
 ```
 :::
-::: {.column width="52%"}
+::: {.column width="42%"}
+- Another class repeated the experiment with 18 seedlings. Its description promises **9 plants per group**, lengths in mm.
+- A new name, `transfer`, so `seedlings` is not overwritten.
+- `dim()`: **18 rows, 4 columns**, the same columns as before.
+- `tail()` shows the **last** rows, where `head()` cannot see problems.
+:::
+::::
+
+::: notes
+This is day07-inspection.R in the exercises. Ask students what they expect before each line.
+:::
+
+## Does it match its description?
+
+:::: {.columns}
+::: {.column width="45%"}
+```text
+> length(unique(transfer$plant_id))
+[1] 18
+> table(transfer$treatment)
+
+control treated 
+      9       9 
+> sum(is.na(transfer$final_mm))
+[1] 0
+```
+
+- `unique()` keeps each ID once: **18 different plants**, none listed twice.
+- `table()` counts each group: **9 and 9**.
+- Nothing missing. The table is what the study description promises.
+:::
+::: {.column width="55%"}
 ![The transfer study has 18 plants, nine per group.](transfer-inventory.svg){width="100%"}
 :::
 ::::
 
-- A new name, `transfer`, so the 24-plant `seedlings` table is not overwritten.
-- 18 rows, 18 distinct IDs, 9 per group, nothing missing: what the study description promises.
-
 ::: notes
-tail shows the last rows; head alone could hide problems at the end. unique() counts distinct IDs; repeated IDs would prompt investigation here because the design has one row per plant. Random allocation is stated in the design, not visible in the rows.
+Repeated IDs would prompt investigation here because the design has one row per plant. Random allocation is stated in the design, not visible in the rows.
 :::
 
 ## A plausible table can still be the wrong one
@@ -212,7 +271,16 @@ tail shows the last rows; head alone could hide problems at the end. unique() co
 ::: {.column width="42%"}
 - Two studies can have the **same column names**. Both import without errors.
 - Check the numbers against the description: 24 plants or 18? 12 or 9 per group?
-- Same for a lab table: `solutions.csv` has **6 rows, 5 columns**. Mass (g) and molar mass (g/mol) are both numbers, but adding them is meaningless.
+- Same for a lab table:
+
+```text
+> solutions <- read_csv("data/solutions.csv",
++                       show_col_types = FALSE)
+> dim(solutions)
+[1] 6 5
+```
+
+Mass (g) and molar mass (g/mol) are both numbers there, but adding them would be meaningless.
 :::
 ::: {.column width="58%"}
 ![Two study folders hold measurement tables with similar columns, one with 24 and one with 18 plant records.](project-identity.svg){width="100%"}

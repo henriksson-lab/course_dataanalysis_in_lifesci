@@ -59,7 +59,7 @@ Typical student laptop today: 8–16 GB RAM, 256 GB–1 TB SSD. Disk is many tim
 
 :::: {.columns}
 ::: {.column width="42%"}
-- A CPU has a few **cores**; each can work on a separate task. `parallel::detectCores()` counts them.
+- A CPU has a few **cores** (typically 4–16 in a laptop); each can work on a separate task. In the practical you look up how many yours has.
 - A **GPU** has thousands of simple cores doing the same small calculation at once.
 - GPUs are used for images, video and deep learning (for example protein-structure prediction).
 - This course runs on the CPU. You will hear about GPUs later; you do not need one here.
@@ -112,7 +112,7 @@ Connect to week 2: Session → Restart R, then run the script from the top. The 
 
 ![One DNA letter in a text file takes 1 byte, one grey pixel takes 1 byte, and one number in R takes 8 bytes.](bytes-per-value.svg){height=400px}
 
-A **byte** = 8 bits = one of 256 patterns. 1 kB = 1,000 bytes; 1 MB = 1,000,000; 1 GB = 1,000,000,000.
+A **bit** is a single 0 or 1. A **byte** is 8 bits: 256 possible patterns, enough for one letter or a whole number from 0 to 255. 1 kB = 1,000 bytes; 1 MB = 1,000,000; 1 GB = 1,000,000,000.
 
 ::: notes
 Three numbers carry the whole lecture: a letter of text is 1 byte, a pixel in an 8-bit grayscale image is 1 byte, and a number in R is 8 bytes. We use decimal units (1 MB = one million bytes), as disk makers do. Some programs use 1,024-based units; the difference does not matter for rough estimates.
@@ -128,32 +128,64 @@ Three numbers carry the whole lecture: a letter of text is 1 byte, a pixel in an
 Work through the arithmetic aloud: one million times ten is ten million numbers; times eight is eighty million bytes; that is 80 MB. Working space: filtering, mutate and plotting create new objects alongside the old one. The 2–3× factor is a rule of thumb, not an exact law.
 :::
 
-## Check the rule in R {.smaller}
+## Check the rule in R: one million numbers
 
-```r
-x <- rnorm(1000000)
-format(object.size(x), units = "MB", standard = "SI")     # "8 MB"
-
-set.seed(21)
-n <- 100000
-big <- data.frame(matrix(round(rnorm(n * 10, mean = 20, sd = 4), 1), ncol = 10))
-format(object.size(big), units = "MB", standard = "SI")   # "8 MB"
-write_csv(big, "output/big-measurements.csv")
-file.size("output/big-measurements.csv") / 1e6            # 4.79
+:::: {.columns}
+::: {.column width="55%"}
+```text
+> x <- rnorm(1000000)
+> object.size(x)
+8000048 bytes
+> format(object.size(x), units = "MB", standard = "SI")
+[1] "8 MB"
+> seedlings <- read_csv("data/seedlings.csv",
++                       show_col_types = FALSE)
+> file.size("data/seedlings.csv")
+[1] 592
+> object.size(seedlings)
+6968 bytes
 ```
-
-| Object | Prediction | R says |
-|---|---|---|
-| 1,000,000 numbers | 8 MB | 8,000,048 bytes |
-| 100,000 rows × 10 columns, in R | 8 MB | 8.0 MB |
-| same table as CSV | ≈ 5 MB (5 characters per value) | 4.79 MB |
-| `data/seedlings.csv`: file / object | tiny | 592 bytes / 6,968 bytes |
-
-- `object.size()` = bytes in RAM; `file.size()` = bytes on disk.
-- For a 24-row table, R's bookkeeping is bigger than the data. The rule is for **large** tables.
+:::
+::: {.column width="45%"}
+- `rnorm(1000000)` makes one million random numbers. Prediction: 1,000,000 × 8 = 8,000,000 bytes. R says **8,000,048**: the rule works, plus 48 bytes of bookkeeping.
+- `object.size()` = bytes in **RAM**; `file.size()` = bytes on **disk**.
+- The 24-plant table is 592 bytes on disk but 6,968 in R: for a tiny table R's bookkeeping (names, types) outweighs the 96 numbers. The rule is for **large** tables.
+:::
+::::
 
 ::: notes
-Students run exactly this code in the practical, so the numbers match theirs. The extra 48 bytes for x are a fixed header. The seedlings tibble is 6,968 bytes because column names, types and the read_csv column specification are stored alongside 96 values.
+Students run exactly this in the practical, so the numbers match theirs (rnorm values differ, the size does not). standard = "SI" means 1 MB = 1,000,000 bytes.
+:::
+
+## A larger table, in RAM and on disk
+
+:::: {.columns}
+::: {.column width="58%"}
+```text
+> set.seed(21)
+> n <- 100000
+> big <- data.frame(matrix(round(rnorm(n * 10, mean = 20,
++                                      sd = 4), 1), ncol = 10))
+> dim(big)
+[1] 100000     10
+> format(object.size(big), units = "MB", standard = "SI")
+[1] "8 MB"
+> write_csv(big, "output/big-measurements.csv")
+> file.size("output/big-measurements.csv") / 1e6
+[1] 4.793725
+```
+:::
+::: {.column width="42%"}
+- 100,000 rows × 10 columns of measurements such as `19.3`.
+- **In R:** predicted 100,000 × 10 × 8 = 8 MB; R says **8 MB**.
+- **As CSV:** about 5 characters per value (`19.3,`), so ≈ 5 MB; the file is **4.79 MB**.
+- `write_csv()` prints nothing, so `file.size()` shows what it wrote.
+- Same data, two sizes: here the file is **smaller** than the object.
+:::
+::::
+
+::: notes
+set.seed(21) makes everyone's random numbers identical. matrix(..., ncol = 10) arranges the numbers in 10 columns; data.frame turns them into a table. 1e6 is one million, so dividing by it gives MB.
 :::
 
 ## A CSV stores numbers as text
@@ -187,21 +219,30 @@ All values were measured in R with set.seed(21). The ID column alone is 6.4 MB i
 ## DNA is text: one byte per letter
 
 :::: {.columns}
-::: {.column width="40%"}
-```r
-dna <- readLines("data/dna.txt")
-nchar(dna)                  # 40
-file.size("data/dna.txt")   # 41
-bases <- strsplit(dna, split = "")[[1]]
-table(bases)  # A 11, C 9, G 9, T 11
+::: {.column width="52%"}
+```text
+> dna <- readLines("data/dna.txt")
+> dna
+[1] "ACGTACGTTTAGCCGATATACCGGTTAAACGTACGCGTAT"
+> nchar(dna)
+[1] 40
+> file.size("data/dna.txt")
+[1] 41
+> bases <- strsplit(dna, split = "")[[1]]
+> table(bases)
+bases
+ A  C  G  T
+11  9  9 11
 ```
 
-- 40 letters + a line ending = 41 bytes.
-- Human genome: **3.1 billion letters ≈ 3.1 GB** as text.
-- Split into separate letters in R, each costs 8 bytes: **≈ 25 GB**.
+- `nchar()` counts letters: 40. The file has 41 bytes: one per letter plus the line ending.
+- `strsplit()` cuts the text into single letters; `table()` counts each base.
 :::
-::: {.column width="60%"}
+::: {.column width="48%"}
 ![The 40-letter course file takes 41 bytes; the human genome as text takes about 3.1 GB, and about 25 GB as separate letters in R.](dna-scale.svg){width="100%"}
+
+- Human genome: **3.1 billion letters ≈ 3.1 GB** as text.
+- As separate letters in R, 8 bytes each: **≈ 25 GB**.
 :::
 ::::
 

@@ -75,48 +75,63 @@ Show both objects in the RStudio Environment pane and compare their dimensions. 
 
 ## One row per group with `group_by()` and `summarise()`
 
-```r
-seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE) |>
-  mutate(growth_mm = final_mm - initial_mm)
-group_summary <- seedlings |>
-  group_by(treatment) |>
-  summarise(n_plants = n(),
-            n_observed = sum(!is.na(growth_mm)),
-            mean_mm = mean(growth_mm, na.rm = TRUE),
-            median_mm = median(growth_mm, na.rm = TRUE),
-            sd_mm = sd(growth_mm, na.rm = TRUE),
-            .groups = "drop")
+```text
+> group_summary <- seedlings |>
++   group_by(treatment) |>
++   summarise(n_plants = n(),
++             n_observed = sum(!is.na(growth_mm)),
++             mean_mm = mean(growth_mm, na.rm = TRUE),
++             median_mm = median(growth_mm, na.rm = TRUE),
++             sd_mm = sd(growth_mm, na.rm = TRUE),
++             .groups = "drop")
+> group_summary
+# A tibble: 2 × 6
+  treatment n_plants n_observed mean_mm median_mm sd_mm
+  <chr>        <int>      <int>   <dbl>     <dbl> <dbl>
+1 control         12         12    15.3      15.7  3.19
+2 treated         12         12    21.5      20.8  4.87
 ```
 
-| treatment | n_plants | n_observed | mean_mm | median_mm | sd_mm |
-|---|---|---|---|---|---|
-| control | 12 | 12 | 15.28 | 15.65 | 3.19 |
-| treated | 12 | 12 | 21.49 | 20.85 | 4.87 |
-
-- `group_by(treatment)`: do the next step **separately for each treatment**. `summarise()` returns one row per group.
-- `n()` counts rows (plant records); `sum(!is.na(growth_mm))` counts **usable measurements** (`!` means "not").
-- `.groups = "drop"` leaves an ordinary table. Check one mean by hand: `mean(filter(seedlings, treatment == "control")$growth_mm)`.
+- `group_by(treatment)`: do the next step **separately for each treatment**; `summarise()` returns **one row per group**. Names left of `=` become columns.
+- `n()` counts rows (plant records); `sum(!is.na(growth_mm))` counts **usable values** (`!` means "not"). `.groups = "drop"` gives an ordinary table.
+- The tibble rounds what it **prints** (15.3); the table keeps full precision (15.275).
 
 ::: notes
-Start day13-groups.R with library(readr), library(dplyr) and library(ggplot2), as in the practical. Read the pipe aloud: take seedlings, then group by treatment, then summarise. The names on the left of = become column names. The values in the table are rounded for display; the object keeps full precision.
+Start day13-groups.R with library(readr), library(dplyr) and library(ggplot2), and the usual seedlings import with growth_mm, as in the practical. Read the pipe aloud: take seedlings, then group by treatment, then summarise. Check one mean by hand with mean(filter(seedlings, treatment == "control")$growth_mm), which gives 15.275.
 :::
 
 ## Always report how many plants contributed
 
 :::: {.columns}
-::: {.column width="45%"}
-- In the complete file both groups have **12 plants and 12 growths**.
-- Summarise the repaired Day 11 file (`output/seedlings-cleaned.csv`) and control has **12 plants but 11 growths**: P06 is unknown.
-- Its control mean is **15.21 mm**, not 15.28 mm: a different set of plants contributed.
-- That is why the table has both `n_plants` and `n_observed`. A reader needs the n next to every mean.
-:::
 ::: {.column width="55%"}
+The same summary on Day 11's repaired file:
+
+```text
+> cleaned <- read_csv("output/seedlings-cleaned.csv",
++                     show_col_types = FALSE)
+> cleaned |>
++   group_by(treatment) |>
++   summarise(n_plants = n(),
++             n_observed = sum(!is.na(growth_mm)),
++             mean_mm = mean(growth_mm, na.rm = TRUE),
++             .groups = "drop")
+# A tibble: 2 × 4
+  treatment n_plants n_observed mean_mm
+  <chr>        <int>      <int>   <dbl>
+1 control         12         11    15.2
+2 treated         12         12    21.5
+```
+
+- Control: **12 plants, 11 growths** (P06 unknown), so its mean is 15.21 mm, not 15.28 mm.
+- A reader needs the n next to every mean.
+:::
+::: {.column width="45%"}
 ![In the repaired file both groups keep twelve plant records, but one control plant has no usable growth value, leaving eleven.](../11-data-quality/available-counts.svg){width="100%"}
 :::
 ::::
 
 ::: notes
-Missingness changes the contributing count without inventing a zero. The counts belong beside the summaries, not hidden in an undocumented filter. The control SD in the repaired file is 3.34 mm.
+Missingness changes the contributing count without inventing a zero. The control SD in the repaired file is 3.34 mm. The counts belong beside the summaries, not hidden in an undocumented filter.
 :::
 
 ## Plot the plants, then add the means
@@ -136,18 +151,19 @@ group_plot <- ggplot(seedlings,
   labs(x = "Treatment",
        y = "Change in seedling length (mm)") +
   theme_minimal()
+group_plot
 ```
+
+- First layer: **plants** from `seedlings`; second layer: **means** from `group_summary`.
+- `height = 0`: dots move sideways only, so each stays at its measured growth.
 :::
 ::: {.column width="50%"}
-![Individual growth measurements as small dots, with red diamonds marking the control mean of 15.28 and the treated mean of 21.49 millimetres.](individuals-and-means.svg){width="100%"}
-
-- First layer: **plants** from `seedlings`. Second layer: **means** from `group_summary`.
-- `height = 0`: dots move sideways only; their measured heights never change.
+![The plot made by this code: one grey dot per plant, slightly spread sideways, and a red diamond at each group mean, 15.28 millimetres for control and 21.49 for treated.](group-plot.png){width="100%"}
 :::
 ::::
 
 ::: notes
-inherit.aes = FALSE means the second layer gets its own mapping, because group_summary has no growth_mm column. The seed makes the jitter identical each time the script runs. Ask students to find one plant above and one below each mean.
+inherit.aes = FALSE gives the second layer its own x and y, because group_summary has no growth_mm column. The seed makes the sideways jitter identical each time. Ask students to find one plant above and one below each mean, and the treated plant that grew only 12.2 mm.
 :::
 
 ## If you draw whiskers, say what they are
@@ -171,25 +187,28 @@ Ask: what could a reader infer from a caption that simply says "error bars"? Too
 ## A histogram shows the shape of a distribution
 
 :::: {.columns}
-::: {.column width="42%"}
+::: {.column width="45%"}
 ```r
 ggplot(seedlings, aes(x = growth_mm)) +
   geom_histogram(binwidth = 4,
     boundary = 0, colour = "white") +
-  facet_wrap(~ treatment, ncol = 1)
+  facet_wrap(~ treatment, ncol = 1) +
+  labs(x = "Change in seedling length (mm)",
+       y = "Number of plants") +
+  theme_minimal()
 ```
 
-- Growth is cut into **4 mm bins**; bar height = **number of plants** in each bin.
-- `facet_wrap()` gives one panel per group on a shared axis.
-- A histogram shows shape and gaps, but not individual plants or their identities.
+- Growth is cut into **4 mm bins** (intervals); bar height = **number of plants** in each.
+- `facet_wrap()` draws one panel per group on a shared axis.
+- Most controls grew 12–20 mm, most treated 20–24 mm; two treated plants form their own bar near 30 mm.
 :::
-::: {.column width="58%"}
-![Separate histograms show the counts of control and treated growth values in four-millimetre bins on a common axis.](group-histograms.svg){width="100%"}
+::: {.column width="55%"}
+![The histogram made by this code: control and treated panels on one growth axis with 4-millimetre bins; the treated bars sit further right.](group-histogram.png){width="100%"}
 :::
 ::::
 
 ::: notes
-The vertical axis counts plants, not a biological response. With 12 plants per group, every bin has only a few plants. In the treated panel, the two plants near 30 mm form their own bar.
+The vertical axis counts plants, not a biological response. A histogram shows shape and gaps, but not individual plants or their identities. With 12 plants per group every bin holds only a few plants, which is why the next slide matters.
 :::
 
 ## The bin width shapes the picture
@@ -235,17 +254,33 @@ The figure is from the second class's study (data/seedlings-transfer.csv), which
 
 ## Save the table and the figure as files
 
-```r
-write_csv(group_summary, "output/growth-summary.csv")
-ggsave("output/growth-summary.png", plot = group_plot, width = 6, height = 4)
+:::: {.columns}
+::: {.column width="58%"}
+```text
+> write_csv(group_summary, "output/growth-summary.csv")
+> ggsave("output/growth-summary.png", plot = group_plot,
++        width = 6, height = 4)
+> list.files("output")
+[1] "growth-summary.csv"    "growth-summary.png"
+[3] "seedlings-cleaned.csv"
+> read_csv("output/growth-summary.csv",
++          show_col_types = FALSE)
+# A tibble: 2 × 6
+  treatment n_plants n_observed mean_mm median_mm sd_mm
+  <chr>        <dbl>      <dbl>   <dbl>     <dbl> <dbl>
+1 control         12         12    15.3      15.7  3.19
+2 treated         12         12    21.5      20.8  4.87
 ```
-
-- A **CSV** stores the numbers; a **PNG** stores the picture. The object in R is neither until you save it.
-- Use different file names for each study, e.g. `output/day13-transfer-summary.csv`.
-- **Reader test:** close RStudio, open the PNG and CSV from the file manager. Can you find one plant, a mean, the units and the n?
+:::
+::: {.column width="42%"}
+- `write_csv()` and `ggsave()` print nothing; `list.files()` shows the two new files.
+- Reading the CSV back shows the **numbers** are in the file. The PNG holds the **picture**.
+- **Reader test:** close RStudio, open both files from the file manager. Can you find one plant, a mean, the units and the n?
+:::
+::::
 
 ::: notes
-After saving, ask students to find the two ordinary files in a file manager and say which application could open each. Restarting R and rerunning the script confirms the outputs come from the script and the raw data.
+Until they are saved, group_summary and group_plot exist only in R's memory. Use different file names for each study, e.g. output/day13-transfer-summary.csv. Restarting R and rerunning the script confirms the outputs come from the script and the raw data.
 :::
 
 ## Summary {.smaller}

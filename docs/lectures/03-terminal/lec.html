@@ -28,74 +28,8 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #24292e;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #24292e; } /* Normal */
-    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
-    code span.an { color: #6a737d; } /* Annotation */
-    code span.at { color: #d73a49; } /* Attribute */
-    code span.bn { color: #005cc5; } /* BaseN */
-    code span.bu { color: #d73a49; } /* BuiltIn */
-    code span.cf { color: #d73a49; } /* ControlFlow */
-    code span.ch { color: #032f62; } /* Char */
-    code span.cn { color: #005cc5; } /* Constant */
-    code span.co { color: #6a737d; } /* Comment */
-    code span.cv { color: #6a737d; } /* CommentVar */
-    code span.do { color: #6a737d; } /* Documentation */
-    code span.dt { color: #d73a49; } /* DataType */
-    code span.dv { color: #005cc5; } /* DecVal */
-    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
-    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
-    code span.fl { color: #005cc5; } /* Float */
-    code span.fu { color: #6f42c1; } /* Function */
-    code span.im { color: #032f62; } /* Import */
-    code span.in { color: #6a737d; } /* Information */
-    code span.kw { color: #d73a49; } /* Keyword */
-    code span.op { color: #24292e; } /* Operator */
-    code span.ot { color: #6f42c1; } /* Other */
-    code span.pp { color: #d73a49; } /* Preprocessor */
-    code span.re { color: #6a737d; } /* RegionMarker */
-    code span.sc { color: #005cc5; } /* SpecialChar */
-    code span.ss { color: #032f62; } /* SpecialString */
-    code span.st { color: #032f62; } /* String */
-    code span.va { color: #e36209; } /* Variable */
-    code span.vs { color: #032f62; } /* VerbatimString */
-    code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-fa0e33e6dd574061e1681ec846127080.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -291,23 +225,25 @@ Data Analysis in Life Sciences
 <section id="where-am-i-what-is-here" class="slide level2">
 <h2>Where am I? What is here?</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> introcomputing-shell/practice</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> introcomputing-shell</span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column" style="width:50%;">
+<div class="column" style="width:52%;">
+<pre class="text"><code>$ cd
+$ mkdir -p introcomputing-shell/practice
+$ cd introcomputing-shell
+$ pwd
+/home/anna/introcomputing-shell
+$ ls
+practice</code></pre>
+</div><div class="column" style="width:48%;">
 <ul>
-<li><code>cd</code> alone takes you to your <strong>home</strong> folder.</li>
-<li><code>mkdir -p</code> makes the folder, and its parent if needed.</li>
-<li><code>pwd</code> prints where you are, e.g.&nbsp;<code>/home/anna/introcomputing-shell</code>.</li>
-<li><code>ls</code> lists what is here. You should see <code>practice</code>.</li>
+<li><code>cd</code> alone takes you to your <strong>home</strong> folder. It prints nothing.</li>
+<li><code>mkdir -p</code> makes the folder <code>introcomputing-shell</code> and <code>practice</code> inside it. Also silent.</li>
+<li><code>pwd</code> prints where you are now.</li>
+<li><code>ls</code> lists what is here: the new <code>practice</code> folder.</li>
 </ul>
 </div></div>
-<p>Run one line at a time and read what each line prints.</p>
+<p>Your path starts differently (<code>/Users/anna</code> on a Mac); it should <strong>end</strong> in <code>introcomputing-shell</code>.</p>
 <aside class="notes">
-<p>Pause after pwd and ask several students what their path ends with. The beginning differs per person (/home/anna, /Users/anna); the end should be introcomputing-shell. Browser Downloads may be elsewhere: we are not working there.</p>
+<p>Pause after pwd and ask several students what their path ends with. The beginning differs per person; the end should be introcomputing-shell. Browser Downloads may be elsewhere: we are not working there. -p also means mkdir does not complain if the folder exists already.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -323,28 +259,29 @@ Data Analysis in Life Sciences
 <section id="move-down-and-back-up" class="slide level2">
 <h2>Move down, and back up</h2>
 <div class="columns">
-<div class="column" style="width:42%;">
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> practice</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> seedlings</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> observations</span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> seedlings</span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
-<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
-<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li><code>..</code> means the folder <strong>one level up</strong>; <code>~</code> means your home folder.</li>
-<li>Before each <code>pwd</code>, predict how the path will end.</li>
-</ul>
-</div><div class="column" style="width:58%;">
+<div class="column" style="width:45%;">
+<pre class="text"><code>$ cd practice
+$ mkdir seedlings
+$ mkdir observations
+$ ls
+observations  seedlings
+$ cd seedlings
+$ pwd
+/home/anna/introcomputing-shell/practice/seedlings
+$ cd ..
+$ pwd
+/home/anna/introcomputing-shell/practice</code></pre>
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="navigate-tree.svg" style="width:100.0%"></p>
 <figcaption>cd moves into child folders; cd .. returns to the parent folder.</figcaption>
 </figure>
 </div>
+<p><code>..</code> means the folder <strong>one level up</strong>; <code>~</code> means your home folder.</p>
 </div></div>
 <aside class="notes">
-<p>Expected endings: /practice/seedlings, then /practice. cd only moves into folders that already exist; it does not create anything.</p>
+<p>Before each pwd, ask students to predict how the path will end. cd only moves into folders that already exist; it does not create anything.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -392,6 +329,10 @@ Data Analysis in Life Sciences
 <h2>Silence often means success</h2>
 <div class="columns">
 <div class="column" style="width:42%;">
+<pre class="text"><code>$ cd observations
+$ ls
+$ pwd
+/home/anna/introcomputing-shell/practice/observations</code></pre>
 <ul>
 <li><code>ls</code> in an empty folder prints <strong>nothing</strong>. The folder exists; it is just empty.</li>
 <li>Many commands, such as <code>mkdir</code>, print nothing when they work.</li>
@@ -422,25 +363,27 @@ Data Analysis in Life Sciences
 <section id="when-a-command-fails-you-stay-put" class="slide level2">
 <h2>When a command fails, you stay put</h2>
 <div class="columns">
-<div class="column" style="width:42%;">
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> no-such-folder</span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/introcomputing-shell</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="column" style="width:52%;">
+<pre class="text"><code>$ pwd
+/home/anna/introcomputing-shell/practice
+$ cd no-such-folder
+bash: cd: no-such-folder: No such file or directory
+$ pwd
+/home/anna/introcomputing-shell/practice
+$ cd Observations
+bash: cd: Observations: No such file or directory
+$ cd ~/introcomputing-shell
+$ pwd
+/home/anna/introcomputing-shell</code></pre>
+</div><div class="column" style="width:48%;">
 <ul>
-<li>The error says the folder does not exist. You are still where you were.</li>
-<li>Check spelling and capitals: <code>Observations</code> is not <code>observations</code> on Ubuntu.</li>
-<li>Lost? <code>cd ~/introcomputing-shell</code> brings you back.</li>
+<li>The error names the folder it could not find. <code>pwd</code> shows you <strong>did not move</strong>.</li>
+<li>Capitals matter: the folder is <code>observations</code>, so <code>Observations</code> fails on Ubuntu.</li>
+<li>Lost? <code>cd ~/introcomputing-shell</code> brings you back from anywhere.</li>
 </ul>
-</div><div class="column" style="width:58%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="failed-cd.svg" style="width:100.0%"></p>
-<figcaption>A failed cd leaves the current folder unchanged.</figcaption>
-</figure>
-</div>
 </div></div>
 <aside class="notes">
-<p>Ubuntu distinguishes upper and lower case; a default Mac disk often does not. Match the real spelling anyway so the work transfers to other computers. Do not teach deleting or “repairing” anything to recover from a typo; ask “where am I and what is here?” (pwd, ls).</p>
+<p>A Mac with its default disk may accept Observations; match the real spelling anyway so work transfers. On a Mac with zsh the message reads “cd: no such file or directory: no-such-folder”. Do not teach deleting or “repairing” anything to recover from a typo; ask “where am I and what is here?” (pwd, ls). The failed-cd.svg figure is no longer needed here; the session shows it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -456,13 +399,19 @@ Data Analysis in Life Sciences
 <section id="spaces-split-a-name-in-two" class="slide level2">
 <h2>Spaces split a name in two</h2>
 <div class="columns">
-<div class="column" style="width:42%;">
+<div class="column" style="width:45%;">
+<pre class="text"><code>$ mkdir field notes
+$ ls
+field  notes
+$ mkdir "field notes"
+$ ls
+field  'field notes'  notes</code></pre>
 <ul>
-<li>The shell splits what you type at spaces. <code>mkdir field notes</code> makes <strong>two</strong> folders.</li>
-<li>Quotes keep the words together: <code>mkdir "field notes"</code>.</li>
-<li>Easier: use names without spaces, such as <code>field-notes</code>.</li>
+<li>Without quotes the shell splits at the space: <strong>two</strong> folders.</li>
+<li>With quotes: <strong>one</strong> folder, <code>field notes</code>. (<code>ls</code> shows it in quotes.)</li>
+<li>Easier: names without spaces, such as <code>field-notes</code>.</li>
 </ul>
-</div><div class="column" style="width:58%;">
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="quoted-arguments.svg" style="width:100.0%"></p>
@@ -471,7 +420,7 @@ Data Analysis in Life Sciences
 </div>
 </div></div>
 <aside class="notes">
-<p>Demonstrate only in the practice folder. Ask students how many folders each line creates before running it.</p>
+<p>Demonstrate only in the practice folder. Ask students how many folders each line creates before running it. Older systems print the spaced name without quotes.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -510,21 +459,23 @@ Data Analysis in Life Sciences
 <section id="worked-example-a-route-between-neighbours" class="slide level2">
 <h2>Worked example: a route between neighbours</h2>
 <div class="columns">
-<div class="column" style="width:42%;">
-<p>You are in <code>results/notes</code> and want <code>inputs</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../../inputs</span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Up once to <code>results</code>, up again to the workspace, then into <code>inputs</code>.</li>
-<li>A route only works from the starting folder it was written for. Write down the start too.</li>
-</ul>
-</div><div class="column" style="width:58%;">
+<div class="column" style="width:50%;">
+<p>The folders were made with <code>mkdir -p</code> beforehand.</p>
+<pre class="text"><code>$ cd route-challenge/results/notes
+$ pwd
+/home/anna/introcomputing-shell/route-challenge/results/notes
+$ cd ../../inputs
+$ pwd
+/home/anna/introcomputing-shell/route-challenge/inputs</code></pre>
+<p><code>../../inputs</code>: up to <code>results</code>, up to <code>route-challenge</code>, then into <code>inputs</code>.</p>
+</div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="route-two-starts.svg" style="width:100.0%"></p>
 <figcaption>From notes, the route to inputs goes up two levels and then into inputs.</figcaption>
 </figure>
 </div>
+<p>A route only works from the folder it was written for, so write down the start too.</p>
 </div></div>
 <aside class="notes">
 <p>This is the route challenge in the exercises. Have students draw the tree and predict before running. If they run the same route from a different folder it fails or lands somewhere else: that is the point.</p>

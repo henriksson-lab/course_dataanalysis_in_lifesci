@@ -95,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-fa0e33e6dd574061e1681ec846127080.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -296,53 +296,27 @@ Data Analysis in Life Sciences
 </section>
 <section id="one-row-per-group-with-group_by-and-summarise" class="slide level2">
 <h2>One row per group with <code>group_by()</code> and <code>summarise()</code></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>group_summary <span class="ot">&lt;-</span> seedlings <span class="sc">|&gt;</span></span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(treatment) <span class="sc">|&gt;</span></span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_plants =</span> <span class="fu">n</span>(),</span>
-<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">n_observed =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(growth_mm)),</span>
-<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_mm =</span> <span class="fu">mean</span>(growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">median_mm =</span> <span class="fu">median</span>(growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_mm =</span> <span class="fu">sd</span>(growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-10"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>treatment</th>
-<th>n_plants</th>
-<th>n_observed</th>
-<th>mean_mm</th>
-<th>median_mm</th>
-<th>sd_mm</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>control</td>
-<td>12</td>
-<td>12</td>
-<td>15.28</td>
-<td>15.65</td>
-<td>3.19</td>
-</tr>
-<tr class="even">
-<td>treated</td>
-<td>12</td>
-<td>12</td>
-<td>21.49</td>
-<td>20.85</td>
-<td>4.87</td>
-</tr>
-</tbody>
-</table>
+<pre class="text"><code>&gt; group_summary &lt;- seedlings |&gt;
++   group_by(treatment) |&gt;
++   summarise(n_plants = n(),
++             n_observed = sum(!is.na(growth_mm)),
++             mean_mm = mean(growth_mm, na.rm = TRUE),
++             median_mm = median(growth_mm, na.rm = TRUE),
++             sd_mm = sd(growth_mm, na.rm = TRUE),
++             .groups = "drop")
+&gt; group_summary
+# A tibble: 2 × 6
+  treatment n_plants n_observed mean_mm median_mm sd_mm
+  &lt;chr&gt;        &lt;int&gt;      &lt;int&gt;   &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
+1 control         12         12    15.3      15.7  3.19
+2 treated         12         12    21.5      20.8  4.87</code></pre>
 <ul>
-<li><code>group_by(treatment)</code>: do the next step <strong>separately for each treatment</strong>. <code>summarise()</code> returns one row per group.</li>
-<li><code>n()</code> counts rows (plant records); <code>sum(!is.na(growth_mm))</code> counts <strong>usable measurements</strong> (<code>!</code> means “not”).</li>
-<li><code>.groups = "drop"</code> leaves an ordinary table. Check one mean by hand: <code>mean(filter(seedlings, treatment == "control")$growth_mm)</code>.</li>
+<li><code>group_by(treatment)</code>: do the next step <strong>separately for each treatment</strong>; <code>summarise()</code> returns <strong>one row per group</strong>. Names left of <code>=</code> become columns.</li>
+<li><code>n()</code> counts rows (plant records); <code>sum(!is.na(growth_mm))</code> counts <strong>usable values</strong> (<code>!</code> means “not”). <code>.groups = "drop"</code> gives an ordinary table.</li>
+<li>The tibble rounds what it <strong>prints</strong> (15.3); the table keeps full precision (15.275).</li>
 </ul>
 <aside class="notes">
-<p>Start day13-groups.R with library(readr), library(dplyr) and library(ggplot2), as in the practical. Read the pipe aloud: take seedlings, then group by treatment, then summarise. The names on the left of = become column names. The values in the table are rounded for display; the object keeps full precision.</p>
+<p>Start day13-groups.R with library(readr), library(dplyr) and library(ggplot2), and the usual seedlings import with growth_mm, as in the practical. Read the pipe aloud: take seedlings, then group by treatment, then summarise. Check one mean by hand with mean(filter(seedlings, treatment == “control”)$growth_mm), which gives 15.275.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -358,14 +332,26 @@ Data Analysis in Life Sciences
 <section id="always-report-how-many-plants-contributed" class="slide level2">
 <h2>Always report how many plants contributed</h2>
 <div class="columns">
-<div class="column" style="width:45%;">
+<div class="column" style="width:55%;">
+<p>The same summary on Day 11’s repaired file:</p>
+<pre class="text"><code>&gt; cleaned &lt;- read_csv("output/seedlings-cleaned.csv",
++                     show_col_types = FALSE)
+&gt; cleaned |&gt;
++   group_by(treatment) |&gt;
++   summarise(n_plants = n(),
++             n_observed = sum(!is.na(growth_mm)),
++             mean_mm = mean(growth_mm, na.rm = TRUE),
++             .groups = "drop")
+# A tibble: 2 × 4
+  treatment n_plants n_observed mean_mm
+  &lt;chr&gt;        &lt;int&gt;      &lt;int&gt;   &lt;dbl&gt;
+1 control         12         11    15.2
+2 treated         12         12    21.5</code></pre>
 <ul>
-<li>In the complete file both groups have <strong>12 plants and 12 growths</strong>.</li>
-<li>Summarise the repaired Day 11 file (<code>output/seedlings-cleaned.csv</code>) and control has <strong>12 plants but 11 growths</strong>: P06 is unknown.</li>
-<li>Its control mean is <strong>15.21 mm</strong>, not 15.28 mm: a different set of plants contributed.</li>
-<li>That is why the table has both <code>n_plants</code> and <code>n_observed</code>. A reader needs the n next to every mean.</li>
+<li>Control: <strong>12 plants, 11 growths</strong> (P06 unknown), so its mean is 15.21 mm, not 15.28 mm.</li>
+<li>A reader needs the n next to every mean.</li>
 </ul>
-</div><div class="column" style="width:55%;">
+</div><div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../11-data-quality/available-counts.svg" style="width:100.0%"></p>
@@ -374,7 +360,7 @@ Data Analysis in Life Sciences
 </div>
 </div></div>
 <aside class="notes">
-<p>Missingness changes the contributing count without inventing a zero. The counts belong beside the summaries, not hidden in an undocumented filter. The control SD in the repaired file is 3.34 mm.</p>
+<p>Missingness changes the contributing count without inventing a zero. The control SD in the repaired file is 3.34 mm. The counts belong beside the summaries, not hidden in an undocumented filter.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -391,32 +377,33 @@ Data Analysis in Life Sciences
 <h2>Plot the plants, then add the means</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>group_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(seedlings,</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> growth_mm)) <span class="sc">+</span></span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(</span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">seed =</span> <span class="dv">13</span>),</span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
-<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> group_summary,</span>
-<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> mean_mm),</span>
-<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">shape =</span> <span class="dv">18</span>,</span>
-<span id="cb2-9"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">4</span>, <span class="at">colour =</span> <span class="st">"darkred"</span>) <span class="sc">+</span></span>
-<span id="cb2-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Treatment"</span>,</span>
-<span id="cb2-11"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Change in seedling length (mm)"</span>) <span class="sc">+</span></span>
-<span id="cb2-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>group_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(seedlings,</span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> growth_mm)) <span class="sc">+</span></span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(</span>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">seed =</span> <span class="dv">13</span>),</span>
+<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> group_summary,</span>
+<span id="cb3-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> mean_mm),</span>
+<span id="cb3-8"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">shape =</span> <span class="dv">18</span>,</span>
+<span id="cb3-9"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">4</span>, <span class="at">colour =</span> <span class="st">"darkred"</span>) <span class="sc">+</span></span>
+<span id="cb3-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Treatment"</span>,</span>
+<span id="cb3-11"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Change in seedling length (mm)"</span>) <span class="sc">+</span></span>
+<span id="cb3-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb3-13"><a aria-hidden="true" tabindex="-1"></a>group_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>First layer: <strong>plants</strong> from <code>seedlings</code>; second layer: <strong>means</strong> from <code>group_summary</code>.</li>
+<li><code>height = 0</code>: dots move sideways only, so each stays at its measured growth.</li>
+</ul>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="individuals-and-means.svg" style="width:100.0%"></p>
-<figcaption>Individual growth measurements as small dots, with red diamonds marking the control mean of 15.28 and the treated mean of 21.49 millimetres.</figcaption>
+<p><img data-src="group-plot.png" style="width:100.0%"></p>
+<figcaption>The plot made by this code: one grey dot per plant, slightly spread sideways, and a red diamond at each group mean, 15.28 millimetres for control and 21.49 for treated.</figcaption>
 </figure>
 </div>
-<ul>
-<li>First layer: <strong>plants</strong> from <code>seedlings</code>. Second layer: <strong>means</strong> from <code>group_summary</code>.</li>
-<li><code>height = 0</code>: dots move sideways only; their measured heights never change.</li>
-</ul>
 </div></div>
 <aside class="notes">
-<p>inherit.aes = FALSE means the second layer gets its own mapping, because group_summary has no growth_mm column. The seed makes the jitter identical each time the script runs. Ask students to find one plant above and one below each mean.</p>
+<p>inherit.aes = FALSE gives the second layer its own x and y, because group_summary has no growth_mm column. The seed makes the sideways jitter identical each time. Ask students to find one plant above and one below each mean, and the treated plant that grew only 12.2 mm.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -464,26 +451,29 @@ Data Analysis in Life Sciences
 <section id="a-histogram-shows-the-shape-of-a-distribution" class="slide level2">
 <h2>A histogram shows the shape of a distribution</h2>
 <div class="columns">
-<div class="column" style="width:42%;">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(seedlings, <span class="fu">aes</span>(<span class="at">x =</span> growth_mm)) <span class="sc">+</span></span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">4</span>,</span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">boundary =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> treatment, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(seedlings, <span class="fu">aes</span>(<span class="at">x =</span> growth_mm)) <span class="sc">+</span></span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">4</span>,</span>
+<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">boundary =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> treatment, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Change in seedling length (mm)"</span>,</span>
+<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Number of plants"</span>) <span class="sc">+</span></span>
+<span id="cb4-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Growth is cut into <strong>4 mm bins</strong>; bar height = <strong>number of plants</strong> in each bin.</li>
-<li><code>facet_wrap()</code> gives one panel per group on a shared axis.</li>
-<li>A histogram shows shape and gaps, but not individual plants or their identities.</li>
+<li>Growth is cut into <strong>4 mm bins</strong> (intervals); bar height = <strong>number of plants</strong> in each.</li>
+<li><code>facet_wrap()</code> draws one panel per group on a shared axis.</li>
+<li>Most controls grew 12–20 mm, most treated 20–24 mm; two treated plants form their own bar near 30 mm.</li>
 </ul>
-</div><div class="column" style="width:58%;">
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="group-histograms.svg" style="width:100.0%"></p>
-<figcaption>Separate histograms show the counts of control and treated growth values in four-millimetre bins on a common axis.</figcaption>
+<p><img data-src="group-histogram.png" style="width:100.0%"></p>
+<figcaption>The histogram made by this code: control and treated panels on one growth axis with 4-millimetre bins; the treated bars sit further right.</figcaption>
 </figure>
 </div>
 </div></div>
 <aside class="notes">
-<p>The vertical axis counts plants, not a biological response. With 12 plants per group, every bin has only a few plants. In the treated panel, the two plants near 30 mm form their own bar.</p>
+<p>The vertical axis counts plants, not a biological response. A histogram shows shape and gaps, but not individual plants or their identities. With 12 plants per group every bin holds only a few plants, which is why the next slide matters.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -564,15 +554,30 @@ Data Analysis in Life Sciences
 </section>
 <section id="save-the-table-and-the-figure-as-files" class="slide level2">
 <h2>Save the table and the figure as files</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(group_summary, <span class="st">"output/growth-summary.csv"</span>)</span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/growth-summary.png"</span>, <span class="at">plot =</span> group_plot, <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="columns">
+<div class="column" style="width:58%;">
+<pre class="text"><code>&gt; write_csv(group_summary, "output/growth-summary.csv")
+&gt; ggsave("output/growth-summary.png", plot = group_plot,
++        width = 6, height = 4)
+&gt; list.files("output")
+[1] "growth-summary.csv"    "growth-summary.png"
+[3] "seedlings-cleaned.csv"
+&gt; read_csv("output/growth-summary.csv",
++          show_col_types = FALSE)
+# A tibble: 2 × 6
+  treatment n_plants n_observed mean_mm median_mm sd_mm
+  &lt;chr&gt;        &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
+1 control         12         12    15.3      15.7  3.19
+2 treated         12         12    21.5      20.8  4.87</code></pre>
+</div><div class="column" style="width:42%;">
 <ul>
-<li>A <strong>CSV</strong> stores the numbers; a <strong>PNG</strong> stores the picture. The object in R is neither until you save it.</li>
-<li>Use different file names for each study, e.g.&nbsp;<code>output/day13-transfer-summary.csv</code>.</li>
-<li><strong>Reader test:</strong> close RStudio, open the PNG and CSV from the file manager. Can you find one plant, a mean, the units and the n?</li>
+<li><code>write_csv()</code> and <code>ggsave()</code> print nothing; <code>list.files()</code> shows the two new files.</li>
+<li>Reading the CSV back shows the <strong>numbers</strong> are in the file. The PNG holds the <strong>picture</strong>.</li>
+<li><strong>Reader test:</strong> close RStudio, open both files from the file manager. Can you find one plant, a mean, the units and the n?</li>
 </ul>
+</div></div>
 <aside class="notes">
-<p>After saving, ask students to find the two ordinary files in a file manager and say which application could open each. Restarting R and rerunning the script confirms the outputs come from the script and the raw data.</p>
+<p>Until they are saved, group_summary and group_plot exist only in R’s memory. Use different file names for each study, e.g.&nbsp;output/day13-transfer-summary.csv. Restarting R and rerunning the script confirms the outputs come from the script and the raw data.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

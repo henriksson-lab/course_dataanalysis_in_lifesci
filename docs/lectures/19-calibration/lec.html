@@ -28,74 +28,8 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #24292e;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #24292e; } /* Normal */
-    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
-    code span.an { color: #6a737d; } /* Annotation */
-    code span.at { color: #d73a49; } /* Attribute */
-    code span.bn { color: #005cc5; } /* BaseN */
-    code span.bu { color: #d73a49; } /* BuiltIn */
-    code span.cf { color: #d73a49; } /* ControlFlow */
-    code span.ch { color: #032f62; } /* Char */
-    code span.cn { color: #005cc5; } /* Constant */
-    code span.co { color: #6a737d; } /* Comment */
-    code span.cv { color: #6a737d; } /* CommentVar */
-    code span.do { color: #6a737d; } /* Documentation */
-    code span.dt { color: #d73a49; } /* DataType */
-    code span.dv { color: #005cc5; } /* DecVal */
-    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
-    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
-    code span.fl { color: #005cc5; } /* Float */
-    code span.fu { color: #6f42c1; } /* Function */
-    code span.im { color: #032f62; } /* Import */
-    code span.in { color: #6a737d; } /* Information */
-    code span.kw { color: #d73a49; } /* Keyword */
-    code span.op { color: #24292e; } /* Operator */
-    code span.ot { color: #6f42c1; } /* Other */
-    code span.pp { color: #d73a49; } /* Preprocessor */
-    code span.re { color: #6a737d; } /* RegionMarker */
-    code span.sc { color: #005cc5; } /* SpecialChar */
-    code span.ss { color: #032f62; } /* SpecialString */
-    code span.st { color: #032f62; } /* String */
-    code span.va { color: #e36209; } /* Variable */
-    code span.vs { color: #032f62; } /* VerbatimString */
-    code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-fa0e33e6dd574061e1681ec846127080.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -298,14 +232,19 @@ Data Analysis in Life Sciences
 </section>
 <section id="fit-the-line-in-r" class="slide level2">
 <h2>Fit the line in R</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>standards <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/calibration.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>calibration_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(absorbance <span class="sc">~</span> concentration_mg_l, <span class="at">data =</span> standards)</span>
-<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(calibration_fit)</span>
-<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        (Intercept) concentration_mg_l</span></span>
-<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         0.03957143         0.06488571</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>&gt; standards &lt;- read_csv("data/calibration.csv", show_col_types = FALSE)
+&gt; standards
+# A tibble: 6 × 3
+  standard_id concentration_mg_l absorbance
+  &lt;chr&gt;                    &lt;dbl&gt;      &lt;dbl&gt;
+1 S1                           0      0.041
+2 S2                           2      0.164
+...
+6 S6                          10      0.687
+&gt; calibration_fit &lt;- lm(absorbance ~ concentration_mg_l, data = standards)
+&gt; coef(calibration_fit)
+       (Intercept) concentration_mg_l
+        0.03957143         0.06488571</code></pre>
 <ul>
 <li><code>~</code> reads “explained by”: response on the left, the prepared variable on the right.</li>
 <li>Line: <strong>absorbance ≈ 0.0396 + 0.0649 × concentration</strong>.</li>
@@ -392,50 +331,30 @@ Data Analysis in Life Sciences
 </section>
 <section id="estimate-only-inside-the-standards" class="slide level2">
 <h2>Estimate only inside the standards</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>unknowns <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/unknowns.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>intercept <span class="ot">&lt;-</span> <span class="fu">coef</span>(calibration_fit)[<span class="dv">1</span>]</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>slope <span class="ot">&lt;-</span> <span class="fu">coef</span>(calibration_fit)[<span class="dv">2</span>]</span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>unknowns <span class="ot">&lt;-</span> unknowns <span class="sc">|&gt;</span></span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">within_range =</span> absorbance <span class="sc">&gt;=</span> <span class="fu">min</span>(standards<span class="sc">$</span>absorbance) <span class="sc">&amp;</span></span>
-<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>                        absorbance <span class="sc">&lt;=</span> <span class="fu">max</span>(standards<span class="sc">$</span>absorbance),</span>
-<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a>         <span class="at">concentration_mg_l =</span> <span class="fu">if_else</span>(</span>
-<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a>           within_range, (absorbance <span class="sc">-</span> intercept) <span class="sc">/</span> slope, <span class="cn">NA_real_</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>sample_id</th>
-<th>absorbance</th>
-<th>within_range</th>
-<th>concentration_mg_l</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>U1</td>
-<td>0.310</td>
-<td>TRUE</td>
-<td>4.17</td>
-</tr>
-<tr class="even">
-<td>U2</td>
-<td>0.520</td>
-<td>TRUE</td>
-<td>7.40</td>
-</tr>
-<tr class="odd">
-<td>U3</td>
-<td>0.900</td>
-<td>FALSE</td>
-<td>NA</td>
-</tr>
-</tbody>
-</table>
+<pre class="text"><code>&gt; unknowns &lt;- read_csv("data/unknowns.csv", show_col_types = FALSE)
+&gt; intercept &lt;- coef(calibration_fit)[1]; slope &lt;- coef(calibration_fit)[2]
+&gt; unknowns &lt;- unknowns |&gt;
++   mutate(within_range = absorbance &gt;= min(standards$absorbance) &amp;
++                         absorbance &lt;= max(standards$absorbance),
++          concentration_mg_l = if_else(
++            within_range, (absorbance - intercept) / slope, NA_real_))
+&gt; unknowns
+# A tibble: 3 × 4
+  sample_id absorbance within_range concentration_mg_l
+  &lt;chr&gt;          &lt;dbl&gt; &lt;lgl&gt;                     &lt;dbl&gt;
+1 U1              0.31 TRUE                       4.17
+2 U2              0.52 TRUE                       7.40
+3 U3              0.9  FALSE                     NA
+&gt; write_csv(unknowns, "output/day19-unknowns.csv")
+&gt; list.files("output")
+[1] "day19-unknowns.csv"</code></pre>
 <ul>
-<li>The standards read <strong>0.041 to 0.687</strong>. U3 is above the highest standard, so it gets <code>NA</code> instead of a number.</li>
-<li>The row stays in the table with its reading, so the reason for the missing estimate is visible.</li>
+<li>The standards read <strong>0.041 to 0.687</strong>. <code>within_range</code> is <code>TRUE</code> only between those; <code>&amp;</code> means both conditions must hold.</li>
+<li>U3 is above the highest standard, so <code>if_else()</code> gives <code>NA</code> instead of a number. Its row and reading stay in the table.</li>
+<li><code>write_csv()</code> prints nothing; <code>list.files()</code> shows the saved file.</li>
 </ul>
 <aside class="notes">
-<p><code>&amp;</code> requires both conditions. <code>NA_real_</code> is a numeric missing value. This is the table saved as output/day19-unknowns.csv in the practical.</p>
+<p><code>NA_real_</code> is a numeric missing value. This is the table saved as output/day19-unknowns.csv in the practical. Ask students to predict which rows will be TRUE before showing the printout.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

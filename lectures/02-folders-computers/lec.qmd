@@ -52,7 +52,7 @@ Open the project in the file manager and walk the tree. Project root means the s
 
 ![The path /home/anna/introcomputing-course/data/seedlings.csv drawn as a chain of folders from the top of the disk to the file.](path-parts.svg){height=360}
 
-Windows writes the same idea as `C:\Users\anna\Documents\...\data\seedlings.csv`.
+This is how Ubuntu writes it. A Mac starts with `/Users/anna/...`; Windows writes `C:\Users\anna\...\data\seedlings.csv`.
 
 ::: notes
 Read the path left to right, opening one folder per part. Show a real path: Windows "Copy as path", Mac right-click with Option, "Copy as Pathname". Paste it into a text editor. Usernames will differ from anna.
@@ -65,9 +65,7 @@ Read the path left to right, opening one folder per part. Show a real path: Wind
 **Absolute:** from the top of the disk.
 
 ```text
-/Users/anna/Documents/
-  introcomputing-course/
-  data/seedlings.csv
+/home/anna/introcomputing-course/data/seedlings.csv
 ```
 
 **Relative:** from an agreed folder, here the project folder.

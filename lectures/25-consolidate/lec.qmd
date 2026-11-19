@@ -68,23 +68,64 @@ Every station today exercises part of this chain. Ask students which step they f
 Everyone should eventually do files, R and meaning. Remote access is practised when the real service works; finishing the local stations does not complete the remote task.
 :::
 
-## Repair a broken analysis
+## Repair a broken analysis: read the errors
+
+This code should give the mean growth of the seedlings. In a fresh R session it fails:
 
 ```text
-seedling <- read_csv("seedlings.csv")
-seedlings <- mutate(seedlings, growth_mm = final_mm + initial_mm)
-mean(seedlings$Growth_mm)
+> seedling <- read_csv("seedlings.csv")
+Error in read_csv("seedlings.csv") : could not find function "read_csv"
+> library(readr)
+> seedling <- read_csv("seedlings.csv")
+Error in (function (path, write = FALSE, call = caller_env())  :
+  'seedlings.csv' does not exist in current working directory: ...
+> seedling <- read_csv("data/seedlings.csv", show_col_types = FALSE)
+> seedlings <- mutate(seedlings, growth_mm = final_mm + initial_mm)
+Error in mutate(seedlings, growth_mm = final_mm + initial_mm) :
+  could not find function "mutate"
+> library(dplyr)
+> seedlings <- mutate(seedlings, growth_mm = final_mm + initial_mm)
+Error : object 'seedlings' not found
 ```
 
-What is wrong?
-
-- **Path:** the file is in `data/`: `"data/seedlings.csv"`.
-- **Names:** `seedling` versus `seedlings`; `growth_mm` versus `Growth_mm` (R is case sensitive).
-- **Meaning:** growth is final **minus** initial. P01: 44.3 − 25.7 = **18.6 mm**.
-- **Packages:** `library(readr)` and `library(dplyr)` must come first.
+- **could not find function:** the package is not loaded; add `library()`.
+- **does not exist in current working directory:** wrong path; the file is in `data/`.
+- **object not found:** a name typed differently: `seedling` was created, `seedlings` was used.
 
 ::: notes
-Let students find the problems before revealing them. The last one is the most important: code can run without error and still compute the wrong biology. Checking one row by hand catches it.
+Read each error aloud and ask what it means before moving on. Fix one thing at a time and run again; the next error only appears once the previous one is fixed. The "..." hides the student's own project path. dplyr also prints a message about masked functions when loaded; it is not an error and was left out here.
+:::
+
+## Code that runs can still be wrong
+
+:::: {.columns}
+::: {.column width="62%"}
+```text
+> seedlings <- mutate(seedling, growth_mm = final_mm + initial_mm)
+> mean(seedlings$Growth_mm)
+[1] NA
+Warning messages:
+1: Unknown or uninitialised column: `Growth_mm`.
+2: In mean.default(seedlings$Growth_mm) :
+  argument is not numeric or logical: returning NA
+> mean(seedlings$growth_mm)
+[1] 63.325
+> seedlings <- mutate(seedling, growth_mm = final_mm - initial_mm)
+> seedlings$growth_mm[1]
+[1] 18.6
+> mean(seedlings$growth_mm)
+[1] 18.38333
+```
+:::
+::: {.column width="38%"}
+- `Growth_mm` with a capital G is a different name, so R warns and returns `NA`.
+- With `+`, R calculates without complaint: **63.3 mm** "growth" for seedlings about 20–45 mm long. Nonsense, but no error.
+- Check one plant by hand. P01: 44.3 − 25.7 = **18.6 mm**. With `-` the first value matches; mean growth is **18.38 mm**.
+:::
+::::
+
+::: notes
+This is the most important lesson of the station: R catches typing mistakes, not biology mistakes. Ask students to say why 63 mm cannot be growth. The repaired script goes in recovery.R.
 :::
 
 ## Explain before calculating: spread and units
@@ -126,18 +167,22 @@ Supplied numbers, not computed from the course data. Avoid "not significant, so 
 ## Investigate a high value
 
 :::: {.columns}
-::: {.column width="42%"}
-- Algae data: reference culture **A11 = 41.7 mg**, the largest value in the file.
-- The data dictionary records a spill for A19, but **nothing wrong with A11**.
-- So A11 stays in the **primary** result.
-- To see how much it matters, make a **separate** object:
-
-```r
-algae_without_a11 <- filter(algae,
-  culture_id != "A11")
+::: {.column width="52%"}
+```text
+> algae <- read_csv("data/algae.csv", show_col_types = FALSE)
+> algae |> arrange(desc(biomass_mg)) |> head(3)
+# A tibble: 3 × 3
+  culture_id treatment  biomass_mg
+  <chr>      <chr>           <dbl>
+1 A11        reference        41.7
+2 A17        supplement       39
+3 A15        supplement       38.3
 ```
+
+- `arrange(desc())` sorts from largest to smallest: **A11, 41.7 mg**, a reference culture, is the highest of all 24.
+- The data dictionary records a spill for A19 but **nothing wrong with A11**, so A11 stays in the **primary** result.
 :::
-::: {.column width="58%"}
+::: {.column width="48%"}
 ![Algae biomass by group with group means; reference culture A11 at 41.7 mg is circled as a recorded value with no evidence of an error.](a11-highlight.svg){width="100%"}
 :::
 ::::
@@ -149,15 +194,30 @@ Start from the imported algae object (library(readr), library(dplyr), read_csv("
 ## How much does A11 change the result?
 
 :::: {.columns}
-::: {.column width="42%"}
-- **Primary** (all available): reference **28.20**, supplement **33.92 mg**; difference **5.72 mg**.
-- **Sensitivity check** (A11 omitted): reference **26.97 mg**; difference **6.95 mg**.
-- The supplement mean does not change; the reference n drops from 12 to 11.
-- Report the primary result. Label the check "A11 omitted **without evidence of error**".
-- Three different issues: A19 **missing**, A11 **high but recorded**, and the study's simplifying **assumptions**.
+::: {.column width="55%"}
+```text
+> algae |> group_by(treatment) |>
++   summarise(mean_mg = mean(biomass_mg, na.rm = TRUE))
+# A tibble: 2 × 2
+  treatment  mean_mg
+  <chr>        <dbl>
+1 reference     28.2
+2 supplement    33.9
+> algae_without_a11 <- filter(algae, culture_id != "A11")
+> algae_without_a11 |> group_by(treatment) |>
++   summarise(mean_mg = mean(biomass_mg, na.rm = TRUE))
+# A tibble: 2 × 2
+  treatment  mean_mg
+  <chr>        <dbl>
+1 reference     27.0
+2 supplement    33.9
+```
 :::
-::: {.column width="58%"}
-![The observed supplement-minus-reference difference is 5.72 mg with all available data and 6.95 mg when A11 is omitted; the diagnostic does not replace the primary analysis.](sensitivity-check.svg){width="100%"}
+::: {.column width="45%"}
+- **Primary** (all available): supplement − reference = 33.92 − 28.20 = **5.72 mg**.
+- **Without A11** (a separate object; the data file is untouched): 33.92 − 26.97 = **6.95 mg**. Only the reference mean changes, and the reference group drops from 12 to 11 cultures.
+- Report the primary result. Label the second "A11 omitted **without evidence of error**".
+- Three different issues: A19 **missing**, A11 **high but recorded**, and a small simulated study.
 :::
 ::::
 

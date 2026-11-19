@@ -91,6 +91,15 @@ invented failure tables, no abstract framing (see the Day 1 deck). Conceptual
 and statistical decks can use the full pattern with problem slides,
 misreading tables and a key-fact summary table (see the Day 17 deck).
 
+**Code is never shown without its output.** Students cannot picture what a
+command does from the command alone. Show a short session exactly as it appears
+on screen, with real output obtained by running it:
+terminal as a `text` block with `$ ` prompts (see `lectures/04-inspect-archive`),
+R as a `text` block in Console style (`> mean(x)` then `[1] 22.47083`). Code that
+makes a plot sits next to the plot it makes. Commands that print nothing (`cp`,
+`>`, `write_csv`, `ggsave`) are followed by `ls`/`list.files()`/reading the file
+back, so the effect is visible. Trim long output with `...`, never invent it.
+
 Aim for about 10–16 content slides. Use `{.smaller}` only for slides with code
 plus a table, or the Summary; otherwise normal text size fills the slide.
 Speaker notes add narration and demonstration instructions; they must not be

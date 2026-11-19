@@ -95,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-fa0e33e6dd574061e1681ec846127080.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -307,7 +307,8 @@ Data Analysis in Life Sciences
 <span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">seed =</span> <span class="dv">16</span>)) <span class="sc">+</span></span>
 <span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Treatment group"</span>,</span>
 <span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Growth over the study period (mm)"</span>) <span class="sc">+</span></span>
-<span id="cb1-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb1-11"><a aria-hidden="true" tabindex="-1"></a>growth_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>The treated group sits higher, but the groups <strong>overlap</strong>.</li>
 <li>The largest control (<strong>18.7 mm</strong>) grew more than the smallest treated plant (<strong>12.2 mm</strong>).</li>
@@ -338,32 +339,33 @@ Data Analysis in Life Sciences
 <section id="compute-the-difference-in-the-stated-direction" class="slide level2">
 <h2>Compute the difference in the stated direction</h2>
 <div class="columns">
-<div class="column" style="width:48%;">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>treated <span class="ot">&lt;-</span> seedlings <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="st">"treated"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(growth_mm)</span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> seedlings <span class="sc">|&gt;</span></span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="st">"control"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(growth_mm)</span>
-<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a>observed_difference <span class="ot">&lt;-</span> <span class="fu">mean</span>(treated) <span class="sc">-</span> <span class="fu">mean</span>(control)</span>
-<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a>observed_difference   <span class="co"># 6.22</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="column" style="width:60%;">
+<pre class="text"><code>&gt; treated &lt;- seedlings |&gt;
++   filter(treatment == "treated") |&gt;
++   pull(growth_mm)
+&gt; treated
+ [1] 30.8 21.4 29.7 20.7 12.2 21.0 18.2 20.1 20.2 19.5 21.8 22.3
+&gt; control &lt;- seedlings |&gt;
++   filter(treatment == "control") |&gt;
++   pull(growth_mm)
+&gt; control
+ [1] 18.6  8.0 14.9 18.0 13.4 16.0 17.1 11.3 15.3 18.7 14.5 17.5
+&gt; mean(treated)
+[1] 21.49167
+&gt; mean(control)
+[1] 15.275
+&gt; observed_difference &lt;- mean(treated) - mean(control)
+&gt; observed_difference
+[1] 6.216667</code></pre>
+</div><div class="column" style="width:40%;">
 <ul>
-<li><code>pull()</code> takes one column out as a plain vector of 12 numbers.</li>
-</ul>
-</div><div class="column" style="width:52%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="difference-direction.svg" style="width:100.0%"></p>
-<figcaption>The treated mean of 21.49 millimetres exceeds the control mean of 15.28 millimetres by 6.22 millimetres.</figcaption>
-</figure>
-</div>
-<ul>
-<li>Control <strong>15.28 mm</strong>, treated <strong>21.49 mm</strong>.</li>
+<li><code>pull()</code> takes one column out of the table as a plain <strong>vector</strong>: the 12 growth values of one group.</li>
 <li>Treated − control = <strong>6.22 mm</strong>: a number with <strong>units and a sign</strong>.</li>
+<li>Say it in words: “treated plants grew on average 6.22 mm more than controls”.</li>
 </ul>
 </div></div>
 <aside class="notes">
-<p>Load readr, dplyr and ggplot2 first, as in the practical. These vectors are exactly what Day 17’s t.test(treated, control) uses, so the direction carries over. Ask students to read the result aloud: “treated plants grew on average 6.22 mm more than controls”.</p>
+<p>These vectors are exactly what Day 17’s t.test(treated, control) uses, so the direction carries over. The treated values include the two tall plants (30.8 and 29.7 mm) and the short one (12.2 mm) seen in the plot.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -477,20 +479,25 @@ Data Analysis in Life Sciences
 <section id="another-sample-another-difference" class="slide level2">
 <h2>Another sample, another difference</h2>
 <div class="columns">
-<div class="column" style="width:45%;">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings-transfer.csv"</span>,</span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
-<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="sc">|&gt;</span> <span class="fu">group_by</span>(treatment) <span class="sc">|&gt;</span></span>
-<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean_mm =</span> <span class="fu">mean</span>(growth_mm),</span>
-<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_mm =</span> <span class="fu">sd</span>(growth_mm),</span>
-<span id="cb3-7"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="column" style="width:55%;">
+<pre class="text"><code>&gt; transfer &lt;- read_csv("data/seedlings-transfer.csv",
++                      show_col_types = FALSE) |&gt;
++   mutate(growth_mm = final_mm - initial_mm)
+&gt; transfer |&gt;
++   group_by(treatment) |&gt;
++   summarise(n = n(), mean_mm = mean(growth_mm),
++             sd_mm = sd(growth_mm), .groups = "drop")
+# A tibble: 2 × 4
+  treatment     n mean_mm sd_mm
+  &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1 control       9    13.7  2.53
+2 treated       9    17.9  1.94</code></pre>
 <ul>
-<li>Second class: <strong>9 plants per group</strong>; control <strong>13.66 mm</strong>, treated <strong>17.87 mm</strong>.</li>
+<li>A second class: <strong>9 plants per group</strong>. Means 13.66 and 17.87 mm (printed rounded).</li>
 <li>Treated − control = <strong>4.21 mm</strong>, not 6.22 mm.</li>
-<li>Different plants and conditions give a different estimate. That alone is not evidence that the treatment “failed”.</li>
+<li>Different plants give a different estimate. That alone does not mean the treatment “failed”.</li>
 </ul>
-</div><div class="column" style="width:55%;">
+</div><div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="extended-transfer-difference.svg" style="width:100.0%"></p>
@@ -499,7 +506,7 @@ Data Analysis in Life Sciences
 </div>
 </div></div>
 <aside class="notes">
-<p>Students analyse this in transfer-comparison.Rmd with the same direction, and save output/day16-transfer-summary.csv. Confirm 18 rows, 9 per group, no missing values. The two simulated studies differ in values, spread and sample size; descriptive work cannot settle why their differences differ.</p>
+<p>Students analyse this in transfer-comparison.Rmd with the same direction, and save output/day16-transfer-summary.csv. Confirm 18 rows, 9 per group, no missing values. Descriptive work cannot settle why the two studies’ differences differ.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -517,7 +524,7 @@ Data Analysis in Life Sciences
 <p><strong>Results paragraph:</strong> “Treated seedlings grew a mean of 21.49 mm (SD 4.87) and controls 15.28 mm (SD 3.19), 12 plants each: a difference of <strong>6.22 mm (treated − control)</strong>. Growth overlapped between the groups.”</p>
 <p>Still open: <strong>would another set of plants give a similar difference, or could chance alone produce 6 mm?</strong></p>
 <ul>
-<li>The <strong>null hypothesis</strong> for Day 17: the population mean growth is the <strong>same</strong> under both conditions.</li>
+<li>The <strong>null hypothesis</strong> for Day 17: mean growth would be the <strong>same</strong> under both conditions if we could grow very many plants.</li>
 <li><strong>Two-sided:</strong> a difference in either direction counts. We decide this now, before seeing a test.</li>
 <li>A <strong>p-value</strong> will say how surprising our data are <em>if</em> the means were equal. It is not the probability that the treatment works, and not the size of the effect.</li>
 </ul>

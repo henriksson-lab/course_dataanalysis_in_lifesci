@@ -39,103 +39,109 @@ The biological question drives the day: growth per plant and a first look at the
 
 ## Growth is a new column, not an edit
 
-:::: {.columns}
-::: {.column width="45%"}
-```r
-library(readr)
-library(dplyr)
-library(ggplot2)
-seedlings <- read_csv("data/seedlings.csv",
-                      show_col_types = FALSE)
-seedlings <- mutate(seedlings,
-  growth_mm = final_mm - initial_mm)
+First load the packages: `library(readr)`, `library(dplyr)`, `library(ggplot2)`. (`dplyr` prints a note about "masked" functions; that is normal.)
+
+```text
+> seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE)
+> seedlings <- mutate(seedlings, growth_mm = final_mm - initial_mm)
+> head(seedlings, 3)
+# A tibble: 3 × 5
+  plant_id treatment initial_mm final_mm growth_mm
+  <chr>    <chr>          <dbl>    <dbl>     <dbl>
+1 P01      control         25.7     44.3      18.6
+2 P02      control         24.3     32.3       8  
+3 P03      control         18       32.9      14.9
 ```
 
-- P01: 44.3 − 25.7 = **18.6 mm**. P02: **8.0 mm**.
-- The CSV on disk is unchanged; the table in R gains a fifth column.
-:::
-::: {.column width="55%"}
-![A growth column is calculated from each plant's final and initial lengths, keeping the original columns.](derived-column.svg){width="100%"}
-:::
-::::
+- `mutate()` adds a column calculated from the others: now **5 columns**. P01: 44.3 − 25.7 = **18.6 mm**; P02: **8 mm**.
+- The CSV file on disk is unchanged; only the table in R has the new column.
 
 ::: notes
-Save in day08.R. mutate() looks for final_mm and initial_mm inside the table and returns a new table, which we assign back to seedlings. Ask students to check P02 by hand. Growth is change; final_mm is size: a plant can start large and grow little. A negative growth would deserve checking, not deletion.
+Save in day08.R. mutate() looks for final_mm and initial_mm inside the table and returns a new table, which we store back under seedlings. R prints 8 rather than 8.0. Growth is change; final_mm is size: a plant can start large and grow little. A negative growth would deserve checking, not deletion.
 :::
 
 ## Which plants? Which columns?
 
 :::: {.columns}
-::: {.column width="45%"}
-```r
-control_plants <- filter(seedlings,
-  treatment == "control")
-growth_table <- select(seedlings,
-  plant_id, treatment, growth_mm)
+::: {.column width="50%"}
+```text
+> control_plants <- filter(seedlings,
++   treatment == "control")
+> nrow(control_plants)
+[1] 12
+> growth_table <- select(seedlings,
++   plant_id, treatment, growth_mm)
+> dim(growth_table)
+[1] 24  3
 ```
 
-- `filter()` keeps **rows** (plants): `control_plants` has **12 rows**.
-- `select()` keeps **columns** (variables): `growth_table` is **24 × 3**.
-- `==` asks "is it equal?"; `<-` stores. Do not mix them up.
+- `filter()` keeps **rows** (plants) that meet a condition: the **12** controls.
+- `select()` keeps the **columns** you name: all 24 plants, now 3 columns.
 :::
-::: {.column width="55%"}
+::: {.column width="50%"}
 ![Treated rows are kept by filtering, then only the ID and growth columns are kept by selecting.](rows-and-columns.svg){width="100%"}
+
+`==` asks "is it equal?"; `<-` stores. `"control"` is in quotes because it is a text label.
 :::
 ::::
 
 ::: notes
-Predict the row and column counts before running each line. Quotes mark the text label "control"; it must match the spelling in the data exactly.
+Predict the row and column counts before running each line. The label must match the spelling in the data exactly. The figure shows the same two operations on three example rows.
 :::
 
 ## Read the steps from left to right
 
-:::: {.columns}
-::: {.column width="48%"}
-```r
-longer_control <- seedlings |>
-  filter(treatment == "control") |>
-  filter(growth_mm > 15)
-nrow(longer_control)   # 7
+```text
+> longer_control <- seedlings |>
++   filter(treatment == "control") |>
++   filter(growth_mm > 15)
+> longer_control
+# A tibble: 7 × 5
+  plant_id treatment initial_mm final_mm growth_mm
+  <chr>    <chr>          <dbl>    <dbl>     <dbl>
+1 P01      control         25.7     44.3      18.6
+2 P04      control         22.2     40.2      18  
+3 P06      control         24.7     40.7      16  
+4 P07      control         21.2     38.3      17.1
+5 P09      control         25.9     41.2      15.3
+6 P10      control         23.2     41.9      18.7
+7 P12      control         22.9     40.4      17.5
 ```
 
-- `|>` (the **pipe**) passes the table on to the next step.
-- Read it as: take seedlings, *then* keep controls, *then* keep growth above 15 mm.
-- 7 of the 12 control plants grew more than 15 mm.
-:::
-::: {.column width="52%"}
-![Filtering keeps whole rows; selecting keeps whole columns.](table-operations.svg){width="100%"}
-:::
-::::
+- `|>` (the **pipe**) passes the table on to the next step. Read it as: take `seedlings`, *then* keep the controls, *then* keep growth above 15 mm.
+- The answer: **7** of the 12 control plants grew more than 15 mm. The `+` at the line starts is R saying "the instruction continues".
 
 ::: notes
-The pipe is a convenience for writing steps in order; it does not change what they do. When something goes wrong, run the chain one step at a time.
+The pipe is a convenience for writing steps in order; it does not change what they do. When something goes wrong, run the chain one step at a time. table-operations.svg was dropped from this slide; the printed table shows the filter result directly.
 :::
 
 ## A plot maps columns to positions
 
 :::: {.columns}
-::: {.column width="48%"}
-```r
-size_plot <- ggplot(seedlings,
-    aes(x = initial_mm, y = final_mm,
-        colour = treatment)) +
-  geom_point(size = 2) +
-  labs(x = "Initial seedling length (mm)",
-       y = "Final seedling length (mm)",
-       colour = "Treatment") +
-  theme_minimal()
-size_plot
+::: {.column width="46%"}
+```text
+> size_plot <- ggplot(seedlings,
++     aes(x = initial_mm, y = final_mm,
++         colour = treatment)) +
++   geom_point(size = 2) +
++   labs(x = "Initial seedling length (mm)",
++        y = "Final seedling length (mm)",
++        colour = "Treatment") +
++   theme_minimal()
+> size_plot
 ```
+
+Typing `size_plot` draws the figure on the right in the Plots pane.
 :::
-::: {.column width="52%"}
-![Final against initial length for the 24 seedlings, coloured by treatment.](initial-final.svg){width="100%"}
+::: {.column width="54%"}
+![Final against initial length for the 24 seedlings, coloured by treatment, as drawn by size_plot.](size-plot.png){width="100%"}
 :::
 ::::
 
-`aes()` says which column goes where. Each point is one plant. `+` adds a layer; `labs()` gives axis names **with units**.
+`aes()` says which column goes where: x, y and colour. Each point is one plant. `geom_point()` draws points, `labs()` names the axes **with units**, and `+` adds each part.
 
 ::: notes
-Read the axes before the pattern. Colour shows a group label, not a measurement. This plot is about final size; it does not show growth directly, and it cannot show that starting longer causes ending longer.
+Read the axes before the pattern. Colour shows a group label, not a measurement. This plot is about final size; it does not show growth directly, and it cannot show that starting longer causes ending longer. Treated plants sit mostly higher, but the x-axis is initial length, not group.
 :::
 
 ## Pick the plot that answers your question
@@ -159,27 +165,29 @@ These panels use the 18-plant transfer study, which students work with in the ex
 ## Show every plant's growth
 
 :::: {.columns}
-::: {.column width="50%"}
-```r
-growth_plot <- ggplot(seedlings,
-    aes(x = treatment, y = growth_mm)) +
-  geom_point(position = position_jitter(
-    width = 0.08, height = 0, seed = 8)) +
-  labs(x = "Treatment",
-       y = "Change in seedling length (mm)") +
-  theme_minimal()
-growth_plot
+::: {.column width="48%"}
+```text
+> growth_plot <- ggplot(seedlings,
++     aes(x = treatment, y = growth_mm)) +
++   geom_point(position = position_jitter(
++     width = 0.08, height = 0, seed = 8)) +
++   labs(x = "Treatment",
++        y = "Change in seedling length (mm)") +
++   theme_minimal()
+> growth_plot
 ```
 
-- **Jitter** spreads points sideways so they don't hide each other. `height = 0`: no value moves up or down.
+- **Jitter** spreads points a little sideways so they don't hide each other. `height = 0`: no value moves up or down.
 :::
-::: {.column width="50%"}
-![Growth of each seedling by treatment; the two groups overlap.](../../week2/seedling-growth.png){width="100%"}
+::: {.column width="52%"}
+![Growth of each seedling by treatment, as drawn by growth_plot; the two groups overlap.](../../week2/seedling-growth.png){width="100%"}
+
+Controls grew 8.0–18.7 mm, treated plants 12.2–30.8 mm: treated tend higher, but the groups overlap.
 :::
 ::::
 
 ::: notes
-Ask: what is one dot? (one plant). What does higher mean? (more growth, mm). Do the groups overlap? (yes: control 8.0 to 18.7 mm, treated 12.2 to 30.8 mm). Treated values tend to be higher; whether that is more than chance is a question for week 4. seed = 8 makes the sideways spread the same every time.
+Ask: what is one dot? (one plant). What does higher mean? (more growth, mm). Whether the difference is more than chance is a question for week 4. seed = 8 makes the sideways spread the same every time.
 :::
 
 ## Jitter must never change a measurement
@@ -195,71 +203,91 @@ Transfer-study data. In the exercises students change only the width and confirm
 
 ## Save files other programs can open
 
-```r
-ggsave("output/seedling-growth.png", plot = growth_plot,
-       width = 6, height = 4, dpi = 150)
-write_csv(growth_table, "output/seedling-growth.csv")
+:::: {.columns}
+::: {.column width="55%"}
+```text
+> ggsave("output/seedling-growth.png",
++        plot = growth_plot,
++        width = 6, height = 4, dpi = 150)
+> write_csv(growth_table,
++           "output/seedling-growth.csv")
+> list.files("output")
+[1] "seedling-growth.csv" "seedling-growth.png"
+> read_csv("output/seedling-growth.csv",
++          show_col_types = FALSE)
+# A tibble: 24 × 3
+   plant_id treatment growth_mm
+   <chr>    <chr>         <dbl>
+ 1 P01      control        18.6
+ 2 P02      control         8  
+...
 ```
-
-- `growth_plot` is an object in memory. `ggsave()` writes a **PNG image** to disk.
-- `write_csv()` writes a **table** to disk. An image is not a table, and vice versa.
-- Both overwrite a file with the same name without asking. Use clear names; never write into `data/`.
-- Open both files from the file manager to check they exist.
+:::
+::: {.column width="45%"}
+- `ggsave()` writes the plot as a **PNG image**; `write_csv()` writes the table as a **CSV file**. Both print nothing.
+- `list.files("output")` shows the two new files.
+- Reading the CSV back shows all **24 rows**, as saved.
+- An existing file with the same name is replaced without asking. Never write into `data/`.
+:::
+::::
 
 ::: notes
-The output/ folder is part of the supplied project. If saving fails, check getwd() and dir.exists("output").
+The output/ folder is part of the supplied project. If saving fails, check getwd() and dir.exists("output"). Open the PNG in the file manager too. If output/ already contains other files, list.files shows them as well.
 :::
 
 ## Worked example: the same steps on new data
 
 :::: {.columns}
-::: {.column width="55%"}
-```r
-transfer <- read_csv("data/seedlings-transfer.csv",
-                     show_col_types = FALSE) |>
-  mutate(growth_mm = final_mm - initial_mm)
-nrow(transfer)                       # 18
-treated <- filter(transfer, treatment == "treated")
-nrow(treated)                        # 9
+::: {.column width="52%"}
+```text
+> transfer <- read_csv(
++     "data/seedlings-transfer.csv",
++     show_col_types = FALSE) |>
++   mutate(growth_mm = final_mm - initial_mm)
+> nrow(transfer)
+[1] 18
+> transfer$growth_mm[1]
+[1] 15
+> treated <- filter(transfer,
++   treatment == "treated")
+> nrow(treated)
+[1] 9
 ```
+
+The first plant, T01: 40.3 − 25.3 = **15 mm**. All 18 plants kept; 9 treated.
 :::
-::: {.column width="45%"}
-- T01: 40.3 − 25.3 = **15.0 mm**. Check one plant by hand.
-- Adding a column keeps all 18 plants.
-- Change the names, labels and file names; the steps stay the same.
+::: {.column width="48%"}
+![Growth of the 18 transfer-study seedlings by treatment, drawn with the same plotting code.](transfer-growth.png){width="100%"}
+
+Same plotting code with `transfer`: controls 10.8–17.4 mm, treated 15.0–21.4 mm. Again they overlap.
 :::
 ::::
 
-Then plot growth by group and save as `output/transfer-...` so nothing from the main study is overwritten.
-
 ::: notes
-This is day08-transfer.R in the exercises. Compare with the main study: what changed (object names, row counts, file names), what stayed the same (operations).
+This is day08-transfer.R in the exercises. Compare with the main study: what changed (object names, row counts, file names output/transfer-...), what stayed the same (operations).
 :::
 
 ## Same steps for a lab calculation
 
-:::: {.columns}
-::: {.column width="48%"}
-```r
-dilutions <- read_csv("data/dilutions.csv",
-                      show_col_types = FALSE) |>
-  mutate(stock_volume_ml =
-           target_mmol_l * final_volume_ml /
-           stock_mmol_l,
-         possible_by_dilution =
-           target_mmol_l <= stock_mmol_l)
+```text
+> dilutions <- read_csv("data/dilutions.csv", show_col_types = FALSE) |>
++   mutate(stock_volume_ml = target_mmol_l * final_volume_ml / stock_mmol_l,
++          possible_by_dilution = target_mmol_l <= stock_mmol_l)
+> select(dilutions, solution_id, stock_volume_ml, possible_by_dilution)
+# A tibble: 4 × 3
+  solution_id stock_volume_ml possible_by_dilution
+  <chr>                 <dbl> <lgl>               
+1 D01                     2.5 TRUE                
+2 D02                     5   TRUE                
+3 D03                    10   TRUE                
+4 D04                   100   FALSE               
 ```
 
-- D01–D03 need **2.5, 5 and 10 mL** stock.
-- D04 needs **100 mL** for a 50 mL final volume: impossible. Keep the row and **flag** it.
-:::
-::: {.column width="52%"}
-![Calculated stock volume against final volume for four dilution requests; D04 needs more stock than its final volume.](dilution-feasibility.svg){width="100%"}
-:::
-::::
+- A **stock** is a solution of known concentration; **diluting** adds liquid up to a final volume. Stock volume = target × final volume / stock.
+- D04 needs **100 mL** of stock for 50 mL of solution: impossible, because its target (200 mmol/L) is stronger than its stock (100 mmol/L). `<=` flags it `FALSE`; keep the row.
 
 ::: notes
-A stock is a solution of known concentration; dilution adds solvent up to a final total volume. D04's target, 200 mmol/L, is above its stock, 100 mmol/L. A formula can produce a number for a request that cannot be carried out. The organic-yield alternative uses the same mutate step: Y01 yield = 100 × 0.62 / 1.00 = 62%.
+<= means "less than or equal to"; the new column holds TRUE/FALSE (<lgl>). A formula can produce a number for a request that cannot be carried out. The organic-yield alternative uses the same mutate step: Y01 yield = 100 × 0.62 / 1.00 = 62%. dilution-feasibility.svg is no longer used on this slide; the printed table carries the result.
 :::
 
 ## Summary {.smaller}

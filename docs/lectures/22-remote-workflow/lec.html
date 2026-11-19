@@ -28,74 +28,8 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #24292e;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #24292e; } /* Normal */
-    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
-    code span.an { color: #6a737d; } /* Annotation */
-    code span.at { color: #d73a49; } /* Attribute */
-    code span.bn { color: #005cc5; } /* BaseN */
-    code span.bu { color: #d73a49; } /* BuiltIn */
-    code span.cf { color: #d73a49; } /* ControlFlow */
-    code span.ch { color: #032f62; } /* Char */
-    code span.cn { color: #005cc5; } /* Constant */
-    code span.co { color: #6a737d; } /* Comment */
-    code span.cv { color: #6a737d; } /* CommentVar */
-    code span.do { color: #6a737d; } /* Documentation */
-    code span.dt { color: #d73a49; } /* DataType */
-    code span.dv { color: #005cc5; } /* DecVal */
-    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
-    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
-    code span.fl { color: #005cc5; } /* Float */
-    code span.fu { color: #6f42c1; } /* Function */
-    code span.im { color: #032f62; } /* Import */
-    code span.in { color: #6a737d; } /* Information */
-    code span.kw { color: #d73a49; } /* Keyword */
-    code span.op { color: #24292e; } /* Operator */
-    code span.ot { color: #6f42c1; } /* Other */
-    code span.pp { color: #d73a49; } /* Preprocessor */
-    code span.re { color: #6a737d; } /* RegionMarker */
-    code span.sc { color: #005cc5; } /* SpecialChar */
-    code span.ss { color: #032f62; } /* SpecialString */
-    code span.st { color: #032f62; } /* String */
-    code span.va { color: #e36209; } /* Variable */
-    code span.vs { color: #032f62; } /* VerbatimString */
-    code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-fa0e33e6dd574061e1681ec846127080.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -265,7 +199,7 @@ Data Analysis in Life Sciences
 <div class="columns">
 <div class="column" style="width:40%;">
 <ul>
-<li><strong>SSH</strong> gives a terminal on the remote computer: the same shell commands as Day 3.</li>
+<li><strong>SSH</strong> (secure shell) gives a terminal on the remote computer: the same shell commands as Day 3.</li>
 <li>A <strong>remote desktop</strong> shows the remote computer’s screen in a window.</li>
 <li>Neither one copies files for you.</li>
 <li>The service guide will say whether both see the same home folder.</li>
@@ -294,16 +228,32 @@ Data Analysis in Life Sciences
 </section>
 <section id="which-computer-which-folder" class="slide level2">
 <h2>Which computer? Which folder?</h2>
-<p>After connecting, run in the <strong>remote shell</strong>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">hostname</span>   <span class="co"># which computer answered?</span></span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>        <span class="co"># which folder am I in on that computer?</span></span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>         <span class="co"># what is in that folder?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="columns">
+<div class="column" style="width:55%;">
+<pre class="text"><code>$ ssh student@remote
+student@remote:~$ hostname
+remote
+student@remote:~$ pwd
+/home/student
+student@remote:~$ mkdir introcomputing-practice
+student@remote:~$ ls
+introcomputing-practice
+student@remote:~$ exit
+logout
+Connection to remote closed.
+$ pwd
+/home/anna</code></pre>
+</div><div class="column" style="width:45%;">
 <ul>
-<li>Write the answers in <code>reports/remote-log.txt</code>. A large service may have several computers with different names.</li>
-<li><code>exit</code> ends the connection and returns you to your laptop’s shell. Run <code>pwd</code> again: now it shows a laptop folder.</li>
+<li><code>student@remote</code> stands for your login and the computer’s name from the service guide; yours will differ.</li>
+<li>The <strong>prompt</strong> changes: <code>student@remote:~$</code> means the remote computer is listening.</li>
+<li><code>hostname</code> names the computer that answered; <code>pwd</code> the folder you are in <strong>on that computer</strong>.</li>
+<li><code>exit</code> ends the connection. Back on the laptop, <code>pwd</code> shows a laptop folder again.</li>
+<li>Write the answers in <code>reports/remote-log.txt</code>.</li>
 </ul>
+</div></div>
 <aside class="notes">
-<p>Demonstrate only on the approved environment. Then make a practice folder with mkdir -p introcomputing-practice, cd into it, exit, reconnect, and find it again. Saved files belong to the disk, not to the terminal window.</p>
+<p>The session is illustrative: host name, login and paths are placeholders until the service guide is issued. Demonstrate only on the approved environment. A large service may have several login computers with different names, which is why hostname is worth recording.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -319,14 +269,17 @@ Data Analysis in Life Sciences
 <section id="leaving-does-not-delete-your-files" class="slide level2">
 <h2>Leaving does not delete your files</h2>
 <div class="columns">
-<div class="column" style="width:40%;">
+<div class="column" style="width:45%;">
+<pre class="text"><code>$ ssh student@remote
+student@remote:~$ ls
+introcomputing-practice</code></pre>
 <ul>
-<li><code>exit</code> closes the <strong>session</strong> (the connection), not the remote disk.</li>
-<li>Reconnect, <code>cd</code> to the folder, and the saved files are still there.</li>
+<li><code>exit</code> closed the <strong>session</strong> (the connection), not the remote disk.</li>
+<li>After reconnecting, the folder made before is still there.</li>
 <li>Same idea as Day 21: closing a process empties its RAM; saved files stay on disk.</li>
 <li>Whether a running program keeps running after you leave depends on the service.</li>
 </ul>
-</div><div class="column" style="width:60%;">
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="session-storage.svg" style="width:100.0%"></p>
@@ -335,7 +288,7 @@ Data Analysis in Life Sciences
 </div>
 </div></div>
 <aside class="notes">
-<p>Ask: if R was running a long analysis in that session, does it continue after exit? Not necessarily: the service guide will explain how to run work that keeps going. Today we only work interactively.</p>
+<p>Placeholder host as on the previous slide. Ask: if R was running a long analysis in that session, does it continue after exit? Not necessarily: the service guide will explain how to run work that keeps going. Today we only work interactively.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -383,26 +336,34 @@ Data Analysis in Life Sciences
 <section id="check-the-copy-before-you-analyse" class="slide level2">
 <h2>Check the copy before you analyse</h2>
 <div class="columns">
-<div class="column" style="width:45%;">
+<div class="column" style="width:55%;">
 <p>In the <strong>remote R console</strong>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">file.exists</span>(<span class="st">"data/algae.csv"</span>)</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>algae <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/algae.csv"</span>,</span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>                         <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(algae)                      <span class="co"># 24</span></span>
-<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(algae<span class="sc">$</span>biomass_mg))    <span class="co"># 23</span></span>
-<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a>algae<span class="sc">$</span>biomass_mg[algae<span class="sc">$</span>culture_id <span class="sc">==</span> <span class="st">"A19"</span>]  <span class="co"># NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Same checks on both computers, same answers: <strong>24, 23, NA</strong>.</p>
-</div><div class="column" style="width:55%;">
+<pre class="text"><code>&gt; getwd()
+[1] "/home/student/introcomputing-course"
+&gt; file.exists("data/algae.csv")
+[1] TRUE
+&gt; algae &lt;- readr::read_csv("data/algae.csv",
++                          show_col_types = FALSE)
+&gt; nrow(algae)
+[1] 24
+&gt; sum(!is.na(algae$biomass_mg))
+[1] 23
+&gt; algae$biomass_mg[algae$culture_id == "A19"]
+[1] NA</code></pre>
+</div><div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="algae-counts.svg" style="width:100.0%"></p>
 <figcaption>Twenty-four separate culture records, with one unavailable supplement measurement, A19.</figcaption>
 </figure>
 </div>
+<ul>
+<li><code>getwd()</code>: R works in the copied project (placeholder path).</li>
+<li>24 cultures, 23 measured, A19 missing: the <strong>same answers as on the laptop</strong>, so the copy is complete.</li>
+</ul>
 </div></div>
 <aside class="notes">
-<p>data/algae.csv: 24 separately grown cultures, 12 reference and 12 supplement, harvested once; A19 spilled before weighing, so its biomass is unavailable (NA, not zero). FALSE from file.exists means R did not find that path from its working directory: check computer, project and folder before typing an absolute laptop path. Matching counts are good evidence but do not prove every value matches.</p>
+<p>data/algae.csv: 24 separately grown cultures, 12 reference and 12 supplement, harvested once; A19 spilled before weighing, so its biomass is unavailable (NA, not zero). The getwd() path is a placeholder; the other lines are real output. FALSE from file.exists means R did not find that path from its working directory: check computer, project and folder before typing an absolute laptop path.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -417,15 +378,21 @@ Data Analysis in Life Sciences
 </section>
 <section id="render-remotely-then-bring-the-result-back" class="slide level2">
 <h2>Render remotely, then bring the result back</h2>
+<pre class="text"><code>student@remote:~$ cd introcomputing-course
+student@remote:~/introcomputing-course$ Rscript -e 'rmarkdown::render("report.Rmd")'
+processing file: report.Rmd
+...
+Output created: report.html
+student@remote:~/introcomputing-course$ ls
+data  introcomputing.Rproj  output  report.html  report.Rmd  reports</code></pre>
 <div class="columns">
-<div class="column" style="width:42%;">
+<div class="column" style="width:50%;">
 <ul>
-<li>Open the remote project and render <code>report.Rmd</code> in the provided R application.</li>
-<li>If R is set up in the remote shell, from the project root: <code>Rscript -e 'rmarkdown::render("report.Rmd")'</code></li>
-<li>Download the HTML into a folder you can name, and open <strong>that</strong> copy.</li>
-<li>To recalculate later you need the source and the data, not only the HTML.</li>
+<li><code>Rscript</code> starts a fresh R and renders the saved report, like Knit after a restart.</li>
+<li><code>ls</code> shows the new <code>report.html</code>, <strong>on the remote disk</strong>. Download it to a named laptop folder and open <strong>that</strong> copy.</li>
+<li>To recalculate later you need the source and data, not only the HTML.</li>
 </ul>
-</div><div class="column" style="width:58%;">
+</div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="roundtrip.svg" style="width:100.0%"></p>
@@ -434,7 +401,7 @@ Data Analysis in Life Sciences
 </div>
 </div></div>
 <aside class="notes">
-<p>Rscript starts a fresh R process and renders the saved document: the same fresh-session idea as restarting R. Run it only on the permitted execution host named in the service guide. On Windows, keep using native RStudio locally; the Rscript line is for a configured remote shell.</p>
+<p>Prompt and host are placeholders; the render output was captured from the course project. If the remote service provides RStudio in a browser, Knit works as on the laptop. Run Rscript only on the permitted execution host named in the service guide.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -570,13 +537,21 @@ Data Analysis in Life Sciences
 <section id="equal-size-is-not-equal-contents" class="slide level2">
 <h2>Equal size is not equal contents</h2>
 <div class="columns">
-<div class="column" style="width:40%;">
+<div class="column" style="width:50%;">
+<pre class="text"><code>&gt; writeLines("version 1", "output/receipt-a.txt")
+&gt; writeLines("version 2", "output/receipt-b.txt")
+&gt; file.size(c("output/receipt-a.txt",
++             "output/receipt-b.txt"))
+[1] 10 10
+&gt; identical(readLines("output/receipt-a.txt"),
++           readLines("output/receipt-b.txt"))
+[1] FALSE</code></pre>
 <ul>
-<li><code>version 1</code> and <code>version 2</code> have the same number of characters, so the same file size.</li>
-<li>Equal row counts are a useful check, but two tables can have equal sizes and different values.</li>
-<li>For small text files, open both and read them; in R, <code>identical(readLines(a), readLines(b))</code>.</li>
+<li>Both files are <strong>10 bytes</strong>, yet their text differs.</li>
+<li>Equal sizes or row counts are a useful first check, not proof.</li>
+<li><code>identical(readLines(a), readLines(b))</code> compares the actual text.</li>
 </ul>
-</div><div class="column" style="width:60%;">
+</div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="size-is-limited.svg" style="width:100.0%"></p>
@@ -585,7 +560,7 @@ Data Analysis in Life Sciences
 </div>
 </div></div>
 <aside class="notes">
-<p>Yesterday file.size counted bytes; here that is exactly why it is not enough: one character per byte, and the same number of characters. Replace a and b with the real paths of the two copies. No hashing theory needed.</p>
+<p>Yesterday file.size counted bytes; here that is exactly why it is not enough: one character per byte, and the same number of characters (9 letters plus a line ending). Replace the paths with the real paths of the two copies. No hashing theory needed.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

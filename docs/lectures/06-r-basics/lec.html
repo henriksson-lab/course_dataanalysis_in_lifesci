@@ -28,74 +28,8 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #24292e;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #24292e; } /* Normal */
-    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
-    code span.an { color: #6a737d; } /* Annotation */
-    code span.at { color: #d73a49; } /* Attribute */
-    code span.bn { color: #005cc5; } /* BaseN */
-    code span.bu { color: #d73a49; } /* BuiltIn */
-    code span.cf { color: #d73a49; } /* ControlFlow */
-    code span.ch { color: #032f62; } /* Char */
-    code span.cn { color: #005cc5; } /* Constant */
-    code span.co { color: #6a737d; } /* Comment */
-    code span.cv { color: #6a737d; } /* CommentVar */
-    code span.do { color: #6a737d; } /* Documentation */
-    code span.dt { color: #d73a49; } /* DataType */
-    code span.dv { color: #005cc5; } /* DecVal */
-    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
-    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
-    code span.fl { color: #005cc5; } /* Float */
-    code span.fu { color: #6f42c1; } /* Function */
-    code span.im { color: #032f62; } /* Import */
-    code span.in { color: #6a737d; } /* Information */
-    code span.kw { color: #d73a49; } /* Keyword */
-    code span.op { color: #24292e; } /* Operator */
-    code span.ot { color: #6f42c1; } /* Other */
-    code span.pp { color: #d73a49; } /* Preprocessor */
-    code span.re { color: #6a737d; } /* RegionMarker */
-    code span.sc { color: #005cc5; } /* SpecialChar */
-    code span.ss { color: #032f62; } /* SpecialString */
-    code span.st { color: #032f62; } /* String */
-    code span.va { color: #e36209; } /* Variable */
-    code span.vs { color: #032f62; } /* VerbatimString */
-    code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-fa0e33e6dd574061e1681ec846127080.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -260,11 +194,13 @@ Data Analysis in Life Sciences
 <h2>R as a calculator</h2>
 <div class="columns">
 <div class="column" style="width:42%;">
-<p>In the Console, after the <code>&gt;</code> prompt:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="dv">37</span> <span class="sc">-</span> <span class="dv">20</span></span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="dv">37</span> <span class="sc">/</span> <span class="dv">20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Type after the <code>&gt;</code> prompt in the Console and press Enter:</p>
+<pre class="text"><code>&gt; 37 - 20
+[1] 17
+&gt; 37 / 20
+[1] 1.85</code></pre>
 <ul>
-<li><code>[1] 17</code> and <code>[1] 1.85</code>. <code>[1]</code> just numbers the first value printed.</li>
+<li><code>[1]</code> just numbers the first value printed.</li>
 <li><strong>17 mm</strong> is the growth. <strong>1.85</strong> is a ratio with no unit: the plant ended 1.85 times as long.</li>
 <li>Both calculations are correct. Pick the one that answers your question.</li>
 </ul>
@@ -294,27 +230,27 @@ Data Analysis in Life Sciences
 <h2>Give a result a name</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Lengths in millimetres</span></span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>initial_mm <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>final_mm <span class="ot">&lt;-</span> <span class="dv">37</span></span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>growth_mm <span class="ot">&lt;-</span> final_mm <span class="sc">-</span> initial_mm</span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>growth_mm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>&gt; initial_mm &lt;- 20
+&gt; final_mm &lt;- 37
+&gt; growth_mm &lt;- final_mm - initial_mm
+&gt; growth_mm
+[1] 17</code></pre>
 <ul>
-<li>Read <code>&lt;-</code> as “store this under this name”.</li>
-<li>The name now appears in the <strong>Environment</strong> pane.</li>
-<li><code>#</code> starts a comment for people; R ignores it.</li>
+<li>Read <code>&lt;-</code> as “store this under this name”. Storing prints nothing; typing the name prints the value.</li>
+<li>The names appear in the <strong>Environment</strong> pane.</li>
 <li>Capitals matter: <code>Growth_mm</code> is a different name.</li>
 </ul>
 </div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="named-object.svg" style="width:100.0%"></p>
-<figcaption>A calculation is stored in a named object in memory, while the script on disk holds the instructions.</figcaption>
+<p><img data-src="script-and-memory.svg" style="width:100.0%"></p>
+<figcaption>The script day06.R on disk holds the three instructions; running them puts initial_mm, final_mm and growth_mm with their values into R’s memory.</figcaption>
 </figure>
 </div>
 </div></div>
+<p>Write these lines in a script, <code>day06.R</code>, and press <strong>Run</strong> on each: the line is sent to the Console and appears there after <code>&gt;</code>, as above.</p>
 <aside class="notes">
-<p>Write this in a new script, File → New File → R Script, saved as day06.R in the project folder. Run each line with Run (Ctrl+Enter / Cmd+Enter). Putting the unit in the name (_mm) is a habit that prevents mistakes later.</p>
+<p>File → New File → R Script, saved as day06.R in the project folder. Run = Ctrl+Enter / Cmd+Enter. In the script, add a comment line starting with # saying the lengths are in mm; R skips comments. Putting the unit in the name (_mm) is a habit that prevents mistakes later.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -331,14 +267,16 @@ Data Analysis in Life Sciences
 <h2>A stored result does not update itself</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>final_mm <span class="ot">&lt;-</span> <span class="dv">39</span></span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>growth_mm      <span class="co"># still 17</span></span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>growth_mm <span class="ot">&lt;-</span> final_mm <span class="sc">-</span> initial_mm</span>
-<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>growth_mm      <span class="co"># now 19</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>&gt; final_mm &lt;- 39
+&gt; growth_mm
+[1] 17
+&gt; growth_mm &lt;- final_mm - initial_mm
+&gt; growth_mm
+[1] 19</code></pre>
 <ul>
-<li>A name holds a <strong>value</strong>, not a live formula as in a spreadsheet cell.</li>
-<li>Change an input, then <strong>rerun the lines that use it</strong>.</li>
-<li>Safest: run the whole script from the top.</li>
+<li>The final length changed, but <code>growth_mm</code> still says 17: a name holds a <strong>value</strong>, not a formula as in a spreadsheet cell.</li>
+<li>Rerun the subtraction and it says 19.</li>
+<li>Safest: after changing an input, run the whole script from the top.</li>
 </ul>
 </div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
@@ -364,15 +302,26 @@ Data Analysis in Life Sciences
 </section>
 <section id="saved-script-versus-objects-in-memory" class="slide level2">
 <h2>Saved script versus objects in memory</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<pre class="text"><code>&gt; growth_mm
+[1] 17 18 15
+
+Restarting R session...
+
+&gt; growth_mm
+Error: object 'growth_mm' not found</code></pre>
+<p>After <strong>Session → Restart R</strong>, the object is gone. The saved <code>day06.R</code> is still there: select all its lines and <strong>Run</strong>, and <code>growth_mm</code> comes back.</p>
+</div><div class="column" style="width:55%;">
 <ul>
 <li><strong>Saving</strong> the script writes instructions to disk. It does not run them.</li>
 <li><strong>Running</strong> a line creates objects in memory. It does not save the script.</li>
-<li>Restart R (<strong>Session → Restart R</strong>): the objects are gone, the saved script is not.</li>
-<li>So after reopening, run the script from the top. Everything it needs must be in it.</li>
+<li>So everything a result needs must be <strong>in the script</strong>, in the right order.</li>
+<li>Test it today: save <code>day06.R</code>, restart R, run all lines.</li>
 </ul>
-<p>Test it today: save <code>day06.R</code>, restart R, run all lines. Does <code>growth_mm</code> come back?</p>
+</div></div>
 <aside class="notes">
-<p>This is the same disk versus memory distinction from week 1. Unsaved editor changes may be recoverable, but do not rely on it. A script that works only after some unrecorded Console typing is not a complete record.</p>
+<p>This is the same disk versus memory distinction from week 1 and Day 5. Unsaved editor changes may be recoverable, but do not rely on it. A script that works only after some unrecorded Console typing is not a complete record. “Restarting R session…” is what RStudio prints in the Console on restart.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -389,13 +338,14 @@ Data Analysis in Life Sciences
 <h2>Several plants in one name</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>initial_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">19</span>)</span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>final_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">37</span>, <span class="dv">40</span>, <span class="dv">34</span>)</span>
-<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>growth_mm <span class="ot">&lt;-</span> final_mm <span class="sc">-</span> initial_mm</span>
-<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>growth_mm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>&gt; initial_mm &lt;- c(20, 22, 19)
+&gt; final_mm &lt;- c(37, 40, 34)
+&gt; growth_mm &lt;- final_mm - initial_mm
+&gt; growth_mm
+[1] 17 18 15</code></pre>
 <ul>
-<li><code>c()</code> combines values into a <strong>vector</strong>.</li>
-<li>R subtracts <strong>position by position</strong>: 17, 18, 15 mm.</li>
+<li><code>c()</code> combines values into a <strong>vector</strong>: one name, several values.</li>
+<li>R subtracts <strong>position by position</strong>: 37 − 20, 40 − 22, 34 − 19.</li>
 <li>This is right only if both vectors list the <strong>same plants in the same order</strong>.</li>
 </ul>
 </div><div class="column" style="width:55%;">
@@ -424,21 +374,29 @@ Data Analysis in Life Sciences
 <h2>Summarise and compare</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(growth_mm)</span>
-<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(growth_mm)</span>
-<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>growth_mm <span class="sc">&gt;</span> <span class="dv">16</span></span>
-<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>plant_id <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"P01"</span>, <span class="st">"P02"</span>, <span class="st">"P03"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>&gt; mean(growth_mm)
+[1] 16.66667
+&gt; length(growth_mm)
+[1] 3
+&gt; growth_mm &gt; 16
+[1]  TRUE  TRUE FALSE
+&gt; plant_id &lt;- c("P01", "P02", "P03")
+&gt; mean(plant_id)
+[1] NA
+Warning message:
+In mean.default(plant_id) :
+  argument is not numeric or logical: returning NA</code></pre>
 </div><div class="column" style="width:50%;">
 <ul>
-<li><code>mean()</code> gives <strong>16.67 mm</strong>; <code>length()</code> gives <strong>3</strong> plants.</li>
-<li><code>growth_mm &gt; 16</code> gives <code>TRUE TRUE FALSE</code>: yes/no answers, not new measurements.</li>
-<li>Text goes in quotes. <code>"20"</code> is text, <code>20</code> is a number.</li>
-<li><code>mean(plant_id)</code> makes no sense: IDs are labels, not measurements.</li>
+<li>A <strong>function</strong> is a name with brackets: <code>mean()</code> averages, <code>length()</code> counts.</li>
+<li>Mean growth <strong>16.67 mm</strong>, from <strong>3</strong> plants.</li>
+<li><code>&gt; 16</code> answers yes/no for each plant: the first two grew more than 16 mm.</li>
+<li>Text goes in quotes. Averaging plant IDs makes no sense, and R says so.</li>
 </ul>
 </div></div>
-<p>A <strong>function</strong> is a name followed by brackets: <code>mean(...)</code>. Run <code>?mean</code> to open its help page.</p>
+<p>Run <code>?mean</code> to open the help page for a function.</p>
 <aside class="notes">
-<p>Read the help’s Description and Examples, not every option. Plant IDs contain digits but are still labels; storing them as text keeps R from treating them as numbers.</p>
+<p>Read the help’s Description and Examples, not every option. Plant IDs contain digits but are labels; the warning is R’s way of saying the request makes no sense.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -454,15 +412,16 @@ Data Analysis in Life Sciences
 <section id="wrong-order-wrong-answer-no-warning" class="slide level2">
 <h2>Wrong order, wrong answer, no warning</h2>
 <div class="columns">
-<div class="column" style="width:42%;">
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>final_wrong <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">34</span>, <span class="dv">37</span>, <span class="dv">40</span>)</span>
-<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>final_wrong <span class="sc">-</span> initial_mm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="column" style="width:45%;">
+<pre class="text"><code>&gt; final_wrong &lt;- c(34, 37, 40)
+&gt; final_wrong - initial_mm
+[1] 14 15 21</code></pre>
 <ul>
-<li>Gives <strong>14, 15, 21</strong> instead of 17, 18, 15.</li>
-<li>Same values, same length, so R raises no error.</li>
+<li>The same final lengths in a different order give <strong>14, 15, 21</strong> instead of 17, 18, 15.</li>
+<li>Same length, so R raises no error.</li>
 <li>Only you know which plant each position belongs to. Keep the order matched.</li>
 </ul>
-</div><div class="column" style="width:58%;">
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="vector-shuffle.svg" style="width:100.0%"></p>
@@ -488,12 +447,16 @@ Data Analysis in Life Sciences
 <h2>Convert the values, not only the label</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
-<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>growth_cm <span class="ot">&lt;-</span> growth_mm <span class="sc">/</span> <span class="dv">10</span></span>
-<span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(growth_mm)   <span class="co"># 16.67</span></span>
-<span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(growth_cm)   <span class="co"># 1.667</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>&gt; growth_cm &lt;- growth_mm / 10
+&gt; growth_cm
+[1] 1.7 1.8 1.5
+&gt; mean(growth_mm)
+[1] 16.66667
+&gt; mean(growth_cm)
+[1] 1.666667</code></pre>
 <ul>
 <li>Dividing by 10 converts mm to cm. Store it under a <strong>new name</strong> ending <code>_cm</code>.</li>
-<li>Renaming an object or an axis to “cm” without dividing would be wrong by a factor of 10.</li>
+<li>Calling the mm values “cm” without dividing would be wrong by a factor of 10.</li>
 </ul>
 </div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
@@ -504,7 +467,7 @@ Data Analysis in Life Sciences
 </div>
 </div></div>
 <aside class="notes">
-<p>Keep the original values. A changed label does not change the numbers. The figure uses plant P01 from the course data (18.6 mm).</p>
+<p>Keep the original values. A changed label does not change the numbers. The figure uses plant P01 from the course data (18.6 mm), which students meet on Day 7.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -520,17 +483,16 @@ Data Analysis in Life Sciences
 <section id="the-same-habit-for-a-lab-calculation" class="slide level2">
 <h2>The same habit for a lab calculation</h2>
 <div class="columns">
-<div class="column" style="width:45%;">
-<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a>mass_g <span class="ot">&lt;-</span> <span class="fl">0.2922</span></span>
-<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>molar_mass_g_mol <span class="ot">&lt;-</span> <span class="fl">58.44</span></span>
-<span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>volume_l <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">/</span> <span class="dv">1000</span></span>
-<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a>amount_mol <span class="ot">&lt;-</span> mass_g <span class="sc">/</span> molar_mass_g_mol</span>
-<span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a><span class="dv">1000</span> <span class="sc">*</span> amount_mol <span class="sc">/</span> volume_l   <span class="co"># 50 mmol/L</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Every input has a name with its unit.</li>
-<li>Each step can be checked on its own.</li>
-</ul>
-</div><div class="column" style="width:55%;">
+<div class="column" style="width:47%;">
+<pre class="text"><code>&gt; mass_g &lt;- 0.2922
+&gt; molar_mass_g_mol &lt;- 58.44
+&gt; volume_l &lt;- 100 / 1000
+&gt; amount_mol &lt;- mass_g / molar_mass_g_mol
+&gt; amount_mol
+[1] 0.005
+&gt; 1000 * amount_mol / volume_l
+[1] 50</code></pre>
+</div><div class="column" style="width:53%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="solution-units.svg" style="width:100.0%"></p>
@@ -538,9 +500,9 @@ Data Analysis in Life Sciences
 </figure>
 </div>
 </div></div>
-<p>Doubling the mass gives 100 mmol/L; doubling the volume gives 25 mmol/L.</p>
+<p>0.2922 g of sodium chloride in 100 mL is <strong>50 mmol/L</strong>. A <strong>mole</strong> is a unit of amount of substance; the <strong>molar mass</strong> (g/mol) says what one mole weighs. Every input has a name with its unit, so each step can be checked.</p>
 <aside class="notes">
-<p>A mole is a unit of chemical amount; molar mass is grams per mole. All values are supplied; no chemistry background is needed. The alternative ratio exercise is a product yield: 100 × 0.62 g / 1.00 g = 62%.</p>
+<p>All values are supplied; no chemistry background is needed. Doubling the mass gives 100 mmol/L; doubling the volume gives 25 mmol/L. The alternative ratio exercise is a product yield: 100 × 0.62 g / 1.00 g = 62%.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -555,12 +517,20 @@ Data Analysis in Life Sciences
 </section>
 <section id="when-something-goes-wrong" class="slide level2">
 <h2>When something goes wrong</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<pre class="text"><code>&gt; Growth_mm
+Error: object 'Growth_mm' not found
+&gt; mean(c(1, 2)
++ </code></pre>
+</div><div class="column" style="width:55%;">
 <ul>
-<li><strong><code>object 'growth_mm' not found</code></strong>: check the spelling and capitals, then run the line that creates it.</li>
-<li><strong>A <code>+</code> prompt</strong> instead of <code>&gt;</code>: R is waiting for the rest of a line. Check quotes and brackets, or press Esc.</li>
-<li><strong>An old result</strong>: did you rerun the lines after changing an input?</li>
+<li><strong><code>object ... not found</code></strong>: check spelling and capitals (here <code>Growth_mm</code> instead of <code>growth_mm</code>), or run the line that creates it.</li>
+<li><strong>A <code>+</code> prompt</strong>: R is waiting for the rest of the line, here a closing bracket. Finish it, or press Esc.</li>
+<li><strong>An old result</strong>: rerun the lines after changing an input.</li>
 <li><strong>Lost track?</strong> Restart R and run the script from the top.</li>
 </ul>
+</div></div>
 <aside class="notes">
 <p>Teach checking the dependency (which line creates this object?) instead of running random lines until the error goes away.</p>
 <style type="text/css">

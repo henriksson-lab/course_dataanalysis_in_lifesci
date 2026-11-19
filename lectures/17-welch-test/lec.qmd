@@ -75,27 +75,36 @@ State the assumptions in biological terms, not as a ritual. Welch's version does
 
 ## Run the comparison in the direction we named
 
-```r
-library(readr)
-library(dplyr)
-seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE) |>
-  mutate(growth_mm = final_mm - initial_mm)
-treated <- filter(seedlings, treatment == "treated")$growth_mm
-control <- filter(seedlings, treatment == "control")$growth_mm
+:::: {.columns}
+::: {.column width="60%"}
+```text
+> comparison <- t.test(treated, control, var.equal = FALSE,
++                      alternative = "two.sided",
++                      conf.level = 0.95)
+> comparison
 
-comparison <- t.test(treated, control,
-                     var.equal = FALSE,          # Welch: spreads may differ
-                     alternative = "two.sided",  # a difference in either direction counts
-                     conf.level = 0.95)
-comparison
+        Welch Two Sample t-test
+
+data:  treated and control
+t = 3.7012, df = 18.986, p-value = 0.001517
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 2.700984 9.732349
+sample estimates:
+mean of x mean of y
+ 21.49167  15.27500
 ```
-
-- The **first vector minus the second**: here **treated − control**. The order of arguments sets the sign.
-- `var.equal = FALSE` is already the default; writing it makes the method visible to a reader.
-- Save the result as an object so you can extract numbers: `comparison$conf.int`, `comparison$p.value`.
+:::
+::: {.column width="40%"}
+- `treated` and `control` are the two vectors of 12 growth values from Day 16.
+- R subtracts the **second from the first**: **treated − control**. The order sets the sign.
+- `var.equal = FALSE` (Welch: spreads may differ) and `alternative = "two.sided"` (either direction counts) are the defaults; writing them makes the method visible.
+- `comparison` keeps the result, so you can reuse its numbers later.
+:::
+::::
 
 ::: notes
-This builds on Day 16's comparison.Rmd, which already creates the treated and control vectors. Students should run it, not copy numbers from the slide. Emphasise naming the direction in words before running the code, so that the sign of the output is a check rather than a surprise.
+This builds on Day 16's comparison.Rmd, which already creates the treated and control vectors with pull(). Students should run it, not copy numbers from the slide. Emphasise naming the direction in words before running the code, so that the sign of the output is a check rather than a surprise. The next slide goes through the printout line by line.
 :::
 
 ## Reading the output
@@ -105,8 +114,8 @@ This builds on Day 16's comparison.Rmd, which already creates the treated and co
 | `mean of x`, `mean of y` | 21.49, 15.28 | mm | Group means (treated, control) |
 | difference of means | **6.22** | mm | The estimate, treated − control |
 | `95 percent confidence interval` | **2.70 to 9.73** | mm | Uncertainty in the mean difference |
-| `t` | 3.70 | none | Estimate divided by its standard error |
-| `df` | 19.0 | none | Welch's approximate degrees of freedom |
+| `t` | 3.70 | none | Estimate ÷ its standard error (its expected variation) |
+| `df` | 19.0 | none | Degrees of freedom; just report it |
 | `p-value` | **0.0015** | none | See the next slides |
 
 - Sample sizes are **not printed**: get them from your data (12 and 12).
@@ -118,7 +127,7 @@ Ask students to annotate their own printout with exactly these four columns: qua
 
 ## The estimate and its confidence interval
 
-![The estimate 6.22 mm and 95 percent confidence interval 2.70–9.73 mm are shown against zero difference.](difference-interval.svg){width="70%" fig-align="center"}
+![The estimate 6.22 mm and 95 percent confidence interval 2.70–9.73 mm are shown against zero difference.](difference-interval.svg){height="330px" fig-align="center"}
 
 - Estimate **6.22 mm**; 95% CI **2.70 to 9.73 mm**.
 - **Zero** marks "no difference between population means". This interval lies entirely above zero.
@@ -186,25 +195,34 @@ The reference curve uses the actual Welch statistic and approximate degrees of f
 
 :::: {.columns}
 ::: {.column width="45%"}
-```r
-reverse <- t.test(control, treated)
-comparison$conf.int   #  2.70   9.73
-reverse$conf.int      # -9.73  -2.70
-comparison$p.value    #  0.0015
-reverse$p.value       #  0.0015
+```text
+> reverse <- t.test(control, treated)
+> comparison$conf.int
+[1] 2.700984 9.732349
+attr(,"conf.level")
+[1] 0.95
+> reverse$conf.int
+[1] -9.732349 -2.700984
+attr(,"conf.level")
+[1] 0.95
+> comparison$p.value
+[1] 0.001517127
+> reverse$p.value
+[1] 0.001517127
 ```
 
-- Same data, opposite sign: **control − treated**.
-- The two-sided p-value is **unchanged**.
-- Keep the direction you **stated in advance** as the reported result; save the check in a separate object.
+- `$conf.int` and `$p.value` take one part out of a saved result. R also prints the level (0.95) as a label.
+- Same data, opposite sign: **control − treated**. The two-sided p-value is **unchanged**.
 :::
 ::: {.column width="55%"}
-![The same comparison in opposite directions produces reflected confidence intervals.](extended-reversed-interval.svg){width="100%"}
+![The same comparison in opposite directions produces mirror-image confidence intervals: 2.70 to 9.73 millimetres and minus 9.73 to minus 2.70 millimetres.](extended-reversed-interval.svg){width="100%"}
+
+Report the direction you **stated in advance**; keep the check in a separate object.
 :::
 ::::
 
 ::: notes
-This is not a new experiment, only the same contrast described in the other direction. The function's argument order determines the sign, not an object name such as treatment_effect. Using a separate object keeps the primary result intact in the report.
+This is not a new experiment, only the same contrast described in the other direction. The argument order determines the sign, not an object name such as treatment_effect. Using a separate object keeps the primary result intact in the report.
 :::
 
 ## What makes an interval wider or narrower?
@@ -228,7 +246,7 @@ Changing conf.level does not change the observed means; it changes how wide the 
 
 ## When the interval includes zero
 
-![An illustrative 2 mm difference has a 95% interval from −1 to 5 mm, covering zero and both directions.](extended-uncertain-case.svg){width="70%" fig-align="center"}
+![An illustrative 2 mm difference has a 95% interval from −1 to 5 mm, covering zero and both directions.](extended-uncertain-case.svg){height="330px" fig-align="center"}
 
 - Illustrative small study: estimate 2 mm, 95% CI **−1 to 5 mm**.
 - Both a small harmful and a moderate helpful effect remain compatible with the data.
@@ -255,28 +273,37 @@ Then one sentence on **biological size** and one on **design limits**.
 Random allocation supports a causal comparison within these study conditions, but p alone never establishes causality or generalisation beyond them. Encourage a sentence on biological relevance: is 6 mm over a week a lot for a seedling of about 20 mm? Precision of wording is part of the analysis, not editing afterwards.
 :::
 
-## Worked example: a second class's study {.smaller}
+## Worked example: a second class's study
 
-```r
-transfer <- read_csv("data/seedlings-transfer.csv", show_col_types = FALSE) |>
-  mutate(growth_mm = final_mm - initial_mm)
-new_treated <- transfer |> filter(treatment == "treated") |> pull(growth_mm)
-new_control <- transfer |> filter(treatment == "control") |> pull(growth_mm)
-transfer_test <- t.test(new_treated, new_control)
-transfer_test
+:::: {.columns}
+::: {.column width="58%"}
+```text
+> transfer_test <- t.test(new_treated, new_control)
+> transfer_test
+
+        Welch Two Sample t-test
+...
+t = 3.9668, df = 15.004, p-value = 0.00124
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 1.948441 6.473782
+sample estimates:
+mean of x mean of y
+ 17.86667  13.65556
 ```
+:::
+::: {.column width="42%"}
+- `new_treated` and `new_control` are the second class's growth values, made with `filter()` and `pull()` as on Day 16. 9 plants per group. Estimate: 17.87 − 13.66 = **4.21 mm**.
+- 95% CI **1.95 to 6.47 mm**; p ≈ **0.0012**.
 
-| Quantity | Value |
-|---|---|
-| Plants per group | 9 and 9 |
-| Estimate (treated − control) | **4.21 mm** |
-| 95% CI | **1.95 to 6.47 mm** |
-| Welch p-value | **0.0012** |
+**Result:** "Treated seedlings grew 4.21 mm more on average (95% CI 1.95–6.47 mm; Welch two-sided test, p ≈ 0.0012; 9 per group)."
 
-"Treated seedlings grew 4.21 mm more on average (95% CI 1.95–6.47 mm; Welch, p ≈ 0.0012; 9 per group)."
+- A smaller estimate than the main study, yet a **narrower** interval: these plants vary less.
+:::
+::::
 
 ::: notes
-Use transfer from its own saved import and growth calculation in transfer-comparison.Rmd, not leftover console objects. Have students write the result sentence before showing the last line. Point out the estimate is smaller than the main study's, yet the interval is narrower: less plant-to-plant variation.
+Use transfer from its own saved import and growth calculation in transfer-comparison.Rmd, not leftover console objects. Have students write the result sentence before showing it. Transfer SDs are about 1.94 and 2.53 mm, against 4.87 and 3.19 mm in the main study.
 :::
 
 ## Summary {.smaller}
