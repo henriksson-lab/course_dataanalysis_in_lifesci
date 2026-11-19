@@ -9,25 +9,21 @@ or a requirement to complete both biology and chemistry routes.
 ## Content and activity changes
 
 Every daily page now has core **Extended practical** and **Independent
-transfer** sections, with concrete steps, hints, output names, and checks. The
-blocks are intended to take about 2–3 hours together, depending on student
-experience and support. These estimates fit the central study plan, with slower
-work using its flexible time; do not add every upper estimate to an already
-full day. They are learner-study estimates, not contact hours or examination
-requirements.
+transfer** sections, with concrete steps, hints, output names, and checks. No
+duration is stated; how long they take beginners is unknown until piloted.
 
-| Day | Added worked and independent work | Additional saved outputs | Indicative active time |
-| --- | --- | --- | --- |
-| 11 | Audit every source-supported repair; compare text/numeric representations; deliberately demonstrate the wrong missing-to-zero result in a separate object; inspect a fresh transfer file and a classroom-created duplicate | Correction audit, transfer audit, derived transfer CSV, handover paragraph | 75–90 min extended + 60–90 min transfer |
-| 12 | Hand-work deviations and transformations; investigate one changed observation; plot observations/means; independently describe the new class in mm and cm | Transformation note, transfer summary/figure, 120–180 word interpretation | 75–90 + 60–90 min |
-| 13 | Compare mean-only and individual displays; repair misleading captions; vary bins and document stable patterns; export a complete new-class figure/table package | Caption log, figures, transfer summary, handover request and rerun note | 75–90 + 60–90 min |
-| 14 | Diagram four designs; distinguish technical readings from units; vary seed/sample size/repetitions in supplied simulations; explain why precision cannot establish design validity | Design diagrams, sampling CSV/figure, source-versus-estimate spread table, interpretation | 75–90 + 60–90 min |
-| 15 | Review one chosen descriptive report as reader and analyst; trace numerical claims; add inline calculations; reproduce and revise; create a new-class descriptive report | Revision log, revised report, transfer-description.Rmd/HTML, minimum-file handover | 75–90 + 60–90 min, with supported rendering time if needed |
-| 16 | Plan the contrast before a test; separate starting size/final size/growth; check direction and individual overlap; prepare another class's comparison without yet adding inference | Analysis plan, paired figure set, descriptive paragraph, transfer-comparison.Rmd/HTML | 75–90 + 60–90 min |
-| 17 | Annotate full output; reverse vectors; compare interval coverage levels; repair misinterpretations; extend the new-class report with the taught Welch comparison | Output-reading table, interval-level check, corrected statements, transfer comparison report | 75–90 + 60–90 min |
-| 18 | Preserve pair identity; demonstrate independent sorting as a deliberately invalid object; compare equivalent paired/on-changes calculations; interpret a fully supplied tiny paired case | Identity audit, valid/wrong comparison, change figures, paired-transfer.Rmd/HTML | 75–90 + 60–90 min |
-| 19 | Audit calibration direction/units/residuals; investigate rounded coefficients; preserve range reasons; trace dilution evidence; independently process a second calibration | Workflow/precision audit, range-checked tables, transfer-calibration.Rmd/HTML with figures | 75–90 + 75–90 min |
-| 20 | Interpret slope/residuals and range; conduct transparent sensitivity and unit checks; distinguish an arithmetic formula from empirical evidence; analyse a new observed association | Revised leaf report, unit/sensitivity checks, transfer-association.Rmd/HTML, three-question comparison sheet | 75–90 + 60–90 min |
+| Day | Added worked and independent work | Additional saved outputs |
+| --- | --- | --- |
+| 11 | Audit every source-supported repair; compare text/numeric representations; deliberately demonstrate the wrong missing-to-zero result in a separate object; inspect a fresh transfer file and a classroom-created duplicate | Correction audit, transfer audit, derived transfer CSV, handover paragraph |
+| 12 | Hand-work deviations and transformations; investigate one changed observation; plot observations/means; independently describe the new class in mm and cm | Transformation note, transfer summary/figure, 120–180 word interpretation |
+| 13 | Compare mean-only and individual displays; repair misleading captions; vary bins and document stable patterns; export a complete new-class figure/table package | Caption log, figures, transfer summary, handover request and rerun note |
+| 14 | Diagram four designs; distinguish technical readings from units; vary seed/sample size/repetitions in supplied simulations; explain why precision cannot establish design validity | Design diagrams, sampling CSV/figure, source-versus-estimate spread table, interpretation |
+| 15 | Review one chosen descriptive report as reader and analyst; trace numerical claims; add inline calculations; reproduce and revise; create a new-class descriptive report | Revision log, revised report, transfer-description.Rmd/HTML, minimum-file handover |
+| 16 | Plan the contrast before a test; separate starting size/final size/growth; check direction and individual overlap; prepare another class's comparison without yet adding inference | Analysis plan, paired figure set, descriptive paragraph, transfer-comparison.Rmd/HTML |
+| 17 | Annotate full output; reverse vectors; compare interval coverage levels; repair misinterpretations; extend the new-class report with the taught Welch comparison | Output-reading table, interval-level check, corrected statements, transfer comparison report |
+| 18 | Preserve pair identity; demonstrate independent sorting as a deliberately invalid object; compare equivalent paired/on-changes calculations; interpret a fully supplied tiny paired case | Identity audit, valid/wrong comparison, change figures, paired-transfer.Rmd/HTML |
+| 19 | Audit calibration direction/units/residuals; investigate rounded coefficients; preserve range reasons; trace dilution evidence; independently process a second calibration | Workflow/precision audit, range-checked tables, transfer-calibration.Rmd/HTML with figures |
+| 20 | Interpret slope/residuals and range; conduct transparent sensitivity and unit checks; distinguish an arithmetic formula from empirical evidence; analyse a new observed association | Revised leaf report, unit/sensitivity checks, transfer-association.Rmd/HTML, three-question comparison sheet |
 
 The organic alternatives remain basic and self-contained. Maximum possible
 product mass, collected mass, formula, units, and simplified purity assumption

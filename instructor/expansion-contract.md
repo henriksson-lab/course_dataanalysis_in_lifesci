@@ -29,9 +29,8 @@ half visual slides. Do not add advanced methods or pad decks with duplicates.
 - Teacher solutions/checks must cover all new numerical/file tasks. Use actual
   supplied data and document expected values. No unimplemented input files.
 - Roughly double weekly quiz questions, with short worked answers and no grades.
-- Root provides a study/workload page with planning estimates: about 35 hours
-  structured study plus 5 flexible hours per week (not 40 contact hours), around
- 200 learner hours over five weeks; pilot estimates rather than a guarantee.
+- Root provides a study-plan page listing the sequence and checkpoints. (Hour
+  estimates were later removed: actual study time is unknown until piloted.)
   Core daily work includes lecture/demonstration, guided work, independent
   transfer, writing/recovery and review. Exam design remains out of scope.
 

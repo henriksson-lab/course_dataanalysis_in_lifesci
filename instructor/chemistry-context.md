@@ -48,10 +48,10 @@ instruction. All new example data should be labelled simulated.
 
 | Priority | Existing lesson | Proposed task | Existing computing skill | Scope |
 | --- | --- | --- | --- | --- |
-| Core, short | Day 6: first R calculations | Calculate a solute mass from supplied concentration, final volume, and molar mass | Objects, arithmetic, comments, units, changing an input | Replace one repeated arithmetic task; about 10–15 minutes |
-| Core, short | Day 8: derived columns | Calculate stock volumes for three dilutions using a supplied relationship | Import a tiny table, `mutate`, export calculated columns | Replace an extra plot variation; about 15–20 minutes |
-| Small transfer check | Day 12: variation | Summarise repeated volume readings | Mean, variance, SD, spread versus a common offset | About 5–10 minutes; no new workflow |
-| Strongest existing fit | Day 19: calibration | Explain the chemistry context and correct one newly measured diluted sample | Existing line fit, inversion, units, range checks | Retain the lesson; at most 5–10 minutes of additional arithmetic |
+| Core, short | Day 6: first R calculations | Calculate a solute mass from supplied concentration, final volume, and molar mass | Objects, arithmetic, comments, units, changing an input | Replace one repeated arithmetic task |
+| Core, short | Day 8: derived columns | Calculate stock volumes for three dilutions using a supplied relationship | Import a tiny table, `mutate`, export calculated columns | Replace an extra plot variation |
+| Small transfer check | Day 12: variation | Summarise repeated volume readings | Mean, variance, SD, spread versus a common offset | No new workflow |
+| Strongest existing fit | Day 19: calibration | Explain the chemistry context and correct one newly measured diluted sample | Existing line fit, inversion, units, range checks | Retain the lesson; adds a small amount of arithmetic |
 
 Retain seedlings as the recurring dataset and duckweed as the integrated study.
 Do not fill the final catch-up day with new chemistry. Timing needs a beginner

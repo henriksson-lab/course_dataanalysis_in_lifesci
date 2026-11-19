@@ -27,19 +27,16 @@ questions with collapsible worked answers.
 
 ## Added active study work
 
-The estimates below concern the new core blocks, in addition to existing
-explanation and practical work. They are planning ranges for a beginner pilot,
-not contact-hour promises. A three-hour version draws on the daily flexible
-allocation in the root study plan; do not add every upper estimate on top of
-every other daily maximum.
+The table below lists the new core blocks, in addition to existing explanation
+and practical work. No duration is stated; it is unknown until piloted.
 
-| Day | Extended practical | Independent transfer | Estimated added active time | Main new retained evidence |
-| --- | --- | --- | --- | --- |
-| 21 | Plan and verify a transfer; check actual receiving contents; create/return a receipt; investigate a stale copy | Recover a misplaced output, test another person's directions, distinguish source from readable output | 75–90 + 60–75 minutes | Transfer plan, receipt, version/location log, and bounded transfer audit |
-| 22 | Predict a one-letter change, compute a defined fraction, write/read a new string, compare original/shifted intensities | Build a strict-threshold table, explain equality, create a four-row CSV, and render an explanatory report | 75–90 + 60–75 minutes | Changed text, small CSV, threshold results, `representation-report.Rmd` and HTML |
-| 23 | Plan the chosen main study before modifying code, retain actual data checks, verify a record, reverse a comparison, repair false interpretations | Analyse the fresh algae dataset as a short script/memo with counts, summary, observation plot, direction, and limitation | 90 + 60–90 minutes | Study decision trail plus `algae-transfer.R`, summary, plot, and short memo |
-| 24 | In disposable copies, contrast a renamed-input failure with false prose that still renders; restore and verify | Convert the existing algae memo into a brief portable report; package/extract/reproduce it from a new location | 90 + 60–90 minutes | Controlled-case record, corrected main package, `algae-brief.Rmd`, and tested algae share package |
-| 25 | Inspect the high recorded A11 value; preserve the primary analysis; label a diagnostic omission and explain its influence | Rehearse a full handover from saved files, verify one record/summary, test recipient instructions, and identify the next concrete rehearsal | 90 + 60–90 minutes | Primary and labelled diagnostic results, final investigation, tested handover, readiness review |
+| Day | Extended practical | Independent transfer | Main new retained evidence |
+| --- | --- | --- | --- |
+| 21 | Plan and verify a transfer; check actual receiving contents; create/return a receipt; investigate a stale copy | Recover a misplaced output, test another person's directions, distinguish source from readable output | Transfer plan, receipt, version/location log, and bounded transfer audit |
+| 22 | Predict a one-letter change, compute a defined fraction, write/read a new string, compare original/shifted intensities | Build a strict-threshold table, explain equality, create a four-row CSV, and render an explanatory report | Changed text, small CSV, threshold results, `representation-report.Rmd` and HTML |
+| 23 | Plan the chosen main study before modifying code, retain actual data checks, verify a record, reverse a comparison, repair false interpretations | Analyse the fresh algae dataset as a short script/memo with counts, summary, observation plot, direction, and limitation | Study decision trail plus `algae-transfer.R`, summary, plot, and short memo |
+| 24 | In disposable copies, contrast a renamed-input failure with false prose that still renders; restore and verify | Convert the existing algae memo into a brief portable report; package/extract/reproduce it from a new location | Controlled-case record, corrected main package, `algae-brief.Rmd`, and tested algae share package |
+| 25 | Inspect the high recorded A11 value; preserve the primary analysis; label a diagnostic omission and explain its influence | Rehearse a full handover from saved files, verify one record/summary, test recipient instructions, and identify the next concrete rehearsal | Primary and labelled diagnostic results, final investigation, tested handover, readiness review |
 
 The algae memo is a short transfer exercise, not a requirement to complete both
 duckweed and organic full main reports. The chemistry alternative retains its

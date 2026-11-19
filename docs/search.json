@@ -1083,7 +1083,7 @@
     "href": "lectures/17-welch-test/lec.html#run-the-comparison-in-the-direction-we-named",
     "title": "How uncertain is the difference?",
     "section": "Run the comparison in the direction we named",
-    "text": "Run the comparison in the direction we named\nlibrary(readr)\nlibrary(dplyr)\nseedlings &lt;- read_csv('data/seedlings.csv', show_col_types = FALSE) |&gt;\n  mutate(growth_mm = final_mm - initial_mm)\ntreated &lt;- filter(seedlings, treatment == 'treated')$growth_mm\ncontrol &lt;- filter(seedlings, treatment == 'control')$growth_mm\ncomparison &lt;- t.test(treated, control,\n  var.equal = FALSE, alternative = \"two.sided\",\n  conf.level = 0.95)\ncomparison\nFirst vector minus second vector: treated minus control.\n\nThe prior preparation creates treated and control numeric vectors. var.equal=FALSE explicitly asks for Welch’s method; the default already does this, but the setting is visible. Two-sided means evidence in either direction counts. We are reading estimates, interval and p-value rather than deriving the t formula.",
+    "text": "Run the comparison in the direction we named\nlibrary(readr)\nlibrary(dplyr)\nseedlings &lt;- read_csv(\"data/seedlings.csv\", show_col_types = FALSE) |&gt;\n  mutate(growth_mm = final_mm - initial_mm)\ntreated &lt;- filter(seedlings, treatment == \"treated\")$growth_mm\ncontrol &lt;- filter(seedlings, treatment == \"control\")$growth_mm\n\ncomparison &lt;- t.test(treated, control,\n                     var.equal = FALSE,          # Welch: spreads may differ\n                     alternative = \"two.sided\",  # a difference in either direction counts\n                     conf.level = 0.95)\ncomparison\n\nThe first vector minus the second: here treated − control. The order of arguments sets the sign.\nvar.equal = FALSE is already the default; writing it makes the method visible to a reader.\nSave the result as an object so you can extract numbers: comparison$conf.int, comparison$p.value.\n\n\nThis builds on Day 16’s comparison.Rmd, which already creates the treated and control vectors. Students should run it, not copy numbers from the slide. Emphasise naming the direction in words before running the code, so that the sign of the output is a check rather than a surprise.",
     "crumbs": [
       "Home",
       "Week 4: comparisons and lines",
@@ -1135,7 +1135,7 @@
     "href": "lectures/17-welch-test/lec.html#spread-among-plants-is-not-the-difference-interval",
     "title": "How uncertain is the difference?",
     "section": "Spread among plants is not the difference interval",
-    "text": "Spread among plants is not the difference interval\n\n\n\nIndividual measurements and the estimated mean-difference interval answer different questions.\n\n\nKeep individual variation and estimate uncertainty separate.\n\nThe left panel shows the individual growth values; the right shows uncertainty in treated minus control. Students often read any error bar as individual spread. Ask them to identify the horizontal or vertical axis and the object being summarised before interpreting either picture.",
+    "text": "Spread among plants is not the difference interval\n\nIndividual measurements and the estimated mean-difference interval answer different questions.\nLeft: individual growth values. Spread here is natural variation between plants (SD).\nRight: uncertainty in the treated − control mean difference (CI).\nBefore reading any error bar, ask: which quantity, and on which axis? A figure caption must say.\n\n\nStudents frequently read any bar as individual spread or any bar as a confidence interval. Ask them to identify the axis and the summarised object in each panel before interpreting. Link back to Day 13: if you draw whiskers, define them.",
     "crumbs": [
       "Home",
       "Week 4: comparisons and lines",
@@ -2747,7 +2747,7 @@
     "href": "lectures/01-files/lec.html#a-file-is-not-the-window-showing-it",
     "title": "Find, save, and reopen",
     "section": "A file is not the window showing it",
-    "text": "A file is not the window showing it\n\n\n\nOne saved CSV can be read as text or as a table in different applications.\n\n\nThe saved measurements can remain after either application closes.\n\nBegin with the biological task: we have seedling lengths to inspect, not a coding puzzle. Ask students what they think happens to the measurements when the window closes. Demonstrate one CSV in a text editor and a table viewer, without assuming experience of either. The point is one file and different applications, not software selection.",
+    "text": "A file is not the window showing it\n\n\n\nThe file is what is saved on disk. An application opens it and shows a view.\nOne CSV can be shown as plain text (a text editor) or as a grid (a spreadsheet). The saved content is the same comma-separated text.\nClosing the application does not delete the file. Deleting the file is a separate action.\nThe format (CSV) is not the application (Excel). R, a text editor, and Excel can all read the same CSV.\n\n\n\n\n\nOne saved CSV can be read as text or as a table in different applications.\n\n\n\n\nDemonstrate: open seedlings.csv in a text editor, then in a spreadsheet viewer. Same file, same path, two views. Ask what happens to the measurements when both windows close: nothing; they are still on disk. This is the mental model that everything else rests on, so make it explicit. Avoid turning this into a software preference discussion; the point is one file, several applications.",
     "crumbs": [
       "Home",
       "Week 1: files and computers",
@@ -2825,7 +2825,7 @@
     "href": "lectures/01-files/lec.html#predict-before-clicking",
     "title": "Find, save, and reopen",
     "section": "Predict before clicking",
-    "text": "Predict before clicking\n\nYou close the editor. Did the saved file disappear?\nYou edit the practice copy. Did the raw CSV change?\nYou know a file’s name. Do you also know which folder contains it?\n\n\nExpected reasoning: closing a normal editor does not delete a saved file; a separate practice copy can be edited without changing the source; a filename alone may not locate a unique file. Ask students to demonstrate the answers on their own saved work. Avoid a memory test of operating-system vocabulary.",
+    "text": "Predict before clicking\nAnswer each one, then check on your own computer:\n\nYou close the editor. Did the saved note disappear?\nYou edit seedlings-practice.csv. Did data/seedlings.csv change?\nYou know a file’s name. Do you know which folder it is in?\nYou rename a .csv to .txt. Did the measurements change?\nA colleague sends a screenshot of the table. What can you check from it, and what must you still ask for?\n\n\nExpected answers: 1 no, a saved file survives closing; 2 no, the practice copy is a separate file; 3 not necessarily, several folders can contain the same name; 4 no, renaming does not convert; 5 a screenshot shows visible headings and values and can help discuss a problem, but may omit rows, cannot be read by R, and cannot be updated; ask for the CSV and its dictionary. Have students demonstrate 1, 2 and 4 on their own files rather than just answering.",
     "crumbs": [
       "Home",
       "Week 1: files and computers",
@@ -2838,7 +2838,7 @@
     "href": "lectures/01-files/lec.html#read-the-whole-filename",
     "title": "Find, save, and reopen",
     "section": "Read the whole filename",
-    "text": "Read the whole filename\n\n\n\nThe base name and .csv extension play different roles in seedlings-practice.csv.\n\n\nMake extensions visible before deciding that two names match.\n\nDemonstrate the file-manager extension setting on the supported system. A folder need not have an extension. A hidden extension can make a student think that adding .txt corrected a file when it produced .txt.rtf instead. Use a disposable practice file.",
+    "text": "Read the whole filename\n\n\n\n\n\nName\nContent\n\n\n\n\nseedlings.csv\nText table of measurements\n\n\nday01-notes.txt\nYour plain-text note\n\n\nreport.Rmd\nSource for a future report\n\n\n\n\nThe extension (.csv, .txt) is part of the name. It tells applications what to expect.\nMany systems hide extensions by default. Turn them on, or notes.txt can silently become notes.txt.rtf.\n\n\n\n\n\nThe base name and .csv extension play different roles in seedlings-practice.csv.\n\n\n\n\nShow the file-manager setting that displays extensions; do it live on the supported system. Define CSV as comma-separated values. A folder normally has no extension. The classic trap: a word processor saves rich text, the student types “.txt” into the name, and the real name becomes notes.txt.rtf. With extensions hidden, it looks right and behaves wrong.",
     "crumbs": [
       "Home",
       "Week 1: files and computers",
@@ -2890,7 +2890,7 @@
     "href": "lectures/01-files/lec.html#several-copies-need-an-explicit-choice",
     "title": "Find, save, and reopen",
     "section": "Several copies need an explicit choice",
-    "text": "Several copies need an explicit choice\n\n\n\nOne original can lead to several extracted project folders with similar names.\n\n\nChoose a working project by its contents and path, not its position in a recent-files list.\n\nShow an extra extraction folder and a download with (1) in its name. Open until data, output and .Rproj are directly inside the chosen root. No deletion is required; students should ask for help before removing a similarly named folder.",
+    "text": "Several copies need an explicit choice\n\n\n\nDownloading twice gives course-files (1).zip; extracting twice gives two similar folders.\nSimilar names do not mean identical contents — one may have your edits.\nChoose one working project by its contents and path: data, output, and the .Rproj file directly inside.\nDo not delete a similar folder until you know what is in it.\n\n\n\n\n\nOne original can lead to several extracted project folders with similar names.\n\n\n\n\nThis is the row “a report was rebuilt from an older copy” in the motivation table. Show a second extraction and a “(1)” download. Open folders until the chosen root is clear. No deletion is required today; students should ask before removing anything that might contain their own work.",
     "crumbs": [
       "Home",
       "Week 1: files and computers",
@@ -2916,7 +2916,7 @@
     "href": "lectures/01-files/lec.html#renaming-does-not-convert-the-contents",
     "title": "Find, save, and reopen",
     "section": "Renaming does not convert the contents",
-    "text": "Renaming does not convert the contents\n\n\n\nA CSV and the same text renamed .txt contain identical records.\n\n\nOnly test on a copy. Restore its informative name afterwards.\n\nThe practical uses output/name-test.txt made from a practice copy. Its commas and measurements remain. Use the practice copy for renaming. A filename can become misleading without changing the underlying information.",
+    "text": "Renaming does not convert the contents\n\n\n\nRenaming seedlings-practice.csv to name-test.txt changes only the label.\nThe commas and measurements inside are identical.\nTo change a format you must export or convert with a program that rewrites the content.\nAn extension is a clue, not proof of what is inside. A wrong extension makes a file misleading.\n\nExperiment only on a copy, then restore the informative name.\n\n\n\n\nA CSV and the same text renamed .txt contain identical records.\n\n\n\n\nThis connects to the motivation table: renaming report.docx to report.pdf does not make a PDF. Demonstrate on output/name-test.txt made from a practice copy and open it in a text editor: the same records are there. Then restore the .csv name. Students should leave able to say: the name is a promise about the content; only a converting program changes the content.",
     "crumbs": [
       "Home",
       "Week 1: files and computers",
@@ -10341,6 +10341,279 @@
       "Home",
       "Week 5: reproduce and transfer",
       "24. Reproduce a report",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/01-files/lec.html#about-this-lecture",
+    "href": "lectures/01-files/lec.html#about-this-lecture",
+    "title": "Find, save, and reopen",
+    "section": "About this lecture",
+    "text": "About this lecture\nEvery measurement you take in a lab course, a project, or a thesis ends up as a file: an instrument export, a spreadsheet from a colleague, a photo of a gel. Before any statistics, you must be able to find that file, keep the original safe, and get back to your own work tomorrow.\n\nA file is saved information with a name and a location. An application only displays or changes it.\nA file’s full name (including its extension) and its folder together say what it is and where it is.\nThe raw data stay unchanged; you work on a copy and you know which copy.\n“Saved” means you can close everything and reopen it — not that a window still shows it.\n\nThis is a concept and practice day with no programming. Everything later in the course — the terminal, R, reports — assumes these habits.\n\nOpen with the biology, not the computer: we have seedling measurements and want to know whether a treatment changed growth. Then say plainly why we spend a whole day on files. In later lab courses, the instrument writes a file; the analysis reads a file; the report is a file you hand in. Most early failures are not statistical: a student cannot find the export, has typed over the raw values, or hands in a copy from last week. The four bullets are the whole lecture; the rest of the slides make each one concrete.",
+    "crumbs": [
+      "Home",
+      "Week 1: files and computers",
+      "1. Files: save, find, reopen",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/01-files/lec.html#what-goes-wrong-without-these-habits",
+    "href": "lectures/01-files/lec.html#what-goes-wrong-without-these-habits",
+    "title": "Find, save, and reopen",
+    "section": "What goes wrong without these habits",
+    "text": "What goes wrong without these habits\nSituations that are common in student lab work:\n\n\n\n\n\n\n\nWhat happened\nWhat it cost\n\n\n\n\nThe instrument export was “somewhere in Downloads” and was later cleaned away\nThe measurements had to be repeated\n\n\nValues were corrected by typing over the original spreadsheet\nNobody could check what the instrument actually recorded\n\n\nA report was rebuilt from results (2).csv, an older copy\nThe figure and the text disagreed\n\n\nA table was sent as a screenshot\nThe receiver had to retype every number\n\n\nreport.docx was renamed report.pdf\nThe file no longer opened; nothing had been converted\n\n\n\nEach row is fixed by one habit from today. None of them needs programming.\n\nAsk the room whether any of these has happened to them, or to a group partner. These are ordinary, not careless-student stories: modern operating systems hide extensions, show “recent files” instead of folders, and autosave to places that are hard to find. The point of the slide is motivation: the cost of not knowing where a file is shows up as repeated lab work or as a report nobody can check. Come back to this table at the end; each row maps to one summary line.",
+    "crumbs": [
+      "Home",
+      "Week 1: files and computers",
+      "1. Files: save, find, reopen",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/01-files/lec.html#todays-data-one-row-per-seedling",
+    "href": "lectures/01-files/lec.html#todays-data-one-row-per-seedling",
+    "title": "Find, save, and reopen",
+    "section": "Today’s data: one row per seedling",
+    "text": "Today’s data: one row per seedling\n\n\nOur (simulated) study: 24 seedlings, each in its own pot. 12 treated, 12 control, assigned at random. Each plant was measured at the start and the end.\nThe file data/seedlings.csv stores this as a table:\n\nThe header names the fields: plant_id, treatment, initial_mm, final_mm.\nEach record (row) describes one plant.\nP01 grew from 25.7 mm to 44.3 mm — an increase of 44.3 − 25.7 = 18.6 mm, not 44.3 mm.\n\nUnits and meanings come from the data dictionary, not from the commas.\n\n\n\n\nThe header labels fields while a record describes one plant.\n\n\n\n\nIntroduce the dataset we will use for weeks: a randomised treatment/control comparison of seedling growth. Read P01’s row aloud field by field and give the units from the dictionary. Work the subtraction: 44.3 minus 25.7 is 18.6 mm. Stress that the computer cannot infer the study design, the units, or which column is the outcome from the comma characters; that knowledge lives in the dictionary and in your notes. A control is a comparison group that shows what might have happened without treatment.",
+    "crumbs": [
+      "Home",
+      "Week 1: files and computers",
+      "1. Files: save, find, reopen",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/01-files/lec.html#from-download-to-a-folder-you-can-find-again",
+    "href": "lectures/01-files/lec.html#from-download-to-a-folder-you-can-find-again",
+    "title": "Find, save, and reopen",
+    "section": "From download to a folder you can find again",
+    "text": "From download to a folder you can find again\n\n\n\nDownload the course ZIP with the browser.\nShow it in the file manager (File Explorer or Finder) — note the folder, usually Downloads.\nExtract the whole archive, then move the extracted folder to Documents.\nOpen files from the extracted folder, not from a preview inside the ZIP.\nFind data/seedlings.csv by opening folders, not via “recent files”.\n\nA download that you cannot locate afterwards is not yet usable data.\n\n\n\n\nThe project contains data, output, and reports folders; seedlings.csv is inside data.\n\n\n\n\nDemonstrate on the supported operating system and pause after locating Downloads so everyone has caught up. Windows Extract All and Mac double-click can create an extra parent folder; check what is directly inside the folder you will work in: data, output, reports, report.Rmd, introcomputing.Rproj. “Recent files” is convenient but hides the location, and location is exactly what tomorrow’s lesson on paths depends on. If someone has a cloud-managed Documents folder, check the files are really on the laptop.",
+    "crumbs": [
+      "Home",
+      "Week 1: files and computers",
+      "1. Files: save, find, reopen",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/01-files/lec.html#keep-the-raw-data-untouched",
+    "href": "lectures/01-files/lec.html#keep-the-raw-data-untouched",
+    "title": "Find, save, and reopen",
+    "section": "Keep the raw data untouched",
+    "text": "Keep the raw data untouched\n\n\n\nThe original file is your evidence: it is what the instrument or the notebook recorded.\nCopy data/seedlings.csv to output/seedlings-practice.csv and edit only the copy.\nTwo locations, two names: you always know which file is the source.\nIf an analysis goes wrong, you can start again from the original. If the original is changed, you cannot.\n\n\n\n\n\nCopying the raw CSV into output creates a separate practice file while retaining the original.\n\n\n\n\nDemonstrate the copy in the file manager. The scientific reason matters more than the computing one: a reviewer, supervisor, or you in six months must be able to see what was actually measured. Corrections are made later in a traceable way (week 3 covers this), never by typing over the source. Our supplied data are simulated, but practise the habit as if they were your own thesis data.",
+    "crumbs": [
+      "Home",
+      "Week 1: files and computers",
+      "1. Files: save, find, reopen",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/01-files/lec.html#saved-means-close-everything-then-reopen",
+    "href": "lectures/01-files/lec.html#saved-means-close-everything-then-reopen",
+    "title": "Find, save, and reopen",
+    "section": "Saved means: close everything, then reopen",
+    "text": "Saved means: close everything, then reopen\n\n\n\nWrite a sentence in a plain-text editor.\nSave as day01-notes.txt inside reports/.\nClose the editor and the file manager.\nNavigate back through the folders and reopen it.\n\nEditors may autosave or restore drafts. The only reliable test is the saved file: you can state its folder and full name, and it opens from there.\n\n\n\n\nAn edited note is saved to disk and then reopened from its folder.\n\n\n\n\nUse a plain-text editor, not a word processor. If the editor appends .txt automatically, check the final name rather than producing a doubled extension. Some editors restore unsaved text when reopened, which can make students think something is saved when it is not; ask what is in the actual file. Have each student say out loud the computer, folder, and full name of their note.",
+    "crumbs": [
+      "Home",
+      "Week 1: files and computers",
+      "1. Files: save, find, reopen",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/01-files/lec.html#worked-example-receiving-a-new-table",
+    "href": "lectures/01-files/lec.html#worked-example-receiving-a-new-table",
+    "title": "Find, save, and reopen",
+    "section": "Worked example: receiving a new table",
+    "text": "Worked example: receiving a new table\nA second class sends seedlings-transfer.csv (18 plants). Before using it, write a short receipt note:\n\n\n\n\n\n\n\nQuestion\nAnswer for this file\n\n\n\n\nWhere is the original, and where is my copy?\ndata/seedlings-transfer.csv; copy in output/\n\n\nWhat does one row record?\nOne plant: ID, treatment, initial and final length\n\n\nUnits?\nmm (from the dictionary)\n\n\nA check of one record\nT01: 25.3 → 40.3 mm, change 15.0 mm\n\n\nHow do I find it again?\nFolder path and full filename, written in the note\n\n\n\nThe same five questions apply to any file you receive from an instrument, a lab partner, or a supervisor.\n\nThis is the independent transfer task in miniature: new data, same habits. T18 is a treated plant, 21.6 to 43.0 mm. The receipt is deliberately not about R; it is about knowing what you have and where it is. In later courses, replace “second class” with “the plate reader” or “my supervisor’s spreadsheet” and the questions are unchanged.",
+    "crumbs": [
+      "Home",
+      "Week 1: files and computers",
+      "1. Files: save, find, reopen",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/01-files/lec.html#summary",
+    "href": "lectures/01-files/lec.html#summary",
+    "title": "Find, save, and reopen",
+    "section": "Summary",
+    "text": "Summary\n\n\n\n\n\n\n\nIdea\nKey fact\n\n\n\n\nFile vs application\nThe file is saved on disk; applications only show or change it\n\n\nLocation\nA file is identified by its folder and its full name\n\n\nExtension\nPart of the name; a clue to the format. Renaming does not convert\n\n\nRaw data\nNever edit the original; work on a named copy in output/\n\n\nSaved\nYou can close everything and reopen it from its folder\n\n\nSeveral copies\nChoose one working project by contents and path\n\n\nReceiving data\nNote source, copy, row meaning, units, and one checked record\n\n\n\nNext (Day 2, folders and the working computer): how to write down where a file is as a path, so you and others can find it without clicking.\nNow: open the Day 1 exercises. Leave with reports/day01-notes.txt and output/seedlings-practice.csv, and be able to find both after closing every window.\n\nWalk back to the “what goes wrong” table and match each row to a summary line: lost export → location; typed over → raw data; older copy → several copies; screenshot → receiving data; renamed docx → extension. The exercises give the detailed click sequence and hints. A student who cannot yet reopen their files needs help before Day 2, because paths build directly on this.",
+    "crumbs": [
+      "Home",
+      "Week 1: files and computers",
+      "1. Files: save, find, reopen",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/17-welch-test/lec.html#about-this-lecture",
+    "href": "lectures/17-welch-test/lec.html#about-this-lecture",
+    "title": "How uncertain is the difference?",
+    "section": "About this lecture",
+    "text": "About this lecture\nOn Day 16 the treated seedlings grew 6.22 mm more on average than the controls. But a second experiment with 24 new seedlings would give a different number. How much should we trust 6.22 mm? Almost every results section you will read or write answers this with three numbers: an estimate, a 95% confidence interval, and a p-value.\n\nThe estimate is the observed treated-minus-control difference in means, with units and a direction.\nThe confidence interval is a range of population differences compatible with the data, under the model.\nThe p-value asks how surprising the data would be if the true means were equal.\nWelch’s test (t.test in R) produces all three for two independent groups, without assuming equal spread.\n\nThis is a reading and writing day: we do not derive the t formula. We learn to run the test, read every number, and write a result sentence that is correct.\n\nMotivate from the reader’s side: students will meet “mean difference 6.2 mm (95% CI 2.7 to 9.7; p = 0.002)” in every paper and every lab report they mark or write. The aim today is that they can produce that sentence from R and explain each part, including what it does not mean. Continuity: Day 16 set up the comparison and the direction; today adds uncertainty. Day 18 changes the design to paired measurements.",
+    "crumbs": [
+      "Home",
+      "Week 4: comparisons and lines",
+      "17. A guided Welch t-test",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/17-welch-test/lec.html#the-problem-groups-overlap",
+    "href": "lectures/17-welch-test/lec.html#the-problem-groups-overlap",
+    "title": "How uncertain is the difference?",
+    "section": "The problem: groups overlap",
+    "text": "The problem: groups overlap\n\n\n\nTreated mean 21.49 mm, control mean 15.28 mm, 12 plants each.\nDifference: 6.22 mm (treated − control).\nBut the dots overlap: several control plants grew more than several treated plants.\nPlants vary. A different random set of 24 would give a different difference.\n\nQuestion: is 6.22 mm a stable feature of the treatment, or could chance variation between plants produce a gap like this?\n\n\n\n\nThe two seedling groups overlap despite a higher treated mean.\n\n\n\n\nUse the figure saved in comparison.Rmd on Day 16. Point at an individual control plant above the treated mean. The inferential question concerns the population mean difference under the study’s conditions, not whether every treated plant beats every control. This is the motivation for the whole day: a difference observed in one sample is a starting point, not a conclusion.",
+    "crumbs": [
+      "Home",
+      "Week 4: comparisons and lines",
+      "17. A guided Welch t-test",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/17-welch-test/lec.html#check-the-design-before-any-test",
+    "href": "lectures/17-welch-test/lec.html#check-the-design-before-any-test",
+    "title": "How uncertain is the difference?",
+    "section": "Check the design before any test",
+    "text": "Check the design before any test\nWelch’s test fits this study because:\n\nIndependent units: each plant is its own unit, randomly allocated to a group.\nOne value per plant: growth = final − initial, computed once.\nUnequal spread is allowed: treated SD 4.87 mm vs control SD 3.19 mm is fine for Welch.\n\nA test cannot repair the design:\n\nRepeated readings of the same plant are not extra plants (Day 14).\nBefore/after on the same plant needs a paired analysis (Day 18).\nIn very small samples, look at the dots for strong skew or a single dominating value; keep genuine unusual values and ask for advice if the simple model looks unsuitable.\n\n\nState the assumptions in biological terms, not as a ritual. Welch’s version does not assume equal population variances, which is why it is the default in R. It does assume independence, and nothing in the output will warn you if that is violated. Random allocation is what lets us interpret a difference as a treatment effect within these conditions.",
+    "crumbs": [
+      "Home",
+      "Week 4: comparisons and lines",
+      "17. A guided Welch t-test",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/17-welch-test/lec.html#reading-the-output",
+    "href": "lectures/17-welch-test/lec.html#reading-the-output",
+    "title": "How uncertain is the difference?",
+    "section": "Reading the output",
+    "text": "Reading the output\n\n\n\n\n\n\n\n\n\nR prints\nValue\nUnits\nMeaning\n\n\n\n\nmean of x, mean of y\n21.49, 15.28\nmm\nGroup means (treated, control)\n\n\ndifference of means\n6.22\nmm\nThe estimate, treated − control\n\n\n95 percent confidence interval\n2.70 to 9.73\nmm\nUncertainty in the mean difference\n\n\nt\n3.70\nnone\nEstimate divided by its standard error\n\n\ndf\n19.0\nnone\nWelch’s approximate degrees of freedom\n\n\np-value\n0.0015\nnone\nSee the next slides\n\n\n\n\nSample sizes are not printed: get them from your data (12 and 12).\nThe interval and estimate carry mm; t, df and p have no unit.\n\n\nAsk students to annotate their own printout with exactly these four columns: quantity, value, units, meaning. The difference of means is not printed directly; it is the subtraction of the two printed means. Do not spend time on the t formula; the important skill is knowing which number answers which question and which carry units.",
+    "crumbs": [
+      "Home",
+      "Week 4: comparisons and lines",
+      "17. A guided Welch t-test",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/17-welch-test/lec.html#the-estimate-and-its-confidence-interval",
+    "href": "lectures/17-welch-test/lec.html#the-estimate-and-its-confidence-interval",
+    "title": "How uncertain is the difference?",
+    "section": "The estimate and its confidence interval",
+    "text": "The estimate and its confidence interval\n\nThe estimate 6.22 mm and 95 percent confidence interval 2.70–9.73 mm are shown against zero difference.\nEstimate 6.22 mm; 95% CI 2.70 to 9.73 mm.\nZero marks “no difference between population means”. This interval lies entirely above zero.\nThe interval is about the mean difference, not about individual plants: it does not contain 95% of plants.\n\n\nUnits and sign matter. Read the interval as: population mean differences from about 2.7 to 9.7 mm are compatible with these data under the model. Values near zero are not well supported; neither are differences of 15 mm. Students often read every interval as a spread of individuals; the next two slides separate those ideas.",
+    "crumbs": [
+      "Home",
+      "Week 4: comparisons and lines",
+      "17. A guided Welch t-test",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/17-welch-test/lec.html#what-95-refers-to",
+    "href": "lectures/17-welch-test/lec.html#what-95-refers-to",
+    "title": "How uncertain is the difference?",
+    "section": "What “95%” refers to",
+    "text": "What “95%” refers to\n\n\n\nImagine repeating the whole experiment many times, each time computing a new interval.\nThe true difference is fixed. The intervals move from study to study.\nA 95% procedure covers the truth in about 95% of repeats — under its assumptions.\nWe do not know whether our one interval is one of the hits.\n\n\n\n\n\nIllustrative repeated studies produce intervals around separate estimates; the true difference is fixed.\n\n\n\n\nThis is a conceptual illustration, not additional seedling experiments. Some intervals miss the fixed truth; that is part of what 95% means. The probability statement is about the procedure, not about this particular interval. Avoid “there is a 95% probability the true value is in this interval” — under this frequentist framework the truth is fixed and either inside or not.",
+    "crumbs": [
+      "Home",
+      "Week 4: comparisons and lines",
+      "17. A guided Welch t-test",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/17-welch-test/lec.html#what-the-p-value-conditions-on",
+    "href": "lectures/17-welch-test/lec.html#what-the-p-value-conditions-on",
+    "title": "How uncertain is the difference?",
+    "section": "What the p-value conditions on",
+    "text": "What the p-value conditions on\n\n\nDefinition: if the two population means were equal (and the assumptions held), how often would a statistic be at least this extreme, in either direction?\n\nHere p ≈ 0.0015: rarely.\nThe shaded tails lie beyond the observed |t| = 3.70.\n\nIt is not:\n\nthe probability that the null hypothesis is true;\nthe probability that the treatment works;\na measure of how large the effect is.\n\n\n\n\n\nThe Welch equal-means reference distribution shades both tails beyond the observed statistic magnitude.\n\n\n\n\nThe reference curve uses the actual Welch statistic and approximate degrees of freedom. It is not a distribution of possible treatment effects. The key phrase is “if the means were equal”: the p-value is computed under that model. Two-sided means both tails count. A large biological effect and a tiny one can both give small p-values with enough data, which is why the estimate and interval must be reported too.",
+    "crumbs": [
+      "Home",
+      "Week 4: comparisons and lines",
+      "17. A guided Welch t-test",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/17-welch-test/lec.html#direction-is-a-choice-reversing-it-flips-the-interval",
+    "href": "lectures/17-welch-test/lec.html#direction-is-a-choice-reversing-it-flips-the-interval",
+    "title": "How uncertain is the difference?",
+    "section": "Direction is a choice; reversing it flips the interval",
+    "text": "Direction is a choice; reversing it flips the interval\n\n\nreverse &lt;- t.test(control, treated)\ncomparison$conf.int   #  2.70   9.73\nreverse$conf.int      # -9.73  -2.70\ncomparison$p.value    #  0.0015\nreverse$p.value       #  0.0015\n\nSame data, opposite sign: control − treated.\nThe two-sided p-value is unchanged.\nKeep the direction you stated in advance as the reported result; save the check in a separate object.\n\n\n\n\n\nThe same comparison in opposite directions produces reflected confidence intervals.\n\n\n\n\nThis is not a new experiment, only the same contrast described in the other direction. The function’s argument order determines the sign, not an object name such as treatment_effect. Using a separate object keeps the primary result intact in the report.",
+    "crumbs": [
+      "Home",
+      "Week 4: comparisons and lines",
+      "17. A guided Welch t-test",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/17-welch-test/lec.html#what-makes-an-interval-wider-or-narrower",
+    "href": "lectures/17-welch-test/lec.html#what-makes-an-interval-wider-or-narrower",
+    "title": "How uncertain is the difference?",
+    "section": "What makes an interval wider or narrower?",
+    "text": "What makes an interval wider or narrower?\n\n\n\n\n\nThe 90%, 95%, and 99% intervals use identical observations but different widths.\n\n\nConfidence level: 90% → 3.31 to 9.12; 99% → 1.41 to 11.02 mm. More coverage requires a wider interval. Keep 95% as the stated analysis.\n\n\n\n\nMain and transfer study intervals differ in estimate and width while also having different spreads and sample sizes.\n\n\nData: width depends on sample size and spread together. The transfer study (9 per group) has a narrower interval than the main study (12 per group) because its plants vary less.\n\n\nChanging conf.level does not change the observed means; it changes how wide the procedure must be to achieve its long-run coverage. On the right, do not teach “bigger n always gives a narrower interval” when spread also differs: transfer SDs are about 1.9 and 2.5 mm against 4.9 and 3.2 mm in the main study.",
+    "crumbs": [
+      "Home",
+      "Week 4: comparisons and lines",
+      "17. A guided Welch t-test",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/17-welch-test/lec.html#when-the-interval-includes-zero",
+    "href": "lectures/17-welch-test/lec.html#when-the-interval-includes-zero",
+    "title": "How uncertain is the difference?",
+    "section": "When the interval includes zero",
+    "text": "When the interval includes zero\n\nAn illustrative 2 mm difference has a 95% interval from −1 to 5 mm, covering zero and both directions.\nIllustrative small study: estimate 2 mm, 95% CI −1 to 5 mm.\nBoth a small harmful and a moderate helpful effect remain compatible with the data.\nIncluding zero is not proof of no effect. “Not significant” means inconclusive here, not equal.\n\n\nThese are illustrative numbers, not output from the course data. Ask students what positive and negative differences remain inside the range. A common error in student reports is writing “the treatment had no effect” from p &gt; 0.05; the honest statement is that this study could not determine the direction.",
+    "crumbs": [
+      "Home",
+      "Week 4: comparisons and lines",
+      "17. A guided Welch t-test",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/17-welch-test/lec.html#write-a-result-not-a-threshold-label",
+    "href": "lectures/17-welch-test/lec.html#write-a-result-not-a-threshold-label",
+    "title": "How uncertain is the difference?",
+    "section": "Write a result, not a threshold label",
+    "text": "Write a result, not a threshold label\nGood: “Treated seedlings grew on average 6.22 mm more than controls (95% CI 2.70 to 9.73 mm; Welch two-sided test, p ≈ 0.0015; 12 plants per group).”\nThen one sentence on biological size and one on design limits.\n\n\n\n\n\n\n\nMisreading\nBetter\n\n\n\n\n“The null hypothesis has probability 0.0015.”\nUnder equal means and the assumptions, a statistic this extreme is rare.\n\n\n“The result is significant.” (alone)\nGive estimate, units, interval and p.\n\n\n“p is small, so the effect is large.”\nSize comes from the estimate and interval, not from p.\n\n\n“p &gt; 0.05, so there is no difference.”\nThe data are inconclusive about direction.\n\n\n\n\nRandom allocation supports a causal comparison within these study conditions, but p alone never establishes causality or generalisation beyond them. Encourage a sentence on biological relevance: is 6 mm over a week a lot for a seedling of about 20 mm? Precision of wording is part of the analysis, not editing afterwards.",
+    "crumbs": [
+      "Home",
+      "Week 4: comparisons and lines",
+      "17. A guided Welch t-test",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/17-welch-test/lec.html#worked-example-a-second-classs-study",
+    "href": "lectures/17-welch-test/lec.html#worked-example-a-second-classs-study",
+    "title": "How uncertain is the difference?",
+    "section": "Worked example: a second class’s study",
+    "text": "Worked example: a second class’s study\ntransfer &lt;- read_csv(\"data/seedlings-transfer.csv\", show_col_types = FALSE) |&gt;\n  mutate(growth_mm = final_mm - initial_mm)\nnew_treated &lt;- transfer |&gt; filter(treatment == \"treated\") |&gt; pull(growth_mm)\nnew_control &lt;- transfer |&gt; filter(treatment == \"control\") |&gt; pull(growth_mm)\ntransfer_test &lt;- t.test(new_treated, new_control)\ntransfer_test\n\n\n\nQuantity\nValue\n\n\n\n\nPlants per group\n9 and 9\n\n\nEstimate (treated − control)\n4.21 mm\n\n\n95% CI\n1.95 to 6.47 mm\n\n\nWelch p-value\n0.0012\n\n\n\n“Treated seedlings grew 4.21 mm more on average (95% CI 1.95–6.47 mm; Welch, p ≈ 0.0012; 9 per group).”\n\nUse transfer from its own saved import and growth calculation in transfer-comparison.Rmd, not leftover console objects. Have students write the result sentence before showing the last line. Point out the estimate is smaller than the main study’s, yet the interval is narrower: less plant-to-plant variation.",
+    "crumbs": [
+      "Home",
+      "Week 4: comparisons and lines",
+      "17. A guided Welch t-test",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/17-welch-test/lec.html#summary",
+    "href": "lectures/17-welch-test/lec.html#summary",
+    "title": "How uncertain is the difference?",
+    "section": "Summary",
+    "text": "Summary\n\n\n\n\n\n\n\nConcept\nKey fact\n\n\n\n\nEstimate\nTreated − control difference of means, in mm; direction set by argument order\n\n\nWelch’s test\nTwo independent groups; spreads may differ; t.test(x, y)\n\n\nDesign first\nIndependence and one value per unit; a test cannot repair design\n\n\n95% CI\nRange of mean differences compatible with the data; procedure covers the truth in ~95% of repeats\n\n\nCI vs SD\nCI is uncertainty in the mean difference, not spread of plants\n\n\np-value\nHow extreme the data would be if means were equal — not P(null), not effect size\n\n\nCI includes 0\nInconclusive about direction, not proof of equality\n\n\nReporting\nEstimate + units + CI + test + p + n, then size and limits in words\n\n\n\nNext (Day 18, paired observations): when each plant is measured twice, the two readings are not independent, and the analysis must keep each pair together.\nNow: open the Day 17 exercises. Add the method, estimate, interval, sample sizes and p-value to comparison.Rmd, keep the individual-point plot, restart R, and render.\n\nRecite the result sentence once more as the model answer. The exercises extend comparison.Rmd and transfer-comparison.Rmd; the rendered HTML should be understandable without R’s printout. Students should check direction and units in the rendered output, not only in the console.",
+    "crumbs": [
+      "Home",
+      "Week 4: comparisons and lines",
+      "17. A guided Welch t-test",
       "Lecture (slides)"
     ]
   }

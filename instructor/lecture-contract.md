@@ -62,6 +62,33 @@ at `../../weekN/<daily-stem>.qmd`. Use notes for demonstration instructions,
 assumptions, and expected answers. Don't add an unrelated question solely to
 increase slide count.
 
+## Deck structure (2026-11 makeover; supersedes the one-point-per-slide style)
+
+Every deck follows the quantbio skeleton. Pilots: `lectures/01-files/lec.qmd`
+and `lectures/17-welch-test/lec.qmd`.
+
+1. **About this lecture.** One short paragraph with a concrete lab, project or
+   thesis situation that motivates the topic, with the key question in bold.
+   Then 3–4 bullets with the key ideas, and one line placing the day in the
+   course (what kind of day it is, and what builds on it).
+2. **The problem / what goes wrong.** Real consequences of not knowing the
+   skill (repeated measurements, unverifiable reports, wrong conclusions).
+   Motivation belongs on the slide, not only in the speaker notes.
+3. **Concept slides.** Each slide is self-contained when watched or read
+   without a lecturer: a figure plus 3–5 explanatory bullets, usually as
+   `:::: {.columns}` with text left (~40–45%) and figure right. Merge thin
+   one-sentence slides; never leave a heading, picture and one line.
+4. **Worked example** on the course data, end to end, with checked numbers.
+5. **Pitfalls / misreadings,** placed in the story rather than appended after the
+   conclusion (material from the workload expansion is folded in here).
+6. **Summary.** A concept/key-fact table, then `**Next (Day N, topic):**` and
+   `**Now:**` with the exercise link and the files to leave with.
+
+Aim for about 12–16 content slides. Use `{.smaller}` only for slides with code
+plus a table, or the Summary; otherwise normal text size fills the slide.
+Speaker notes add narration and demonstration instructions; they must not be
+the only place where an idea is explained. Never state how long anything takes.
+
 ## Shared visual helper
 
 `tools/lecture_svg.py` supplies low-level SVG drawing helpers. Use it if helpful

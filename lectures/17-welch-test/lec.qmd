@@ -20,25 +20,57 @@ format:
 toc: false
 ---
 
-## Observed difference is a starting point
+## About this lecture
 
-![The two seedling groups overlap despite a higher treated mean.](../../week4/figures/day16-growth.png){height=350px}
+On Day 16 the treated seedlings grew **6.22 mm more** on average than the controls. But a second experiment with 24 new seedlings would give a different number. **How much should we trust 6.22 mm?** Almost every results section you will read or write answers this with three numbers: an **estimate**, a **95% confidence interval**, and a **p-value**.
 
-How uncertain is the estimated **treated-minus-control** mean difference?
+- The **estimate** is the observed treated-minus-control difference in means, with units and a direction.
+- The **confidence interval** is a range of population differences compatible with the data, under the model.
+- The **p-value** asks how surprising the data would be **if the true means were equal**.
+- **Welch's test** (`t.test` in R) produces all three for two independent groups, without assuming equal spread.
+
+This is a **reading and writing** day: we do not derive the t formula. We learn to run the test, read every number, and write a result sentence that is correct.
 
 ::: notes
-Use the comparison.Rmd prepared on day 16. The difference in this sample is 6.21667 mm. The inferential question concerns a population mean difference under assumptions, not whether every individual plant must follow the group ordering.
+Motivate from the reader's side: students will meet "mean difference 6.2 mm (95% CI 2.7 to 9.7; p = 0.002)" in every paper and every lab report they mark or write. The aim today is that they can produce that sentence from R and explain each part, including what it does not mean. Continuity: Day 16 set up the comparison and the direction; today adds uncertainty. Day 18 changes the design to paired measurements.
 :::
 
-## Check the design and observations first
+## The problem: groups overlap
 
-- Independent plants, allocated to separate groups.
-- One growth value per plant.
-- Inspect severe skew and influential observations in small samples.
-- Keep genuine unusual values; seek advice when the simple model is unsuitable.
+:::: {.columns}
+::: {.column width="40%"}
+- Treated mean **21.49 mm**, control mean **15.28 mm**, 12 plants each.
+- Difference: **6.22 mm** (treated − control).
+- But the dots **overlap**: several control plants grew more than several treated plants.
+- Plants vary. A different random set of 24 would give a different difference.
+
+**Question:** is 6.22 mm a stable feature of the treatment, or could chance variation between plants produce a gap like this?
+:::
+::: {.column width="60%"}
+![The two seedling groups overlap despite a higher treated mean.](../../week4/figures/day16-growth.png){width="100%"}
+:::
+::::
 
 ::: notes
-Welch’s method does not require equal population variances, but does not repair dependence, biased allocation or data quality. Describe the assumptions in biological terms.
+Use the figure saved in comparison.Rmd on Day 16. Point at an individual control plant above the treated mean. The inferential question concerns the population mean difference under the study's conditions, not whether every treated plant beats every control. This is the motivation for the whole day: a difference observed in one sample is a starting point, not a conclusion.
+:::
+
+## Check the design before any test
+
+Welch's test fits this study because:
+
+- **Independent units:** each plant is its own unit, randomly allocated to a group.
+- **One value per plant:** growth = final − initial, computed once.
+- **Unequal spread is allowed:** treated SD 4.87 mm vs control SD 3.19 mm is fine for Welch.
+
+A test **cannot repair** the design:
+
+- Repeated readings of the same plant are not extra plants (Day 14).
+- Before/after on the **same** plant needs a paired analysis (Day 18).
+- In very small samples, look at the dots for strong skew or a single dominating value; keep genuine unusual values and ask for advice if the simple model looks unsuitable.
+
+::: notes
+State the assumptions in biological terms, not as a ritual. Welch's version does not assume equal population variances, which is why it is the default in R. It does assume independence, and nothing in the output will warn you if that is violated. Random allocation is what lets us interpret a difference as a treatment effect within these conditions.
 :::
 
 ## Run the comparison in the direction we named
@@ -46,194 +78,224 @@ Welch’s method does not require equal population variances, but does not repai
 ```r
 library(readr)
 library(dplyr)
-seedlings <- read_csv('data/seedlings.csv', show_col_types = FALSE) |>
+seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE) |>
   mutate(growth_mm = final_mm - initial_mm)
-treated <- filter(seedlings, treatment == 'treated')$growth_mm
-control <- filter(seedlings, treatment == 'control')$growth_mm
+treated <- filter(seedlings, treatment == "treated")$growth_mm
+control <- filter(seedlings, treatment == "control")$growth_mm
+
 comparison <- t.test(treated, control,
-  var.equal = FALSE, alternative = "two.sided",
-  conf.level = 0.95)
+                     var.equal = FALSE,          # Welch: spreads may differ
+                     alternative = "two.sided",  # a difference in either direction counts
+                     conf.level = 0.95)
 comparison
 ```
 
-First vector minus second vector: **treated minus control**.
+- The **first vector minus the second**: here **treated − control**. The order of arguments sets the sign.
+- `var.equal = FALSE` is already the default; writing it makes the method visible to a reader.
+- Save the result as an object so you can extract numbers: `comparison$conf.int`, `comparison$p.value`.
 
 ::: notes
-The prior preparation creates treated and control numeric vectors. var.equal=FALSE explicitly asks for Welch’s method; the default already does this, but the setting is visible. Two-sided means evidence in either direction counts. We are reading estimates, interval and p-value rather than deriving the t formula.
+This builds on Day 16's comparison.Rmd, which already creates the treated and control vectors. Students should run it, not copy numbers from the slide. Emphasise naming the direction in words before running the code, so that the sign of the output is a check rather than a surprise.
 :::
 
-## An interval around the estimated difference
+## Reading the output
 
-![The estimate 6.22 mm and 95 percent confidence interval 2.70–9.73 mm are shown against zero difference.](difference-interval.svg){height=350px}
+| R prints | Value | Units | Meaning |
+|---|---|---|---|
+| `mean of x`, `mean of y` | 21.49, 15.28 | mm | Group means (treated, control) |
+| difference of means | **6.22** | mm | The estimate, treated − control |
+| `95 percent confidence interval` | **2.70 to 9.73** | mm | Uncertainty in the mean difference |
+| `t` | 3.70 | none | Estimate divided by its standard error |
+| `df` | 19.0 | none | Welch's approximate degrees of freedom |
+| `p-value` | **0.0015** | none | See the next slides |
 
-Estimate **6.22 mm**; 95% CI **2.70 to 9.73 mm**.
+- Sample sizes are **not printed**: get them from your data (12 and 12).
+- The interval and estimate carry **mm**; t, df and p have **no unit**.
 
 ::: notes
-Units and sign matter. Zero denotes equal population means under this comparison. The interval quantifies uncertainty in the mean difference under the model; it is not an interval containing 95% of individual plants, nor a guarantee that the true difference lies inside this particular interval.
+Ask students to annotate their own printout with exactly these four columns: quantity, value, units, meaning. The difference of means is not printed directly; it is the subtraction of the two printed means. Do not spend time on the t formula; the important skill is knowing which number answers which question and which carry units.
 :::
 
-## The 95% refers to a repeated-sampling procedure
+## The estimate and its confidence interval
 
-![Illustrative repeated studies produce intervals around separate estimates; the true difference is fixed.](interval-procedure.svg){height=350px}
+![The estimate 6.22 mm and 95 percent confidence interval 2.70–9.73 mm are shown against zero difference.](difference-interval.svg){width="70%" fig-align="center"}
 
-A valid 95% procedure covers the fixed truth in about 95% of repeated samples.
+- Estimate **6.22 mm**; 95% CI **2.70 to 9.73 mm**.
+- **Zero** marks "no difference between population means". This interval lies entirely above zero.
+- The interval is about the **mean difference**, not about individual plants: it does not contain 95% of plants.
 
 ::: notes
-This is a conceptual repeated-study illustration, not additional seedling experiments or the actual Welch intervals. Some intervals can miss the fixed truth. We do not know whether this particular experiment’s interval covers it. The frequency statement concerns the procedure under its assumptions.
+Units and sign matter. Read the interval as: population mean differences from about 2.7 to 9.7 mm are compatible with these data under the model. Values near zero are not well supported; neither are differences of 15 mm. Students often read every interval as a spread of individuals; the next two slides separate those ideas.
 :::
 
-## What does the p-value condition on?
+## What "95%" refers to
 
-![The Welch equal-means reference distribution shades both tails beyond the observed statistic magnitude.](null-tail-area.svg){height=350px}
-
-If the equal-means model held, how often would a statistic be at least this extreme?
+:::: {.columns}
+::: {.column width="40%"}
+- Imagine repeating the whole experiment many times, each time computing a new interval.
+- The **true difference is fixed**. The **intervals move** from study to study.
+- A 95% procedure covers the truth in about **95% of repeats** — under its assumptions.
+- We do not know whether **our one interval** is one of the hits.
+:::
+::: {.column width="60%"}
+![Illustrative repeated studies produce intervals around separate estimates; the true difference is fixed.](interval-procedure.svg){width="100%"}
+:::
+::::
 
 ::: notes
-For these data p is about 0.001517. The reference curve uses the actual Welch statistic and approximate degrees of freedom. It is not a distribution of possible treatment effects. State the conditioning model and assumptions. The p-value is not the probability that the null hypothesis is true or that the treatment works.
+This is a conceptual illustration, not additional seedling experiments. Some intervals miss the fixed truth; that is part of what 95% means. The probability statement is about the procedure, not about this particular interval. Avoid "there is a 95% probability the true value is in this interval" — under this frequentist framework the truth is fixed and either inside or not.
 :::
 
 ## Spread among plants is not the difference interval
 
-![Individual measurements and the estimated mean-difference interval answer different questions.](spread-versus-interval.svg){height=350px}
+![Individual measurements and the estimated mean-difference interval answer different questions.](spread-versus-interval.svg){width="80%" fig-align="center"}
 
-Keep **individual variation** and **estimate uncertainty** separate.
-
-::: notes
-The left panel shows the individual growth values; the right shows uncertainty in treated minus control. Students often read any error bar as individual spread. Ask them to identify the horizontal or vertical axis and the object being summarised before interpreting either picture.
-:::
-
-## Write a result, not just a threshold label
-
-“Treated mean growth exceeded control mean growth by **6.22 mm**
-(95% CI **2.70–9.73 mm**; Welch two-sided **p ≈ 0.0015**).”
-
-Then explain the biological size, assumptions, and limits.
-
-A small p-value does not establish a large or causal effect.
+- **Left:** individual growth values. Spread here is natural **variation between plants** (SD).
+- **Right:** uncertainty in the **treated − control mean difference** (CI).
+- Before reading any error bar, ask: **which quantity**, and **on which axis**? A figure caption must say.
 
 ::: notes
-The study’s random allocation supports a causal comparison within its conditions, but a p-value alone never establishes causality or universal generalisation. If an interval included zero, it would not prove equality. Encourage a sentence on biological relevance rather than “significant” alone.
+Students frequently read any bar as individual spread or any bar as a confidence interval. Ask them to identify the axis and the summarised object in each panel before interpreting. Link back to Day 13: if you draw whiskers, define them.
 :::
 
-## Read units as well as numbers
+## What the p-value conditions on
 
-Mean growth and the confidence interval use **mm**.
-The p-value has **no measurement unit**.
+:::: {.columns}
+::: {.column width="45%"}
+**Definition:** *if* the two population means were equal (and the assumptions held), how often would a statistic be **at least this extreme**, in either direction?
 
-Neither a group SD nor a p-value is the interval for a difference.
+- Here **p ≈ 0.0015**: rarely.
+- The shaded tails lie beyond the observed |t| = 3.70.
+
+**It is not:**
+
+- the probability that the null hypothesis is true;
+- the probability that the treatment works;
+- a measure of how **large** the effect is.
+:::
+::: {.column width="55%"}
+![The Welch equal-means reference distribution shades both tails beyond the observed statistic magnitude.](null-tail-area.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Ask students to annotate a real output table with quantity,value, units,interpretation. The sample counts come from actual input vectors, not the number of lines printed in the test output.
+The reference curve uses the actual Welch statistic and approximate degrees of freedom. It is not a distribution of possible treatment effects. The key phrase is "if the means were equal": the p-value is computed under that model. Two-sided means both tails count. A large biological effect and a tiny one can both give small p-values with enough data, which is why the estimate and interval must be reported too.
 :::
 
-## Reversing order reverses the interval
+## Direction is a choice; reversing it flips the interval
 
-![The same comparison in opposite directions produces reflected confidence intervals.](extended-reversed-interval.svg){height=350px}
-
-For a two-sided test, the p-value remains the same.
-
-::: notes
-A treated-minus-control interval[2.70,9.73] becomes a control-minus-treated interval[−9.73,−2.70]. Both describe the same estimated contrast in opposite units of direction. This is not a new experiment.
-:::
-
-## Check the reversal directly
-
+:::: {.columns}
+::: {.column width="45%"}
 ```r
-reverse_comparison <- t.test(control, treated)
-comparison$conf.int
-reverse_comparison$conf.int
-comparison$p.value
-reverse_comparison$p.value
+reverse <- t.test(control, treated)
+comparison$conf.int   #  2.70   9.73
+reverse$conf.int      # -9.73  -2.70
+comparison$p.value    #  0.0015
+reverse$p.value       #  0.0015
 ```
 
-Use separate objects so the stated primary result is preserved.
+- Same data, opposite sign: **control − treated**.
+- The two-sided p-value is **unchanged**.
+- Keep the direction you **stated in advance** as the reported result; save the check in a separate object.
+:::
+::: {.column width="55%"}
+![The same comparison in opposite directions produces reflected confidence intervals.](extended-reversed-interval.svg){width="100%"}
+:::
+::::
 
 ::: notes
-This follows the independent-group setup from day 16: treated/control are numeric growth vectors. The function order determines the sign, not an object name such as treatment_effect.
+This is not a new experiment, only the same contrast described in the other direction. The function's argument order determines the sign, not an object name such as treatment_effect. Using a separate object keeps the primary result intact in the report.
 :::
 
-## Coverage level and interval width are a trade-off
+## What makes an interval wider or narrower?
 
-![The90%,95%,and 99%intervals use identical observations but different widths.](extended-confidence-levels.svg){height=350px}
+:::: {.columns}
+::: {.column width="50%"}
+![The 90%, 95%, and 99% intervals use identical observations but different widths.](extended-confidence-levels.svg){width="100%"}
 
-Keep the 95% interval as the stated main analysis.
+**Confidence level:** 90% → 3.31 to 9.12; 99% → 1.41 to 11.02 mm. More coverage requires a wider interval. Keep 95% as the stated analysis.
+:::
+::: {.column width="50%"}
+![Main and transfer study intervals differ in estimate and width while also having different spreads and sample sizes.](extended-two-studies.svg){width="100%"}
+
+**Data:** width depends on **sample size and spread together**. The transfer study (9 per group) has a *narrower* interval than the main study (12 per group) because its plants vary less.
+:::
+::::
 
 ::: notes
-Higher long-run coverage requires a wider procedure under the same model. Keep the confidence level chosen for the main analysis. Changing conf.level does not change the observed means.
+Changing conf.level does not change the observed means; it changes how wide the procedure must be to achieve its long-run coverage. On the right, do not teach "bigger n always gives a narrower interval" when spread also differs: transfer SDs are about 1.9 and 2.5 mm against 4.9 and 3.2 mm in the main study.
 :::
 
-## A small experiment can remain inconclusive about direction
+## When the interval includes zero
 
-![An illustrative2 mm difference has a95%interval from−1 to 5 mm,covering zero and both directions.](extended-uncertain-case.svg){height=350px}
+![An illustrative 2 mm difference has a 95% interval from −1 to 5 mm, covering zero and both directions.](extended-uncertain-case.svg){width="70%" fig-align="center"}
 
-Including zero is not proof of equality or equivalence.
+- Illustrative small study: estimate 2 mm, 95% CI **−1 to 5 mm**.
+- Both a small harmful and a moderate helpful effect remain compatible with the data.
+- **Including zero is not proof of no effect.** "Not significant" means *inconclusive here*, not *equal*.
 
 ::: notes
-Ask what positive and negative differences remain inside the supplied range. These are illustrative numbers, not output from the course plant file. No new test or sample-size calculation is needed.
+These are illustrative numbers, not output from the course data. Ask students what positive and negative differences remain inside the range. A common error in student reports is writing "the treatment had no effect" from p > 0.05; the honest statement is that this study could not determine the direction.
 :::
 
-## Repair the interpretation, not the desired result
+## Write a result, not a threshold label
 
-Incorrect: “The null hypothesis has probability 0.0015.”
+**Good:** "Treated seedlings grew on average **6.22 mm more** than controls (95% CI **2.70 to 9.73 mm**; Welch two-sided test, **p ≈ 0.0015**; 12 plants per group)."
 
-Better: under the equal-means model and assumptions, a statistic at least this extreme is rare.
+Then one sentence on **biological size** and one on **design limits**.
 
-Then report effect size, units, interval, and design limits.
+| Misreading | Better |
+|---|---|
+| "The null hypothesis has probability 0.0015." | Under equal means and the assumptions, a statistic this extreme is rare. |
+| "The result is significant." (alone) | Give estimate, units, interval and p. |
+| "p is small, so the effect is large." | Size comes from the estimate and interval, not from p. |
+| "p > 0.05, so there is no difference." | The data are inconclusive about direction. |
 
 ::: notes
-A frequentist p-value conditions on the model; it does not assign the hypothesis a probability. Biological importance and causality require context. Precision in wording is part of analysis, not an optional editorial add-on.
+Random allocation supports a causal comparison within these study conditions, but p alone never establishes causality or generalisation beyond them. Encourage a sentence on biological relevance: is 6 mm over a week a lot for a seedling of about 20 mm? Precision of wording is part of the analysis, not editing afterwards.
 :::
 
-## Two studies: n alone does not explain interval width
-
-![Main and transfer study intervals differ in estimate and width while also having different spreads and sample sizes.](extended-two-studies.svg){height=350px}
-
-Both sample size and observed variability contribute.
-
-::: notes
-Here the smaller transfer study happens to have a narrower interval because its observed spread is smaller. Do not teach a universal ordering from n alone when other quantities change.
-:::
-
-## Recreate the guided comparison for the new source
+## Worked example: a second class's study {.smaller}
 
 ```r
-transfer <- read_csv('data/seedlings-transfer.csv',
-                     show_col_types = FALSE) |>
+transfer <- read_csv("data/seedlings-transfer.csv", show_col_types = FALSE) |>
   mutate(growth_mm = final_mm - initial_mm)
-new_treated <- transfer |>
-  filter(treatment == 'treated') |> pull(growth_mm)
-new_control <- transfer |>
-  filter(treatment == 'control') |> pull(growth_mm)
+new_treated <- transfer |> filter(treatment == "treated") |> pull(growth_mm)
+new_control <- transfer |> filter(treatment == "control") |> pull(growth_mm)
 transfer_test <- t.test(new_treated, new_control)
 transfer_test
 ```
 
+| Quantity | Value |
+|---|---|
+| Plants per group | 9 and 9 |
+| Estimate (treated − control) | **4.21 mm** |
+| 95% CI | **1.95 to 6.47 mm** |
+| Welch p-value | **0.0012** |
+
+"Treated seedlings grew 4.21 mm more on average (95% CI 1.95–6.47 mm; Welch, p ≈ 0.0012; 9 per group)."
+
 ::: notes
-Use transfer from its own saved import/growth calculation, not hidden console state. There are9 available values per group. Difference4.2111 mm;95% interval 1.9484 to6.4738 mm; p about.00124. Include actual observations and assumptions in the interpretation.
+Use transfer from its own saved import and growth calculation in transfer-comparison.Rmd, not leftover console objects. Have students write the result sentence before showing the last line. Point out the estimate is smaller than the main study's, yet the interval is narrower: less plant-to-plant variation.
 :::
 
-## A complete result can be read without R
+## Summary {.smaller}
 
-A reader should identify:
+| Concept | Key fact |
+|---|---|
+| Estimate | Treated − control difference of means, in **mm**; direction set by argument order |
+| Welch's test | Two **independent** groups; spreads may differ; `t.test(x, y)` |
+| Design first | Independence and one value per unit; a test cannot repair design |
+| 95% CI | Range of mean differences compatible with the data; procedure covers the truth in ~95% of repeats |
+| CI vs SD | CI is uncertainty in the **mean difference**, not spread of plants |
+| p-value | How extreme the data would be **if means were equal** — not P(null), not effect size |
+| CI includes 0 | Inconclusive about direction, not proof of equality |
+| Reporting | Estimate + units + CI + test + p + n, then size and limits in words |
 
-- What was independently assigned and measured.
-- The estimated difference and its direction/units.
-- Uncertainty under the model and a design/context limitation.
+**Next (Day 18, paired observations):** when each plant is measured twice, the two readings are not independent, and the analysis must keep each pair together.
 
-A printout alone does not answer all three.
-
-::: notes
-Students extend transfer-comparison.Rmd with a concise results paragraph, then check direction and units in the rendered HTML. Earlier descriptive work remains useful and should not disappear after adding a test.
-:::
-
-## Exercises: add interpretation to the report
-
-Keep the individual-point plot. Add the method, directed estimate, interval, sample sizes and p-value.
-
-Restart R and render **`comparison.Rmd`**.
-
-[Open exercises](../../week4/17-welch-test.qmd).
+**Now:** [open the Day 17 exercises](../../week4/17-welch-test.qmd). Add the method, estimate, interval, sample sizes and p-value to `comparison.Rmd`, keep the individual-point plot, restart R, and render.
 
 ::: notes
-Have students find comparison$conf.int and comparison$p.value and relate them to the printed output. They should report the two group means and available sample sizes as well. The written interpretation should be understandable without seeing R’s long printout.
+Recite the result sentence once more as the model answer. The exercises extend comparison.Rmd and transfer-comparison.Rmd; the rendered HTML should be understandable without R's printout. Students should check direction and units in the rendered output, not only in the console.
 :::

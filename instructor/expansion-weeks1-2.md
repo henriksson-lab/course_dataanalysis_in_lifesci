@@ -6,14 +6,10 @@ work develops explanation, verification, independent transfer and writing. It
 does not add a programming-language survey or a chemistry prerequisite.
 
 Each daily page now has a substantial **Extended practical** and **Independent
-transfer** block. They are core work, not optional stretch tails. Typical added
-active time is about 75–90 minutes guided investigation plus 60–90 minutes
-independent transfer, including prediction, checking, interpretation and saved
-outputs. These are pilot estimates rather than timings established by slide
-count. A context choice still means one chosen route, not compulsory completion
-of all biology and chemistry alternatives. These estimates fit into the shared
-study plan's daily guided, transfer, writing/recovery and flexible blocks; actual
-pacing must be piloted with genuine beginners.
+transfer** block. They are core work, not optional stretch tails, and include
+prediction, checking, interpretation and saved outputs. No duration is stated:
+how long these take beginners is unknown until piloted. A context choice still means one chosen route, not compulsory completion
+of all biology and chemistry alternatives.
 
 ## Per-day work and products
 
@@ -30,7 +26,7 @@ pacing must be piloted with genuine beginners.
 | 09 | Diagnose three isolated render failures, transfer the report to a new input, test a separate project copy. | workshop/transfer .Rmd and HTML, render-recovery.txt | 8 → 16 (8 visual) |
 | 10 | Audit claims against evidence, revise one earlier report, deliver one independent plant-or-solution brief. | revision log, laboratory-brief.Rmd/HTML, table/figure, tested package | 7 → 15 (8 visual) |
 
-## Observable expansion, not a claim that words equal hours
+## Observable expansion, not a claim about study time
 
 - Lecture content: **79 → 160 slides** (2.03×), plus one title slide per deck.
 - Image-bearing content slides: **40 → 80**; half the expanded content slides use diagrams or actual-data plots.

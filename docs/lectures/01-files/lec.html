@@ -139,17 +139,18 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="a-file-is-not-the-window-showing-it" class="slide level2">
-<h2>A file is not the window showing it</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="file-and-applications.svg" height="390"></p>
-<figcaption>One saved CSV can be read as text or as a table in different applications.</figcaption>
-</figure>
-</div>
-<p>The saved measurements can remain after either application closes.</p>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>Every measurement you take in a lab course, a project, or a thesis ends up as a <strong>file</strong>: an instrument export, a spreadsheet from a colleague, a photo of a gel. <strong>Before any statistics, you must be able to find that file, keep the original safe, and get back to your own work tomorrow.</strong></p>
+<ul>
+<li>A <strong>file</strong> is saved information with a name and a location. An <strong>application</strong> only displays or changes it.</li>
+<li>A file’s <strong>full name</strong> (including its extension) and its <strong>folder</strong> together say what it is and where it is.</li>
+<li>The <strong>raw data</strong> stay unchanged; you work on a <strong>copy</strong> and you know which copy.</li>
+<li>“Saved” means you can <strong>close everything and reopen it</strong> — not that a window still shows it.</li>
+</ul>
+<p>This is a <strong>concept and practice</strong> day with no programming. Everything later in the course — the terminal, R, reports — assumes these habits.</p>
 <aside class="notes">
-<p>Begin with the biological task: we have seedling lengths to inspect, not a coding puzzle. Ask students what they think happens to the measurements when the window closes. Demonstrate one CSV in a text editor and a table viewer, without assuming experience of either. The point is one file and different applications, not software selection.</p>
+<p>Open with the biology, not the computer: we have seedling measurements and want to know whether a treatment changed growth. Then say plainly why we spend a whole day on files. In later lab courses, the instrument writes a file; the analysis reads a file; the report is a file you hand in. Most early failures are not statistical: a student cannot find the export, has typed over the raw values, or hands in a copy from last week. The four bullets are the whole lecture; the rest of the slides make each one concrete.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -162,78 +163,46 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="downloading-is-only-the-first-step" class="slide level2">
-<h2>Downloading is only the first step</h2>
-<ol type="1">
-<li>Download the course ZIP using the browser.</li>
-<li>Show the download in File Explorer or Finder.</li>
-<li>Extract the <strong>whole folder</strong> into a place you can find again.</li>
-<li>Open a file from the extracted folder, not from a ZIP preview.</li>
-</ol>
-<aside class="notes">
-<p>Demonstrate on the supported operating system. Pause after locating Downloads and check that everyone can find the file. Windows Extract All and Mac double-click may produce an extra parent directory. Choose one working copy.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="locate-the-measurement-inside-its-folder" class="slide level2">
-<h2>Locate the measurement inside its folder</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="find-the-file.svg" height="390"></p>
-<figcaption>The project contains data, output, and reports folders; seedlings.csv is inside data.</figcaption>
-</figure>
-</div>
-<p>Find <code>data/seedlings.csv</code> by opening folders, without using “recent files”.</p>
-<aside class="notes">
-<p>Use this as a map before introducing the formal path vocabulary tomorrow. The diagram is deliberately incomplete: the real project has other datasets too. Identify data as the input location and output as a place for derived work. Ask students to point at the correct file in their own graphical window.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="the-filename-gives-clues-not-a-calculation" class="slide level2">
-<h2>The filename gives clues, not a calculation</h2>
+<section id="what-goes-wrong-without-these-habits" class="slide level2">
+<h2>What goes wrong without these habits</h2>
+<p>Situations that are common in student lab work:</p>
 <table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>Name</th>
-<th>Intended content</th>
+<th>What happened</th>
+<th>What it cost</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>seedlings.csv</code></td>
-<td>A text table of measurements</td>
+<td>The instrument export was “somewhere in Downloads” and was later cleaned away</td>
+<td>The measurements had to be repeated</td>
 </tr>
 <tr class="even">
-<td><code>day01-notes.txt</code></td>
-<td>Your plain-text note</td>
+<td>Values were corrected by typing over the original spreadsheet</td>
+<td>Nobody could check what the instrument actually recorded</td>
 </tr>
 <tr class="odd">
-<td><code>report.Rmd</code></td>
-<td>Source for a future report</td>
+<td>A report was rebuilt from <code>results (2).csv</code>, an older copy</td>
+<td>The figure and the text disagreed</td>
+</tr>
+<tr class="even">
+<td>A table was sent as a screenshot</td>
+<td>The receiver had to retype every number</td>
+</tr>
+<tr class="odd">
+<td><code>report.docx</code> was renamed <code>report.pdf</code></td>
+<td>The file no longer opened; nothing had been converted</td>
 </tr>
 </tbody>
 </table>
-<p>The extension is part of the name. Renaming a file does not convert its contents.</p>
+<p>Each row is fixed by one habit from today. None of them needs programming.</p>
 <aside class="notes">
-<p>Show file extensions in the file manager. Define CSV as comma-separated values; students do not need to know parsing yet. Read P01’s first row as a plant ID, treatment label, initial length 25.7 mm, final length 44.3 mm. Units and meaning come from the dictionary, not from an application guessing them.</p>
+<p>Ask the room whether any of these has happened to them, or to a group partner. These are ordinary, not careless-student stories: modern operating systems hide extensions, show “recent files” instead of folders, and autosave to places that are hard to find. The point of the slide is motivation: the cost of not knowing where a file is shows up as repeated lab work or as a report nobody can check. Come back to this table at the end; each row maps to one summary line.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -246,61 +215,94 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="preserve-the-original-measurements" class="slide level2">
-<h2>Preserve the original measurements</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="copy-preserves-source.svg" height="390"></p>
-<figcaption>Copying the raw CSV into output creates a separate practice file while retaining the original.</figcaption>
-</figure>
-</div>
-<p>Our supplied data are simulated. Keep the raw file unchanged.</p>
-<aside class="notes">
-<p>Demonstrate copying data/seedlings.csv to output/seedlings-practice.csv. Point out the two locations and the two names. Edit only the practice copy. A duplicate is useful here because it separates input from practice; unexplained duplicate projects are different and should be resolved before continuing.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="save-close-and-reopen" class="slide level2">
-<h2>Save, close, and reopen</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="save-and-reopen.svg" height="390"></p>
-<figcaption>An edited note is saved to disk and then reopened from its folder.</figcaption>
-</figure>
-</div>
-<p>Save <code>day01-notes.txt</code> inside <code>reports/</code>. Then find it again.</p>
-<aside class="notes">
-<p>Use a plain-text editor, not a word processor’s rich format. If the editor adds .txt automatically, check the final filename rather than creating a duplicate extension. Some editors autosave or restore unsaved state; ask what is in the actual file, not only what the application remembers.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="predict-before-clicking" class="slide level2">
-<h2>Predict before clicking</h2>
+<section id="todays-data-one-row-per-seedling" class="slide level2">
+<h2>Today’s data: one row per seedling</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p>Our (simulated) study: <strong>24 seedlings</strong>, each in its own pot. <strong>12 treated, 12 control</strong>, assigned at random. Each plant was measured at the start and the end.</p>
+<p>The file <code>data/seedlings.csv</code> stores this as a table:</p>
 <ul>
-<li>You close the editor. Did the saved file disappear?</li>
-<li>You edit the practice copy. Did the raw CSV change?</li>
-<li>You know a file’s name. Do you also know which folder contains it?</li>
+<li>The <strong>header</strong> names the fields: <code>plant_id</code>, <code>treatment</code>, <code>initial_mm</code>, <code>final_mm</code>.</li>
+<li>Each <strong>record</strong> (row) describes <strong>one plant</strong>.</li>
+<li>P01 grew from 25.7 mm to <strong>44.3 mm</strong> — an increase of 44.3 − 25.7 = <strong>18.6 mm</strong>, not 44.3 mm.</li>
 </ul>
+<p>Units and meanings come from the <strong>data dictionary</strong>, not from the commas.</p>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="header-records.svg" style="width:100.0%"></p>
+<figcaption>The header labels fields while a record describes one plant.</figcaption>
+</figure>
+</div>
+</div></div>
 <aside class="notes">
-<p>Expected reasoning: closing a normal editor does not delete a saved file; a separate practice copy can be edited without changing the source; a filename alone may not locate a unique file. Ask students to demonstrate the answers on their own saved work. Avoid a memory test of operating-system vocabulary.</p>
+<p>Introduce the dataset we will use for weeks: a randomised treatment/control comparison of seedling growth. Read P01’s row aloud field by field and give the units from the dictionary. Work the subtraction: 44.3 minus 25.7 is 18.6 mm. Stress that the computer cannot infer the study design, the units, or which column is the outcome from the comma characters; that knowledge lives in the dictionary and in your notes. A control is a comparison group that shows what might have happened without treatment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-file-is-not-the-window-showing-it" class="slide level2">
+<h2>A file is not the window showing it</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>The <strong>file</strong> is what is saved on disk. An <strong>application</strong> opens it and shows a <strong>view</strong>.</li>
+<li>One CSV can be shown as plain text (a text editor) or as a grid (a spreadsheet). The saved content is the same comma-separated text.</li>
+<li>Closing the application <strong>does not</strong> delete the file. Deleting the file is a separate action.</li>
+<li>The <strong>format</strong> (CSV) is not the <strong>application</strong> (Excel). R, a text editor, and Excel can all read the same CSV.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="file-and-applications.svg" style="width:100.0%"></p>
+<figcaption>One saved CSV can be read as text or as a table in different applications.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Demonstrate: open seedlings.csv in a text editor, then in a spreadsheet viewer. Same file, same path, two views. Ask what happens to the measurements when both windows close: nothing; they are still on disk. This is the mental model that everything else rests on, so make it explicit. Avoid turning this into a software preference discussion; the point is one file, several applications.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="from-download-to-a-folder-you-can-find-again" class="slide level2">
+<h2>From download to a folder you can find again</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ol type="1">
+<li>Download the course ZIP with the browser.</li>
+<li><strong>Show it in the file manager</strong> (File Explorer or Finder) — note the folder, usually <em>Downloads</em>.</li>
+<li><strong>Extract the whole archive</strong>, then move the extracted folder to <em>Documents</em>.</li>
+<li>Open files from the <strong>extracted folder</strong>, not from a preview inside the ZIP.</li>
+<li>Find <code>data/seedlings.csv</code> by <strong>opening folders</strong>, not via “recent files”.</li>
+</ol>
+<p>A download that you cannot locate afterwards is not yet usable data.</p>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="find-the-file.svg" style="width:100.0%"></p>
+<figcaption>The project contains data, output, and reports folders; seedlings.csv is inside data.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Demonstrate on the supported operating system and pause after locating Downloads so everyone has caught up. Windows Extract All and Mac double-click can create an extra parent folder; check what is directly inside the folder you will work in: data, output, reports, report.Rmd, introcomputing.Rproj. “Recent files” is convenient but hides the location, and location is exactly what tomorrow’s lesson on paths depends on. If someone has a cloud-managed Documents folder, check the files are really on the laptop.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -315,123 +317,44 @@ Data Analysis in Life Sciences
 </section>
 <section id="read-the-whole-filename" class="slide level2">
 <h2>Read the whole filename</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>seedlings.csv</code></td>
+<td>Text table of measurements</td>
+</tr>
+<tr class="even">
+<td><code>day01-notes.txt</code></td>
+<td>Your plain-text note</td>
+</tr>
+<tr class="odd">
+<td><code>report.Rmd</code></td>
+<td>Source for a future report</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The <strong>extension</strong> (<code>.csv</code>, <code>.txt</code>) is <strong>part of the name</strong>. It tells applications what to expect.</li>
+<li>Many systems <strong>hide extensions</strong> by default. Turn them on, or <code>notes.txt</code> can silently become <code>notes.txt.rtf</code>.</li>
+</ul>
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="filename-parts.svg" height="350"></p>
+<p><img data-src="filename-parts.svg" style="width:100.0%"></p>
 <figcaption>The base name and .csv extension play different roles in seedlings-practice.csv.</figcaption>
 </figure>
 </div>
-<p>Make extensions visible before deciding that two names match.</p>
+</div></div>
 <aside class="notes">
-<p>Demonstrate the file-manager extension setting on the supported system. A folder need not have an extension. A hidden extension can make a student think that adding .txt corrected a file when it produced .txt.rtf instead. Use a disposable practice file.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-format-is-not-an-application" class="slide level2">
-<h2>A format is not an application</h2>
-<p>A CSV can open in a spreadsheet or a text editor.</p>
-<ul>
-<li>The saved information is still comma-separated text.</li>
-<li>The application presents that information differently.</li>
-<li>A filename extension is a clue; it does not prove the contents.</li>
-</ul>
-<aside class="notes">
-<p>Ask students to close one view and reopen the same ordinary file in the other. Keep the input unchanged. The key observation is identity of the file and path, not that a particular application is always best.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="connect-a-row-to-a-plant" class="slide level2">
-<h2>Connect a row to a plant</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="header-records.svg" height="350"></p>
-<figcaption>The header labels fields while a record describes one plant.</figcaption>
-</figure>
-</div>
-<p>P01 ended at 44.3 mm; it did not increase by 44.3 mm.</p>
-<aside class="notes">
-<p>Read all four P01 fields in order and give the mm units from the dictionary. Work 44.3 minus 25.7 equals 18.6. The computer cannot infer that study design or those units from the comma characters.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="prediction-what-would-a-screenshot-preserve" class="slide level2">
-<h2>Prediction: what would a screenshot preserve?</h2>
-<p>You receive a picture of the measurement table.</p>
-<p>What can you inspect? What would you still request before calculating?</p>
-<aside class="notes">
-<p>A screenshot can help discuss an error, show column headings, or locate a visible value. It is not the ordinary machine-readable table, may omit rows, and is awkward to update. Ask for the CSV and its dictionary.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="several-copies-need-an-explicit-choice" class="slide level2">
-<h2>Several copies need an explicit choice</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="canonical-copy.svg" height="350"></p>
-<figcaption>One original can lead to several extracted project folders with similar names.</figcaption>
-</figure>
-</div>
-<p>Choose a working project by its contents and path, not its position in a recent-files list.</p>
-<aside class="notes">
-<p>Show an extra extraction folder and a download with (1) in its name. Open until data, output and .Rproj are directly inside the chosen root. No deletion is required; students should ask for help before removing a similarly named folder.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="check-saving-with-a-closed-window" class="slide level2">
-<h2>Check saving with a closed window</h2>
-<ol type="1">
-<li>Write a sentence in a plain-text note.</li>
-<li>Save to a named folder.</li>
-<li>Close the editor and file manager.</li>
-<li>Navigate back and reopen the ordinary file.</li>
-</ol>
-<aside class="notes">
-<p>An application may autosave or restore drafts. The reliable check is the actual saved ordinary file. Have students state its computer, folder and full name, and compare it with the source measurements rather than storing observations only in a screenshot.</p>
+<p>Show the file-manager setting that displays extensions; do it live on the supported system. Define CSV as comma-separated values. A folder normally has no extension. The classic trap: a word processor saves rich text, the student types “.txt” into the name, and the real name becomes notes.txt.rtf. With extensions hidden, it looks right and behaves wrong.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -446,15 +369,25 @@ Data Analysis in Life Sciences
 </section>
 <section id="renaming-does-not-convert-the-contents" class="slide level2">
 <h2>Renaming does not convert the contents</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>Renaming <code>seedlings-practice.csv</code> to <code>name-test.txt</code> changes only the <strong>label</strong>.</li>
+<li>The commas and measurements inside are <strong>identical</strong>.</li>
+<li>To change a format you must <strong>export or convert</strong> with a program that rewrites the content.</li>
+<li>An extension is a <strong>clue</strong>, not proof of what is inside. A wrong extension makes a file <strong>misleading</strong>.</li>
+</ul>
+<p>Experiment only on a copy, then restore the informative name.</p>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="format-rename.svg" height="350"></p>
+<p><img data-src="format-rename.svg" style="width:100.0%"></p>
 <figcaption>A CSV and the same text renamed .txt contain identical records.</figcaption>
 </figure>
 </div>
-<p>Only test on a copy. Restore its informative name afterwards.</p>
+</div></div>
 <aside class="notes">
-<p>The practical uses output/name-test.txt made from a practice copy. Its commas and measurements remain. Use the practice copy for renaming. A filename can become misleading without changing the underlying information.</p>
+<p>This connects to the motivation table: renaming report.docx to report.pdf does not make a PDF. Demonstrate on output/name-test.txt made from a practice copy and open it in a text editor: the same records are there. Then restore the .csv name. Students should leave able to say: the name is a promise about the content; only a converting program changes the content.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -467,17 +400,26 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="a-receipt-makes-another-input-understandable" class="slide level2">
-<h2>A receipt makes another input understandable</h2>
-<p>For the transfer study, save a note identifying:</p>
+<section id="keep-the-raw-data-untouched" class="slide level2">
+<h2>Keep the raw data untouched</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
 <ul>
-<li>The source and your inspection copy.</li>
-<li>What one row records and its units.</li>
-<li>T01’s initial, final, and change values.</li>
-<li>Where to find the ordinary file again.</li>
+<li>The original file is your <strong>evidence</strong>: it is what the instrument or the notebook recorded.</li>
+<li>Copy <code>data/seedlings.csv</code> to <code>output/seedlings-practice.csv</code> and <strong>edit only the copy</strong>.</li>
+<li>Two locations, two names: you always know which file is the source.</li>
+<li>If an analysis goes wrong, you can <strong>start again from the original</strong>. If the original is changed, you cannot.</li>
 </ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="copy-preserves-source.svg" style="width:100.0%"></p>
+<figcaption>Copying the raw CSV into output creates a separate practice file while retaining the original.</figcaption>
+</figure>
+</div>
+</div></div>
 <aside class="notes">
-<p>Use the new eighteen-plant table only after defining its study. T01 is 25.3 to 40.3 mm, an increase of 15.0 mm. T18 is treated, 21.6 to 43.0 mm. The independent task assesses file handling and interpretation, not importing into R yet.</p>
+<p>Demonstrate the copy in the file manager. The scientific reason matters more than the computing one: a reviewer, supervisor, or you in six months must be able to see what was actually measured. Corrections are made later in a traceable way (week 3 covers this), never by typing over the source. Our supplied data are simulated, but practise the habit as if they were your own thesis data.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -490,17 +432,195 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="now-practise-the-complete-route" class="slide level2">
-<h2>Now practise the complete route</h2>
-<p><a href="../../week1/01-files.html">Open the exercises</a>.</p>
-<p>Leave with:</p>
-<ul>
-<li><code>reports/day01-notes.txt</code>.</li>
-<li><code>output/seedlings-practice.csv</code>.</li>
-<li>The ability to locate both after closing their applications.</li>
-</ul>
+<section id="saved-means-close-everything-then-reopen" class="slide level2">
+<h2>Saved means: close everything, then reopen</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ol type="1">
+<li>Write a sentence in a <strong>plain-text</strong> editor.</li>
+<li>Save as <code>day01-notes.txt</code> inside <code>reports/</code>.</li>
+<li><strong>Close</strong> the editor and the file manager.</li>
+<li>Navigate back through the folders and <strong>reopen</strong> it.</li>
+</ol>
+<p>Editors may autosave or restore drafts. The only reliable test is the <strong>saved file</strong>: you can state its folder and full name, and it opens from there.</p>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="save-and-reopen.svg" style="width:100.0%"></p>
+<figcaption>An edited note is saved to disk and then reopened from its folder.</figcaption>
+</figure>
+</div>
+</div></div>
 <aside class="notes">
-<p>The practical supplies the detailed click sequence and hints. Give time for independent reopening. A student unable to locate their files needs support before tomorrow’s path lesson; finishing a screenshot alone does not establish this skill.</p>
+<p>Use a plain-text editor, not a word processor. If the editor appends .txt automatically, check the final name rather than producing a doubled extension. Some editors restore unsaved text when reopened, which can make students think something is saved when it is not; ask what is in the actual file. Have each student say out loud the computer, folder, and full name of their note.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="several-copies-need-an-explicit-choice" class="slide level2">
+<h2>Several copies need an explicit choice</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>Downloading twice gives <code>course-files (1).zip</code>; extracting twice gives two similar folders.</li>
+<li>Similar names <strong>do not</strong> mean identical contents — one may have your edits.</li>
+<li>Choose <strong>one working project</strong> by its <strong>contents and path</strong>: <code>data</code>, <code>output</code>, and the <code>.Rproj</code> file directly inside.</li>
+<li>Do not delete a similar folder until you know what is in it.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="canonical-copy.svg" style="width:100.0%"></p>
+<figcaption>One original can lead to several extracted project folders with similar names.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>This is the row “a report was rebuilt from an older copy” in the motivation table. Show a second extraction and a “(1)” download. Open folders until the chosen root is clear. No deletion is required today; students should ask before removing anything that might contain their own work.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="predict-before-clicking" class="slide level2">
+<h2>Predict before clicking</h2>
+<p>Answer each one, then check on your own computer:</p>
+<ol type="1">
+<li>You close the editor. Did the saved note disappear?</li>
+<li>You edit <code>seedlings-practice.csv</code>. Did <code>data/seedlings.csv</code> change?</li>
+<li>You know a file’s name. Do you know which folder it is in?</li>
+<li>You rename a <code>.csv</code> to <code>.txt</code>. Did the measurements change?</li>
+<li>A colleague sends a <strong>screenshot</strong> of the table. What can you check from it, and what must you still ask for?</li>
+</ol>
+<aside class="notes">
+<p>Expected answers: 1 no, a saved file survives closing; 2 no, the practice copy is a separate file; 3 not necessarily, several folders can contain the same name; 4 no, renaming does not convert; 5 a screenshot shows visible headings and values and can help discuss a problem, but may omit rows, cannot be read by R, and cannot be updated; ask for the CSV and its dictionary. Have students demonstrate 1, 2 and 4 on their own files rather than just answering.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="worked-example-receiving-a-new-table" class="slide level2">
+<h2>Worked example: receiving a new table</h2>
+<p>A second class sends <code>seedlings-transfer.csv</code> (18 plants). Before using it, write a short <strong>receipt</strong> note:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Answer for this file</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Where is the original, and where is my copy?</td>
+<td><code>data/seedlings-transfer.csv</code>; copy in <code>output/</code></td>
+</tr>
+<tr class="even">
+<td>What does one row record?</td>
+<td>One plant: ID, treatment, initial and final length</td>
+</tr>
+<tr class="odd">
+<td>Units?</td>
+<td>mm (from the dictionary)</td>
+</tr>
+<tr class="even">
+<td>A check of one record</td>
+<td>T01: 25.3 → 40.3 mm, change <strong>15.0 mm</strong></td>
+</tr>
+<tr class="odd">
+<td>How do I find it again?</td>
+<td>Folder path and full filename, written in the note</td>
+</tr>
+</tbody>
+</table>
+<p>The same five questions apply to any file you receive from an instrument, a lab partner, or a supervisor.</p>
+<aside class="notes">
+<p>This is the independent transfer task in miniature: new data, same habits. T18 is a treated plant, 21.6 to 43.0 mm. The receipt is deliberately not about R; it is about knowing what you have and where it is. In later courses, replace “second class” with “the plate reader” or “my supervisor’s spreadsheet” and the questions are unchanged.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Idea</th>
+<th>Key fact</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>File vs application</td>
+<td>The file is saved on disk; applications only show or change it</td>
+</tr>
+<tr class="even">
+<td>Location</td>
+<td>A file is identified by its <strong>folder</strong> and its <strong>full name</strong></td>
+</tr>
+<tr class="odd">
+<td>Extension</td>
+<td>Part of the name; a clue to the format. Renaming does not convert</td>
+</tr>
+<tr class="even">
+<td>Raw data</td>
+<td>Never edit the original; work on a named copy in <code>output/</code></td>
+</tr>
+<tr class="odd">
+<td>Saved</td>
+<td>You can close everything and reopen it from its folder</td>
+</tr>
+<tr class="even">
+<td>Several copies</td>
+<td>Choose one working project by contents and path</td>
+</tr>
+<tr class="odd">
+<td>Receiving data</td>
+<td>Note source, copy, row meaning, units, and one checked record</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Next (Day 2, folders and the working computer):</strong> how to write down <em>where</em> a file is as a <strong>path</strong>, so you and others can find it without clicking.</p>
+<p><strong>Now:</strong> <a href="../../week1/01-files.html">open the Day 1 exercises</a>. Leave with <code>reports/day01-notes.txt</code> and <code>output/seedlings-practice.csv</code>, and be able to find both after closing every window.</p>
+<aside class="notes">
+<p>Walk back to the “what goes wrong” table and match each row to a summary line: lost export → location; typed over → raw data; older copy → several copies; screenshot → receiving data; renamed docx → extension. The exercises give the detailed click sequence and hints. A student who cannot yet reopen their files needs help before Day 2, because paths build directly on this.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
