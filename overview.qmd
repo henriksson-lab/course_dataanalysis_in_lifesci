@@ -50,6 +50,14 @@ work after closing the applications. The exact contact timetable is arranged by
 the teaching team. If an installation fails, ask for support rather than spending
 the whole study unit trying unrelated system changes.
 
+The [five-week study plan](study-plan.qmd) sets out lecture/demonstration,
+guided work, extended practice, independent transfer, writing/recovery, and
+review time. It plans about 35 structured learner hours plus 5 flexible hours
+per week, not 40 contact hours. The estimates need a beginner pilot. Complete
+the extended and transfer blocks on your chosen context as part of the course;
+they are not optional advanced tails. Keep the named outputs and checks so you
+can judge what you can now do independently.
+
 For most R lessons, a useful working rhythm is:
 
 1. Open the course `.Rproj` and yesterday's source file.

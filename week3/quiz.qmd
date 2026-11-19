@@ -94,5 +94,65 @@ it is not SD among individual plants. A precise estimate can still be biased
 or based on an inappropriate design.
 :::
 
+## 7. A duplicate identifier needs a design check
+
+A file has two rows with the same plant ID. Is deleting one automatically justified? How does the answer differ between one row per plant and one row per time point?
+
+::: {.callout-note collapse="true"}
+## Answer and reasoning
+
+No. First establish the intended row meaning and compare the complete records. In the supplied messy exercise, an identical duplicate import is confirmed by source notes. In a repeated-time design, the same plant ID can legitimately recur. Different readings attached to one ID require investigation, not arbitrary deletion.
+:::
+
+## 8. What did the invented zero do?
+
+P06 initially measured24.7 mm and has no final reading. A student substitutes final length0. What growth does this calculate, and why is it different from retaining NA?
+
+::: {.callout-note collapse="true"}
+## Answer and reasoning
+
+It invents −24.7 mm growth. NA states that growth cannot be calculated from the available record; zero final length asserts a measured final size. Omitting an explicitly counted missing value in an available-case mean does not authorise making up a zero measurement.
+:::
+
+## 9. Same mean, different spread in a new source
+
+The transfer study has a larger treated mean but a smaller treated SD. Is that inconsistent? What should the axis and summary table say?
+
+::: {.callout-note collapse="true"}
+## Answer and reasoning
+
+It is consistent: centre and individual spread describe different features. Use seven-day growth in mm, available n=9 per group, and the actual group summaries. Do not copy the first study pattern, where the treated SD was larger, into the second study.
+:::
+
+## 10. Read the units after a transformation
+
+A vector has SD 2 mm and variance 4mm². What happens to SD and variance if every value is divided by 10 to express cm? What if10 mm is added to every value instead?
+
+::: {.callout-note collapse="true"}
+## Answer and reasoning
+
+Conversion gives SD 0.2 cm and variance 0.04cm². A common additive shift changes the mean but neither deviations nor SD/variance. The physical spread did not diminish merely because its unit changed.
+:::
+
+## 11. Two simulation settings
+
+One run draws 12 values for each mean and repeats that400 times. Another draws 12 values and repeats1000 times. Did the second acquire more independently measured plants or reduce the sample size of each mean?
+
+::: {.callout-note collapse="true"}
+## Answer and reasoning
+
+Neither. The source observations and 12 draws per sample stay fixed. More repetitions give a more stable picture of the simulated sampling distribution. Increasing the number of independent draws per estimated mean is a different change from collecting more simulation repetitions.
+:::
+
+## 12. Repair a descriptive conclusion
+
+A report says: “The higher group mean proves every treated plant improved; the SD is the 95% uncertainty.” Repair the two errors without adding a test.
+
+::: {.callout-note collapse="true"}
+## Answer and reasoning
+
+A greater observed mean can coexist with overlapping individuals, so describe the group tendency and observations. SD describes individual spread, not a95% confidence interval. A descriptive report should state outcome, units, n, centre, spread and limits rather than inventing inferential or universal claims.
+:::
+
 Return to [the descriptive report](15-descriptive-report.qmd), or continue to
 [comparisons](../week4/16-comparisons.qmd).

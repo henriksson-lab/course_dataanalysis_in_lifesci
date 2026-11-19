@@ -1,0 +1,7 @@
+solution_id,solute,mass_g,molar_mass_g_mol,final_volume_ml
+Q01,sodium-chloride,0.2922,58.44,100
+Q02,sodium-chloride,0.5844,58.44,100
+Q03,sodium-chloride,0.8766,58.44,100
+Q04,glucose,0.9008,180.16,100
+Q05,glucose,1.8016,180.16,100
+Q06,glucose,2.7024,180.16,100

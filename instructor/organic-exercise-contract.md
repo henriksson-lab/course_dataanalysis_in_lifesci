@@ -1,5 +1,9 @@
 # Shared scope for the organic-chemistry exercise review
 
+This records the earlier context review. The later user-requested
+`instructor/expansion-contract.md` authorises a larger core workload across all
+days. The chemistry prerequisites and shortened-course scope below still apply.
+
 Review every daily module's exercise for clear inputs, operations, units, saved
 outputs, prerequisites, and checkable answers. Add a small number of organic
 laboratory transfer tasks where they reuse existing skills. Do not append extra

@@ -28,6 +28,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -293,6 +359,200 @@ mean(seedlings$Growth_mm)</code></pre>
           display:block!important;
       }</style></aside>
 </section>
+<section id="evidence-of-a-skill-is-an-action-you-can-repeat" class="slide level2">
+<h2>Evidence of a skill is an action you can repeat</h2>
+<p>Locate the raw input, source, derived table, figure, HTML, and backup.</p>
+<p>Explain the role of each without relying on recent files or session memory.</p>
+<aside class="notes">
+<p>The portfolio is not judged by its number of files. Ask students to demonstrate one reproducible path from question to result. Keep the day as consolidation: no new package, model, or examination format is introduced. The references are part of competent practice rather than forbidden assistance.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-high-recorded-value-is-a-question-to-investigate" class="slide level2">
+<h2>A high recorded value is a question to investigate</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="algae-high-reading.svg" height="350"></p>
+<figcaption>Reference culture A11 is the largest algae observation and is highlighted without removing it.</figcaption>
+</figure>
+</div>
+<p>No source evidence confirms that A11 is erroneous.</p>
+<aside class="notes">
+<p>The value is 41.7 mg. A high point can affect a small-sample summary, but that observation alone does not justify exclusion. The source notes identify A19 as spilled; they do not identify A11 as a transcription error. Distinguish evidence for a repair from a preference for a simpler-looking plot.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="name-the-primary-and-diagnostic-datasets-separately" class="slide level2">
+<h2>Name the primary and diagnostic datasets separately</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>algae <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/algae.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>algae_without_a11 <span class="ot">&lt;-</span> <span class="fu">filter</span>(algae, culture_id <span class="sc">!=</span> <span class="st">"A11"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The primary result uses <strong>all available measurements</strong>.</p>
+<aside class="notes">
+<p>The new object is a sensitivity demonstration, not a replacement raw file. Counts must be recomputed for each version. Preserve A19 as missing. Do not choose a dataset by which p-value is smaller; the task only examines how one record changes a descriptive summary.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-diagnostic-changes-the-answer-not-the-evidence-for-exclusion" class="slide level2">
+<h2>The diagnostic changes the answer, not the evidence for exclusion</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="sensitivity-check.svg" height="350"></p>
+<figcaption>Omitting A11 increases the observed mean difference, but the result is explicitly diagnostic.</figcaption>
+</figure>
+</div>
+<p>Primary difference ≈ <strong>5.72 mg</strong>; diagnostic difference ≈ <strong>6.95 mg</strong>.</p>
+<aside class="notes">
+<p>The supplement mean stays 33.91818 mg. The reference mean falls from 28.20 mg to 26.97273 mg, so the observed difference increases to 6.94545 mg. There is no confirmation that the omitted value is wrong. The primary analysis remains the main report; a sensitivity result must carry its changed count and rationale.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="different-problems-require-different-explanations" class="slide level2">
+<h2>Different problems require different explanations</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="missing-and-high.svg" height="350"></p>
+<figcaption>A19 has an unavailable measurement after a spill; A11 has a high recorded value.</figcaption>
+</figure>
+</div>
+<p>Missing is not zero. Unusual is not automatically erroneous.</p>
+<aside class="notes">
+<p>Ask students to explain each issue without giving both the same label of bad data. A19 reduces available n.&nbsp;A11 remains a recorded observation unless independent source evidence supports a correction. Model assumptions are a third issue: they do not disappear merely because the file is tidy.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="an-uncertain-estimate-does-not-establish-equality" class="slide level2">
+<h2>An uncertain estimate does not establish equality</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="uncertain-interval.svg" height="350"></p>
+<figcaption>A supplied difference estimate of 3 mm has a 95 percent interval from minus 2 to 8 mm spanning zero.</figcaption>
+</figure>
+</div>
+<p>State the uncertainty rather than turn it into “no effect”.</p>
+<aside class="notes">
+<p>This is the same interpretation case already in the practical. The picture supports a discussion of compatible differences in both directions. It is not a new computation from algae. It does not mean that 95 percent of plants lie inside the interval or that the null hypothesis has 95 percent probability.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="match-the-output-to-the-question" class="slide level2">
+<h2>Match the output to the question</h2>
+<ul>
+<li>What values were recorded? Inspect and describe.</li>
+<li>How variable are observations? Show points and SD.</li>
+<li>How uncertain is a guided mean comparison? Use the taught interval/test.</li>
+<li>What concentration matches a signal? Use the supported calibration.</li>
+</ul>
+<aside class="notes">
+<p>Students are not learning a menu of tests. These are familiar workflow questions that should lead to an interpretable output. A calculated dilution formula is not empirical evidence needing regression; an observational line is not proof of an intervention’s effect.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-handover-should-survive-a-change-of-reader" class="slide level2">
+<h2>A handover should survive a change of reader</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="handover.svg" height="350"></p>
+<figcaption>A recipient follows the source and inputs into a tested project rather than relying on the author’s memory.</figcaption>
+</figure>
+</div>
+<p>Give directions another person can follow, then test them.</p>
+<aside class="notes">
+<p>The final independent task is a handover request and readiness review. A peer should locate input, render source, and state a limitation. Working alone, use a differently named extracted folder. Keep only tested packages and clearly identify revisions, including separate Windows and Ubuntu copies.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="choose-the-next-rehearsal-from-evidence" class="slide level2">
+<h2>Choose the next rehearsal from evidence</h2>
+<p>Write three reliable actions, two weak steps, and a concrete next practice task.</p>
+<p>Keep unfinished remote skills explicitly pending.</p>
+<aside class="notes">
+<p>Self-review should identify an action, not only confidence. “I can render after restarting” has a checkable meaning; “I understand R” is too broad. Remaining time belongs to the weak step. Do not fill it with an advanced topic merely because some students finish earlier.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="practical-leave-with-work-you-can-find-again" class="slide level2">
 <h2>Practical: leave with work you can find again</h2>
 <p><a href="../../week5/25-consolidate.html">Open day 25 practical and notes</a>.</p>
@@ -301,6 +561,7 @@ mean(seedlings$Growth_mm)</code></pre>
 <li>Render your chosen report from a fresh session.</li>
 <li>Save <code>reports/next-lab.txt</code> as your reusable workflow.</li>
 <li>Identify the supported backup and any pending remote-access skill.</li>
+<li>Keep a labelled sensitivity check, handover, and readiness review.</li>
 </ul>
 <aside class="notes">
 <p>Stop adding topics. Use the time to make these tasks dependable. The descriptive organic alternative stays descriptive; higher yield alone does not prove higher purity. The course’s written examination design remains outside these materials.</p>

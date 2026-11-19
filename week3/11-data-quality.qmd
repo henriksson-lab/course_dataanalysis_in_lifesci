@@ -125,5 +125,92 @@ small or large value may be real. Omitting missing values from a calculation
 does not make their absence disappear from the report.
 :::
 
+## Extended practical — audit a repair rather than trusting it
+
+Plan about 75–90 minutes for this investigation and its written evidence. Work
+from the raw `seedlings-messy.csv` and the source notes supplied above. Your aim
+is not merely to obtain 24 rows: it is to show why each retained value and each
+change can be defended. Continue `day11-cleaning.R`, preserving its import and
+original repair. Save new results under names beginning `day11-` in `output/`.
+
+1. Before running the cleaning block, write a compact audit table in
+   `output/day11-audit.txt`. Give a row for each problem: observed entry,
+   affected identifier, source evidence, action, and a check of the result.
+   Distinguish an unavailable measurement from an incorrectly transcribed one.
+2. Inspect the two P01 records together. Compare every field, not just their
+   identifiers. Explain why identical duplication plus the source note permits
+   removal here. Write what additional investigation would be needed if their
+   final lengths disagreed. Do not manufacture another biological plant to
+   explain a repeated file record.
+3. Import a second raw object with the usual whitespace-trimming default and
+   compare its treatment labels with `raw`. Find the difference concealed by
+   that convenience. An importer can standardise representation without proving
+   the source is free of errors. Record which option made the original visible.
+4. Create an intermediate object after label repairs but before numeric parsing.
+   Inspect `str()` and the P18 record. Then inspect the corresponding columns
+   after parsing. Describe why the same printed digits can have different R
+   types, and why the unit suffix needs documented interpretation before removal.
+5. In a separate derived copy, deliberately replace P06's unknown final length
+   with zero. Calculate that row's growth and the overall available mean. Label
+   this object `wrong_zero_example`; never write it over the corrected table.
+   Compare its result with the defensible missing-value calculation. Explain
+   what the invented zero claims about the plant and why that is different from
+   choosing `na.rm = TRUE` for an explicitly reported available-case mean.
+6. Compare the available group counts before and after your repairs. Include
+   total plant records and usable growth values separately. State why removing
+   the duplicate should change a record count, while leaving P06 unknown should
+   change availability without changing the number of enrolled plants.
+7. Save the corrected CSV, close R, reopen the project, and regenerate it from
+   the unedited source. Read the derived file back into a new object and check
+   its identifier count, missing growth count, and P21 final length. This tests
+   the saved workflow rather than only the visible Environment pane.
+
+::: {.callout-tip collapse="true"}
+## Hint: compare stages with a specific question
+
+Use `filter(raw, plant_id == 'P01')`, `str()`, `unique()`, `nrow()`,
+`sum(is.na(...))`, and the same `group_by()`/`summarise()` pattern used elsewhere.
+The defensible table has 24 unique IDs and one unknown growth. P06's initial
+length is 24.7 mm: an invented final zero would imply **−24.7 mm** growth.
+A numeric answer from the wrong object is still a wrong analysis.
+:::
+
+## Independent transfer — write the rules before reading the answers
+
+Allow another 60–90 minutes. A second simulated class has supplied
+`data/seedlings-transfer.csv`: 18 independently potted seedlings, nine randomly
+assigned to each allocation, measured seven days apart. The columns and units
+match the clean seedling table, but the values and identifiers differ. No source
+note identifies an error in this new file. Treat it as a fresh dataset, not as
+18 rows selected from the first experiment.
+
+1. In `day11-transfer.R`, state your expected schema in comments before importing:
+   column names, types, meaning of one row, valid group labels, measurement units,
+   and which identifier should be unique. Obtain those meanings from the
+   dictionary; do not infer units solely from the magnitude of the values.
+2. Import, inspect, and save the results of your checks in
+   `output/day11-transfer-audit.txt`. Check row count, unique IDs, actual labels,
+   missing values, numeric types, and whether final-minus-initial is calculable.
+   A check should record what you observed, not just say “passed”.
+3. Find T01 and calculate its growth by hand. Then calculate growth for every
+   row in code. Keep the original four columns as well as the derived one.
+   Do not copy any repaired P01/P21 values or earlier group counts into this file.
+4. Make a disposable copy with an extra copy of its first row. Detect the
+   duplicate and explain why the original transfer file remains unaffected.
+   Do not practise by altering the actual CSV. Record the difference between
+   a classroom-created error and source evidence about an actual observation.
+5. Ask a partner to identify a check you forgot or a conclusion stronger than
+   your evidence. If working alone, reread the audit after a short pause and
+   try to reproduce one check from the saved script without looking at objects.
+6. Write a handover paragraph: what was checked, whether any correction was
+   justified, and what information you would ask the recorder for if an unusual
+   value appeared. Save `output/day11-transfer-growth.csv` and rerun from a
+   fresh session. Your handover must make clear that **no correction was
+   supported** in this supplied transfer file.
+
+**Additional outputs:** both scripts, the audit and handover notes, and a derived
+transfer CSV. Completion means another reader can trace a value to its input
+and distinguish a verified repair from a convenient guess.
+
 **Keep:** `day11-cleaning.R`, the derived CSV, and your cleaning notes.
 Next: [describe variation](12-variation.qmd).

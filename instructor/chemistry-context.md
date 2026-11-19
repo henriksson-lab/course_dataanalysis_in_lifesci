@@ -1,7 +1,10 @@
 # Chemistry contexts: findings and proposed insertions
 
-These are investigated proposals. The day 19 dilution correction is now
-implemented; the other general-chemistry tasks below remain proposals.
+These are the initial investigated proposals. The day 19 dilution correction is
+implemented. The later [workload expansion](workload-expansion.md) also implements
+self-contained solution-concentration calculations and a dilution table in
+days 6–8, with some different numerical examples. The specific volume-reading
+task below remains a proposal; use the current student pages for active tasks.
 Use chemistry to reinforce the existing computing outcomes without adding a
 prerequisite, another week, new packages, or a separate chemistry track.
 

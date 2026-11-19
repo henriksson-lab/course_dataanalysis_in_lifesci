@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -929,6 +935,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#meet-r-and-rstudio" id="toc-meet-r-and-rstudio" class="nav-link" data-scroll-target="#meet-r-and-rstudio">Meet R and RStudio</a></li>
   <li><a href="#from-a-plot-to-a-report" id="toc-from-a-plot-to-a-report" class="nav-link" data-scroll-target="#from-a-plot-to-a-report">From a plot to a report</a></li>
+  <li><a href="#extended-practical-test-a-handover-as-the-receiver" id="toc-extended-practical-test-a-handover-as-the-receiver" class="nav-link" data-scroll-target="#extended-practical-test-a-handover-as-the-receiver">Extended practical — test a handover as the receiver</a></li>
+  <li><a href="#independent-transfer-prepare-a-new-laboratory-receipt" id="toc-independent-transfer-prepare-a-new-laboratory-receipt" class="nav-link" data-scroll-target="#independent-transfer-prepare-a-new-laboratory-receipt">Independent transfer — prepare a new laboratory receipt</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
   </ul>
 </nav>
@@ -1102,10 +1110,52 @@ Hint: the same commands, different filenames
 <h2 class="anchored" data-anchor-id="from-a-plot-to-a-report">From a plot to a report</h2>
 <p>The teacher will show a complete HTML report generated from saved measurements and an R Markdown file. Notice the biological question, code, figure with units, and a written interpretation. The goal is to make these together so that the report can be produced again when new measurements arrive. You will build your first version next week.</p>
 </section>
+<section id="extended-practical-test-a-handover-as-the-receiver" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-test-a-handover-as-the-receiver">Extended practical — test a handover as the receiver</h2>
+<p>Allow about 90 minutes. A useful shared package must contain enough information for someone who was absent from the practical. Today you will make and test a second version of your small report package. This is ordinary laboratory file management; we are not introducing a version-control system or expecting you to memorise commands without references. Work on course practice material only.</p>
+<p>Use previously unused ZIP names for each snapshot; if a suggested name already exists, choose the next unused version name before running <code>zip</code>. Updating an old archive can retain entries that are no longer in the source folder.</p>
+<ol type="1">
+<li>Open the ordinary <code>report</code> folder from today’s earlier exercise. Inspect its findings note and selected records. Add a README that identifies the simulated seedling source archive, what one record represents, length units, which samples were selected, and the purpose of each included file. Avoid a note that merely says “these are the results”.</li>
+<li>From its parent directory, create <code>report-v1.zip</code> with <code>zip -r</code>. List the archive with <code>unzip -l</code>, then extract it to a <strong>new</strong> destination named <code>receiver-v1</code>. Navigate through that destination to find the report folder. Notice that the archived folder name can add another level after extraction.</li>
+<li>Open the extracted findings note in the file manager. Ask a partner to check a stated sample ID against the extract and manifest/source reference. If a source file is deliberately not included, the README must say where the recipient is expected to obtain it; do not imply that a shortcut transfers its target data.</li>
+<li>In the original ordinary report folder, add a dated correction sentence or clearer unit label. Do not change the received copy. Reopen the copy inside <code>receiver-v1</code> and explain why it still contains the older text. A ZIP is a package made at a particular time, not a live connection to its source folder.</li>
+<li>Make a new <code>report-v2.zip</code>, list it, and extract it to <code>receiver-v2</code>. Check the revised sentence in that second received copy. Retain a brief change note so the recipient can tell which version to use without guessing from file modification times alone. Keep the ZIP outside the folder it packages.</li>
+<li>Save <code>handover-check.txt</code> in the shell workspace, recording the source folder, both archive names, receiver locations, checked sentence, and one problem that your first README did not explain well. State which computer holds these copies and whether you actually transferred a copy to another computer.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: follow a concrete file, not the word “report”
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For example, an extraction into <code>receiver-v1</code> may place the note at <code>receiver-v1/report/findings.txt</code>. Inspect the actual tree. Editing <code>report/findings.txt</code> does not update that separate ordinary copy or the older ZIP. Repackage after correcting, then verify the newly extracted result; naming it v2 alone is not evidence that it contains the new text.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-prepare-a-new-laboratory-receipt" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-prepare-a-new-laboratory-receipt">Independent transfer — prepare a new laboratory receipt</h2>
+<p>Allow 60–90 minutes. Choose the seedling archive or the organic-laboratory archive already used for your transfer check. Complete one route. The operations below are the same for both; chemistry background is unnecessary because organic classes are supplied text labels, and no product calculation is required here.</p>
+<ol type="1">
+<li>Begin with a fresh extraction and read its README/dictionary. Write your own receipt listing the input filenames, their roles, and the known number of sample records. For seedlings this is four records in <code>samples.tsv</code>; for the organic inventory it is four records in <code>inventory.tsv</code>. Distinguish a line naming columns from an actual sample record.</li>
+<li>Define one selection question: treated seedlings, or inventory records with the supplied <code>ester</code> label. Predict the count, run the literal search, save its output with an informative filename, and inspect the IDs. Do not claim the tool interpreted a treatment or identified a molecular structure.</li>
+<li>Create a sharing folder containing your receipt, selected records, and a source note. Write one sentence explaining what a recipient could reproduce from that package and which original inputs they would still need. Include only course material; no personal files or account information.</li>
+<li>Package the sharing folder, extract into a new test location, and ask another student to answer the selection question from the received contents. Have them record the route they followed. Working alone, close the windows and act as the receiver after a break, using only the README you wrote.</li>
+<li>Make a short two-column note titled “shell or R?”. Classify <code>pwd</code>, <code>grep -F</code>, <code>unzip</code>, <code>44.3 - 25.7</code>, and <code>mean(c(12, 14, 16))</code>. In RStudio, run the two R expressions if setup works. They should give 18.6 and 14 respectively; run shell commands in the shell instead. An error from the wrong interpreter does not mean the computer is broken.</li>
+<li>Finish with a recovery plan: how will you find your working folder tomorrow, which file will you open to continue, and where is the separately stored backup? If the university’s supported backup or remote access is pending, say so rather than pretending another local copy fulfils that requirement.</li>
+</ol>
+<p><strong>Check and retain:</strong> your tested sharing ZIP, receipt, handover check, and shell/R note. Both selection routes have two matching sample records in the supplied files. Next week’s R work will use the ordinary extracted course project, not an <code>.Rproj</code> opened from inside either shell-practice archive.</p>
+</section>
 <section id="check-your-understanding" class="level2">
 <h2 class="anchored" data-anchor-id="check-your-understanding">Check your understanding</h2>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1114,14 +1164,14 @@ Why inspect an archive after making it?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The name of the ZIP does not guarantee what it contains. Listing and extracting it checks the folder structure and the actual saved files a recipient gets.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1130,7 +1180,7 @@ Where should <code>grep</code> run, and where should <code>44.3 - 25.7</code> ru
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Use <code>grep</code> in the terminal’s shell. Enter the calculation in the R console. The prompt tells you which program is waiting for instructions; learn to check it before entering a command.</p>
 </div>

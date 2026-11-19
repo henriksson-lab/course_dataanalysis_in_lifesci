@@ -86,6 +86,94 @@ If an object is missing, repair the source rather than hiding the gap in Console
 Do not insert this render command into the report itself. Work from the first relevant error and its chunk. Check file paths, package loading, and the growth calculation before rewriting the whole report. A successful fresh-session render is evidence of reproducibility in this environment, not proof the interpretation is correct.
 :::
 
+## Descriptions need evidence
+
+![Individual transfer-study growth values show overlap between the groups.](claim-evidence.svg){height=350px}
+
+A difference in typical growth does not mean every treated plant outgrew every control.
+
+::: notes
+Use the actual transfer data. Read three draft claims and identify a supporting figure, recorded value, or supplied design fact. Revise universal or causal claims that this descriptive exercise cannot establish.
+:::
+
+## Audit the report as a reader
+
+Can the HTML alone identify:
+
+- The question and independent unit?
+- The input and measurement units?
+- The calculation and plotted quantity?
+- A defensible conclusion and limitation?
+
+::: notes
+Read without the source first to find communication gaps. Then locate the code and dictionary supporting each fact. Revise the R Markdown source, not only the generated HTML.
+:::
+
+## Connect the question to the recorded evidence
+
+![A report traces a question through supplied data, analysis and a readable result.](report-story.svg){height=350px}
+
+Each section has a job in the reasoning.
+
+::: notes
+Methods identify what was done; results describe what was observed; interpretation connects observations to the question within limits. Four clear short sections may communicate better than a long formal document.
+:::
+
+## Choose a figure because it answers a question
+
+Compare final-size and growth plots.
+
+Keep one as the main evidence. Retain another only if it answers a stated useful question.
+
+::: notes
+More figures are not automatically better. This session expands revision and transfer rather than adding a statistical test. A partner should state which measured or derived quantity the vertical axis actually shows.
+:::
+
+## The received project needs the same internal structure
+
+![A complete report and data folder retain their relative relationship after copying.](portable-root.svg){height=350px}
+
+Test from the received copy’s root in a fresh session.
+
+::: notes
+A working original project is not proof that the received package reproduces it. Include the ordinary CSV and dictionary rather than a shortcut. Native Windows RStudio should use the extracted Windows project, not an unnoticed Ubuntu copy.
+:::
+
+## A smaller brief tests transfer without new methods
+
+Choose the transfer seedlings or the supplied solutions table.
+
+Import, check, calculate, plot, and write a short laboratory brief.
+
+Save one selected brief, not both contexts.
+
+::: notes
+For plants derive growth. For solutions, every formula and molar mass is given. The row roles differ: plants are experimental units, while solutions are numerical preparation cases. Do not call a supplied formula relation a discovered biological effect.
+:::
+
+## Converting a label is not converting values
+
+![A value of 18.6 mm becomes 1.86 cm, not 18.6 cm.](unit-label-check.svg){height=350px}
+
+Check the values, variable names and axis units together.
+
+::: notes
+A unit-label error can leave R code running without warnings. Conversion needs a numerical change as well as a changed label. Encourage explicit comments and independent checks, not evaluation of appearance alone.
+:::
+
+## Leave a revision trail and a working brief
+
+Retain:
+
+- A revised earlier report and its source.
+- One laboratory-brief.Rmd and HTML.
+- Saved table/figure and a revision log.
+- A successfully tested practice package.
+
+::: notes
+The solution checks are 50, 100 and 150 mmol/L for each solute. The transfer plant input has 18 records and T01 growth of 15.0 mm. These are practice products, not a grading rubric or an examination design.
+:::
+
 ## Give the reader four short sections
 
 [Open the practical and notes](../../week2/10-first-report.qmd).

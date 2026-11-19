@@ -358,6 +358,179 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
+<section id="a-zip-is-a-snapshot" class="slide level2">
+<h2>A ZIP is a snapshot</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="version-snapshot.svg" height="350"></p>
+<figcaption>An older ZIP retains version1 while the ordinary source and a newly made ZIP contain version2.</figcaption>
+</figure>
+</div>
+<p>Editing a source folder does not update an existing archive.</p>
+<aside class="notes">
+<p>Create v1, extract and inspect it; revise the ordinary note; inspect v1 again before packaging v2. The change must be recognisable in contents, not only a renamed archive. This is file version discipline, not a Git topic.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-must-the-receiver-know" class="slide level2">
+<h2>What must the receiver know?</h2>
+<p>A README should identify:</p>
+<ul>
+<li>The source and what each included file does.</li>
+<li>What one record represents and its units.</li>
+<li>Which selection was performed.</li>
+<li>Any input the receiver still needs.</li>
+</ul>
+<aside class="notes">
+<p>Students should test whether a partner can identify a selected sample without oral guidance. A shortcut is not the target dataset. If the raw source is not included, the receipt must give its actual available source rather than pretending the package is complete.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="extraction-can-add-another-folder-level" class="slide level2">
+<h2>Extraction can add another folder level</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="zip-nesting.svg" height="350"></p>
+<figcaption>The received note is inside receiver-v1/report/findings.txt, not directly inside receiver-v1.</figcaption>
+</figure>
+</div>
+<p>Inspect the extracted tree before constructing a path.</p>
+<aside class="notes">
+<p>The folder name inside the archive is preserved. A new extraction destination is outside it, so an additional level is expected. This connects the archive exercise to the extra wrapper folder sometimes created when the course project is downloaded.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="keep-the-archive-outside-what-it-packages" class="slide level2">
+<h2>Keep the archive outside what it packages</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">zip</span> <span class="at">-r</span> report-v2.zip report/</span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> <span class="at">-l</span> report-v2.zip</span>
+<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> report-v2.zip <span class="at">-d</span> receiver-v2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Run from the folder containing report/.</p>
+<aside class="notes">
+<p>The package should not contain itself. When source changes, create a fresh named snapshot rather than assuming an old ZIP is live. The receiver test checks ordinary extracted files, not merely an archive listing.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="test-the-handover-from-a-new-location" class="slide level2">
+<h2>Test the handover from a new location</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="receiver-proof.svg" height="350"></p>
+<figcaption>A sharing archive is extracted in a separate receiver location and checked from its README.</figcaption>
+</figure>
+</div>
+<p>The receiver’s successful check is stronger evidence than your own familiar view.</p>
+<aside class="notes">
+<p>A single laptop copy tests portability but not all cross-machine software differences. If remote transfer is available, identify the supported direction and destination. Do not claim local rehearsal completes remote access.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="find-the-stale-copy-before-recalculating" class="slide level2">
+<h2>Find the stale copy before recalculating</h2>
+<p>A partner says the correction is absent.</p>
+<p>What would you ask first?</p>
+<p>Check the archive version, extraction folder, and actual note contents.</p>
+<aside class="notes">
+<p>A missing revision can be a location/version problem rather than an editing failure. Have students compare v1 and v2 contents and record the correction sentence in handover-check.txt. Do not create final-final2 files without explaining which to use.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-interpreter-matters-too" class="slide level2">
+<h2>The interpreter matters too</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="interpreter-choice.svg" height="350"></p>
+<figcaption>Shell and R Console accept different instruction languages.</figcaption>
+</figure>
+</div>
+<p>The wrong window needs a changed context, not system repair.</p>
+<aside class="notes">
+<p>Classify pwd, grep, unzip as shell commands, and arithmetic/mean as R. Run 44.3 − 25.7 = 18.6 and mean(c(12, 14, 16)) = 14 in R if setup works. Keep Windows native RStudio and local Ubuntu workspace separate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="explain-what-was-actually-reproduced" class="slide level2">
+<h2>Explain what was actually reproduced</h2>
+<p>A receiver can identify the selection and inspect the saved records.</p>
+<p>What would they still need to recompute a future report?</p>
+<p>Keep a source/input/output distinction in the receipt.</p>
+<aside class="notes">
+<p>The current week5 R work has not happened yet; students are meeting R, not required to construct a report from scratch today. The ordinary source files, data dictionary and later R code will make calculations repeatable. A screenshot or HTML alone is not the complete recipe.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="finish-with-a-clear-handover" class="slide level2">
 <h2>Finish with a clear handover</h2>
 <p><a href="../../week1/05-lab-files.html">Open the practical and notes</a>.</p>

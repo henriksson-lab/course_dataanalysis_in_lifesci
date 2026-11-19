@@ -155,6 +155,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -890,6 +896,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#rows-versus-available-measurements" id="toc-rows-versus-available-measurements" class="nav-link" data-scroll-target="#rows-versus-available-measurements">4. Rows versus available measurements</a></li>
   <li><a href="#more-readings-or-more-independent-units" id="toc-more-readings-or-more-independent-units" class="nav-link" data-scroll-target="#more-readings-or-more-independent-units">5. More readings or more independent units?</a></li>
   <li><a href="#spread-of-observations-versus-spread-of-sample-means" id="toc-spread-of-observations-versus-spread-of-sample-means" class="nav-link" data-scroll-target="#spread-of-observations-versus-spread-of-sample-means">6. Spread of observations versus spread of sample means</a></li>
+  <li><a href="#a-duplicate-identifier-needs-a-design-check" id="toc-a-duplicate-identifier-needs-a-design-check" class="nav-link" data-scroll-target="#a-duplicate-identifier-needs-a-design-check">7. A duplicate identifier needs a design check</a></li>
+  <li><a href="#what-did-the-invented-zero-do" id="toc-what-did-the-invented-zero-do" class="nav-link" data-scroll-target="#what-did-the-invented-zero-do">8. What did the invented zero do?</a></li>
+  <li><a href="#same-mean-different-spread-in-a-new-source" id="toc-same-mean-different-spread-in-a-new-source" class="nav-link" data-scroll-target="#same-mean-different-spread-in-a-new-source">9. Same mean, different spread in a new source</a></li>
+  <li><a href="#read-the-units-after-a-transformation" id="toc-read-the-units-after-a-transformation" class="nav-link" data-scroll-target="#read-the-units-after-a-transformation">10. Read the units after a transformation</a></li>
+  <li><a href="#two-simulation-settings" id="toc-two-simulation-settings" class="nav-link" data-scroll-target="#two-simulation-settings">11. Two simulation settings</a></li>
+  <li><a href="#repair-a-descriptive-conclusion" id="toc-repair-a-descriptive-conclusion" class="nav-link" data-scroll-target="#repair-a-descriptive-conclusion">12. Repair a descriptive conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -1032,6 +1044,126 @@ Answer and check
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The source measurements stay the same. A mean averages independent sampling variation, so repeated means based on more observations typically vary less. The SD among repeated sample means describes sampling variability of an estimate; it is not SD among individual plants. A precise estimate can still be biased or based on an inappropriate design.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="a-duplicate-identifier-needs-a-design-check" class="level2">
+<h2 class="anchored" data-anchor-id="a-duplicate-identifier-needs-a-design-check">7. A duplicate identifier needs a design check</h2>
+<p>A file has two rows with the same plant ID. Is deleting one automatically justified? How does the answer differ between one row per plant and one row per time point?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer and reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No.&nbsp;First establish the intended row meaning and compare the complete records. In the supplied messy exercise, an identical duplicate import is confirmed by source notes. In a repeated-time design, the same plant ID can legitimately recur. Different readings attached to one ID require investigation, not arbitrary deletion.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="what-did-the-invented-zero-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-did-the-invented-zero-do">8. What did the invented zero do?</h2>
+<p>P06 initially measured24.7 mm and has no final reading. A student substitutes final length0. What growth does this calculate, and why is it different from retaining NA?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer and reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>It invents −24.7 mm growth. NA states that growth cannot be calculated from the available record; zero final length asserts a measured final size. Omitting an explicitly counted missing value in an available-case mean does not authorise making up a zero measurement.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="same-mean-different-spread-in-a-new-source" class="level2">
+<h2 class="anchored" data-anchor-id="same-mean-different-spread-in-a-new-source">9. Same mean, different spread in a new source</h2>
+<p>The transfer study has a larger treated mean but a smaller treated SD. Is that inconsistent? What should the axis and summary table say?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer and reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>It is consistent: centre and individual spread describe different features. Use seven-day growth in mm, available n=9 per group, and the actual group summaries. Do not copy the first study pattern, where the treated SD was larger, into the second study.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="read-the-units-after-a-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="read-the-units-after-a-transformation">10. Read the units after a transformation</h2>
+<p>A vector has SD 2 mm and variance 4mm². What happens to SD and variance if every value is divided by 10 to express cm? What if10 mm is added to every value instead?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer and reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Conversion gives SD 0.2 cm and variance 0.04cm². A common additive shift changes the mean but neither deviations nor SD/variance. The physical spread did not diminish merely because its unit changed.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="two-simulation-settings" class="level2">
+<h2 class="anchored" data-anchor-id="two-simulation-settings">11. Two simulation settings</h2>
+<p>One run draws 12 values for each mean and repeats that400 times. Another draws 12 values and repeats1000 times. Did the second acquire more independently measured plants or reduce the sample size of each mean?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer and reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Neither. The source observations and 12 draws per sample stay fixed. More repetitions give a more stable picture of the simulated sampling distribution. Increasing the number of independent draws per estimated mean is a different change from collecting more simulation repetitions.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="repair-a-descriptive-conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="repair-a-descriptive-conclusion">12. Repair a descriptive conclusion</h2>
+<p>A report says: “The higher group mean proves every treated plant improved; the SD is the 95% uncertainty.” Repair the two errors without adding a test.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer and reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A greater observed mean can coexist with overlapping individuals, so describe the group tendency and observations. SD describes individual spread, not a95% confidence interval. A descriptive report should state outcome, units, n, centre, spread and limits rather than inventing inferential or universal claims.</p>
 </div>
 </div>
 </div>

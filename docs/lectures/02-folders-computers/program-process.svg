@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>One installed application can be launched as running processes</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<path d="M70,170 h210 l30,30 v125 h-240 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="280" y1="170" x2="280" y2="200" stroke="#3b5bab" stroke-width="3"/>
+<line x1="280" y1="200" x2="310" y2="200" stroke="#3b5bab" stroke-width="3"/>
+<text x="190.0" y="360" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">installed application</text>
+<line x1="350" y1="245" x2="670" y2="130" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="700" y="80" width="320" height="110" rx="10" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="860" y="145" font-family="Arial, sans-serif" font-size="28" fill="#203247" text-anchor="middle" font-weight="normal">running process</text>
+<line x1="350" y1="245" x2="670" y2="370" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="700" y="320" width="320" height="110" rx="10" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="860" y="385" font-family="Arial, sans-serif" font-size="28" fill="#203247" text-anchor="middle" font-weight="normal">running process</text>
+<text x="210" y="435" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="normal">persistent storage</text>
+<text x="860" y="485" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="normal">CPU + memory now</text>
+</svg>

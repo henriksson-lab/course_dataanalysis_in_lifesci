@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -927,6 +933,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#save-a-search-then-count-its-records" id="toc-save-a-search-then-count-its-records" class="nav-link" data-scroll-target="#save-a-search-then-count-its-records">Save a search, then count its records</a></li>
   <li><a href="#practical-preserve-and-organise-a-working-copy" id="toc-practical-preserve-and-organise-a-working-copy" class="nav-link" data-scroll-target="#practical-preserve-and-organise-a-working-copy">Practical: preserve and organise a working copy</a></li>
   <li><a href="#a-first-look-at-the-remote-computer" id="toc-a-first-look-at-the-remote-computer" class="nav-link" data-scroll-target="#a-first-look-at-the-remote-computer">A first look at the remote computer</a></li>
+  <li><a href="#extended-practical-audit-the-archive-and-the-search" id="toc-extended-practical-audit-the-archive-and-the-search" class="nav-link" data-scroll-target="#extended-practical-audit-the-archive-and-the-search">Extended practical — audit the archive and the search</a></li>
+  <li><a href="#independent-transfer-find-a-file-discrepancy-and-report-it" id="toc-independent-transfer-find-a-file-discrepancy-and-report-it" class="nav-link" data-scroll-target="#independent-transfer-find-a-file-discrepancy-and-report-it">Independent transfer — find a file discrepancy and report it</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
   </ul>
 </nav>
@@ -1039,10 +1047,51 @@ Extraction asks whether to replace a file
 <p>The teacher will demonstrate <a href="../intro/remote-linux.html">SSH and remote desktop</a>. SSH gives a terminal on another computer. A remote desktop gives a graphical workspace there. In either case, saved files can be on that other computer, even while your laptop displays the session.</p>
 <p>When account details are available, follow the supplied instructions and try <code>pwd</code> and <code>ls</code> remotely. State aloud: “This command runs on <strong><em>; this path is on </em></strong>.” If accounts are not ready, continue the local practical. Do not guess a login address.</p>
 </section>
+<section id="extended-practical-audit-the-archive-and-the-search" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-audit-the-archive-and-the-search">Extended practical — audit the archive and the search</h2>
+<p>Allow about 90 minutes. Complete this in a newly extracted disposable copy, such as <code>lab-audit</code>, rather than mixing it into yesterday’s work. The archive contains four sample records, not the 24 plants in the R dataset. We use this small known structure to test what commands do before trusting a search on a larger laboratory export. Save an audit note with evidence and actual filenames.</p>
+<ol type="1">
+<li>From the folder containing <code>lab-data.zip</code>, list its entries with <code>unzip -l</code>. Predict the extraction tree, then extract with <code>unzip lab-data.zip -d lab-audit</code>. Identify README, manifest, measurement files, and field notes. Listing an archive did not extract its entries; extraction did not remove the ZIP.</li>
+<li>Enter <code>lab-audit</code> and inspect <code>samples.tsv</code> with <code>head</code> or <code>less</code>. Follow each manifest path to its measurement file. Record which sample and units appear in that file. Confirm that S03 and S04 are the treated records and that their saved lengths differ; two matching labels are not identical samples.</li>
+<li>Run <code>wc -l samples.tsv</code>, then <code>grep -F treated samples.tsv | wc -l</code>. Explain both answers in words, including the header. Inspect the actual matched lines rather than assuming a count proves that the right records were selected.</li>
+<li>Copy the manifest to <code>search-trap.tsv</code> using <code>cp</code>. Open only that copy in the text editor, and replace S01’s <code>control</code> label by <code>untreated</code>. Do not change the actual manifest. Predict whether <code>grep -F treated search-trap.tsv</code> will select S01; run it and explain why literal text search is not a treatment-aware table operation. Save this as a demonstration of a limitation, not a corrected biological annotation.</li>
+<li>Save the original treated matches to <code>treated-audit.txt</code>. Copy that extract to <code>extract-backup.txt</code>. Now run <code>grep -F control samples.tsv &gt; treated-audit.txt</code> <strong>only on this disposable extract</strong>. Compare the files with <code>less</code>: the name <code>treated-audit.txt</code> no longer describes its contents. <code>&gt;</code> replaces output; it does not check whether the filename makes scientific sense.</li>
+<li>Restore the correctly named treated extract by rerunning the treated search. Write a note recording the misleading-name experiment and the corrected command. Never use <code>samples.tsv</code> itself as the output destination: shell redirection can truncate an input before the reader starts. Explain this hazard without experimenting on a raw input.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: use known records to test the operation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In the unchanged fixture, <code>wc -l samples.tsv</code> gives 5 and the treated pipe gives 2. In the deliberately altered <code>search-trap.tsv</code>, the same substring search matches three lines, because <code>untreated</code> contains <code>treated</code>. A useful audit records both the command and the records selected. It does not silently rename those selected lines “three treated plants”.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-find-a-file-discrepancy-and-report-it" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-find-a-file-discrepancy-and-report-it">Independent transfer — find a file discrepancy and report it</h2>
+<p>Allow 60–90 minutes. You are checking a received folder before analysis. The following discrepancies are created in a disposable copy so you can practise recovery; they are not claims that the supplied archive is faulty.</p>
+<ol type="1">
+<li>Copy the extracted <code>lab-audit</code> folder using the file manager to a separately named <code>received-check</code> folder. Confirm you are in that copy in both terminal and graphical views. Locate its <code>measurements/S04.csv</code> and rename it <code>S04-renamed.csv</code>. Keep its contents intact.</li>
+<li>Starting from the copied manifest, check whether each listed relative file path exists by navigating and listing the relevant folder. Identify the one discrepancy. Explain why a manifest record can still exist while the named file cannot be opened. Do not solve it by deleting the sample record.</li>
+<li>Read the renamed measurement and identify S04 from its contents. Restore the original name using the evidence of the known deliberate rename. Recheck the manifest path, record the action, and distinguish a supported repair from guessing which similarly named file “probably belongs” to a sample.</li>
+<li>Repeat the treated search on the restored copy. While inside <code>received-check</code>, save <code>treated-received.txt</code> (its path from the parent is <code>received-check/treated-received.txt</code>); use a pipe to count its records and a reader to inspect their IDs. Identify which command wrote a new file and which merely displayed information.</li>
+<li>While still inside <code>received-check</code>, produce <code>audit.txt</code> (from the parent, <code>received-check/audit.txt</code>) with the original archive name, extraction location, header/record counts, search limitations, discrepancy, evidence, repair, and final check. Include the current computer, because the same path on a remote machine would describe different storage.</li>
+<li>Ask a partner to inspect your audit without hearing your explanation. They should be able to locate the restored measurement from the manifest and explain why a count alone was insufficient. Keep the original source archive and raw extracted manifest available for comparison.</li>
+</ol>
+<p><strong>Check and retain:</strong> both audit notes, the preserved source manifest, search extracts, and the deliberately labelled trap file. S03’s length is 42.4 mm and S04’s is 39.8 mm. Restoring a filename does not alter either measurement.</p>
+</section>
 <section id="check-your-understanding" class="level2">
 <h2 class="anchored" data-anchor-id="check-your-understanding">Check your understanding</h2>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1051,7 +1100,7 @@ Did <code>grep</code> change the manifest? Why does <code>wc -l</code> sometimes
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><code>grep</code> reads the file; redirection saved its output separately. <code>wc -l</code> counts lines, not their meaning. The full manifest includes a header, while our saved matching lines do not. We must know the file’s structure to interpret the count.</p>
 </div>

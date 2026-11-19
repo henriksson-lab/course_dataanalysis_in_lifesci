@@ -28,3 +28,10 @@ laboratory transfer exercises. It supplies the maximum possible and collected
 product masses, with the calculation defined in each exercise. Choose a transfer
 option where a lesson offers it; you do not need to complete every context or
 have taken another chemistry course.
+
+The expanded practice uses six further CSV files included in the project ZIP:
+`seedlings-transfer.csv`, `solutions.csv`, `dilutions.csv`,
+`calibration-transfer.csv`, `unknowns-transfer.csv`, and `algae.csv`.
+The [data dictionary](../data/README.md) supplies designs, definitions, units,
+and the meaning of missing values. Use each exercise's stated input file, not
+the result from a different instrument run or study.

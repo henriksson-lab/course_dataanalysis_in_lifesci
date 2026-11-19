@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Local, cloud and remote storage are distinct locations</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="35" y="80" width="270" height="260" rx="10" fill="#f8fafc" stroke="#3b5bab" stroke-width="3"/>
+<text x="170" y="125" font-family="Arial, sans-serif" font-size="28" fill="#203247" text-anchor="middle" font-weight="normal">Laptop</text>
+<path d="M65,230 v-20 h84.0 l20,20 h106.0 v80 h-210 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="170.0" y="278.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">course</text>
+<rect x="415" y="80" width="270" height="260" rx="10" fill="#f8fafc" stroke="#3b5bab" stroke-width="3"/>
+<text x="550" y="125" font-family="Arial, sans-serif" font-size="28" fill="#203247" text-anchor="middle" font-weight="normal">Cloud service</text>
+<path d="M445,230 v-20 h84.0 l20,20 h106.0 v80 h-210 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="550.0" y="278.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">course</text>
+<rect x="795" y="80" width="270" height="260" rx="10" fill="#f8fafc" stroke="#3b5bab" stroke-width="3"/>
+<text x="930" y="125" font-family="Arial, sans-serif" font-size="28" fill="#203247" text-anchor="middle" font-weight="normal">Remote Linux</text>
+<path d="M825,230 v-20 h84.0 l20,20 h106.0 v80 h-210 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="930.0" y="278.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">course</text>
+<line x1="325" y1="260" x2="390" y2="260" stroke="#64748b" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="550" y="405" font-family="Arial, sans-serif" font-size="28" fill="#203247" text-anchor="middle" font-weight="normal">Only draw copying/sync links you know exist.</text>
+<text x="550" y="460" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="normal">A desktop connection is not automatic synchronisation.</text>
+</svg>

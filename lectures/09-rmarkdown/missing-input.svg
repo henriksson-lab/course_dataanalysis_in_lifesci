@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>A source report without its input is not a complete reproducible package</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<path d="M60,90 h175 l30,30 v115 h-205 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="235" y1="90" x2="235" y2="120" stroke="#3b5bab" stroke-width="3"/>
+<line x1="235" y1="120" x2="265" y2="120" stroke="#3b5bab" stroke-width="3"/>
+<text x="162.5" y="270" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">report.Rmd</text>
+<path d="M60,320 h175 l30,30 v60 h-205 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="235" y1="320" x2="235" y2="350" stroke="#3b5bab" stroke-width="3"/>
+<line x1="235" y1="350" x2="265" y2="350" stroke="#3b5bab" stroke-width="3"/>
+<text x="162.5" y="445" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">input.csv</text>
+<line x1="310" y1="165" x2="725" y2="165" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="310" y1="365" x2="725" y2="195" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<path d="M780,100 h175 l30,30 v115 h-205 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="955" y1="100" x2="955" y2="130" stroke="#3b5bab" stroke-width="3"/>
+<line x1="955" y1="130" x2="985" y2="130" stroke="#3b5bab" stroke-width="3"/>
+<text x="882.5" y="280" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">report.html</text>
+<text x="545" y="345" font-family="Arial, sans-serif" font-size="28" fill="#a8324a" text-anchor="middle" font-weight="normal">omit input → missing dependency</text>
+</svg>

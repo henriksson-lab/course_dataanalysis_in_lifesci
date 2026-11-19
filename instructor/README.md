@@ -8,11 +8,11 @@ This is draft teaching content, not an approved syllabus or a fixed timetable.
 
 ## Where to start evaluating
 
-The [chemistry context investigation](chemistry-context.md) proposed short
-insertions in days 6, 8, 12, and 19. Its day 19 dilution correction is now
-implemented. The other general-chemistry mass, dilution-table, and volume-reading
-ideas remain proposals. All chemistry exercises must supply terms, inputs,
-units, relationships, and requested calculations without prior chemistry.
+The [chemistry context investigation](chemistry-context.md) supplied the initial
+placement ideas. The day 19 dilution correction and later solution/dilution
+practice in days 6–8 are implemented; the specific volume-reading illustration
+remains a proposal. All chemistry exercises supply terms, inputs, units,
+relationships, and requested calculations without prior chemistry.
 
 The [organic-exercise review](organic-context-review.md) records the implemented
 basic laboratory alternatives and links the parallel reviews of all 25 days.
@@ -50,6 +50,13 @@ Use speaker view for notes; the slides and embedded notes are public teaching
 material. There are no recorded lecture videos yet, so the menu does not imply
 that recordings exist.
 
+The subsequent [workload expansion](workload-expansion.md) roughly doubles
+lecture depth and active practice. Each daily practical now has extended core
+work and an independent transfer task, with fresh inputs and checkable outputs.
+The student [study plan](../study-plan.qmd) budgets about 35 structured plus 5
+flexible learner hours per week. This is a planning estimate requiring a pilot,
+not a claim of 40 contact hours or examination requirements.
+
 ## What's supplied
 
 - 25 lecture decks and 25 practical/notes pages with biological context, examples, practicals, hints,
@@ -59,7 +66,7 @@ that recordings exist.
   Website code execution is disabled; example figures are generated separately
   from the actual teaching datasets. Five weekly self-check quizzes give brief
   worked answers.
-- Nine CSV datasets, an organic sample-label TSV, and a tiny DNA string, all
+- Fifteen CSV datasets, an organic sample-label TSV, and a tiny DNA string, all
   simulated. The data dictionary
   identifies units, experimental units, and missing values. A separate source
   note justifies the planted data-quality corrections.
@@ -107,9 +114,15 @@ On day 10, find who can render after restarting R. Use these as support signals,
 not grades. Pair work can help troubleshooting, but each student needs hands-on
 practice controlling their own session and locating their own saved files.
 
-Keep day 25 as catch-up. If overloaded, shorten the representations demonstration
+Keep day 25 as consolidation and catch-up. If overloaded, shorten the representations demonstration
 and paired-test calculation practice while retaining the paired-design concept.
 Do not remove file literacy or fresh-session rendering to fit more methods.
+
+The expanded version uses more independent practice within the same topic
+list, rather than a broader method catalogue. New inputs include a second
+seedling study, supplied solution/dilution calculations, a second calibration
+run, and an algae study. Preserve the distinction between independent units and
+repeated measurements when transferring calculations to each new context.
 
 ## Known limitations and next decisions
 

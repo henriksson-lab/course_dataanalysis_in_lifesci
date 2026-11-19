@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>The same printed digits can be stored as text or as a numeric measurement</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="90" y="135" width="350" height="200" rx="10" fill="#f8e9ec" stroke="#a8324a" stroke-width="3"/>
+<text x="265" y="205" font-family="Arial, sans-serif" font-size="42" fill="#203247" text-anchor="middle" font-weight="normal">&quot;18.7 mm&quot;</text>
+<text x="265" y="265" font-family="Arial, sans-serif" font-size="28" fill="#203247" text-anchor="middle" font-weight="normal">character entry</text>
+<rect x="650" y="135" width="350" height="200" rx="10" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="825" y="205" font-family="Arial, sans-serif" font-size="42" fill="#203247" text-anchor="middle" font-weight="normal">18.7</text>
+<text x="825" y="265" font-family="Arial, sans-serif" font-size="28" fill="#203247" text-anchor="middle" font-weight="normal">numeric millimetres</text>
+<line x1="470" y1="235" x2="620" y2="235" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="550" y="110" font-family="Arial, sans-serif" font-size="28" fill="#203247" text-anchor="middle" font-weight="normal">check unit evidence first</text>
+<text x="550" y="430" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="normal">Parsing is justified by meaning, not just removing inconvenient text.</text>
+</svg>

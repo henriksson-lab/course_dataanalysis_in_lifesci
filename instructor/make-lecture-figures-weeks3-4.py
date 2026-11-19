@@ -454,3 +454,197 @@ ax.set(xlabel='Leaf area (cm²)',ylabel='Dry mass (mg)',xlim=(0,26))
 save_plot(fig,20,'extrapolation.svg')
 
 print('Lecture diagrams rebuilt for days 11–20.')
+
+# Expanded worked cases and independent-transfer material, days11–20.
+transfer_rows = records('seedlings-transfer.csv')
+transfer_control = [float(r['final_mm'])-float(r['initial_mm']) for r in transfer_rows if r['treatment']=='control']
+transfer_treated = [float(r['final_mm'])-float(r['initial_mm']) for r in transfer_rows if r['treatment']=='treated']
+transfer_means = [statistics.mean(transfer_control),statistics.mean(transfer_treated)]
+
+def group_plot(day,name,groups,labels,ylabel,title=None):
+    fig,ax=plt.subplots(figsize=(10,4))
+    for i,values in enumerate(groups):
+        jitter=np.linspace(-.07,.07,len(values))
+        ax.scatter(np.full(len(values),i)+jitter,values,s=60,color=[TEAL,PURPLE,RED][i%3],alpha=.85)
+        ax.scatter(i,statistics.mean(values),marker='D',s=110,color=INK,zorder=4)
+    ax.set(xticks=range(len(groups)),xticklabels=labels,ylabel=ylabel,title=title)
+    save_plot(fig,day,name)
+
+def route(day,name,left,middle,right,caption):
+    d=Drawing(title=caption)
+    for x,label in [(55,left),(440,middle),(825,right)]:
+        d.file(x,160,label,width=190,height=145)
+    d.arrow(270,225,415,225);d.arrow(650,225,800,225)
+    d.text(550,425,caption,size=27,anchor='middle')
+    d.save(dest(day,name))
+
+#11: numerical consequences and a separate source study.
+raw_missing=[float(r['final_mm'])-float(r['initial_mm']) for r in plants if r['plant_id']!='P06']
+wrong_missing=raw_missing+[-24.7]
+fig,ax=plt.subplots(figsize=(10,4))
+ax.scatter([0,1],[statistics.mean(raw_missing),statistics.mean(wrong_missing)],s=150,color=[TEAL,RED])
+ax.set(xticks=[0,1],xticklabels=['Unknown retained\n23 available growths','Final length invented as0\n24 calculated growths'],ylabel='Overall mean growth (mm)',ylim=(15,20))
+for i,values in enumerate([raw_missing,wrong_missing]):ax.text(i,statistics.mean(values)+.35,f'{statistics.mean(values):.2f}',ha='center',fontsize=21)
+save_plot(fig,11,'extended-zero-consequence.svg')
+route(11,'extended-audit-chain.svg','source record','specific correction','checked output','Evidence should connect the changed value to its source.')
+d=Drawing(title='The same printed digits can be stored as text or as a numeric measurement')
+d.rect(90,135,350,200,fill='#f8e9ec',stroke=RED);d.text(265,205,'"18.7 mm"',size=42,anchor='middle');d.text(265,265,'character entry',size=28,anchor='middle')
+d.rect(650,135,350,200);d.text(825,205,'18.7',size=42,anchor='middle');d.text(825,265,'numeric millimetres',size=28,anchor='middle')
+d.arrow(470,235,620,235);d.text(550,110,'check unit evidence first',size=28,anchor='middle');d.text(550,430,'Parsing is justified by meaning, not just removing inconvenient text.',size=26,anchor='middle')
+d.save(dest(11,'extended-types.svg'))
+fig,ax=plt.subplots(figsize=(10,4))
+for group,col in [('control',TEAL),('treated',PURPLE)]:
+    rr=[r for r in transfer_rows if r['treatment']==group]
+    ax.scatter([float(r['initial_mm']) for r in rr],[float(r['final_mm']) for r in rr],label=group,color=col,s=60)
+ax.set(xlabel='Initial length (mm)',ylabel='Final length (mm)',title='A new study needs new checks and identifiers');ax.legend();save_plot(fig,11,'extended-transfer-inspection.svg')
+
+#12: transformation intuition from actual small numbers.
+group_plot(12,'extended-one-high-value.svg',[[12,14,16],[12,14,26]],['original','one value changed'],'Growth (mm)','A changed observation can alter centre and spread')
+group_plot(12,'extended-shift.svg',[[12,14,16],[22,24,26]],['original','every value +10 mm'],'Growth (mm)','Same deviations, different centre')
+fig,axes=plt.subplots(1,2,figsize=(11,4))
+for ax,values,unit in [(axes[0],[12,14,16],'mm'),(axes[1],[1.2,1.4,1.6],'cm')]:
+    ax.scatter(values,[1,1,1],s=100,color=TEAL);ax.axvline(statistics.mean(values),color=RED,ls='--');ax.set(yticks=[],xlabel=f'Growth ({unit})',ylim=(.5,1.5))
+axes[0].set_title('SD2 mm; variance4mm²');axes[1].set_title('SD0.2 cm; variance0.04cm²');save_plot(fig,12,'extended-units.svg')
+group_plot(12,'extended-transfer-variation.svg',[transfer_control,transfer_treated],['control','treated'],'Seven-day growth (mm)','New study: greater mean need not mean greater SD')
+
+#13: readers need observations, display choices and explicit units.
+fig,axes=plt.subplots(1,2,figsize=(11,4),sharey=True)
+axes[0].scatter([0,1],means,s=130,marker='D',color=INK)
+for i,values in enumerate([control,treated]):axes[1].scatter(np.full(len(values),i)+np.linspace(-.07,.07,len(values)),values,s=45,color=[TEAL,PURPLE][i])
+axes[1].scatter([0,1],means,s=100,marker='D',color=INK)
+for ax in axes:ax.set(xticks=[0,1],xticklabels=['control','treated'],ylabel='Growth (mm)')
+axes[0].set_title('Means alone');axes[1].set_title('Same means and observed plants');save_plot(fig,13,'extended-means-and-points.svg')
+fig,axes=plt.subplots(1,3,figsize=(12,4),sharex=True,sharey=True)
+for ax,width in zip(axes,[2,4,6]):
+    ax.hist(transfer_control+transfer_treated,bins=np.arange(8,26,width),color=TEAL,edgecolor='white');ax.set(title=f'Bin width{width} mm',xlabel='Growth (mm)')
+axes[0].set_ylabel('Number of plants');save_plot(fig,13,'extended-binwidth.svg')
+fig,axes=plt.subplots(1,2,figsize=(11,4))
+for ax,limits in zip(axes,[(0,35),(10,32)]):
+    for i,values in enumerate([control,treated]):ax.scatter([i]*len(values),values,color=[TEAL,PURPLE][i],s=50)
+    ax.set(xticks=[0,1],xticklabels=['control','treated'],ylim=limits,ylabel='Growth (mm)')
+axes[0].set_title('Broader vertical range');axes[1].set_title('Narrower vertical range');save_plot(fig,13,'extended-axis-choice.svg')
+group_plot(13,'extended-transfer-caption.svg',[transfer_control,transfer_treated],['control','treated'],'Seven-day growth (mm)','Points: plants; diamonds: group means; n=9 per group')
+
+#14: change n, number of repeated simulations, or source bias separately.
+rng_np=np.random.default_rng(144)
+toy_source=np.array(transfer_control+transfer_treated)
+fig,axes=plt.subplots(1,2,figsize=(11,4),sharex=True,sharey=True)
+for ax,n in zip(axes,[3,12]):
+    simulated=rng_np.choice(toy_source,size=(400,n),replace=True).mean(axis=1)
+    ax.hist(simulated,bins=np.arange(10,22,.6),color=TEAL,edgecolor='white');ax.set(title=f'{n} draws per sample',xlabel='One simulated sample mean (mm)')
+axes[0].set_ylabel('Number of simulated samples');save_plot(fig,14,'extended-transfer-sampling.svg')
+fig,axes=plt.subplots(1,2,figsize=(11,4),sharex=True)
+for ax,repeats in zip(axes,[100,1000]):
+    simulated=rng_np.choice(toy_source,size=(repeats,12),replace=True).mean(axis=1)
+    ax.hist(simulated,bins=np.arange(10,22,.6),density=True,color=PURPLE,edgecolor='white');ax.set(title=f'{repeats} repeated samples; n=12',xlabel='Sample mean (mm)')
+axes[0].set_ylabel('Relative density');save_plot(fig,14,'extended-more-simulations.svg')
+fig,ax=plt.subplots(figsize=(10,4))
+truth=float(np.mean(toy_source))
+for n,col,label in [(4,TEAL,'n=4, correct source'),(40,PURPLE,'n=40, source shifted +5 mm')]:
+    simulated=rng_np.choice(toy_source,size=(800,n),replace=True).mean(axis=1)+(5 if n==40 else 0)
+    ax.hist(simulated,bins=np.arange(8,25,.4),density=True,alpha=.6,color=col,label=label)
+ax.axvline(truth,color=INK,ls='--',label='original source mean');ax.set(xlabel='Simulated sample mean (mm)',ylabel='Relative density');ax.legend(fontsize=12);save_plot(fig,14,'extended-precise-but-shifted.svg')
+d=Drawing(title='Observed plants and repeated simulated samples are different levels')
+for i in range(6):plant(d,90+i*80,180,label=f'T{i+1:02d}',scale=.6)
+for row,ids in enumerate([[1,3,3],[6,2,1],[4,4,5]]):
+    y=120+row*115
+    for j,identifier in enumerate(ids):d.circle(710+j*100,y,30,fill=TEAL);d.text(710+j*100,y+8,f'T{identifier:02d}',size=21,anchor='middle',fill='white')
+d.text(290,330,'fixed source observations',size=28,anchor='middle');d.text(810,440,'new draws can repeat source values',size=25,anchor='middle');d.arrow(540,230,650,230);d.save(dest(14,'extended-source-and-draws.svg'))
+
+#15: report revision has dependencies, not only headings.
+route(15,'extended-result-lineage.svg','input CSV','analysis chunks','table + prose','A reported number should trace back to saved data and code.')
+d=Drawing(title='A missing input breaks rendering even when the report source is present')
+d.file(90,150,'missing input',fill='#f8e9ec',width=200,height=150);d.file(480,150,'report.Rmd',width=200,height=150);d.file(870,150,'no new HTML',width=170,height=150)
+d.arrow(320,230,450,230,stroke=RED);d.line(375,195,415,265,RED,width=7);d.line(415,195,375,265,RED,width=7);d.arrow(710,230,840,230,stroke=GREY)
+d.text(550,430,'A project file does not contain the missing measurements.',size=28,anchor='middle');d.save(dest(15,'extended-missing-dependency.svg'))
+d=Drawing(title='Observed results support a description before broader causal claims')
+for x,y,label in [(70,270,'measured plants'),(450,170,'sample description'),(825,70,'universal cause?')]:
+    d.rect(x,y,220,100,stroke=RED if x==825 else TEAL,fill='#f8e9ec' if x==825 else PALE);d.text(x+110,y+58,label,size=24,anchor='middle')
+d.arrow(310,300,420,230);d.arrow(700,200,800,130,stroke=RED);d.line(725,120,785,180,RED,width=7);d.line(785,120,725,180,RED,width=7);d.text(550,440,'The last step needs more evidence than a larger mean.',size=28,anchor='middle');d.save(dest(15,'extended-claim-limits.svg'))
+
+#16: starting size, comparison direction and overlapping individuals.
+fig,axes=plt.subplots(1,2,figsize=(11,4))
+for i,group in enumerate(['control','treated']):
+    rr=[r for r in plants if r['treatment']==group]
+    axes[0].scatter([i]*len(rr),[float(r['initial_mm']) for r in rr],s=50,color=[TEAL,PURPLE][i]);axes[1].scatter([i]*len(rr),[float(r['final_mm'])-float(r['initial_mm']) for r in rr],s=50,color=[TEAL,PURPLE][i])
+for ax in axes:ax.set(xticks=[0,1],xticklabels=['control','treated'])
+axes[0].set(ylabel='Initial length (mm)',title='Starting measurements');axes[1].set(ylabel='Growth (mm)',title='Outcome for our question');save_plot(fig,16,'extended-start-and-growth.svg')
+fig,ax=plt.subplots(figsize=(10,4))
+ax.axvline(0,color=GREY,ls='--');ax.scatter([-diff,diff],[1,2],s=130,color=[PURPLE,TEAL]);ax.set(yticks=[1,2],yticklabels=['control − treated','treated − control'],xlabel='Directed difference (mm)',xlim=(-10,10),ylim=(.5,2.5))
+for x,y in [(-diff,1),(diff,2)]:ax.text(x,y+.17,f'{x:+.2f}',ha='center',fontsize=20)
+save_plot(fig,16,'extended-direction.svg')
+fig,ax=plt.subplots(figsize=(10,4))
+ax.scatter(control,[0]*len(control),s=70,color=TEAL,label='control');ax.scatter(treated,[1]*len(treated),s=70,color=PURPLE,label='treated')
+ax.scatter([means[0],means[1]],[0,1],s=130,marker='D',color=INK);ax.set(yticks=[0,1],yticklabels=['control','treated'],xlabel='Individual growth (mm)',ylim=(-.5,1.5));save_plot(fig,16,'extended-overlap.svg')
+group_plot(16,'extended-transfer-difference.svg',[transfer_control,transfer_treated],['control','treated'],'Seven-day growth (mm)',f'Transfer study: observed mean difference {transfer_means[1]-transfer_means[0]:.2f} mm')
+
+#17: reversing order, confidence levels, and two studies' uncertainty.
+fig,ax=plt.subplots(figsize=(10,4))
+for y,label,lower,upper in [(0,'90%',3.312254,9.121079),(1,'95%',lo,hi),(2,'99%',1.41096,11.02237)]:
+    ax.plot([lower,upper],[y,y],lw=4,color=[TEAL,PURPLE,RED][y]);ax.scatter(diff,y,s=90,color=INK)
+ax.axvline(0,color=GREY,ls='--');ax.set(yticks=[0,1,2],yticklabels=['90%','95%','99%'],xlabel='Mean difference (mm)',title='Same observations, different coverage targets');save_plot(fig,17,'extended-confidence-levels.svg')
+fig,ax=plt.subplots(figsize=(10,4))
+for y,lower,upper,estimate in [(0,lo,hi,diff),(1,-hi,-lo,-diff)]:ax.plot([lower,upper],[y,y],lw=4,color=[TEAL,PURPLE][y]);ax.scatter(estimate,y,s=90,color=INK)
+ax.axvline(0,color=GREY,ls='--');ax.set(yticks=[0,1],yticklabels=['treated − control','control − treated'],xlabel='Mean difference (mm)',ylim=(-.5,1.5));save_plot(fig,17,'extended-reversed-interval.svg')
+fig,ax=plt.subplots(figsize=(10,4))
+transfer_diff=transfer_means[1]-transfer_means[0]
+for y,lower,upper,estimate in [(0,lo,hi,diff),(1,1.948441,6.473782,transfer_diff)]:ax.plot([lower,upper],[y,y],lw=4,color=[TEAL,PURPLE][y]);ax.scatter(estimate,y,s=90,color=INK)
+ax.axvline(0,color=GREY,ls='--');ax.set(yticks=[0,1],yticklabels=['main study:12+12 plants','transfer study:9+9 plants'],xlabel='Treated − control mean growth (mm)',ylim=(-.5,1.5));save_plot(fig,17,'extended-two-studies.svg')
+fig,ax=plt.subplots(figsize=(10,4))
+ax.axvline(0,color=GREY,ls='--');ax.errorbar(2,1,xerr=3,fmt='D',ms=12,color=PURPLE,capsize=12,lw=3);ax.set(xlim=(-3,7),ylim=(.5,1.5),yticks=[],xlabel='Supplied illustrative mean difference (mm)');ax.text(2,1.25,'estimate 2; interval −1 to 5',ha='center',fontsize=22);save_plot(fig,17,'extended-uncertain-case.svg')
+
+#18: pairing matters even with identical marginal means.
+changes=np.array(after)-np.array(before)
+sorted_changes=np.sort(after)-np.sort(before)
+group_plot(18,'extended-sorted-pairs.svg',[changes.tolist(),sorted_changes.tolist()],['correct identities','columns sorted independently'],'After − before (umol CO2 m⁻² s⁻¹)','Same mean change; different constructed variability')
+fig,axes=plt.subplots(1,2,figsize=(11,4))
+for ax,b,a,title in [(axes[0],before,after,'Correct within-plant pairings'),(axes[1],sorted(before),sorted(after),'Artificial rank matching')]:
+    for bb,aa in zip(b,a):ax.plot([0,1],[bb,aa],marker='o',color=TEAL,alpha=.7)
+    ax.set(xticks=[0,1],xticklabels=['before','after'],ylabel='Rate (umol CO2 m⁻² s⁻¹)',title=title)
+save_plot(fig,18,'extended-identity-lines.svg')
+fig,ax=plt.subplots(figsize=(10,4))
+ax.axvline(0,color=GREY,ls='--');ax.scatter([2,1,3],[.6,.6,.6],s=90,color=TEAL);ax.plot([-.4841377,4.4841377],[1,1],lw=4,color=PURPLE);ax.scatter(2,1,s=100,marker='D',color=INK);ax.set(yticks=[.6,1],yticklabels=['three observed changes','95% interval for mean change'],xlabel='After − before (rate units)',ylim=(.3,1.3),xlim=(-1,5));save_plot(fig,18,'extended-three-pair-case.svg')
+d=Drawing(title='A fixed before-after order cannot separate light from elapsed time')
+for x,label in [(100,'before reading'),(770,'after reading')]:d.rect(x,180,240,110);d.text(x+120,245,label,size=28,anchor='middle')
+d.arrow(370,205,735,205);d.text(550,150,'illumination changed',size=29,anchor='middle');d.arrow(370,285,735,285,stroke=PURPLE);d.text(550,350,'time passed too',size=29,anchor='middle',fill=PURPLE);d.text(550,440,'A paired analysis preserves identity; it does not remove order effects.',size=25,anchor='middle');d.save(dest(18,'extended-order-effects.svg'))
+
+#19: another measured calibration, including unsupported readings.
+transfer_standards=records('calibration-transfer.csv')
+sx=np.array([float(r['concentration_mg_l']) for r in transfer_standards]);sy=np.array([float(r['absorbance']) for r in transfer_standards]);sb,sa=np.polyfit(sx,sy,1)
+fig,ax=plt.subplots(figsize=(10,4));ax.scatter(sx,sy,s=65,color=TEAL);ax.plot(sx,sa+sb*sx,color=BLUE);ax.set(xlabel='Known concentration (mg/L)',ylabel='Absorbance',title='A new instrument needs its own fitted coefficients');save_plot(fig,19,'extended-transfer-line.svg')
+fig,ax=plt.subplots(figsize=(10,4));ax.axhline(0,color=GREY,ls='--');ax.scatter(sx,sy-(sa+sb*sx),s=65,color=TEAL);ax.set(xlabel='Known concentration (mg/L)',ylabel='Observed − fitted absorbance');save_plot(fig,19,'extended-transfer-residuals.svg')
+fig,ax=plt.subplots(figsize=(10,4));ax.plot(sx,sa+sb*sx,color=BLUE);ax.scatter(sx,sy,s=55,color=TEAL);ax.axhline(.270,color=PURPLE,ls='--',label='X1: 0.270, within range');ax.axhline(.700,color=RED,ls='--',label='X2: 0.700, beyond standards');ax.set(xlabel='Known concentration (mg/L)',ylabel='Absorbance',ylim=(0,.8));ax.legend(fontsize=13);save_plot(fig,19,'extended-transfer-range.svg')
+fig,ax=plt.subplots(figsize=(10,4));full_a=.0395714285714;full_b=.0648857142857
+full_values=[(a-full_a)/full_b for a in [.310,.520]];rounded_values=[(a-round(full_a,2))/round(full_b,2) for a in [.310,.520]]
+for i,(full,rounded) in enumerate(zip(full_values,rounded_values)):
+    ax.scatter([i-.1,i+.1],[full,rounded],s=100,color=[TEAL,RED]);ax.plot([i-.1,i+.1],[full,rounded],color=GREY)
+ax.scatter([],[],color=TEAL,label='full coefficients');ax.scatter([],[],color=RED,label='two-decimal coefficients');ax.set(xticks=[0,1],xticklabels=['reading 0.310','reading 0.520'],ylabel='Inverse estimate (mg/L)');ax.legend(fontsize=13);save_plot(fig,19,'extended-rounded-coefficients.svg')
+d=Drawing(title='A corrected estimate needs both a new measured reading and the supplied volume factor')
+d.rect(50,120,260,220);d.text(180,180,'new reading',size=28,anchor='middle');d.text(180,235,'0.520',size=43,anchor='middle');d.text(180,300,'measured diluted',size=23,anchor='middle')
+d.rect(420,120,260,220);d.text(550,180,'inverse estimate',size=28,anchor='middle');d.text(550,235,'7.40 mg/L',size=40,anchor='middle');d.text(550,300,'diluted sample',size=23,anchor='middle')
+d.rect(790,120,260,220);d.text(920,180,'factor 10',size=28,anchor='middle');d.text(920,235,'74.04 mg/L',size=40,anchor='middle');d.text(920,300,'original estimate',size=23,anchor='middle');d.arrow(330,225,400,225);d.arrow(700,225,770,225);d.text(550,425,'The original estimate is not a new direct instrument reading.',size=27,anchor='middle');d.save(dest(19,'extended-dilution-lineage.svg'))
+
+#20: identical fitted values under a unit conversion, and a new observational fit.
+leaf_rows=records('leaf-mass.csv');lx=np.array([float(r['leaf_area_cm2']) for r in leaf_rows]);ly=np.array([float(r['dry_mass_mg']) for r in leaf_rows]);lb,la=np.polyfit(lx,ly,1)
+fig,axes=plt.subplots(1,2,figsize=(11,4),sharey=True)
+for ax,factor,unit in [(axes[0],1,'cm²'),(axes[1],100,'mm²')]:
+    ax.scatter(lx*factor,ly,color=TEAL,s=45);ax.plot(lx*factor,la+lb*lx,color=BLUE);ax.set(xlabel=f'Leaf area ({unit})',ylabel='Dry mass (mg)',title=f'Slope {lb/factor:.4f} mg/{unit}')
+save_plot(fig,20,'extended-area-units.svg')
+fig,ax=plt.subplots(figsize=(10,4));ax.scatter(lx,ly,color=TEAL,s=50);ax.plot(lx,la+lb*lx,color=BLUE);index=8;ax.plot([lx[index],lx[index]],[ly[index],la+lb*lx[index]],color=RED,lw=4);ax.text(lx[index]+.35,(ly[index]+la+lb*lx[index])/2,'residual',fontsize=19,color=RED);ax.set(xlabel='Leaf area (cm²)',ylabel='Dry mass (mg)');save_plot(fig,20,'extended-residual-check.svg')
+tx=np.array([float(r['initial_mm']) for r in transfer_rows]);ty=np.array([float(r['final_mm']) for r in transfer_rows]);tb,ta=np.polyfit(tx,ty,1)
+fig,ax=plt.subplots(figsize=(10,4))
+for group,col in [('control',TEAL),('treated',PURPLE)]:
+    selected=np.array([r['treatment']==group for r in transfer_rows]);ax.scatter(tx[selected],ty[selected],label=group,color=col,s=60)
+ax.plot(np.sort(tx),ta+tb*np.sort(tx),color=INK,label='combined descriptive line');ax.set(xlabel='Initial length (mm)',ylabel='Final length (mm)');ax.legend(fontsize=13);save_plot(fig,20,'extended-transfer-association.svg')
+d=Drawing(title='The question and design determine whether we compare groups, pairs, or a line')
+for x,title in [(60,'Independent groups'),(430,'Same units twice'),(800,'Observed association')]:
+    d.rect(x,80,250,300,fill='white');d.text(x+125,55,title,size=24,anchor='middle')
+for i in range(4):d.circle(120+(i%2)*90,160+(i//2)*100,17,fill=TEAL if i%2==0 else PURPLE)
+for y in [155,250]:d.circle(485,y,16,fill=TEAL);d.circle(620,y,16,fill=PURPLE);d.line(510,y,595,y,INK)
+d.line(850,315,1010,315,INK);d.line(850,315,850,130,INK)
+for x,y in [(875,280),(910,250),(940,235),(970,180),(1000,165)]:d.circle(x,y,9,fill=TEAL)
+d.text(185,435,'mean difference',size=26,anchor='middle');d.text(555,435,'within-unit change',size=26,anchor='middle');d.text(925,435,'slope and residuals',size=26,anchor='middle');d.save(dest(20,'extended-question-map.svg'))
+fig,axes=plt.subplots(1,2,figsize=(11,4));formula_x=np.array([.2922,.5844,.8766]);formula_y=1000*(formula_x/58.44)/.1
+axes[0].plot(formula_x,formula_y,marker='o',color=TEAL);axes[0].set(xlabel='Supplied NaCl mass (g)',ylabel='Calculated concentration (mmol/L)',title='A defined arithmetic relationship')
+axes[1].scatter(lx,ly,color=PURPLE,s=45);axes[1].plot(lx,la+lb*lx,color=BLUE);axes[1].set(xlabel='Measured leaf area (cm²)',ylabel='Measured dry mass (mg)',title='Empirical association with residuals');save_plot(fig,20,'extended-formula-versus-data.svg')
+print('Expanded lecture diagrams regenerated for days11–20.')

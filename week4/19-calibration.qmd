@@ -185,6 +185,89 @@ response is a different regression and is not the workflow used here.
 - Are concentration estimates exact? **No; standards, measurement, and the fitted
   relationship all contribute uncertainty.**
 
+## Extended practical — audit a calibration as a measurement workflow
+
+Allow 75–90 minutes. The existing line is not just a picture: its direction,
+units, range, and treatment of unknowns must agree. Continue your calibration
+report and keep raw standards, fitted results, and estimated unknowns distinct.
+No new chemistry or statistical method is introduced in this investigation.
+
+1. Make a small table identifying known concentration, measured signal,
+   response variable, predictor, slope units, and intercept interpretation.
+   Explain why the prepared concentration is on x even though the quantity
+   ultimately wanted for an unknown is concentration.
+2. For one standard, obtain the line's fitted reading and subtract it from
+   the observed reading by hand. Compare with `residuals(calibration_fit)`.
+   State its sign and what that sign means on the original plot. Residuals
+   are measurement-scale discrepancies, not concentrations or p-values.
+3. Calculate an in-range unknown with full fitted coefficients, then repeat
+   using coefficients rounded to two decimal places. Compare the estimates
+   and explain why rounded display values should not silently replace the
+   calculation object. More displayed digits are not a claim of greater
+   measurement precision either.
+4. Check every unknown against the actual measured standard-reading range.
+   Preserve its ID and original reading in the output table. Keep unsupported
+   estimates missing with an explicit reason. A blank estimate should not
+   conceal whether input was unavailable or available but outside range.
+5. Revisit the separate new diluted measurement. Write original-sample volume,
+   final total volume, factor, measured diluted reading, diluted estimate,
+   and original estimate in one traceable table. Label which reading was
+   actually measured within the tested range. Do not attach that result to
+   U3, whose new measurement was never supplied.
+6. Draft a response to “The line fits well, so its estimate at any concentration
+   must be reliable.” Identify what the residual check addresses and what it
+   cannot establish beyond the standards. Include the uncertainty omitted
+   by the simple inverse calculation and the fact that chemical specificity
+   is not demonstrated merely by a straight line.
+7. Save the corrected range-checked table and a one-page workflow explanation.
+   Ask a reader to trace an output concentration back to a particular measured
+   reading, fitted coefficients, and any stated dilution. Revise ambiguous
+   variable names before rendering again.
+
+::: {.callout-tip collapse="true"}
+## Hint: rounded coefficients are an intentional diagnostic
+
+Use a separate temporary expression with `round(intercept, 2)` and
+`round(slope, 2)`; do not overwrite the fitted coefficients. The supported
+first unknown is about **4.17 mg/L** with the full main calibration. The
+out-of-range reading is not repaired by giving its unsupported estimate
+more decimal places.
+:::
+
+## Independent transfer — process a second instrument's standards
+
+Use another 75–90 minutes. `data/calibration-transfer.csv` supplies six
+standards from 0 to 5 mg/L and their absorbance readings. `data/unknowns-transfer.csv`
+supplies X1 and X2 readings. Absorbance is a dimensionless measure of light
+attenuation; known standards connect it empirically to concentration over the
+tested range. You do not need to know an optical law or identify a chemical.
+
+1. Start `transfer-calibration.Rmd` at project root with its own loading,
+   imports, design explanation, and units. Inspect the new column names and
+   known range. Do not reuse the first instrument's coefficient objects.
+2. Plot the six standards, fit absorbance as response to known concentration,
+   and add the fitted line. Report the intercept and slope with meanings and
+   units. Check which are empirical readings and which are model summaries.
+3. Create and plot residuals against known concentration. Describe whether
+   obvious curvature or an unusual reading is visible. There are only six
+   standards; a tidy residual plot is limited evidence, not proof of a law.
+4. Invert this new fitted line for the unknown readings only where the measured
+   signal falls within the supplied standards' range. Preserve both unknown
+   IDs, signals, a supported-range flag, and estimated concentration or a
+   documented missing estimate. Keep the original unknown file unchanged.
+5. Check X1's estimated concentration by inserting it back into the fitted
+   forward equation. It should recover X1's observed absorbance apart from
+   numerical rounding. Explain why this algebra check does not independently
+   validate the calibration or remove measurement uncertainty.
+6. Write a short report recommending the next action for X2. If a new dilution
+   is needed, specify what information would have to be recorded, not an
+   invented measurement or a fabricated corrected value. Render after
+   restarting and save the source, two figures, and output table.
+
+**Additional outputs:** audit table, precision/range notes, revised main report,
+and the independent transfer calibration report. Checkable anchors: the new
+slope is about **0.10009 per mg/L**; X1 is supported and X2 is outside range.
+
 **Leave with:** the calibration report, supported concentration table, and figures.
 
 Next: [Day 20 — A biological association](20-association.qmd).

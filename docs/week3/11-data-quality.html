@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -925,6 +931,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#check-the-repaired-table" id="toc-check-the-repaired-table" class="nav-link" data-scroll-target="#check-the-repaired-table">Check the repaired table</a></li>
   <li><a href="#your-practical" id="toc-your-practical" class="nav-link" data-scroll-target="#your-practical">Your practical</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
+  <li><a href="#extended-practical-audit-a-repair-rather-than-trusting-it" id="toc-extended-practical-audit-a-repair-rather-than-trusting-it" class="nav-link" data-scroll-target="#extended-practical-audit-a-repair-rather-than-trusting-it">Extended practical — audit a repair rather than trusting it</a></li>
+  <li><a href="#independent-transfer-write-the-rules-before-reading-the-answers" id="toc-independent-transfer-write-the-rules-before-reading-the-answers" class="nav-link" data-scroll-target="#independent-transfer-write-the-rules-before-reading-the-answers">Independent transfer — write the rules before reading the answers</a></li>
   </ul>
 </nav>
     </div>
@@ -1053,6 +1061,48 @@ What makes a repair justified?
 </div>
 </div>
 </div>
+</section>
+<section id="extended-practical-audit-a-repair-rather-than-trusting-it" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-audit-a-repair-rather-than-trusting-it">Extended practical — audit a repair rather than trusting it</h2>
+<p>Plan about 75–90 minutes for this investigation and its written evidence. Work from the raw <code>seedlings-messy.csv</code> and the source notes supplied above. Your aim is not merely to obtain 24 rows: it is to show why each retained value and each change can be defended. Continue <code>day11-cleaning.R</code>, preserving its import and original repair. Save new results under names beginning <code>day11-</code> in <code>output/</code>.</p>
+<ol type="1">
+<li>Before running the cleaning block, write a compact audit table in <code>output/day11-audit.txt</code>. Give a row for each problem: observed entry, affected identifier, source evidence, action, and a check of the result. Distinguish an unavailable measurement from an incorrectly transcribed one.</li>
+<li>Inspect the two P01 records together. Compare every field, not just their identifiers. Explain why identical duplication plus the source note permits removal here. Write what additional investigation would be needed if their final lengths disagreed. Do not manufacture another biological plant to explain a repeated file record.</li>
+<li>Import a second raw object with the usual whitespace-trimming default and compare its treatment labels with <code>raw</code>. Find the difference concealed by that convenience. An importer can standardise representation without proving the source is free of errors. Record which option made the original visible.</li>
+<li>Create an intermediate object after label repairs but before numeric parsing. Inspect <code>str()</code> and the P18 record. Then inspect the corresponding columns after parsing. Describe why the same printed digits can have different R types, and why the unit suffix needs documented interpretation before removal.</li>
+<li>In a separate derived copy, deliberately replace P06’s unknown final length with zero. Calculate that row’s growth and the overall available mean. Label this object <code>wrong_zero_example</code>; never write it over the corrected table. Compare its result with the defensible missing-value calculation. Explain what the invented zero claims about the plant and why that is different from choosing <code>na.rm = TRUE</code> for an explicitly reported available-case mean.</li>
+<li>Compare the available group counts before and after your repairs. Include total plant records and usable growth values separately. State why removing the duplicate should change a record count, while leaving P06 unknown should change availability without changing the number of enrolled plants.</li>
+<li>Save the corrected CSV, close R, reopen the project, and regenerate it from the unedited source. Read the derived file back into a new object and check its identifier count, missing growth count, and P21 final length. This tests the saved workflow rather than only the visible Environment pane.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: compare stages with a specific question
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use <code>filter(raw, plant_id == 'P01')</code>, <code>str()</code>, <code>unique()</code>, <code>nrow()</code>, <code>sum(is.na(...))</code>, and the same <code>group_by()</code>/<code>summarise()</code> pattern used elsewhere. The defensible table has 24 unique IDs and one unknown growth. P06’s initial length is 24.7 mm: an invented final zero would imply <strong>−24.7 mm</strong> growth. A numeric answer from the wrong object is still a wrong analysis.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-write-the-rules-before-reading-the-answers" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-write-the-rules-before-reading-the-answers">Independent transfer — write the rules before reading the answers</h2>
+<p>Allow another 60–90 minutes. A second simulated class has supplied <code>data/seedlings-transfer.csv</code>: 18 independently potted seedlings, nine randomly assigned to each allocation, measured seven days apart. The columns and units match the clean seedling table, but the values and identifiers differ. No source note identifies an error in this new file. Treat it as a fresh dataset, not as 18 rows selected from the first experiment.</p>
+<ol type="1">
+<li>In <code>day11-transfer.R</code>, state your expected schema in comments before importing: column names, types, meaning of one row, valid group labels, measurement units, and which identifier should be unique. Obtain those meanings from the dictionary; do not infer units solely from the magnitude of the values.</li>
+<li>Import, inspect, and save the results of your checks in <code>output/day11-transfer-audit.txt</code>. Check row count, unique IDs, actual labels, missing values, numeric types, and whether final-minus-initial is calculable. A check should record what you observed, not just say “passed”.</li>
+<li>Find T01 and calculate its growth by hand. Then calculate growth for every row in code. Keep the original four columns as well as the derived one. Do not copy any repaired P01/P21 values or earlier group counts into this file.</li>
+<li>Make a disposable copy with an extra copy of its first row. Detect the duplicate and explain why the original transfer file remains unaffected. Do not practise by altering the actual CSV. Record the difference between a classroom-created error and source evidence about an actual observation.</li>
+<li>Ask a partner to identify a check you forgot or a conclusion stronger than your evidence. If working alone, reread the audit after a short pause and try to reproduce one check from the saved script without looking at objects.</li>
+<li>Write a handover paragraph: what was checked, whether any correction was justified, and what information you would ask the recorder for if an unusual value appeared. Save <code>output/day11-transfer-growth.csv</code> and rerun from a fresh session. Your handover must make clear that <strong>no correction was supported</strong> in this supplied transfer file.</li>
+</ol>
+<p><strong>Additional outputs:</strong> both scripts, the audit and handover notes, and a derived transfer CSV. Completion means another reader can trace a value to its input and distinguish a verified repair from a convenient guess.</p>
 <p><strong>Keep:</strong> <code>day11-cleaning.R</code>, the derived CSV, and your cleaning notes. Next: <a href="../week3/12-variation.html">describe variation</a>.</p>
 
 

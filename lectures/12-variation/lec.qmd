@@ -113,6 +113,106 @@ A supplied maximum is **1.00 g**; collected dry product is **0.62 g**.
 This is an alternative small task, not additional compulsory work. Theoretical maximum masses are supplied in organic-recovery.csv. Collected dry material is assumed pure for this simplified calculation. Across six standard runs mean yield is 68.67% and SD 4.32 percentage points. Distinguish a percentage scale from relative percentage change.
 :::
 
+## One changed observation can move several summaries
+
+![Changing16 to26 mm alters the mean,median and spread differently.](extended-one-high-value.svg){height=350px}
+
+Original: 12, 14, 16 mm. Changed: 12, 14, 26 mm.
+
+::: notes
+The new mean is17.33 mm, median14 mm, variance 57.33 mm² and SD 7.57 mm. Ask for predictions before displaying numbers. This is sensitivity reasoning, not permission to remove a real large value.
+:::
+
+## A common shift changes centre, not deviations
+
+![Every value shifts by 10 mm while the pattern of deviations stays unchanged.](extended-shift.svg){height=350px}
+
+Adding 10 mm shifts both the mean and each observation by 10 mm.
+
+::: notes
+The shifted vector22,24,26 has mean 24 and SD 2. Show subtraction from each set mean. An SD change under a common shift would signal a calculation or comparison mistake.
+:::
+
+## Use units as an arithmetic check
+
+![The same three measurements displayed in millimetres and centimetres have rescaled numerical summaries.](extended-units.svg){height=350px}
+
+Unit conversion changes numbers; it does not change the measured plants.
+
+::: notes
+Original variance 4 mm² becomes.04 cm²; SD 2 mm becomes.2 cm. Variance scales with the square of the conversion factor. Do not equate a smaller numeric SD after conversion with less biological variation.
+:::
+
+## Calculate before rounding
+
+```r
+x_mm <- c(12, 14, 26)
+mean(x_mm)
+median(x_mm)
+var(x_mm)
+sd(x_mm)
+```
+
+Keep full values for calculations; round the displayed table and prose.
+
+::: notes
+R printing many digits is not proof of precise measurements. Students can show about 17.3 mm mean and 7.57 mm SD while retaining the calculation object. Confirm hand-worked deviations for the original simple vector first.
+:::
+
+## Another study separates mean and spread again
+
+![The new treated group has a larger mean but a smaller observed SD than controls.](extended-transfer-variation.svg){height=350px}
+
+Larger mean does not require larger SD.
+
+::: notes
+Transfer control mean 13.66 mm, SD 2.53 mm; treated mean 17.87 mm, SD 1.94 mm. Use actual values rather than the earlier study pattern, where treated spread was larger.
+:::
+
+## Recreate the calculation in a separate script
+
+```r
+library(readr)
+library(dplyr)
+transfer <- read_csv('data/seedlings-transfer.csv',
+                     show_col_types = FALSE) |>
+  mutate(growth_mm = final_mm - initial_mm)
+transfer_control <- filter(transfer, treatment == 'control')
+sd(transfer_control$growth_mm)
+```
+
+T01 grew **15.0 mm**; check that subtraction independently.
+
+::: notes
+Load readr and dplyr as earlier. New data need their own import and growth column. Each group has 9 complete independent observations. Do not reuse a control vector from another file accidentally.
+:::
+
+## The SD does not identify its own cause
+
+A group has a larger SD. Is that evidence of:
+
+- Greater biological diversity?
+- More measurement noise?
+- A less precise estimated mean?
+
+SD describes the spread. Additional design and measurement information distinguish explanations.
+
+::: notes
+Observed spread can have multiple sources. Uncertainty in a mean additionally depends on independent sample size and assumptions. A group SD alone does not evaluate all experimental technique.
+:::
+
+## Write a summary that survives a unit change
+
+Include the quantity, units, n, centre, and individual spread.
+
+If you convert to cm, revise the mean, SD, variance units, and axis together.
+
+**Which biological comparison should remain unchanged?**
+
+::: notes
+The ordering of group means and relative spread should remain consistent under a common positive conversion. A data table with correct numbers but wrong unit labels is still a misleading report.
+:::
+
 ## Practical: explain the number you calculate
 
 Choose one short transfer task and keep **`day12-variation.R`**.

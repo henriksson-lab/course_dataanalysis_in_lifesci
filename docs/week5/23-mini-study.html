@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -927,6 +933,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#write-the-interpretation-before-polishing" id="toc-write-the-interpretation-before-polishing" class="nav-link" data-scroll-target="#write-the-interpretation-before-polishing">5. Write the interpretation before polishing</a></li>
   <li><a href="#completion-check" id="toc-completion-check" class="nav-link" data-scroll-target="#completion-check">Completion check</a></li>
   <li><a href="#alternative-study-product-yield-in-an-organic-laboratory" id="toc-alternative-study-product-yield-in-an-organic-laboratory" class="nav-link" data-scroll-target="#alternative-study-product-yield-in-an-organic-laboratory">Alternative study: product yield in an organic laboratory</a></li>
+  <li><a href="#extended-practical-plan-challenge-and-improve-the-chosen-study" id="toc-extended-practical-plan-challenge-and-improve-the-chosen-study" class="nav-link" data-scroll-target="#extended-practical-plan-challenge-and-improve-the-chosen-study">Extended practical — plan, challenge, and improve the chosen study</a></li>
+  <li><a href="#independent-transfer-a-fresh-culture-dataset" id="toc-independent-transfer-a-fresh-culture-dataset" class="nav-link" data-scroll-target="#independent-transfer-a-fresh-culture-dataset">Independent transfer — a fresh culture dataset</a></li>
   </ul>
 </nav>
     </div>
@@ -1109,6 +1117,52 @@ Hint and completion checks for the alternative
 </div>
 </div>
 </div>
+</section>
+<section id="extended-practical-plan-challenge-and-improve-the-chosen-study" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-plan-challenge-and-improve-the-chosen-study">Extended practical — plan, challenge, and improve the chosen study</h2>
+<p>Allow about 90 minutes in addition to the initial analysis. Continue <strong>one</strong> selected main report: duckweed or organic yield. The additional work is to make its reasoning inspectable, not to complete both alternatives. Keep a short <code>reports/study-decisions.txt</code> beside your other notes.</p>
+<ol type="1">
+<li>Before changing code, write an analysis plan of about 150–250 words. State the question, observational unit, input file, outcome calculation, units, missing-value rule, plot, and comparison direction. State which uncertainty statement your chosen route supports. For the organic descriptive route, explicitly say that no confidence interval or hypothesis test is being added.</li>
+<li>Create a small check table in your notes with one row each for identifiers, group labels, numeric measurements, missing values, and derived values. Put the command or inspection used in one column and the actual finding in another. “All checks passed” alone is not enough evidence for another person.</li>
+<li>Select one record and verify its arithmetic by hand. For duckweed there is no change score: final biomass itself is the outcome. For organic Y01, 100 times 0.62 g divided by the supplied 1.00 g maximum gives 62%. Explain why subtracting the two organic masses would answer a different question.</li>
+<li>Compare the two group means in both directions. Confirm that reversing their order changes the sign, not the size of the observed difference. In the duckweed route, check that the confidence interval’s direction agrees with the order passed to the taught test. The descriptive route needs only the directed observed difference in percentage points.</li>
+<li>Write one draft interpretation before looking at the next paragraph. Then audit the supplied faulty interpretation below for your chosen route. Name at least three problems, and rewrite it using the actual evidence.</li>
+</ol>
+<p><strong>Duckweed draft to repair:</strong> “There were 20 biomass results. The nutrient plants all grew more, and the group SD is the error in the treatment effect. The p-value tells us the probability that nutrients work.”</p>
+<p><strong>Organic draft to repair:</strong> “The protocol collecting more grams must have higher percentage yield. Each balance reading is another independent run. A larger yield proves that the product is purer.”</p>
+<ol start="6" type="1">
+<li>Insert the corrected interpretation into your report, with a caption that identifies observations, units, and any missing measurement. Include the source of the missingness/assumption information rather than pretending the numbers alone explained it. Add at least one inline calculated result using the pattern from week 2, so a rerun updates that result automatically.</li>
+<li>Restart, render, and compare the rendered statements with the current summary table. Save the plan and the three most consequential decisions. Do not introduce another test because a sentence feels difficult to write.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: repair the meaning, not only the wording
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Duckweed has 20 enrolled flasks but 19 available biomass measurements, and the observations overlap. SD describes flask variation, not uncertainty in an effect. The p-value is conditional on a null model and assumptions. In the organic case, starting scales differ, yield has a supplied denominator, the run is independent, and purity was assumed. Use these distinctions to rewrite the draft rather than merely replacing “proves” with “suggests”.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-a-fresh-culture-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-a-fresh-culture-dataset">Independent transfer — a fresh culture dataset</h2>
+<p>Allow about 60–90 minutes. This is a short transfer memo, not a second full main study report. Use <code>data/algae.csv</code>, described here so no microbiology knowledge is required. Algae are photosynthetic organisms; our measured quantity is simply harvested dry biomass in mg. Twenty-four cultures were grown separately and randomly allocated <code>reference</code> or <code>supplement</code>, twelve each. They were harvested once after seven days. A19 spilled before weighing. One culture is the independent experimental unit; its many cells do not add independent replicates.</p>
+<ol type="1">
+<li>Save <code>algae-transfer.R</code> at the project root. Import the file and inspect the columns <code>culture_id</code>, <code>treatment</code>, and <code>biomass_mg</code>. Record rows, unique IDs, labels, and missing measurements before calculating a summary.</li>
+<li>Summarise enrolled, available, and missing counts by group, then mean and SD of available biomass. Keep A19 as a missing raw value. Explain the difference between the two counts rather than replacing the blank with zero.</li>
+<li>Make an individual-point plot with treatment on x and biomass in mg on y. Use the same display pattern already taught. Include the unavailable measurement in its caption, although it has no plotted y value.</li>
+<li>Calculate the observed supplement-minus-reference mean difference. Report its units and direction. No new test is necessary for this memo; students already comfortable with week 4 may verify the taught Welch calculation, but a test is not a substitute for the requested description.</li>
+<li>In <code>reports/algae-transfer.txt</code>, write a result paragraph of 100–150 words containing the independent unit, counts, direction, group spread/overlap, and a missingness limitation. State one question the plot cannot settle.</li>
+<li>Save a summary CSV and plot in <code>output/</code> with the prefix <code>algae-transfer</code>. Restart and run the script from the top. Tomorrow’s reproduction work will use these saved inputs and code, not your current Environment pane.</li>
+</ol>
+<p><strong>Checks:</strong> there are 24 unique cultures; 12 reference and 11 supplement biomass measurements are available. A19 remains missing. The group with the larger mean need not contain the largest individual observation. Use your table and plot to check that distinction rather than assuming every treated unit must be larger.</p>
 <p><strong>Before you finish:</strong> save a first rendered report and a note of anything that failed. Tomorrow we will test whether someone else can reproduce it: <a href="../week5/24-reproduce.html">Day 24</a>.</p>
 
 

@@ -108,14 +108,112 @@ Nothing about the plants changed between panels. Changing a display choice chang
 
 ```r
 write_csv(group_summary, "output/growth-summary.csv")
-ggsave("output/growth-summary.png", plot = group_plot,
-       width = 6, height = 4)
 ```
 
 A CSV stores numbers; a PNG stores a figure. Keep both traceable to raw data.
 
 ::: notes
 The practical defines group_plot and output/ already exists in the supplied project. Assigning an R object does not export it. After saving, ask students to find the two ordinary files in a file manager and explain which application could open each.
+:::
+
+## A summary can hide the very observations it describes
+
+![Means alone conceal the individual measurements and overlap shown by a point plot.](extended-means-and-points.svg){height=350px}
+
+Both panels use the same group means.
+
+::: notes
+Ask which panel permits inspecting overlap and unusual values. The point plot need not become cluttered: horizontal jitter can separate overlapping dots without changing their measured vertical positions.
+:::
+
+## Summary rows are not new plants
+
+The original table has **24 plant rows**.
+The grouped table has **two summary rows**.
+
+These are different objects answering different questions.
+
+Which table should supply individual points? Which supplies mean markers?
+
+::: notes
+Individual-point layer uses the raw/derived plant table. Mean-marker layer uses group_summary with explicit mappings. A two-row summary cannot substitute for the individual observations in a treatment test.
+:::
+
+## Histogram details depend on display choices
+
+![Three histograms of the same transfer growth values use different bin widths.](extended-binwidth.svg){height=350px}
+
+Record the bin width and distinguish stable patterns from unstable detail.
+
+::: notes
+The underlying18 measurements are unchanged. Small samples can look multimodal or gapped depending on bins. Do not select a display solely because it exaggerates a desired difference.
+:::
+
+## An axis range changes the visual emphasis
+
+![The same individual growth observations appear under broader and narrower vertical ranges.](extended-axis-choice.svg){height=350px}
+
+Read values and labels; do not judge effect size from screen distance alone.
+
+::: notes
+Both displays can be useful with clear axes, but a reader should not mistake a changed scale for changed observations. This is particularly important when comparing figures from different groups or experiments.
+:::
+
+## Repair the caption precisely
+
+Weak caption: **“Treatment makes everything larger; error is shown.”**
+
+Repair it by naming:
+
+1. Independent unit and outcome/units.
+2. Individual points and any mean symbol.
+3. Available n and the actual meaning of any error bars.
+
+::: notes
+Do not invent error bars where none are shown. Mean±SD describes individual spread. A confidence interval describes uncertainty in an estimate. Neither phrase can be replaced by a generic word error.
+:::
+
+## A new class needs a complete figure package
+
+![A point plot of the transfer data identifies points asplants and diamonds asgroup means.](extended-transfer-caption.svg){height=350px}
+
+Keep the input, summary CSV, figure, and analysis script distinct.
+
+::: notes
+Transfer data have9 plants per group. Students export the summary and plot, verify one mean using a filtered vector, and write a handover request listing actual file dependencies.
+:::
+
+## A script should name the files it creates
+
+```r
+library(ggplot2)
+group_plot <- ggplot(seedlings, aes(treatment, growth_mm)) +
+  geom_point(position = position_jitter(
+    width = 0.08, height = 0, seed = 13)) +
+  labs(x = 'Treatment', y = 'Seven-day growth (mm)') +
+  theme_minimal()
+ggsave('output/growth-summary.png', plot = group_plot,
+       width = 6, height = 4)
+```
+
+Use new names for transfer outputs; do not overwrite the first study's figures.
+
+::: notes
+In the independent task students create transfer_summary and transfer_plot with analogous exports. Explain why a plot object in memory, a PNG, and a summary CSV are not interchangeable outputs.
+:::
+
+## A reader test is more specific than “does this look good?”
+
+Ask a peer to identify:
+
+- One observation and the mean marker.
+- Units, available sample size, and independent unit.
+- A pattern supported by both the table and figure.
+
+Record the ambiguity and the correction.
+
+::: notes
+The practical requires a caption-repair log and reproducible outputs. Working alone, reread the figure after closing the code. Biological claims need numerical meaning, not just attractive layout.
 :::
 
 ## Practical: describe the sample before testing it

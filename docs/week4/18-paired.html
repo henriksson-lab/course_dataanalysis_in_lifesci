@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -926,6 +932,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#what-this-experiment-can-and-cannot-show" id="toc-what-this-experiment-can-and-cannot-show" class="nav-link" data-scroll-target="#what-this-experiment-can-and-cannot-show">What this experiment can and cannot show</a></li>
   <li><a href="#practical-a-short-paired-report" id="toc-practical-a-short-paired-report" class="nav-link" data-scroll-target="#practical-a-short-paired-report">Practical: a short paired report</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
+  <li><a href="#extended-practical-protect-the-identity-of-a-pair" id="toc-extended-practical-protect-the-identity-of-a-pair" class="nav-link" data-scroll-target="#extended-practical-protect-the-identity-of-a-pair">Extended practical — protect the identity of a pair</a></li>
+  <li><a href="#independent-transfer-a-small-explicitly-supplied-paired-case" id="toc-independent-transfer-a-small-explicitly-supplied-paired-case" class="nav-link" data-scroll-target="#independent-transfer-a-small-explicitly-supplied-paired-case">Independent transfer — a small explicitly supplied paired case</a></li>
   </ul>
 </nav>
     </div>
@@ -1054,6 +1062,48 @@ Hint: check the direction with one plant
 <li>Would pairing unrelated plants by their row position be meaningful? <strong>No.</strong></li>
 <li>Does a small p-value establish that light caused the change? <strong>No; the fixed measurement order remains a limitation.</strong></li>
 </ul>
+</section>
+<section id="extended-practical-protect-the-identity-of-a-pair" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-protect-the-identity-of-a-pair">Extended practical — protect the identity of a pair</h2>
+<p>Use about 75–90 minutes to investigate why the paired design matters. Continue <code>paired-report.Rmd</code>; keep the original paired CSV unchanged. One independent plant supplies two related photosynthesis readings, in micromoles CO2 per square metre per second. A change is after minus before for the <strong>same identifier</strong>.</p>
+<ol type="1">
+<li>Inspect L01, L02, and L03. Calculate their changes by hand and compare with your derived column. Give units. Check that the two readings share an identifier, not merely a similar numeric size or neighbouring row position.</li>
+<li>Make a plot joining before and after readings for each plant, using the supplied pattern or a teacher demonstration. Retain your plot of within-plant changes as well. Explain what each display makes easier to see, including individual change and variation in starting levels.</li>
+<li>Compare <code>mean(after - before)</code> with <code>mean(after) - mean(before)</code> for these complete matched rows. They agree, but that arithmetic equality does not justify forgetting the pairing. The uncertainty calculation also depends on the variation of the within-plant differences.</li>
+<li>Create a separate demonstration object by sorting the before column and after column independently. Do not alter the source file or the proper paired object. Calculate changes and run the same paired function on this artificial matching. Compare its mean change, SD of changes, and interval with the valid result. Save both under unmistakably different names.</li>
+<li>Explain the trap: the two marginal means and mean difference can remain unchanged while the paired variability changes greatly. A smaller p-value after sorting is not improved evidence; the identities were destroyed. Recover the original matching using the supplied rows and plant IDs.</li>
+<li>Analyse the original change vector with the supplied one-sample equivalence check <code>t.test(change_umol_m2_s, mu = 0)</code>. Compare its estimate, interval, and p-value with the correctly paired call. This is a check of the same analysis, not an additional independent experiment or a search for a result.</li>
+<li>Add a limitation paragraph naming the fixed before/after order and absence of an unchanged-light comparison. Explain why the observed change cannot isolate light from every possible time/order influence. A small p-value does not remove this design limitation.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: preserve the valid object before the bad example
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use distinct names such as <code>paired</code> and <code>wrong_sorted</code>. Sorting rows while keeping all columns together preserves pairs; sorting two columns separately does not. The valid mean change is <strong>1.983</strong> in the stated rate units. The sorted-column demonstration has the same mean change but a different SD and interval, which exposes why means alone cannot validate paired analysis.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-a-small-explicitly-supplied-paired-case" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-a-small-explicitly-supplied-paired-case">Independent transfer — a small explicitly supplied paired case</h2>
+<p>Allow 60–90 minutes for reasoning and a short source report. A teaching example measures the same three independently sampled plants before and after changing light. The before rates are 5, 8, and 6; after rates are 7, 9, and 9, in micromoles CO2 per square metre per second. The plant IDs are D1, D2, D3 in that order for both vectors. These are illustrative supplied values, not a new measurement file or a randomised experiment. Three plants are very limited support for population inference.</p>
+<ol type="1">
+<li>Enter the supplied values in a three-row table using the familiar <code>data.frame()</code> pattern. Include IDs and both rate columns. Explain why this table has three independent pairs and not six independent plants.</li>
+<li>Calculate the within-plant changes and check them by hand. Compute their mean and sample SD. Describe how much information would be lost by reporting only the mean and omitting the three observations.</li>
+<li>Make a change plot with a zero reference line. Write a caption identifying the unit and the direction. Preserve the actual vertical values rather than adding vertical jitter to make the figure more attractive.</li>
+<li>A guided paired calculation gives an approximate 95% interval of <strong>−0.48 to 4.48</strong> for the mean change in these units. Interpret that supplied interval without claiming it contains 95% of individual plant changes or proves no effect. If you reproduce it in R, identify the very small n and the model assumptions rather than treating the function as a guarantee.</li>
+<li>Write a design recommendation for a later real experiment: explain how more independent plants, a suitable comparison, and recording identities would address different limitations. Do not claim that simply reweighing or rereading these same three plants creates more independent pairs.</li>
+<li>Save <code>paired-transfer.Rmd</code> and render it after restarting. Include all values and code inside the source, a short interpretation, and a statement that the case is illustrative. Keep a note comparing it with the ten-plant source case without pooling the two unrelated examples.</li>
+</ol>
+<p><strong>Additional outputs:</strong> matching audit, valid-versus-sorted demonstration, change figures, revised main report, and the short supplied-case report.</p>
 <p><strong>Leave with:</strong> <code>paired-report.Rmd</code>, its HTML, and the change figure.</p>
 <p>Next: <a href="../week4/19-calibration.html">Day 19 — A calibration line</a>.</p>
 

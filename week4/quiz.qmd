@@ -97,5 +97,65 @@ area would cause this mass change. Inspect residuals and the measured range,
 and avoid extrapolating far beyond observed leaf areas.
 :::
 
+## 7. Reversing the contrast
+
+A treated-minus-control95% interval is2.70 to9.73 mm. What is the control-minus-treated interval? What happens to the two-sided p-value?
+
+::: {.callout-note collapse="true"}
+## Answer and reasoning
+
+The reversed interval is−9.73 to−2.70 mm. Reverse the endpoint order as well as their signs. The two-sided p-value is unchanged because the equal-means question and observations are the same. Clearly label the reported direction.
+:::
+
+## 8. Different confidence levels, same observations
+
+With identical data and model, would a99% interval normally be narrower or wider than a90% interval? Does changing the interval level alter the observed means?
+
+::: {.callout-note collapse="true"}
+## Answer and reasoning
+
+The99% procedure gives the wider interval to target greater long-run coverage. The sample means do not change. Do not select a confidence level after seeing which one gives a preferred conclusion; retain the stated analysis.
+:::
+
+## 9. What if the smaller study has a narrower interval?
+
+The transfer study has 9 plants per group instead of 12, yet its interval is narrower. Must R have failed?
+
+::: {.callout-note collapse="true"}
+## Answer and reasoning
+
+No. Interval width also depends on observed variability and model assumptions. The transfer study has lower observed group spread. When several features differ, sample size alone does not determine the ordering of interval widths.
+:::
+
+## 10. Pairing checked only by means
+
+Independently sorting before and after columns preserves their separate means. Does that validate the paired analysis?
+
+::: {.callout-note collapse="true"}
+## Answer and reasoning
+
+No. It destroys subject identity and can alter the spread of within-subject changes while preserving their average. In the actual ten-plant file the correct and artificial pairings have the same mean change but very different SDs and intervals. Sort complete rows together or match by recorded identity.
+:::
+
+## 11. A new instrument gives two unknown readings
+
+Transfer standards cover measured signals0.024–0.525. X1 reads0.270 and X2 reads0.700. Which gets an inverse estimate, and what should happen to the other record?
+
+::: {.callout-note collapse="true"}
+## Answer and reasoning
+
+X1 is within the measured range and estimates about 2.48 mg/L using the new fitted coefficients. X2 remains in the output with its reading, an out-of-range flag, and no supported concentration estimate. A new suitable measurement is required; do not delete its ID or invent dilution evidence.
+:::
+
+## 12. A unit conversion changes a slope
+
+A mass-on-area slope is4.11 mg/cm². Area is converted to mm² by multiplying by 100. What happens to slope and fitted masses?
+
+::: {.callout-note collapse="true"}
+## Answer and reasoning
+
+The slope becomes about 0.0411 mg/mm², a factor of 100 smaller numerically. The intercept and fitted masses remain the same apart from rounding. The biological association did not become weaker merely because the predictor unit changed. A line through formula-calculated values is also not independent empirical evidence.
+:::
+
 Return to [association practice](20-association.qmd), or continue to
 [remote workflow](../week5/21-remote-workflow.qmd).

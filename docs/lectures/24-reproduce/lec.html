@@ -369,13 +369,234 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
+<section id="two-checks-not-one-badge-of-correctness" class="slide level2">
+<h2>Two checks, not one badge of correctness</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="runs-versus-valid.svg" height="350"></p>
+<figcaption>Execution success and supported interpretation are separate dimensions, with successful-but-misleading work possible.</figcaption>
+</figure>
+</div>
+<p>A reproducible mistake is still a mistake.</p>
+<aside class="notes">
+<p>Ask which check software can perform directly. It can report missing inputs or unavailable functions; it cannot automatically know that a scientific conclusion is warranted. The controlled exercise separates execution failures from false or unsupported prose in a document that renders successfully.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="investigate-one-controlled-change-at-a-time" class="slide level2">
+<h2>Investigate one controlled change at a time</h2>
+<p>Use a disposable copy:</p>
+<ol type="1">
+<li>Run the working reference version.</li>
+<li>Change one known item and predict its effect.</li>
+<li>Observe the error or inconsistency.</li>
+<li>Restore, rerun, and compare the key result.</li>
+</ol>
+<aside class="notes">
+<p>Preserve the original project. Students record the changed item, expected and actual consequence, repair, and confirming rerun. Changing several things at once makes diagnosis harder and can conceal which correction mattered. This is practical error recovery, not deliberate damage to raw measurements.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-copied-input-with-another-name-is-unavailable-to-this-path" class="slide level2">
+<h2>A copied input with another name is unavailable to this path</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="missing-file-case.svg" height="350"></p>
+<figcaption>The report requests data/algae.csv while the received file has a different name.</figcaption>
+</figure>
+</div>
+<p>Repair the copied filename or documented path; verify the rerun.</p>
+<aside class="notes">
+<p>Use the current main report’s actual input in the exercise, not necessarily algae. Temporarily renaming it in a disposable project should cause a file error. Restore the exact name and confirm the original counts and main result. The absence of an error alone is not enough evidence of a correct repair.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="do-not-invent-a-value-to-silence-an-error" class="slide level2">
+<h2>Do not invent a value to silence an error</h2>
+<p>A missing file, a missing measurement, and an unknown R object are different.</p>
+<ul>
+<li>Restore the required input file/path.</li>
+<li>Preserve an unavailable measurement as <code>NA</code>.</li>
+<li>Create an object through the saved import/calculation.</li>
+</ul>
+<aside class="notes">
+<p>These problems need different actions. A copied input renamed for an experiment has not become a dataset of zeros. A missing observation does not justify removing all objects or installing packages. Ask the learner to classify the problem before choosing a repair.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="wrong-prose-can-render-successfully" class="slide level2">
+<h2>Wrong prose can render successfully</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="wrong-prose-renders.svg" height="350"></p>
+<figcaption>A false sentence in report source becomes the same false sentence in an HTML output despite a successful render.</figcaption>
+</figure>
+</div>
+<p>Read the claims against the counts, plot, and assumptions.</p>
+<aside class="notes">
+<p>In the controlled exercise, the false duckweed sentence says all enrolled samples had outcomes; the organic sentence says yield independently establishes purity. Both can render. Students must rewrite the claim and check they did not accidentally share an intentionally misleading diagnostic version.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="fresh-memory-and-fresh-location-test-different-dependencies" class="slide level2">
+<h2>Fresh memory and fresh location test different dependencies</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="two-fresh-checks.svg" height="350"></p>
+<figcaption>Restarting R checks hidden objects; moving a complete project checks paths and included files.</figcaption>
+</figure>
+</div>
+<p>Use both tests when handing work to another person.</p>
+<aside class="notes">
+<p>Restarting in the original folder may leave a personal file path accessible. Moving a project while retaining interactive objects may conceal a missing import. A fresh session in a new extracted folder tests both problems together, within the particular software environment being used.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-source-edit-does-not-update-an-old-html" class="slide level2">
+<h2>A source edit does not update an old HTML</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stale-output.svg" height="350"></p>
+<figcaption>A revised source file and old HTML remain inconsistent until the render is run again.</figcaption>
+</figure>
+</div>
+<p>Locate and open the <strong>newly generated</strong> output after rerunning.</p>
+<aside class="notes">
+<p>The file manager, editor, and browser may each display a different stage of work. Ask the learner to state which artifact they inspected. A browser tab with a familiar title is not a version check. Reopen the known output file rather than accumulating copies named final2 without tracing them.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="use-the-fresh-culture-memo-for-a-small-portable-report" class="slide level2">
+<h2>Use the fresh culture memo for a small portable report</h2>
+<p><code>algae-brief.Rmd</code> needs:</p>
+<ul>
+<li>Its own imports and calculations.</li>
+<li>Input and design, available counts, and one observation plot.</li>
+<li>A short interpretation and missingness account.</li>
+<li>A README for the recipient.</li>
+</ul>
+<aside class="notes">
+<p>This transfers the already completed algae script and memo; it is not a new full project or statistical method. Save source in the project root so data/ paths remain consistent. Include actual inputs rather than shortcuts to the original project. The required available counts remain 12 and 11.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="compare-numerical-results-with-sensible-precision" class="slide level2">
+<h2>Compare numerical results with sensible precision</h2>
+<p><code>33.91818 mg</code> and <code>33.92 mg</code> can be the same result at different precision.</p>
+<p><code>33.91818 mg</code> and <code>34.32 mg</code> require investigation.</p>
+<p>Check input, exclusions, outcome, and calculation before blaming rounding.</p>
+<aside class="notes">
+<p>A comparison should include counts and definitions as well as printed digits. Rounding affects display, not the intended underlying calculation. Environment records such as sessionInfo can help diagnosis, but do not replace the source, input data, or an explanation of a changed exclusion rule.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="keep-the-failure-investigation-useful" class="slide level2">
+<h2>Keep the failure investigation useful</h2>
+<p>Record what changed, what you predicted, what happened, and what confirmed repair.</p>
+<p>Share the corrected source, not an unresolved test case.</p>
+<aside class="notes">
+<p>Use a short case log and a new clear package name after revision. A successful rerun is a bounded result in a tested environment. If working alone, leave the case for another task and then follow only the written directions; this helps expose instructions that rely on remembered undocumented actions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="practical-keep-a-reproduction-log" class="slide level2">
 <h2>Practical: keep a reproduction log</h2>
 <p><a href="../../week5/24-reproduce.html">Open day 24 practical and notes</a>.</p>
 <ul>
-<li>Produce one tested share ZIP and corrected report.</li>
+<li>Test the chosen main-study package and the brief algae-share package.</li>
 <li>Record destination, first error, fix, and rerun outcome.</li>
 <li>Retain source, input, HTML, and a supported backup copy.</li>
+<li>Keep a controlled-failure log distinguishing execution from interpretation.</li>
 </ul>
 <p>Use the study you chose yesterday.</p>
 <aside class="notes">

@@ -106,6 +106,100 @@ Windows students use native RStudio and a separate Ubuntu shell. Mac students do
 All need correction. The editor may be displaying an unsaved or recovered version; a same-disk ZIP does not protect against loss of that disk; relative paths need a starting folder. Ask for a concrete fix to each claim rather than vocabulary alone.
 :::
 
+## A route starts somewhere
+
+![The route from reports to data first goes up to the project root.](nested-route.svg){height=350px}
+
+From reports, data is a neighbour, not a child.
+
+::: notes
+Trace the route graphically before naming relative paths. Students should draw a parent and two children. The exact personal absolute path differs across machines; the within-project relation is portable.
+:::
+
+## Try a move on a practice tree
+
+Create map-a and map-b under practice.
+
+Put a note in map-a, write its route, then move map-a into map-b.
+
+Which written route needs revising?
+
+::: notes
+Do not move the real data folder. Contents may remain identical while the address changes. Compare with copy: copying would leave the original route valid and create a second location. Ask students to predict before clicking.
+:::
+
+## Closing a process and saving a file differ
+
+![Closing a running process clears its working session while the saved note persists on storage.](memory-close.svg){height=350px}
+
+Inspect the saved file to find out which changes survived.
+
+::: notes
+Use the plain-text disposable experiment and acknowledge autosave/recovery. Do not promise that every application loses every unsaved change. RAM supports running information; storage retains deliberately saved information between sessions.
+:::
+
+## A personal absolute path is a poor shared instruction
+
+Illustrative laptop address:
+
+```text
+/Users/anna/Documents/future-lab/data/seedlings-transfer.csv
+```
+
+Portable instruction from the agreed project root:
+
+```text
+data/seedlings-transfer.csv
+```
+
+::: notes
+The second route still assumes an agreed root and an intact folder structure. It does not find data anywhere on the network. On a remote computer the same text refers to storage accessible there, not automatically to the laptop.
+:::
+
+## Installed program versus running instance
+
+![One application saved on storage can be launched as running processes using memory and CPU.](program-process.svg){height=350px}
+
+More RAM and more saved-file capacity solve different problems.
+
+::: notes
+Ask whether a closed editor remains installed. Yes, its saved program is still available to launch. A process is its current execution. Do not add computer architecture derivations; use these distinctions to explain everyday observation and recovery.
+:::
+
+## Plan the next laboratory folder
+
+A practical supplies measurements, photographs, and a protocol.
+
+Where would you keep originals, notes, derived figures, and the report?
+
+Write a README that another person can use.
+
+::: notes
+The independent task creates a disposable future-lab project and text placeholders explicitly marked as such. Renaming text .jpg does not make a photograph. No particular folder scheme is scientifically mandatory; consistency and clear roles are what matter.
+:::
+
+## Connections do not all mean synchronisation
+
+![Laptop, cloud service and remote Linux storage are distinct locations.](storage-locations.svg){height=350px}
+
+Draw only the copying or sync links you actually know are configured.
+
+::: notes
+Cloud-managed folders can have local placeholders. A remote desktop is another interface, not automatic transfer. The course service details remain pending; do not invent an account or hostname. Students can put a question mark on unknown links.
+:::
+
+## Test portability by moving the structure
+
+Copy the complete practice project to a new location.
+
+Find its README and data from the new root.
+
+Explain which relative routes remain valid and which old absolute routes point elsewhere.
+
+::: notes
+This is a test of organisation, not a separate backup against losing the laptop. Keep one clearly named working course project. The student output is the two maps and investigation note; a peer should follow the documented route without oral rescue.
+:::
+
 ## Practise explaining the route
 
 [Open the practical and notes](../../week1/02-folders-computers.qmd).

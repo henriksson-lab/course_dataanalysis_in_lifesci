@@ -480,13 +480,256 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
+<section id="start-with-the-claim-you-intend-to-support" class="slide level2">
+<h2>Start with the claim you intend to support</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="claim-sequence.svg" height="350"></p>
+<figcaption>An analysis moves from question to independent unit and data to a descriptive result; inference needs additional model assumptions.</figcaption>
+</figure>
+</div>
+<p>Write the plan before changing the code.</p>
+<aside class="notes">
+<p>The additional exercise asks for a 150–250 word plan covering question, unit, outcome, units, missingness, plot and direction. The descriptive organic route stops at a directed observed comparison; the duckweed route adds the taught independent inference. One chosen main study is enough.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="make-checks-inspectable" class="slide level2">
+<h2>Make checks inspectable</h2>
+<p>For each check, retain <strong>operation and finding</strong>:</p>
+<ul>
+<li>Identifiers and allocation labels.</li>
+<li>Measurement types, units, and unavailable values.</li>
+<li>Derived outcome and available counts.</li>
+<li>Comparison direction and interpretation.</li>
+</ul>
+<aside class="notes">
+<p>“All checks passed” is not enough for another reader. Ask students to show a count or a named record. They can use existing commands rather than a new validation package. One hand calculation helps test the operation’s meaning, but does not by itself validate experimental independence.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="transfer-the-workflow-to-a-fresh-culture-study" class="slide level2">
+<h2>Transfer the workflow to a fresh culture study</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="algae-counts.svg" height="350"></p>
+<figcaption>Twenty-four algae cultures include twelve reference and twelve supplement records, with A19 unavailable.</figcaption>
+</figure>
+</div>
+<p>New file: <code>data/algae.csv</code>; outcome: dry biomass in <strong>mg</strong>.</p>
+<aside class="notes">
+<p>Algae are photosynthetic organisms, but the task requires no microbiology: independent cultures were randomly assigned, and one seven-day harvest produced a biomass reading. A19 spilled before weighing. This is a short transfer memo, not a requirement to do both duckweed and organic main reports.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="check-before-summarising" class="slide level2">
+<h2>Check before summarising</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>algae <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/algae.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(algae)</span>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">anyDuplicated</span>(algae<span class="sc">$</span>culture_id)</span>
+<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(algae<span class="sc">$</span>biomass_mg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Expect <strong>24 rows</strong>, <strong>0 duplicated IDs</strong>, <strong>1 missing measurement</strong>.</p>
+<aside class="notes">
+<p>The available counts are twelve reference and eleven supplement. Keep A19’s raw row and missing value. State that the culture, not its number of cells, is the independent unit. The transfer table has different column and allocation names from the plant table: adapt the roles, not only the title.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="look-at-the-observations-before-the-summary" class="slide level2">
+<h2>Look at the observations before the summary</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="algae-observations.svg" height="350"></p>
+<figcaption>Individual biomass measurements overlap between the two culture allocations.</figcaption>
+</figure>
+</div>
+<p>Which group contains the largest individual observation?</p>
+<aside class="notes">
+<p>Reference culture A11 has 41.7 mg, larger than every supplement observation. This does not contradict a greater supplement mean. Let students answer the individual-observation question before showing means, so the plot is read as data rather than treated as decoration behind a chosen conclusion.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-group-mean-is-not-a-rule-for-every-culture" class="slide level2">
+<h2>A group mean is not a rule for every culture</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="algae-means.svg" height="350"></p>
+<figcaption>Red diamonds mark the group means while individual reference and supplement observations remain visible.</figcaption>
+</figure>
+</div>
+<p>Reference mean ≈ <strong>28.20 mg</strong>; supplement mean ≈ <strong>33.92 mg</strong>.</p>
+<aside class="notes">
+<p>The supplement group has the higher mean but its values do not all exceed the reference values. Both individual observations and the summary are informative. The plot alone does not isolate every possible source of biological variation; the supplied design and assumptions still matter.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="zero-would-invent-a-different-result" class="slide level2">
+<h2>Zero would invent a different result</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="zero-changes-mean.svg" height="350"></p>
+<figcaption>Incorrectly inserting zero for the unavailable culture lowers the supplement mean relative to using available measurements.</figcaption>
+</figure>
+</div>
+<p>The unavailable value has not become observed information.</p>
+<aside class="notes">
+<p>The correct available supplement mean is 33.91818 mg. Adding a false zero as a twelfth measurement changes it to 31.09167 mg. This is a demonstration of why the rule matters, not an alternative recommended analysis. Keep the raw missing value and explain the loss rather than choosing a convenient invented number.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="repair-claims-as-carefully-as-code" class="slide level2">
+<h2>Repair claims as carefully as code</h2>
+<p>Faulty statements to challenge:</p>
+<ul>
+<li>“All enrolled flasks have measured biomass.”</li>
+<li>“The group SD is the error in the treatment effect.”</li>
+<li>“A higher product yield proves greater purity.”</li>
+</ul>
+<p>Use the <strong>specific data and assumptions</strong> in the correction.</p>
+<aside class="notes">
+<p>Duckweed has nineteen available outcomes out of twenty enrolled flasks. SD is individual spread. Organic purity was assumed for a simplified calculation, not measured by yield. A useful rewrite changes the claim’s meaning, not only its strength from proves to suggests. Students record their corrections.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="give-the-difference-a-direction" class="slide level2">
+<h2>Give the difference a direction</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="comparison-sign.svg" height="350"></p>
+<figcaption>Supplement-minus-reference and reference-minus-supplement have equal sizes and opposite signs.</figcaption>
+</figure>
+</div>
+<p>The observed supplement-minus-reference difference is about <strong>5.72 mg</strong>.</p>
+<aside class="notes">
+<p>Reversing the order changes the sign without altering the underlying observations. In the duckweed test, the order also determines the interval’s direction. For the algae transfer memo no new hypothesis test is required. If a taught test is run, it does not replace the requested descriptive reasoning.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="write-a-bounded-result-paragraph" class="slide level2">
+<h2>Write a bounded result paragraph</h2>
+<p>Include unit, available n, direction, spread or overlap, and a limitation.</p>
+<p>A larger mean does not imply every treated observation is larger.</p>
+<aside class="notes">
+<p>The algae transfer memo is 100–150 words with a saved summary and figure. Keep number precision sensible, but calculate with the unrounded means. A19’s loss needs reporting, even when na.rm=TRUE supplies a numeric summary. Do not generalise the simulated conditions to all organisms or supplements.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="retain-a-decision-trail-with-the-result" class="slide level2">
+<h2>Retain a decision trail with the result</h2>
+<p>Save the analysis plan, checks, chosen direction, and interpretation revision.</p>
+<p>Then restart and recreate the outputs from the saved source.</p>
+<aside class="notes">
+<p>The extended practical turns a short command sequence into a reviewable analysis. Students do not need to produce a second full main study. The fresh culture memo supplies transfer evidence and becomes a small reproducibility task on the following day.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="practical-a-first-complete-version-today" class="slide level2">
 <h2>Practical: a first complete version today</h2>
 <p><a href="../../week5/23-mini-study.html">Open day 23 practical and notes</a>.</p>
 <ul>
 <li>Default: <code>duckweed-report.Rmd</code> plus HTML.</li>
 <li>Alternative: <code>organic-study.Rmd</code> plus HTML.</li>
-<li>Save both in the project root, with the chosen source data intact.</li>
+<li>Keep the chosen source and HTML in the project, with raw data intact.</li>
+<li>Retain the analysis plan and short algae transfer memo/script.</li>
 </ul>
 <p>If extending day 15’s <code>organic-report.Rmd</code>, use <strong>Save As</strong> to preserve it.</p>
 <aside class="notes">

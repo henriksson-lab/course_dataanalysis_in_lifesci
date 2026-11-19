@@ -160,6 +160,91 @@ When account details are available, follow the supplied instructions and try
 on ___.” If accounts are not ready, continue the local practical. Do not guess
 a login address.
 
+
+## Extended practical — audit the archive and the search
+
+Allow about 90 minutes. Complete this in a newly extracted disposable copy,
+such as `lab-audit`, rather than mixing it into yesterday's work. The archive
+contains four sample records, not the 24 plants in the R dataset. We use this
+small known structure to test what commands do before trusting a search on a
+larger laboratory export. Save an audit note with evidence and actual filenames.
+
+1. From the folder containing `lab-data.zip`, list its entries with `unzip -l`.
+   Predict the extraction tree, then extract with `unzip lab-data.zip -d lab-audit`.
+   Identify README, manifest, measurement files, and field notes. Listing an
+   archive did not extract its entries; extraction did not remove the ZIP.
+2. Enter `lab-audit` and inspect `samples.tsv` with `head` or `less`. Follow
+   each manifest path to its measurement file. Record which sample and units
+   appear in that file. Confirm that S03 and S04 are the treated records and
+   that their saved lengths differ; two matching labels are not identical samples.
+3. Run `wc -l samples.tsv`, then `grep -F treated samples.tsv | wc -l`. Explain
+   both answers in words, including the header. Inspect the actual matched lines
+   rather than assuming a count proves that the right records were selected.
+4. Copy the manifest to `search-trap.tsv` using `cp`. Open only that copy in the
+   text editor, and replace S01's `control` label by `untreated`. Do not change
+   the actual manifest. Predict whether `grep -F treated search-trap.tsv` will
+   select S01; run it and explain why literal text search is not a treatment-aware
+   table operation. Save this as a demonstration of a limitation, not a corrected
+   biological annotation.
+5. Save the original treated matches to `treated-audit.txt`. Copy that extract
+   to `extract-backup.txt`. Now run `grep -F control samples.tsv > treated-audit.txt`
+   **only on this disposable extract**. Compare the files with `less`: the name
+   `treated-audit.txt` no longer describes its contents. `>` replaces output;
+   it does not check whether the filename makes scientific sense.
+6. Restore the correctly named treated extract by rerunning the treated search.
+   Write a note recording the misleading-name experiment and the corrected
+   command. Never use `samples.tsv` itself as the output destination: shell
+   redirection can truncate an input before the reader starts. Explain this
+   hazard without experimenting on a raw input.
+
+::: {.callout-tip collapse="true"}
+## Hint: use known records to test the operation
+
+In the unchanged fixture, `wc -l samples.tsv` gives 5 and the treated pipe gives
+2. In the deliberately altered `search-trap.tsv`, the same substring search
+matches three lines, because `untreated` contains `treated`. A useful audit
+records both the command and the records selected. It does not silently rename
+those selected lines “three treated plants”.
+:::
+
+## Independent transfer — find a file discrepancy and report it
+
+Allow 60–90 minutes. You are checking a received folder before analysis. The
+following discrepancies are created in a disposable copy so you can practise
+recovery; they are not claims that the supplied archive is faulty.
+
+1. Copy the extracted `lab-audit` folder using the file manager to a separately
+   named `received-check` folder. Confirm you are in that copy in both terminal
+   and graphical views. Locate its `measurements/S04.csv` and rename it
+   `S04-renamed.csv`. Keep its contents intact.
+2. Starting from the copied manifest, check whether each listed relative file
+   path exists by navigating and listing the relevant folder. Identify the one
+   discrepancy. Explain why a manifest record can still exist while the named
+   file cannot be opened. Do not solve it by deleting the sample record.
+3. Read the renamed measurement and identify S04 from its contents. Restore the
+   original name using the evidence of the known deliberate rename. Recheck the
+   manifest path, record the action, and distinguish a supported repair from
+   guessing which similarly named file “probably belongs” to a sample.
+4. Repeat the treated search on the restored copy. While inside `received-check`, save
+   `treated-received.txt` (its path from the parent is
+   `received-check/treated-received.txt`); use a pipe to count its records and a
+   reader to inspect their IDs. Identify which command wrote a new file and
+   which merely displayed information.
+5. While still inside `received-check`, produce `audit.txt` (from the parent,
+   `received-check/audit.txt`) with the original archive name, extraction
+   location, header/record counts, search limitations, discrepancy, evidence,
+   repair, and final check. Include the current computer, because the same path
+   on a remote machine would describe different storage.
+6. Ask a partner to inspect your audit without hearing your explanation. They
+   should be able to locate the restored measurement from the manifest and
+   explain why a count alone was insufficient. Keep the original source archive
+   and raw extracted manifest available for comparison.
+
+**Check and retain:** both audit notes, the preserved source manifest, search
+extracts, and the deliberately labelled trap file. S03's length is 42.4 mm and
+S04's is 39.8 mm. Restoring a filename does not alter either measurement.
+
+
 ## Check your understanding
 
 ::: {.callout-note collapse="true"}

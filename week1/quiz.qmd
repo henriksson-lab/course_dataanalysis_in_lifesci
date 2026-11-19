@@ -100,5 +100,65 @@ destination. A ZIP on the same disk is a convenient sharing package; use support
 separate storage for protection against losing that disk.
 :::
 
+## 7. A renamed extension
+
+A practice copy of seedlings.csv is renamed name-test.txt. Did its plant measurements become a different format? What would you inspect?
+
+::: {.callout-note collapse="true"}
+## Worked answer
+
+The name changed; renaming did not convert the contents. Open the practice copy as plain text and inspect its comma-separated header and records. Use actual conversion software only when a task calls for conversion; no conversion is needed here. Keep the original CSV unchanged.
+:::
+
+## 8. Two terminal windows
+
+Shell A is inside day03/readings while Shell B is in the workspace root. You run cd .. in Shell A. What changes in Shell B?
+
+::: {.callout-note collapse="true"}
+## Worked answer
+
+Nothing automatically changes in Shell B. Each shell has its own current directory. Check pwd in both windows. The folders themselves did not move, and changing a shell location does not move an independent file-manager window.
+:::
+
+## 9. Quote the intended argument
+
+You want one folder called field notes. Compare mkdir field notes with mkdir "field notes". Which command expresses the intended single name?
+
+::: {.callout-note collapse="true"}
+## Worked answer
+
+The quoted command groups both words into one argument and creates one named folder. The unquoted command normally supplies two names and creates two folders. Practise only in the disposable workspace, then use ls and the graphical view to inspect what actually exists.
+:::
+
+## 10. A surprising grep count
+
+In a copy of the four-record manifest, S01 is labelled untreated; S03 and S04 are treated. How many records match grep -F treated, and does that count establish three treatment allocations?
+
+::: {.callout-note collapse="true"}
+## Worked answer
+
+There are three literal text matches because untreated contains treated. It does not establish three treated plants. Inspect the selected IDs and use the study description to understand labels. The unchanged source manifest still has two treated records.
+:::
+
+## 11. A manifest path fails
+
+The manifest lists measurements/S04.csv, but the copied folder contains S04-renamed.csv. Should you delete the record, change its measurement, or investigate identity?
+
+::: {.callout-note collapse="true"}
+## Worked answer
+
+Investigate. In the deliberate classroom rename, the file contents still identify S04 and 39.8 mm, and the known rename supports restoring its filename. In a real ambiguous case, obtain source evidence. Do not delete a record simply because a path fails.
+:::
+
+## 12. The recipient has the old correction
+
+You edited ordinary report/findings.txt after creating report-v1.zip. A partner extracts v1 and sees the old sentence. What happened, and what is a useful verification?
+
+::: {.callout-note collapse="true"}
+## Worked answer
+
+The archive is a snapshot and did not update when the source changed. Create a newly named package, extract it into a fresh receiver location, and inspect the actual corrected sentence. Confirm both archive version and extracted folder before assuming editing failed.
+:::
+
 Return to [day 5 practical](05-lab-files.qmd) for a complete file workflow, or
 continue to [week 2](../week2/06-r-basics.qmd).

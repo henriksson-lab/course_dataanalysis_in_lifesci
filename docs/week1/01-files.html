@@ -155,6 +155,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -890,6 +896,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#reading-names-and-extensions" id="toc-reading-names-and-extensions" class="nav-link" data-scroll-target="#reading-names-and-extensions">Reading names and extensions</a></li>
   <li><a href="#practical-2-open-a-copy-in-two-ways" id="toc-practical-2-open-a-copy-in-two-ways" class="nav-link" data-scroll-target="#practical-2-open-a-copy-in-two-ways">Practical 2: open a copy in two ways</a></li>
   <li><a href="#practical-3-save-a-note-you-can-find-again" id="toc-practical-3-save-a-note-you-can-find-again" class="nav-link" data-scroll-target="#practical-3-save-a-note-you-can-find-again">Practical 3: save a note you can find again</a></li>
+  <li><a href="#extended-practical-build-a-record-you-can-audit" id="toc-extended-practical-build-a-record-you-can-audit" class="nav-link" data-scroll-target="#extended-practical-build-a-record-you-can-audit">Extended practical — build a record you can audit</a></li>
+  <li><a href="#independent-transfer-receive-a-second-measurement-file" id="toc-independent-transfer-receive-a-second-measurement-file" class="nav-link" data-scroll-target="#independent-transfer-receive-a-second-measurement-file">Independent transfer — receive a second measurement file</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
   </ul>
 </nav>
@@ -983,11 +991,51 @@ P02,control,24.3,32.3</code></pre>
 <p>On Mac, choose <strong>Format → Make Plain Text</strong> in TextEdit before saving. On either system, check the resulting filename in the file manager. It should not secretly end in <code>.txt.txt</code> or <code>.rtf</code>.</p>
 <p>Close the editor and all file-manager windows. Open the file manager again and navigate from Documents to your note. Open it. If you can only find it through an application’s “recent files” list, repeat the folder route once more.</p>
 </section>
+<section id="extended-practical-build-a-record-you-can-audit" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-build-a-record-you-can-audit">Extended practical — build a record you can audit</h2>
+<p>Allow about 75–90 minutes for this block, including explanation and checking. Work in the graphical file manager and a plain-text editor. You are receiving measurements as a future laboratory student: a reader should be able to identify which file is original, which is your practice copy, and which contains your explanation. Speed is not the objective. Pause after each action and identify what changed on storage. Keep the course’s <code>data</code> folder unchanged throughout.</p>
+<ol type="1">
+<li>Create <code>reports/file-audit.txt</code>. In it, record the project folder’s name and the route you take to reach it from Documents. Include the computer you are using; the name of the application alone is not an address.</li>
+<li>In the file manager, inspect <code>data/seedlings.csv</code>, <code>report.Rmd</code>, and <code>introcomputing.Rproj</code>. Record each full filename and its extension. Use the type or kind column, where available, to distinguish a folder from a file. Explain why <code>data</code> is a folder although it has no filename extension.</li>
+<li>Open <code>data/seedlings.csv</code> in the text editor without changing it. Copy its <strong>header line</strong> and the P01 record into your audit note. Label the copied lines as a description, not a replacement dataset. Write the meaning of all four fields in P01’s record, including the millimetre units.</li>
+<li>Copy <code>output/seedlings-practice.csv</code> to another practice file named <code>output/name-test.txt</code>. Open it as plain text. Do you still see commas and the same plant measurements? Rename that copy <code>name-test.csv</code> again. Record the observation: changing the extension changes the name, not the saved information. Do not try this on the original or on an application file.</li>
+<li>Open <code>reports/file-audit.txt</code>, add today’s progress, and save explicitly. Close the editor. Locate and reopen the note from the file manager rather than from a recent-files list. Check that the last sentence is present. If it is absent, investigate whether you saved another copy or an unexpected extension before writing the sentence again.</li>
+<li>Ask a partner to find your note using only the route written in it. If working alone, close all windows, take a short break, and follow your own instructions. Revise an ambiguous instruction such as “open the file” into a named action.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: comparing names is easier when extensions are visible
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The file manager may hide extensions even while a text editor displays them. Show them before deciding that two names are identical. A name such as <code>file-audit.txt.rtf</code> is a formatted document, not the plain-text note requested. Use the editor’s plain-text mode and Save As, then inspect the resulting file again. Do not solve a file-format problem by repeatedly appending <code>.txt</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-receive-a-second-measurement-file" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-receive-a-second-measurement-file">Independent transfer — receive a second measurement file</h2>
+<p>Allow about 60–90 minutes. The new <code>data/seedlings-transfer.csv</code> is another <strong>simulated</strong> study: 18 separate potted seedlings, nine randomly assigned to each of <code>control</code> and <code>treated</code>, with initial and final lengths seven days apart. Its columns have the same definitions as the first seedling table. No calculation software is needed today. The challenge is handling another input accurately, not remembering a filename from the demonstration.</p>
+<ol type="1">
+<li>Locate this second file and make a copy called <code>output/transfer-inspection.csv</code>. State in your audit which remains the original. Open the copy in a text editor and find its header and first record.</li>
+<li>Read T01 aloud: initial length 25.3 mm and final length 40.3 mm. Write a sentence saying what was measured. Compute the increase by ordinary arithmetic and explain why 40.3 mm is not the increase. Do not change either measurement in the CSV to store your answer; put the interpretation in your note.</li>
+<li>Inspect T18 near the end of the file. Record its treatment and two lengths, then show your partner where the record came from. The table has one header and 18 plant records; you do not need to count with a terminal yet.</li>
+<li>In <code>reports/transfer-receipt.txt</code>, write a small receipt for your partner: source filename, copy filename, number of plants stated in the study, length units, and the difference between initial length, final length, and change. Include a sentence explaining that these numbers are teaching data.</li>
+<li>Close the applications and recover both the receipt and the practice copy. Confirm that the original filenames under <code>data</code> remain as supplied. Explain why a screenshot of a table would be harder to update or calculate from than the ordinary CSV. A screenshot may help show a problem; it does not replace the measurement file.</li>
+</ol>
+<p><strong>Check and retain:</strong> T01’s increase is 15.0 mm. T18 is treated, 21.6 mm initially and 43.0 mm finally. Keep the two text notes and your practice copies. A partner should be able to point to the original input and your interpretation separately.</p>
+</section>
 <section id="check-your-understanding" class="level2">
 <h2 class="anchored" data-anchor-id="check-your-understanding">Check your understanding</h2>
 <p>Try answering before opening the explanation.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -996,14 +1044,14 @@ Does closing an application delete the file? What did copying create?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Closing an application does not delete a saved file. Copying created another file. Changes to your practice copy would not automatically change the original. Neither copy is protected against losing the computer if both are stored only on that computer.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1012,7 +1060,7 @@ Why keep <code>data/seedlings.csv</code> unchanged?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>It is our starting record. Later we will describe changes in code so that someone else can repeat the analysis and see what happened to the original measurements.</p>
 </div>

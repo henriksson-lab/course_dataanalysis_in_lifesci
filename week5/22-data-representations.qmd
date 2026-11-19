@@ -11,9 +11,10 @@ Is a computer handling something fundamentally different when it stores a DNA
 sequence or a picture? The information has different meanings, but we can reuse
 familiar ideas: characters, numbers, vectors, tables, and saved files.
 
-This is a short breadth session. We will not search a database, align sequences,
-or learn an image-analysis package. Allow time afterwards to practise earlier
-reports. Save today's code as `representations.R` in the project root, and two
+This is a breadth session with substantial practice in familiar R operations.
+We will not search a database, align sequences, or learn an image-analysis
+package. The extended work tests counting, logical comparisons, saved files,
+and clear explanations. Save today's code as `representations.R` in the project root, and two
 or three explanatory sentences in `reports/representations.txt`.
 
 ## 1. A DNA sequence as character data
@@ -147,6 +148,98 @@ interpretation needs acquisition context, scale, and biological validation.
 Pixels from one image are spatially related measurements, and one treated plant
 remains one experimental unit regardless of its number of pixels.
 :::
+
+
+## Extended practical — change an object and predict what changes
+
+Allow about 75–90 minutes. Keep the supplied DNA and pixel files unchanged.
+Extend `representations.R` with a short prediction comment before each change,
+then record the observed result after running it. We are studying how stored
+values and operations relate, not starting a bioinformatics or image-analysis
+pipeline.
+
+1. Recreate `dna`, `bases`, and `pixels` from their files in a fresh session.
+   Record the three different sizes: one text string, 40 separate base labels,
+   and an 8-by-8 matrix. Explain which function answers each size question.
+2. Make `bases_changed <- bases`, then use `bases_changed[1] <- "G"` to replace
+   only its first element. Square brackets select positions; position 1 is the
+   first letter. Predict the total length and the A and G counts. Check both
+   the changed object and the original `bases` to see which was modified.
+3. Define a **GC fraction** for this invented example as the number of letters
+   labelled G or C divided by the total number of letters. This is only a
+   count-based description. Compute it before and after the replacement using
+   `sum(bases == "G" | bases == "C") / length(bases)` and the corresponding
+   changed object. Here `|` means “or” between logical comparisons in R; it is
+   different from the shell pipe. Explain why neither fraction identifies a gene.
+4. Save the changed sequence as a new file, then read it back. This supplied
+   line joins the letters into one string before writing ordinary text:
+
+```r
+bases_changed <- bases
+bases_changed[1] <- "G"
+writeLines(paste(bases_changed, collapse = ""), "output/changed-dna.txt")
+changed_from_disk <- readLines("output/changed-dna.txt")
+```
+
+   `paste(..., collapse = "")` joins without separators. Check that the saved
+   string has 40 characters. Saving a changed object should not overwrite the
+   raw file. Record both names in your notes.
+5. Make `pixels_shifted <- pixels + 30`. Predict the two new intensity levels,
+   the number above 100, and the number above 220. Check your predictions and
+   display the shifted image using the existing supplied plotting pattern.
+   Values stay within 0–255 here, so no clipping or new image package is needed.
+6. Compare the original and shifted objects at row 1, column 1 and row 4,
+   column 4. The positions did not move; brightness changed. Write a sentence
+   distinguishing a changed measurement scale from a newly larger organism.
+
+::: {.callout-tip collapse="true"}
+## Answer checks for the controlled changes
+
+The original counts are A11, C9, G9, T11; GC fraction is 18/40 = 0.45.
+Replacing the first A by G gives A10 and G10, still 40 letters, and GC fraction
+19/40 = 0.475. The original object should retain its original counts.
+Shifted intensities are 55 and 240. There are still 24 pixels above 100, but
+now 24 rather than zero above 220. A fixed threshold can therefore change its
+answer after brightness changes even when the represented object's positions
+are unchanged. Real image interpretation needs more than this toy arithmetic.
+:::
+
+## Independent transfer — explain a threshold and a file format
+
+Allow about 60–75 minutes. Produce `representation-report.Rmd` at the project
+root, using the familiar report structure. Include two small figures and a
+compact table rather than pasting a long console transcript.
+
+1. Construct a results table for thresholds 0, 25, 100, 209, 210, and 255. For
+   each, count original pixels **strictly greater than** the threshold and divide
+   by 64 for the fraction. Use repeated `sum(pixels > value)` expressions; you
+   do not need to write a loop or function. Give the threshold, count, and
+   fraction columns clear names.
+2. State why a pixel equal to 210 is excluded by `> 210`. Contrast the meaning
+   with `>= 210`, which includes equality. Predict and check the count for the
+   latter. This is the same logical distinction used when filtering a table.
+3. Show the original and shifted grayscale objects in separate report chunks,
+   with captions identifying the operation and intensity scale. Use the same
+   `plot.new()` and `rasterImage(as.raster(... / 255), 0, 0, 1, 1)` pattern, so
+   the display method stays fixed while its input changes.
+4. Read the table and write a three-sentence conclusion: which thresholds give
+   the same result, where a count changes, and what the toy example does not
+   establish about cells or physical area. Do not report a biological t-test
+   using 64 pixels as if they were independent organisms.
+5. In a plain-text editor, make `output/four-bases.csv` containing the header
+   `position,base` and four rows `1,A`, `2,C`, `3,G`, `4,T`. Import it with
+   `read_csv()`. Explain why it gives four table observations whereas reading
+   `ACGT` from a text line gives one string. The information is related, but
+   the file organisation and the question asked of it differ.
+6. Restart R and render your report without running its chunks interactively
+   first. Locate its HTML and source, then ask a partner to use the captions
+   and table to explain the threshold comparison without reading your code.
+
+**Keep:** the script, changed text file, four-row CSV, report source and HTML.
+Your results table should show counts 64, 24, 24, 24, 0, 0 for the stated strict
+thresholds. Use this as an output check, not a reason to alter data until it fits.
+If your counts differ, inspect the loaded object, comparison symbol, and whether
+it was the shifted copy. Those are three distinct possible explanations.
 
 **Before you finish:** rerun `representations.R` from a fresh R session and save
 your explanatory notes. Next: [a small integrated study](23-mini-study.qmd).

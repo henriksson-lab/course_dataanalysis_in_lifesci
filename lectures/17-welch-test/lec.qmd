@@ -44,6 +44,12 @@ Welch’s method does not require equal population variances, but does not repai
 ## Run the comparison in the direction we named
 
 ```r
+library(readr)
+library(dplyr)
+seedlings <- read_csv('data/seedlings.csv', show_col_types = FALSE) |>
+  mutate(growth_mm = final_mm - initial_mm)
+treated <- filter(seedlings, treatment == 'treated')$growth_mm
+control <- filter(seedlings, treatment == 'control')$growth_mm
 comparison <- t.test(treated, control,
   var.equal = FALSE, alternative = "two.sided",
   conf.level = 0.95)
@@ -107,6 +113,117 @@ A small p-value does not establish a large or causal effect.
 
 ::: notes
 The study’s random allocation supports a causal comparison within its conditions, but a p-value alone never establishes causality or universal generalisation. If an interval included zero, it would not prove equality. Encourage a sentence on biological relevance rather than “significant” alone.
+:::
+
+## Read units as well as numbers
+
+Mean growth and the confidence interval use **mm**.
+The p-value has **no measurement unit**.
+
+Neither a group SD nor a p-value is the interval for a difference.
+
+::: notes
+Ask students to annotate a real output table with quantity,value, units,interpretation. The sample counts come from actual input vectors, not the number of lines printed in the test output.
+:::
+
+## Reversing order reverses the interval
+
+![The same comparison in opposite directions produces reflected confidence intervals.](extended-reversed-interval.svg){height=350px}
+
+For a two-sided test, the p-value remains the same.
+
+::: notes
+A treated-minus-control interval[2.70,9.73] becomes a control-minus-treated interval[−9.73,−2.70]. Both describe the same estimated contrast in opposite units of direction. This is not a new experiment.
+:::
+
+## Check the reversal directly
+
+```r
+reverse_comparison <- t.test(control, treated)
+comparison$conf.int
+reverse_comparison$conf.int
+comparison$p.value
+reverse_comparison$p.value
+```
+
+Use separate objects so the stated primary result is preserved.
+
+::: notes
+This follows the main paired-independent setup from day16: treated/control are numeric growth vectors. The function order determines the sign, not an object name such as treatment_effect.
+:::
+
+## Coverage level and interval width are a trade-off
+
+![The90%,95%,and 99%intervals use identical observations but different widths.](extended-confidence-levels.svg){height=350px}
+
+Keep the 95% interval as the stated main analysis.
+
+::: notes
+Higher long-run coverage requires a wider procedure under the same model. Do not select a level after seeing which interval permits a preferred statement. Changing conf.level does not change the observed means.
+:::
+
+## A small experiment can remain inconclusive about direction
+
+![An illustrative2 mm difference has a95%interval from−1 to 5 mm,covering zero and both directions.](extended-uncertain-case.svg){height=350px}
+
+Including zero is not proof of equality or equivalence.
+
+::: notes
+Ask what positive and negative differences remain inside the supplied range. These are illustrative numbers, not output from the course plant file. No new test or sample-size calculation is needed.
+:::
+
+## Repair the interpretation, not the desired result
+
+Incorrect: “The null hypothesis has probability 0.0015.”
+
+Better: under the equal-means model and assumptions, a statistic at least this extreme is rare.
+
+Then report effect size, units, interval, and design limits.
+
+::: notes
+A frequentist p-value conditions on the model; it does not assign the hypothesis a probability. Biological importance and causality require context. Precision in wording is part of analysis, not an optional editorial add-on.
+:::
+
+## Two studies: n alone does not explain interval width
+
+![Main and transfer study intervals differ in estimate and width while also having different spreads and sample sizes.](extended-two-studies.svg){height=350px}
+
+Both sample size and observed variability contribute.
+
+::: notes
+Here the smaller transfer study happens to have a narrower interval because its observed spread is smaller. Do not teach a universal ordering from n alone when other quantities change.
+:::
+
+## Recreate the guided comparison for the new source
+
+```r
+transfer <- read_csv('data/seedlings-transfer.csv',
+                     show_col_types = FALSE) |>
+  mutate(growth_mm = final_mm - initial_mm)
+new_treated <- transfer |>
+  filter(treatment == 'treated') |> pull(growth_mm)
+new_control <- transfer |>
+  filter(treatment == 'control') |> pull(growth_mm)
+transfer_test <- t.test(new_treated, new_control)
+transfer_test
+```
+
+::: notes
+Use transfer from its own saved import/growth calculation, not hidden console state. There are9 available values per group. Difference4.2111 mm;95% interval 1.9484 to6.4738 mm; p about.00124. Include actual observations and assumptions in the interpretation.
+:::
+
+## A complete result can be read without R
+
+A reader should identify:
+
+- What was independently assigned and measured.
+- The estimated difference and its direction/units.
+- Uncertainty under the model and a design/context limitation.
+
+A printout alone does not answer all three.
+
+::: notes
+Students extend transfer-comparison.Rmd with a concise results paragraph, then peer-check direction and units in rendered HTML. Earlier descriptive work remains useful and should not disappear after adding a test.
 :::
 
 ## Practical: add interpretation to the report

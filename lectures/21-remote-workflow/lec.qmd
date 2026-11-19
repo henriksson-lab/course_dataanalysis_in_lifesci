@@ -159,6 +159,154 @@ the remote render failed. Avoid creating multiple reports with names such as
 final2 while the real problem is location.
 :::
 
+
+## Plan the copy before performing it
+
+![Source and destination projects identify the intended algae file and the content checks to repeat.](transfer-plan.svg){height=350px}
+
+Record computer, project path, filename, and intended output.
+
+::: notes
+Use the actual service only when supplied. A local rehearsal needs two different
+parent folders, both explicitly labelled local. These locations are not account
+credentials. Ask students what a receiver would need to distinguish two files
+with the same name. A plan written afterwards can conceal an incorrect assumption.
+:::
+
+## Count what the receiving copy should contain
+
+![Twenty-four separate culture records contain one unavailable supplement measurement, A19.](algae-counts.svg){height=350px}
+
+24 records; 23 available measurements; one documented spill.
+
+::: notes
+The fresh transfer table is data/algae.csv. Define algae simply as the organisms
+in separate cultures; harvested dry biomass is measured in mg. Twelve cultures
+were independently assigned each allocation. There are twelve reference and
+eleven available supplement measurements. These are content checks, not a new model.
+:::
+
+## Verify the intended input in R
+
+```r
+library(readr)
+algae <- read_csv("data/algae.csv", show_col_types = FALSE)
+nrow(algae)
+sum(!is.na(algae$biomass_mg))
+algae$biomass_mg[algae$culture_id == "A19"]
+```
+
+Repeat after transfer: **24**, **23**, and **NA**.
+
+::: notes
+Run in the receiving R project's Console. A path printed by a shell elsewhere
+is not R's current folder. The brackets select the entry matching the ID, not
+the nineteenth row by assumption. Correct counts are useful evidence, but they
+do not establish that every individual value matches the source.
+:::
+
+## A matching filename is not a version check
+
+![Two files named receipt.txt contain different first and second revisions.](same-name-versions.svg){height=350px}
+
+Inspect the saved contents before choosing which copy to send.
+
+::: notes
+Demonstrate with receipts, not raw data. Edit a disposable destination note,
+save it, and reopen both copies. The remote desktop is a view of a computer;
+it is not a guarantee that a laptop's copy updates. Preserve both versions until
+their roles are understood instead of deleting an unfamiliar folder.
+:::
+
+## Write a receipt another reader can use
+
+A short receipt names:
+
+- The input and receiving project location.
+- Checks performed and their actual results.
+- The returned artifact and its destination.
+- Any real remote steps still pending.
+
+::: notes
+Ask students to avoid vague claims such as “uploaded successfully”. A useful
+receipt can distinguish a file selected, a file sent, and the received file
+opened and checked. No passwords, authentication codes, or private account
+details belong in it. A local rehearsal should say exactly that.
+:::
+
+## An unsaved edit has not travelled
+
+![A changed editor buffer and the saved receipt can contain different revisions until saving occurs.](buffer-and-file.svg){height=350px}
+
+Save, close, reopen, then inspect the copy you intend to transfer.
+
+::: notes
+This returns to the file-system baseline deliberately. Some editors autosave
+or restore buffers, so the practical test is the actual saved file. Source-code
+edits likewise do not change an old rendered HTML document until rendering runs.
+The transfer audit needs a named source artifact, not only what is on screen.
+:::
+
+## Why not check only the file size?
+
+![Different version text occupies the same number of character positions.](size-is-limited.svg){height=350px}
+
+Equal size is a limited check, not proof of equal contents.
+
+::: notes
+The strings version 1 and version 2 have equal lengths but different final
+characters. Students need no hashing theory. For these small notes, read both
+saved files and compare their contents. Row counts also have limits: two tables
+can have identical dimensions yet contain different values.
+:::
+
+## “File not found” needs a location investigation
+
+In the **receiving R Console**:
+
+```r
+getwd()
+file.exists("data/algae.csv")
+```
+
+Check computer → project root → relative path → actual file.
+
+::: notes
+A FALSE result tells us that R did not find this path from this starting
+location. It does not mean the input is absent from every machine. Open the
+right project and inspect extraction nesting before inserting a personal
+absolute path. Keep the search sequence reproducible in the log.
+:::
+
+## Diagnose before rendering another copy
+
+The expected local result is absent.
+
+1. Did rendering succeed, and where did it write?
+2. Was that specific output transferred?
+3. Which destination received it?
+4. Which copy did the browser open?
+
+::: notes
+Let students trace a deliberately misplaced HTML file without immediately
+rerunning the analysis. A second render may only create another identical
+artifact in the same unexpected folder. Distinguish failure to calculate,
+failure to transfer, and failure to locate the result.
+:::
+
+## A bounded handover is more useful than a promise
+
+Save `transfer-plan.txt`, the receipt, and the audit in `reports/`.
+
+State what was checked, which copies were compared, and what remains unknown.
+
+::: notes
+These artifacts support the extended practical and independent recovery task.
+A local copy check is valuable but cannot complete SSH authentication or remote
+desktop access. Likewise a successful transfer does not establish a backup
+policy or guarantee that a disconnected process continues running.
+:::
+
 ## Practical: locate, render, return
 
 [Open day 21 practical and notes](../../week5/21-remote-workflow.qmd).
@@ -166,6 +314,7 @@ final2 while the real problem is location.
 - Save `reports/remote-log.txt` with computer names and project locations.
 - Connect, disconnect, reconnect, and find saved work.
 - Transfer and identify one output copy.
+- Retain the transfer plan, receipt, version checks, and audit.
 
 Until access is provided, complete the **local rehearsal** and mark remote steps pending.
 

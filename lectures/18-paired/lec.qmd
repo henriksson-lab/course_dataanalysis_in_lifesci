@@ -117,6 +117,101 @@ These describe a change under the study conditions, not an isolated light effect
 The confidence interval concerns the population mean change, under the assumptions. It does not describe the range of most plants’ individual changes. Sensible precision and a direct order/time limitation matter more than copying every decimal from the console.
 :::
 
+## The same marginal means do not validate a pairing
+
+![Valid pairings and independently sorted columns have identical mean change but different change variability.](extended-sorted-pairs.svg){height=350px}
+
+Identity influences the uncertainty calculation, even when the mean agrees.
+
+::: notes
+For the actual source, correct SD of change is about 1.018 rate units; independently sorted columns give about.505. The changed uncertainty is artificial. A smaller p-value after sorting is not improved evidence.
+:::
+
+## Look at which measurements the lines connect
+
+![Originalplant pairings and artificialrank matchings connect different before-and-after values.](extended-identity-lines.svg){height=350px}
+
+Keep a plant identifier attached to both of its measurements.
+
+::: notes
+Sorting whole rows preserves pairs; sorting columns separately destroys identity. A matching based on numerical rank is not a replacement for the recorded subject identifier.
+:::
+
+## A deliberately wrong object exposes the trap
+
+```r
+wrong_sorted_change <- sort(paired_data$after_umol_m2_s) -
+  sort(paired_data$before_umol_m2_s)
+mean(paired_data$change)
+mean(wrong_sorted_change)
+sd(paired_data$change)
+sd(wrong_sorted_change)
+```
+
+Never overwrite the valid paired object with this demonstration.
+
+::: notes
+The first two means agree. The SDs differ. Ask why subtracting marginal means cannot check whether identities were preserved. Keep the source CSV untouched and label the wrong demonstration unambiguously.
+:::
+
+## One analysis, two equivalent computations
+
+Paired comparison of before and after:
+` t.test(after, before, paired = TRUE) `
+
+One-sample comparison of correctly matched changes with zero:
+` t.test(change, mu = 0) `
+
+These analyse the same within-unit differences.
+
+::: notes
+The estimate,interval, and p-value agree when the exact same complete differences are supplied. They are not two independent pieces of evidence and should not be reported as separate confirming experiments.
+:::
+
+## Few pairs can leave substantial uncertainty
+
+![Threechanges of 2,1,and 3 have a mean of 2,but a95%mean-change interval spanning about−0.48 to 4.48.](extended-three-pair-case.svg){height=350px}
+
+Three plants are limited support for a population inference.
+
+::: notes
+The three illustrative plants had before5,8,6 and after7,9,9 in the stated rate units. Mean change2,SD 1. The interval is provided to practise interpretation. Do not teach that a function guarantees reliable inference at tiny n.
+:::
+
+## A positive observed change does not prove a universal change
+
+For the illustrative case:
+
+- Describe all three individual changes.
+- Interpret uncertainty in the population mean.
+- Name the small-sample and design limitations separately.
+
+::: notes
+All supplied individual changes are positive, yet the model-based95% mean interval includes zero. This does not make the data erroneous or establish equality. Do not select a different test merely to obtain a preferred threshold label.
+:::
+
+## Pairing does not remove an order effect
+
+![Both light and elapsed time change between the two readings in a fixed-order experiment.](extended-order-effects.svg){height=350px}
+
+Preserved identity and a valid causal comparison are different requirements.
+
+::: notes
+The source study always measures before then after increased illumination, without an unchanged-light parallel group. The mean change is describable, but light cannot be isolated from every time/order influence.
+:::
+
+## Plan the next experiment by limitation
+
+More independent plants → more independent pairs.
+Repeat readings of one plant → measurement repeatability.
+A suitable comparison/design → better separation of treatment from time.
+
+These are different improvements.
+
+::: notes
+Students create paired-transfer.Rmd from the supplied three-row example, including its values/code and a limitation. They should not pool this illustrative case with the unrelated ten-plant study or claim a new measured dataset.
+:::
+
 ## Practical: keep the pair visible
 
 Make **`paired-report.Rmd`** with the design, matched changes, a figure, result, and limitation.

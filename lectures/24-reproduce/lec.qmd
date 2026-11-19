@@ -143,13 +143,155 @@ investigating software-version differences, without expecting beginners to
 interpret every field. A ZIP beside the original is not a separate backup.
 :::
 
+
+## Two checks, not one badge of correctness
+
+![Execution success and supported interpretation are separate dimensions, with successful-but-misleading work possible.](runs-versus-valid.svg){height=350px}
+
+A reproducible mistake is still a mistake.
+
+::: notes
+Ask which check software can perform directly. It can report missing inputs or
+unavailable functions; it cannot automatically know that a scientific conclusion
+is warranted. The controlled exercise separates execution failures from false
+or unsupported prose in a document that renders successfully.
+:::
+
+## Investigate one controlled change at a time
+
+Use a disposable copy:
+
+1. Run the working reference version.
+2. Change one known item and predict its effect.
+3. Observe the error or inconsistency.
+4. Restore, rerun, and compare the key result.
+
+::: notes
+Preserve the original project. Students record the changed item, expected and
+actual consequence, repair, and confirming rerun. Changing several things at
+once makes diagnosis harder and can conceal which correction mattered.
+This is practical error recovery, not deliberate damage to raw measurements.
+:::
+
+## A copied input with another name is unavailable to this path
+
+![The report requests data/algae.csv while the received file has a different name.](missing-file-case.svg){height=350px}
+
+Repair the copied filename or documented path; verify the rerun.
+
+::: notes
+Use the current main report's actual input in the exercise, not necessarily
+algae. Temporarily renaming it in a disposable project should cause a file
+error. Restore the exact name and confirm the original counts and main result.
+The absence of an error alone is not enough evidence of a correct repair.
+:::
+
+## Do not invent a value to silence an error
+
+A missing file, a missing measurement, and an unknown R object are different.
+
+- Restore the required input file/path.
+- Preserve an unavailable measurement as `NA`.
+- Create an object through the saved import/calculation.
+
+::: notes
+These problems need different actions. A copied input renamed for an experiment
+has not become a dataset of zeros. A missing observation does not justify
+removing all objects or installing packages. Ask the learner to classify the
+problem before choosing a repair.
+:::
+
+## Wrong prose can render successfully
+
+![A false sentence in report source becomes the same false sentence in an HTML output despite a successful render.](wrong-prose-renders.svg){height=350px}
+
+Read the claims against the counts, plot, and assumptions.
+
+::: notes
+In the controlled exercise, the false duckweed sentence says all enrolled
+samples had outcomes; the organic sentence says yield independently establishes
+purity. Both can render. Students must rewrite the claim and check they did not
+accidentally share an intentionally misleading diagnostic version.
+:::
+
+## Fresh memory and fresh location test different dependencies
+
+![Restarting R checks hidden objects; moving a complete project checks paths and included files.](two-fresh-checks.svg){height=350px}
+
+Use both tests when handing work to another person.
+
+::: notes
+Restarting in the original folder may leave a personal file path accessible.
+Moving a project while retaining interactive objects may conceal a missing
+import. A fresh session in a new extracted folder tests both problems together,
+within the particular software environment being used.
+:::
+
+## A source edit does not update an old HTML
+
+![A revised source file and old HTML remain inconsistent until the render is run again.](stale-output.svg){height=350px}
+
+Locate and open the **newly generated** output after rerunning.
+
+::: notes
+The file manager, editor, and browser may each display a different stage of
+work. Ask the learner to state which artifact they inspected. A browser tab
+with a familiar title is not a version check. Reopen the known output file
+rather than accumulating copies named final2 without tracing them.
+:::
+
+## Use the fresh culture memo for a small portable report
+
+`algae-brief.Rmd` needs:
+
+- Its own imports and calculations.
+- Input and design, available counts, and one observation plot.
+- A short interpretation and missingness account.
+- A README for the recipient.
+
+::: notes
+This transfers the already completed algae script and memo; it is not a new
+full project or statistical method. Save source in the project root so data/
+paths remain consistent. Include actual inputs rather than shortcuts to the
+original project. The required available counts remain 12 and 11.
+:::
+
+## Compare numerical results with sensible precision
+
+`33.91818 mg` and `33.92 mg` can be the same result at different precision.
+
+`33.91818 mg` and `34.32 mg` require investigation.
+
+Check input, exclusions, outcome, and calculation before blaming rounding.
+
+::: notes
+A comparison should include counts and definitions as well as printed digits.
+Rounding affects display, not the intended underlying calculation. Environment
+records such as sessionInfo can help diagnosis, but do not replace the source,
+input data, or an explanation of a changed exclusion rule.
+:::
+
+## Keep the failure investigation useful
+
+Record what changed, what you predicted, what happened, and what confirmed repair.
+
+Share the corrected source, not an unresolved test case.
+
+::: notes
+Use a short case log and a new clear package name after revision. A successful
+rerun is a bounded result in a tested environment. If working alone, leave the
+case for another task and then follow only the written directions; this helps
+expose instructions that rely on remembered undocumented actions.
+:::
+
 ## Practical: keep a reproduction log
 
 [Open day 24 practical and notes](../../week5/24-reproduce.qmd).
 
-- Produce one tested share ZIP and corrected report.
+- Test the chosen main-study package and the brief algae-share package.
 - Record destination, first error, fix, and rerun outcome.
 - Retain source, input, HTML, and a supported backup copy.
+- Keep a controlled-failure log distinguishing execution from interpretation.
 
 Use the study you chose yesterday.
 

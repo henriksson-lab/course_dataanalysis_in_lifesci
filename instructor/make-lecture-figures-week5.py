@@ -280,4 +280,229 @@ for index,(name,sub) in enumerate([("Files","locate + inspect"),("R","repair + r
     d.text(x+117,350,sub,anchor="middle",size=21)
 save(d,u,"stations.svg")
 
+
+# Expanded demonstrations: provenance, controlled changes, and fresh transfer data.
+import statistics
+import math
+
+u='21-remote-workflow'
+d=Drawing(title='A transfer plan specifies both project locations and the evidence checked')
+computer(d,45,90,'Source copy',TEAL); computer(d,690,90,'Destination copy',PURPLE)
+d.text(225,155,'data/algae.csv',anchor='middle',size=25)
+d.text(225,205,'24 rows; A19 unavailable',anchor='middle',size=22)
+d.text(870,155,'data/algae.csv',anchor='middle',size=25)
+d.text(870,205,'Repeat the content checks',anchor='middle',size=22)
+d.arrow(440,190,660,190)
+d.text(550,405,'A filename is only one field in the transfer record',anchor='middle',size=25)
+save(d,u,'transfer-plan.svg')
+
+def algae_counts(unit,name):
+    d=Drawing(title='Twenty-four independent cultures, with one unavailable supplement measurement')
+    for group,label in enumerate(['reference: 12 available','supplement: 11 available']):
+        d.text(55,60+group*215,label,weight='bold',size=27)
+        for index in range(12):
+            x=95+index*80;y=90+group*215
+            d.path(f'M{x}, {y} v25 l-18,50 h55 l-18,-50 v-25',fill='#e6f3f5',stroke=TEAL,width=3)
+            if group==1 and index==6:
+                d.line(x-15,y+25,x+33,y+73,RED,5);d.line(x+33,y+25,x-15,y+73,RED,5)
+            d.text(x+10,y+112,f'A{group*12+index+1:02d}',anchor='middle',size=17)
+    d.text(550,485,'A19 was spilled: an unavailable value is not a zero',anchor='middle',size=23)
+    save(d,unit,name)
+algae_counts(u,'algae-counts.svg')
+
+d=Drawing(title='Two files can share a filename while containing different versions')
+d.file(100,110,'receipt.txt',width=220,height=180)
+d.file(780,110,'receipt.txt',width=220,height=180,fill='#f1eaf8')
+d.text(210,190,'first revision',anchor='middle',size=25)
+d.text(890,190,'second revision',anchor='middle',size=25)
+d.line(390,200,690,200,RED,5,dashed=True)
+d.text(550,380,'Equal names do not establish equal contents',anchor='middle',size=28)
+save(d,u,'same-name-versions.svg')
+
+d=Drawing(title='An unsaved edit and the saved file are different states')
+d.rect(65,80,390,220,fill='#f1eaf8',stroke=PURPLE)
+d.text(260,130,'Editor buffer',anchor='middle',weight='bold')
+d.text(260,195,'second revision',anchor='middle',size=29)
+d.file(785,100,'saved receipt.txt',width=180,height=180)
+d.text(875,180,'first revision',anchor='middle',size=22)
+d.arrow(480,185,750,185);d.text(615,145,'Save?',anchor='middle',size=30)
+d.text(550,440,'Read the saved file again before claiming what travelled',anchor='middle',size=24)
+save(d,u,'buffer-and-file.svg')
+
+d=Drawing(title='Matching file size is a limited check, not proof of matching content')
+for x,label,colour in [(90,'version 1',TEAL),(650,'version 2',PURPLE)]:
+    d.rect(x,100,360,130,fill='#f8fafc',stroke=colour)
+    d.text(x+180,175,label,anchor='middle',size=36)
+    for i in range(9):d.rect(x+i*39,285,34,48,fill='#e6f3f5',stroke=colour,radius=2)
+    d.text(x+180,385,'same number of characters',anchor='middle',size=23)
+d.text(550,465,'Different contents can occupy the same number of bytes',anchor='middle',size=26)
+save(d,u,'size-is-limited.svg')
+
+u='22-data-representations'
+changed=list(sequence);changed[0]='G';changed=''.join(changed)
+fig,axes=plt.subplots(1,2,figsize=(10.5,4.2),sharey=True)
+for ax,text,label in zip(axes,[sequence,changed],['Original','First A changed to G']):
+    counts=[text.count(b) for b in 'ACGT']
+    ax.bar(list('ACGT'),counts,color=[TEAL,PURPLE,BLUE,RED]);ax.set_title(label)
+    ax.set_ylim(0,13);ax.set_xlabel('Base label')
+    for i,v in enumerate(counts):ax.text(i,v+.2,str(v),ha='center',fontsize=14)
+    ax.spines[['top','right']].set_visible(False)
+axes[0].set_ylabel('Count in the invented string');fig.tight_layout();fig.savefig(ROOT/'lectures'/u/'one-letter-change.svg');plt.close(fig)
+
+fig,ax=plt.subplots(figsize=(9.5,4.1))
+ax.barh(['original','one A replaced by G'],[.45,.475],color=[TEAL,PURPLE])
+ax.set(xlim=(0,1),xlabel='Fraction of letters labelled G or C')
+for y,value in enumerate([.45,.475]):ax.text(value+.025,y,f'{value:.3f}',va='center',fontsize=18)
+ax.spines[['top','right']].set_visible(False);fig.tight_layout();fig.savefig(ROOT/'lectures'/u/'gc-fraction.svg');plt.close(fig)
+
+fig,axes=plt.subplots(1,2,figsize=(10.5,4.1))
+for ax,matrix,label in zip(axes,[pixels,[[v+30 for v in row] for row in pixels]],['Original: 25 and 210','Add 30: 55 and 240']):
+    ax.imshow(matrix,cmap='gray',vmin=0,vmax=255,interpolation='nearest')
+    ax.set_title(label);ax.set_xticks([]);ax.set_yticks([])
+fig.tight_layout();fig.savefig(ROOT/'lectures'/u/'brightness-shift.svg');plt.close(fig)
+
+thresholds=[0,25,100,209,210,255]
+selected=[sum(v>t for row in pixels for v in row) for t in thresholds]
+fig,ax=plt.subplots(figsize=(9.8,4.2))
+ax.step([0,25,210,255],[64,24,0,0],where='post',color=TEAL,lw=3)
+ax.scatter(thresholds,selected,color=PURPLE,s=65,zorder=3)
+ax.set(xlabel='Threshold in the strict comparison intensity > threshold',ylabel='Pixels selected',ylim=(-3,70),xlim=(-3,258))
+ax.set_xticks([0,25,100,210,255]);ax.set_yticks([0,24,64]);ax.spines[['top','right']].set_visible(False)
+fig.tight_layout();fig.savefig(ROOT/'lectures'/u/'threshold-response.svg');plt.close(fig)
+
+d=Drawing(title='One text string and a four-row CSV organise the same four labels differently')
+d.file(90,95,'bases.txt',width=250,height=210);d.text(215,205,'ACGT',anchor='middle',size=36)
+d.file(735,95,'bases.csv',width=250,height=210,fill='#f1eaf8')
+for index,line in enumerate(['position,base','1,A','2,C','3,G','4,T']):d.text(785,145+index*32,line,size=23)
+d.text(215,400,'one stored string',anchor='middle',size=27)
+d.text(860,400,'four table observations',anchor='middle',size=27)
+d.arrow(390,210,685,210);d.text(550,170,'reorganise, not rename',anchor='middle',size=23)
+save(d,u,'string-versus-table.svg')
+
+u='23-mini-study'
+d=Drawing(title='An analysis claim follows the question and available evidence')
+for index,(label,colour) in enumerate([('Question',TEAL),('Unit + data',PURPLE),('Description',BLUE)]):
+    x=55+index*360;d.circle(x+125,165,65,fill=colour)
+    d.text(x+125,176,str(index+1),anchor='middle',fill='white',size=36)
+    d.text(x+125,280,label,anchor='middle',weight='bold')
+    if index<2:d.arrow(x+210,165,x+285,165)
+d.line(555,320,555,425,PURPLE,4)
+d.text(550,475,'Inference requires the taught model and its assumptions',anchor='middle',size=25)
+save(d,u,'claim-sequence.svg')
+algae_counts(u,'algae-counts.svg')
+with (ROOT/'data/algae.csv').open() as handle: algae=list(csv.DictReader(handle))
+ref=[float(r['biomass_mg']) for r in algae if r['treatment']=='reference' and r['biomass_mg']]
+sup=[float(r['biomass_mg']) for r in algae if r['treatment']=='supplement' and r['biomass_mg']]
+for means,outname in [(False,'algae-observations.svg'),(True,'algae-means.svg')]:
+    fig,ax=plt.subplots(figsize=(9,4.3))
+    for index,values in enumerate([ref,sup]):
+        ax.scatter([index+((j%5)-2)*.035 for j in range(len(values))],values,color=[TEAL,PURPLE][index],s=65)
+        if means:ax.scatter([index],[statistics.mean(values)],color=RED,marker='D',s=130,zorder=4)
+    ax.set_xticks([0,1],['reference','supplement']);ax.set_ylabel('Dry biomass after seven days (mg)');ax.set_xlim(-.5,1.5)
+    ax.spines[['top','right']].set_visible(False);fig.tight_layout();fig.savefig(ROOT/'lectures'/u/outname);plt.close(fig)
+fig,ax=plt.subplots(figsize=(9.6,4.2))
+correct=statistics.mean(sup);invented=sum(sup)/12
+ax.bar(['available measurements','incorrectly inserted zero'],[correct,invented],color=[TEAL,RED])
+ax.set_ylabel('Supplement mean biomass (mg)');ax.set_ylim(0,40)
+for i,value in enumerate([correct,invented]):ax.text(i,value+.6,f'{value:.2f}',ha='center',fontsize=17)
+ax.set_title('A changed number does not replace missing information')
+ax.spines[['top','right']].set_visible(False);fig.tight_layout();fig.savefig(ROOT/'lectures'/u/'zero-changes-mean.svg');plt.close(fig)
+
+d=Drawing(title='The same observed difference has opposite signs when comparison order reverses')
+d.line(140,245,950,245,INK,4)
+for x,label,value,col in [(240,'reference','28.20 mg',TEAL),(860,'supplement','33.92 mg',PURPLE)]:
+    d.circle(x,245,17,fill=col);d.text(x,330,label,anchor='middle',size=29);d.text(x,380,value,anchor='middle',size=26)
+d.arrow(270,140,830,140,RED);d.text(550,95,'supplement − reference = +5.72 mg',anchor='middle',size=28)
+d.arrow(830,440,270,440,BLUE);d.text(550,485,'reference − supplement = −5.72 mg',anchor='middle',size=27)
+save(d,u,'comparison-sign.svg')
+
+u='24-reproduce'
+d=Drawing(title='Execution success and supported interpretation are separate checks')
+d.arrow(210,410,990,410,INK);d.arrow(210,410,210,45,INK)
+d.text(700,465,'Interpretation supported?',anchor='middle',size=25)
+d.text(155,230,'Runs?',anchor='middle',size=25)
+for x,y,label,col in [(425,140,'Runs; supported',TEAL),(825,140,'Runs; misleading',RED),(425,320,'Fails; reasoning may be sound',PURPLE),(825,320,'Fails; unsupported',RED)]:
+    d.circle(x,y,28,fill=col);d.text(x,y+60,label,anchor='middle',size=21)
+d.text(245,72,'yes',size=20);d.text(245,335,'no',size=20)
+d.text(405,395,'yes',size=20);d.text(810,395,'no',size=20)
+save(d,u,'runs-versus-valid.svg')
+
+d=Drawing(title='A report path must match the input filename in the received project')
+d.file(65,100,'report.Rmd',width=200,height=170)
+d.text(165,185,'data/algae.csv',anchor='middle',size=20)
+d.file(760,100,'algae-missing.csv',width=220,height=170,fill='#f1eaf8')
+d.line(315,180,705,180,RED,5,dashed=True);d.text(510,135,'path mismatch',anchor='middle',fill=RED,size=29)
+d.text(550,405,'Restore the copied input name, then verify the result',anchor='middle',size=26)
+save(d,u,'missing-file-case.svg')
+
+d=Drawing(title='A report can render a false prose claim successfully')
+d.file(60,100,'report.Rmd',width=210,height=190)
+d.text(165,180,'wrong sentence',anchor='middle',size=23)
+d.arrow(320,200,740,200);d.text(530,150,'render succeeds',anchor='middle',size=28)
+d.file(800,100,'report.html',width=210,height=190,fill='#f1eaf8')
+d.text(905,180,'wrong sentence',anchor='middle',fill=RED,size=23)
+d.text(550,430,'Software execution is not a check of the biological claim',anchor='middle',size=26)
+save(d,u,'wrong-prose-renders.svg')
+
+d=Drawing(title='A fresh session and a fresh folder test different dependencies')
+d.rect(55,95,425,250,fill='#f1eaf8',stroke=PURPLE)
+d.circle(265,185,60,fill=PURPLE);d.text(265,196,'R',anchor='middle',fill='white',size=40)
+d.text(265,285,'Fresh session',anchor='middle',weight='bold')
+d.rect(620,95,425,250,fill='#e6f3f5');d.folder(725,150,'New location',width=220)
+d.text(835,285,'Fresh folder',anchor='middle',weight='bold')
+d.text(265,410,'checks hidden memory',anchor='middle',size=24)
+d.text(835,410,'checks portable inputs + paths',anchor='middle',size=24)
+save(d,u,'two-fresh-checks.svg')
+
+d=Drawing(title='An old HTML file does not update merely because the source was edited')
+d.file(70,115,'source revised',width=210,height=180)
+d.file(800,115,'old HTML',width=210,height=180,fill='#f1eaf8')
+d.text(175,205,'new code',anchor='middle',size=25);d.text(905,205,'old result',anchor='middle',size=25)
+d.line(325,205,750,205,RED,5,dashed=True);d.text(540,155,'render not rerun',anchor='middle',size=28)
+d.text(550,435,'Check the generated output, not only the editor buffer',anchor='middle',size=26)
+save(d,u,'stale-output.svg')
+
+u='25-consolidate'
+fig,ax=plt.subplots(figsize=(9.2,4.1))
+for index,(values,group) in enumerate([(ref,'reference'),(sup,'supplement')]):
+    ax.scatter([index+((j%5)-2)*.035 for j in range(len(values))],values,color=[TEAL,PURPLE][index],s=65)
+ax.scatter([0],[41.7],s=220,facecolors='none',edgecolors=RED,lw=2,zorder=5)
+ax.annotate('A11: investigate, do not silently delete',xy=(0,41.7),xytext=(.18,43),fontsize=12)
+ax.set_xticks([0,1],['reference','supplement']);ax.set_ylabel('Biomass (mg)');ax.set_xlim(-.4,1.55);ax.set_ylim(10,47)
+ax.spines[['top','right']].set_visible(False);fig.tight_layout();fig.savefig(ROOT/'lectures'/u/'algae-high-reading.svg');plt.close(fig)
+fig,ax=plt.subplots(figsize=(9.5,4.2))
+primary=statistics.mean(sup)-statistics.mean(ref)
+diagnostic_reference=[float(row['biomass_mg']) for row in algae
+                      if row['treatment']=='reference' and row['culture_id']!='A11']
+diagnostic=statistics.mean(sup)-statistics.mean(diagnostic_reference)
+ax.barh(['Primary: all available','Diagnostic: A11 omitted'],[primary,diagnostic],color=[TEAL,RED])
+ax.set(xlabel='Observed supplement − reference mean biomass (mg)',xlim=(0,9))
+for y,value in enumerate([primary,diagnostic]):ax.text(value+.1,y,f'{value:.2f}',va='center',fontsize=17)
+ax.set_title('The diagnostic does not justify replacing the primary analysis');ax.spines[['top','right']].set_visible(False)
+fig.tight_layout();fig.savefig(ROOT/'lectures'/u/'sensitivity-check.svg');plt.close(fig)
+
+d=Drawing(title='An unavailable reading and a high recorded reading require different reasoning')
+for x,label,sub,col in [(115,'A19','unavailable after spill',RED),(720,'A11','recorded high value',TEAL)]:
+    d.path(f'M{x+85},90 v55 l-50,110 h140 l-50,-110 v-55',fill='#e6f3f5',stroke=col,width=4)
+    d.text(x+100,330,label,anchor='middle',weight='bold',size=35)
+    d.text(x+100,390,sub,anchor='middle',size=25)
+d.text(215,190,'?',anchor='middle',size=45,fill=RED)
+d.text(820,190,'41.7',anchor='middle',size=30)
+d.text(550,475,'Missing is not zero; high is not automatically erroneous',anchor='middle',size=25)
+save(d,u,'missing-and-high.svg')
+fig,ax=plt.subplots(figsize=(9.5,3.6))
+ax.axvline(0,ls='--',color=GREY);ax.errorbar([3],[1],xerr=[[5],[5]],fmt='D',color=PURPLE,ms=12,capsize=10,lw=3)
+ax.set(xlim=(-5,11),ylim=(.4,1.6),yticks=[],xlabel='Supplied treatment − control mean difference (mm)')
+for x,text,y in [(-2,'−2',.78),(3,'estimate 3',1.22),(8,'8',.78)]:ax.text(x,y,text,ha='center',fontsize=19)
+ax.spines[['top','right','left']].set_visible(False);fig.tight_layout();fig.savefig(ROOT/'lectures'/u/'uncertain-interval.svg');plt.close(fig)
+
+d=Drawing(title='A usable handover connects the recipient to source, inputs, and a tested result')
+d.rect(35,110,265,230,fill='#e6f3f5');d.text(168,165,'Recipient',anchor='middle',weight='bold')
+d.circle(168,225,35,fill=TEAL)
+d.file(470,110,'source + data',width=150,height=150)
+d.folder(830,130,'Tested project',width=220,height=130)
+d.arrow(325,220,445,220);d.arrow(655,220,800,220)
+d.text(550,430,'Instructions are usable when another person can follow them',anchor='middle',size=25)
+save(d,u,'handover.svg')
+
 print("Built week 5 lecture diagrams and plots in lectures/21–25 directories.")

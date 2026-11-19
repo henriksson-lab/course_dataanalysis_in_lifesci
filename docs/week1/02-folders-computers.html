@@ -155,6 +155,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -891,6 +897,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#what-happens-when-you-open-a-file" id="toc-what-happens-when-you-open-a-file" class="nav-link" data-scroll-target="#what-happens-when-you-open-a-file">What happens when you open a file?</a></li>
   <li><a href="#practical-2-test-the-difference-between-editing-and-saving" id="toc-practical-2-test-the-difference-between-editing-and-saving" class="nav-link" data-scroll-target="#practical-2-test-the-difference-between-editing-and-saving">Practical 2: test the difference between editing and saving</a></li>
   <li><a href="#where-do-local-cloud-and-remote-files-live" id="toc-where-do-local-cloud-and-remote-files-live" class="nav-link" data-scroll-target="#where-do-local-cloud-and-remote-files-live">Where do local, cloud, and remote files live?</a></li>
+  <li><a href="#extended-practical-explain-the-computer-through-saved-work" id="toc-extended-practical-explain-the-computer-through-saved-work" class="nav-link" data-scroll-target="#extended-practical-explain-the-computer-through-saved-work">Extended practical — explain the computer through saved work</a></li>
+  <li><a href="#independent-transfer-plan-a-portable-laboratory-project" id="toc-independent-transfer-plan-a-portable-laboratory-project" class="nav-link" data-scroll-target="#independent-transfer-plan-a-portable-laboratory-project">Independent transfer — plan a portable laboratory project</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
   </ul>
 </nav>
@@ -1031,10 +1039,50 @@ I moved the whole project and now see two copies
 <p>A <strong>local</strong> file is on the computer you are using. A cloud service may keep a copy elsewhere and synchronise it with your laptop. A <strong>remote Linux computer</strong> is another computer we will log into. Its home folder is separate from yours. Opening its desktop does not automatically copy your downloads to it.</p>
 <p>An archive in the same folder as the originals is convenient for sharing, but it is not protection against losing the whole laptop. Keep another copy using the university’s supported backup or storage service once the teaching team identifies it. Check that a copy completed and that you can retrieve it.</p>
 </section>
+<section id="extended-practical-explain-the-computer-through-saved-work" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-explain-the-computer-through-saved-work">Extended practical — explain the computer through saved work</h2>
+<p>Plan about 75–90 minutes for the following investigations. Use disposable notes under <code>practice</code>, never a raw measurement file. “The computer remembers it” can mean several things: a program still holds information in memory, an editor restores a draft, or a file has actually been saved. This block asks you to gather observations that distinguish those possibilities instead of guessing from what one window happens to show.</p>
+<ol type="1">
+<li>Draw the project tree on paper with <code>data</code>, <code>output</code>, <code>reports</code>, and your <code>practice</code> folder. Circle the project root. Mark the original seedling table, one derived practice copy, and yesterday’s audit note. Follow the tree in the file manager and correct any branch your drawing put in the wrong place.</li>
+<li>Make <code>practice/memory-test.txt</code> containing “version saved to storage”. Save, close, and reopen it. Then add “unsaved change” without choosing Save. Describe what happens when you close and reopen. If the application autosaves or restores the draft, record that behaviour; do not change operating-system settings to manufacture a preferred result.</li>
+<li>Save a second copy as <code>practice/saved-copy.txt</code>. Close the application, then open this ordinary file from the file manager. Identify what persisted after the program stopped. Explain why an installed editor, its running process, and a saved note are three related but different things.</li>
+<li>Create <code>practice/map-a</code> and <code>practice/map-b</code>. Put a copy of your note in <code>map-a</code>. Write directions to it starting from the project root, then write different directions starting inside <code>map-b</code>. Use the parent folder in your second route; do not invent a <code>data</code> folder inside every location.</li>
+<li>Move the <strong>practice</strong> <code>map-a</code> folder into <code>map-b</code>, using the file manager. Predict which of your two written routes stops being correct. Test both routes and revise your map. The note’s contents need not change when its address changes. Do not move the actual course <code>data</code> folder.</li>
+<li>Write <code>reports/day02-investigation.txt</code> with your before/after tree, what you observed about saving, and an explanation of why RAM capacity and disk capacity answer different practical questions. Include what you are unsure about, rather than treating the editor’s recovery feature as understood.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: decide whether an observation concerns contents or location
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If a sentence in the note changed, you are checking contents. If a route no longer reaches the same note, you are checking location. Copying can leave two sets of contents in two locations; moving changes the route. Use the file manager to inspect the actual folders before renaming or moving anything else.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-plan-a-portable-laboratory-project" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-plan-a-portable-laboratory-project">Independent transfer — plan a portable laboratory project</h2>
+<p>Allow 60–90 minutes and work from a blank page. Imagine your next practical gives you a CSV of measurements, three photographs, and a protocol document. A partner will write an interpretation, and both of you need to recognise the original inputs next week. You are designing an organisation scheme, not simulating cloud synchronisation or creating unnecessary copies of the whole course.</p>
+<ol type="1">
+<li>Create <code>practice/future-lab</code> with <code>data</code>, <code>images</code>, <code>reports</code>, and <code>output</code> folders. Make three small plain-text placeholder notes in suitable folders, explicitly labelling them placeholders. Do not rename a text note <code>.jpg</code> and claim that it is a photograph. Explain where actual image files would go.</li>
+<li>Copy <code>data/seedlings-transfer.csv</code> from the course project into this practice project’s <code>data</code> folder. Treat that file as its supplied measurement input. Write a README note at the practice root describing the folder roles and identifying that the copied input is simulated course data.</li>
+<li>Give the measurement file’s relative path starting at <code>future-lab</code>, then starting inside its <code>reports</code> folder. Draw the routes. Explain why a route containing your own account name would be inconvenient for a classmate.</li>
+<li>Make a separate copy of <code>future-lab</code> under another disposable folder you choose. Reopen its README and data through that copy’s tree. Does the relative route from the new project root still work? Compare with an absolute route written before copying. Record which project you will use for this test.</li>
+<li>Add three labelled boxes to your map: laptop, cloud storage if used, and a remote Linux computer. Draw only the copying or synchronising links you actually know exist. Put a question mark where service details are pending. A remote desktop is a view of another machine, not proof that two folders share contents.</li>
+</ol>
+<p><strong>Check and retain:</strong> your README, two folder maps, and <code>day02-investigation.txt</code>. From <code>future-lab</code> the measurement path is <code>data/seedlings-transfer.csv</code>; from its <code>reports</code> folder a route goes up to the parent before entering <code>data</code>. These are practice projects, so leave the original course project untouched.</p>
+</section>
 <section id="check-your-understanding" class="level2">
 <h2 class="anchored" data-anchor-id="check-your-understanding">Check your understanding</h2>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1043,14 +1091,14 @@ From the project root, what is the relative path to yesterday’s note?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><code>reports/day01-notes.txt</code>. From inside <code>reports</code>, its name alone is sufficient: <code>day01-notes.txt</code>. The file did not move; your starting location changed.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1059,7 +1107,7 @@ Does more RAM automatically provide more room for saved photographs?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>No.&nbsp;RAM supports running work; persistent storage holds saved files. They have different jobs. We will see this again when R objects disappear after restarting R but the saved data file is still present.</p>
 </div>

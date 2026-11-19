@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -926,6 +932,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#reproduce-from-a-different-location" id="toc-reproduce-from-a-different-location" class="nav-link" data-scroll-target="#reproduce-from-a-different-location">4. Reproduce from a different location</a></li>
   <li><a href="#what-to-record" id="toc-what-to-record" class="nav-link" data-scroll-target="#what-to-record">What to record</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
+  <li><a href="#extended-practical-run-a-controlled-failure-investigation" id="toc-extended-practical-run-a-controlled-failure-investigation" class="nav-link" data-scroll-target="#extended-practical-run-a-controlled-failure-investigation">Extended practical — run a controlled failure investigation</a></li>
+  <li><a href="#independent-transfer-package-a-short-analysis-for-another-reader" id="toc-independent-transfer-package-a-short-analysis-for-another-reader" class="nav-link" data-scroll-target="#independent-transfer-package-a-short-analysis-for-another-reader">Independent transfer — package a short analysis for another reader</a></li>
   </ul>
 </nav>
     </div>
@@ -1084,6 +1092,49 @@ Short answers
 </div>
 </div>
 </div>
+</section>
+<section id="extended-practical-run-a-controlled-failure-investigation" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-run-a-controlled-failure-investigation">Extended practical — run a controlled failure investigation</h2>
+<p>Allow about 90 minutes. Use a <strong>disposable copy of the share project</strong>, named <code>report-investigation</code>, outside your original working project. Keep the original report and raw data intact. Choose the same main study as yesterday. A failure investigation is useful only if you know what changed and can return to a known working state.</p>
+<ol type="1">
+<li>Render the unmodified copied report first. Record the input filename, available group counts, one key numerical result, and the output location in <code>reports/reproduction-cases.txt</code> in your original project. This is the successful reference run against which later cases will be compared.</li>
+<li>In the disposable copy only, rename the required input CSV by adding <code>-temporarily-missing</code> to its name. Do not change the report’s path. Restart R, render, and record the first meaningful error and chunk. Predict whether any valid new result can be produced from the now unavailable input.</li>
+<li>Restore the input’s exact name, render again, and confirm that the key result matches the reference. A repair is not complete just because the error message disappeared; check the result and record the restored relationship.</li>
+<li>Make another fresh disposable copy. In its <code>.Rmd</code>, replace one calculated result sentence with the deliberately wrong sentence “All enrolled samples had an available outcome.” Render without altering the code. Compare the sentence with the counts and raw data for duckweed. For the organic route, use “The percentage yield independently demonstrates product purity.” Rendering can succeed while this interpretation is false or unsupported.</li>
+<li>Record whether each case is an execution failure, an interpretation failure, or neither. Rewrite the incorrect sentence using the evidence. Keep the final source correct; do not let an intentionally misleading example become the copy you later share. Record filenames so you can tell the cases apart.</li>
+<li>Ask a peer to select one case without announcing which fault it contains. Diagnose it by locating the input, running from a fresh session, and comparing prose with results. Working alone, revisit the case after completing the transfer exercise below and follow only your written investigation procedure.</li>
+</ol>
+<p>A useful case record has columns for changed item, predicted effect, observed error or inconsistency, repair, and confirming rerun. Add the approximate time spent diagnosing each. A large number of attempts is not the goal: the goal is to change one thing, observe its consequence, and preserve a path back.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: three questions before making a repair
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Which computer and project are running? Is the named input actually present at that relative path? Does the saved source create the objects and make claims supported by the data? Renaming a copied CSV should cause an input error; replacing a sentence with a false claim may cause no software error at all. A successful rerun therefore checks computational reproduction, not scientific validity by itself. Never “repair” a missing value by inventing a number.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-package-a-short-analysis-for-another-reader" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-package-a-short-analysis-for-another-reader">Independent transfer — package a short analysis for another reader</h2>
+<p>Allow about 60–90 minutes. Use yesterday’s algae transfer script and results. This is a brief data memo using existing work, not an additional full biological project. It checks whether the workflow transfers when the dataset and filenames change. If the file is not present, extract the updated course ZIP separately and copy its algae CSV and dictionary into the project, preserving your own code.</p>
+<ol type="1">
+<li>Create <code>algae-brief.Rmd</code> at the project root. Include a short question, the supplied culture design, the missing A19 account, your import/check/summary code, one individual-point figure, and the 100–150-word interpretation. All required objects and packages must be created or loaded in its chunks.</li>
+<li>Turn the stated available sample sizes into inline calculated results rather than typing them independently of the data. Check the rendered counts against the summary. Use HTML as before; no new document format is required.</li>
+<li>Render after restarting. Open the HTML in a browser and ask whether a reader can identify biomass units, culture as the unit, what the points represent, and the missingness limitation without seeing the source code.</li>
+<li>Create a new folder <code>algae-share</code> outside the working project. Include the <code>.Rproj</code>, <code>algae-brief.Rmd</code>, its HTML, <code>data/algae.csv</code>, the dictionary, and the output folder if your source exports there. Add a README specifying the required packages and the file to render. Do not include console session files, account information, or links to an untransferred local data folder.</li>
+<li>Package the folder, extract it into a different parent location, open that copy’s project, and render without first running console lines. On Windows, preserve the explicit Windows/Ubuntu copy steps used above; a ZIP created in Ubuntu must be returned to normal Windows storage for a native-RStudio check. Check source, data, and rendered output in the extracted copy.</li>
+<li>Compare the available counts, two means, and observed difference with your earlier memo. If they differ, inspect the inputs and code before blaming rounding. Record <code>sessionInfo()</code> only if needed to explain environment differences; it is a record for diagnosis, not a replacement for the data.</li>
+<li>Save <code>reports/algae-reproduction.txt</code> with what you tested, the outcome, any correction, and a limitation of the test. A second folder on one laptop does not establish that every other software environment will work.</li>
+</ol>
+<p><strong>Keep:</strong> the tested main-study package, controlled-case record, brief algae source/HTML, and tested <code>algae-share</code> package. The key independent skill is knowing what another reader needs and then verifying the supplied package, not accumulating archives whose contents you have never opened.</p>
 <p><strong>Before you finish:</strong> retain the corrected report, tested ZIP, and a copy on the supported backup storage. Next: <a href="../week5/25-consolidate.html">consolidation and error recovery</a>.</p>
 
 

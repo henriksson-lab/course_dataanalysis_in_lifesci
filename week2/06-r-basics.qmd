@@ -137,6 +137,88 @@ An editor line has no effect until it runs. If the Console shows `+`, an express
 is unfinished: check quotes or parentheses, or press Esc to cancel it.
 :::
 
+
+## Extended practical — trace a calculation through its inputs
+
+Plan about 90 minutes. Today you will investigate why saving code is more
+reliable than remembering the final number. Create `day06-extended.R` at the
+project root. Keep all numerical inputs and comments in that file. Use the
+Console to inspect results, then recreate them from the saved script after a
+restart. Record predictions before running each changed calculation.
+
+1. Begin with `initial_mm <- 20`, `final_mm <- 37`, and
+   `growth_mm <- final_mm - initial_mm`. Print all three objects. Now change only
+   `final_mm` to 39 and print `growth_mm` **without rerunning the subtraction**.
+   Explain the stale value: assigning a number to one object does not make every
+   previous calculation update automatically like a spreadsheet formula.
+2. Rerun the subtraction, check the new answer, and add a comment identifying
+   the dependency. Put the lines in their correct order and run the script from
+   the top. A reliable source creates inputs before it uses them.
+3. Recreate the three-plant vectors from the demonstration. Make a deliberately
+   reordered **copy** of the final vector, `c(34, 37, 40)`, and calculate apparent
+   changes. The arithmetic can run while pairing the wrong plants. State the
+   missing assumption; do not interpret these copied results as biology.
+4. Return to the correctly ordered vectors. Print `length(initial_mm)` and
+   `length(final_mm)` before subtracting. Extend both to four plants as in the
+   earlier practical. Explain why equal lengths are necessary here but do not
+   prove that the same plant occupies each position.
+5. Convert the correctly calculated growth vector from millimetres to centimetres
+   using division by ten. Store it under a new name ending `_cm`, print it, and
+   compare its mean with the mean in mm. Do not change only the object name or
+   unit label while leaving the numbers unchanged.
+6. Calculate the final/initial ratio for the corrected vectors, or the supplied
+   product-yield ratio from the alternative task. Describe in comments which
+   operation is subtraction and which is division, what quantity each produces,
+   and why its units differ. Keep the input masses or lengths alongside the
+   calculation so a reader can repeat it.
+
+::: {.callout-tip collapse="true"}
+## Hint: a name stores the current result, not a live recipe
+
+With initial 20 and final 37, the assigned growth is 17. Updating final to 39
+leaves that stored growth at 17 until you execute the subtraction again; it then
+becomes 19 mm. A script supplies an order of operations you can rerun. R may
+recycle a shorter vector, so do not treat the absence of an error as proof that
+measurement correspondence was correct.
+:::
+
+## Independent transfer — calculate a solution from a supplied rule
+
+Allow 60–90 minutes. No chemistry course is required. A solution contains a
+substance in a solvent. A **mole**, abbreviated mol, is a unit of chemical amount.
+**Molar mass** tells us how many grams correspond to one mole. A concentration
+in mol/L is the amount per litre of **final solution**, not the amount per litre
+of solvent before adding the substance. This is a numerical exercise, not a
+laboratory preparation protocol.
+
+1. Use these supplied values: sodium chloride mass **0.2922 g**, molar mass
+   **58.44 g/mol**, final volume **100 mL**. Write them as named R objects with
+   units in comments. Do not look up a constant or infer a chemical formula.
+2. Convert final volume to litres by dividing by 1000. Calculate amount in mol
+   as mass in g divided by molar mass in g/mol. Divide that amount by final
+   volume in litres to obtain mol/L. Print the intermediate values so the unit
+   conversions can be checked separately.
+3. Multiply mol/L by 1000 to obtain mmol/L; one mmol is one-thousandth of a mol.
+   Write the complete result and units in a comment. Predict the effect of
+   doubling mass while keeping final volume fixed, then check with the script.
+4. Instead restore the original mass and double final volume. Predict whether
+   the concentration doubles or halves. Run the changed calculation from its
+   inputs and explain how this differs from the previous experiment.
+5. Repeat the original calculation for glucose using supplied mass **0.9008 g**,
+   molar mass **180.16 g/mol**, and final volume **100 mL**. Compare its mmol/L
+   result with the sodium-chloride result. Different masses can correspond to
+   the same amount concentration because the molar masses differ.
+6. Save the source, restart R, and reproduce both original results. Add a short
+   `reports/calculation-check.txt` stating the formula in words, the conversion
+   factors, the meaning of final volume, and one error you corrected. Preserve
+   your predictions even when they were wrong; they make the reasoning visible.
+
+**Check and retain:** the original sodium-chloride and glucose examples each give
+0.005 mol in 0.100 L: **0.050 mol/L = 50 mmol/L**. Doubling only mass gives
+100 mmol/L; doubling only volume gives 25 mmol/L. Keep these results in a saved
+script with inputs, not only a copied Console printout.
+
+
 ## Check your understanding
 
 - What survives restarting R: an unsaved object or a saved script?

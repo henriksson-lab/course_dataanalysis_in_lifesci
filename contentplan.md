@@ -21,6 +21,14 @@ lecture links, blue formative quiz links, and italic practical links. Decks use
 speaker notes and explanatory diagrams/plots on roughly half their slides.
 The maximum is 45 slides, with fewer preferred and no padding to meet a count.
 
+The user then requested roughly twice the teaching/practice volume. The expanded
+version develops worked examples, diagnosis, interpretation, and independent
+transfer within the existing topics, with two substantial additional practice
+blocks per day. See [the student study plan](study-plan.qmd) for a provisional
+35 structured plus 5 flexible learner hours per week, and the
+[expansion audit](instructor/workload-expansion.md) for before/after evidence.
+These are planning estimates, not contact hours or validated student timings.
+
 ## Purpose and audience
 
 Students should leave able to handle ordinary data from later biology practicals
@@ -37,9 +45,10 @@ Chemistry can provide laboratory contexts, but students must not need to have
 completed Fundamentals of Chemistry (5KE165) to understand what to compute.
 Each exercise supplies definitions, quantities, units, constants, the formula,
 and calculation instructions. See [the chemistry context note](instructor/chemistry-context.md)
-for investigated placements. Its day 19 dilution correction is now implemented;
-the other general-chemistry mass, dilution-table, and volume-reading tasks remain
-proposals.
+for the initial placement investigation. The day 19 dilution correction and
+the expanded solution/dilution practice in days 6–8 are implemented, using the
+current lesson inputs. The specific volume-reading illustration remains a
+proposal.
 
 Selected organic-laboratory transfer choices are now implemented separately:
 supplied sample-label searches, percentage yield from provided masses, variation

@@ -120,6 +120,85 @@ Close the editor and all file-manager windows. Open the file manager again and
 navigate from Documents to your note. Open it. If you can only find it through
 an application's “recent files” list, repeat the folder route once more.
 
+
+## Extended practical — build a record you can audit
+
+Allow about 75–90 minutes for this block, including explanation and checking.
+Work in the graphical file manager and a plain-text editor. You are receiving
+measurements as a future laboratory student: a reader should be able to identify
+which file is original, which is your practice copy, and which contains your
+explanation. Speed is not the objective. Pause after each action and identify
+what changed on storage. Keep the course's `data` folder unchanged throughout.
+
+1. Create `reports/file-audit.txt`. In it, record the project folder's name and
+   the route you take to reach it from Documents. Include the computer you are
+   using; the name of the application alone is not an address.
+2. In the file manager, inspect `data/seedlings.csv`, `report.Rmd`, and
+   `introcomputing.Rproj`. Record each full filename and its extension. Use the
+   type or kind column, where available, to distinguish a folder from a file.
+   Explain why `data` is a folder although it has no filename extension.
+3. Open `data/seedlings.csv` in the text editor without changing it. Copy its
+   **header line** and the P01 record into your audit note. Label the copied lines
+   as a description, not a replacement dataset. Write the meaning of all four
+   fields in P01's record, including the millimetre units.
+4. Copy `output/seedlings-practice.csv` to another practice file named
+   `output/name-test.txt`. Open it as plain text. Do you still see commas and the
+   same plant measurements? Rename that copy `name-test.csv` again. Record the
+   observation: changing the extension changes the name, not the saved information.
+   Do not try this on the original or on an application file.
+5. Open `reports/file-audit.txt`, add today's progress, and save explicitly.
+   Close the editor. Locate and reopen the note from the file manager rather
+   than from a recent-files list. Check that the last sentence is present. If
+   it is absent, investigate whether you saved another copy or an unexpected
+   extension before writing the sentence again.
+6. Ask a partner to find your note using only the route written in it. If working
+   alone, close all windows, take a short break, and follow your own instructions.
+   Revise an ambiguous instruction such as “open the file” into a named action.
+
+::: {.callout-tip collapse="true"}
+## Hint: comparing names is easier when extensions are visible
+
+The file manager may hide extensions even while a text editor displays them.
+Show them before deciding that two names are identical. A name such as
+`file-audit.txt.rtf` is a formatted document, not the plain-text note requested.
+Use the editor's plain-text mode and Save As, then inspect the resulting file
+again. Do not solve a file-format problem by repeatedly appending `.txt`.
+:::
+
+## Independent transfer — receive a second measurement file
+
+Allow about 60–90 minutes. The new `data/seedlings-transfer.csv` is another
+**simulated** study: 18 separate potted seedlings, nine randomly assigned to each
+of `control` and `treated`, with initial and final lengths seven days apart.
+Its columns have the same definitions as the first seedling table. No calculation
+software is needed today. The challenge is handling another input accurately,
+not remembering a filename from the demonstration.
+
+1. Locate this second file and make a copy called
+   `output/transfer-inspection.csv`. State in your audit which remains the
+   original. Open the copy in a text editor and find its header and first record.
+2. Read T01 aloud: initial length 25.3 mm and final length 40.3 mm. Write a
+   sentence saying what was measured. Compute the increase by ordinary arithmetic
+   and explain why 40.3 mm is not the increase. Do not change either measurement
+   in the CSV to store your answer; put the interpretation in your note.
+3. Inspect T18 near the end of the file. Record its treatment and two lengths,
+   then show your partner where the record came from. The table has one header
+   and 18 plant records; you do not need to count with a terminal yet.
+4. In `reports/transfer-receipt.txt`, write a small receipt for your partner:
+   source filename, copy filename, number of plants stated in the study, length
+   units, and the difference between initial length, final length, and change.
+   Include a sentence explaining that these numbers are teaching data.
+5. Close the applications and recover both the receipt and the practice copy.
+   Confirm that the original filenames under `data` remain as supplied. Explain
+   why a screenshot of a table would be harder to update or calculate from than
+   the ordinary CSV. A screenshot may help show a problem; it does not replace
+   the measurement file.
+
+**Check and retain:** T01's increase is 15.0 mm. T18 is treated, 21.6 mm initially
+and 43.0 mm finally. Keep the two text notes and your practice copies. A partner
+should be able to point to the original input and your interpretation separately.
+
+
 ## Check your understanding
 
 Try answering before opening the explanation.

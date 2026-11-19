@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -924,6 +930,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#spread-among-plants-versus-uncertainty-in-a-mean" id="toc-spread-among-plants-versus-uncertainty-in-a-mean" class="nav-link" data-scroll-target="#spread-among-plants-versus-uncertainty-in-a-mean">Spread among plants versus uncertainty in a mean</a></li>
   <li><a href="#your-practical" id="toc-your-practical" class="nav-link" data-scroll-target="#your-practical">Your practical</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
+  <li><a href="#extended-practical-count-the-information-in-four-study-designs" id="toc-extended-practical-count-the-information-in-four-study-designs" class="nav-link" data-scroll-target="#extended-practical-count-the-information-in-four-study-designs">Extended practical — count the information in four study designs</a></li>
+  <li><a href="#independent-transfer-change-sample-size-while-keeping-the-source-fixed" id="toc-independent-transfer-change-sample-size-while-keeping-the-source-fixed" class="nav-link" data-scroll-target="#independent-transfer-change-sample-size-while-keeping-the-source-fixed">Independent transfer — change sample size while keeping the source fixed</a></li>
   </ul>
 </nav>
     </div>
@@ -1040,6 +1048,48 @@ Is a precise mean enough?
 </div>
 </div>
 </div>
+</section>
+<section id="extended-practical-count-the-information-in-four-study-designs" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-count-the-information-in-four-study-designs">Extended practical — count the information in four study designs</h2>
+<p>Use about 75–90 minutes for diagrams and a controlled simulation investigation. The added work develops the meaning of independent replication, not a new statistical test. Save your drawings or descriptions in <code>output/day14-design-notes.txt</code> and keep the demonstration code in today’s script.</p>
+<ol type="1">
+<li>Draw twelve separate pots, each with one plant, with nutrient allocation independently assigned to pots. Label the unit assigned to treatment, the measurement, and the number of independent units. Give the conditions under which it is reasonable to regard the pots as independent.</li>
+<li>Now draw one pot per treatment, with twelve ruler readings of its plant. Identify what variation those readings could help assess. Explain why the number of recorded lengths does not provide twelve independent treatment assignments. Do not propose averaging the readings and then pretending the two averages represent many independent pots.</li>
+<li>Draw two trays, each containing twelve plants, where treatment was applied to the whole tray. Identify which plants share a treatment unit and possible environment. State what independent replication is missing. Do not count each plant as a separately assigned treatment replicate simply because its identifier is unique.</li>
+<li>Transfer the reasoning to either one culture measured at ten times, or one organic synthesis product weighed ten times. Name the biological or laboratory unit and the repeated measurements. Specify which question the repeats can inform and which comparison needs separately prepared units.</li>
+<li>Run the supplied sampling demonstration unchanged and save its histogram. Read the horizontal axis aloud: each value is a sample mean, not an individual plant. Make a small table containing SD among source values, SD among means from samples of four, and SD among means from samples of sixteen. Label what each row describes.</li>
+<li>Change only the random seed and rerun. Compare exact numerical results and the broad relationship. Then return to the stated seed. Explain why a reproducible simulation can use randomness, and why selecting a convenient seed is not evidence that one sampling method is generally better.</li>
+<li>Write a short response to: “The histogram is narrow, so the design must be good.” Identify assumptions about independence, sampling, and measurement that a narrow distribution of means cannot establish. Precision in a biased or irrelevant measurement is not a substitute for answering the question.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: label the level at every stage
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In this demonstration, <code>population_mm</code> is the fixed source vector. A single <code>sample()</code> call gives a group of draws. One <code>mean()</code> gives one estimate from that sample. <code>replicate()</code> collects many such estimates. Neither a hundred simulation runs nor ten technical readings creates additional measured plants. Keep the source SD and the SD of repeated means under different names.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-change-sample-size-while-keeping-the-source-fixed" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-change-sample-size-while-keeping-the-source-fixed">Independent transfer — change sample size while keeping the source fixed</h2>
+<p>Allow another 60–90 minutes. Use the growth measurements from <code>data/seedlings-transfer.csv</code> as a new <strong>toy source distribution</strong>, not as proof about every plant. It combines allocations for this teaching demonstration; this is not a treatment comparison or a confidence interval for a treatment effect.</p>
+<ol type="1">
+<li>Import and calculate growth from all 18 records. Document that one row is one measured independent plant in its source study, but repeated draws from this stored vector are simulated samples rather than new measurements.</li>
+<li>Adapt the supplied code to collect 400 means from samples of size three, then size twelve, with replacement, keeping the same source values. The only new choice is sample size; no new R function is needed. Predict which set of means will be more spread out before running it.</li>
+<li>Save both numerical vectors as columns of a derived table, or in a long table using the supplied <code>data.frame()</code> pattern. State that the 400 rows represent simulated estimates, not enrolled plants or independent protocols.</li>
+<li>Make comparable histograms or plots of the two distributions. Use shared axis limits and a stated bin width. Compare SD among means with SD among source observations. A larger sample size changes the estimate’s variation, not the original recorded plant values.</li>
+<li>Repeat with a second seed, retaining the first result as a separate object. Write a paragraph identifying a broad stable feature and an unstable exact value. Explain why the number of simulation repeats and number of plants per simulated sample are different settings with different meanings.</li>
+<li>End with a real design decision: if you could either measure each of two plants twenty more times or obtain ten additional independent plants, which option better informs a population mean, assuming comparable measurements? State the assumptions and also name a situation where checking measurement repeatability first would still be useful.</li>
+</ol>
+<p><strong>Additional outputs:</strong> four labelled design diagrams, a table distinguishing source spread from estimate spread, transfer simulation CSV/figure, and a 250-word interpretation. Your answer should remain sensible if the exact simulation histogram bins change. No hypothesis test is required today.</p>
 <p><strong>Keep:</strong> <code>day14-sampling.R</code>, your replicate diagrams, and the two-sentence explanation. Next: <a href="../week3/15-descriptive-report.html">write a descriptive report</a>.</p>
 
 

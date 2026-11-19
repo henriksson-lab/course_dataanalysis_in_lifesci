@@ -1,0 +1,162 @@
+{
+  "commit": "b27d47cecf5c43bb23902ef883e02b3267377d2a",
+  "days": {
+    "01-files": {
+      "practical_words": 1121,
+      "numbered_steps": 10,
+      "content_slides": 8,
+      "visual_slides": 4
+    },
+    "02-folders-computers": {
+      "practical_words": 1095,
+      "numbered_steps": 9,
+      "content_slides": 8,
+      "visual_slides": 4
+    },
+    "03-terminal": {
+      "practical_words": 1027,
+      "numbered_steps": 0,
+      "content_slides": 8,
+      "visual_slides": 4
+    },
+    "04-inspect-archive": {
+      "practical_words": 1070,
+      "numbered_steps": 6,
+      "content_slides": 8,
+      "visual_slides": 4
+    },
+    "05-lab-files": {
+      "practical_words": 1484,
+      "numbered_steps": 10,
+      "content_slides": 8,
+      "visual_slides": 4
+    },
+    "06-r-basics": {
+      "practical_words": 1037,
+      "numbered_steps": 5,
+      "content_slides": 8,
+      "visual_slides": 4
+    },
+    "07-import": {
+      "practical_words": 828,
+      "numbered_steps": 6,
+      "content_slides": 8,
+      "visual_slides": 4
+    },
+    "08-transform-plot": {
+      "practical_words": 1129,
+      "numbered_steps": 5,
+      "content_slides": 8,
+      "visual_slides": 4
+    },
+    "09-rmarkdown": {
+      "practical_words": 875,
+      "numbered_steps": 6,
+      "content_slides": 8,
+      "visual_slides": 4
+    },
+    "10-first-report": {
+      "practical_words": 867,
+      "numbered_steps": 4,
+      "content_slides": 7,
+      "visual_slides": 4
+    },
+    "11-data-quality": {
+      "practical_words": 792,
+      "numbered_steps": 5,
+      "content_slides": 9,
+      "visual_slides": 5
+    },
+    "12-variation": {
+      "practical_words": 1044,
+      "numbered_steps": 5,
+      "content_slides": 9,
+      "visual_slides": 5
+    },
+    "13-group-summaries": {
+      "practical_words": 961,
+      "numbered_steps": 5,
+      "content_slides": 9,
+      "visual_slides": 5
+    },
+    "14-replicates-uncertainty": {
+      "practical_words": 883,
+      "numbered_steps": 5,
+      "content_slides": 9,
+      "visual_slides": 5
+    },
+    "15-descriptive-report": {
+      "practical_words": 1311,
+      "numbered_steps": 11,
+      "content_slides": 7,
+      "visual_slides": 4
+    },
+    "16-comparisons": {
+      "practical_words": 883,
+      "numbered_steps": 5,
+      "content_slides": 9,
+      "visual_slides": 5
+    },
+    "17-welch-test": {
+      "practical_words": 908,
+      "numbered_steps": 3,
+      "content_slides": 9,
+      "visual_slides": 5
+    },
+    "18-paired": {
+      "practical_words": 889,
+      "numbered_steps": 5,
+      "content_slides": 9,
+      "visual_slides": 5
+    },
+    "19-calibration": {
+      "practical_words": 1109,
+      "numbered_steps": 4,
+      "content_slides": 11,
+      "visual_slides": 6
+    },
+    "20-association": {
+      "practical_words": 889,
+      "numbered_steps": 3,
+      "content_slides": 10,
+      "visual_slides": 6
+    },
+    "21-remote-workflow": {
+      "practical_words": 1007,
+      "numbered_steps": 6,
+      "content_slides": 10,
+      "visual_slides": 5
+    },
+    "22-data-representations": {
+      "practical_words": 977,
+      "numbered_steps": 3,
+      "content_slides": 10,
+      "visual_slides": 5
+    },
+    "23-mini-study": {
+      "practical_words": 1508,
+      "numbered_steps": 6,
+      "content_slides": 12,
+      "visual_slides": 6
+    },
+    "24-reproduce": {
+      "practical_words": 1075,
+      "numbered_steps": 6,
+      "content_slides": 10,
+      "visual_slides": 5
+    },
+    "25-consolidate": {
+      "practical_words": 1050,
+      "numbered_steps": 12,
+      "content_slides": 8,
+      "visual_slides": 4
+    }
+  },
+  "quiz_questions": {
+    "week1": 6,
+    "week2": 6,
+    "week3": 6,
+    "week4": 6,
+    "week5": 7
+  }
+}

@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -926,6 +932,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#your-practical" id="toc-your-practical" class="nav-link" data-scroll-target="#your-practical">Your practical</a></li>
   <li><a href="#transfer-choice-variation-in-collected-product" id="toc-transfer-choice-variation-in-collected-product" class="nav-link" data-scroll-target="#transfer-choice-variation-in-collected-product">Transfer choice: variation in collected product</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
+  <li><a href="#extended-practical-compare-the-effects-of-a-shift-and-a-scale-change" id="toc-extended-practical-compare-the-effects-of-a-shift-and-a-scale-change" class="nav-link" data-scroll-target="#extended-practical-compare-the-effects-of-a-shift-and-a-scale-change">Extended practical — compare the effects of a shift and a scale change</a></li>
+  <li><a href="#independent-transfer-describe-another-set-without-copying-its-labels" id="toc-independent-transfer-describe-another-set-without-copying-its-labels" class="nav-link" data-scroll-target="#independent-transfer-describe-another-set-without-copying-its-labels">Independent transfer — describe another set without copying its labels</a></li>
   </ul>
 </nav>
     </div>
@@ -1075,6 +1083,48 @@ Which spread is larger?
 </div>
 </div>
 </div>
+</section>
+<section id="extended-practical-compare-the-effects-of-a-shift-and-a-scale-change" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-compare-the-effects-of-a-shift-and-a-scale-change">Extended practical — compare the effects of a shift and a scale change</h2>
+<p>Use about 75–90 minutes to make variation visible and explain it. Continue <code>day12-variation.R</code>. The purpose is to connect the arithmetic definition to units and actual observations, rather than learn another summary function. Choose your existing biological or organic context for the final write-up; complete the small numerical investigation below in either case.</p>
+<ol type="1">
+<li>Make a three-row hand table for values 12, 14, and 16 mm. Include the mean, each signed deviation, squared deviation, their sum, and the denominator used for sample variance. Check the hand table against R. Save the table as a short text note or CSV, retaining the units in its explanation.</li>
+<li>Replace the last value with 26 mm. Predict the direction of the mean, median, variance, and SD changes before calculation. Then calculate them. Identify which statement about “a typical observation” is affected most by this one high value. A sensitivity demonstration does not authorise deleting an actual inconvenient measurement.</li>
+<li>Add 10 to every value in the original three-value vector. Explain why the signed deviations, variance, and SD stay the same while the mean changes. Draw both sets along the same horizontal scale, on paper or with a supplied point-plot pattern. An axis with inconsistent limits would obscure the shift.</li>
+<li>Convert the original vector from mm to cm by dividing by ten. Write the new mean, variance, and SD <strong>with units</strong>. Check that changing unit does not make the biological sample less variable. The numeric variance changes by a factor of 100 because its unit changes from mm² to cm².</li>
+<li>For your selected supplied context, compute centre and spread separately within both groups. For plants use <code>growth_mm</code>; for organic runs first use the supplied <code>100 * isolated_mass_g / theoretical_mass_g</code> relationship to obtain <code>yield_percent</code>. Never compare raw grams across different starting scales and call that a comparison of yield.</li>
+<li>Make an individual-observation plot and add one mean marker per group using the familiar separate-summary-table pattern. Find at least one observation above and one below its group’s mean. Explain why a mean need not itself be an observed value and why showing only a mean conceals these differences.</li>
+<li>Write a short response to this claim: “The group with the larger SD must have the less reliable mean and the worse experimental technique.” Separate variation among measured units from uncertainty in an estimate and from possible biological or measurement sources of spread. The SD alone cannot identify the source or evaluate the entire design.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: check the transformation, not a memorised rule
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For the original vector, the sample variance is 4 mm² and SD 2 mm. In cm, variance is 0.04 cm² and SD 0.2 cm. Adding 10 mm changes only the centre. For the changed vector <code>c(12, 14, 26)</code>, ask R for <code>mean()</code>, <code>median()</code>, <code>var()</code>, and <code>sd()</code> after writing predictions. Keep the two vectors under distinct names.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-describe-another-set-without-copying-its-labels" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-describe-another-set-without-copying-its-labels">Independent transfer — describe another set without copying its labels</h2>
+<p>Allow about 60–90 minutes. Import <code>data/seedlings-transfer.csv</code> into an object called <code>transfer</code> and calculate final minus initial length. These are 18 new independent plants, nine per randomised group, with lengths in mm and complete measurements. The seven-day study uses the same column structure as the first experiment. Your job is to demonstrate that the reasoning transfers to new values.</p>
+<ol type="1">
+<li>Start a separate script, <code>day12-transfer.R</code>, containing its own package loading, import, checks, and derived growth. Identify T01 and verify its subtraction by hand. A plausible overall mean would not reveal a sign error.</li>
+<li>Compute mean, median, sample variance, and SD for each treatment. Save a labelled table to <code>output/day12-transfer-summaries.csv</code>. State n alongside the summaries, even though neither group has missing values here.</li>
+<li>Draw both groups’ individual measurements on a common scale. Use your summaries to describe which group has the larger mean and which has the larger SD. Do not assume that the group with the larger mean must have the larger spread. Use actual values rather than the first experiment’s numbers.</li>
+<li>Convert the derived growth to cm in another column. Verify one group mean, SD, and variance in the new units. Preserve the mm column so the conversion is transparent. Give a sentence explaining which numeric changes reflect unit choice and which comparisons between groups remain the same.</li>
+<li>Write a 120–180 word explanation for a lab partner who sees only your table and figure. Define what SD describes, include units and independent sample sizes, and state one thing the descriptive summaries cannot establish. Avoid language saying that all treated plants are alike or that a larger mean implies every treated observation exceeds every control observation.</li>
+<li>Reopen the output table in another application and verify that it contains summaries, not the original plant-level rows. Restart R and regenerate the outputs. Keep the code, plot, and explanatory note together in your project.</li>
+</ol>
+<p><strong>Additional outputs:</strong> <code>output/day12-transformations.txt</code>, the transfer script, summary CSV, <code>output/day12-transfer.png</code>, and your interpretation. Checkable anchors: T01 grew <strong>15.0 mm</strong>; both groups have nine observations. Save your own calculated group values rather than copying a worked answer before analysis.</p>
 <p><strong>Keep:</strong> <code>day12-variation.R</code> and the interpretation in comments or report notes. Next: <a href="../week3/13-group-summaries.html">summarise groups while still showing individuals</a>.</p>
 
 

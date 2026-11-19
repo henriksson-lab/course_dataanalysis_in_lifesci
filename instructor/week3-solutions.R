@@ -235,3 +235,118 @@ if ("--figures" %in% commandArgs(trailingOnly = TRUE)) {
             overwrite = TRUE)
 }
 cat("Week 3 worked calculations and report rendered successfully. Artifacts:", out, "\n")
+
+# Expanded days11–15: audit consequences and independent transfer work.
+raw_trimmed <- read_csv('data/seedlings-messy.csv', show_col_types = FALSE,
+                        col_types = cols(.default = col_character()))
+stopifnot('treated ' %in% raw$treatment,
+          !('treated ' %in% raw_trimmed$treatment))
+wrong_zero_example <- cleaned |>
+  mutate(final_mm = if_else(plant_id == 'P06', 0, final_mm),
+         growth_mm = final_mm - initial_mm)
+stopifnot(wrong_zero_example$growth_mm[wrong_zero_example$plant_id == 'P06'] == -24.7,
+          abs(mean(cleaned$growth_mm, na.rm = TRUE) - 18.4869565217) < 1e-8,
+          abs(mean(wrong_zero_example$growth_mm) - 16.6875) < 1e-8)
+transfer <- read_csv('data/seedlings-transfer.csv', show_col_types = FALSE) |>
+  mutate(growth_mm = final_mm - initial_mm)
+transfer_duplicate <- bind_rows(transfer, slice(transfer, 1))
+stopifnot(nrow(transfer) == 18, anyDuplicated(transfer$plant_id) == 0,
+          !anyNA(transfer), anyDuplicated(transfer_duplicate$plant_id) > 0,
+          abs(transfer$growth_mm[transfer$plant_id == 'T01'] - 15) < 1e-10)
+transfer_summary <- transfer |>
+  group_by(treatment) |>
+  summarise(n = n(), mean_mm = mean(growth_mm), median_mm = median(growth_mm),
+            variance_mm2 = var(growth_mm), sd_mm = sd(growth_mm), .groups = 'drop')
+stopifnot(all(transfer_summary$n == 9),
+          abs(transfer_summary$mean_mm[transfer_summary$treatment == 'control'] - 13.6555555556) < 1e-8,
+          abs(transfer_summary$mean_mm[transfer_summary$treatment == 'treated'] - 17.8666666667) < 1e-8)
+write_csv(transfer, file.path(out, 'day11-transfer-growth.csv'))
+write_csv(transfer_summary, file.path(out, 'day12-transfer-summaries.csv'))
+write_csv(transfer_summary, file.path(out, 'day13-transfer-summary.csv'))
+stopifnot(mean(c(12,14,16)+10) == 24,
+          sd(c(12,14,16)+10) == 2,
+          abs(var(c(12,14,16)/10) - .04) < 1e-10,
+          abs(var(c(12,14,26)) - 57.3333333333) < 1e-8,
+          median(c(12,14,26)) == 14)
+transfer_cm <- transfer |> mutate(growth_cm = growth_mm / 10)
+stopifnot(abs(sd(transfer_cm$growth_cm) - sd(transfer$growth_mm)/10) < 1e-10,
+          abs(var(transfer_cm$growth_cm) - var(transfer$growth_mm)/100) < 1e-10)
+transfer_plot <- ggplot(transfer, aes(treatment, growth_mm)) +
+  geom_point(position = position_jitter(width = .08, height = 0, seed = 13)) +
+  geom_point(data = transfer_summary, aes(treatment, mean_mm),
+             inherit.aes = FALSE, shape = 18, colour = 'darkred', size = 3) +
+  labs(x = 'Allocation', y = 'Seven-day growth (mm)',
+       caption = 'Points: independent plants. Red diamonds: group means. Nine observations per group.') +
+  theme_minimal()
+ggsave(file.path(out, 'day12-transfer.png'), transfer_plot, width = 6, height = 4)
+ggsave(file.path(out, 'day13-transfer-points.png'), transfer_plot, width = 6, height = 4)
+for (width in c(2,4,6)) {
+  transfer_hist <- ggplot(transfer, aes(growth_mm)) +
+    geom_histogram(binwidth = width, boundary = 0, colour = 'white') +
+    facet_wrap(~treatment, ncol = 1) +
+    labs(x = 'Seven-day growth (mm)', y = 'Number of plants') + theme_minimal()
+  ggsave(file.path(out, paste0('day13-transfer-hist-',width,'.png')),
+         transfer_hist, width = 6, height = 5)
+}
+set.seed(14)
+means_3 <- replicate(400, mean(sample(transfer$growth_mm, size = 3, replace = TRUE)))
+means_12 <- replicate(400, mean(sample(transfer$growth_mm, size = 12, replace = TRUE)))
+stopifnot(length(means_3) == 400, length(means_12) == 400,
+          sd(means_12) < sd(means_3))
+transfer_sampling <- data.frame(mean_mm = c(means_3, means_12),
+                                sample_size = rep(c('3 draws','12 draws'), each = 400))
+write_csv(transfer_sampling, file.path(out, 'day14-transfer-sampling.csv'))
+transfer_sampling_plot <- ggplot(transfer_sampling, aes(mean_mm)) +
+  geom_histogram(binwidth = .6, colour = 'white') + facet_wrap(~sample_size, ncol = 1) +
+  labs(x = 'Mean of one simulated sample (mm)', y = 'Number of simulated samples') +
+  theme_minimal()
+ggsave(file.path(out, 'day14-transfer-sampling.png'), transfer_sampling_plot, width = 6, height = 5)
+set.seed(25)
+second_means_3 <- replicate(400, mean(sample(transfer$growth_mm, size = 3, replace = TRUE)))
+second_means_12 <- replicate(400, mean(sample(transfer$growth_mm, size = 12, replace = TRUE)))
+stopifnot(sd(second_means_12) < sd(second_means_3), !identical(means_3,second_means_3))
+writeLines(c(
+  'Day11: raw25 records; repaired24 distinct plants,23 growth measurements.',
+  'Missing P06 is not zero: an invented zero final implies -24.7 mm growth.',
+  'Transfer study:18 unique plants,9 per group,no missing values,no supported correction.',
+  'Day12: shift changes centre; conversion changes mean/SD by 10 and variance by 100.',
+  'Day13: individual observations and grouped summaries have distinct roles.',
+  'Day14: source observations,draws per sample,and simulation repetitions differ.',
+  'Day15: report contains its own imports/checks/calculations; no self-render chunk.'
+), file.path(out,'expanded-practice-anchors.txt'))
+transfer_report <- c(
+  '---','title: "Transfer class: descriptive growth report"','output: html_document','---','',
+  '## Question and design','',
+  'These are simulated data from 18 independently potted plants, nine randomly',
+  'assigned to each allocation. Lengths in mm were measured seven days apart.',
+  'The question is descriptive growth variation, not a significance test.', '',
+  '```{r setup}',
+  'library(readr)','library(dplyr)','library(ggplot2)',
+  'transfer <- read_csv("data/seedlings-transfer.csv", show_col_types = FALSE)',
+  'anyDuplicated(transfer$plant_id)','transfer |> count(treatment)',
+  'sum(is.na(transfer$final_mm))',
+  'transfer <- mutate(transfer, growth_mm = final_mm - initial_mm)',
+  'transfer_summary <- transfer |> group_by(treatment) |>',
+  '  summarise(n = n(), mean_mm = mean(growth_mm), median_mm = median(growth_mm),',
+  '            sd_mm = sd(growth_mm), .groups = "drop")','```','',
+  '## Results','',
+  'There are `r nrow(transfer)` plant records and no unavailable length measurements.',
+  '```{r summary}','knitr::kable(transfer_summary, digits = 2)','```','',
+  '```{r figure, fig.cap="Each point is an independently potted plant; horizontal jitter only separates overlap."}',
+  'ggplot(transfer, aes(treatment, growth_mm)) +',
+  '  geom_point(position = position_jitter(width = .08, height = 0, seed = 13)) +',
+  '  labs(x = "Allocation", y = "Seven-day growth (mm)") + theme_minimal()',
+  '```','',
+  '## Interpretation','',
+  'The observed treated mean is about 17.87 mm compared with 13.66 mm for controls.',
+  'Observed SD is about 1.94 mm in treated plants and2.53 mm in controls. The',
+  'groups overlap; a larger group mean is not a statement about every pair of plants.',
+  'These summaries describe individual spread and do not estimate uncertainty',
+  'in a population mean difference. The small simulated study cannot establish',
+  'a universal effect across other growth conditions.'
+)
+transfer_source <- file.path(out,'transfer-description.Rmd')
+writeLines(transfer_report, transfer_source)
+rmarkdown::render(transfer_source, output_dir = out, knit_root_dir = root,
+                  envir = new.env(parent = globalenv()), quiet = TRUE)
+cat('Expanded week3 audit, summaries, simulation and transfer report checks passed.\n')

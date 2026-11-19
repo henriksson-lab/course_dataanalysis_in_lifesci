@@ -179,13 +179,171 @@ project root so data/relative paths keep the same meaning. Preserve the input
 CSV and keep derived output separate.
 :::
 
+
+## Start with the claim you intend to support
+
+![An analysis moves from question to independent unit and data to a descriptive result; inference needs additional model assumptions.](claim-sequence.svg){height=350px}
+
+Write the plan before changing the code.
+
+::: notes
+The additional exercise asks for a 150–250 word plan covering question, unit,
+outcome, units, missingness, plot and direction. The descriptive organic route
+stops at a directed observed comparison; the duckweed route adds the taught
+independent inference. One chosen main study is enough.
+:::
+
+## Make checks inspectable
+
+For each check, retain **operation and finding**:
+
+- Identifiers and allocation labels.
+- Measurement types, units, and unavailable values.
+- Derived outcome and available counts.
+- Comparison direction and interpretation.
+
+::: notes
+“All checks passed” is not enough for another reader. Ask students to show a
+count or a named record. They can use existing commands rather than a new
+validation package. One hand calculation helps test the operation's meaning,
+but does not by itself validate experimental independence.
+:::
+
+## Transfer the workflow to a fresh culture study
+
+![Twenty-four algae cultures include twelve reference and twelve supplement records, with A19 unavailable.](algae-counts.svg){height=350px}
+
+New file: `data/algae.csv`; outcome: dry biomass in **mg**.
+
+::: notes
+Algae are photosynthetic organisms, but the task requires no microbiology:
+independent cultures were randomly assigned, and one seven-day harvest produced
+a biomass reading. A19 spilled before weighing. This is a short transfer memo,
+not a requirement to do both duckweed and organic main reports.
+:::
+
+## Check before summarising
+
+```r
+library(readr)
+algae <- read_csv("data/algae.csv", show_col_types = FALSE)
+nrow(algae)
+anyDuplicated(algae$culture_id)
+sum(is.na(algae$biomass_mg))
+```
+
+Expect **24 rows**, **0 duplicated IDs**, **1 missing measurement**.
+
+::: notes
+The available counts are twelve reference and eleven supplement. Keep A19's
+raw row and missing value. State that the culture, not its number of cells,
+is the independent unit. The transfer table has different column and allocation
+names from the plant table: adapt the roles, not only the title.
+:::
+
+## Look at the observations before the summary
+
+![Individual biomass measurements overlap between the two culture allocations.](algae-observations.svg){height=350px}
+
+Which group contains the largest individual observation?
+
+::: notes
+Reference culture A11 has 41.7 mg, larger than every supplement observation.
+This does not contradict a greater supplement mean. Let students answer the
+individual-observation question before showing means, so the plot is read as
+data rather than treated as decoration behind a chosen conclusion.
+:::
+
+## A group mean is not a rule for every culture
+
+![Red diamonds mark the group means while individual reference and supplement observations remain visible.](algae-means.svg){height=350px}
+
+Reference mean ≈ **28.20 mg**; supplement mean ≈ **33.92 mg**.
+
+::: notes
+The supplement group has the higher mean but its values do not all exceed the
+reference values. Both individual observations and the summary are informative.
+The plot alone does not isolate every possible source of biological variation;
+the supplied design and assumptions still matter.
+:::
+
+## Zero would invent a different result
+
+![Incorrectly inserting zero for the unavailable culture lowers the supplement mean relative to using available measurements.](zero-changes-mean.svg){height=350px}
+
+The unavailable value has not become observed information.
+
+::: notes
+The correct available supplement mean is 33.91818 mg. Adding a false zero as a
+twelfth measurement changes it to 31.09167 mg. This is a demonstration of why the
+rule matters, not an alternative recommended analysis. Keep the raw missing
+value and explain the loss rather than choosing a convenient invented number.
+:::
+
+## Repair claims as carefully as code
+
+Faulty statements to challenge:
+
+- “All enrolled flasks have measured biomass.”
+- “The group SD is the error in the treatment effect.”
+- “A higher product yield proves greater purity.”
+
+Use the **specific data and assumptions** in the correction.
+
+::: notes
+Duckweed has nineteen available outcomes out of twenty enrolled flasks. SD is
+individual spread. Organic purity was assumed for a simplified calculation,
+not measured by yield. A useful rewrite changes the claim's meaning, not only
+its strength from proves to suggests. Students record their corrections.
+:::
+
+## Give the difference a direction
+
+![Supplement-minus-reference and reference-minus-supplement have equal sizes and opposite signs.](comparison-sign.svg){height=350px}
+
+The observed supplement-minus-reference difference is about **5.72 mg**.
+
+::: notes
+Reversing the order changes the sign without altering the underlying
+observations. In the duckweed test, the order also determines the interval's
+direction. For the algae transfer memo no new hypothesis test is required.
+If a taught test is run, it does not replace the requested descriptive reasoning.
+:::
+
+## Write a bounded result paragraph
+
+Include unit, available n, direction, spread or overlap, and a limitation.
+
+A larger mean does not imply every treated observation is larger.
+
+::: notes
+The algae transfer memo is 100–150 words with a saved summary and figure. Keep
+number precision sensible, but calculate with the unrounded means. A19's
+loss needs reporting, even when na.rm=TRUE supplies a numeric summary.
+Do not generalise the simulated conditions to all organisms or supplements.
+:::
+
+## Retain a decision trail with the result
+
+Save the analysis plan, checks, chosen direction, and interpretation revision.
+
+Then restart and recreate the outputs from the saved source.
+
+::: notes
+The extended practical turns a short command sequence into a reviewable
+analysis. Students do not need to produce a second full main study. The
+fresh culture memo supplies transfer evidence and becomes a small
+reproducibility task on the following day.
+:::
+
 ## Practical: a first complete version today
 
 [Open day 23 practical and notes](../../week5/23-mini-study.qmd).
 
 - Default: `duckweed-report.Rmd` plus HTML.
 - Alternative: `organic-study.Rmd` plus HTML.
-- Save both in the project root, with the chosen source data intact.
+- Keep the chosen source and HTML in the project, with raw data intact.
+- Retain the analysis plan and short algae transfer memo/script.
 
 If extending day 15's `organic-report.Rmd`, use **Save As** to preserve it.
 

@@ -112,6 +112,97 @@ mean(seedlings$initial_mm)
 Have students distinguish the count from the mean. The mean initial length combines both allocations; it does not estimate a treatment difference. No hypothesis testing is needed today. The code only answers a meaningful question when the variable and observational unit are understood.
 :::
 
+## Type and meaning are different checks
+
+![Imported fields include identifier labels and measurements with stated units.](import-roles.svg){height=350px}
+
+Numeric storage alone does not authorise averaging or dividing columns.
+
+::: notes
+The solutions table has IDs and names as labels, with numeric mass, molar mass and volume. A supplied chemical name is context, not a request to identify a structure. The dictionary establishes units and row meaning.
+:::
+
+## Inspect more than the first displayed rows
+
+```r
+transfer <- read_csv("data/seedlings-transfer.csv",
+                     show_col_types = FALSE)
+dim(transfer)
+head(transfer)
+tail(transfer)
+```
+
+head() is a preview, not the sample-size definition.
+
+::: notes
+The imported table is 18 by 4; initial and final measurements belong to the same plant in each row. Inspect both ends and object structure rather than inferring 24 plants from the preceding lesson.
+:::
+
+## Check the supplied study’s expected structure
+
+![The independent transfer study has 18 plants split nine per group.](transfer-inventory.svg){height=350px}
+
+Row counts, unique IDs, and group counts answer related but distinct questions.
+
+::: notes
+Use length(plant_id), length(unique(plant_id)), and table(treatment). Repeated IDs can be legitimate in another design; here one row per plant sets the expectation. Random allocation is stated in the design, not demonstrated by sorted rows.
+:::
+
+## A filename that opens is not the whole audit
+
+Record the source path, dimensions, types, identifiers, groups, and missing counts.
+
+Name two facts that only the dictionary provides.
+
+::: notes
+Units, random allocation, experimental unit, elapsed time and simulation status are not established by a successful import. Suppressing the type message does not replace inspection.
+:::
+
+## Zero and unavailable give different calculations
+
+![Ignoring one unavailable reading gives mean 15, while recording a genuine zero gives mean 10.](missing-zero-means.svg){height=350px}
+
+The number of available measurements changes too.
+
+::: notes
+For c(10, NA, 20), ordinary mean returns NA; na.rm = TRUE gives 15 from two available values. The vector c(10, 0, 20) has mean 10 from three measurements. Replacing missing by zero invents a value.
+:::
+
+## Read the next table before choosing operations
+
+Import solutions.csv, then inspect:
+
+- Six rows and five columns.
+- Unique solution IDs and two solute labels.
+- Numeric mass, molar mass, and final volume.
+- Units and row meaning from the supplied dictionary.
+
+::: notes
+Define a mole as a chemical amount unit and molar mass as grams per mole. Today the learner audits inputs; the next lesson derives concentrations. These are numerical preparation cases, not independently allocated experimental groups.
+:::
+
+## The same kind of project may hold different inputs
+
+![Separate study folders may contain 24 or 18 records with similar column names.](project-identity.svg){height=350px}
+
+Check which input produced the result before changing the written sample size.
+
+::: notes
+A wrong project with a plausible-looking filename can produce plausible output. Have a peer rerun the script fresh and identify each audit. Source provenance matters even when file.exists returns TRUE.
+:::
+
+## Keep the import audit useful to another person
+
+A strong audit gives evidence:
+
+“18 rows, 18 distinct IDs, nine per group, no missing lengths.”
+
+It also states what was supplied by the study design.
+
+::: notes
+A useful audit records specific evidence rather than simply saying checked. Save the two audit notes and script. Unusual range values prompt questions and source inspection, not automatic deletion.
+:::
+
 ## Import a second table deliberately
 
 [Open the practical and notes](../../week2/07-import.qmd).

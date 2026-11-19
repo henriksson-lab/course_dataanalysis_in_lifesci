@@ -163,5 +163,90 @@ variation among these plants; it does not by itself quantify uncertainty in the
 difference between group means. We will separate those questions next.
 :::
 
+## Extended practical — compare the effects of a shift and a scale change
+
+Use about 75–90 minutes to make variation visible and explain it. Continue
+`day12-variation.R`. The purpose is to connect the arithmetic definition to
+units and actual observations, rather than learn another summary function.
+Choose your existing biological or organic context for the final write-up;
+complete the small numerical investigation below in either case.
+
+1. Make a three-row hand table for values 12, 14, and 16 mm. Include the mean,
+   each signed deviation, squared deviation, their sum, and the denominator
+   used for sample variance. Check the hand table against R. Save the table as
+   a short text note or CSV, retaining the units in its explanation.
+2. Replace the last value with 26 mm. Predict the direction of the mean, median,
+   variance, and SD changes before calculation. Then calculate them. Identify
+   which statement about “a typical observation” is affected most by this one
+   high value. A sensitivity demonstration does not authorise deleting an
+   actual inconvenient measurement.
+3. Add 10 to every value in the original three-value vector. Explain why the
+   signed deviations, variance, and SD stay the same while the mean changes.
+   Draw both sets along the same horizontal scale, on paper or with a supplied
+   point-plot pattern. An axis with inconsistent limits would obscure the shift.
+4. Convert the original vector from mm to cm by dividing by ten. Write the
+   new mean, variance, and SD **with units**. Check that changing unit does not
+   make the biological sample less variable. The numeric variance changes by
+   a factor of 100 because its unit changes from mm² to cm².
+5. For your selected supplied context, compute centre and spread separately
+   within both groups. For plants use `growth_mm`; for organic runs first use
+   the supplied `100 * isolated_mass_g / theoretical_mass_g` relationship to
+   obtain `yield_percent`. Never compare raw grams across different starting
+   scales and call that a comparison of yield.
+6. Make an individual-observation plot and add one mean marker per group using
+   the familiar separate-summary-table pattern. Find at least one observation
+   above and one below its group's mean. Explain why a mean need not itself be
+   an observed value and why showing only a mean conceals these differences.
+7. Write a short response to this claim: “The group with the larger SD must
+   have the less reliable mean and the worse experimental technique.” Separate
+   variation among measured units from uncertainty in an estimate and from
+   possible biological or measurement sources of spread. The SD alone cannot
+   identify the source or evaluate the entire design.
+
+::: {.callout-tip collapse="true"}
+## Hint: check the transformation, not a memorised rule
+
+For the original vector, the sample variance is 4 mm² and SD 2 mm. In cm,
+variance is 0.04 cm² and SD 0.2 cm. Adding 10 mm changes only the centre.
+For the changed vector `c(12, 14, 26)`, ask R for `mean()`, `median()`, `var()`,
+and `sd()` after writing predictions. Keep the two vectors under distinct names.
+:::
+
+## Independent transfer — describe another set without copying its labels
+
+Allow about 60–90 minutes. Import `data/seedlings-transfer.csv` into an object
+called `transfer` and calculate final minus initial length. These are 18 new
+independent plants, nine per randomised group, with lengths in mm and complete
+measurements. The seven-day study uses the same column structure as the first
+experiment. Your job is to demonstrate that the reasoning transfers to new values.
+
+1. Start a separate script, `day12-transfer.R`, containing its own package
+   loading, import, checks, and derived growth. Identify T01 and verify its
+   subtraction by hand. A plausible overall mean would not reveal a sign error.
+2. Compute mean, median, sample variance, and SD for each treatment. Save a
+   labelled table to `output/day12-transfer-summaries.csv`. State n alongside
+   the summaries, even though neither group has missing values here.
+3. Draw both groups' individual measurements on a common scale. Use your
+   summaries to describe which group has the larger mean and which has the
+   larger SD. Do not assume that the group with the larger mean must have the
+   larger spread. Use actual values rather than the first experiment's numbers.
+4. Convert the derived growth to cm in another column. Verify one group mean,
+   SD, and variance in the new units. Preserve the mm column so the conversion
+   is transparent. Give a sentence explaining which numeric changes reflect
+   unit choice and which comparisons between groups remain the same.
+5. Write a 120–180 word explanation for a lab partner who sees only your table
+   and figure. Define what SD describes, include units and independent sample
+   sizes, and state one thing the descriptive summaries cannot establish.
+   Avoid language saying that all treated plants are alike or that a larger
+   mean implies every treated observation exceeds every control observation.
+6. Reopen the output table in another application and verify that it contains
+   summaries, not the original plant-level rows. Restart R and regenerate the
+   outputs. Keep the code, plot, and explanatory note together in your project.
+
+**Additional outputs:** `output/day12-transformations.txt`, the transfer script,
+summary CSV, `output/day12-transfer.png`, and your interpretation. Checkable
+anchors: T01 grew **15.0 mm**; both groups have nine observations. Save your own
+calculated group values rather than copying a worked answer before analysis.
+
 **Keep:** `day12-variation.R` and the interpretation in comments or report notes.
 Next: [summarise groups while still showing individuals](13-group-summaries.qmd).

@@ -362,6 +362,178 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
+<section id="a-substring-does-not-understand-a-treatment" class="slide level2">
+<h2>A substring does not understand a treatment</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="grep-substring.svg" height="350"></p>
+<figcaption>Literal treated search selects untreated as well as the treated labels.</figcaption>
+</figure>
+</div>
+<p>Test a search against known records before trusting its count.</p>
+<aside class="notes">
+<p>The student makes search-trap.tsv from a copy, changes S01 to untreated, and preserves the real manifest. That trap gives three matches, not evidence for three treated biological samples. The baseline fixture remains two treated records.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="inspect-selected-ids-not-just-a-number" class="slide level2">
+<h2>Inspect selected IDs, not just a number</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-F</span> treated samples.tsv</span>
+<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-F</span> treated samples.tsv <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A correct count is not proof that the right lines were selected.</p>
+<aside class="notes">
+<p>Compare the same two commands on the trap copy. Explain -F literal matching. This is not a full table query language and should not replace structured data checks later in R.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-line-count-depends-on-the-file-structure" class="slide level2">
+<h2>A line count depends on the file structure</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="header-lines.svg" height="350"></p>
+<figcaption>Five newline-terminated lines represent one header and four sample records.</figcaption>
+</figure>
+</div>
+<p>Headers name fields; they are not an additional sample.</p>
+<aside class="notes">
+<p>Use the actual manifest with a final newline. wc -l counts newline characters, not an abstract number of biological observations. A CSV may contain quoted embedded newlines in general; this controlled TSV has one record per line, which makes the simple count valid here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="follow-a-manifest-path-to-a-measurement" class="slide level2">
+<h2>Follow a manifest path to a measurement</h2>
+<p>Read S04’s listed path, then locate its file.</p>
+<p>What if the record is present but the file has been renamed?</p>
+<p>Do not erase a sample simply because its file could not be found.</p>
+<aside class="notes">
+<p>The independent exercise deliberately renames S04.csv only in a disposable received-check copy. The contents still identify S04 and length39.8mm. The manifest is an index of intended paths; it does not guarantee files currently occupy them.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-filename-can-outlive-its-correct-meaning" class="slide level2">
+<h2>A filename can outlive its correct meaning</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="overwrite-state.svg" height="350"></p>
+<figcaption>Redirection replaces a treated-named extract with control records while retaining its filename.</figcaption>
+</figure>
+</div>
+<p>Read the saved output after writing it.</p>
+<aside class="notes">
+<p>Use the disposable treated-audit.txt experiment, retaining an extract-backup.txt. Show that &gt; overwrites rather than appends. Never demonstrate input=output truncation on raw course data; explain the hazard without creating it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-input-and-output-paths-must-differ" class="slide level2">
+<h2>Why input and output paths must differ</h2>
+<p>Unsafe pattern — <strong>do not run</strong>:</p>
+<pre class="text"><code>grep -F treated samples.tsv &gt; samples.tsv</code></pre>
+<p>The shell may truncate the destination before grep reads its input.</p>
+<aside class="notes">
+<p>Make the sequence explicit: the shell prepares output redirection, then starts the program. No deletion command is needed to lose data. A reproducible workflow preserves raw inputs and uses distinct informative output paths.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-discrepancy-needs-evidence-before-repair" class="slide level2">
+<h2>A discrepancy needs evidence before repair</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="manifest-path.svg" height="350"></p>
+<figcaption>The manifest expects S04.csv while a renamed file retains the S04 measurement record.</figcaption>
+</figure>
+</div>
+<p>Use the deliberately known rename as evidence to restore its path.</p>
+<aside class="notes">
+<p>This does not establish a general rule to rename any nearby file to whatever is missing. Real ambiguous identities require source records or advice. Ask students to record the discrepancy, supporting evidence, repair, and verification in audit.txt.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="audit-the-recovered-copy" class="slide level2">
+<h2>Audit the recovered copy</h2>
+<p>Keep:</p>
+<ul>
+<li>Original source archive and manifest.</li>
+<li>Search command and selected IDs.</li>
+<li>The discrepancy and supported repair.</li>
+<li>A checked output and explanation of the units.</li>
+</ul>
+<aside class="notes">
+<p>The source archive still contains the original known fixture. The practical should end with a peer able to find the restored measurement and explain why line counts alone were insufficient. Record current computer and extraction location.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="save-an-inspection-someone-can-explain" class="slide level2">
 <h2>Save an inspection someone can explain</h2>
 <p><a href="../../week1/04-inspect-archive.html">Open the practical and notes</a>.</p>

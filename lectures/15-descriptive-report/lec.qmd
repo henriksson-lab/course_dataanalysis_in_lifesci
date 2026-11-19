@@ -86,6 +86,82 @@ We have described the sample; we have not estimated uncertainty in the differenc
 The individual-point plot shows overlap. Keep SD as spread, not uncertainty in a group mean. In the optional organic context, standard mean yield 68.67% and modified 77% describe independent runs; higher yield does not verify purity or general protocol superiority.
 :::
 
+## A result should have a visible lineage
+
+![Saved data feed reportcode that produces the numerical table and results prose.](extended-result-lineage.svg){height=350px}
+
+Trace each reported number back to a saved input and calculation.
+
+::: notes
+Ask a reader to identify where the mean came from, which rows contributed, and which units apply. A report with an impressive table but an unidentified input is not complete.
+:::
+
+## The project file does not contain every dependency
+
+![A missing input file breaks the path fromreport source to a newly rendered output.](extended-missing-dependency.svg){height=350px}
+
+Include the ordinary input CSV, not just a shortcut to its old location.
+
+::: notes
+An Rproj provides context; it does not package data. Reproduction in a newly named folder tests personal paths and omitted files. Do not silently fix a peer source before recording the original failure.
+:::
+
+## Keep claims at the level supported by the work
+
+![Measurements support a sample description; an unsupported jump to universal causation is blocked.](extended-claim-limits.svg){height=350px}
+
+Descriptive work is useful even before a hypothesis test.
+
+::: notes
+Repair sentences such as results were good or computer removed bad values. Identify a measurement pattern, a defined summary, or a documented correction. Current day15 reports do not quantify uncertainty in a treatment difference.
+:::
+
+## Adapt a structure, not an old conclusion
+
+![The transfer study has different individual values,means and spread from the firststudy.](../12-variation/extended-transfer-variation.svg){height=350px}
+
+A changed title alone does not create a report about new observations.
+
+::: notes
+The new source is seedlings-transfer.csv with 18 plants,9 per group. Replace old imports, descriptions, counts, and labels together. If using a previously saved analysis, recreate its objects inside the new report.
+:::
+
+## Inline results keep prose connected to code
+
+A count or mean can be calculated inline after its object is created.
+
+Literal source example: <code>&#96;r nrow(transfer)&#96;</code>
+
+The sentence still needs a quantity, units, and interpretation.
+
+::: notes
+Use escaped entities to display literal R Markdown code in these slides. During a student report render the inline expression executes. Installing packages or rendering the report from inside itself is not a solution to missing objects.
+:::
+
+## Do a reader review and an analyst review
+
+Reader review: question, unit, outcome, figure meaning, conclusion.
+
+Analyst review: input, checks, transformations, available n, regeneration.
+
+A change log records the issue, correction, and rerun result.
+
+::: notes
+The practical includes one revised chosen report plus a new descriptive transfer report. The new work is a transfer challenge, not another required organic/biology branch completed for its own sake.
+:::
+
+## A short report can contain strong evidence
+
+Keep one relevant table, one useful figure, and a specific interpretation.
+
+Remove a redundant printout before removing a limitation or a unit label.
+
+Can another person regenerate and explain the result?
+
+::: notes
+Wordiness is not workload quality. Students spend time inspecting, drafting, checking, revising, and reproducing. Their saved outputs demonstrate those actions rather than the number of headings.
+:::
+
 ## Practical: one report that reopens and renders
 
 Save **`descriptive-report.Rmd`** or the chosen **`organic-report.Rmd`**, plus HTML.

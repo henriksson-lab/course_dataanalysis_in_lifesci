@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -925,6 +931,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#copy-move-and-extract" id="toc-copy-move-and-extract" class="nav-link" data-scroll-target="#copy-move-and-extract">4. Copy, move, and extract</a></li>
   <li><a href="#memory-and-storage" id="toc-memory-and-storage" class="nav-link" data-scroll-target="#memory-and-storage">5. Memory and storage</a></li>
   <li><a href="#the-same-filename-on-two-computers" id="toc-the-same-filename-on-two-computers" class="nav-link" data-scroll-target="#the-same-filename-on-two-computers">6. The same filename on two computers</a></li>
+  <li><a href="#a-renamed-extension" id="toc-a-renamed-extension" class="nav-link" data-scroll-target="#a-renamed-extension">7. A renamed extension</a></li>
+  <li><a href="#two-terminal-windows" id="toc-two-terminal-windows" class="nav-link" data-scroll-target="#two-terminal-windows">8. Two terminal windows</a></li>
+  <li><a href="#quote-the-intended-argument" id="toc-quote-the-intended-argument" class="nav-link" data-scroll-target="#quote-the-intended-argument">9. Quote the intended argument</a></li>
+  <li><a href="#a-surprising-grep-count" id="toc-a-surprising-grep-count" class="nav-link" data-scroll-target="#a-surprising-grep-count">10. A surprising grep count</a></li>
+  <li><a href="#a-manifest-path-fails" id="toc-a-manifest-path-fails" class="nav-link" data-scroll-target="#a-manifest-path-fails">11. A manifest path fails</a></li>
+  <li><a href="#the-recipient-has-the-old-correction" id="toc-the-recipient-has-the-old-correction" class="nav-link" data-scroll-target="#the-recipient-has-the-old-correction">12. The recipient has the old correction</a></li>
   </ul>
 </nav>
     </div>
@@ -1069,6 +1081,126 @@ Answer and check
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>No to both. Remote access is not automatic file transfer, and identical names can refer to separate copies. Use the supported transfer route and name the destination. A ZIP on the same disk is a convenient sharing package; use supported separate storage for protection against losing that disk.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="a-renamed-extension" class="level2">
+<h2 class="anchored" data-anchor-id="a-renamed-extension">7. A renamed extension</h2>
+<p>A practice copy of seedlings.csv is renamed name-test.txt. Did its plant measurements become a different format? What would you inspect?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Worked answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The name changed; renaming did not convert the contents. Open the practice copy as plain text and inspect its comma-separated header and records. Use actual conversion software only when a task calls for conversion; no conversion is needed here. Keep the original CSV unchanged.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="two-terminal-windows" class="level2">
+<h2 class="anchored" data-anchor-id="two-terminal-windows">8. Two terminal windows</h2>
+<p>Shell A is inside day03/readings while Shell B is in the workspace root. You run cd .. in Shell A. What changes in Shell B?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Worked answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Nothing automatically changes in Shell B. Each shell has its own current directory. Check pwd in both windows. The folders themselves did not move, and changing a shell location does not move an independent file-manager window.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="quote-the-intended-argument" class="level2">
+<h2 class="anchored" data-anchor-id="quote-the-intended-argument">9. Quote the intended argument</h2>
+<p>You want one folder called field notes. Compare mkdir field notes with mkdir “field notes”. Which command expresses the intended single name?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Worked answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The quoted command groups both words into one argument and creates one named folder. The unquoted command normally supplies two names and creates two folders. Practise only in the disposable workspace, then use ls and the graphical view to inspect what actually exists.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="a-surprising-grep-count" class="level2">
+<h2 class="anchored" data-anchor-id="a-surprising-grep-count">10. A surprising grep count</h2>
+<p>In a copy of the four-record manifest, S01 is labelled untreated; S03 and S04 are treated. How many records match grep -F treated, and does that count establish three treatment allocations?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Worked answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>There are three literal text matches because untreated contains treated. It does not establish three treated plants. Inspect the selected IDs and use the study description to understand labels. The unchanged source manifest still has two treated records.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="a-manifest-path-fails" class="level2">
+<h2 class="anchored" data-anchor-id="a-manifest-path-fails">11. A manifest path fails</h2>
+<p>The manifest lists measurements/S04.csv, but the copied folder contains S04-renamed.csv. Should you delete the record, change its measurement, or investigate identity?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Worked answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Investigate. In the deliberate classroom rename, the file contents still identify S04 and 39.8 mm, and the known rename supports restoring its filename. In a real ambiguous case, obtain source evidence. Do not delete a record simply because a path fails.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-recipient-has-the-old-correction" class="level2">
+<h2 class="anchored" data-anchor-id="the-recipient-has-the-old-correction">12. The recipient has the old correction</h2>
+<p>You edited ordinary report/findings.txt after creating report-v1.zip. A partner extracts v1 and sees the old sentence. What happened, and what is a useful verification?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Worked answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The archive is a snapshot and did not update when the source changed. Create a newly named package, extract it into a fresh receiver location, and inspect the actual corrected sentence. Confirm both archive version and extracted folder before assuming editing failed.</p>
 </div>
 </div>
 </div>

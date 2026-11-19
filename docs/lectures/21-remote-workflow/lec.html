@@ -410,6 +410,227 @@ Remote R:    data/seedlings.csv</code></pre>
           display:block!important;
       }</style></aside>
 </section>
+<section id="plan-the-copy-before-performing-it" class="slide level2">
+<h2>Plan the copy before performing it</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="transfer-plan.svg" height="350"></p>
+<figcaption>Source and destination projects identify the intended algae file and the content checks to repeat.</figcaption>
+</figure>
+</div>
+<p>Record computer, project path, filename, and intended output.</p>
+<aside class="notes">
+<p>Use the actual service only when supplied. A local rehearsal needs two different parent folders, both explicitly labelled local. These locations are not account credentials. Ask students what a receiver would need to distinguish two files with the same name. A plan written afterwards can conceal an incorrect assumption.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="count-what-the-receiving-copy-should-contain" class="slide level2">
+<h2>Count what the receiving copy should contain</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="algae-counts.svg" height="350"></p>
+<figcaption>Twenty-four separate culture records contain one unavailable supplement measurement, A19.</figcaption>
+</figure>
+</div>
+<p>24 records; 23 available measurements; one documented spill.</p>
+<aside class="notes">
+<p>The fresh transfer table is data/algae.csv. Define algae simply as the organisms in separate cultures; harvested dry biomass is measured in mg. Twelve cultures were independently assigned each allocation. There are twelve reference and eleven available supplement measurements. These are content checks, not a new model.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="verify-the-intended-input-in-r" class="slide level2">
+<h2>Verify the intended input in R</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>algae <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/algae.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(algae)</span>
+<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(algae<span class="sc">$</span>biomass_mg))</span>
+<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a>algae<span class="sc">$</span>biomass_mg[algae<span class="sc">$</span>culture_id <span class="sc">==</span> <span class="st">"A19"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Repeat after transfer: <strong>24</strong>, <strong>23</strong>, and <strong>NA</strong>.</p>
+<aside class="notes">
+<p>Run in the receiving R project’s Console. A path printed by a shell elsewhere is not R’s current folder. The brackets select the entry matching the ID, not the nineteenth row by assumption. Correct counts are useful evidence, but they do not establish that every individual value matches the source.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-matching-filename-is-not-a-version-check" class="slide level2">
+<h2>A matching filename is not a version check</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="same-name-versions.svg" height="350"></p>
+<figcaption>Two files named receipt.txt contain different first and second revisions.</figcaption>
+</figure>
+</div>
+<p>Inspect the saved contents before choosing which copy to send.</p>
+<aside class="notes">
+<p>Demonstrate with receipts, not raw data. Edit a disposable destination note, save it, and reopen both copies. The remote desktop is a view of a computer; it is not a guarantee that a laptop’s copy updates. Preserve both versions until their roles are understood instead of deleting an unfamiliar folder.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="write-a-receipt-another-reader-can-use" class="slide level2">
+<h2>Write a receipt another reader can use</h2>
+<p>A short receipt names:</p>
+<ul>
+<li>The input and receiving project location.</li>
+<li>Checks performed and their actual results.</li>
+<li>The returned artifact and its destination.</li>
+<li>Any real remote steps still pending.</li>
+</ul>
+<aside class="notes">
+<p>Ask students to avoid vague claims such as “uploaded successfully”. A useful receipt can distinguish a file selected, a file sent, and the received file opened and checked. No passwords, authentication codes, or private account details belong in it. A local rehearsal should say exactly that.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="an-unsaved-edit-has-not-travelled" class="slide level2">
+<h2>An unsaved edit has not travelled</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="buffer-and-file.svg" height="350"></p>
+<figcaption>A changed editor buffer and the saved receipt can contain different revisions until saving occurs.</figcaption>
+</figure>
+</div>
+<p>Save, close, reopen, then inspect the copy you intend to transfer.</p>
+<aside class="notes">
+<p>This returns to the file-system baseline deliberately. Some editors autosave or restore buffers, so the practical test is the actual saved file. Source-code edits likewise do not change an old rendered HTML document until rendering runs. The transfer audit needs a named source artifact, not only what is on screen.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-not-check-only-the-file-size" class="slide level2">
+<h2>Why not check only the file size?</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="size-is-limited.svg" height="350"></p>
+<figcaption>Different version text occupies the same number of character positions.</figcaption>
+</figure>
+</div>
+<p>Equal size is a limited check, not proof of equal contents.</p>
+<aside class="notes">
+<p>The strings version 1 and version 2 have equal lengths but different final characters. Students need no hashing theory. For these small notes, read both saved files and compare their contents. Row counts also have limits: two tables can have identical dimensions yet contain different values.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="file-not-found-needs-a-location-investigation" class="slide level2">
+<h2>“File not found” needs a location investigation</h2>
+<p>In the <strong>receiving R Console</strong>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
+<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">file.exists</span>(<span class="st">"data/algae.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Check computer → project root → relative path → actual file.</p>
+<aside class="notes">
+<p>A FALSE result tells us that R did not find this path from this starting location. It does not mean the input is absent from every machine. Open the right project and inspect extraction nesting before inserting a personal absolute path. Keep the search sequence reproducible in the log.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="diagnose-before-rendering-another-copy" class="slide level2">
+<h2>Diagnose before rendering another copy</h2>
+<p>The expected local result is absent.</p>
+<ol type="1">
+<li>Did rendering succeed, and where did it write?</li>
+<li>Was that specific output transferred?</li>
+<li>Which destination received it?</li>
+<li>Which copy did the browser open?</li>
+</ol>
+<aside class="notes">
+<p>Let students trace a deliberately misplaced HTML file without immediately rerunning the analysis. A second render may only create another identical artifact in the same unexpected folder. Distinguish failure to calculate, failure to transfer, and failure to locate the result.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-bounded-handover-is-more-useful-than-a-promise" class="slide level2">
+<h2>A bounded handover is more useful than a promise</h2>
+<p>Save <code>transfer-plan.txt</code>, the receipt, and the audit in <code>reports/</code>.</p>
+<p>State what was checked, which copies were compared, and what remains unknown.</p>
+<aside class="notes">
+<p>These artifacts support the extended practical and independent recovery task. A local copy check is valuable but cannot complete SSH authentication or remote desktop access. Likewise a successful transfer does not establish a backup policy or guarantee that a disconnected process continues running.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="practical-locate-render-return" class="slide level2">
 <h2>Practical: locate, render, return</h2>
 <p><a href="../../week5/21-remote-workflow.html">Open day 21 practical and notes</a>.</p>
@@ -417,6 +638,7 @@ Remote R:    data/seedlings.csv</code></pre>
 <li>Save <code>reports/remote-log.txt</code> with computer names and project locations.</li>
 <li>Connect, disconnect, reconnect, and find saved work.</li>
 <li>Transfer and identify one output copy.</li>
+<li>Retain the transfer plan, receipt, version checks, and audit.</li>
 </ul>
 <p>Until access is provided, complete the <strong>local rehearsal</strong> and mark remote steps pending.</p>
 <aside class="notes">

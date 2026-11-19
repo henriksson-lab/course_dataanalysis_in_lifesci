@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -927,6 +933,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#commands-arguments-and-options" id="toc-commands-arguments-and-options" class="nav-link" data-scroll-target="#commands-arguments-and-options">Commands, arguments, and options</a></li>
   <li><a href="#practical-2-recover-from-an-ordinary-mistake" id="toc-practical-2-recover-from-an-ordinary-mistake" class="nav-link" data-scroll-target="#practical-2-recover-from-an-ordinary-mistake">Practical 2: recover from an ordinary mistake</a></li>
   <li><a href="#small-keyboard-habits-that-save-effort" id="toc-small-keyboard-habits-that-save-effort" class="nav-link" data-scroll-target="#small-keyboard-habits-that-save-effort">Small keyboard habits that save effort</a></li>
+  <li><a href="#extended-practical-predict-run-and-recover" id="toc-extended-practical-predict-run-and-recover" class="nav-link" data-scroll-target="#extended-practical-predict-run-and-recover">Extended practical — predict, run, and recover</a></li>
+  <li><a href="#independent-transfer-give-a-partner-a-route-they-can-test" id="toc-independent-transfer-give-a-partner-a-route-they-can-test" class="nav-link" data-scroll-target="#independent-transfer-give-a-partner-a-route-they-can-test">Independent transfer — give a partner a route they can test</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
   </ul>
 </nav>
@@ -1049,10 +1057,51 @@ I’m lost. How can I return to the workspace?
 </ul>
 <p>We are not using deletion commands today. Practise on the supplied workspace, and ask before removing something you did not mean to create.</p>
 </section>
+<section id="extended-practical-predict-run-and-recover" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-predict-run-and-recover">Extended practical — predict, run, and recover</h2>
+<p>Allow about 90 minutes. Work in <code>~/introcomputing-shell</code>, which is the shell workspace on the computer running this terminal. It is separate from the native RStudio project on Windows. A command sequence is easier to understand when you predict its effect on a drawn tree before running it. Save a plain-text command log with the command, your prediction, the observed result, and a correction if needed. You need not record every keystroke or install a logging application.</p>
+<ol type="1">
+<li>Draw the starting tree using the folders you actually have. Run <code>pwd</code> and <code>ls</code> to check it. Enter <code>practice</code>, create a child <code>day03</code>, and enter that child. At each step, predict the final part of <code>pwd</code> before asking for it.</li>
+<li>Create two children in <code>day03</code>: <code>readings</code> and <code>field notes</code>. For the second, use <code>mkdir "field notes"</code>. Quotes keep the two words as one argument. Inspect the names with <code>ls</code>, and practise tab completion to enter the spaced name. Record how many directories you created, not just how many words you typed.</li>
+<li>Return to <code>day03</code>. Predict and run <code>cd readings</code>, then <code>cd ..</code>, then <code>pwd</code>. Now try <code>cd not-present</code>. Read the error and run <code>pwd</code> again. Explain why a failed navigation did not create a destination or take you somewhere else.</li>
+<li>Open a <strong>second terminal window</strong> and run <code>pwd</code> there. Navigate the first window to <code>readings</code>. Check both windows again. Each shell has its own current working directory; a command in one does not automatically move the other. Save both locations in the log and label their windows.</li>
+<li>Use an absolute home-based route to return the first shell to the workspace: <code>cd ~/introcomputing-shell</code>. Reach <code>day03</code> again with a relative route. Explain what extra knowledge a relative route assumes about your starting place. Test the same relative text from a different starting folder and describe the result without changing your real course project.</li>
+<li>In the file manager, locate <code>day03</code> through <code>explorer.exe .</code> on Ubuntu/Windows or <code>open .</code> on Mac after navigating there. Make a note graphically inside <code>readings</code>, refresh the terminal listing, and identify it. Editing a file through the graphical view does not make it a different kind of storage.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: a safe return point makes a mistaken route ordinary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Run <code>pwd</code> to establish where you actually are, then return to <code>~/introcomputing-shell</code>. Inspect <code>ls</code> before entering the next folder. Do not repair a typo using administrator mode, and do not delete a tree because its location is confusing. Use <code>q</code> only when inside <code>less</code>; Ctrl+C interrupts a running shell command and is not the terminal’s normal copy shortcut.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-give-a-partner-a-route-they-can-test" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-give-a-partner-a-route-they-can-test">Independent transfer — give a partner a route they can test</h2>
+<p>Plan 60–90 minutes. Create a new subtree called <code>route-challenge</code> under your shell workspace. This block removes the line-by-line recipe. The required result is a predictable tree and a tested explanation, not a long command collection.</p>
+<ol type="1">
+<li>Inside <code>route-challenge</code>, create neighbouring <code>inputs</code> and <code>results</code> folders, and place a <code>notes</code> folder inside <code>results</code>. Draw the intended tree before creating it. Use only navigation, listing, and directory-creation commands already taught. A path to a new nested folder needs its parent to exist or the explained <code>mkdir -p</code> option.</li>
+<li>Use the graphical bridge to save a small <code>README.txt</code> in <code>route-challenge</code>. State the purpose of each child and mark the data as a practice exercise. Locate it from the terminal without assuming that your browser Downloads happens to be the current directory.</li>
+<li>Write three navigation challenges for a partner: root to <code>notes</code>, <code>notes</code> to <code>inputs</code>, and <code>inputs</code> back to the workspace home. For each, state the starting folder. Include one route with <code>..</code> and one with <code>~</code>.</li>
+<li>Exchange instructions. Before running a route, the receiver should predict the ending location. After running, use <code>pwd</code> to check. If working alone, close the terminal, reopen it, and follow your instructions from the named start. Revise an instruction that depended on unrecorded session state.</li>
+<li>Deliberately mistype one directory name. Record the error, actual location, and recovery command. Then demonstrate how Tab or command history can reduce retyping while still requiring you to check what you are about to run.</li>
+<li>Save <code>navigation-transfer.txt</code> inside <code>route-challenge</code>, with the finished tree, successful routes, and the recovery example. Explain which computer the paths describe. If you repeat this on a remote service later, name it as a separate run of the exercise rather than assuming the local tree exists there.</li>
+</ol>
+<p><strong>Check and retain:</strong> the command log and route challenge. A correct path from <code>results/notes</code> to its neighbouring <code>inputs</code> climbs two levels before entering <code>inputs</code>. <code>cd</code> changes the current directory of a shell; it does not move the folders or alter their contents. Ask your partner to explain that difference.</p>
+</section>
 <section id="check-your-understanding" class="level2">
 <h2 class="anchored" data-anchor-id="check-your-understanding">Check your understanding</h2>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1061,14 +1110,14 @@ What changes when I run <code>cd</code>? What stays unchanged?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The terminal’s current working directory changes. The files do not move, and other windows need not change location. <code>pwd</code> checks the new starting point.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1077,7 +1126,7 @@ Why can <code>ls</code> work without printing any filenames?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The directory may be empty. Compare with an error, which normally includes a message explaining the problem. Read the output rather than assuming silence is failure.</p>
 </div>

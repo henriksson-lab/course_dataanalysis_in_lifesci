@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -926,6 +932,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#produce-one-result-and-transfer-it-back" id="toc-produce-one-result-and-transfer-it-back" class="nav-link" data-scroll-target="#produce-one-result-and-transfer-it-back">4. Produce one result and transfer it back</a></li>
   <li><a href="#local-rehearsal-while-remote-access-is-pending" id="toc-local-rehearsal-while-remote-access-is-pending" class="nav-link" data-scroll-target="#local-rehearsal-while-remote-access-is-pending">Local rehearsal while remote access is pending</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
+  <li><a href="#extended-practical-audit-a-transfer-not-just-a-login" id="toc-extended-practical-audit-a-transfer-not-just-a-login" class="nav-link" data-scroll-target="#extended-practical-audit-a-transfer-not-just-a-login">Extended practical — audit a transfer, not just a login</a></li>
+  <li><a href="#independent-transfer-recover-a-misplaced-result" id="toc-independent-transfer-recover-a-misplaced-result" class="nav-link" data-scroll-target="#independent-transfer-recover-a-misplaced-result">Independent transfer — recover a misplaced result</a></li>
   </ul>
 </nav>
     </div>
@@ -1057,6 +1065,48 @@ Short answers
 </div>
 </div>
 </div>
+</section>
+<section id="extended-practical-audit-a-transfer-not-just-a-login" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-audit-a-transfer-not-just-a-login">Extended practical — audit a transfer, not just a login</h2>
+<p>Allow about 75–90 minutes. Work on the real service if access has been issued; otherwise use two clearly named local rehearsal folders. Record the difference in your log. The purpose is to establish which copy produced an output. A successful login alone does not establish that you transferred the intended data.</p>
+<ol type="1">
+<li>Before copying anything, create <code>reports/transfer-plan.txt</code>. Name the source computer, source project path, destination computer, and destination project path. For a local rehearsal, label both as local and give different parent folders. List the intended input <code>data/algae.csv</code>, its dictionary, and the report source you will use. Do not record authentication details.</li>
+<li>Open <code>data/algae.csv</code> in the original project without editing it. Read its dictionary: 24 separately grown cultures were assigned to <code>reference</code> or <code>supplement</code>, twelve each, and harvested once after seven days. A19 spilled before weighing, so its biomass is unavailable. The culture is the independent unit; the many cells within it are not independent cultures.</li>
+<li>Record three checks in your plan: number of culture records, number of available biomass measurements, and A19’s state. Use the familiar R checks <code>nrow()</code>, <code>sum(!is.na(...))</code>, and filtering by identifier. These are useful content checks, whereas a matching filename is not.</li>
+<li>Transfer or copy the complete project into the designated destination. Open the destination <code>.Rproj</code>, run <code>getwd()</code>, and repeat the checks there. Record both paths, the method, and the results in a small table in <code>reports/remote-log.txt</code>. Only claim a real remote transfer if one occurred.</li>
+<li>Write a new plain-text note, <code>reports/transfer-receipt.txt</code>, <strong>in the destination copy</strong>. Include the date, the destination project path, the input filename, and the three checked results. Locate it through the supported graphical workspace as well as through the file listing. This tests that you can identify a newly saved file rather than only recognise a supplied one.</li>
+<li>Bring that note back to the source using the supported route and open the returned copy. State whether you now have two independently stored copies. Ask a partner to locate the returned receipt using your directions, or close both applications and follow your own written directions from the start.</li>
+</ol>
+<p>Now investigate a deliberately stale copy. In a <strong>disposable copy</strong> of the project, change only the returned receipt’s text to say “second revision”. Save it, close the editor, and reopen both receipt copies. Does the other copy change? Keep both and explain the observation. Do not modify a raw CSV to perform this exercise. Repeating a transfer after an edit creates a new decision about which version should be retained; it is not a reason to delete an unfamiliar folder.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: compare contents as well as names
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The algae table should have 24 records and 23 available biomass measurements. A19’s biomass remains missing. For small text receipts, open both in a text editor and compare the actual sentences. If you use R, the supplied expression <code>identical(readLines("path-to-first-note"), readLines("path-to-second-note"))</code> asks whether the text lines match; replace the two descriptions with your real paths. <code>readLines()</code> reads saved text, not an unsaved editor buffer. You do not need a new comparison package or a memorised command here.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-recover-a-misplaced-result" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-recover-a-misplaced-result">Independent transfer — recover a misplaced result</h2>
+<p>Allow about 60–75 minutes. Use a small report you already know renders. The task is to make a colleague’s next action unambiguous, including when your first expectation about location is wrong.</p>
+<ol type="1">
+<li>In the destination project, render the report once and locate its real HTML output. It may be beside its <code>.Rmd</code> or in a documented output folder. Write its full location and the time of your check in the transfer log.</li>
+<li>In the file manager, copy that HTML into a new folder named <code>returned-results</code>. Open <strong>that copy</strong>. Do not infer the location from a browser tab title: use the file manager or browser file address to check it.</li>
+<li>Give a partner only the project location and a sentence describing the desired result. They must find the HTML, its source, and its input without using your recent-files list. Working alone, close applications and wait until you have completed another exercise, then use those directions again.</li>
+<li>Record one failed assumption or ambiguous direction, and repair the instructions. Include a concrete recovery sequence such as “identify the computer; open the project; find its output folder; inspect the file”.</li>
+<li>Check that an unchanged raw input has not been confused with the derived HTML. Explain which files must travel if the recipient needs to recalculate, rather than only read, the result. Add this distinction to your receipt.</li>
+<li>Save a final <code>reports/transfer-audit.txt</code> containing source, destination, checks, version decision, and one remaining limitation. If remote access is pending, include a separate list of the authentication, desktop, and transfer steps that still need real service practice. Local success cannot tick them off.</li>
+</ol>
+<p><strong>Keep:</strong> your plan, receipt, location log, and audit. A strong audit makes a specific, bounded claim about tested copies. It does not claim that network connections never fail, that remote storage is automatically backed up, or that an application keeps running when a connection closes.</p>
 <p><strong>Before you finish:</strong> save your location log, mark any pending access-dependent steps, and identify the report copy you opened. End the desktop session using the service’s instructions. Next: <a href="../week5/22-data-representations.html">DNA and images as data</a>.</p>
 
 

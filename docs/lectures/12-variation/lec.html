@@ -384,6 +384,186 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
+<section id="one-changed-observation-can-move-several-summaries" class="slide level2">
+<h2>One changed observation can move several summaries</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-one-high-value.svg" height="350"></p>
+<figcaption>Changing16 to26 mm alters the mean,median and spread differently.</figcaption>
+</figure>
+</div>
+<p>Original: 12, 14, 16 mm. Changed: 12, 14, 26 mm.</p>
+<aside class="notes">
+<p>The new mean is17.33 mm, median14 mm, variance 57.33 mm² and SD 7.57 mm. Ask for predictions before displaying numbers. This is sensitivity reasoning, not permission to remove a real large value.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-common-shift-changes-centre-not-deviations" class="slide level2">
+<h2>A common shift changes centre, not deviations</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-shift.svg" height="350"></p>
+<figcaption>Every value shifts by 10 mm while the pattern of deviations stays unchanged.</figcaption>
+</figure>
+</div>
+<p>Adding 10 mm shifts both the mean and each observation by 10 mm.</p>
+<aside class="notes">
+<p>The shifted vector22,24,26 has mean 24 and SD 2. Show subtraction from each set mean. An SD change under a common shift would signal a calculation or comparison mistake.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="use-units-as-an-arithmetic-check" class="slide level2">
+<h2>Use units as an arithmetic check</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-units.svg" height="350"></p>
+<figcaption>The same three measurements displayed in millimetres and centimetres have rescaled numerical summaries.</figcaption>
+</figure>
+</div>
+<p>Unit conversion changes numbers; it does not change the measured plants.</p>
+<aside class="notes">
+<p>Original variance 4 mm² becomes.04 cm²; SD 2 mm becomes.2 cm. Variance scales with the square of the conversion factor. Do not equate a smaller numeric SD after conversion with less biological variation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="calculate-before-rounding" class="slide level2">
+<h2>Calculate before rounding</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>x_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">26</span>)</span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x_mm)</span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(x_mm)</span>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x_mm)</span>
+<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Keep full values for calculations; round the displayed table and prose.</p>
+<aside class="notes">
+<p>R printing many digits is not proof of precise measurements. Students can show about 17.3 mm mean and 7.57 mm SD while retaining the calculation object. Confirm hand-worked deviations for the original simple vector first.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="another-study-separates-mean-and-spread-again" class="slide level2">
+<h2>Another study separates mean and spread again</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-transfer-variation.svg" height="350"></p>
+<figcaption>The new treated group has a larger mean but a smaller observed SD than controls.</figcaption>
+</figure>
+</div>
+<p>Larger mean does not require larger SD.</p>
+<aside class="notes">
+<p>Transfer control mean 13.66 mm, SD 2.53 mm; treated mean 17.87 mm, SD 1.94 mm. Use actual values rather than the earlier study pattern, where treated spread was larger.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="recreate-the-calculation-in-a-separate-script" class="slide level2">
+<h2>Recreate the calculation in a separate script</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/seedlings-transfer.csv'</span>,</span>
+<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
+<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a>transfer_control <span class="ot">&lt;-</span> <span class="fu">filter</span>(transfer, treatment <span class="sc">==</span> <span class="st">'control'</span>)</span>
+<span id="cb4-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(transfer_control<span class="sc">$</span>growth_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>T01 grew <strong>15.0 mm</strong>; check that subtraction independently.</p>
+<aside class="notes">
+<p>Load readr and dplyr as earlier. New data need their own import and growth column. Each group has 9 complete independent observations. Do not reuse a control vector from another file accidentally.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-sd-does-not-identify-its-own-cause" class="slide level2">
+<h2>The SD does not identify its own cause</h2>
+<p>A group has a larger SD. Is that evidence of:</p>
+<ul>
+<li>Greater biological diversity?</li>
+<li>More measurement noise?</li>
+<li>A less precise estimated mean?</li>
+</ul>
+<p>SD describes the spread. Additional design and measurement information distinguish explanations.</p>
+<aside class="notes">
+<p>Observed spread can have multiple sources. Uncertainty in a mean additionally depends on independent sample size and assumptions. A group SD alone does not evaluate all experimental technique.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="write-a-summary-that-survives-a-unit-change" class="slide level2">
+<h2>Write a summary that survives a unit change</h2>
+<p>Include the quantity, units, n, centre, and individual spread.</p>
+<p>If you convert to cm, revise the mean, SD, variance units, and axis together.</p>
+<p><strong>Which biological comparison should remain unchanged?</strong></p>
+<aside class="notes">
+<p>The ordering of group means and relative spread should remain consistent under a common positive conversion. A data table with correct numbers but wrong unit labels is still a misleading report.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="practical-explain-the-number-you-calculate" class="slide level2">
 <h2>Practical: explain the number you calculate</h2>
 <p>Choose one short transfer task and keep <strong><code>day12-variation.R</code></strong>.</p>

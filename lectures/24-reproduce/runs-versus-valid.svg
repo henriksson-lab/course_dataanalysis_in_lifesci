@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Execution success and supported interpretation are separate checks</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<line x1="210" y1="410" x2="990" y2="410" stroke="#203247" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="210" y1="410" x2="210" y2="45" stroke="#203247" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="700" y="465" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">Interpretation supported?</text>
+<text x="155" y="230" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">Runs?</text>
+<circle cx="425" cy="140" r="28" fill="#2a7f8f" stroke="none" stroke-width="3"/>
+<text x="425" y="200" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="middle" font-weight="normal">Runs; supported</text>
+<circle cx="825" cy="140" r="28" fill="#a8324a" stroke="none" stroke-width="3"/>
+<text x="825" y="200" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="middle" font-weight="normal">Runs; misleading</text>
+<circle cx="425" cy="320" r="28" fill="#6b4fa0" stroke="none" stroke-width="3"/>
+<text x="425" y="380" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="middle" font-weight="normal">Fails; reasoning may be sound</text>
+<circle cx="825" cy="320" r="28" fill="#a8324a" stroke="none" stroke-width="3"/>
+<text x="825" y="380" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="middle" font-weight="normal">Fails; unsupported</text>
+<text x="245" y="72" font-family="Arial, sans-serif" font-size="20" fill="#203247" text-anchor="start" font-weight="normal">yes</text>
+<text x="245" y="335" font-family="Arial, sans-serif" font-size="20" fill="#203247" text-anchor="start" font-weight="normal">no</text>
+<text x="405" y="395" font-family="Arial, sans-serif" font-size="20" fill="#203247" text-anchor="start" font-weight="normal">yes</text>
+<text x="810" y="395" font-family="Arial, sans-serif" font-size="20" fill="#203247" text-anchor="start" font-weight="normal">no</text>
+</svg>

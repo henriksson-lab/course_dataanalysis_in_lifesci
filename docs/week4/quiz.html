@@ -155,6 +155,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -890,6 +896,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#invert-the-calibration-in-the-stated-direction" id="toc-invert-the-calibration-in-the-stated-direction" class="nav-link" data-scroll-target="#invert-the-calibration-in-the-stated-direction">4. Invert the calibration in the stated direction</a></li>
   <li><a href="#a-diluted-reading-is-new-evidence" id="toc-a-diluted-reading-is-new-evidence" class="nav-link" data-scroll-target="#a-diluted-reading-is-new-evidence">5. A diluted reading is new evidence</a></li>
   <li><a href="#slope-units-and-causal-limits" id="toc-slope-units-and-causal-limits" class="nav-link" data-scroll-target="#slope-units-and-causal-limits">6. Slope units and causal limits</a></li>
+  <li><a href="#reversing-the-contrast" id="toc-reversing-the-contrast" class="nav-link" data-scroll-target="#reversing-the-contrast">7. Reversing the contrast</a></li>
+  <li><a href="#different-confidence-levels-same-observations" id="toc-different-confidence-levels-same-observations" class="nav-link" data-scroll-target="#different-confidence-levels-same-observations">8. Different confidence levels, same observations</a></li>
+  <li><a href="#what-if-the-smaller-study-has-a-narrower-interval" id="toc-what-if-the-smaller-study-has-a-narrower-interval" class="nav-link" data-scroll-target="#what-if-the-smaller-study-has-a-narrower-interval">9. What if the smaller study has a narrower interval?</a></li>
+  <li><a href="#pairing-checked-only-by-means" id="toc-pairing-checked-only-by-means" class="nav-link" data-scroll-target="#pairing-checked-only-by-means">10. Pairing checked only by means</a></li>
+  <li><a href="#a-new-instrument-gives-two-unknown-readings" id="toc-a-new-instrument-gives-two-unknown-readings" class="nav-link" data-scroll-target="#a-new-instrument-gives-two-unknown-readings">11. A new instrument gives two unknown readings</a></li>
+  <li><a href="#a-unit-conversion-changes-a-slope" id="toc-a-unit-conversion-changes-a-slope" class="nav-link" data-scroll-target="#a-unit-conversion-changes-a-slope">12. A unit conversion changes a slope</a></li>
   </ul>
 </nav>
     </div>
@@ -1032,6 +1044,126 @@ Answer
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The units are <strong>mg per cm²</strong>: fitted change in dry mass for a one-cm² increase in area. The sample association does not establish that experimentally changing area would cause this mass change. Inspect residuals and the measured range, and avoid extrapolating far beyond observed leaf areas.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="reversing-the-contrast" class="level2">
+<h2 class="anchored" data-anchor-id="reversing-the-contrast">7. Reversing the contrast</h2>
+<p>A treated-minus-control95% interval is2.70 to9.73 mm. What is the control-minus-treated interval? What happens to the two-sided p-value?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer and reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The reversed interval is−9.73 to−2.70 mm. Reverse the endpoint order as well as their signs. The two-sided p-value is unchanged because the equal-means question and observations are the same. Clearly label the reported direction.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="different-confidence-levels-same-observations" class="level2">
+<h2 class="anchored" data-anchor-id="different-confidence-levels-same-observations">8. Different confidence levels, same observations</h2>
+<p>With identical data and model, would a99% interval normally be narrower or wider than a90% interval? Does changing the interval level alter the observed means?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer and reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The99% procedure gives the wider interval to target greater long-run coverage. The sample means do not change. Do not select a confidence level after seeing which one gives a preferred conclusion; retain the stated analysis.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="what-if-the-smaller-study-has-a-narrower-interval" class="level2">
+<h2 class="anchored" data-anchor-id="what-if-the-smaller-study-has-a-narrower-interval">9. What if the smaller study has a narrower interval?</h2>
+<p>The transfer study has 9 plants per group instead of 12, yet its interval is narrower. Must R have failed?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer and reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No.&nbsp;Interval width also depends on observed variability and model assumptions. The transfer study has lower observed group spread. When several features differ, sample size alone does not determine the ordering of interval widths.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="pairing-checked-only-by-means" class="level2">
+<h2 class="anchored" data-anchor-id="pairing-checked-only-by-means">10. Pairing checked only by means</h2>
+<p>Independently sorting before and after columns preserves their separate means. Does that validate the paired analysis?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer and reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No.&nbsp;It destroys subject identity and can alter the spread of within-subject changes while preserving their average. In the actual ten-plant file the correct and artificial pairings have the same mean change but very different SDs and intervals. Sort complete rows together or match by recorded identity.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="a-new-instrument-gives-two-unknown-readings" class="level2">
+<h2 class="anchored" data-anchor-id="a-new-instrument-gives-two-unknown-readings">11. A new instrument gives two unknown readings</h2>
+<p>Transfer standards cover measured signals0.024–0.525. X1 reads0.270 and X2 reads0.700. Which gets an inverse estimate, and what should happen to the other record?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer and reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>X1 is within the measured range and estimates about 2.48 mg/L using the new fitted coefficients. X2 remains in the output with its reading, an out-of-range flag, and no supported concentration estimate. A new suitable measurement is required; do not delete its ID or invent dilution evidence.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="a-unit-conversion-changes-a-slope" class="level2">
+<h2 class="anchored" data-anchor-id="a-unit-conversion-changes-a-slope">12. A unit conversion changes a slope</h2>
+<p>A mass-on-area slope is4.11 mg/cm². Area is converted to mm² by multiplying by 100. What happens to slope and fitted masses?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer and reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The slope becomes about 0.0411 mg/mm², a factor of 100 smaller numerically. The intercept and fitted masses remain the same apart from rounding. The biological association did not become weaker merely because the predictor unit changed. A line through formula-calculated values is also not independent empirical evidence.</p>
 </div>
 </div>
 </div>

@@ -184,4 +184,238 @@ rmarkdown::render(organic_source, output_dir = out, knit_root_dir = root,
 seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE) |>
   mutate(growth_mm = final_mm - initial_mm)
 stopifnot(abs(seedlings$growth_mm[seedlings$plant_id == "P01"] - 18.6) < 1e-10)
+
+# Expanded day 21: content/version checks in disposable local transfer fixtures.
+# This never claims SSH, desktop or real remote access was tested.
+audit_dir <- file.path(out, "transfer-rehearsal")
+dir.create(audit_dir, recursive = TRUE, showWarnings = FALSE)
+source_dir <- file.path(audit_dir, "source")
+received_dir <- file.path(audit_dir, "received")
+dir.create(source_dir, showWarnings = FALSE)
+dir.create(received_dir, showWarnings = FALSE)
+file.copy("data/algae.csv", file.path(source_dir, "algae.csv"), overwrite = TRUE)
+file.copy(file.path(source_dir, "algae.csv"), file.path(received_dir, "algae.csv"),
+          overwrite = TRUE)
+source_lines <- readLines(file.path(source_dir, "algae.csv"))
+received_lines <- readLines(file.path(received_dir, "algae.csv"))
+stopifnot(identical(source_lines, received_lines))
+writeLines("version 1", file.path(source_dir, "receipt.txt"))
+writeLines("version 2", file.path(received_dir, "receipt.txt"))
+stopifnot(file.info(file.path(source_dir, "receipt.txt"))$size ==
+          file.info(file.path(received_dir, "receipt.txt"))$size,
+          !identical(readLines(file.path(source_dir, "receipt.txt")),
+                     readLines(file.path(received_dir, "receipt.txt"))))
+writeLines(c("Local rehearsal only: no SSH or desktop service was tested.",
+             "Two equal-size receipts differ in contents; filenames and size alone are insufficient.",
+             "The received algae CSV has been checked against the source text."),
+           file.path(audit_dir, "audit.txt"))
+
+# Expanded day 22: controlled object changes and a report from saved inputs.
+bases_changed <- bases
+bases_changed[1] <- "G"
+gc_fraction <- sum(bases == "G" | bases == "C") / length(bases)
+changed_gc <- sum(bases_changed == "G" | bases_changed == "C") / length(bases_changed)
+stopifnot(identical(as.integer(table(bases_changed)), c(10L, 9L, 10L, 11L)),
+          gc_fraction == 0.45, changed_gc == 0.475,
+          identical(as.integer(table(bases)), c(11L, 9L, 9L, 11L)))
+writeLines(paste(bases_changed, collapse = ""), file.path(out, "changed-dna.txt"))
+stopifnot(nchar(readLines(file.path(out, "changed-dna.txt"))) == 40)
+pixels_shifted <- pixels + 30
+thresholds <- c(0, 25, 100, 209, 210, 255)
+threshold_counts <- c(sum(pixels > 0), sum(pixels > 25), sum(pixels > 100),
+                      sum(pixels > 209), sum(pixels > 210), sum(pixels > 255))
+threshold_table <- data.frame(threshold = thresholds, count = threshold_counts,
+                               fraction = threshold_counts / length(pixels))
+stopifnot(identical(as.numeric(threshold_counts), c(64, 24, 24, 24, 0, 0)),
+          sum(pixels >= 210) == 24, sum(pixels_shifted > 220) == 24,
+          sum(pixels_shifted > 100) == 24, identical(dim(pixels), dim(pixels_shifted)),
+          min(pixels_shifted) == 55, max(pixels_shifted) == 240)
+write_csv(threshold_table, file.path(out, "threshold-results.csv"))
+four_bases <- data.frame(position = 1:4, base = c("A", "C", "G", "T"))
+write_csv(four_bases, file.path(out, "four-bases.csv"))
+stopifnot(nrow(read_csv(file.path(out, "four-bases.csv"), show_col_types = FALSE)) == 4)
+representation_source <- file.path(out, "representation-report.Rmd")
+writeLines(c(
+  '---', 'title: "Controlled representation changes"', 'output: html_document', '---', '',
+  '# Question and inputs', '',
+  'How do counts change when one stored label or each brightness value changes?',
+  'The sequence and image are artificial teaching data, not measured organisms.', '',
+  '```{r input}',
+  'dna <- readLines("data/dna.txt")',
+  'bases <- strsplit(dna, split = "")[[1]]',
+  'bases_changed <- bases', 'bases_changed[1] <- "G"',
+  'pixels <- as.matrix(read.csv("data/pixels.csv"))',
+  'pixels_shifted <- pixels + 30', '```', '',
+  'The original GC fraction is `r sum(bases == "G" | bases == "C") / length(bases)`.',
+  'After the change it is `r sum(bases_changed == "G" | bases_changed == "C") / length(bases_changed)`.', '',
+  '# Results', '',
+  '```{r threshold-table}',
+  'threshold_counts <- c(sum(pixels > 0), sum(pixels > 25), sum(pixels > 100),',
+  '                      sum(pixels > 209), sum(pixels > 210), sum(pixels > 255))',
+  'results <- data.frame(threshold = c(0,25,100,209,210,255),',
+  '                      count = threshold_counts, fraction = threshold_counts / 64)',
+  'knitr::kable(results)', '```', '',
+  '```{r original, fig.cap="Original toy image, intensities 25 and 210 on a zero-to-255 scale."}',
+  'plot.new()', 'rasterImage(as.raster(pixels / 255), 0, 0, 1, 1)', '```', '',
+  '```{r shifted, fig.cap="Same positions after adding 30; intensities 55 and 240 on the same scale."}',
+  'plot.new()', 'rasterImage(as.raster(pixels_shifted / 255), 0, 0, 1, 1)', '```', '',
+  '# Interpretation', '',
+  'The label change alters two counts but preserves the sequence length.',
+  'Adding thirty changes the threshold 220 count without moving matrix positions.',
+  'Pixel counts do not establish cell identity, physical area, or independent',
+  'biological replication; sequence counts do not establish function.'
+), representation_source)
+rmarkdown::render(representation_source, output_dir = out, knit_root_dir = root,
+                  envir = new.env(parent = globalenv()), quiet = TRUE)
+
+# Expanded days 23–25: genuinely fresh transfer data, primary and diagnostic.
+algae <- read_csv("data/algae.csv", show_col_types = FALSE)
+algae_summary <- algae |>
+  group_by(treatment) |>
+  summarise(n_enrolled = n(), n_available = sum(!is.na(biomass_mg)),
+            n_missing = sum(is.na(biomass_mg)), mean_mg = mean(biomass_mg, na.rm = TRUE),
+            sd_mg = sd(biomass_mg, na.rm = TRUE), .groups = "drop")
+algae_reference <- algae |> filter(treatment == "reference") |> pull(biomass_mg)
+algae_supplement <- algae |> filter(treatment == "supplement") |> pull(biomass_mg)
+algae_difference <- mean(algae_supplement, na.rm = TRUE) - mean(algae_reference)
+stopifnot(nrow(algae) == 24, anyDuplicated(algae$culture_id) == 0,
+          sum(!is.na(algae_reference)) == 12, sum(!is.na(algae_supplement)) == 11,
+          sum(is.na(algae$biomass_mg)) == 1,
+          is.na(algae$biomass_mg[algae$culture_id == "A19"]),
+          abs(mean(algae_reference) - 28.2) < 1e-10,
+          abs(mean(algae_supplement, na.rm = TRUE) - 33.91818181818) < 1e-9,
+          abs(algae_difference - 5.71818181818) < 1e-9,
+          max(algae_reference) == 41.7, max(algae_supplement, na.rm = TRUE) == 39)
+# Counterfactual zero is checked only to demonstrate an incorrect missing-value rule.
+incorrect_zero_mean <- sum(algae_supplement, na.rm = TRUE) / length(algae_supplement)
+stopifnot(abs(incorrect_zero_mean - 31.09166666667) < 1e-9)
+# Optional inference reuses, and does not expand, the taught Welch method.
+algae_test <- t.test(algae_supplement, algae_reference)
+print(algae_summary)
+print(algae_test)
+write_csv(algae_summary, file.path(out, "algae-transfer-summary.csv"))
+algae_plot <- ggplot(filter(algae, !is.na(biomass_mg)), aes(treatment, biomass_mg)) +
+  geom_point(position = position_jitter(width = .08, height = 0, seed = 23)) +
+  labs(x = "Culture allocation", y = "Dry biomass after seven days (mg)",
+       caption = "Each point is one independent culture; A19 spilled and is not plotted.") +
+  theme_minimal()
+ggsave(file.path(out, "algae-transfer.png"), algae_plot, width = 6, height = 4)
+
+algae_source <- file.path(out, "algae-brief.Rmd")
+writeLines(c(
+  '---', 'title: "Algae biomass: a short reproducible transfer memo"',
+  'output: html_document', '---', '',
+  '# Question and design', '',
+  'These simulated data describe 24 independently grown cultures, twelve randomly',
+  'allocated reference and twelve supplement conditions. Dry biomass was measured',
+  'once after seven days. A19 spilled before weighing; biomass is unavailable.',
+  'The culture is the independent unit, not each of its cells.', '',
+  '```{r input}',
+  'library(readr)', 'library(dplyr)', 'library(ggplot2)',
+  'algae <- read_csv("data/algae.csv", show_col_types = FALSE)',
+  'anyDuplicated(algae$culture_id)',
+  'group_summary <- algae |> group_by(treatment) |>',
+  '  summarise(n_enrolled = n(), n_available = sum(!is.na(biomass_mg)),',
+  '            n_missing = sum(is.na(biomass_mg)),',
+  '            mean_mg = mean(biomass_mg, na.rm = TRUE),',
+  '            sd_mg = sd(biomass_mg, na.rm = TRUE), .groups = "drop")',
+  'reference <- algae |> filter(treatment == "reference") |> pull(biomass_mg)',
+  'supplement <- algae |> filter(treatment == "supplement") |> pull(biomass_mg)',
+  'difference_mg <- mean(supplement, na.rm = TRUE) - mean(reference, na.rm = TRUE)',
+  '```', '',
+  '# Results', '',
+  'There are `r nrow(algae)` culture records and',
+  '`r sum(!is.na(algae$biomass_mg))` available biomass measurements.', '',
+  '```{r summary}', 'knitr::kable(group_summary, digits = 2)', '```', '',
+  '```{r observations, fig.cap="Independent cultures; A19 has unavailable biomass after a spill and is not plotted."}',
+  'ggplot(filter(algae, !is.na(biomass_mg)), aes(treatment, biomass_mg)) +',
+  '  geom_point(position = position_jitter(width = .08, height = 0, seed = 23)) +',
+  '  labs(x = "Culture allocation", y = "Dry biomass after seven days (mg)") +',
+  '  theme_minimal()', '```', '',
+  'The observed supplement-minus-reference mean difference is',
+  '`r round(difference_mg, 2)` mg. The reference culture A11 has the largest',
+  'individual measurement, despite the greater supplement mean.', '',
+  '# Interpretation and limitations', '',
+  'Supplement cultures had greater mean observed biomass, with overlap among',
+  'individual measurements. SD describes culture-to-culture spread; it is not',
+  'uncertainty in an effect. The descriptive memo adds no inferential claim.',
+  'One supplement result is unavailable, so the comparison is conditional on',
+  'the available observations and how the loss relates to the outcome.',
+  'A small simulated experiment cannot establish a response for all growing conditions.'
+), algae_source)
+rmarkdown::render(algae_source, output_dir = out, knit_root_dir = root,
+                  envir = new.env(parent = globalenv()), quiet = TRUE)
+
+# Day 24: portable extraction and a controlled missing-input failure.
+portable <- file.path(out, "portable-algae")
+dir.create(file.path(portable, "data"), recursive = TRUE, showWarnings = FALSE)
+dir.create(file.path(portable, "output"), showWarnings = FALSE)
+file.copy(algae_source, file.path(portable, "algae-brief.Rmd"), overwrite = TRUE)
+file.copy("introcomputing.Rproj", file.path(portable, "introcomputing.Rproj"), overwrite = TRUE)
+file.copy("data/algae.csv", file.path(portable, "data/algae.csv"), overwrite = TRUE)
+file.copy("data/README.md", file.path(portable, "data/README.md"), overwrite = TRUE)
+writeLines(c("Simulated independent-culture data; no original measurements.",
+             "Render algae-brief.Rmd from this project root.",
+             "R packages: readr,dplyr,ggplot2,rmarkdown,knitr."),
+           file.path(portable, "README.txt"))
+portable_source <- file.path(portable, "algae-brief.Rmd")
+rmarkdown::render(portable_source, quiet = TRUE, envir = new.env(parent = globalenv()))
+stopifnot(file.exists(file.path(portable, "algae-brief.html")))
+file.rename(file.path(portable, "data/algae.csv"), file.path(portable, "data/algae-temporarily-missing.csv"))
+missing_error <- tryCatch({
+  rmarkdown::render(portable_source, quiet = TRUE, envir = new.env(parent = globalenv()))
+  NULL
+}, error = function(error) conditionMessage(error))
+file.rename(file.path(portable, "data/algae-temporarily-missing.csv"), file.path(portable, "data/algae.csv"))
+stopifnot(is.character(missing_error), length(missing_error) == 1,
+          grepl("algae.csv", missing_error, fixed = TRUE))
+rmarkdown::render(portable_source, quiet = TRUE, envir = new.env(parent = globalenv()))
+false_source <- file.path(portable, "diagnostic-false-prose.Rmd")
+writeLines(c(readLines(portable_source), '', '# Intentionally false diagnostic sentence',
+             'All 24 cultures had a measured biomass outcome.'), false_source)
+rmarkdown::render(false_source, quiet = TRUE, envir = new.env(parent = globalenv()))
+stopifnot(file.exists(file.path(portable, "diagnostic-false-prose.html")))
+writeLines(c("Case 1: copied input renamed; expected rendering failure observed.",
+             paste("Observed error:", missing_error),
+             "Case 1 repair: restored exact name; successful fresh render.",
+             "Case 2: intentionally false prose still renders; contradiction requires scientific review."),
+           file.path(out, "reproduction-cases.txt"))
+# Keep intentionally false diagnostics outside the final portable package.
+unlink(c(false_source, sub("\\.Rmd$", ".html", false_source)))
+
+# Day 25: preserve the primary data and label sensitivity to one recorded high value.
+algae_without_a11 <- filter(algae, culture_id != "A11")
+diagnostic_ref <- filter(algae_without_a11, treatment == "reference")$biomass_mg
+diagnostic_supplement <- filter(algae_without_a11, treatment == "supplement")$biomass_mg
+diagnostic_difference <- mean(diagnostic_supplement, na.rm = TRUE) - mean(diagnostic_ref)
+stopifnot(nrow(algae_without_a11) == 23,
+          sum(!is.na(algae_without_a11$biomass_mg)) == 22,
+          abs(mean(diagnostic_ref) - 26.97272727273) < 1e-9,
+          abs(diagnostic_difference - 6.94545454545) < 1e-9,
+          mean(diagnostic_supplement, na.rm = TRUE) == mean(algae_supplement, na.rm = TRUE),
+          nrow(algae) == 24,
+          is.na(algae$biomass_mg[algae$culture_id == "A19"]))
+write_csv(data.frame(
+  analysis = c("primary_all_available", "diagnostic_a11_omitted_without_error_evidence"),
+  n_reference = c(12, 11), n_supplement = c(11, 11),
+  observed_difference_mg = c(algae_difference, diagnostic_difference)),
+  file.path(out, "primary-and-diagnostic.csv"))
+
+# Package the final tested source and actual inputs, then render its extracted copy.
+archive_path <- file.path(out, "algae-share.zip")
+local({
+  original_directory <- setwd(out)
+  on.exit(setwd(original_directory))
+  if (file.exists(archive_path)) unlink(archive_path)
+  status <- utils::zip(archive_path, files = "portable-algae", flags = "-r9Xq")
+  stopifnot(status == 0)
+})
+extracted <- tempfile("algae-recipient-")
+dir.create(extracted)
+unzip(archive_path, exdir = extracted)
+recipient_source <- file.path(extracted, "portable-algae/algae-brief.Rmd")
+rmarkdown::render(recipient_source, quiet = TRUE, envir = new.env(parent = globalenv()))
+stopifnot(file.exists(sub("\\.Rmd$", ".html", recipient_source)))
+cat("Expanded week 5 transfer, representation, fresh-culture reports, controlled failure, sensitivity and extracted-project checks passed.\n")
+
 cat("Week 5 reference computations and report passed. Artifacts:", out, "\n")

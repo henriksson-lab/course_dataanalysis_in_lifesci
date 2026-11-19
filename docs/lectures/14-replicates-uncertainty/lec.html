@@ -341,11 +341,16 @@ Data Analysis in Life Sciences
 </section>
 <section id="run-the-supplied-demonstration-do-not-write-a-simulator" class="slide level2">
 <h2>Run the supplied demonstration; do not write a simulator</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">14</span>)</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>means_4 <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">400</span>,</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="fu">sample</span>(population_mm, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>means_16 <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">400</span>,</span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="fu">sample</span>(population_mm, <span class="at">size =</span> <span class="dv">16</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/seedlings.csv'</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
+<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>population_mm <span class="ot">&lt;-</span> seedlings<span class="sc">$</span>growth_mm</span>
+<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">14</span>)</span>
+<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>means_4 <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">400</span>,</span>
+<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="fu">sample</span>(population_mm, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>means_16 <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">400</span>,</span>
+<span id="cb1-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="fu">sample</span>(population_mm, <span class="at">size =</span> <span class="dv">16</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>set.seed()</code> makes the random demonstration repeatable.</p>
 <aside class="notes">
 <p>The practical imports and defines population_mm before these lines. Explain sample as drawing values, replace=TRUE as allowing a source value again, and replicate as repeating the calculation. Students predict and interpret the result; functions and loops are not a new programming requirement.</p>
@@ -368,6 +373,180 @@ Data Analysis in Life Sciences
 <p>Which problem needs another independently chosen unit?</p>
 <aside class="notes">
 <p>Precision does not remove bias, dependence, or unrepresentative sampling. Another reading may help measurement consistency; another independently allocated or sampled unit addresses a different uncertainty. Avoid claiming that sample size alone guarantees a valid study.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-new-toy-source-makes-the-same-point" class="slide level2">
+<h2>A new toy source makes the same point</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-transfer-sampling.svg" height="350"></p>
+<figcaption>Sample means from 12 draws vary less than means from 3 draws from the same fixed transfer source.</figcaption>
+</figure>
+</div>
+<p>Both sampling processes reuse the same fixed recorded values.</p>
+<aside class="notes">
+<p>This is a supplied simulation, not new biological measurement or a treatment comparison. The transfer source combines groups only to illustrate sampling. Keep the target fixed while changing sample size.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="number-of-repeats-is-not-sample-size" class="slide level2">
+<h2>Number of repeats is not sample size</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-more-simulations.svg" height="350"></p>
+<figcaption>Increasing simulation repeats smooths the display without changing the sample size of 12 draws.</figcaption>
+</figure>
+</div>
+<p>More simulated estimates improve our picture of the sampling pattern.</p>
+<aside class="notes">
+<p>Compare100 and 1000 repeats, each using12 draws. More repetitions do not create more measured plants or shrink the underlying distribution as increasing independent sample size does.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="follow-the-levels-of-information" class="slide level2">
+<h2>Follow the levels of information</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-source-and-draws.svg" height="350"></p>
+<figcaption>Repeated simulated samples can contain the same source identifier multiple times.</figcaption>
+</figure>
+</div>
+<p>Observed source → sampled draws → one mean → repeated estimates.</p>
+<aside class="notes">
+<p>Replacement permits a value to appear twice. A stored source plant is not remeasured each time it is drawn by sample. Students should label each row in their simulation output as an estimate, not a new organism.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-precise-estimate-can-miss-the-question" class="slide level2">
+<h2>A precise estimate can miss the question</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-precise-but-shifted.svg" height="350"></p>
+<figcaption>A shifted source produces a narrow distribution centred away from the original source mean.</figcaption>
+</figure>
+</div>
+<p>Greater precision does not remove a common measurement offset.</p>
+<aside class="notes">
+<p>This schematic uses a known5 mm shift for illustration. It does not diagnose bias in the course study. A narrow distribution can describe a biased or irrelevant process very precisely.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="adapt-a-supplied-simulation-without-inventing-a-new-method" class="slide level2">
+<h2>Adapt a supplied simulation without inventing a new method</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/seedlings-transfer.csv'</span>,</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">14</span>)</span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>means_3 <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">400</span>, <span class="fu">mean</span>(<span class="fu">sample</span>(</span>
+<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>  transfer<span class="sc">$</span>growth_mm, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Change size to 12 in a second object; preserve the first.</p>
+<aside class="notes">
+<p>Load readr/dplyr before this supplied block. Students need to understand source, draw size, replacement, repetitions, and seed; they are not asked to author loops or a sampling algorithm.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="different-repeat-settings-answer-different-questions" class="slide level2">
+<h2>Different repeat settings answer different questions</h2>
+<p>Change one setting at a time:</p>
+<ul>
+<li>Seed: another reproducible random sequence.</li>
+<li>Draw size: more values in each estimated mean.</li>
+<li>Repetitions: more simulated means to inspect.</li>
+</ul>
+<p>Which change alters the original recorded plants? <strong>None.</strong></p>
+<aside class="notes">
+<p>Avoid a recipe of trying seeds until a pretty plot appears. The saved source is unchanged, and the simulation is conditional on that source distribution.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="choose-independent-units-before-counting-rows" class="slide level2">
+<h2>Choose independent units before counting rows</h2>
+<p>One plant measured twenty times and twenty independent plants are different designs.</p>
+<p><strong>What could technical repeats help assess?</strong> <strong>What needs additional independently sampled or assigned units?</strong></p>
+<aside class="notes">
+<p>Technical repeats can assess measurement repeatability under appropriate conditions. Questions about variation among plants or treatment allocations need independent biological units. This is why repeating balance readings of one synthesis does not create more independent runs.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-defensible-simulation-explanation-has-boundaries" class="slide level2">
+<h2>A defensible simulation explanation has boundaries</h2>
+<p>State the fixed source, sampling rule, estimate, and comparison.</p>
+<p>Then state what the demonstration <strong>does not establish</strong> about a natural population or treatment.</p>
+<aside class="notes">
+<p>The required transfer note should distinguish source SD from SD among means, stable patterns from exact seed-dependent values, and a toy combined-treatment source from a real inferential design.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

@@ -214,6 +214,99 @@ percentage points**. Do not call that an 8.33% relative increase, and do not
 claim an inferential conclusion from these summaries alone.
 :::
 
+
+## Extended practical — plan, challenge, and improve the chosen study
+
+Allow about 90 minutes in addition to the initial analysis. Continue **one**
+selected main report: duckweed or organic yield. The additional work is to make
+its reasoning inspectable, not to complete both alternatives. Keep a short
+`reports/study-decisions.txt` beside your other notes.
+
+1. Before changing code, write an analysis plan of about 150–250 words. State
+   the question, observational unit, input file, outcome calculation, units,
+   missing-value rule, plot, and comparison direction. State which uncertainty
+   statement your chosen route supports. For the organic descriptive route,
+   explicitly say that no confidence interval or hypothesis test is being added.
+2. Create a small check table in your notes with one row each for identifiers,
+   group labels, numeric measurements, missing values, and derived values. Put
+   the command or inspection used in one column and the actual finding in
+   another. “All checks passed” alone is not enough evidence for another person.
+3. Select one record and verify its arithmetic by hand. For duckweed there is
+   no change score: final biomass itself is the outcome. For organic Y01,
+   100 times 0.62 g divided by the supplied 1.00 g maximum gives 62%. Explain
+   why subtracting the two organic masses would answer a different question.
+4. Compare the two group means in both directions. Confirm that reversing their
+   order changes the sign, not the size of the observed difference. In the
+   duckweed route, check that the confidence interval's direction agrees with
+   the order passed to the taught test. The descriptive route needs only the
+   directed observed difference in percentage points.
+5. Write one draft interpretation before looking at the next paragraph. Then
+   audit the supplied faulty interpretation below for your chosen route. Name
+   at least three problems, and rewrite it using the actual evidence.
+
+**Duckweed draft to repair:** “There were 20 biomass results. The nutrient
+plants all grew more, and the group SD is the error in the treatment effect.
+The p-value tells us the probability that nutrients work.”
+
+**Organic draft to repair:** “The protocol collecting more grams must have
+higher percentage yield. Each balance reading is another independent run.
+A larger yield proves that the product is purer.”
+
+6. Insert the corrected interpretation into your report, with a caption that
+   identifies observations, units, and any missing measurement. Include the
+   source of the missingness/assumption information rather than pretending the
+   numbers alone explained it. Add at least one inline calculated result using
+   the pattern from week 2, so a rerun updates that result automatically.
+7. Restart, render, and compare the rendered statements with the current
+   summary table. Save the plan and the three most consequential decisions.
+   Do not introduce another test because a sentence feels difficult to write.
+
+::: {.callout-tip collapse="true"}
+## Hint: repair the meaning, not only the wording
+
+Duckweed has 20 enrolled flasks but 19 available biomass measurements, and the
+observations overlap. SD describes flask variation, not uncertainty in an effect.
+The p-value is conditional on a null model and assumptions. In the organic case,
+starting scales differ, yield has a supplied denominator, the run is independent,
+and purity was assumed. Use these distinctions to rewrite the draft rather
+than merely replacing “proves” with “suggests”.
+:::
+
+## Independent transfer — a fresh culture dataset
+
+Allow about 60–90 minutes. This is a short transfer memo, not a second full main
+study report. Use `data/algae.csv`, described here so no microbiology knowledge
+is required. Algae are photosynthetic organisms; our measured quantity is simply
+harvested dry biomass in mg. Twenty-four cultures were grown separately and
+randomly allocated `reference` or `supplement`, twelve each. They were harvested
+once after seven days. A19 spilled before weighing. One culture is the independent
+experimental unit; its many cells do not add independent replicates.
+
+1. Save `algae-transfer.R` at the project root. Import the file and inspect the
+   columns `culture_id`, `treatment`, and `biomass_mg`. Record rows, unique IDs,
+   labels, and missing measurements before calculating a summary.
+2. Summarise enrolled, available, and missing counts by group, then mean and SD
+   of available biomass. Keep A19 as a missing raw value. Explain the difference
+   between the two counts rather than replacing the blank with zero.
+3. Make an individual-point plot with treatment on x and biomass in mg on y.
+   Use the same display pattern already taught. Include the unavailable
+   measurement in its caption, although it has no plotted y value.
+4. Calculate the observed supplement-minus-reference mean difference. Report
+   its units and direction. No new test is necessary for this memo; students
+   already comfortable with week 4 may verify the taught Welch calculation,
+   but a test is not a substitute for the requested description.
+5. In `reports/algae-transfer.txt`, write a result paragraph of 100–150 words
+   containing the independent unit, counts, direction, group spread/overlap,
+   and a missingness limitation. State one question the plot cannot settle.
+6. Save a summary CSV and plot in `output/` with the prefix `algae-transfer`.
+   Restart and run the script from the top. Tomorrow's reproduction work will
+   use these saved inputs and code, not your current Environment pane.
+
+**Checks:** there are 24 unique cultures; 12 reference and 11 supplement biomass
+measurements are available. A19 remains missing. The group with the larger mean
+need not contain the largest individual observation. Use your table and plot to
+check that distinction rather than assuming every treated unit must be larger.
+
 **Before you finish:** save a first rendered report and a note of anything that
 failed. Tomorrow we will test whether someone else can reproduce it:
 [Day 24](24-reproduce.qmd).

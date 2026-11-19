@@ -85,6 +85,11 @@ This additional picture is regenerated from the course values using a fixed illu
 ## Run the supplied demonstration; do not write a simulator
 
 ```r
+library(readr)
+library(dplyr)
+seedlings <- read_csv('data/seedlings.csv', show_col_types = FALSE) |>
+  mutate(growth_mm = final_mm - initial_mm)
+population_mm <- seedlings$growth_mm
 set.seed(14)
 means_4 <- replicate(400,
   mean(sample(population_mm, size = 4, replace = TRUE)))
@@ -108,6 +113,98 @@ Which problem needs another independently chosen unit?
 
 ::: notes
 Precision does not remove bias, dependence, or unrepresentative sampling. Another reading may help measurement consistency; another independently allocated or sampled unit addresses a different uncertainty. Avoid claiming that sample size alone guarantees a valid study.
+:::
+
+## A new toy source makes the same point
+
+![Sample means from 12 draws vary less than means from 3 draws from the same fixed transfer source.](extended-transfer-sampling.svg){height=350px}
+
+Both sampling processes reuse the same fixed recorded values.
+
+::: notes
+This is a supplied simulation, not new biological measurement or a treatment comparison. The transfer source combines groups only to illustrate sampling. Keep the target fixed while changing sample size.
+:::
+
+## Number of repeats is not sample size
+
+![Increasing simulation repeats smooths the display without changing the sample size of 12 draws.](extended-more-simulations.svg){height=350px}
+
+More simulated estimates improve our picture of the sampling pattern.
+
+::: notes
+Compare100 and 1000 repeats, each using12 draws. More repetitions do not create more measured plants or shrink the underlying distribution as increasing independent sample size does.
+:::
+
+## Follow the levels of information
+
+![Repeated simulated samples can contain the same source identifier multiple times.](extended-source-and-draws.svg){height=350px}
+
+Observed source → sampled draws → one mean → repeated estimates.
+
+::: notes
+Replacement permits a value to appear twice. A stored source plant is not remeasured each time it is drawn by sample. Students should label each row in their simulation output as an estimate, not a new organism.
+:::
+
+## A precise estimate can miss the question
+
+![A shifted source produces a narrow distribution centred away from the original source mean.](extended-precise-but-shifted.svg){height=350px}
+
+Greater precision does not remove a common measurement offset.
+
+::: notes
+This schematic uses a known5 mm shift for illustration. It does not diagnose bias in the course study. A narrow distribution can describe a biased or irrelevant process very precisely.
+:::
+
+## Adapt a supplied simulation without inventing a new method
+
+```r
+transfer <- read_csv('data/seedlings-transfer.csv',
+                     show_col_types = FALSE) |>
+  mutate(growth_mm = final_mm - initial_mm)
+set.seed(14)
+means_3 <- replicate(400, mean(sample(
+  transfer$growth_mm, size = 3, replace = TRUE)))
+```
+
+Change size to 12 in a second object; preserve the first.
+
+::: notes
+Load readr/dplyr before this supplied block. Students need to understand source, draw size, replacement, repetitions, and seed; they are not asked to author loops or a sampling algorithm.
+:::
+
+## Different repeat settings answer different questions
+
+Change one setting at a time:
+
+- Seed: another reproducible random sequence.
+- Draw size: more values in each estimated mean.
+- Repetitions: more simulated means to inspect.
+
+Which change alters the original recorded plants? **None.**
+
+::: notes
+Avoid a recipe of trying seeds until a pretty plot appears. The saved source is unchanged, and the simulation is conditional on that source distribution.
+:::
+
+## Choose independent units before counting rows
+
+One plant measured twenty times and twenty independent plants are different designs.
+
+**What could technical repeats help assess?**
+**What needs additional independently sampled or assigned units?**
+
+::: notes
+Technical repeats can assess measurement repeatability under appropriate conditions. Questions about variation among plants or treatment allocations need independent biological units. This is why repeating balance readings of one synthesis does not create more independent runs.
+:::
+
+## A defensible simulation explanation has boundaries
+
+State the fixed source, sampling rule, estimate, and comparison.
+
+Then state what the demonstration **does not establish** about a natural population or treatment.
+
+::: notes
+The required transfer note should distinguish source SD from SD among means, stable patterns from exact seed-dependent values, and a toy combined-treatment source from a real inferential design.
 :::
 
 ## Practical: draw the design and explain the mean

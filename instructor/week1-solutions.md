@@ -192,3 +192,30 @@ explain the selected record count, and reopen their extracted findings. Listen
 for "it's in Excel" or "it's in the terminal" as location answers: these name
 applications, not saved file locations. Use another short navigation attempt to
 resolve the misconception before adding syntax.
+
+## Expanded practicals and independent transfer, days 1–5
+
+These are core practice blocks, not additional chemistry alternatives or grades.
+Allow about 75–90 minutes for a guided extension and 60–90 minutes for transfer;
+include time for prediction, checking, explaining and recovering saved work.
+
+| Day | Expected evidence and checks |
+| --- | --- |
+| 1 | file-audit.txt gives computer/folder/full names; header versus P01 record distinguished; renamed copy still contains CSV text; raw files preserved. Transfer T01 is 25.3 to 40.3 mm, growth 15.0 mm; T18 treated 21.6 to 43.0 mm. Student reopens the receipt without recent-files help. |
+| 2 | Saved/discarded observations acknowledge autosave if present; tree changes when map-a moves into map-b; ordinary saved note persists separately from a process. Future-lab contains explicitly labelled placeholders, ordinary copied input, README and documented internal paths; copy tests portability but is not a second-machine backup. |
+| 3 | Quoted field notes is one folder; unquoted words may become separate arguments. Failed cd leaves pwd unchanged. Two shells retain different current folders. From results/notes to neighbouring inputs use the common ancestor: up twice, then inputs. Log states computer and predicted versus observed location. |
+| 4 | Source manifest: 5 lines / 4 records / 2 treated. Trap copy: untreated makes a third substring match. Overwriting the disposable extract changes contents without changing its name; source is never used as output. Deliberate rename of S04 breaks its manifest path; contents S04, 39.8 plus the known action support restoring the filename. |
+| 5 | Version1 archive retains old sentence after ordinary source edit; new version2 extracted elsewhere contains correction. Receiver README identifies selection, units and missing source dependencies. Both fixture routes match 2 records. Shell/R classification correct; R arithmetic 18.6 and mean 14. Logs do not claim a local rehearsal verifies remote access. |
+
+A representative safe shell check in a temporary directory follows the same
+operations as the student work: create nested directories and a quoted name;
+inspect and extract the actual archive; make a manifest copy with S01 labelled
+untreated; verify three substring matches; preserve the original; rename and
+restore S04 in a copied extraction; package a report snapshot and verify a
+subsequent source edit is absent from its old extracted copy. Do not demonstrate
+input-equals-output redirection on originals. GUI actions and OS-specific
+extension/autosave behaviour still need a supported student-machine pilot.
+
+Reproducible command paths are relative to the disposable workspace. When
+marking a check as complete, ask the student to locate the ordinary file and
+explain the action; a memorised output alone is insufficient.

@@ -4,6 +4,12 @@ This is a first teaching draft, not an approved syllabus or an examination plan.
 Students have no assumed file-system or programming knowledge. The current
 five-week sequence is in `contentplan.md`.
 
+The user subsequently requested approximately doubling lecture and exercise
+content to support five weeks of study. `instructor/expansion-contract.md` defines
+that work: substantial daily extended/independent blocks and fresh inputs,
+without broadening the statistical method list or adding chemistry prerequisites.
+`study-plan.qmd` sets out learner-workload estimates; these require piloting.
+
 Chemistry contexts must be self-contained. Completion of Fundamentals of
 Chemistry (5KE165), or recall of a chemical formula or method, is not required
 to understand an instruction. Supply definitions, inputs, constants, units,

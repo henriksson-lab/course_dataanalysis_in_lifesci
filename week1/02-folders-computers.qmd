@@ -136,6 +136,86 @@ it is not protection against losing the whole laptop. Keep another copy using
 the university's supported backup or storage service once the teaching team
 identifies it. Check that a copy completed and that you can retrieve it.
 
+
+## Extended practical — explain the computer through saved work
+
+Plan about 75–90 minutes for the following investigations. Use disposable notes
+under `practice`, never a raw measurement file. “The computer remembers it” can
+mean several things: a program still holds information in memory, an editor
+restores a draft, or a file has actually been saved. This block asks you to gather
+observations that distinguish those possibilities instead of guessing from what
+one window happens to show.
+
+1. Draw the project tree on paper with `data`, `output`, `reports`, and your
+   `practice` folder. Circle the project root. Mark the original seedling table,
+   one derived practice copy, and yesterday's audit note. Follow the tree in the
+   file manager and correct any branch your drawing put in the wrong place.
+2. Make `practice/memory-test.txt` containing “version saved to storage”. Save,
+   close, and reopen it. Then add “unsaved change” without choosing Save. Describe
+   what happens when you close and reopen. If the application autosaves or
+   restores the draft, record that behaviour; do not change operating-system
+   settings to manufacture a preferred result.
+3. Save a second copy as `practice/saved-copy.txt`. Close the application, then
+   open this ordinary file from the file manager. Identify what persisted after
+   the program stopped. Explain why an installed editor, its running process,
+   and a saved note are three related but different things.
+4. Create `practice/map-a` and `practice/map-b`. Put a copy of your note in
+   `map-a`. Write directions to it starting from the project root, then write
+   different directions starting inside `map-b`. Use the parent folder in your
+   second route; do not invent a `data` folder inside every location.
+5. Move the **practice** `map-a` folder into `map-b`, using the file manager.
+   Predict which of your two written routes stops being correct. Test both
+   routes and revise your map. The note's contents need not change when its
+   address changes. Do not move the actual course `data` folder.
+6. Write `reports/day02-investigation.txt` with your before/after tree, what you
+   observed about saving, and an explanation of why RAM capacity and disk
+   capacity answer different practical questions. Include what you are unsure
+   about, rather than treating the editor's recovery feature as understood.
+
+::: {.callout-tip collapse="true"}
+## Hint: decide whether an observation concerns contents or location
+
+If a sentence in the note changed, you are checking contents. If a route no
+longer reaches the same note, you are checking location. Copying can leave two
+sets of contents in two locations; moving changes the route. Use the file
+manager to inspect the actual folders before renaming or moving anything else.
+:::
+
+## Independent transfer — plan a portable laboratory project
+
+Allow 60–90 minutes and work from a blank page. Imagine your next practical gives
+you a CSV of measurements, three photographs, and a protocol document. A partner
+will write an interpretation, and both of you need to recognise the original
+inputs next week. You are designing an organisation scheme, not simulating
+cloud synchronisation or creating unnecessary copies of the whole course.
+
+1. Create `practice/future-lab` with `data`, `images`, `reports`, and `output`
+   folders. Make three small plain-text placeholder notes in suitable folders,
+   explicitly labelling them placeholders. Do not rename a text note `.jpg` and
+   claim that it is a photograph. Explain where actual image files would go.
+2. Copy `data/seedlings-transfer.csv` from the course project into this practice
+   project's `data` folder. Treat that file as its supplied measurement input.
+   Write a README note at the practice root describing the folder roles and
+   identifying that the copied input is simulated course data.
+3. Give the measurement file's relative path starting at `future-lab`, then
+   starting inside its `reports` folder. Draw the routes. Explain why a route
+   containing your own account name would be inconvenient for a classmate.
+4. Make a separate copy of `future-lab` under another disposable folder you
+   choose. Reopen its README and data through that copy's tree. Does the relative
+   route from the new project root still work? Compare with an absolute route
+   written before copying. Record which project you will use for this test.
+5. Add three labelled boxes to your map: laptop, cloud storage if used, and a
+   remote Linux computer. Draw only the copying or synchronising links you
+   actually know exist. Put a question mark where service details are pending.
+   A remote desktop is a view of another machine, not proof that two folders
+   share contents.
+
+**Check and retain:** your README, two folder maps, and `day02-investigation.txt`.
+From `future-lab` the measurement path is `data/seedlings-transfer.csv`; from
+its `reports` folder a route goes up to the parent before entering `data`.
+These are practice projects, so leave the original course project untouched.
+
+
 ## Check your understanding
 
 ::: {.callout-note collapse="true"}

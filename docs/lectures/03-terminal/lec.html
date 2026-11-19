@@ -366,6 +366,182 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
+<section id="spaces-change-argument-boundaries" class="slide level2">
+<h2>Spaces change argument boundaries</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="quoted-arguments.svg" height="350"></p>
+<figcaption>Unquoted mkdir field notes creates separate names while quoted field notes is one name.</figcaption>
+</figure>
+</div>
+<p>Quote a space-containing name, or use a simple name while learning.</p>
+<aside class="notes">
+<p>Demonstrate only inside a disposable practice tree. The shell divides unquoted words into arguments; it does not read a natural-language folder description. Tab completion helps use names actually present.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="read-a-command-as-an-action-with-inputs" class="slide level2">
+<h2>Read a command as an action with inputs</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="st">"field notes"</span></span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"field notes"</span></span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Name the command, destination argument, and resulting location.</p>
+<aside class="notes">
+<p>Options modify behaviour; arguments supply values. Here quotes group the two-word destination, not a new kind of folder. Do not type the prompt. Explain the distinction before students copy the examples.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-failed-cd-leaves-you-where-you-were" class="slide level2">
+<h2>A failed cd leaves you where you were</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="failed-cd.svg" height="350"></p>
+<figcaption>A failed change-directory command leaves the original current directory unchanged.</figcaption>
+</figure>
+</div>
+<p>An error message is information about the attempted action.</p>
+<aside class="notes">
+<p>The practical asks students to record the failed destination and pwd result. They should not try sudo, random system settings, or broad deletion. Return to a known workspace and inspect names to recover.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="prediction-which-commands-create-something" class="slide level2">
+<h2>Prediction: which commands create something?</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
+<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> readings</span>
+<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> readings</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Which line changes storage? Which changes the shell’s starting location?</p>
+<aside class="notes">
+<p>mkdir creates a directory; cd changes that shell’s working directory; pwd and ls inspect. Their output or silence should be connected to an action rather than judged as successful solely because text appeared.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="two-shells-can-look-at-different-folders" class="slide level2">
+<h2>Two shells can look at different folders</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="shell-cwd.svg" height="350"></p>
+<figcaption>Two terminal windows have independently maintained current working directories.</figcaption>
+</figure>
+</div>
+<p>Moving Shell A does not automatically move Shell B.</p>
+<aside class="notes">
+<p>Open two actual windows and record each pwd. It is possible to inspect the same files from both while standing in different folders. File-manager location is another independent view. These are local shells unless an SSH connection has been made.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="recover-with-a-named-return-point" class="slide level2">
+<h2>Recover with a named return point</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/introcomputing-shell</span>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Check the actual tree before taking the next route.</p>
+<aside class="notes">
+<p>The tilde refers to the current account’s home on this computer. It is not the root of the entire filesystem. This return point is useful because the course deliberately created it; a path to a missing workspace cannot conjure it into existence.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="follow-the-route-from-the-stated-start" class="slide level2">
+<h2>Follow the route from the stated start</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="route-two-starts.svg" height="350"></p>
+<figcaption>A route from nested notes to neighbouring inputs must go up twice.</figcaption>
+</figure>
+</div>
+<p>From results/notes, reach inputs through the common parent.</p>
+<aside class="notes">
+<p>Have students draw the tree and predict before commands. The independent route challenge asks for root to notes, notes to inputs, and inputs to the workspace. A correct path needs the correct starting place and existing destination names.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-command-log-records-reasoning" class="slide level2">
+<h2>A command log records reasoning</h2>
+<p>For each test, save:</p>
+<ul>
+<li>Starting folder and command.</li>
+<li>Predicted ending location.</li>
+<li>Actual pwd or listing.</li>
+<li>Recovery if the prediction was wrong.</li>
+</ul>
+<aside class="notes">
+<p>The log can be a plain-text note edited graphically; no logging software or shell scripting is needed. Include the computer, especially if the exercise is later repeated remotely. A recorded error and successful recovery are useful evidence of understanding.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="connect-words-to-the-graphical-view" class="slide level2">
 <h2>Connect words to the graphical view</h2>
 <p><a href="../../week1/03-terminal.html">Open the practical and notes</a>.</p>

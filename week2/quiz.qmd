@@ -93,5 +93,65 @@ inputs; a larger raw mass is not necessarily a greater percentage when starting
 scales differ. This question is a numerical transfer check, not a lab procedure.
 :::
 
+## 7. A stored result becomes stale
+
+After assigning initial_mm <- 20, final_mm <- 37, and growth_mm <- final_mm - initial_mm, you set final_mm <- 39. What is growth_mm before and after rerunning the subtraction?
+
+::: {.callout-note collapse="true"}
+## Worked answer
+
+It remains 17 until the subtraction runs again, then becomes 19 mm. An assigned object holds its stored result; it is not a live spreadsheet formula that automatically recomputes every dependency. Save the correct order in the script and rerun from its inputs.
+:::
+
+## 8. Equal lengths but wrong plants
+
+Initial lengths are c(20,22,19). The correct final vector is c(37,40,34), but a copy has been reordered to c(34,37,40). Both vectors have length three. Is subtraction biologically justified?
+
+::: {.callout-note collapse="true"}
+## Worked answer
+
+Not by equal length alone. R subtracts positions, so the reordered copy gives 14,15,21 mm for incorrect pairs. The correct correspondence gives 17,18,15 mm. Verify identities and order as well as compatible vector lengths.
+:::
+
+## 9. Audit the new input
+
+The transfer study is supplied as 18 independent plants, nine per group. Your report still says 24 plants. Which evidence and source lines should you inspect?
+
+::: {.callout-note collapse="true"}
+## Worked answer
+
+Check the imported filename, project and object; inspect dim(), distinct plant IDs, group labels/counts and missingness. Then check inline and manually written prose against that input. The expected transfer table is 18 by 4 with 18 unique IDs, nine records per group and no missing lengths.
+:::
+
+## 10. A supplied concentration calculation
+
+No chemistry recall is needed: amount in mol = mass_g / supplied molar_mass_g_mol; concentration in mmol/L = 1000 × amount / final_volume_l. For 0.2922 g, 58.44 g/mol and 100 mL final volume, what is the result?
+
+::: {.callout-note collapse="true"}
+## Worked answer
+
+100 mL = 0.100 L. The amount is 0.005 mol, giving 0.050 mol/L or 50 mmol/L. Doubling only mass gives 100 mmol/L; doubling only volume gives 25 mmol/L. The quantity refers to final total solution volume, not a solvent volume before addition.
+:::
+
+## 11. An impossible dilution request
+
+The supplied rule is stock volume = target × final volume / stock concentration. A request has stock 100 mmol/L, target 200 mmol/L and final volume 50 mL. What numerical result appears, and why is it not a valid preparation recipe?
+
+::: {.callout-note collapse="true"}
+## Worked answer
+
+The formula gives 100 mL of stock, exceeding the requested 50 mL total. The target is more concentrated than the stock, so dilution by adding solvent alone cannot achieve it. Preserve the row and flag it rather than deleting it or inventing stronger stock. These are numerical cases, not wet-lab instructions.
+:::
+
+## 12. Source, HTML and a revision
+
+You corrected an HTML caption directly, then rendered the R Markdown source again and the correction vanished. Where should the revision live, and what should be tested?
+
+::: {.callout-note collapse="true"}
+## Worked answer
+
+Edit the .Rmd source and render it. The HTML is a generated reading copy and can be replaced. Check the new output location, caption, units, input description and inline counts, then rerender from a fresh session with the required ordinary data files included.
+:::
+
 Return to [your first report](10-first-report.qmd), or continue to
 [data quality](../week3/11-data-quality.qmd).

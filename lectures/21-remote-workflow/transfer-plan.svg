@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>A transfer plan specifies both project locations and the evidence checked</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="45" y="90" width="360" height="210" rx="10" fill="#f8fafc" stroke="#2a7f8f" stroke-width="3"/>
+<line x1="225" y1="300" x2="225" y2="340" stroke="#2a7f8f" stroke-width="8"/>
+<line x1="145" y1="340" x2="305" y2="340" stroke="#2a7f8f" stroke-width="8"/>
+<text x="225" y="70" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Source copy</text>
+<rect x="690" y="90" width="360" height="210" rx="10" fill="#f8fafc" stroke="#6b4fa0" stroke-width="3"/>
+<line x1="870" y1="300" x2="870" y2="340" stroke="#6b4fa0" stroke-width="8"/>
+<line x1="790" y1="340" x2="950" y2="340" stroke="#6b4fa0" stroke-width="8"/>
+<text x="870" y="70" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Destination copy</text>
+<text x="225" y="155" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">data/algae.csv</text>
+<text x="225" y="205" font-family="Arial, sans-serif" font-size="22" fill="#203247" text-anchor="middle" font-weight="normal">24 rows; A19 unavailable</text>
+<text x="870" y="155" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">data/algae.csv</text>
+<text x="870" y="205" font-family="Arial, sans-serif" font-size="22" fill="#203247" text-anchor="middle" font-weight="normal">Repeat the content checks</text>
+<line x1="440" y1="190" x2="660" y2="190" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="550" y="405" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">A filename is only one field in the transfer record</text>
+</svg>

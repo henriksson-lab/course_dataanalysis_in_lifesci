@@ -367,6 +367,180 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
+<section id="type-and-meaning-are-different-checks" class="slide level2">
+<h2>Type and meaning are different checks</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="import-roles.svg" height="350"></p>
+<figcaption>Imported fields include identifier labels and measurements with stated units.</figcaption>
+</figure>
+</div>
+<p>Numeric storage alone does not authorise averaging or dividing columns.</p>
+<aside class="notes">
+<p>The solutions table has IDs and names as labels, with numeric mass, molar mass and volume. A supplied chemical name is context, not a request to identify a structure. The dictionary establishes units and row meaning.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="inspect-more-than-the-first-displayed-rows" class="slide level2">
+<h2>Inspect more than the first displayed rows</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings-transfer.csv"</span>,</span>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(transfer)</span>
+<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(transfer)</span>
+<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(transfer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>head() is a preview, not the sample-size definition.</p>
+<aside class="notes">
+<p>The imported table is 18 by 4; initial and final measurements belong to the same plant in each row. Inspect both ends and object structure rather than inferring 24 plants from the preceding lesson.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="check-the-supplied-studys-expected-structure" class="slide level2">
+<h2>Check the supplied study’s expected structure</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="transfer-inventory.svg" height="350"></p>
+<figcaption>The independent transfer study has 18 plants split nine per group.</figcaption>
+</figure>
+</div>
+<p>Row counts, unique IDs, and group counts answer related but distinct questions.</p>
+<aside class="notes">
+<p>Use length(plant_id), length(unique(plant_id)), and table(treatment). Repeated IDs can be legitimate in another design; here one row per plant sets the expectation. Random allocation is stated in the design, not demonstrated by sorted rows.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-filename-that-opens-is-not-the-whole-audit" class="slide level2">
+<h2>A filename that opens is not the whole audit</h2>
+<p>Record the source path, dimensions, types, identifiers, groups, and missing counts.</p>
+<p>Name two facts that only the dictionary provides.</p>
+<aside class="notes">
+<p>Units, random allocation, experimental unit, elapsed time and simulation status are not established by a successful import. Suppressing the type message does not replace inspection.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="zero-and-unavailable-give-different-calculations" class="slide level2">
+<h2>Zero and unavailable give different calculations</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="missing-zero-means.svg" height="350"></p>
+<figcaption>Ignoring one unavailable reading gives mean 15, while recording a genuine zero gives mean 10.</figcaption>
+</figure>
+</div>
+<p>The number of available measurements changes too.</p>
+<aside class="notes">
+<p>For c(10, NA, 20), ordinary mean returns NA; na.rm = TRUE gives 15 from two available values. The vector c(10, 0, 20) has mean 10 from three measurements. Replacing missing by zero invents a value.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="read-the-next-table-before-choosing-operations" class="slide level2">
+<h2>Read the next table before choosing operations</h2>
+<p>Import solutions.csv, then inspect:</p>
+<ul>
+<li>Six rows and five columns.</li>
+<li>Unique solution IDs and two solute labels.</li>
+<li>Numeric mass, molar mass, and final volume.</li>
+<li>Units and row meaning from the supplied dictionary.</li>
+</ul>
+<aside class="notes">
+<p>Define a mole as a chemical amount unit and molar mass as grams per mole. Today the learner audits inputs; the next lesson derives concentrations. These are numerical preparation cases, not independently allocated experimental groups.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-same-kind-of-project-may-hold-different-inputs" class="slide level2">
+<h2>The same kind of project may hold different inputs</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="project-identity.svg" height="350"></p>
+<figcaption>Separate study folders may contain 24 or 18 records with similar column names.</figcaption>
+</figure>
+</div>
+<p>Check which input produced the result before changing the written sample size.</p>
+<aside class="notes">
+<p>A wrong project with a plausible-looking filename can produce plausible output. Have a peer rerun the script fresh and identify each audit. Source provenance matters even when file.exists returns TRUE.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="keep-the-import-audit-useful-to-another-person" class="slide level2">
+<h2>Keep the import audit useful to another person</h2>
+<p>A strong audit gives evidence:</p>
+<p>“18 rows, 18 distinct IDs, nine per group, no missing lengths.”</p>
+<p>It also states what was supplied by the study design.</p>
+<aside class="notes">
+<p>A useful audit records specific evidence rather than simply saying checked. Save the two audit notes and script. Unusual range values prompt questions and source inspection, not automatic deletion.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="import-a-second-table-deliberately" class="slide level2">
 <h2>Import a second table deliberately</h2>
 <p><a href="../../week2/07-import.html">Open the practical and notes</a>.</p>

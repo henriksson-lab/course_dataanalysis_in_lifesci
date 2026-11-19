@@ -384,6 +384,180 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
+<section id="the-same-marginal-means-do-not-validate-a-pairing" class="slide level2">
+<h2>The same marginal means do not validate a pairing</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-sorted-pairs.svg" height="350"></p>
+<figcaption>Valid pairings and independently sorted columns have identical mean change but different change variability.</figcaption>
+</figure>
+</div>
+<p>Identity influences the uncertainty calculation, even when the mean agrees.</p>
+<aside class="notes">
+<p>For the actual source, correct SD of change is about 1.018 rate units; independently sorted columns give about.505. The changed uncertainty is artificial. A smaller p-value after sorting is not improved evidence.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="look-at-which-measurements-the-lines-connect" class="slide level2">
+<h2>Look at which measurements the lines connect</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-identity-lines.svg" height="350"></p>
+<figcaption>Originalplant pairings and artificialrank matchings connect different before-and-after values.</figcaption>
+</figure>
+</div>
+<p>Keep a plant identifier attached to both of its measurements.</p>
+<aside class="notes">
+<p>Sorting whole rows preserves pairs; sorting columns separately destroys identity. A matching based on numerical rank is not a replacement for the recorded subject identifier.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-deliberately-wrong-object-exposes-the-trap" class="slide level2">
+<h2>A deliberately wrong object exposes the trap</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>wrong_sorted_change <span class="ot">&lt;-</span> <span class="fu">sort</span>(paired_data<span class="sc">$</span>after_umol_m2_s) <span class="sc">-</span></span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">sort</span>(paired_data<span class="sc">$</span>before_umol_m2_s)</span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(paired_data<span class="sc">$</span>change)</span>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(wrong_sorted_change)</span>
+<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(paired_data<span class="sc">$</span>change)</span>
+<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(wrong_sorted_change)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Never overwrite the valid paired object with this demonstration.</p>
+<aside class="notes">
+<p>The first two means agree. The SDs differ. Ask why subtracting marginal means cannot check whether identities were preserved. Keep the source CSV untouched and label the wrong demonstration unambiguously.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="one-analysis-two-equivalent-computations" class="slide level2">
+<h2>One analysis, two equivalent computations</h2>
+<p>Paired comparison of before and after: <code>t.test(after, before, paired = TRUE)</code></p>
+<p>One-sample comparison of correctly matched changes with zero: <code>t.test(change, mu = 0)</code></p>
+<p>These analyse the same within-unit differences.</p>
+<aside class="notes">
+<p>The estimate,interval, and p-value agree when the exact same complete differences are supplied. They are not two independent pieces of evidence and should not be reported as separate confirming experiments.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="few-pairs-can-leave-substantial-uncertainty" class="slide level2">
+<h2>Few pairs can leave substantial uncertainty</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-three-pair-case.svg" height="350"></p>
+<figcaption>Threechanges of 2,1,and 3 have a mean of 2,but a95%mean-change interval spanning about−0.48 to 4.48.</figcaption>
+</figure>
+</div>
+<p>Three plants are limited support for a population inference.</p>
+<aside class="notes">
+<p>The three illustrative plants had before5,8,6 and after7,9,9 in the stated rate units. Mean change2,SD 1. The interval is provided to practise interpretation. Do not teach that a function guarantees reliable inference at tiny n.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-positive-observed-change-does-not-prove-a-universal-change" class="slide level2">
+<h2>A positive observed change does not prove a universal change</h2>
+<p>For the illustrative case:</p>
+<ul>
+<li>Describe all three individual changes.</li>
+<li>Interpret uncertainty in the population mean.</li>
+<li>Name the small-sample and design limitations separately.</li>
+</ul>
+<aside class="notes">
+<p>All supplied individual changes are positive, yet the model-based95% mean interval includes zero. This does not make the data erroneous or establish equality. Do not select a different test merely to obtain a preferred threshold label.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="pairing-does-not-remove-an-order-effect" class="slide level2">
+<h2>Pairing does not remove an order effect</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-order-effects.svg" height="350"></p>
+<figcaption>Both light and elapsed time change between the two readings in a fixed-order experiment.</figcaption>
+</figure>
+</div>
+<p>Preserved identity and a valid causal comparison are different requirements.</p>
+<aside class="notes">
+<p>The source study always measures before then after increased illumination, without an unchanged-light parallel group. The mean change is describable, but light cannot be isolated from every time/order influence.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="plan-the-next-experiment-by-limitation" class="slide level2">
+<h2>Plan the next experiment by limitation</h2>
+<p>More independent plants → more independent pairs. Repeat readings of one plant → measurement repeatability. A suitable comparison/design → better separation of treatment from time.</p>
+<p>These are different improvements.</p>
+<aside class="notes">
+<p>Students create paired-transfer.Rmd from the supplied three-row example, including its values/code and a limitation. They should not pool this illustrative case with the unrelated ten-plant study or claim a new measured dataset.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="practical-keep-the-pair-visible" class="slide level2">
 <h2>Practical: keep the pair visible</h2>
 <p>Make <strong><code>paired-report.Rmd</code></strong> with the design, matched changes, a figure, result, and limitation.</p>

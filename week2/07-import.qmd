@@ -111,6 +111,91 @@ not installed, use the setup instructions or ask for help. For column names,
 copy from `names(seedlings)`; `initial_mm` and `initial` are different names.
 :::
 
+
+## Extended practical — inspect an unfamiliar table systematically
+
+Allow about 90 minutes. A copied import line is not enough to establish that the
+right data arrived with the right meaning. Create `day07-inspection.R` and use
+it to investigate the new `data/seedlings-transfer.csv`. This simulated study
+has 18 independently potted seedlings, nine randomly assigned to control and
+nine to treated. Initial and final lengths are millimetres, measured seven days
+apart. Each row is one plant, not one independent measurement occasion.
+
+1. Open the course project, print `getwd()`, and check the relative input path
+   with `file.exists()`. Import into a new object called `transfer`; keep the
+   original `seedlings` object separate so that outputs from the two studies
+   cannot silently overwrite each other.
+2. Use `head()`, `tail()`, `dim()`, `names()`, and `str()` on the imported table.
+   Record what each command establishes and what it does not. For example,
+   seeing six rows in `head()` does not mean the dataset has six observations.
+3. Check `length(transfer$plant_id)` and
+   `length(unique(transfer$plant_id))`. The latter counts distinct identifiers.
+   Compare them and explain why different counts would prompt investigation.
+   Repeated IDs can be legitimate in a repeated-measurement design, so the study
+   description—not a universal “duplicates are bad” rule—sets the expectation.
+4. Inspect `unique(transfer$treatment)` and `table(transfer$treatment)`. Here
+   `table()` counts the supplied labels. Check the expected group labels and
+   nine records per group. Do not infer random assignment from the sorted row
+   order; that information comes from the supplied study design.
+5. Count missing initial and final lengths using `sum(is.na(...))`. Use
+   `range(transfer$initial_mm)` and `range(transfer$final_mm)` to inspect minima
+   and maxima. Range is a check on recorded values; it cannot determine the
+   intended units or establish that every plausible number was measured correctly.
+6. Make `reports/transfer-import-audit.txt` with the input path, dimensions,
+   column types and roles, unique-ID count, group counts, missing-value counts,
+   and units. State at least two things that required the data dictionary rather
+   than a function call. Restart R and recreate the audit's numerical checks.
+
+::: {.callout-tip collapse="true"}
+## Hint: use the object's actual column names
+
+A column request such as `transfer$initial` is different from
+`transfer$initial_mm`. Copy names from `names(transfer)` while learning. The
+intended table is 18 rows by four columns, with 18 distinct IDs and no missing
+initial/final readings. Matching these expectations helps identify the file but
+does not replace understanding its measurements.
+:::
+
+## Independent transfer — inspect quantities in different units
+
+Plan 60–90 minutes. The supplied `data/solutions.csv` table contains six simulated
+calculation cases, not six independent treatment experiments. It lists solution
+IDs, a solute name, mass in grams, molar mass in grams per mole, and final total
+volume in millilitres. A mole is a unit of chemical amount; the supplied molar
+mass converts grams to moles. You will inspect the input today, then use these
+quantities in later calculation and report practice. No prior chemistry
+knowledge is needed.
+
+1. Import the table into `solutions` using a project-relative path. Before
+   running `str()`, predict which columns should contain text and which should
+   contain numbers. Compare the result with your prediction and explain why
+   solution IDs and solute names are not measured quantities to average.
+2. Check dimensions, unique solution identifiers, the two solute labels, and
+   the absence or presence of missing values. Read Q01 aloud: 0.2922 g of sodium
+   chloride, supplied molar mass 58.44 g/mol, final volume 100 mL. Identify the
+   meaning and unit of every number before doing arithmetic.
+3. Use `range()` on the numeric columns. Explain why the numbers for molar mass
+   are not interchangeable with those for weighed mass, even though both types
+   are numeric. A numeric storage type alone cannot authorise an operation.
+4. Compare these two supplied vectors in a separate part of the script:
+   `c(10, NA, 20)` and `c(10, 0, 20)`. Calculate their means and, for the first,
+   the available-value mean using `na.rm = TRUE`. Record available and missing
+   counts. Explain why using zero for an unavailable measurement invents evidence.
+5. Save `reports/solutions-import-audit.txt` describing the table, its units,
+   and what you could calculate from the supplied inputs. Include the formula
+   in words if helpful: amount = mass / molar mass; concentration = amount /
+   final volume in litres. This is not a request to operate laboratory equipment.
+6. Ask a partner to run your saved inspection script from a fresh session.
+   Have them identify which input generated each audit. If they see a table of
+   24 plants where the note promises 18, investigate the filename/object choice
+   before changing the note to match whichever result happened to appear.
+
+**Check and retain:** `solutions.csv` has six rows, five columns, six unique IDs,
+two supplied solute labels, and no missing inputs. The available-value mean of
+10, NA, 20 is 15 from two observations; the mean of 10, 0, 20 is 10 from three.
+Your two audit notes should preserve that distinction.
+
+
 ## Check your understanding
 
 Why is the header not a plant? Why does the file's name not tell R the units?

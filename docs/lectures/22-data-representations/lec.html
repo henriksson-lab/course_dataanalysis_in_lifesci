@@ -407,17 +407,232 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
+<section id="the-question-determines-what-to-count" class="slide level2">
+<h2>The question determines what to count</h2>
+<p>One string can contain 40 characters.</p>
+<p>An 8-by-8 matrix contains 64 positions.</p>
+<p>Neither size is automatically the number of independent organisms.</p>
+<aside class="notes">
+<p>Ask students to name the represented thing before choosing length, nchar, dim, or a count of TRUE values. This is a transfer of familiar concepts rather than a survey of sequence or image software. Distinguish a file’s physical size in bytes from the number of meaningful values interpreted from that file.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="change-one-label-predict-two-counts" class="slide level2">
+<h2>Change one label; predict two counts</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="one-letter-change.svg" height="350"></p>
+<figcaption>Replacing the first A with G changes A11/G9 to A10/G10 while keeping forty total letters.</figcaption>
+</figure>
+</div>
+<p>The original object and file can remain unchanged.</p>
+<aside class="notes">
+<p>The sequence begins with A. Predict the total and two counts before running the replacement. Do not edit the raw DNA file: make a changed R object. Counts are numerical descriptions of this invented string, not evidence about the function of a real DNA sequence.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="create-a-changed-object-explicitly" class="slide level2">
+<h2>Create a changed object explicitly</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>bases_changed <span class="ot">&lt;-</span> bases</span>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>bases_changed[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"G"</span></span>
+<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bases_changed)</span>
+<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bases)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>[1]</code> selects the first element. Inspect <strong>both</strong> objects after the change.</p>
+<aside class="notes">
+<p>The important observation is that bases retains its original values while bases_changed holds the modified values. No R memory-internals explanation is needed. Saving neither object to the raw path also leaves the supplied file unchanged. Ask which actions would be needed to persist the changed string.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-fraction-needs-a-stated-numerator-and-denominator" class="slide level2">
+<h2>A fraction needs a stated numerator and denominator</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="gc-fraction.svg" height="350"></p>
+<figcaption>GC fraction rises from 0.450 to 0.475 after the stated one-letter replacement.</figcaption>
+</figure>
+</div>
+<p>GC fraction here = letters labelled G or C / all letters.</p>
+<aside class="notes">
+<p>The original numerator is 18 and denominator 40; afterwards 19 and 40. This is a supplied definition with no molecular-biology prerequisite. In R, comparison with G or C uses a logical OR. It does not identify a gene, organism, or biological property beyond the count that has been defined.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="save-a-string-then-verify-the-saved-representation" class="slide level2">
+<h2>Save a string, then verify the saved representation</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="fu">paste</span>(bases_changed, <span class="at">collapse =</span> <span class="st">""</span>),</span>
+<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>           <span class="st">"output/changed-dna.txt"</span>)</span>
+<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>changed_from_disk <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="st">"output/changed-dna.txt"</span>)</span>
+<span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(changed_from_disk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The new saved string still has <strong>40 characters</strong>.</p>
+<aside class="notes">
+<p>paste with collapse joins elements into one string without a separator. writeLines saves that text. Reading it back checks the saved file, not only the current object. The new filename protects the supplied raw sequence. These lines are given operations to understand and adapt, not a new programming API survey.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="same-positions-different-brightness" class="slide level2">
+<h2>Same positions, different brightness</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="brightness-shift.svg" height="350"></p>
+<figcaption>Original grayscale intensities 25/210 become 55/240 after adding thirty, using the same display scale.</figcaption>
+</figure>
+</div>
+<p>A changed threshold answer need not mean a larger biological object.</p>
+<aside class="notes">
+<p>The plot scale is fixed at zero to 255 in both panels. This makes the brightness change interpretable. Every matrix position stayed the same; adding thirty changed the numerical values. For this controlled example no value exceeds 255. Real acquisition and biological interpretation require more context.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="show-the-response-to-the-stated-threshold" class="slide level2">
+<h2>Show the response to the stated threshold</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="threshold-response.svg" height="350"></p>
+<figcaption>Counts for the original image change from 64 to 24 to zero as a strict intensity threshold crosses the two stored levels.</figcaption>
+</figure>
+</div>
+<p>A threshold is a comparison rule, not a discovered biological boundary.</p>
+<aside class="notes">
+<p>For thresholds 0, 25, 100, 209, 210, 255 the counts are 64, 24, 24, 24, 0, 0. Only the values 25 and 210 occur, so the response is unusually simple. The plot shows a rule applied to known values; it is not a fitted model and does not validate a segmentation method for real microscopy.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="equality-changes-the-selection" class="slide level2">
+<h2>Equality changes the selection</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(pixels <span class="sc">&gt;</span> <span class="dv">210</span>)   <span class="co"># 0</span></span>
+<span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(pixels <span class="sc">&gt;=</span> <span class="dv">210</span>)  <span class="co"># 24</span></span>
+<span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(pixels <span class="sc">&gt;</span> <span class="dv">220</span>)   <span class="co"># 0</span></span>
+<span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((pixels <span class="sc">+</span> <span class="dv">30</span>) <span class="sc">&gt;</span> <span class="dv">220</span>)  <span class="co"># 24</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Read the operator and the object before interpreting the number.</p>
+<aside class="notes">
+<p>These are not inconsistent results. Strictly greater excludes equality; greater-or-equal includes it. Adding thirty changes the input while the threshold 220 stays fixed. These are the same logical distinctions used in row filtering, now applied to a rectangular collection of intensities.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="reorganising-information-differs-from-renaming-a-file" class="slide level2">
+<h2>Reorganising information differs from renaming a file</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="string-versus-table.svg" height="350"></p>
+<figcaption>The text string ACGT is one line, while a CSV stores four position-and-base rows.</figcaption>
+</figure>
+</div>
+<p>A new arrangement needs new delimiters and a header, not just a new suffix.</p>
+<aside class="notes">
+<p>The practical asks students to create the tiny four-row CSV themselves and read it back. It is a format exercise, not sequence analysis. Merely renaming bases.txt to bases.csv cannot insert a table structure that was never present. Ask what one row represents in each version.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="explain-the-operation-in-a-short-report" class="slide level2">
+<h2>Explain the operation in a short report</h2>
+<p>Use two figures, the threshold table, and a few explanatory sentences.</p>
+<p>Name the original object, controlled change, observed result, and limit.</p>
+<aside class="notes">
+<p>The independent task is representation-report.Rmd, rendered from its own saved code. A reader should be able to distinguish pixel brightness from physical area and label counts from sequence function. The required short conclusions matter more than another elaborate plotting layer.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="practical-explain-the-representation" class="slide level2">
 <h2>Practical: explain the representation</h2>
 <p><a href="../../week5/22-data-representations.html">Open day 22 practical and notes</a>.</p>
 <ul>
-<li>Save <code>representations.R</code> and short interpretation notes.</li>
-<li>Reuse supplied code; focus on what its values and counts mean.</li>
+<li>Save <code>representations.R</code>, controlled copies, and the threshold table.</li>
+<li>Render <code>representation-report.Rmd</code> with two figures and interpretation.</li>
+<li>Explain the difference between one text string and a four-row CSV.</li>
 <li>Keep original files intact and rerun from a fresh session.</li>
 </ul>
-<p>Use remaining time to consolidate earlier reports.</p>
 <aside class="notes">
-<p>Keep this breadth activity short. It should build confidence in transferable ideas, not become a third specialist software unit.</p>
+<p>Keep operations at the level already taught. The added depth is predicting controlled changes, interpreting the result, and testing the saved report; it should not become a third specialist software unit.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

@@ -141,6 +141,101 @@ and how to render and back up your report. Include one question you would ask a
 lab teacher before analysing a dataset, such as “what was independently assigned
 to treatment?” or “what do blank cells mean?”
 
+
+## Extended practical — investigate before changing a result
+
+Allow about 90 minutes. Use your algae script and brief report from days 23–24,
+so the final day consolidates familiar methods. Work in copies for diagnostic
+changes, keep the primary result from all available measurements, and record
+what you changed in `reports/final-investigation.txt`.
+
+1. From the file manager, locate the project, `algae-transfer.R`,
+   `algae-brief.Rmd`, input CSV, and generated HTML without using recent files.
+   Write their project-relative paths. If one is missing, repair that part of
+   the portfolio before changing the analysis.
+2. Open the supplied algae CSV without editing it. Identify the largest
+   reference-group measurement and its culture ID. Check the dictionary for
+   evidence that it is erroneous. There is none: a large value is a question
+   to investigate, not permission to remove an observation.
+3. Recreate the primary group summaries from all available measurements. State
+   the observed supplement-minus-reference mean difference in mg. Label this
+   result “primary, all available measurements”. A19 remains unavailable.
+4. Create a separately named diagnostic object that omits **A11**, and repeat
+   the group means and observed difference. The aim is to see how one high
+   reference value influences a small-sample summary. Label the diagnostic
+   result “sensitivity check, A11 omitted without evidence of error”. This
+   label is essential: do not silently replace the primary result.
+5. Compare the two differences and reference means. Explain why the supplement
+   mean is unchanged, why the reference mean changes, and why the diagnostic
+   sample count is different. Do not select the preferred result by its p-value.
+   No new inferential method is needed for this comparison.
+6. In a copied report, add a short limitations paragraph distinguishing
+   unavailable A19, unusually high but recorded A11, and the simplifying
+   assumptions of the study. These are three different issues. Restore or
+   retain the primary analysis as the main result, with the diagnostic clearly
+   marked if included at all.
+7. Render, close, and reopen the report. Confirm the prose, counts, and plotted
+   observations all refer to the primary dataset. A diagnostic object left in
+   memory must not accidentally change the main figure or inline results.
+
+::: {.callout-tip collapse="true"}
+## Hint: separate objects make the decision visible
+
+Start from the imported `algae` object and use a name such as
+`algae_without_a11 <- filter(algae, culture_id != "A11")` for the diagnostic.
+Use `na.rm = TRUE` in a summary while still reporting available counts. Do not
+write this object over `data/algae.csv`. The primary reference mean is about
+28.20 mg and the available supplement mean about 33.92 mg; use your unrounded
+values for the difference. Omitting a high reference value will lower that
+reference mean and increase the observed difference, without establishing that
+the altered estimate is more scientifically justified.
+:::
+
+## Independent transfer — complete a laboratory handover
+
+Allow about 60–90 minutes. This is a rehearsal of working from a question and
+saved files. Use references when needed, but start by writing the sequence in
+words instead of copying a whole worked solution. Work alone first; then let a
+peer inspect the result. There is no grade or new examination component.
+
+1. Write a handover request of about 100 words for a future lab partner: the
+   scientific question, where the original data are, what one row means, and
+   which report should be rendered. Include the missing-value meaning and
+   expected output. If using your organic main report, restate the supplied
+   theoretical maximum, collected mass, and percentage formula; do not assume
+   the partner remembers chemistry.
+2. Close RStudio and reopen the project from its saved location. Starting in a
+   fresh session, run your chosen source from the top or Knit the report.
+   Record the first point at which you needed a reference and how it helped.
+   The aim is an understandable workflow, not unaided memorisation.
+3. Independently verify one input record and one group summary using a small
+   separate calculation. For the algae memo, count the available values in
+   each group; for an organic report, check one yield's numerator, denominator,
+   and units. Explain how an arithmetic check differs from validating the
+   experimental design.
+4. Give a peer the tested share package and the handover request. Ask them to
+   locate the input, render the source, and state the main result and one
+   limitation. Working alone, extract to a differently named parent folder
+   and follow the handover text after another station. Record which route you used.
+5. If the recipient finds an ambiguity, revise the source or README and make
+   a new clearly named package. Extract and check that replacement too. An
+   edit in the original Windows copy does not update an Ubuntu copy already
+   packaged; use the transfer/version checks from day 21.
+6. Open the returned HTML as a reader. Find the axes' units, figure's
+   observational unit, available counts, and limitation. Write one sentence
+   explaining why a successful render alone cannot supply those meanings.
+7. Save a one-page `reports/readiness-review.txt`: three actions you can now
+   perform reliably, two actions needing another rehearsal, and the concrete
+   next practice task for each. List remote login/desktop/transfer as pending
+   if you have not used the actual service. Store your final source, data,
+   results, and retrievable backup according to the supported course route.
+
+**Keep:** the primary report, labelled diagnostic calculation, final investigation,
+verified handover package, and readiness review. This is evidence of actions
+performed and outputs checked, not a claim that a particular number of saved
+files establishes mastery. Use remaining time to practise the weak step you
+identified; do not fill it with a new statistical method.
+
 **Before you finish:** locate the final report, source, input, and backup without
 using a recent-files menu. Keep the [reference pages](../reference/r.qmd) and your
 working project template for later practicals.

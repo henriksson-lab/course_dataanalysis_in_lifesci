@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>A route from reports to data must first visit the parent</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<path d="M425,50 v-20 h104.0 l20,20 h136.0 v80 h-260 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="555.0" y="98.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">project root</text>
+<path d="M100,260 v-20 h88.0 l20,20 h112.0 v80 h-220 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="210.0" y="308.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">reports</text>
+<path d="M770,260 v-20 h88.0 l20,20 h112.0 v80 h-220 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="880.0" y="308.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">data</text>
+<line x1="210" y1="220" x2="450" y2="145" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="680" y1="145" x2="880" y2="220" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="290" y="190" font-family="Arial, sans-serif" font-size="28" fill="#203247" text-anchor="start" font-weight="normal">1. parent</text>
+<text x="730" y="190" font-family="Arial, sans-serif" font-size="28" fill="#203247" text-anchor="start" font-weight="normal">2. data</text>
+<path d="M800,365 h140 l30,30 v45 h-170 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="940" y1="365" x2="940" y2="395" stroke="#3b5bab" stroke-width="3"/>
+<line x1="940" y1="395" x2="970" y2="395" stroke="#3b5bab" stroke-width="3"/>
+<text x="885.0" y="475" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">seedlings.csv</text>
+<text x="550" y="455" font-family="Arial, sans-serif" font-size="27" fill="#203247" text-anchor="middle" font-weight="normal">The starting folder changes the route.</text>
+</svg>

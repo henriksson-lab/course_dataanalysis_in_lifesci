@@ -119,6 +119,102 @@ Explain the missing observation before choosing the second calculation.
 The first returns NA. The second is about 18.48696 mm across the 23 available growth values. It is not a grouped treatment comparison. Ask students to say how many observations were used and what is unknown about the missing plant.
 :::
 
+## A repair needs an audit trail
+
+![Source evidence connects a specific correction to a checked output.](extended-audit-chain.svg){height=350px}
+
+For every changed value: observation → evidence → action → check.
+
+::: notes
+Demonstrate a five-column correction log for P21. The log explains a supported unit correction, not a rule to multiply all small lengths by ten. Keep original, script, and derived output.
+:::
+
+## Two matching IDs do not automatically mean a duplicate
+
+Compare **all fields**, then consult the design and source note.
+
+- One row per plant: a repeated identifier prompts investigation.
+- One row per time point: repeated identifiers may be expected.
+- Disagreeing records need investigation, not arbitrary deletion.
+
+::: notes
+Show both P01 records in the actual raw file. Here they are identical and the recorder confirms an import duplication. Do not teach distinct(plant_id) as a universal repair.
+:::
+
+## Number text and a measurement are different objects
+
+![A text entry with a unit suffix is converted only after its meaning is confirmed.](extended-types.svg){height=350px}
+
+Correct representation after checking meaning; do not just strip inconvenient characters.
+
+::: notes
+R cannot infer that every suffix or magnitude reflects the same unit. P18 is confirmed as 18.7 mm. Compare character versus numeric columns using str before and after parse_double.
+:::
+
+## What an invented zero would claim
+
+![The defensible available-case mean differs from the mean after inventing a zero final length.](extended-zero-consequence.svg){height=350px}
+
+P06 initial length is 24.7 mm: a final zero invents −24.7 mm growth.
+
+::: notes
+The defensible overall available mean is about 18.49 mm from 23 observations. Replacing the missing final reading by zero gives about 16.69 mm from 24 invented/observed values. This changes meaning, not only sample size. Keep wrong_zero_example separate.
+:::
+
+## Check the saved output, not only the Environment pane
+
+```r
+write_csv(cleaned, 'output/seedlings-cleaned.csv')
+check_copy <- read_csv('output/seedlings-cleaned.csv',
+                       show_col_types = FALSE)
+nrow(check_copy)
+anyDuplicated(check_copy$plant_id)
+sum(is.na(check_copy$growth_mm))
+```
+
+Expect 24 unique plants and one unavailable growth value.
+
+::: notes
+A successful in-memory calculation does not establish that the exported file is correct. Save the corrected CSV in the practical, read it back, and compare identifiers and availability. Restart and rerun to test the full script.
+:::
+
+## A new class is a new source
+
+![The transfer file contains eighteen new measured plants with initial and final lengths.](extended-transfer-inspection.svg){height=350px}
+
+The column pattern is familiar; the values, identifiers, and checks are new.
+
+::: notes
+The transfer study has 18 independent potted plants,9 per allocation, measured7 days apart. No source note authorises corrections. Do not reuse the first study denominator, P21 repair, or prior means.
+:::
+
+## A schema is an expectation you can check
+
+Before importing, state:
+
+- What one row represents and which ID should be unique.
+- Column names, types, labels, and units.
+- What missingness and derived growth would mean.
+
+Then record what you actually observed.
+
+::: notes
+This is a checklist, not a new validation package. Use familiar names, str, missing-value checks and group counts. Units come from the dictionary, not solely from numerical size.
+:::
+
+## Decide whether a change is justified
+
+An unfamiliar value appears in the transfer file.
+
+**What can you do immediately, and what requires more evidence?**
+
+Inspect the record and unit; preserve the input; ask the recorder.
+Do not change it merely because it is far from the others.
+
+::: notes
+Ask students to distinguish a diagnostic flag from an authorised correction. Their independent transfer output must explicitly state that no correction is supported in the supplied complete transfer file.
+:::
+
 ## Practical: leave a repair trail
 
 Save **`day11-cleaning.R`**, a derived CSV, and short cleaning notes.

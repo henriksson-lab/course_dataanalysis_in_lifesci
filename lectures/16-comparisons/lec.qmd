@@ -111,6 +111,93 @@ Do not use the two within-group SDs as if they were a confidence interval for th
 This list guides inspection, not a mechanical test-selection algorithm. For this introductory example the supplied design supports independent groups. If an actual practical looks unsuitable, seeking advice is a successful outcome; deleting genuine observations until a test works is not.
 :::
 
+## Starting size and growth answer different questions
+
+![Initial lengths and seven-day growth are displayed separately for the two groups.](extended-start-and-growth.svg){height=350px}
+
+Choose the outcome before choosing a summary or a test.
+
+::: notes
+The study records two lengths per plant. Growth is final minus initial, not final size alone. Starting-size patterns can inform a limitation, but we are not adding an adjusted regression in this introductory course.
+:::
+
+## Write the analysis plan before the output exists
+
+State the outcome, direction, unit, allocation, and units.
+
+For this study: mean seven-day growth; treated minus control; plant/pot; randomly assigned allocation; mm.
+
+::: notes
+A group-sorted file does not establish random assignment. That information comes from the supplied design. Ask what would differ if all treated plants shared one tray and all controls another.
+:::
+
+## Direction is an arithmetic choice you must explain
+
+![The same two group means produce opposite signed differences when subtraction order is reversed.](extended-direction.svg){height=350px}
+
+Changing subtraction order does not change the observations.
+
+::: notes
+Treated minus control is+6.2167 mm; control minus treated is−6.2167 mm. Neither direction is intrinsically wrong if labelled. A report that states one direction and calculates the other is wrong.
+:::
+
+## A difference in means is not a claim about every plant
+
+![Individual control and treated growth values overlap even when group means differ.](extended-overlap.svg){height=350px}
+
+Use individual points to check the word “every”.
+
+::: notes
+The largest control growth exceeds some treated values. Rewrite the group statement to say greater mean growth in these observations, not that every treated plant outgrew every control. Overlap itself is not a significance test.
+:::
+
+## Describe the result without a threshold label
+
+Include n, group means, directed difference, units, and individual variation.
+
+Then name the unanswered question: **how uncertain is the estimated population difference?**
+
+::: notes
+Students should have a meaningful results paragraph before day17. Prohibit neither ordinary uncertainty nor cautious wording; the point is to stop a p-value replacing the experimental question.
+:::
+
+## An independent study gives another estimate
+
+![The transfer study has 18 plants and an observed treated-minus-control difference near 4.21 mm.](extended-transfer-difference.svg){height=350px}
+
+Another observed estimate is not automatically evidence that a mechanism changed.
+
+::: notes
+The two simulated studies differ in actual values, group spread, and sample sizes. A smaller observed difference is not proof of no effect or failed treatment. Current descriptive work cannot resolve every comparison between studies.
+:::
+
+## Keep transfer inputs and outputs under new names
+
+```r
+transfer <- read_csv('data/seedlings-transfer.csv',
+                     show_col_types = FALSE) |>
+  mutate(growth_mm = final_mm - initial_mm)
+transfer |> group_by(treatment) |>
+  summarise(n = n(), mean_mm = mean(growth_mm),
+            sd_mm = sd(growth_mm), .groups = 'drop')
+```
+
+::: notes
+Load readr and dplyr as in the main study. Confirm18 rows,9 per group, no missing values. Use transfer-comparison.Rmd rather than overwriting the main report; preserve the comparison direction.
+:::
+
+## Inspect a hypothetical design failure
+
+Suppose the label was assigned to **one tray per group**.
+
+What remains observable? What independent treatment information is missing?
+
+A different test cannot manufacture independently assigned trays.
+
+::: notes
+The observed plant lengths still exist, but treating24 plants as24 independent treatment allocations would be misleading. Keep a design limitation separate from a data-entry error or computational bug.
+:::
+
 ## Practical: prepare before testing
 
 Create **`comparison.Rmd`** with design, growth calculation, observations, and the directed difference.

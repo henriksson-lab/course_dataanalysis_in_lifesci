@@ -172,6 +172,86 @@ folders. Do not replace it with someone else's username.
 We are not using deletion commands today. Practise on the supplied workspace,
 and ask before removing something you did not mean to create.
 
+
+## Extended practical — predict, run, and recover
+
+Allow about 90 minutes. Work in `~/introcomputing-shell`, which is the shell
+workspace on the computer running this terminal. It is separate from the native
+RStudio project on Windows. A command sequence is easier to understand when you
+predict its effect on a drawn tree before running it. Save a plain-text command
+log with the command, your prediction, the observed result, and a correction if
+needed. You need not record every keystroke or install a logging application.
+
+1. Draw the starting tree using the folders you actually have. Run `pwd` and
+   `ls` to check it. Enter `practice`, create a child `day03`, and enter that
+   child. At each step, predict the final part of `pwd` before asking for it.
+2. Create two children in `day03`: `readings` and `field notes`. For the second,
+   use `mkdir "field notes"`. Quotes keep the two words as one argument. Inspect
+   the names with `ls`, and practise tab completion to enter the spaced name.
+   Record how many directories you created, not just how many words you typed.
+3. Return to `day03`. Predict and run `cd readings`, then `cd ..`, then `pwd`.
+   Now try `cd not-present`. Read the error and run `pwd` again. Explain why a
+   failed navigation did not create a destination or take you somewhere else.
+4. Open a **second terminal window** and run `pwd` there. Navigate the first
+   window to `readings`. Check both windows again. Each shell has its own current
+   working directory; a command in one does not automatically move the other.
+   Save both locations in the log and label their windows.
+5. Use an absolute home-based route to return the first shell to the workspace:
+   `cd ~/introcomputing-shell`. Reach `day03` again with a relative route.
+   Explain what extra knowledge a relative route assumes about your starting
+   place. Test the same relative text from a different starting folder and
+   describe the result without changing your real course project.
+6. In the file manager, locate `day03` through `explorer.exe .` on Ubuntu/Windows
+   or `open .` on Mac after navigating there. Make a note graphically inside
+   `readings`, refresh the terminal listing, and identify it. Editing a file
+   through the graphical view does not make it a different kind of storage.
+
+::: {.callout-tip collapse="true"}
+## Hint: a safe return point makes a mistaken route ordinary
+
+Run `pwd` to establish where you actually are, then return to
+`~/introcomputing-shell`. Inspect `ls` before entering the next folder. Do not
+repair a typo using administrator mode, and do not delete a tree because its
+location is confusing. Use `q` only when inside `less`; Ctrl+C interrupts a
+running shell command and is not the terminal's normal copy shortcut.
+:::
+
+## Independent transfer — give a partner a route they can test
+
+Plan 60–90 minutes. Create a new subtree called `route-challenge` under your
+shell workspace. This block removes the line-by-line recipe. The required result
+is a predictable tree and a tested explanation, not a long command collection.
+
+1. Inside `route-challenge`, create neighbouring `inputs` and `results` folders,
+   and place a `notes` folder inside `results`. Draw the intended tree before
+   creating it. Use only navigation, listing, and directory-creation commands
+   already taught. A path to a new nested folder needs its parent to exist or
+   the explained `mkdir -p` option.
+2. Use the graphical bridge to save a small `README.txt` in `route-challenge`.
+   State the purpose of each child and mark the data as a practice exercise.
+   Locate it from the terminal without assuming that your browser Downloads
+   happens to be the current directory.
+3. Write three navigation challenges for a partner: root to `notes`, `notes`
+   to `inputs`, and `inputs` back to the workspace home. For each, state the
+   starting folder. Include one route with `..` and one with `~`.
+4. Exchange instructions. Before running a route, the receiver should predict
+   the ending location. After running, use `pwd` to check. If working alone,
+   close the terminal, reopen it, and follow your instructions from the named
+   start. Revise an instruction that depended on unrecorded session state.
+5. Deliberately mistype one directory name. Record the error, actual location,
+   and recovery command. Then demonstrate how Tab or command history can reduce
+   retyping while still requiring you to check what you are about to run.
+6. Save `navigation-transfer.txt` inside `route-challenge`, with the finished
+   tree, successful routes, and the recovery example. Explain which computer the
+   paths describe. If you repeat this on a remote service later, name it as a
+   separate run of the exercise rather than assuming the local tree exists there.
+
+**Check and retain:** the command log and route challenge. A correct path from
+`results/notes` to its neighbouring `inputs` climbs two levels before entering
+`inputs`. `cd` changes the current directory of a shell; it does not move the
+folders or alter their contents. Ask your partner to explain that difference.
+
+
 ## Check your understanding
 
 ::: {.callout-note collapse="true"}

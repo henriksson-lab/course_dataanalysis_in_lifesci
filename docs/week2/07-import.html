@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -924,6 +930,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#import-and-inspect" id="toc-import-and-inspect" class="nav-link" data-scroll-target="#import-and-inspect">Import and inspect</a></li>
   <li><a href="#missing-is-different-from-zero" id="toc-missing-is-different-from-zero" class="nav-link" data-scroll-target="#missing-is-different-from-zero">Missing is different from zero</a></li>
   <li><a href="#your-practical" id="toc-your-practical" class="nav-link" data-scroll-target="#your-practical">Your practical</a></li>
+  <li><a href="#extended-practical-inspect-an-unfamiliar-table-systematically" id="toc-extended-practical-inspect-an-unfamiliar-table-systematically" class="nav-link" data-scroll-target="#extended-practical-inspect-an-unfamiliar-table-systematically">Extended practical — inspect an unfamiliar table systematically</a></li>
+  <li><a href="#independent-transfer-inspect-quantities-in-different-units" id="toc-independent-transfer-inspect-quantities-in-different-units" class="nav-link" data-scroll-target="#independent-transfer-inspect-quantities-in-different-units">Independent transfer — inspect quantities in different units</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
   </ul>
 </nav>
@@ -1024,11 +1032,52 @@ Hint: a function is not found
 </div>
 </div>
 </section>
+<section id="extended-practical-inspect-an-unfamiliar-table-systematically" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-inspect-an-unfamiliar-table-systematically">Extended practical — inspect an unfamiliar table systematically</h2>
+<p>Allow about 90 minutes. A copied import line is not enough to establish that the right data arrived with the right meaning. Create <code>day07-inspection.R</code> and use it to investigate the new <code>data/seedlings-transfer.csv</code>. This simulated study has 18 independently potted seedlings, nine randomly assigned to control and nine to treated. Initial and final lengths are millimetres, measured seven days apart. Each row is one plant, not one independent measurement occasion.</p>
+<ol type="1">
+<li>Open the course project, print <code>getwd()</code>, and check the relative input path with <code>file.exists()</code>. Import into a new object called <code>transfer</code>; keep the original <code>seedlings</code> object separate so that outputs from the two studies cannot silently overwrite each other.</li>
+<li>Use <code>head()</code>, <code>tail()</code>, <code>dim()</code>, <code>names()</code>, and <code>str()</code> on the imported table. Record what each command establishes and what it does not. For example, seeing six rows in <code>head()</code> does not mean the dataset has six observations.</li>
+<li>Check <code>length(transfer$plant_id)</code> and <code>length(unique(transfer$plant_id))</code>. The latter counts distinct identifiers. Compare them and explain why different counts would prompt investigation. Repeated IDs can be legitimate in a repeated-measurement design, so the study description—not a universal “duplicates are bad” rule—sets the expectation.</li>
+<li>Inspect <code>unique(transfer$treatment)</code> and <code>table(transfer$treatment)</code>. Here <code>table()</code> counts the supplied labels. Check the expected group labels and nine records per group. Do not infer random assignment from the sorted row order; that information comes from the supplied study design.</li>
+<li>Count missing initial and final lengths using <code>sum(is.na(...))</code>. Use <code>range(transfer$initial_mm)</code> and <code>range(transfer$final_mm)</code> to inspect minima and maxima. Range is a check on recorded values; it cannot determine the intended units or establish that every plausible number was measured correctly.</li>
+<li>Make <code>reports/transfer-import-audit.txt</code> with the input path, dimensions, column types and roles, unique-ID count, group counts, missing-value counts, and units. State at least two things that required the data dictionary rather than a function call. Restart R and recreate the audit’s numerical checks.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: use the object’s actual column names
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A column request such as <code>transfer$initial</code> is different from <code>transfer$initial_mm</code>. Copy names from <code>names(transfer)</code> while learning. The intended table is 18 rows by four columns, with 18 distinct IDs and no missing initial/final readings. Matching these expectations helps identify the file but does not replace understanding its measurements.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-inspect-quantities-in-different-units" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-inspect-quantities-in-different-units">Independent transfer — inspect quantities in different units</h2>
+<p>Plan 60–90 minutes. The supplied <code>data/solutions.csv</code> table contains six simulated calculation cases, not six independent treatment experiments. It lists solution IDs, a solute name, mass in grams, molar mass in grams per mole, and final total volume in millilitres. A mole is a unit of chemical amount; the supplied molar mass converts grams to moles. You will inspect the input today, then use these quantities in later calculation and report practice. No prior chemistry knowledge is needed.</p>
+<ol type="1">
+<li>Import the table into <code>solutions</code> using a project-relative path. Before running <code>str()</code>, predict which columns should contain text and which should contain numbers. Compare the result with your prediction and explain why solution IDs and solute names are not measured quantities to average.</li>
+<li>Check dimensions, unique solution identifiers, the two solute labels, and the absence or presence of missing values. Read Q01 aloud: 0.2922 g of sodium chloride, supplied molar mass 58.44 g/mol, final volume 100 mL. Identify the meaning and unit of every number before doing arithmetic.</li>
+<li>Use <code>range()</code> on the numeric columns. Explain why the numbers for molar mass are not interchangeable with those for weighed mass, even though both types are numeric. A numeric storage type alone cannot authorise an operation.</li>
+<li>Compare these two supplied vectors in a separate part of the script: <code>c(10, NA, 20)</code> and <code>c(10, 0, 20)</code>. Calculate their means and, for the first, the available-value mean using <code>na.rm = TRUE</code>. Record available and missing counts. Explain why using zero for an unavailable measurement invents evidence.</li>
+<li>Save <code>reports/solutions-import-audit.txt</code> describing the table, its units, and what you could calculate from the supplied inputs. Include the formula in words if helpful: amount = mass / molar mass; concentration = amount / final volume in litres. This is not a request to operate laboratory equipment.</li>
+<li>Ask a partner to run your saved inspection script from a fresh session. Have them identify which input generated each audit. If they see a table of 24 plants where the note promises 18, investigate the filename/object choice before changing the note to match whichever result happened to appear.</li>
+</ol>
+<p><strong>Check and retain:</strong> <code>solutions.csv</code> has six rows, five columns, six unique IDs, two supplied solute labels, and no missing inputs. The available-value mean of 10, NA, 20 is 15 from two observations; the mean of 10, 0, 20 is 10 from three. Your two audit notes should preserve that distinction.</p>
+</section>
 <section id="check-your-understanding" class="level2">
 <h2 class="anchored" data-anchor-id="check-your-understanding">Check your understanding</h2>
 <p>Why is the header not a plant? Why does the file’s name not tell R the units? Why should the script work from a classmate’s project folder?</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1037,7 +1086,7 @@ Check your answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The header labels columns rather than containing an observation. Units are metadata supplied by people; R only sees column names and values. The script uses relative paths and the same documented folder structure rather than your username. There are no missing final lengths in the clean seedling dataset.</p>
 </div>

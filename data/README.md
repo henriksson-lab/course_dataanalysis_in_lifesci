@@ -166,3 +166,98 @@ literal text `ester`; the header and other notes do not contain that term.
 The separate `organic-lab.zip` packages this inventory as `inventory.tsv`, the
 recovery CSV, and short explanatory notes for a command-line transfer exercise.
 It is an alternative to repeated seedling-file practice, not a new software unit.
+
+## seedlings-transfer.csv — a second seedling study
+
+Eighteen new simulated seedlings were grown in separate pots. Nine were randomly
+assigned a control allocation and nine a nutrient treatment; each was measured
+at the start and seven days later. These are independent plants in a separate
+study, not additional readings from the original 24 plants.
+
+The columns have the same definitions as seedlings.csv: `plant_id` (T01–T18),
+`treatment` (`control`/`treated`), `initial_mm`, and `final_mm`. Both lengths are
+millimetres. Calculate `growth_mm = final_mm - initial_mm`. All readings are
+available. Use it to check that an analysis works when the data and sample sizes
+change. Do not combine studies without discussing their different conditions;
+our exercises analyse them separately.
+
+## solutions.csv — quantities and unit conversions
+
+A solution contains a substance mixed into a solvent. A mole (mol) is a unit
+of chemical amount; molar mass gives grams per mole. A millimole (mmol) is
+one-thousandth of a mole. Chemical constants are supplied, not something students
+must remember or look up. Sodium chloride and glucose are simply two named
+solutes for this calculation exercise; no reaction knowledge is needed.
+
+| Column | Meaning |
+| --- | --- |
+| `solution_id` | Q01–Q06, identifiers of six proposed preparations |
+| `solute` | Supplied substance label: `sodium-chloride` or `glucose` |
+| `mass_g` | Mass of substance in grams |
+| `molar_mass_g_mol` | Supplied molar mass in grams per mole, 58.44 or 180.16 |
+| `final_volume_ml` | Final total solution volume in millilitres, not solvent volume added |
+
+For these simplified complete-dissolution calculations, amount in mol is
+`mass_g / molar_mass_g_mol`, final volume in litres is `final_volume_ml / 1000`,
+and concentration in mmol/L is `1000 * amount_mol / final_volume_l`.
+Each solute has proposed concentrations of 50, 100, and 150 mmol/L. For Q01,
+0.2922 g / 58.44 g/mol = 0.005 mol, in 0.100 L: 0.050 mol/L = 50 mmol/L.
+These are arithmetic preparations, not replicate observations for a treatment
+test. Values and assumptions are given for numerical practice, not a lab protocol.
+
+## dilutions.csv — flag an impossible request
+
+A stock is a prepared solution of stated concentration. Dilution adds solvent
+to a portion of stock to reach a specified final total volume. Assume no solute
+is lost or reacts. All concentrations here use mmol/L and all volumes use mL.
+
+| Column | Meaning |
+| --- | --- |
+| `solution_id` | D01–D04, identifiers of requested dilutions |
+| `stock_mmol_l` | Supplied starting-stock concentration |
+| `target_mmol_l` | Requested final concentration |
+| `final_volume_ml` | Requested final total volume |
+
+Use `stock_volume_ml = target_mmol_l * final_volume_ml / stock_mmol_l`.
+D01–D03 need 2.5, 5, and 10 mL of stock respectively. D04 requests 200 mmol/L
+from a 100 mmol/L stock; the formula returns 100 mL stock for a final 50 mL.
+That is impossible by dilution alone. Keep D04 visible and flag it; do not treat
+the numeric result as a feasible recipe. Bringing a solution to a final total
+volume is different from adding that volume of solvent.
+
+## calibration-transfer.csv and unknowns-transfer.csv — another instrument run
+
+These are separate simulated readings for the same introductory calibration
+workflow. Do not reuse the original instrument run's fitted coefficients.
+`calibration-transfer.csv` has six prepared standards R1–R6 with the same columns
+as calibration.csv: `standard_id`, `concentration_mg_l` (0–5 mg/L), and
+`absorbance` (dimensionless). The standards are not treatment replicates.
+
+`unknowns-transfer.csv` has `sample_id` and `absorbance`: X1 reads 0.270, inside
+the measured standard range; X2 reads 0.700, outside it. Fit absorbance as a
+function of known concentration, inspect the fit, then invert only within the
+supported range. Flag X2 rather than extrapolate. Any exercise using a new
+diluted reading must supply that new reading and both volumes explicitly.
+Inverse estimates still omit full calibration/measurement uncertainty.
+
+## algae.csv — independent transfer study
+
+Twenty-four separate algae cultures started with equal material. Twelve were
+randomly assigned a reference medium and twelve a nutrient supplement. Final
+dry biomass was measured once after seven days. Treat cultures as independent
+for this simulated study; cells or repeated balance readings are not additional
+independent cultures. The culture, not a cell, received the allocation.
+
+| Column | Meaning |
+| --- | --- |
+| `culture_id` | Unique culture identifiers A01–A24, local to this study |
+| `treatment` | `reference` or `supplement` random allocation |
+| `biomass_mg` | Dry biomass after seven days, milligrams |
+
+A19 was spilled before weighing and has unavailable biomass. There are 24
+records, with 12 available reference and 11 available supplement measurements.
+Preserve the missing value; never replace it with zero. Report the loss and
+make interpretation conditional on the available observations. The input remains
+untouched while code creates summaries, figures, and the chosen report. IDs
+may resemble IDs in other files but do not identify the same organisms across
+studies. Do not join unrelated studies merely because identifiers look similar.

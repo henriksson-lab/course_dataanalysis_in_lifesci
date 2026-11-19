@@ -1,0 +1,5 @@
+solution_id,stock_mmol_l,target_mmol_l,final_volume_ml
+D01,500,50,25
+D02,500,50,50
+D03,500,50,100
+D04,100,200,50

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>The transfer study has eighteen independent plants, nine per group</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<text x="65" y="130" font-family="Arial, sans-serif" font-size="32" fill="#203247" text-anchor="start" font-weight="normal">control</text>
+<circle cx="355" cy="120" r="18" fill="#2a7f8f" stroke="none" stroke-width="3"/>
+<line x1="355" y1="140" x2="355" y2="182" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M335,182 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<circle cx="430" cy="120" r="18" fill="#2a7f8f" stroke="none" stroke-width="3"/>
+<line x1="430" y1="140" x2="430" y2="182" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M410,182 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<circle cx="505" cy="120" r="18" fill="#2a7f8f" stroke="none" stroke-width="3"/>
+<line x1="505" y1="140" x2="505" y2="182" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M485,182 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<circle cx="580" cy="120" r="18" fill="#2a7f8f" stroke="none" stroke-width="3"/>
+<line x1="580" y1="140" x2="580" y2="182" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M560,182 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<circle cx="655" cy="120" r="18" fill="#2a7f8f" stroke="none" stroke-width="3"/>
+<line x1="655" y1="140" x2="655" y2="182" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M635,182 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<circle cx="730" cy="120" r="18" fill="#2a7f8f" stroke="none" stroke-width="3"/>
+<line x1="730" y1="140" x2="730" y2="182" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M710,182 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<circle cx="805" cy="120" r="18" fill="#2a7f8f" stroke="none" stroke-width="3"/>
+<line x1="805" y1="140" x2="805" y2="182" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M785,182 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<circle cx="880" cy="120" r="18" fill="#2a7f8f" stroke="none" stroke-width="3"/>
+<line x1="880" y1="140" x2="880" y2="182" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M860,182 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<circle cx="955" cy="120" r="18" fill="#2a7f8f" stroke="none" stroke-width="3"/>
+<line x1="955" y1="140" x2="955" y2="182" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M935,182 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<text x="65" y="350" font-family="Arial, sans-serif" font-size="32" fill="#203247" text-anchor="start" font-weight="normal">treated</text>
+<circle cx="355" cy="340" r="18" fill="#6b4fa0" stroke="none" stroke-width="3"/>
+<line x1="355" y1="360" x2="355" y2="402" stroke="#6b4fa0" stroke-width="5"/>
+<path d="M335,402 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<circle cx="430" cy="340" r="18" fill="#6b4fa0" stroke="none" stroke-width="3"/>
+<line x1="430" y1="360" x2="430" y2="402" stroke="#6b4fa0" stroke-width="5"/>
+<path d="M410,402 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<circle cx="505" cy="340" r="18" fill="#6b4fa0" stroke="none" stroke-width="3"/>
+<line x1="505" y1="360" x2="505" y2="402" stroke="#6b4fa0" stroke-width="5"/>
+<path d="M485,402 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<circle cx="580" cy="340" r="18" fill="#6b4fa0" stroke="none" stroke-width="3"/>
+<line x1="580" y1="360" x2="580" y2="402" stroke="#6b4fa0" stroke-width="5"/>
+<path d="M560,402 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<circle cx="655" cy="340" r="18" fill="#6b4fa0" stroke="none" stroke-width="3"/>
+<line x1="655" y1="360" x2="655" y2="402" stroke="#6b4fa0" stroke-width="5"/>
+<path d="M635,402 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<circle cx="730" cy="340" r="18" fill="#6b4fa0" stroke="none" stroke-width="3"/>
+<line x1="730" y1="360" x2="730" y2="402" stroke="#6b4fa0" stroke-width="5"/>
+<path d="M710,402 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<circle cx="805" cy="340" r="18" fill="#6b4fa0" stroke="none" stroke-width="3"/>
+<line x1="805" y1="360" x2="805" y2="402" stroke="#6b4fa0" stroke-width="5"/>
+<path d="M785,402 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<circle cx="880" cy="340" r="18" fill="#6b4fa0" stroke="none" stroke-width="3"/>
+<line x1="880" y1="360" x2="880" y2="402" stroke="#6b4fa0" stroke-width="5"/>
+<path d="M860,402 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<circle cx="955" cy="340" r="18" fill="#6b4fa0" stroke="none" stroke-width="3"/>
+<line x1="955" y1="360" x2="955" y2="402" stroke="#6b4fa0" stroke-width="5"/>
+<path d="M935,402 h40 l-7,32 h-26 Z" fill="#c8a47a" stroke="#795438" stroke-width="2"/>
+<text x="550" y="470" font-family="Arial, sans-serif" font-size="28" fill="#203247" text-anchor="middle" font-weight="normal">18 rows × 4 columns; the header is not a plant.</text>
+</svg>

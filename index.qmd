@@ -26,6 +26,12 @@ Each topic in the left menu has separate **Lecture (slides)** and
 weekly quiz links are blue. Coloured week bands follow the Quantitative Biology
 course scaffold. The labels identify their roles even without colour.
 
+Use the [five-week study plan](study-plan.qmd) to organise the work. Each daily
+practical includes **Extended practical** and **Independent transfer** blocks:
+apply the taught ideas to a changed problem, save the result, explain it, and
+reproduce it from a fresh start. These are core practice, with gradually fewer
+prompts. Weekly self-checks and protected review/support time complete the plan.
+
 | Week | Biological question | What you will do |
 | --- | --- | --- |
 | [1 — Files and computers](week1/01-files.qmd) | Where are the seedling measurements? | Save and find files, use a terminal, unpack ZIPs, and search lab records |

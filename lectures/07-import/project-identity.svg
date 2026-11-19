@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Opening the right kind of folder does not identify which dataset was read</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<path d="M65,85 v-20 h116.0 l20,20 h154.0 v80 h-290 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="210.0" y="133.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">Study A</text>
+<path d="M110,235 h160 l30,30 v70 h-190 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="270" y1="235" x2="270" y2="265" stroke="#3b5bab" stroke-width="3"/>
+<line x1="270" y1="265" x2="300" y2="265" stroke="#3b5bab" stroke-width="3"/>
+<text x="205.0" y="370" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">measurement table</text>
+<text x="210" y="435" font-family="Arial, sans-serif" font-size="30" fill="#203247" text-anchor="middle" font-weight="normal">24 plant records</text>
+<path d="M680,85 v-20 h116.0 l20,20 h154.0 v80 h-290 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="825.0" y="133.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">Study B</text>
+<path d="M725,235 h160 l30,30 v70 h-190 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="885" y1="235" x2="885" y2="265" stroke="#3b5bab" stroke-width="3"/>
+<line x1="885" y1="265" x2="915" y2="265" stroke="#3b5bab" stroke-width="3"/>
+<text x="820.0" y="370" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">measurement table</text>
+<text x="825" y="435" font-family="Arial, sans-serif" font-size="30" fill="#203247" text-anchor="middle" font-weight="normal">18 plant records</text>
+<text x="550" y="40" font-family="Arial, sans-serif" font-size="27" fill="#203247" text-anchor="middle" font-weight="normal">Check filename, project, dimensions, and dictionary.</text>
+</svg>

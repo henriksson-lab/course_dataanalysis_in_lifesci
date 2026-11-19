@@ -149,5 +149,88 @@ plant grew more than every control plant. The repaired dataset retains twelve
 control plants but only eleven observed control growth values.
 :::
 
+## Extended practical — make a figure that survives a misleading caption
+
+Spend about 75–90 minutes on a small figure-and-table package. Use the main
+seedling table or your selected organic yield context; do not do both merely
+to increase the amount of work. Start with the observations and group summary
+already created above. Your goal is a reader who can distinguish the inputs,
+observations, summaries, and meaning of visual symbols without guessing.
+
+1. Write down the number of input rows, the number of groups, and the number
+   of summary rows. Locate one actual observation in each group. Explain why
+   the two summary rows are not two additional experimental units.
+2. Save a first figure showing individual observations only. Save another
+   with group means added. Use identical axis limits, units, and point positions
+   so the difference between figures is the added information, not rescaling.
+   Describe one feature that the observations reveal and a mean alone hides.
+3. Draft a deliberately inadequate caption, such as “Treatment makes everything
+   larger; bars show error.” Then replace it with a caption identifying the
+   independent unit, plotted quantity and units, mean symbol if used, available
+   n, and whether any error bars exist. Keep both versions in a caption log
+   and explain at least three specific repairs.
+4. Create histograms using two defensible bin widths. Compare apparent modes,
+   gaps, and group overlap. Record which broad statement remains supported in
+   both displays and which detail depends on the bin choice. Do not select
+   the prettiest bin width because it exaggerates a treatment difference.
+5. Produce a compact table containing available n, mean, median, and SD per
+   group. Round for readable display only after calculation. Preserve the
+   full-precision summary object for further arithmetic and any CSV export.
+   Explain why printing six decimal places does not add measurement precision.
+6. Inspect how plot labels change between contexts. Plant growth uses mm;
+   organic yield uses percent, and an SD of yield is expressed in percentage
+   points. Revise both the axis and the caption if switching contexts. Merely
+   changing a figure title can leave a convincing but false unit label.
+7. Give your package to a partner. Ask them to identify n, one observation,
+   the mean marker, the measurement units, and what “overlap” refers to. Keep
+   their answers and revise any element they could not identify. Working alone,
+   apply the same reader questions after closing the code for a few minutes.
+
+::: {.callout-tip collapse="true"}
+## Hint: two tables have different roles
+
+The raw table supplies individual points; the grouped summary supplies means.
+In a second `geom_point()` layer, use `data = group_summary` and explicit x/y
+mappings. If you omit error bars, your caption should not mention them. If a
+teacher demonstrates mean ± SD, label it as SD among observations, not a 95%
+interval or a measurement instrument's error bound.
+:::
+
+## Independent transfer — a second class's figure request
+
+Use another 60–90 minutes for `data/seedlings-transfer.csv`. The class wants
+both a figure suitable for a report and a table suitable for checking the
+calculation. It does not want a test or only a screenshot of RStudio.
+The file contains 18 independently potted plants, with nine observations per
+allocation and no missing lengths. All lengths are mm, measured seven days apart.
+
+1. Create `day13-transfer.R` from a blank script. Import, inspect, and derive
+   `growth_mm`; check the meaning and units from the dictionary. Retain all
+   rows and original columns. Do not manually retype the measurement vectors.
+2. Create one group summary and export it as
+   `output/day13-transfer-summary.csv`. Include available n, mean, median, and
+   SD, using distinct informative column names. Describe the difference between
+   `nrow(transfer)` and `nrow(transfer_summary)` in a code comment.
+3. Create a point plot with a group mean marker using the summary as a separate
+   layer. Save a PNG. Check that every individual point's vertical position is
+   its measured growth; jitter is horizontal only. Explain why moving points
+   vertically would misrepresent the recorded values.
+4. Make a faceted histogram using a common horizontal range and one stated bin
+   width. Compare it with the point plot for this small sample. Which better
+   permits identifying individual observations? Which highlights the grouping
+   of nearby numeric values? Keep both, with different filenames and captions.
+5. Write an email-length request to a future lab partner describing exactly
+   which two data files and which script they need to recreate the figures.
+   Do not actually send a message. The saved request should make it clear
+   which input was supplied and which table was derived.
+6. Run the script in a fresh R session. Open the PNGs and CSV in the file manager,
+   not only through RStudio's recent tabs. Verify one summary against a filtered
+   vector and `mean()`. Save a short reproducibility note identifying the check.
+
+**Additional outputs:** a caption-repair log, the chosen-context figure pair,
+transfer summary/figures, and a saved handover request. A complete package lets
+its reader identify the experimental unit and units without consulting your
+screen. Treat comments about layout separately from biological conclusions.
+
 **Keep:** `day13-groups.R`, the summary CSV, figure, and caption.
 Next: [replicates and uncertainty](14-replicates-uncertainty.qmd).

@@ -22,6 +22,12 @@ guides, references, and instructor solutions. Datasets are simulated. The
 sidebar and slide theme are copied from the Quantitative Biology scaffold:
 coloured week bands, green lecture links, blue quizzes, and italic practicals.
 
+The [five-week study plan](study-plan.qmd) allocates structured practice and
+independent transfer alongside explanation. Every day has additional core
+`Extended practical` and `Independent transfer` work. The instructor
+[expansion audit](instructor/workload-expansion.md) compares this larger version
+with the original draft; its hour estimates require a beginner pilot.
+
 Run `make render` to package the downloads and build the student site into
 `docs/`, or `make preview` for a local preview. Quarto is required; rendering
 lesson code fences also uses R and knitr, though student example execution is

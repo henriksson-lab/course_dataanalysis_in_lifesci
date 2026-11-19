@@ -88,4 +88,37 @@ with (DATA / "organic-inventory.tsv").open("w", newline="") as handle:
         ["O03", "ester", "supplied class label"],
         ["O04", "carboxylic-acid", "supplied class label"],
     ])
-print("Generated nine CSV datasets, an inventory TSV, and a DNA text file in data/.")
+transfer_rng = random.Random(912)
+transfer = []
+for index in range(18):
+    group = "control" if index < 9 else "treated"
+    initial = round(transfer_rng.uniform(20, 30), 1)
+    growth = round(transfer_rng.gauss(13 if group == "control" else 17, 3), 1)
+    transfer.append([f"T{index + 1:02d}", group, initial, round(initial + growth, 1)])
+write("seedlings-transfer.csv", fields, transfer)
+
+solutions = []
+for solute, molar_mass in [("sodium-chloride", 58.44), ("glucose", 180.16)]:
+    for concentration in [50, 100, 150]:
+        mass = round((concentration / 1000) * 0.1 * molar_mass, 5)
+        solutions.append([f"Q{len(solutions) + 1:02d}", solute, mass, molar_mass, 100])
+write("solutions.csv", ["solution_id", "solute", "mass_g", "molar_mass_g_mol", "final_volume_ml"], solutions)
+write("dilutions.csv", ["solution_id", "stock_mmol_l", "target_mmol_l", "final_volume_ml"], [
+    ["D01", 500, 50, 25], ["D02", 500, 50, 50],
+    ["D03", 500, 50, 100], ["D04", 100, 200, 50],
+])
+write("calibration-transfer.csv", ["standard_id", "concentration_mg_l", "absorbance"], [
+    [f"R{index + 1}", concentration, absorbance]
+    for index, (concentration, absorbance) in enumerate(zip(
+        [0, 1, 2, 3, 4, 5], [0.024, 0.121, 0.221, 0.319, 0.421, 0.525]))
+])
+write("unknowns-transfer.csv", ["sample_id", "absorbance"], [["X1", 0.270], ["X2", 0.700]])
+
+algae_rng = random.Random(709)
+algae = []
+for index in range(24):
+    group = "reference" if index < 12 else "supplement"
+    mass = round(algae_rng.gauss(28 if group == "reference" else 34, 5), 1)
+    algae.append([f"A{index + 1:02d}", group, "" if index == 18 else mass])
+write("algae.csv", ["culture_id", "treatment", "biomass_mg"], algae)
+print("Generated fifteen CSV datasets, an inventory TSV, and a DNA text file in data/.")

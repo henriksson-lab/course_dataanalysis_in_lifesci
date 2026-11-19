@@ -140,6 +140,125 @@ The new measured reading, not the original concentration, is within calibration 
 An original concentration above 10 mg/L can be estimated through a new in-range diluted measurement and a justified factor. That is different from extrapolating the old calibration directly to a high absorbance. Full dilution and calibration uncertainty remain outside this exercise.
 :::
 
+## Show the complete quantity map
+
+Known standards: concentration → measured absorbance.
+Fit: absorbance as a function of known concentration.
+Unknown: measured absorbance → inverse point estimate.
+
+Keep the fitted direction and requested output distinct.
+
+::: notes
+The standard concentration is prepared and the response is measured. A new direct regression of concentration on absorbance is a different fit. Students should label predictor,response,intercept,slope units,range,and unknown estimate.
+:::
+
+## Rounding a display can change a later calculation
+
+![Inverse estimates differ when full coefficients are replaced by coefficients rounded to two decimals.](extended-rounded-coefficients.svg){height=350px}
+
+Retain fitted coefficients; round results when communicating.
+
+::: notes
+For reading.310, rounding intercept and slope to.04 and.06 gives4.50 rather than4.17 mg/L. It is a deliberate diagnostic, not a recommended new calibration. Extra display precision does not remove measurement uncertainty either.
+:::
+
+## A residual has a direction and a scale
+
+```r
+standards$observed_minus_fitted <-
+  standards$absorbance - fitted(calibration_fit)
+residuals(calibration_fit)
+```
+
+Positive means the observed signal is above the line.
+
+::: notes
+Compare one value by hand. Both expressions should match. A residual is not the concentration error of an unknown and not a p-value. Use the first standard while its measured concentration and signal remain visible.
+:::
+
+## Trace a corrected estimate through its evidence
+
+![A new diluted reading feeds its inverseestimate and suppliedfactor to recover an original estimate.](extended-dilution-lineage.svg){height=350px}
+
+The corrected original estimate is not a direct instrument reading.
+
+::: notes
+A numerical table should retain the new reading,original aliquot volume,total final volume,factor,diluted estimate,and original estimate. Nothing in this chain validates U3 without its own new measurement.
+:::
+
+## A second calibration needs a second fit
+
+![The new six-standard instrument calibration has its own intercept and slope.](extended-transfer-line.svg){height=350px}
+
+Do not reuse the first instrument coefficient objects.
+
+::: notes
+Transfer standards span0–5 mg/L. Fit absorbance on known concentration. Their fitted intercept is.02161905 and slope.10008571 per mg/L. This is another empirical calibration,not a universal optical law.
+:::
+
+## Rebuild the transfer fit explicitly
+
+```r
+transfer_standards <- read_csv(
+  'data/calibration-transfer.csv', show_col_types = FALSE)
+transfer_fit <- lm(absorbance ~ concentration_mg_l,
+                   data = transfer_standards)
+coef(transfer_fit)
+```
+
+::: notes
+Load readr before this block. Keep separate names so the primary instrument report is not silently altered. The independent transfer report must contain its own import,checks,fit,and inverse calculations.
+:::
+
+## Inspect the new residuals, not the old picture
+
+![Residuals fromthe new six-standard fit remain small onthe absorbance scale.](extended-transfer-residuals.svg){height=350px}
+
+A tidy residual plot is limited evidence with only six standards.
+
+::: notes
+Look for obvious curvature or an unusual point. Absence of an obvious pattern does not establish chemical specificity,measurement accuracy in every condition,or performance beyond the tested range.
+:::
+
+## Preserve the unsupported unknown as a record
+
+![X1at0.270 is within the new standard range;X2at0.700 is above it.](extended-transfer-range.svg){height=350px}
+
+Keep the ID and reading; flag the unsupported concentration.
+
+::: notes
+X1 estimates about 2.48168 mg/L. X2 is not supported by the supplied standard readings. Missing estimate due to out-of-range input differs from a missing measured signal; retain the reason rather than dropping the row.
+:::
+
+## An algebra check is useful but not independent validation
+
+```r
+transfer_a <- coef(transfer_fit)[1]
+transfer_b <- coef(transfer_fit)[2]
+x1_mg_l <- (0.270 - transfer_a) / transfer_b
+transfer_a + transfer_b * x1_mg_l
+```
+
+The forward calculation returns **0.270**, apart from rounding.
+
+::: notes
+The check can catch reversal or arithmetic mistakes. Because it reuses the same fitted relationship, it does not independently establish calibration validity or eliminate uncertainty.
+:::
+
+## A next action needs new information, not an invented result
+
+For an unsupported sample, state what must be supplied next:
+
+- A new suitable measurement.
+- Any recorded sample and total volumes.
+- The supported range and applicable calibration.
+
+No fabricated corrected concentration.
+
+::: notes
+The transfer report should recommend a sensible information-gathering step for X2. It is not a wet-lab protocol and does not require prior chemistry. Full uncertainty propagation remains beyond this simple exercise.
+:::
+
 ## Practical: report the line and its limits
 
 Save **`calibration-report.Rmd`**, supported concentration estimates, and both figures.

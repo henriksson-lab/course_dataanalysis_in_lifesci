@@ -273,6 +273,155 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
+<section id="a-result-should-have-a-visible-lineage" class="slide level2">
+<h2>A result should have a visible lineage</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-result-lineage.svg" height="350"></p>
+<figcaption>Saved data feed reportcode that produces the numerical table and results prose.</figcaption>
+</figure>
+</div>
+<p>Trace each reported number back to a saved input and calculation.</p>
+<aside class="notes">
+<p>Ask a reader to identify where the mean came from, which rows contributed, and which units apply. A report with an impressive table but an unidentified input is not complete.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-project-file-does-not-contain-every-dependency" class="slide level2">
+<h2>The project file does not contain every dependency</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-missing-dependency.svg" height="350"></p>
+<figcaption>A missing input file breaks the path fromreport source to a newly rendered output.</figcaption>
+</figure>
+</div>
+<p>Include the ordinary input CSV, not just a shortcut to its old location.</p>
+<aside class="notes">
+<p>An Rproj provides context; it does not package data. Reproduction in a newly named folder tests personal paths and omitted files. Do not silently fix a peer source before recording the original failure.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="keep-claims-at-the-level-supported-by-the-work" class="slide level2">
+<h2>Keep claims at the level supported by the work</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-claim-limits.svg" height="350"></p>
+<figcaption>Measurements support a sample description; an unsupported jump to universal causation is blocked.</figcaption>
+</figure>
+</div>
+<p>Descriptive work is useful even before a hypothesis test.</p>
+<aside class="notes">
+<p>Repair sentences such as results were good or computer removed bad values. Identify a measurement pattern, a defined summary, or a documented correction. Current day15 reports do not quantify uncertainty in a treatment difference.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="adapt-a-structure-not-an-old-conclusion" class="slide level2">
+<h2>Adapt a structure, not an old conclusion</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../12-variation/extended-transfer-variation.svg" height="350"></p>
+<figcaption>The transfer study has different individual values,means and spread from the firststudy.</figcaption>
+</figure>
+</div>
+<p>A changed title alone does not create a report about new observations.</p>
+<aside class="notes">
+<p>The new source is seedlings-transfer.csv with 18 plants,9 per group. Replace old imports, descriptions, counts, and labels together. If using a previously saved analysis, recreate its objects inside the new report.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="inline-results-keep-prose-connected-to-code" class="slide level2">
+<h2>Inline results keep prose connected to code</h2>
+<p>A count or mean can be calculated inline after its object is created.</p>
+<p>Literal source example: <code>`r nrow(transfer)`</code></p>
+<p>The sentence still needs a quantity, units, and interpretation.</p>
+<aside class="notes">
+<p>Use escaped entities to display literal R Markdown code in these slides. During a student report render the inline expression executes. Installing packages or rendering the report from inside itself is not a solution to missing objects.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="do-a-reader-review-and-an-analyst-review" class="slide level2">
+<h2>Do a reader review and an analyst review</h2>
+<p>Reader review: question, unit, outcome, figure meaning, conclusion.</p>
+<p>Analyst review: input, checks, transformations, available n, regeneration.</p>
+<p>A change log records the issue, correction, and rerun result.</p>
+<aside class="notes">
+<p>The practical includes one revised chosen report plus a new descriptive transfer report. The new work is a transfer challenge, not another required organic/biology branch completed for its own sake.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-short-report-can-contain-strong-evidence" class="slide level2">
+<h2>A short report can contain strong evidence</h2>
+<p>Keep one relevant table, one useful figure, and a specific interpretation.</p>
+<p>Remove a redundant printout before removing a limitation or a unit label.</p>
+<p>Can another person regenerate and explain the result?</p>
+<aside class="notes">
+<p>Wordiness is not workload quality. Students spend time inspecting, drafting, checking, revising, and reproducing. Their saved outputs demonstrate those actions rather than the number of headings.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="practical-one-report-that-reopens-and-renders" class="slide level2">
 <h2>Practical: one report that reopens and renders</h2>
 <p>Save <strong><code>descriptive-report.Rmd</code></strong> or the chosen <strong><code>organic-report.Rmd</code></strong>, plus HTML.</p>

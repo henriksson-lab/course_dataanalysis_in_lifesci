@@ -15,9 +15,11 @@ check: downloads
 	Rscript instructor/week3-solutions.R
 	Rscript instructor/week4-solutions.R
 	Rscript instructor/week5-solutions.R
+	Rscript instructor/transfer-data-checks.R
 	Rscript tools/check_report.R
 	python3 tools/check_course.py
 	python3 tools/check_lectures.py
+	python3 tools/check_expansion.py
 
 figures:
 	Rscript instructor/week2-solutions.R --figures

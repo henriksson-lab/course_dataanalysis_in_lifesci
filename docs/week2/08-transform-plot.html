@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -928,6 +934,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#alternative-transfer-task-a-derived-yield-column" id="toc-alternative-transfer-task-a-derived-yield-column" class="nav-link" data-scroll-target="#alternative-transfer-task-a-derived-yield-column">Alternative transfer task: a derived yield column</a></li>
   </ul></li>
+  <li><a href="#extended-practical-derive-select-plot-and-verify" id="toc-extended-practical-derive-select-plot-and-verify" class="nav-link" data-scroll-target="#extended-practical-derive-select-plot-and-verify">Extended practical — derive, select, plot, and verify</a></li>
+  <li><a href="#independent-transfer-calculate-requested-dilutions" id="toc-independent-transfer-calculate-requested-dilutions" class="nav-link" data-scroll-target="#independent-transfer-calculate-requested-dilutions">Independent transfer — calculate requested dilutions</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
   </ul>
 </nav>
@@ -1080,10 +1088,51 @@ Hint: a plot or file is missing
 </div>
 </section>
 </section>
+<section id="extended-practical-derive-select-plot-and-verify" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-derive-select-plot-and-verify">Extended practical — derive, select, plot, and verify</h2>
+<p>Allow about 90 minutes. Start <code>day08-transfer.R</code> at the project root. The new <code>seedlings-transfer.csv</code> is an independent simulated seven-day study of eighteen plants, nine per group. Its variable definitions match the main seedling table, but its values and identifiers differ. Reusing a workflow means changing the input deliberately and checking the outputs, not simply changing a plot title.</p>
+<ol type="1">
+<li>Import the new table into <code>transfer</code>, inspect it, and calculate <code>growth_mm</code> using <code>mutate()</code>. Check T01 by hand: 40.3 − 25.3 = 15.0 mm. Verify the row count before and after adding the column; a calculation should not itself remove plants.</li>
+<li>Create a compact table of plant ID, treatment, and growth. Then create a separate table containing treated plants only. State in comments which step selected columns and which selected rows. Record the expected row counts before running each selection.</li>
+<li>Make an initial-length versus final-length plot, then an initial-length versus growth plot. Keep the horizontal units in mm and label the actual vertical quantity on each. Explain why a conclusion about final size is not automatically a conclusion about how much a plant changed.</li>
+<li>Make the individual-growth-by-group plot with horizontal jitter and zero vertical jitter. Change only the horizontal jitter width and compare the display. The measured growth values must not change. Explain that spreading points sideways helps visibility but does not create additional plants.</li>
+<li>Save the derived full table, the selected treated table, and two useful plots under names starting <code>transfer-</code> in <code>output/</code>. Open each saved file graphically and confirm its contents. A plot object printed in R is not automatically an exported image; writing a CSV is not exporting a figure.</li>
+<li>Write a caption stating the independent unit, outcome, units, and meaning of each point. Add two interpretation sentences and one limitation. Compare the workflow with the main seedling example: which names changed, which operations stayed the same, and which conclusions depend on the new data?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: check the result before polishing the plot
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>There should be 18 rows in the full derived table and nine in the treated subset. <code>growth_mm</code> has the same length as the input. Check the original columns remain available. To select treated rows use the given label with <code>==</code>; do not accidentally assign an object or assume every second row is treated.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-calculate-requested-dilutions" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-calculate-requested-dilutions">Independent transfer — calculate requested dilutions</h2>
+<p>Plan 60–90 minutes. A <strong>stock</strong> is a supplied solution of known concentration. Dilution uses some stock and solvent to reach a <strong>final total volume</strong>. Assume no solute reacts or is lost. The amount stays the same, so the stock volume required is <code>target concentration × final total volume / stock concentration</code>. Both concentrations are supplied in mmol/L; using mL for final volume gives mL for the required stock. These are numerical cases, not laboratory instructions.</p>
+<ol type="1">
+<li>Import <code>data/dilutions.csv</code>, inspect its four rows, and retain every original request. Use <code>mutate()</code> to add <code>stock_volume_ml</code> from the stated formula. Work D02 by hand before running the table calculation: stock 500 mmol/L, target 50 mmol/L, final total volume 50 mL.</li>
+<li>Add a logical column <code>possible_by_dilution</code> using <code>target_mmol_l &lt;= stock_mmol_l</code>. Explain that <code>&lt;=</code> means “less than or equal”. A target more concentrated than the stock cannot be obtained by adding solvent alone. Keep that row flagged; do not drop it silently or invent a stronger stock concentration.</li>
+<li>Inspect <code>stock_volume_ml &lt;= final_volume_ml</code> as a second check for these positive supplied cases. Identify the request that fails and explain why a numerical result can be calculable while the intended procedure is impossible.</li>
+<li>Save the complete flagged table as <code>output/dilution-check.csv</code>. Use <code>filter(possible_by_dilution)</code> to create a separate supported-results table. Plot final total volume against required stock volume for those supported cases, with both axes in mL. Do not interpret this supplied formula relation as an observed biological association needing a statistical test.</li>
+<li>Write <code>reports/dilution-interpretation.txt</code> with the requested outputs, impossible-case explanation, and a sentence distinguishing “bring to 50 mL total” from “add 50 mL solvent”. Preserve the denominator units in the source.</li>
+<li>Restart R and regenerate tables and plot. A partner should identify the impossible request from the saved flagged table without seeing your Console. They should also be able to explain why its row still appears in the audit.</li>
+</ol>
+<p><strong>Check and retain:</strong> D01–D03 need 2.5, 5, and 10 mL of stock respectively. D04’s formula produces 100 mL stock for a 50 mL final request and must be flagged; its target is 200 mmol/L while its stock is only 100 mmol/L. Do not present that number as a preparation recipe or erase the input that revealed the issue.</p>
+</section>
 <section id="check-your-understanding" class="level2">
 <h2 class="anchored" data-anchor-id="check-your-understanding">Check your understanding</h2>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1092,7 +1141,7 @@ Why keep the raw table?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>A derived table lets someone trace the calculation back to the recorded lengths. P02 grew 8.0 mm. Selecting columns is not selecting plants; <code>select()</code> and <code>filter()</code> act on different parts of the table.</p>
 </div>

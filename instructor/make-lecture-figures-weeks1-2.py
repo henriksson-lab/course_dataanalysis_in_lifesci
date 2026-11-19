@@ -424,3 +424,223 @@ d.text(550, 450, "data/seedlings.csv works from either complete project root.", 
 save(d, stem, "portable-project.svg")
 
 print("Rebuilt lecture diagrams for days 1–10.")
+
+# Expanded first-fortnight demonstrations: actual operations and contrasting cases.
+def nodes(stem, name, labels, values=None, colours=None):
+    d=Drawing(title=' → '.join(labels))
+    n=len(labels); gap=1050/n; w=min(240,gap-35)
+    for i,label in enumerate(labels):
+        x=25+i*gap
+        d.rect(x,130,w,150,fill='#eef4f7',stroke=(colours or [TEAL]*n)[i])
+        d.text(x+w/2,175,label,size=22,anchor='middle',weight='bold')
+        if values: d.text(x+w/2,235,values[i],size=24,anchor='middle')
+        if i<n-1: d.arrow(x+w+8,205,x+gap-12,205)
+    return d
+
+stem='01-files'
+d=Drawing(title='A filename consists of a base name and an extension')
+d.file(450,40,'seedlings-practice.csv',width=190,height=145)
+d.rect(125,290,600,90,fill='#e6f3f5',stroke=TEAL);d.rect(725,290,240,90,fill='#f1eafa',stroke=PURPLE)
+d.text(425,348,'seedlings-practice',anchor='middle',size=39);d.text(845,348,'.csv',anchor='middle',size=39)
+d.arrow(550,225,425,275);d.arrow(610,225,845,275,stroke=PURPLE)
+d.text(425,435,'informative base name',anchor='middle');d.text(845,435,'format clue',anchor='middle')
+save(d,stem,'filename-parts.svg')
+d=Drawing(title='A header names columns; one record describes one plant')
+for y,label,col in [(90,'plant_id,treatment,initial_mm,final_mm',BLUE),(180,'P01,control,25.7,44.3',TEAL),(270,'P02,control,24.3,32.3',TEAL)]:
+    d.rect(45,y,675,65,fill='#f8fafc',stroke=col);d.text(65,y+43,label,size=27)
+d.arrow(730,120,870,120,stroke=BLUE);d.text(900,130,'header',size=30)
+d.arrow(730,215,870,215);d.circle(960,235,32,fill='#8fcbaa');d.line(960,265,960,320,stroke=TEAL,width=8);d.path('M925,320 h70 l-12,50 h-46 Z',fill='#c8a47a',stroke='#795438')
+d.text(950,430,'one plant record',anchor='middle',size=27)
+save(d,stem,'header-records.svg')
+d=Drawing(title='Renaming an extension preserves the same text contents')
+d.file(120,65,'name-test.csv',width=240,height=160);d.file(740,65,'name-test.txt',width=240,height=160)
+d.arrow(400,150,690,150);d.text(545,115,'rename',anchor='middle',size=30)
+for x in [100,720]:
+ d.rect(x,300,280,95,fill='#f8fafc',stroke=BLUE);d.text(x+140,340,'P01,control,',anchor='middle',size=27);d.text(x+140,378,'25.7,44.3',anchor='middle',size=27)
+d.text(550,465,'Same bytes and measurements; a different filename.',anchor='middle',size=28)
+save(d,stem,'format-rename.svg')
+d=Drawing(title='Choose a known working project when several copies exist')
+d.folder(425,35,'original data',width=260);d.file(465,170,'seedlings.csv',width=180,height=100)
+for x,label in [(70,'course'),(790,'course (1)')]:
+ d.folder(x,345,label,width=240);d.arrow(530,285,x+120,330,stroke=GREY)
+d.text(550,475,'Inspect paths and contents before choosing a working copy.',anchor='middle',size=25)
+save(d,stem,'canonical-copy.svg')
+
+stem='02-folders-computers'
+d=Drawing(title='A route from reports to data must first visit the parent')
+d.folder(425,30,'project root',width=260)
+d.folder(100,240,'reports');d.folder(770,240,'data')
+d.arrow(210,220,450,145);d.arrow(680,145,880,220)
+d.text(290,190,'1. parent',size=28);d.text(730,190,'2. data',size=28)
+d.file(800,365,'seedlings.csv',width=170,height=75)
+d.text(550,455,'The starting folder changes the route.',anchor='middle',size=27)
+save(d,stem,'nested-route.svg')
+d=Drawing(title='Closing a process can clear working memory while the saved file remains')
+for x,title in [(80,'Before closing'),(650,'After closing')]:
+ d.rect(x,65,370,190,fill='#f4eefb',stroke=PURPLE);d.text(x+185,110,title,anchor='middle',size=28);d.text(x+185,165,'working memory',anchor='middle',size=25)
+d.text(265,220,'edited note',anchor='middle',size=31);d.text(835,220,'session ended',anchor='middle',size=31,fill=GREY)
+d.arrow(470,160,620,160);d.file(465,325,'saved note on disk',width=180,height=90)
+d.text(550,480,'Check the ordinary saved file, not only an editor window.',anchor='middle',size=24)
+save(d,stem,'memory-close.svg')
+d=Drawing(title='One installed application can be launched as running processes')
+d.file(70,170,'installed application',width=240,height=155)
+for y in [80,320]:
+ d.arrow(350,245,670,y+50);d.rect(700,y,320,110,fill='#e6f3f5',stroke=TEAL);d.text(860,y+65,'running process',anchor='middle',size=28)
+d.text(210,435,'persistent storage',anchor='middle',size=26);d.text(860,485,'CPU + memory now',anchor='middle',size=26)
+save(d,stem,'program-process.svg')
+d=Drawing(title='Local, cloud and remote storage are distinct locations')
+for x,label in [(35,'Laptop'),(415,'Cloud service'),(795,'Remote Linux')]:
+ d.rect(x,80,270,260,fill='#f8fafc',stroke=BLUE);d.text(x+135,125,label,anchor='middle',size=28);d.folder(x+30,210,'course',width=210,height=100)
+d.arrow(325,260,390,260,stroke=GREY);d.text(550,405,'Only draw copying/sync links you know exist.',anchor='middle',size=28)
+d.text(550,460,'A desktop connection is not automatic synchronisation.',anchor='middle',size=26)
+save(d,stem,'storage-locations.svg')
+
+stem='03-terminal'
+d=Drawing(title='Quotes make a space-containing folder name one argument')
+d.text(70,70,'mkdir field notes',size=34);d.arrow(430,65,650,65)
+d.folder(650,20,'field',width=160,height=90);d.folder(865,20,'notes',width=160,height=90)
+d.text(70,280,'mkdir "field notes"',size=34);d.arrow(500,270,700,270)
+d.folder(720,230,'field notes',width=250,height=100)
+d.text(550,440,'Unquoted words may become separate arguments.',anchor='middle',size=30)
+save(d,stem,'quoted-arguments.svg')
+d=nodes(stem,'failed-cd.svg',['Before command','Failed cd','After command'],['day03/','not-present','day03/'],[TEAL,RED,TEAL]);d.text(550,385,'A failed change-directory does not move you.',anchor='middle',size=29);save(d,stem,'failed-cd.svg')
+d=Drawing(title='Each terminal session has its own current working directory')
+for x,label,path in [(50,'Shell A','.../day03/readings'),(610,'Shell B','.../introcomputing-shell')]:
+ d.rect(x,75,440,300,fill='#eef2f6',stroke=BLUE);d.text(x+220,125,label,anchor='middle',size=31);d.text(x+25,205,'$ pwd',size=30);d.text(x+25,270,path,size=25)
+d.text(550,455,'Navigating A does not automatically navigate B.',anchor='middle',size=29)
+save(d,stem,'shell-cwd.svg')
+d=Drawing(title='Two starting locations need different relative paths')
+d.folder(425,25,'workspace',width=250);d.folder(60,230,'inputs');d.folder(770,230,'results');d.folder(770,365,'notes',height=90)
+d.line(550,128,170,220);d.line(550,128,880,220);d.line(880,332,880,355)
+d.arrow(790,390,570,160,stroke=PURPLE);d.arrow(520,155,220,240,stroke=PURPLE)
+d.text(370,340,'From notes: up twice,',size=28);d.text(370,380,'then enter inputs.',size=28)
+save(d,stem,'route-two-starts.svg')
+
+stem='04-inspect-archive'
+d=Drawing(title='Literal treated search also matches untreated')
+for i,(label,col) in enumerate([('S01 untreated',RED),('S02 control',GREY),('S03 treated',TEAL),('S04 treated',TEAL)]):
+ y=60+i*85;d.rect(75,y,450,65,fill='#f8fafc',stroke=col);d.text(100,y+43,label,size=29)
+ if i!=1: d.arrow(550,y+30,800,y+30,stroke=col);d.circle(860,y+30,14,fill=col)
+d.text(550,455,'Three text matches; not evidence for three treated samples.',anchor='middle',size=26)
+save(d,stem,'grep-substring.svg')
+d=Drawing(title='Five text lines contain one header and four sample records')
+for i in range(5):
+ y=50+i*70;d.rect(100,y,450,52,fill='#dceaf6' if i==0 else '#e6f3f5',stroke=BLUE if i==0 else TEAL);d.text(130,y+35,'header' if i==0 else f'sample record {i}',size=27)
+d.path('M590,50 h30 v332 h-30',stroke=BLUE);d.text(680,145,'wc: 5 lines',size=33,fill=BLUE)
+d.path('M590,120 h30 v262 h-30',stroke=TEAL);d.text(680,280,'4 plants',size=33,fill=TEAL)
+save(d,stem,'header-lines.svg')
+d=Drawing(title='An output filename can remain unchanged while redirection replaces contents')
+for x,label,ids in [(70,'Before >','S03, S04'),(690,'After >','S01, S02')]:
+ d.file(x,70,'treated-audit.txt',width=250,height=170);d.text(x+125,330,ids,anchor='middle',size=34);d.text(x+125,390,label,anchor='middle',size=29)
+d.arrow(390,160,630,160,stroke=RED);d.text(550,460,'Check contents: the name does not protect their meaning.',anchor='middle',size=27)
+save(d,stem,'overwrite-state.svg')
+d=Drawing(title='A manifest path and a renamed file can disagree')
+d.file(60,100,'manifest',width=200,height=155);d.text(40,380,'measurements/S04.csv',size=27)
+d.arrow(310,175,570,175,stroke=RED);d.text(430,135,'path not found',anchor='middle',size=25,fill=RED)
+d.file(660,100,'S04-renamed.csv',width=230,height=155);d.text(780,380,'contents: S04,39.8',anchor='middle',size=27)
+d.text(550,465,'Inspect identity before restoring a name; do not delete the record.',anchor='middle',size=24)
+save(d,stem,'manifest-path.svg')
+
+stem='05-lab-files'
+d=Drawing(title='A sharing archive is a snapshot, not a live copy')
+d.file(50,85,'ordinary source',width=210,height=150);d.file(440,85,'report-v1.zip',width=210,height=150);d.file(830,85,'report-v2.zip',width=210,height=150)
+d.arrow(285,145,410,145);d.arrow(285,300,800,300,stroke=PURPLE)
+d.text(155,370,'edited to version 2',anchor='middle',size=26);d.text(545,370,'still version 1',anchor='middle',size=26,fill=RED);d.text(935,370,'new snapshot',anchor='middle',size=26)
+d.text(550,460,'Repackage, extract, and check the actual revised sentence.',anchor='middle',size=27)
+save(d,stem,'version-snapshot.svg')
+d=Drawing(title='Extraction can preserve the archived report folder as another level')
+d.folder(60,45,'receiver-v1',width=250);d.folder(400,210,'report');d.file(790,350,'findings.txt',width=170,height=75)
+d.arrow(300,130,400,225);d.arrow(620,290,790,375)
+d.text(550,80,'receiver-v1/report/findings.txt',anchor='middle',size=31)
+save(d,stem,'zip-nesting.svg')
+d=Drawing(title='The receiver checks an extracted result in a new location')
+d.folder(45,80,'sender',width=250);d.file(445,120,'sharing.zip',width=185,height=140);d.folder(790,80,'receiver',width=250)
+d.arrow(320,180,415,180);d.arrow(665,180,760,180)
+d.file(835,285,'README + input',width=160,height=95);d.text(550,450,'Can another person identify and verify the selected records?',anchor='middle',size=27)
+save(d,stem,'receiver-proof.svg')
+d=Drawing(title='The shell and R interpret different instruction languages')
+for x,label,cmd in [(60,'Shell','grep -F treated ...'),(610,'R Console','mean(c(12, 14, 16))')]:
+ d.rect(x,70,430,300,fill='#f8fafc',stroke=TEAL if x==60 else PURPLE);d.text(x+215,125,label,anchor='middle',size=32);d.text(x+215,235,cmd,anchor='middle',size=28)
+d.text(550,450,'An interpreter mismatch calls for the right window, not system repair.',anchor='middle',size=25)
+save(d,stem,'interpreter-choice.svg')
+
+stem='06-r-basics'
+d=nodes(stem,'stale-value.svg',['Initial inputs','Change final','Rerun calculation'],['20 → 37: 17 mm','final = 39; old 17','39 − 20 = 19'],[TEAL,RED,PURPLE]);d.text(550,390,'An assigned result is not a live spreadsheet formula.',anchor='middle',size=28);save(d,stem,'stale-value.svg')
+d=Drawing(title='Position-by-position subtraction needs corresponding plants')
+for i,(plant,initial,final) in enumerate([('P1',20,37),('P2',22,40),('P3',19,34)]):
+ y=100+i*110;d.text(65,y,plant,size=30);d.text(260,y,initial,size=30);d.text(820,y,final,size=30);d.arrow(350,y-12,735,y-12)
+d.path('M840,95 Q1060,170 840,315',stroke=RED);d.text(550,445,'Reordering one vector changes the biological pairing.',anchor='middle',size=28)
+save(d,stem,'vector-shuffle.svg')
+d=nodes(stem,'solution-units.svg',['Mass ÷ molar mass','Amount ÷ volume','Convert scale'],['0.2922 / 58.44','0.005 / 0.100','0.050 × 1000'])
+d.text(165,350,'mol',size=30,anchor='middle');d.text(515,350,'mol/L',size=30,anchor='middle');d.text(865,350,'50 mmol/L',size=30,anchor='middle');d.text(550,450,'Every factor and conversion is supplied.',anchor='middle',size=28)
+save(d,stem,'solution-units.svg')
+fig,ax=plt.subplots(figsize=(10,4));ax.bar(['Original','Double mass','Double volume'],[50,100,25],color=[TEAL,PURPLE,BLUE]);ax.set_ylabel('Calculated concentration (mmol/L)');ax.set_ylim(0,115);fig.tight_layout();fig.savefig(ROOT/'lectures'/stem/'scale-change.svg');plt.close(fig)
+
+stem='07-import'
+d=Drawing(title='Import interprets stored fields as columns with types and meanings')
+d.file(60,130,'solutions.csv',width=200,height=150);d.arrow(300,205,515,205)
+for i,(name,col) in enumerate([('solution_id: label',PURPLE),('mass_g: measurement',TEAL),('final_volume_ml: measurement',BLUE)]):
+ y=55+i*130;d.rect(550,y,480,95,fill='#f8fafc',stroke=col);d.text(790,y+60,name,anchor='middle',size=29)
+save(d,stem,'import-roles.svg')
+d=Drawing(title='The transfer study has eighteen independent plants, nine per group')
+for row,(label,col) in enumerate([('control',TEAL),('treated',PURPLE)]):
+ d.text(65,130+row*220,label,size=32)
+ for i in range(9):
+  x=355+i*75;y=120+row*220;d.circle(x,y,18,fill=col);d.line(x,y+20,x,y+62,stroke=col,width=5);d.path(f'M{x-20},{y+62} h40 l-7,32 h-26 Z',fill='#c8a47a',stroke='#795438',width=2)
+d.text(550,470,'18 rows × 4 columns; the header is not a plant.',anchor='middle',size=28)
+save(d,stem,'transfer-inventory.svg')
+fig,ax=plt.subplots(figsize=(9,4));ax.bar(['10, NA, 20\n(available values)','10, 0, 20\n(three observed values)'],[15,10],color=[TEAL,RED]);ax.set_ylabel('Mean measurement');ax.set_ylim(0,18);fig.tight_layout();fig.savefig(ROOT/'lectures'/stem/'missing-zero-means.svg');plt.close(fig)
+d=Drawing(title='Opening the right kind of folder does not identify which dataset was read')
+for x,title,n in [(65,'Study A',24),(680,'Study B',18)]:
+ d.folder(x,65,title,width=290);d.file(x+45,235,'measurement table',width=190,height=100);d.text(x+145,435,f'{n} plant records',anchor='middle',size=30)
+d.text(550,40,'Check filename, project, dimensions, and dictionary.',anchor='middle',size=27)
+save(d,stem,'project-identity.svg')
+
+stem='08-transform-plot'
+d=Drawing(title='Selecting rows and selecting columns act in different directions')
+for x,label,orientation in [(60,'filter: keep observations','rows'),(610,'select: keep variables','columns')]:
+ d.text(x+205,65,label,anchor='middle',size=29)
+ for row in range(5):
+  for col in range(4):
+   on=(row in [2,3]) if orientation=='rows' else (col in [0,3])
+   d.rect(x+col*100,110+row*57,95,52,fill=PALE if on else '#f8fafc',stroke=TEAL if on else '#cbd5e1',radius=0)
+ d.arrow(x+205,415,x+205,465)
+save(d,stem,'table-operations.svg')
+with (ROOT/'data/seedlings-transfer.csv').open() as f: rows=list(csv.DictReader(f))
+initial=[float(r['initial_mm']) for r in rows];final=[float(r['final_mm']) for r in rows];growth=[b-a for a,b in zip(initial,final)]
+fig,axes=plt.subplots(1,2,figsize=(11,4.3));axes[0].scatter(initial,final,color=TEAL);axes[0].set(xlabel='Initial length (mm)',ylabel='Final length (mm)');axes[1].scatter(initial,growth,color=PURPLE);axes[1].set(xlabel='Initial length (mm)',ylabel='Growth (mm)');fig.tight_layout();fig.savefig(ROOT/'lectures'/stem/'two-outcomes.svg');plt.close(fig)
+fig,ax=plt.subplots(figsize=(10,4));ax.bar([0,1,2,3],[25,50,100,50],width=.6,color='#e2e8f0',label='final total volume');ax.bar([0,1,2,3],[2.5,5,10,100],width=.25,color=[TEAL,TEAL,TEAL,RED],label='calculated stock volume');ax.set_xticks([0,1,2,3],['D01','D02','D03','D04: impossible']);ax.set_ylabel('Volume (mL)');ax.legend(fontsize=12);fig.tight_layout();fig.savefig(ROOT/'lectures'/stem/'dilution-feasibility.svg');plt.close(fig)
+fig,axes=plt.subplots(1,2,figsize=(11,4));x=[0 if r['treatment']=='control' else 1 for r in rows]
+for j,ax in enumerate(axes):
+ xx=[v+(0 if j==0 else ((i%5)-2)*.025) for i,v in enumerate(x)];ax.scatter(xx,growth,color=TEAL);ax.set(xticks=[0,1],xticklabels=['control','treated'],ylabel='Growth (mm)',title='No jitter' if j==0 else 'Horizontal jitter only',ylim=(7,23))
+fig.tight_layout();fig.savefig(ROOT/'lectures'/stem/'jitter-invariance.svg');plt.close(fig)
+
+stem='09-rmarkdown'
+d=nodes(stem,'chunk-collision.svg',['Chunk: import','Chunk: import','Render stops'],['first label','duplicate label','rename labels'],[TEAL,RED,RED]);d.text(550,390,'Chunk labels identify code locations and must be unique.',anchor='middle',size=28);save(d,stem,'chunk-collision.svg')
+d=nodes(stem,'inline-dependency.svg',['CSV input','Imported table','Inline result'],['18 plant rows','transfer object','nrow → 18']);d.text(550,395,'The number in the prose comes from this saved input.',anchor='middle',size=28);save(d,stem,'inline-dependency.svg')
+d=Drawing(title='A source report without its input is not a complete reproducible package')
+d.file(60,90,'report.Rmd',width=205,height=145);d.file(60,320,'input.csv',width=205,height=90);d.arrow(310,165,725,165);d.arrow(310,365,725,195)
+d.file(780,100,'report.html',width=205,height=145);d.text(545,345,'omit input → missing dependency',anchor='middle',size=28,fill=RED)
+save(d,stem,'missing-input.svg')
+d=Drawing(title='Edit the source document and render to update its readable output')
+d.file(90,100,'report.Rmd',width=210,height=155);d.arrow(360,180,720,180);d.text(540,135,'render',anchor='middle',size=31);d.file(790,100,'report.html',width=210,height=155)
+d.path('M890,340 Q550,490 195,345',stroke=RED);d.text(550,455,'HTML edits do not rewrite the source recipe.',anchor='middle',size=28)
+save(d,stem,'source-html.svg')
+
+stem='10-first-report'
+fig,ax=plt.subplots(figsize=(10,4));
+for group,col,pos in [('control',TEAL,0),('treated',PURPLE,1)]:
+ vals=[float(r['final_mm'])-float(r['initial_mm']) for r in rows if r['treatment']==group];ax.scatter([pos]*len(vals),vals,color=col,s=55)
+ax.set(xticks=[0,1],xticklabels=['control','treated'],ylabel='Growth (mm)',title='Different centres can still have overlapping observations');fig.tight_layout();fig.savefig(ROOT/'lectures'/stem/'claim-evidence.svg');plt.close(fig)
+d=Drawing(title='A laboratory report connects question, measurement, method and explanation')
+d.folder(55,75,'data');d.arrow(300,150,470,150);d.rect(500,60,220,200,fill='#f8fafc',stroke=TEAL)
+for x,y in [(535,220),(565,185),(610,205),(655,130),(685,155)]:d.circle(x,y,7)
+d.arrow(755,150,890,150);d.file(905,75,'report',width=130,height=150);d.text(550,370,'Which recorded evidence supports this sentence?',anchor='middle',size=31)
+save(d,stem,'report-story.svg')
+d=Drawing(title='A complete project can be copied while its relative input relationships remain valid')
+for x,label in [(60,'working project'),(690,'received copy')]:
+ d.folder(x,50,label,width=320);d.file(x+20,245,'brief.Rmd',width=145,height=105);d.folder(x+185,260,'data',width=150,height=90);d.arrow(x+165,290,x+180,290)
+d.arrow(420,160,655,160);d.text(550,455,'Move the structure together, then test a fresh render.',anchor='middle',size=29)
+save(d,stem,'portable-root.svg')
+fig,axes=plt.subplots(1,2,figsize=(10,4));axes[0].bar(['P01'],[18.6],color=RED);axes[0].set(ylabel='Growth (cm): WRONG',title='Only relabelled');axes[1].bar(['P01'],[1.86],color=TEAL);axes[1].set(ylabel='Growth (cm)',title='Converted mm ÷ 10');fig.tight_layout();fig.savefig(ROOT/'lectures'/stem/'unit-label-check.svg');plt.close(fig)
+print('Rebuilt 40 additional first-fortnight lecture visuals.')

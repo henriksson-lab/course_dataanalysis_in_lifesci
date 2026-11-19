@@ -119,6 +119,113 @@ Plant age, species, growing conditions, and other properties may vary together.
 The named possible factors are examples of missing context, not measured covariates to add to a model. We are not introducing multiple regression or causal adjustment. The outcome is a restrained interpretation of an observational pattern.
 :::
 
+## A slope changes numerically when its units change
+
+![Identical fitted leaf masses are shown with area in square centimetres and square millimetres.](extended-area-units.svg){height=350px}
+
+The biological observations did not change.
+
+::: notes
+One cm² equals100mm². Slope 4.1101 mg/cm² becomes.041101 mg/mm². The intercept and fitted masses stay the same apart from numerical precision. Preserve both area columns for the demonstration.
+:::
+
+## Check the unit conversion through fitted values
+
+```r
+library(dplyr)
+leaves <- mutate(leaves, leaf_area_mm2 = 100 * leaf_area_cm2)
+unit_fit <- lm(dry_mass_mg ~ leaf_area_mm2, data = leaves)
+coef(unit_fit)
+max(abs(fitted(leaf_fit) - fitted(unit_fit)))
+```
+
+The final difference should be essentially zero.
+
+::: notes
+A tiny floating-point difference is normal. This is a consistency check,not another independent biological result. A smaller numeric slope in different units does not establish a weaker association.
+:::
+
+## A residual is attached to a particular measured leaf
+
+![One leaf observation and its fitted value are connected by its vertical residual.](extended-residual-check.svg){height=350px}
+
+Residual = observed mass − fitted mass, in mg.
+
+::: notes
+Locate the same identifier in the table and plot. Positive residual means the observed leaf lies above the line. The fitted relationship describes mean tendency and leaves individual variation.
+:::
+
+## Influence is a question, not an exclusion rule
+
+Keep the full-data fit as primary.
+Fit without A18 in a separate object and compare.
+
+Ask what changed and why; do not discard a valid value to obtain a preferred story.
+
+::: notes
+The main slope is4.110117 mg/cm² and the fit without A18 is4.064927. The difference is small here,but sensitivity does not depend on getting a dramatic answer. Source evidence is needed for an actual correction or exclusion.
+:::
+
+## A defined formula and an empirical relationship differ
+
+![Calculated solution concentrations fall on a prescribed arithmetic relationship;measuredleaf values vary around an empiricalfit.](extended-formula-versus-data.svg){height=350px}
+
+A perfect relationship created by a formula is not experimental validation.
+
+::: notes
+The solution example supplies all masses,molar masses and volumes; its concentration calculation is arithmetic. The leaf line summarises measured associations. Do not treat a line fitted to formula-generated values as proof of a new biological or chemical law.
+:::
+
+## A new association retains its study context
+
+![Initial and final transferseedling lengths are plotted with allocationcolour and one descriptive combined line.](extended-transfer-association.svg){height=350px}
+
+This asks about starting and final size, not the mean treatment effect on growth.
+
+::: notes
+These are18 independent source plants,but the two lengths on each plant are related. Allocation and other differences may contribute to the combined pattern. We do not add a multiple regression or claim an intervention on initial size.
+:::
+
+## Fit the question you actually stated
+
+```r
+transfer <- read_csv('data/seedlings-transfer.csv',
+                     show_col_types = FALSE)
+size_fit <- lm(final_mm ~ initial_mm, data = transfer)
+coef(size_fit)
+range(transfer$initial_mm)
+```
+
+Use an in-range initial length for a worked fitted-value calculation.
+
+::: notes
+A predictor value of zero may be outside the useful biological range even though the model calculates an intercept. The report should include a residual plot and one checked observed-minus-fitted example.
+:::
+
+## Choose the analysis through the design and outcome
+
+![Independentgroups,paired measurements,and an observed scatter pattern lead to different familiaranalysisquestions.](extended-question-map.svg){height=350px}
+
+Mean difference, within-unit change, and a slope answer different questions.
+
+::: notes
+This is not an automatic menu based on a normality test or whichever function gives a small p-value. Name the independent unit,outcome,units,and limitation before applying the appropriate taught method.
+:::
+
+## Finish with a comparison sheet you can reuse
+
+For each familiar question, record:
+
+- Independent units and what was measured.
+- Outcome, units, and the method/output.
+- A design or interpretation limitation.
+
+Keep source, data, figure, and report together.
+
+::: notes
+Students revise the leaf report and independently write transfer-association.Rmd. Their three-question sheet becomes a practical reference for future labs. Do not turn this consolidation into a survey of advanced models.
+:::
+
 ## Practical: explain the line, the residuals, and one limit
 
 Create **`association-report.Rmd`** with observations, fitted line, slope units, and residuals.

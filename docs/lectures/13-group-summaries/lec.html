@@ -371,12 +371,192 @@ Data Analysis in Life Sciences
 </section>
 <section id="save-the-right-object-for-the-intended-use" class="slide level2">
 <h2>Save the right object for the intended use</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(group_summary, <span class="st">"output/growth-summary.csv"</span>)</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/growth-summary.png"</span>, <span class="at">plot =</span> group_plot,</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(group_summary, <span class="st">"output/growth-summary.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>A CSV stores numbers; a PNG stores a figure. Keep both traceable to raw data.</p>
 <aside class="notes">
 <p>The practical defines group_plot and output/ already exists in the supplied project. Assigning an R object does not export it. After saving, ask students to find the two ordinary files in a file manager and explain which application could open each.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-summary-can-hide-the-very-observations-it-describes" class="slide level2">
+<h2>A summary can hide the very observations it describes</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-means-and-points.svg" height="350"></p>
+<figcaption>Means alone conceal the individual measurements and overlap shown by a point plot.</figcaption>
+</figure>
+</div>
+<p>Both panels use the same group means.</p>
+<aside class="notes">
+<p>Ask which panel permits inspecting overlap and unusual values. The point plot need not become cluttered: horizontal jitter can separate overlapping dots without changing their measured vertical positions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary-rows-are-not-new-plants" class="slide level2">
+<h2>Summary rows are not new plants</h2>
+<p>The original table has <strong>24 plant rows</strong>. The grouped table has <strong>two summary rows</strong>.</p>
+<p>These are different objects answering different questions.</p>
+<p>Which table should supply individual points? Which supplies mean markers?</p>
+<aside class="notes">
+<p>Individual-point layer uses the raw/derived plant table. Mean-marker layer uses group_summary with explicit mappings. A two-row summary cannot substitute for the individual observations in a treatment test.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="histogram-details-depend-on-display-choices" class="slide level2">
+<h2>Histogram details depend on display choices</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-binwidth.svg" height="350"></p>
+<figcaption>Three histograms of the same transfer growth values use different bin widths.</figcaption>
+</figure>
+</div>
+<p>Record the bin width and distinguish stable patterns from unstable detail.</p>
+<aside class="notes">
+<p>The underlying18 measurements are unchanged. Small samples can look multimodal or gapped depending on bins. Do not select a display solely because it exaggerates a desired difference.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="an-axis-range-changes-the-visual-emphasis" class="slide level2">
+<h2>An axis range changes the visual emphasis</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-axis-choice.svg" height="350"></p>
+<figcaption>The same individual growth observations appear under broader and narrower vertical ranges.</figcaption>
+</figure>
+</div>
+<p>Read values and labels; do not judge effect size from screen distance alone.</p>
+<aside class="notes">
+<p>Both displays can be useful with clear axes, but a reader should not mistake a changed scale for changed observations. This is particularly important when comparing figures from different groups or experiments.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="repair-the-caption-precisely" class="slide level2">
+<h2>Repair the caption precisely</h2>
+<p>Weak caption: <strong>“Treatment makes everything larger; error is shown.”</strong></p>
+<p>Repair it by naming:</p>
+<ol type="1">
+<li>Independent unit and outcome/units.</li>
+<li>Individual points and any mean symbol.</li>
+<li>Available n and the actual meaning of any error bars.</li>
+</ol>
+<aside class="notes">
+<p>Do not invent error bars where none are shown. Mean±SD describes individual spread. A confidence interval describes uncertainty in an estimate. Neither phrase can be replaced by a generic word error.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-new-class-needs-a-complete-figure-package" class="slide level2">
+<h2>A new class needs a complete figure package</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-transfer-caption.svg" height="350"></p>
+<figcaption>A point plot of the transfer data identifies points asplants and diamonds asgroup means.</figcaption>
+</figure>
+</div>
+<p>Keep the input, summary CSV, figure, and analysis script distinct.</p>
+<aside class="notes">
+<p>Transfer data have9 plants per group. Students export the summary and plot, verify one mean using a filtered vector, and write a handover request listing actual file dependencies.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-script-should-name-the-files-it-creates" class="slide level2">
+<h2>A script should name the files it creates</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>group_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(seedlings, <span class="fu">aes</span>(treatment, growth_mm)) <span class="sc">+</span></span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(</span>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">seed =</span> <span class="dv">13</span>)) <span class="sc">+</span></span>
+<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Treatment'</span>, <span class="at">y =</span> <span class="st">'Seven-day growth (mm)'</span>) <span class="sc">+</span></span>
+<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb3-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">'output/growth-summary.png'</span>, <span class="at">plot =</span> group_plot,</span>
+<span id="cb3-8"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Use new names for transfer outputs; do not overwrite the first study’s figures.</p>
+<aside class="notes">
+<p>In the independent task students create transfer_summary and transfer_plot with analogous exports. Explain why a plot object in memory, a PNG, and a summary CSV are not interchangeable outputs.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-reader-test-is-more-specific-than-does-this-look-good" class="slide level2">
+<h2>A reader test is more specific than “does this look good?”</h2>
+<p>Ask a peer to identify:</p>
+<ul>
+<li>One observation and the mean marker.</li>
+<li>Units, available sample size, and independent unit.</li>
+<li>A pattern supported by both the table and figure.</li>
+</ul>
+<p>Record the ambiguity and the correction.</p>
+<aside class="notes">
+<p>The practical requires a caption-repair log and reproducible outputs. Working alone, reread the figure after closing the code. Biological claims need numerical meaning, not just attractive layout.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

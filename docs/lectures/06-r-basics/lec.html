@@ -364,6 +364,185 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
+<section id="an-assignment-is-not-a-live-spreadsheet-link" class="slide level2">
+<h2>An assignment is not a live spreadsheet link</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stale-value.svg" height="350"></p>
+<figcaption>After final length changes, assigned growth stays stale until the subtraction reruns.</figcaption>
+</figure>
+</div>
+<p>Name the input, stored result, and instruction that refreshes it.</p>
+<aside class="notes">
+<p>Work through 20 to 37 mm giving 17 mm. Update final to 39, then print the old stored growth before rerunning the subtraction. The script records an order of computations; reopening it does not automatically execute it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="predict-the-stored-result-before-rerunning" class="slide level2">
+<h2>Predict the stored result before rerunning</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>initial_mm <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>final_mm <span class="ot">&lt;-</span> <span class="dv">37</span></span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>growth_mm <span class="ot">&lt;-</span> final_mm <span class="sc">-</span> initial_mm</span>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>final_mm <span class="ot">&lt;-</span> <span class="dv">39</span></span>
+<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>growth_mm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now rerun the subtraction and explain the difference.</p>
+<aside class="notes">
+<p>The printed growth remains 17 until recalculation. Ask for the reason before showing 19. This is a concrete dependency exercise, not a request to write a function or build a spreadsheet application.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="equal-vector-length-is-not-enough" class="slide level2">
+<h2>Equal vector length is not enough</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="vector-shuffle.svg" height="350"></p>
+<figcaption>Reordering one measurement vector destroys the intended within-plant correspondence.</figcaption>
+</figure>
+</div>
+<p>R subtracts positions; it does not infer plant identities.</p>
+<aside class="notes">
+<p>Correct vectors are initial 20, 22, 19 and final 37, 40, 34. A reordered final copy 34, 37, 40 yields 14, 15, 21: arithmetic on the wrong pairs. Equal lengths cannot certify matching identities.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="convert-the-values-as-well-as-their-labels" class="slide level2">
+<h2>Convert the values as well as their labels</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>growth_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">18</span>, <span class="dv">15</span>)</span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>growth_cm <span class="ot">&lt;-</span> growth_mm <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(growth_mm)</span>
+<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(growth_cm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The means are about 16.67 mm and 1.667 cm.</p>
+<aside class="notes">
+<p>A renamed object or axis label does not convert units. Preserve original values and assign converted values to a new name. Ratios cancel compatible length units; changes retain length units.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-supplied-solution-rule-can-be-traced-through-units" class="slide level2">
+<h2>A supplied solution rule can be traced through units</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="solution-units.svg" height="350"></p>
+<figcaption>Mass divided by supplied molar mass yields amount; dividing by litres gives concentration.</figcaption>
+</figure>
+</div>
+<p>A mole is a unit of chemical amount; no reaction equation is required.</p>
+<aside class="notes">
+<p>Define molar mass as grams per mole. The supplied calculation is 0.2922 g / 58.44 g/mol = 0.005 mol; 100 mL = 0.100 L; amount divided by volume gives 0.050 mol/L, or 50 mmol/L. This is arithmetic, not laboratory preparation instructions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="write-every-input-into-the-source" class="slide level2">
+<h2>Write every input into the source</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>mass_g <span class="ot">&lt;-</span> <span class="fl">0.2922</span></span>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>molar_mass_g_mol <span class="ot">&lt;-</span> <span class="fl">58.44</span></span>
+<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>final_volume_l <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>concentration_mmol_l <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="sc">*</span></span>
+<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a>  (mass_g <span class="sc">/</span> molar_mass_g_mol) <span class="sc">/</span> final_volume_l</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p>All numerical rules and constants are supplied. Keep intermediate quantities visible while learning so an incorrect conversion can be located. Avoid a single expression containing unexplained magic numbers.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="change-one-input-and-predict-the-response" class="slide level2">
+<h2>Change one input and predict the response</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="scale-change.svg" height="350"></p>
+<figcaption>Original concentration is 50 mmol/L; doubling only mass gives 100, doubling only volume gives 25.</figcaption>
+</figure>
+</div>
+<p>Different input changes answer different questions.</p>
+<aside class="notes">
+<p>Restore original inputs between cases. Glucose mass 0.9008 g with supplied molar mass 180.16 g/mol in 100 mL also gives 50 mmol/L. Different weighed masses can produce the same amount concentration; no treatment effect has been inferred.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="diagnose-a-stale-or-missing-object" class="slide level2">
+<h2>Diagnose a stale or missing object</h2>
+<p>Check in order:</p>
+<ol type="1">
+<li>Which saved script and session?</li>
+<li>Were the input assignments run?</li>
+<li>Were dependent calculations rerun?</li>
+<li>Do names, units, and correspondences agree?</li>
+</ol>
+<aside class="notes">
+<p>The outputs are day06-extended.R and a calculation-check note. Retain predictions even when wrong. A saved source that recreates the result after restart is stronger evidence than a successful result following unrecorded Console experiments.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="practise-a-complete-repeatable-calculation" class="slide level2">
 <h2>Practise a complete, repeatable calculation</h2>
 <p><a href="../../week2/06-r-basics.html">Open the practical and notes</a>.</p>

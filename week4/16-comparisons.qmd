@@ -132,6 +132,87 @@ the reverse comparison, not a contradictory biological result.
 - Does an observed mean difference alone tell us its sampling uncertainty?
   **No; variability and sample size matter as well.**
 
+## Extended practical — prepare the comparison before seeing a p-value
+
+Use about 75–90 minutes to strengthen the comparison report. Today is still
+about the question, design, observations, and estimated difference. Do not
+skip these steps because tomorrow's function can produce a small number in one
+line. Continue `comparison.Rmd`, preserving its imports and plant-level data.
+
+1. Write the outcome, comparison direction, independent unit, allocation
+   process, and units in a five-line analysis plan. In this study the unit is
+   an independently potted plant; twelve lengths from one shared treatment
+   container would describe a different design. A table sorted by group is
+   not itself evidence that allocation was random: use the study description.
+2. Calculate initial length, final length, and growth summaries separately.
+   Explain which quantity answers the growth question and which describes
+   starting size. Keep their names and units visible. Do not silently switch
+   from final size to growth halfway through a results paragraph.
+3. Make two figures with common treatment labels: initial lengths by group,
+   then growth by group. Show individual points. Compare what each can reveal
+   about this particular small experiment. We are not adding an adjusted model;
+   note any limitation that would require more design or modelling expertise.
+4. Calculate treated minus control mean growth explicitly. Reverse the
+   subtraction in a separate line and check that only the sign changes. Write
+   a complete sentence for each direction without changing the biological
+   observations. This is a test of interpretation, not two different datasets.
+5. Locate the smallest treated growth and largest control growth. Use these
+   observations to check the statement “the treated group grew more”. Revise
+   it so that it distinguishes a difference in group means from a guarantee
+   about every pair of individual plants. Show where overlap appears in the
+   plot rather than treating overlap as a significance test.
+6. Draft a results paragraph without the words “significant” or “proved”.
+   Include n, group means, the directed difference, units, and a sentence
+   describing individual spread. Add the unanswered uncertainty question that
+   the next lesson will address. This paragraph should already be informative.
+7. Ask a partner to point to the numerical source of each statement. If working
+   alone, annotate the paragraph with object or table names. Save a figure
+   and an `output/day16-plan.txt` so that the comparison is reconstructable
+   before any test output is attached.
+
+::: {.callout-tip collapse="true"}
+## Hint: a group label is not a comparison direction
+
+`mean(treated) - mean(control)` is treated minus control because of the argument
+order in that expression. Merely calling an object `treatment_effect` does not
+establish its sign. In the main dataset the difference is about **6.22 mm**.
+The point plot also contains overlapping observations; neither fact replaces
+an account of independent units or uncertainty.
+:::
+
+## Independent transfer — plan a comparison for another class
+
+Use another 60–90 minutes for `data/seedlings-transfer.csv`. The study has 18
+new independent potted plants, nine per randomly assigned group, measured in
+mm seven days apart. The question is again mean growth, but none of the first
+study's estimates should be copied into the new report.
+
+1. Create `transfer-comparison.Rmd` at project root and state its question,
+   input file, units, growth formula, and treated-minus-control direction.
+   Import and check row count, unique IDs, missingness, and group labels.
+2. Derive growth in code. Verify T01 by hand, then produce a group summary
+   and plot of individual growth values. Keep the summary and raw-level table
+   as different objects; two summary rows do not supply two new plants.
+3. Calculate the two group means and directed difference. Save the descriptive
+   summary to `output/day16-transfer-summary.csv`. Give sample sizes and units
+   in the rendered output and in the figure caption.
+4. Compare the observed difference with the first study's difference. Do not
+   interpret a smaller observed difference as proof that the treatment changed
+   or stopped working. Different samples and conditions can produce different
+   estimates; our simulated studies do not establish a universal biological law.
+5. Write a design challenge in your notes: suppose all treated plants shared
+   one tray and all controls another. Identify which part of your current
+   independence argument would fail. Do not repair that hypothetical design
+   simply by choosing a different test later.
+6. Save a 150–200 word interpretation ending with what you still need to know
+   before judging the uncertainty or generality of the difference. Render from
+   a fresh R session. Keep this report for day 17, when you will add an interval
+   and test using the same stated direction rather than redesigning the question.
+
+**Additional outputs:** the plan, initial/growth figure pair, descriptive results
+paragraph, and fresh transfer report. Your work should make sense before a
+p-value exists, and should identify the biological meaning of each calculation.
+
 **Leave with:** `comparison.Rmd`, its rendered HTML, and
 `output/day16-growth.png`. Your report should currently describe the observations
 without pretending that a test has already been performed.

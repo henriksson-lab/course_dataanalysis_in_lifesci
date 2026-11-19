@@ -8,9 +8,16 @@ User requirements: decks may be up to **45 slides**, but favour fewer slides and
 never pad them. Roughly half should use a meaningful picture: diagrams, real
 data plots, file-tree illustrations, or worked visual examples. A code block or
 a table alone is not counted as a picture. Existing data plots may be reused.
-Prefer compact teaching decks: select the material needed for this topic rather
-than trying to reproduce all practical prose. Consolidation days need only a
-short briefing. No new methods or expanded course scope.
+Keep each teaching deck focused on its topic rather than reproducing all
+practical prose. Consolidation develops case discussion and recovery rather than
+introducing another statistical method. The expanded teaching depth is described
+below; the introductory topic boundaries remain.
+
+The later user-requested [workload expansion](expansion-contract.md) supersedes
+the initial short-deck volume: roughly double explanations/demonstrations and
+active practice within these topics, while retaining the 45-slide ceiling,
+visual balance, and prohibition on filler. Consolidation includes substantial
+case review and recovery practice; it introduces no new statistical method.
 
 ## Format (copy the sibling course's RevealJS scaffold)
 

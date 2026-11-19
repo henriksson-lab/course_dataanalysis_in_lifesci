@@ -109,6 +109,98 @@ Which original files should still be present?
 The original archive and manifest remain. Only the practice copy is renamed. The S03 measurement file has one observed length; find its units in README. cp and mv may replace a destination, so inspect the names before running. Ask students to identify S04's path without copying the S03 line blindly.
 :::
 
+## A substring does not understand a treatment
+
+![Literal treated search selects untreated as well as the treated labels.](grep-substring.svg){height=350px}
+
+Test a search against known records before trusting its count.
+
+::: notes
+The student makes search-trap.tsv from a copy, changes S01 to untreated, and preserves the real manifest. That trap gives three matches, not evidence for three treated biological samples. The baseline fixture remains two treated records.
+:::
+
+## Inspect selected IDs, not just a number
+
+```bash
+grep -F treated samples.tsv
+grep -F treated samples.tsv | wc -l
+```
+
+A correct count is not proof that the right lines were selected.
+
+::: notes
+Compare the same two commands on the trap copy. Explain -F literal matching. This is not a full table query language and should not replace structured data checks later in R.
+:::
+
+## A line count depends on the file structure
+
+![Five newline-terminated lines represent one header and four sample records.](header-lines.svg){height=350px}
+
+Headers name fields; they are not an additional sample.
+
+::: notes
+Use the actual manifest with a final newline. wc -l counts newline characters, not an abstract number of biological observations. A CSV may contain quoted embedded newlines in general; this controlled TSV has one record per line, which makes the simple count valid here.
+:::
+
+## Follow a manifest path to a measurement
+
+Read S04’s listed path, then locate its file.
+
+What if the record is present but the file has been renamed?
+
+Do not erase a sample simply because its file could not be found.
+
+::: notes
+The independent exercise deliberately renames S04.csv only in a disposable received-check copy. The contents still identify S04 and length39.8mm. The manifest is an index of intended paths; it does not guarantee files currently occupy them.
+:::
+
+## A filename can outlive its correct meaning
+
+![Redirection replaces a treated-named extract with control records while retaining its filename.](overwrite-state.svg){height=350px}
+
+Read the saved output after writing it.
+
+::: notes
+Use the disposable treated-audit.txt experiment, retaining an extract-backup.txt. Show that > overwrites rather than appends. Never demonstrate input=output truncation on raw course data; explain the hazard without creating it.
+:::
+
+## Why input and output paths must differ
+
+Unsafe pattern — **do not run**:
+
+```text
+grep -F treated samples.tsv > samples.tsv
+```
+
+The shell may truncate the destination before grep reads its input.
+
+::: notes
+Make the sequence explicit: the shell prepares output redirection, then starts the program. No deletion command is needed to lose data. A reproducible workflow preserves raw inputs and uses distinct informative output paths.
+:::
+
+## A discrepancy needs evidence before repair
+
+![The manifest expects S04.csv while a renamed file retains the S04 measurement record.](manifest-path.svg){height=350px}
+
+Use the deliberately known rename as evidence to restore its path.
+
+::: notes
+This does not establish a general rule to rename any nearby file to whatever is missing. Real ambiguous identities require source records or advice. Ask students to record the discrepancy, supporting evidence, repair, and verification in audit.txt.
+:::
+
+## Audit the recovered copy
+
+Keep:
+
+- Original source archive and manifest.
+- Search command and selected IDs.
+- The discrepancy and supported repair.
+- A checked output and explanation of the units.
+
+::: notes
+The source archive still contains the original known fixture. The practical should end with a peer able to find the restored measurement and explain why line counts alone were insufficient. Record current computer and extraction location.
+:::
+
 ## Save an inspection someone can explain
 
 [Open the practical and notes](../../week1/04-inspect-archive.qmd).

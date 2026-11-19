@@ -426,6 +426,224 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
+<section id="show-the-complete-quantity-map" class="slide level2">
+<h2>Show the complete quantity map</h2>
+<p>Known standards: concentration → measured absorbance. Fit: absorbance as a function of known concentration. Unknown: measured absorbance → inverse point estimate.</p>
+<p>Keep the fitted direction and requested output distinct.</p>
+<aside class="notes">
+<p>The standard concentration is prepared and the response is measured. A new direct regression of concentration on absorbance is a different fit. Students should label predictor,response,intercept,slope units,range,and unknown estimate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="rounding-a-display-can-change-a-later-calculation" class="slide level2">
+<h2>Rounding a display can change a later calculation</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-rounded-coefficients.svg" height="350"></p>
+<figcaption>Inverse estimates differ when full coefficients are replaced by coefficients rounded to two decimals.</figcaption>
+</figure>
+</div>
+<p>Retain fitted coefficients; round results when communicating.</p>
+<aside class="notes">
+<p>For reading.310, rounding intercept and slope to.04 and.06 gives4.50 rather than4.17 mg/L. It is a deliberate diagnostic, not a recommended new calibration. Extra display precision does not remove measurement uncertainty either.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-residual-has-a-direction-and-a-scale" class="slide level2">
+<h2>A residual has a direction and a scale</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>standards<span class="sc">$</span>observed_minus_fitted <span class="ot">&lt;-</span></span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>  standards<span class="sc">$</span>absorbance <span class="sc">-</span> <span class="fu">fitted</span>(calibration_fit)</span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">residuals</span>(calibration_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Positive means the observed signal is above the line.</p>
+<aside class="notes">
+<p>Compare one value by hand. Both expressions should match. A residual is not the concentration error of an unknown and not a p-value. Use the first standard while its measured concentration and signal remain visible.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="trace-a-corrected-estimate-through-its-evidence" class="slide level2">
+<h2>Trace a corrected estimate through its evidence</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-dilution-lineage.svg" height="350"></p>
+<figcaption>A new diluted reading feeds its inverseestimate and suppliedfactor to recover an original estimate.</figcaption>
+</figure>
+</div>
+<p>The corrected original estimate is not a direct instrument reading.</p>
+<aside class="notes">
+<p>A numerical table should retain the new reading,original aliquot volume,total final volume,factor,diluted estimate,and original estimate. Nothing in this chain validates U3 without its own new measurement.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-second-calibration-needs-a-second-fit" class="slide level2">
+<h2>A second calibration needs a second fit</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-transfer-line.svg" height="350"></p>
+<figcaption>The new six-standard instrument calibration has its own intercept and slope.</figcaption>
+</figure>
+</div>
+<p>Do not reuse the first instrument coefficient objects.</p>
+<aside class="notes">
+<p>Transfer standards span0–5 mg/L. Fit absorbance on known concentration. Their fitted intercept is.02161905 and slope.10008571 per mg/L. This is another empirical calibration,not a universal optical law.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="rebuild-the-transfer-fit-explicitly" class="slide level2">
+<h2>Rebuild the transfer fit explicitly</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>transfer_standards <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="st">'data/calibration-transfer.csv'</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>transfer_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(absorbance <span class="sc">~</span> concentration_mg_l,</span>
+<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> transfer_standards)</span>
+<span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(transfer_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p>Load readr before this block. Keep separate names so the primary instrument report is not silently altered. The independent transfer report must contain its own import,checks,fit,and inverse calculations.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="inspect-the-new-residuals-not-the-old-picture" class="slide level2">
+<h2>Inspect the new residuals, not the old picture</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-transfer-residuals.svg" height="350"></p>
+<figcaption>Residuals fromthe new six-standard fit remain small onthe absorbance scale.</figcaption>
+</figure>
+</div>
+<p>A tidy residual plot is limited evidence with only six standards.</p>
+<aside class="notes">
+<p>Look for obvious curvature or an unusual point. Absence of an obvious pattern does not establish chemical specificity,measurement accuracy in every condition,or performance beyond the tested range.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="preserve-the-unsupported-unknown-as-a-record" class="slide level2">
+<h2>Preserve the unsupported unknown as a record</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-transfer-range.svg" height="350"></p>
+<figcaption>X1at0.270 is within the new standard range;X2at0.700 is above it.</figcaption>
+</figure>
+</div>
+<p>Keep the ID and reading; flag the unsupported concentration.</p>
+<aside class="notes">
+<p>X1 estimates about 2.48168 mg/L. X2 is not supported by the supplied standard readings. Missing estimate due to out-of-range input differs from a missing measured signal; retain the reason rather than dropping the row.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="an-algebra-check-is-useful-but-not-independent-validation" class="slide level2">
+<h2>An algebra check is useful but not independent validation</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>transfer_a <span class="ot">&lt;-</span> <span class="fu">coef</span>(transfer_fit)[<span class="dv">1</span>]</span>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>transfer_b <span class="ot">&lt;-</span> <span class="fu">coef</span>(transfer_fit)[<span class="dv">2</span>]</span>
+<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>x1_mg_l <span class="ot">&lt;-</span> (<span class="fl">0.270</span> <span class="sc">-</span> transfer_a) <span class="sc">/</span> transfer_b</span>
+<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>transfer_a <span class="sc">+</span> transfer_b <span class="sc">*</span> x1_mg_l</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The forward calculation returns <strong>0.270</strong>, apart from rounding.</p>
+<aside class="notes">
+<p>The check can catch reversal or arithmetic mistakes. Because it reuses the same fitted relationship, it does not independently establish calibration validity or eliminate uncertainty.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-next-action-needs-new-information-not-an-invented-result" class="slide level2">
+<h2>A next action needs new information, not an invented result</h2>
+<p>For an unsupported sample, state what must be supplied next:</p>
+<ul>
+<li>A new suitable measurement.</li>
+<li>Any recorded sample and total volumes.</li>
+<li>The supported range and applicable calibration.</li>
+</ul>
+<p>No fabricated corrected concentration.</p>
+<aside class="notes">
+<p>The transfer report should recommend a sensible information-gathering step for X2. It is not a wet-lab protocol and does not require prior chemistry. Full uncertainty propagation remains beyond this simple exercise.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="practical-report-the-line-and-its-limits" class="slide level2">
 <h2>Practical: report the line and its limits</h2>
 <p>Save <strong><code>calibration-report.Rmd</code></strong>, supported concentration estimates, and both figures.</p>

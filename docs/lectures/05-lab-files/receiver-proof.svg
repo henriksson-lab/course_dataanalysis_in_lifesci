@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>The receiver checks an extracted result in a new location</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<path d="M45,100 v-20 h100.0 l20,20 h130.0 v80 h-250 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="170.0" y="148.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">sender</text>
+<path d="M445,120 h155 l30,30 v110 h-185 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="600" y1="120" x2="600" y2="150" stroke="#3b5bab" stroke-width="3"/>
+<line x1="600" y1="150" x2="630" y2="150" stroke="#3b5bab" stroke-width="3"/>
+<text x="537.5" y="295" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">sharing.zip</text>
+<path d="M790,100 v-20 h100.0 l20,20 h130.0 v80 h-250 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="915.0" y="148.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">receiver</text>
+<line x1="320" y1="180" x2="415" y2="180" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="665" y1="180" x2="760" y2="180" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<path d="M835,285 h130 l30,30 v65 h-160 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="965" y1="285" x2="965" y2="315" stroke="#3b5bab" stroke-width="3"/>
+<line x1="965" y1="315" x2="995" y2="315" stroke="#3b5bab" stroke-width="3"/>
+<text x="915.0" y="415" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">README + input</text>
+<text x="550" y="450" font-family="Arial, sans-serif" font-size="27" fill="#203247" text-anchor="middle" font-weight="normal">Can another person identify and verify the selected records?</text>
+</svg>

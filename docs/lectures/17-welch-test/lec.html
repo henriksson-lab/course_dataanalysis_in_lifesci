@@ -268,10 +268,16 @@ Data Analysis in Life Sciences
 </section>
 <section id="run-the-comparison-in-the-direction-we-named" class="slide level2">
 <h2>Run the comparison in the direction we named</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">t.test</span>(treated, control,</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>,</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/seedlings.csv'</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
+<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>treated <span class="ot">&lt;-</span> <span class="fu">filter</span>(seedlings, treatment <span class="sc">==</span> <span class="st">'treated'</span>)<span class="sc">$</span>growth_mm</span>
+<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">filter</span>(seedlings, treatment <span class="sc">==</span> <span class="st">'control'</span>)<span class="sc">$</span>growth_mm</span>
+<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">t.test</span>(treated, control,</span>
+<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>,</span>
+<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb1-10"><a aria-hidden="true" tabindex="-1"></a>comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>First vector minus second vector: <strong>treated minus control</strong>.</p>
 <aside class="notes">
 <p>The prior preparation creates treated and control numeric vectors. var.equal=FALSE explicitly asks for Welch’s method; the default already does this, but the setting is visible. Two-sided means evidence in either direction counts. We are reading estimates, interval and p-value rather than deriving the t formula.</p>
@@ -386,6 +392,205 @@ Data Analysis in Life Sciences
 <p>A small p-value does not establish a large or causal effect.</p>
 <aside class="notes">
 <p>The study’s random allocation supports a causal comparison within its conditions, but a p-value alone never establishes causality or universal generalisation. If an interval included zero, it would not prove equality. Encourage a sentence on biological relevance rather than “significant” alone.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="read-units-as-well-as-numbers" class="slide level2">
+<h2>Read units as well as numbers</h2>
+<p>Mean growth and the confidence interval use <strong>mm</strong>. The p-value has <strong>no measurement unit</strong>.</p>
+<p>Neither a group SD nor a p-value is the interval for a difference.</p>
+<aside class="notes">
+<p>Ask students to annotate a real output table with quantity,value, units,interpretation. The sample counts come from actual input vectors, not the number of lines printed in the test output.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="reversing-order-reverses-the-interval" class="slide level2">
+<h2>Reversing order reverses the interval</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-reversed-interval.svg" height="350"></p>
+<figcaption>The same comparison in opposite directions produces reflected confidence intervals.</figcaption>
+</figure>
+</div>
+<p>For a two-sided test, the p-value remains the same.</p>
+<aside class="notes">
+<p>A treated-minus-control interval[2.70,9.73] becomes a control-minus-treated interval[−9.73,−2.70]. Both describe the same estimated contrast in opposite units of direction. This is not a new experiment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="check-the-reversal-directly" class="slide level2">
+<h2>Check the reversal directly</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>reverse_comparison <span class="ot">&lt;-</span> <span class="fu">t.test</span>(control, treated)</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>comparison<span class="sc">$</span>conf.int</span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>reverse_comparison<span class="sc">$</span>conf.int</span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>comparison<span class="sc">$</span>p.value</span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>reverse_comparison<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Use separate objects so the stated primary result is preserved.</p>
+<aside class="notes">
+<p>This follows the main paired-independent setup from day16: treated/control are numeric growth vectors. The function order determines the sign, not an object name such as treatment_effect.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="coverage-level-and-interval-width-are-a-trade-off" class="slide level2">
+<h2>Coverage level and interval width are a trade-off</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-confidence-levels.svg" height="350"></p>
+<figcaption>The90%,95%,and 99%intervals use identical observations but different widths.</figcaption>
+</figure>
+</div>
+<p>Keep the 95% interval as the stated main analysis.</p>
+<aside class="notes">
+<p>Higher long-run coverage requires a wider procedure under the same model. Do not select a level after seeing which interval permits a preferred statement. Changing conf.level does not change the observed means.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-small-experiment-can-remain-inconclusive-about-direction" class="slide level2">
+<h2>A small experiment can remain inconclusive about direction</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-uncertain-case.svg" height="350"></p>
+<figcaption>An illustrative2 mm difference has a95%interval from−1 to 5 mm,covering zero and both directions.</figcaption>
+</figure>
+</div>
+<p>Including zero is not proof of equality or equivalence.</p>
+<aside class="notes">
+<p>Ask what positive and negative differences remain inside the supplied range. These are illustrative numbers, not output from the course plant file. No new test or sample-size calculation is needed.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="repair-the-interpretation-not-the-desired-result" class="slide level2">
+<h2>Repair the interpretation, not the desired result</h2>
+<p>Incorrect: “The null hypothesis has probability 0.0015.”</p>
+<p>Better: under the equal-means model and assumptions, a statistic at least this extreme is rare.</p>
+<p>Then report effect size, units, interval, and design limits.</p>
+<aside class="notes">
+<p>A frequentist p-value conditions on the model; it does not assign the hypothesis a probability. Biological importance and causality require context. Precision in wording is part of analysis, not an optional editorial add-on.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="two-studies-n-alone-does-not-explain-interval-width" class="slide level2">
+<h2>Two studies: n alone does not explain interval width</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-two-studies.svg" height="350"></p>
+<figcaption>Main and transfer study intervals differ in estimate and width while also having different spreads and sample sizes.</figcaption>
+</figure>
+</div>
+<p>Both sample size and observed variability contribute.</p>
+<aside class="notes">
+<p>Here the smaller transfer study happens to have a narrower interval because its observed spread is smaller. Do not teach a universal ordering from n alone when other quantities change.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="recreate-the-guided-comparison-for-the-new-source" class="slide level2">
+<h2>Recreate the guided comparison for the new source</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/seedlings-transfer.csv'</span>,</span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>new_treated <span class="ot">&lt;-</span> transfer <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="st">'treated'</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(growth_mm)</span>
+<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a>new_control <span class="ot">&lt;-</span> transfer <span class="sc">|&gt;</span></span>
+<span id="cb3-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="st">'control'</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(growth_mm)</span>
+<span id="cb3-8"><a aria-hidden="true" tabindex="-1"></a>transfer_test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(new_treated, new_control)</span>
+<span id="cb3-9"><a aria-hidden="true" tabindex="-1"></a>transfer_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p>Use transfer from its own saved import/growth calculation, not hidden console state. There are9 available values per group. Difference4.2111 mm;95% interval 1.9484 to6.4738 mm; p about.00124. Include actual observations and assumptions in the interpretation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-complete-result-can-be-read-without-r" class="slide level2">
+<h2>A complete result can be read without R</h2>
+<p>A reader should identify:</p>
+<ul>
+<li>What was independently assigned and measured.</li>
+<li>The estimated difference and its direction/units.</li>
+<li>Uncertainty under the model and a design/context limitation.</li>
+</ul>
+<p>A printout alone does not answer all three.</p>
+<aside class="notes">
+<p>Students extend transfer-comparison.Rmd with a concise results paragraph, then peer-check direction and units in rendered HTML. Earlier descriptive work remains useful and should not disappear after adding a test.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

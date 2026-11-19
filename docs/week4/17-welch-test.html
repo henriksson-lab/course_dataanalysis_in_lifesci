@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -925,6 +931,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#read-the-result-in-a-useful-order" id="toc-read-the-result-in-a-useful-order" class="nav-link" data-scroll-target="#read-the-result-in-a-useful-order">Read the result in a useful order</a></li>
   <li><a href="#practical-extend-your-report" id="toc-practical-extend-your-report" class="nav-link" data-scroll-target="#practical-extend-your-report">Practical: extend your report</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
+  <li><a href="#extended-practical-read-and-challenge-the-complete-test-output" id="toc-extended-practical-read-and-challenge-the-complete-test-output" class="nav-link" data-scroll-target="#extended-practical-read-and-challenge-the-complete-test-output">Extended practical — read and challenge the complete test output</a></li>
+  <li><a href="#independent-transfer-add-uncertainty-to-your-new-class-report" id="toc-independent-transfer-add-uncertainty-to-your-new-class-report" class="nav-link" data-scroll-target="#independent-transfer-add-uncertainty-to-your-new-class-report">Independent transfer — add uncertainty to your new-class report</a></li>
   </ul>
 </nav>
     </div>
@@ -1023,7 +1031,50 @@ Hint: what if the interval includes zero?
 <li>Does group SD describe uncertainty in the difference? <strong>No; SD describes individual spread within a group.</strong></li>
 <li>If all these plants came from one shared pot per treatment, would the same analysis be justified? <strong>No; the independent-unit assumption would change.</strong></li>
 </ol>
-<p>Restart R and render the report. <strong>Leave with:</strong> an updated <code>comparison.Rmd</code> and HTML that explain both the size and uncertainty of the estimated effect.</p>
+<p>Restart R and render the report.</p>
+</section>
+<section id="extended-practical-read-and-challenge-the-complete-test-output" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-read-and-challenge-the-complete-test-output">Extended practical — read and challenge the complete test output</h2>
+<p>Allow about 75–90 minutes. Keep the question and plant-level figure from day 16. Work in the saved report and a small <code>day17-checks.R</code> script. We are using one guided model, not learning a catalogue of tests or a rule based on automatic normality testing. Every claim remains conditional on the independent units, measurement quality, and appropriateness of the small-sample model.</p>
+<ol type="1">
+<li>Predict the sign of the estimated difference from the group means before calling <code>t.test()</code>. Run it in the stated treated-minus-control order. Locate the mean estimates, confidence interval, p-value, and number of input observations. Explain which parts have units of mm and which do not.</li>
+<li>Reverse the vector order in a second, clearly labelled calculation. Check the mean difference and interval endpoints. The two-sided p-value should be unchanged, while direction reverses. Write a sentence explaining why a negative sign here does not mean that the data changed.</li>
+<li>Create a small output-reading table: quantity, value, units, and a plain language interpretation. Include both group means, their difference, the 95% interval, and the p-value. Keep SD among plants separate from the interval for the population mean difference.</li>
+<li>Using the same observations, compare 90%, 95%, and 99% intervals by changing only <code>conf.level</code>. State which procedure gives the widest interval and why a higher coverage target costs precision. Do not choose a confidence level after looking for one that permits a preferred conclusion. Keep the original 95% result as the main reported analysis.</li>
+<li>Repair these statements in your own words: “There is a 0.15% probability that the treatment has no effect”; “95% of treated plants gained between 2.70 and 9.73 mm more”; “the test shows this difference matters in any biological setting.” Identify the conditioning, individual-versus-mean, and generalisation errors separately.</li>
+<li>Discuss a supplied different study with a mean difference of 2 mm and a 95% interval from −1 to 5 mm. No new calculation is required. Explain whether equality has been established, whether positive differences remain compatible with the interval, and what information would help decide if such a difference would matter biologically.</li>
+<li>Revise <code>comparison.Rmd</code> so the methods, figure, numerical results, and interpretation agree. Render after restarting, without creating the vectors manually in the Console first. Add a short note describing the checks you performed and retain the code that produced them.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: separate an interval’s level from the data
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use <code>t.test(treated, control, conf.level = 0.90)</code> and compare its <code>conf.int</code> with the existing result and with <code>conf.level = 0.99</code>. Changing the level does not change the observed means. Reversing the two vectors reverses and negates interval endpoints, while a two-sided test asks the same equal-means question.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-add-uncertainty-to-your-new-class-report" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-add-uncertainty-to-your-new-class-report">Independent transfer — add uncertainty to your new-class report</h2>
+<p>Spend another 60–90 minutes extending yesterday’s <code>transfer-comparison.Rmd</code>. If you did not retain it, recreate its own import, checks, growth calculation, summary, and individual-point figure from <code>data/seedlings-transfer.csv</code>. There are nine complete independent plants in each allocation; this is not paired data.</p>
+<ol type="1">
+<li>State the analysis direction before fitting: treated minus control mean seven-day growth, in mm. Extract the two numeric growth vectors by their supplied labels. Check their lengths and inspect observations before testing.</li>
+<li>Run the guided Welch comparison with a 95% interval. Check the estimated difference by subtracting the means yourself. Read the interval endpoints in that same direction and verify that your prose agrees with the code.</li>
+<li>Add a results paragraph containing the available n, two means, directed difference, interval, p-value, and a biological interpretation restricted to these simulated conditions. An output printout alone is not the paragraph.</li>
+<li>Compare the width of this interval with the first study’s interval. List plausible contributing features, including sample size and observed spread. Do not attribute the width to sample size alone when other quantities differ.</li>
+<li>Create a three-sentence conclusion for a reader who does not know t-tests: what difference was estimated, how uncertain it is under the model, and what remains limited by design or context. Avoid a conclusion consisting only of a threshold label.</li>
+<li>Render and give the HTML to a peer. Ask them to state the comparison direction, units, and independent unit without opening your source. Correct any ambiguity and save the complete source, inputs, and output together.</li>
+</ol>
+<p><strong>Additional outputs:</strong> a test-output reading table, interval-level check, corrected interpretation statements, and the extended transfer report. Numerical checking should support a defensible explanation rather than replace one.</p>
+<p><strong>Leave with:</strong> an updated <code>comparison.Rmd</code> and HTML that explain both the size and uncertainty of the estimated effect.</p>
 <p>Next: <a href="../week4/18-paired.html">Day 18 — The same plant measured twice</a>.</p>
 
 

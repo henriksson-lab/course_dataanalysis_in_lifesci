@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>A fresh session and a fresh folder test different dependencies</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="55" y="95" width="425" height="250" rx="10" fill="#f1eaf8" stroke="#6b4fa0" stroke-width="3"/>
+<circle cx="265" cy="185" r="60" fill="#6b4fa0" stroke="none" stroke-width="3"/>
+<text x="265" y="196" font-family="Arial, sans-serif" font-size="40" fill="white" text-anchor="middle" font-weight="normal">R</text>
+<text x="265" y="285" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Fresh session</text>
+<rect x="620" y="95" width="425" height="250" rx="10" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M725,170 v-20 h88.0 l20,20 h112.0 v80 h-220 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="835.0" y="218.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">New location</text>
+<text x="835" y="285" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Fresh folder</text>
+<text x="265" y="410" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">checks hidden memory</text>
+<text x="835" y="410" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">checks portable inputs + paths</text>
+</svg>

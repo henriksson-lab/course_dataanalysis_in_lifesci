@@ -140,6 +140,88 @@ calculation and the two vectors supplied to `t.test()`.
 - Does a small p-value establish that light caused the change? **No; the fixed
   measurement order remains a limitation.**
 
+## Extended practical — protect the identity of a pair
+
+Use about 75–90 minutes to investigate why the paired design matters. Continue
+`paired-report.Rmd`; keep the original paired CSV unchanged. One independent
+plant supplies two related photosynthesis readings, in micromoles CO2 per square
+metre per second. A change is after minus before for the **same identifier**.
+
+1. Inspect L01, L02, and L03. Calculate their changes by hand and compare with
+   your derived column. Give units. Check that the two readings share an
+   identifier, not merely a similar numeric size or neighbouring row position.
+2. Make a plot joining before and after readings for each plant, using the
+   supplied pattern or a teacher demonstration. Retain your plot of within-plant
+   changes as well. Explain what each display makes easier to see, including
+   individual change and variation in starting levels.
+3. Compare `mean(after - before)` with `mean(after) - mean(before)` for these
+   complete matched rows. They agree, but that arithmetic equality does not
+   justify forgetting the pairing. The uncertainty calculation also depends
+   on the variation of the within-plant differences.
+4. Create a separate demonstration object by sorting the before column and
+   after column independently. Do not alter the source file or the proper
+   paired object. Calculate changes and run the same paired function on this
+   artificial matching. Compare its mean change, SD of changes, and interval
+   with the valid result. Save both under unmistakably different names.
+5. Explain the trap: the two marginal means and mean difference can remain
+   unchanged while the paired variability changes greatly. A smaller p-value
+   after sorting is not improved evidence; the identities were destroyed.
+   Recover the original matching using the supplied rows and plant IDs.
+6. Analyse the original change vector with the supplied one-sample equivalence
+   check `t.test(change_umol_m2_s, mu = 0)`. Compare its estimate, interval,
+   and p-value with the correctly paired call. This is a check of the same
+   analysis, not an additional independent experiment or a search for a result.
+7. Add a limitation paragraph naming the fixed before/after order and absence
+   of an unchanged-light comparison. Explain why the observed change cannot
+   isolate light from every possible time/order influence. A small p-value
+   does not remove this design limitation.
+
+::: {.callout-tip collapse="true"}
+## Hint: preserve the valid object before the bad example
+
+Use distinct names such as `paired` and `wrong_sorted`. Sorting rows while
+keeping all columns together preserves pairs; sorting two columns separately
+does not. The valid mean change is **1.983** in the stated rate units. The
+sorted-column demonstration has the same mean change but a different SD and
+interval, which exposes why means alone cannot validate paired analysis.
+:::
+
+## Independent transfer — a small explicitly supplied paired case
+
+Allow 60–90 minutes for reasoning and a short source report. A teaching
+example measures the same three independently sampled plants before and after
+changing light. The before rates are 5, 8, and 6; after rates are 7, 9, and 9,
+in micromoles CO2 per square metre per second. The plant IDs are D1, D2, D3 in
+that order for both vectors. These are illustrative supplied values, not a new
+measurement file or a randomised experiment. Three plants are very limited
+support for population inference.
+
+1. Enter the supplied values in a three-row table using the familiar
+   `data.frame()` pattern. Include IDs and both rate columns. Explain why this
+   table has three independent pairs and not six independent plants.
+2. Calculate the within-plant changes and check them by hand. Compute their
+   mean and sample SD. Describe how much information would be lost by reporting
+   only the mean and omitting the three observations.
+3. Make a change plot with a zero reference line. Write a caption identifying
+   the unit and the direction. Preserve the actual vertical values rather
+   than adding vertical jitter to make the figure more attractive.
+4. A guided paired calculation gives an approximate 95% interval of **−0.48
+   to 4.48** for the mean change in these units. Interpret that supplied
+   interval without claiming it contains 95% of individual plant changes or
+   proves no effect. If you reproduce it in R, identify the very small n and
+   the model assumptions rather than treating the function as a guarantee.
+5. Write a design recommendation for a later real experiment: explain how
+   more independent plants, a suitable comparison, and recording identities
+   would address different limitations. Do not claim that simply reweighing
+   or rereading these same three plants creates more independent pairs.
+6. Save `paired-transfer.Rmd` and render it after restarting. Include all values
+   and code inside the source, a short interpretation, and a statement that
+   the case is illustrative. Keep a note comparing it with the ten-plant
+   source case without pooling the two unrelated examples.
+
+**Additional outputs:** matching audit, valid-versus-sorted demonstration,
+change figures, revised main report, and the short supplied-case report.
+
 **Leave with:** `paired-report.Rmd`, its HTML, and the change figure.
 
 Next: [Day 19 — A calibration line](19-calibration.qmd).

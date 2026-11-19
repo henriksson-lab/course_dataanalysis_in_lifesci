@@ -106,6 +106,104 @@ You have run the code but not saved the script. Then you restart R.
 The unsaved script changes may be lost or recoverable by the editor, but should not be relied upon. Save explicitly. In a fresh R session the objects need recreating from the beginning. Introduce error recovery as checking a dependency rather than running random lines until the error disappears. Esc cancels an unfinished expression marked by a plus prompt.
 :::
 
+## An assignment is not a live spreadsheet link
+
+![After final length changes, assigned growth stays stale until the subtraction reruns.](stale-value.svg){height=350px}
+
+Name the input, stored result, and instruction that refreshes it.
+
+::: notes
+Work through 20 to 37 mm giving 17 mm. Update final to 39, then print the old stored growth before rerunning the subtraction. The script records an order of computations; reopening it does not automatically execute it.
+:::
+
+## Predict the stored result before rerunning
+
+```r
+initial_mm <- 20
+final_mm <- 37
+growth_mm <- final_mm - initial_mm
+final_mm <- 39
+growth_mm
+```
+
+Now rerun the subtraction and explain the difference.
+
+::: notes
+The printed growth remains 17 until recalculation. Ask for the reason before showing 19. This is a concrete dependency exercise, not a request to write a function or build a spreadsheet application.
+:::
+
+## Equal vector length is not enough
+
+![Reordering one measurement vector destroys the intended within-plant correspondence.](vector-shuffle.svg){height=350px}
+
+R subtracts positions; it does not infer plant identities.
+
+::: notes
+Correct vectors are initial 20, 22, 19 and final 37, 40, 34. A reordered final copy 34, 37, 40 yields 14, 15, 21: arithmetic on the wrong pairs. Equal lengths cannot certify matching identities.
+:::
+
+## Convert the values as well as their labels
+
+```r
+growth_mm <- c(17, 18, 15)
+growth_cm <- growth_mm / 10
+mean(growth_mm)
+mean(growth_cm)
+```
+
+The means are about 16.67 mm and 1.667 cm.
+
+::: notes
+A renamed object or axis label does not convert units. Preserve original values and assign converted values to a new name. Ratios cancel compatible length units; changes retain length units.
+:::
+
+## A supplied solution rule can be traced through units
+
+![Mass divided by supplied molar mass yields amount; dividing by litres gives concentration.](solution-units.svg){height=350px}
+
+A mole is a unit of chemical amount; no reaction equation is required.
+
+::: notes
+Define molar mass as grams per mole. The supplied calculation is 0.2922 g / 58.44 g/mol = 0.005 mol; 100 mL = 0.100 L; amount divided by volume gives 0.050 mol/L, or 50 mmol/L. This is arithmetic, not laboratory preparation instructions.
+:::
+
+## Write every input into the source
+
+```r
+mass_g <- 0.2922
+molar_mass_g_mol <- 58.44
+final_volume_l <- 100 / 1000
+concentration_mmol_l <- 1000 *
+  (mass_g / molar_mass_g_mol) / final_volume_l
+```
+
+::: notes
+All numerical rules and constants are supplied. Keep intermediate quantities visible while learning so an incorrect conversion can be located. Avoid a single expression containing unexplained magic numbers.
+:::
+
+## Change one input and predict the response
+
+![Original concentration is 50 mmol/L; doubling only mass gives 100, doubling only volume gives 25.](scale-change.svg){height=350px}
+
+Different input changes answer different questions.
+
+::: notes
+Restore original inputs between cases. Glucose mass 0.9008 g with supplied molar mass 180.16 g/mol in 100 mL also gives 50 mmol/L. Different weighed masses can produce the same amount concentration; no treatment effect has been inferred.
+:::
+
+## Diagnose a stale or missing object
+
+Check in order:
+
+1. Which saved script and session?
+2. Were the input assignments run?
+3. Were dependent calculations rerun?
+4. Do names, units, and correspondences agree?
+
+::: notes
+The outputs are day06-extended.R and a calculation-check note. Retain predictions even when wrong. A saved source that recreates the result after restart is stronger evidence than a successful result following unrecorded Console experiments.
+:::
+
 ## Practise a complete, repeatable calculation
 
 [Open the practical and notes](../../week2/06-r-basics.qmd).

@@ -115,6 +115,130 @@ The workflow replaces manual spreadsheet calculations, but still needs subject
 context and a valid experimental design. Asking these questions is competence.
 :::
 
+
+## Evidence of a skill is an action you can repeat
+
+Locate the raw input, source, derived table, figure, HTML, and backup.
+
+Explain the role of each without relying on recent files or session memory.
+
+::: notes
+The portfolio is not judged by its number of files. Ask students to demonstrate
+one reproducible path from question to result. Keep the day as consolidation:
+no new package, model, or examination format is introduced. The references are
+part of competent practice rather than forbidden assistance.
+:::
+
+## A high recorded value is a question to investigate
+
+![Reference culture A11 is the largest algae observation and is highlighted without removing it.](algae-high-reading.svg){height=350px}
+
+No source evidence confirms that A11 is erroneous.
+
+::: notes
+The value is 41.7 mg. A high point can affect a small-sample summary, but that
+observation alone does not justify exclusion. The source notes identify A19 as
+spilled; they do not identify A11 as a transcription error. Distinguish evidence
+for a repair from a preference for a simpler-looking plot.
+:::
+
+## Name the primary and diagnostic datasets separately
+
+```r
+library(readr)
+library(dplyr)
+algae <- read_csv("data/algae.csv", show_col_types = FALSE)
+algae_without_a11 <- filter(algae, culture_id != "A11")
+```
+
+The primary result uses **all available measurements**.
+
+::: notes
+The new object is a sensitivity demonstration, not a replacement raw file.
+Counts must be recomputed for each version. Preserve A19 as missing. Do not
+choose a dataset by which p-value is smaller; the task only examines how one
+record changes a descriptive summary.
+:::
+
+## The diagnostic changes the answer, not the evidence for exclusion
+
+![Omitting A11 increases the observed mean difference, but the result is explicitly diagnostic.](sensitivity-check.svg){height=350px}
+
+Primary difference ≈ **5.72 mg**; diagnostic difference ≈ **6.95 mg**.
+
+::: notes
+The supplement mean stays 33.91818 mg. The reference mean falls from 28.20 mg
+to 26.97273 mg, so the observed difference increases to 6.94545 mg. There is no
+confirmation that the omitted value is wrong. The primary analysis remains the
+main report; a sensitivity result must carry its changed count and rationale.
+:::
+
+## Different problems require different explanations
+
+![A19 has an unavailable measurement after a spill; A11 has a high recorded value.](missing-and-high.svg){height=350px}
+
+Missing is not zero. Unusual is not automatically erroneous.
+
+::: notes
+Ask students to explain each issue without giving both the same label of
+bad data. A19 reduces available n. A11 remains a recorded observation unless
+independent source evidence supports a correction. Model assumptions are a
+third issue: they do not disappear merely because the file is tidy.
+:::
+
+## An uncertain estimate does not establish equality
+
+![A supplied difference estimate of 3 mm has a 95 percent interval from minus 2 to 8 mm spanning zero.](uncertain-interval.svg){height=350px}
+
+State the uncertainty rather than turn it into “no effect”.
+
+::: notes
+This is the same interpretation case already in the practical. The picture
+supports a discussion of compatible differences in both directions. It is not
+a new computation from algae. It does not mean that 95 percent of plants lie
+inside the interval or that the null hypothesis has 95 percent probability.
+:::
+
+## Match the output to the question
+
+- What values were recorded? Inspect and describe.
+- How variable are observations? Show points and SD.
+- How uncertain is a guided mean comparison? Use the taught interval/test.
+- What concentration matches a signal? Use the supported calibration.
+
+::: notes
+Students are not learning a menu of tests. These are familiar workflow
+questions that should lead to an interpretable output. A calculated dilution
+formula is not empirical evidence needing regression; an observational line
+is not proof of an intervention's effect.
+:::
+
+## A handover should survive a change of reader
+
+![A recipient follows the source and inputs into a tested project rather than relying on the author's memory.](handover.svg){height=350px}
+
+Give directions another person can follow, then test them.
+
+::: notes
+The final independent task is a handover request and readiness review. A peer
+should locate input, render source, and state a limitation. Working alone, use
+a differently named extracted folder. Keep only tested packages and clearly
+identify revisions, including separate Windows and Ubuntu copies.
+:::
+
+## Choose the next rehearsal from evidence
+
+Write three reliable actions, two weak steps, and a concrete next practice task.
+
+Keep unfinished remote skills explicitly pending.
+
+::: notes
+Self-review should identify an action, not only confidence. “I can render after
+restarting” has a checkable meaning; “I understand R” is too broad. Remaining
+time belongs to the weak step. Do not fill it with an advanced topic merely
+because some students finish earlier.
+:::
+
 ## Practical: leave with work you can find again
 
 [Open day 25 practical and notes](../../week5/25-consolidate.qmd).
@@ -123,6 +247,7 @@ context and a valid experimental design. Asking these questions is competence.
 - Render your chosen report from a fresh session.
 - Save `reports/next-lab.txt` as your reusable workflow.
 - Identify the supported backup and any pending remote-access skill.
+- Keep a labelled sensitivity check, handover, and readiness review.
 
 ::: notes
 Stop adding topics. Use the time to make these tasks dependable. The descriptive

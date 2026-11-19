@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -926,6 +932,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#your-practical" id="toc-your-practical" class="nav-link" data-scroll-target="#your-practical">Your practical</a></li>
   <li><a href="#transfer-choice-summarise-product-yield" id="toc-transfer-choice-summarise-product-yield" class="nav-link" data-scroll-target="#transfer-choice-summarise-product-yield">Transfer choice: summarise product yield</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
+  <li><a href="#extended-practical-make-a-figure-that-survives-a-misleading-caption" id="toc-extended-practical-make-a-figure-that-survives-a-misleading-caption" class="nav-link" data-scroll-target="#extended-practical-make-a-figure-that-survives-a-misleading-caption">Extended practical — make a figure that survives a misleading caption</a></li>
+  <li><a href="#independent-transfer-a-second-classs-figure-request" id="toc-independent-transfer-a-second-classs-figure-request" class="nav-link" data-scroll-target="#independent-transfer-a-second-classs-figure-request">Independent transfer — a second class’s figure request</a></li>
   </ul>
 </nav>
     </div>
@@ -1072,6 +1080,48 @@ Why show individual dots?
 </div>
 </div>
 </div>
+</section>
+<section id="extended-practical-make-a-figure-that-survives-a-misleading-caption" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-make-a-figure-that-survives-a-misleading-caption">Extended practical — make a figure that survives a misleading caption</h2>
+<p>Spend about 75–90 minutes on a small figure-and-table package. Use the main seedling table or your selected organic yield context; do not do both merely to increase the amount of work. Start with the observations and group summary already created above. Your goal is a reader who can distinguish the inputs, observations, summaries, and meaning of visual symbols without guessing.</p>
+<ol type="1">
+<li>Write down the number of input rows, the number of groups, and the number of summary rows. Locate one actual observation in each group. Explain why the two summary rows are not two additional experimental units.</li>
+<li>Save a first figure showing individual observations only. Save another with group means added. Use identical axis limits, units, and point positions so the difference between figures is the added information, not rescaling. Describe one feature that the observations reveal and a mean alone hides.</li>
+<li>Draft a deliberately inadequate caption, such as “Treatment makes everything larger; bars show error.” Then replace it with a caption identifying the independent unit, plotted quantity and units, mean symbol if used, available n, and whether any error bars exist. Keep both versions in a caption log and explain at least three specific repairs.</li>
+<li>Create histograms using two defensible bin widths. Compare apparent modes, gaps, and group overlap. Record which broad statement remains supported in both displays and which detail depends on the bin choice. Do not select the prettiest bin width because it exaggerates a treatment difference.</li>
+<li>Produce a compact table containing available n, mean, median, and SD per group. Round for readable display only after calculation. Preserve the full-precision summary object for further arithmetic and any CSV export. Explain why printing six decimal places does not add measurement precision.</li>
+<li>Inspect how plot labels change between contexts. Plant growth uses mm; organic yield uses percent, and an SD of yield is expressed in percentage points. Revise both the axis and the caption if switching contexts. Merely changing a figure title can leave a convincing but false unit label.</li>
+<li>Give your package to a partner. Ask them to identify n, one observation, the mean marker, the measurement units, and what “overlap” refers to. Keep their answers and revise any element they could not identify. Working alone, apply the same reader questions after closing the code for a few minutes.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: two tables have different roles
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The raw table supplies individual points; the grouped summary supplies means. In a second <code>geom_point()</code> layer, use <code>data = group_summary</code> and explicit x/y mappings. If you omit error bars, your caption should not mention them. If a teacher demonstrates mean ± SD, label it as SD among observations, not a 95% interval or a measurement instrument’s error bound.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-a-second-classs-figure-request" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-a-second-classs-figure-request">Independent transfer — a second class’s figure request</h2>
+<p>Use another 60–90 minutes for <code>data/seedlings-transfer.csv</code>. The class wants both a figure suitable for a report and a table suitable for checking the calculation. It does not want a test or only a screenshot of RStudio. The file contains 18 independently potted plants, with nine observations per allocation and no missing lengths. All lengths are mm, measured seven days apart.</p>
+<ol type="1">
+<li>Create <code>day13-transfer.R</code> from a blank script. Import, inspect, and derive <code>growth_mm</code>; check the meaning and units from the dictionary. Retain all rows and original columns. Do not manually retype the measurement vectors.</li>
+<li>Create one group summary and export it as <code>output/day13-transfer-summary.csv</code>. Include available n, mean, median, and SD, using distinct informative column names. Describe the difference between <code>nrow(transfer)</code> and <code>nrow(transfer_summary)</code> in a code comment.</li>
+<li>Create a point plot with a group mean marker using the summary as a separate layer. Save a PNG. Check that every individual point’s vertical position is its measured growth; jitter is horizontal only. Explain why moving points vertically would misrepresent the recorded values.</li>
+<li>Make a faceted histogram using a common horizontal range and one stated bin width. Compare it with the point plot for this small sample. Which better permits identifying individual observations? Which highlights the grouping of nearby numeric values? Keep both, with different filenames and captions.</li>
+<li>Write an email-length request to a future lab partner describing exactly which two data files and which script they need to recreate the figures. Do not actually send a message. The saved request should make it clear which input was supplied and which table was derived.</li>
+<li>Run the script in a fresh R session. Open the PNGs and CSV in the file manager, not only through RStudio’s recent tabs. Verify one summary against a filtered vector and <code>mean()</code>. Save a short reproducibility note identifying the check.</li>
+</ol>
+<p><strong>Additional outputs:</strong> a caption-repair log, the chosen-context figure pair, transfer summary/figures, and a saved handover request. A complete package lets its reader identify the experimental unit and units without consulting your screen. Treat comments about layout separately from biological conclusions.</p>
 <p><strong>Keep:</strong> <code>day13-groups.R</code>, the summary CSV, figure, and caption. Next: <a href="../week3/14-replicates-uncertainty.html">replicates and uncertainty</a>.</p>
 
 

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Matching file size is a limited check, not proof of matching content</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="90" y="100" width="360" height="130" rx="10" fill="#f8fafc" stroke="#2a7f8f" stroke-width="3"/>
+<text x="270" y="175" font-family="Arial, sans-serif" font-size="36" fill="#203247" text-anchor="middle" font-weight="normal">version 1</text>
+<rect x="90" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<rect x="129" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<rect x="168" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<rect x="207" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<rect x="246" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<rect x="285" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<rect x="324" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<rect x="363" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<rect x="402" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="270" y="385" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">same number of characters</text>
+<rect x="650" y="100" width="360" height="130" rx="10" fill="#f8fafc" stroke="#6b4fa0" stroke-width="3"/>
+<text x="830" y="175" font-family="Arial, sans-serif" font-size="36" fill="#203247" text-anchor="middle" font-weight="normal">version 2</text>
+<rect x="650" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#6b4fa0" stroke-width="3"/>
+<rect x="689" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#6b4fa0" stroke-width="3"/>
+<rect x="728" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#6b4fa0" stroke-width="3"/>
+<rect x="767" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#6b4fa0" stroke-width="3"/>
+<rect x="806" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#6b4fa0" stroke-width="3"/>
+<rect x="845" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#6b4fa0" stroke-width="3"/>
+<rect x="884" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#6b4fa0" stroke-width="3"/>
+<rect x="923" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#6b4fa0" stroke-width="3"/>
+<rect x="962" y="285" width="34" height="48" rx="2" fill="#e6f3f5" stroke="#6b4fa0" stroke-width="3"/>
+<text x="830" y="385" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">same number of characters</text>
+<text x="550" y="465" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="normal">Different contents can occupy the same number of bytes</text>
+</svg>

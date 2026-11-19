@@ -119,5 +119,90 @@ process answers the intended biological question. Independent units and an
 appropriate design still matter.
 :::
 
+## Extended practical — count the information in four study designs
+
+Use about 75–90 minutes for diagrams and a controlled simulation investigation.
+The added work develops the meaning of independent replication, not a new
+statistical test. Save your drawings or descriptions in
+`output/day14-design-notes.txt` and keep the demonstration code in today's script.
+
+1. Draw twelve separate pots, each with one plant, with nutrient allocation
+   independently assigned to pots. Label the unit assigned to treatment, the
+   measurement, and the number of independent units. Give the conditions under
+   which it is reasonable to regard the pots as independent.
+2. Now draw one pot per treatment, with twelve ruler readings of its plant.
+   Identify what variation those readings could help assess. Explain why the
+   number of recorded lengths does not provide twelve independent treatment
+   assignments. Do not propose averaging the readings and then pretending
+   the two averages represent many independent pots.
+3. Draw two trays, each containing twelve plants, where treatment was applied
+   to the whole tray. Identify which plants share a treatment unit and possible
+   environment. State what independent replication is missing. Do not count
+   each plant as a separately assigned treatment replicate simply because its
+   identifier is unique.
+4. Transfer the reasoning to either one culture measured at ten times, or one
+   organic synthesis product weighed ten times. Name the biological or
+   laboratory unit and the repeated measurements. Specify which question the
+   repeats can inform and which comparison needs separately prepared units.
+5. Run the supplied sampling demonstration unchanged and save its histogram.
+   Read the horizontal axis aloud: each value is a sample mean, not an
+   individual plant. Make a small table containing SD among source values,
+   SD among means from samples of four, and SD among means from samples of
+   sixteen. Label what each row describes.
+6. Change only the random seed and rerun. Compare exact numerical results and
+   the broad relationship. Then return to the stated seed. Explain why a
+   reproducible simulation can use randomness, and why selecting a convenient
+   seed is not evidence that one sampling method is generally better.
+7. Write a short response to: “The histogram is narrow, so the design must be
+   good.” Identify assumptions about independence, sampling, and measurement
+   that a narrow distribution of means cannot establish. Precision in a biased
+   or irrelevant measurement is not a substitute for answering the question.
+
+::: {.callout-tip collapse="true"}
+## Hint: label the level at every stage
+
+In this demonstration, `population_mm` is the fixed source vector. A single
+`sample()` call gives a group of draws. One `mean()` gives one estimate from
+that sample. `replicate()` collects many such estimates. Neither a hundred
+simulation runs nor ten technical readings creates additional measured plants.
+Keep the source SD and the SD of repeated means under different names.
+:::
+
+## Independent transfer — change sample size while keeping the source fixed
+
+Allow another 60–90 minutes. Use the growth measurements from
+`data/seedlings-transfer.csv` as a new **toy source distribution**, not as proof
+about every plant. It combines allocations for this teaching demonstration;
+this is not a treatment comparison or a confidence interval for a treatment effect.
+
+1. Import and calculate growth from all 18 records. Document that one row is
+   one measured independent plant in its source study, but repeated draws from
+   this stored vector are simulated samples rather than new measurements.
+2. Adapt the supplied code to collect 400 means from samples of size three,
+   then size twelve, with replacement, keeping the same source values. The
+   only new choice is sample size; no new R function is needed. Predict which
+   set of means will be more spread out before running it.
+3. Save both numerical vectors as columns of a derived table, or in a long
+   table using the supplied `data.frame()` pattern. State that the 400 rows
+   represent simulated estimates, not enrolled plants or independent protocols.
+4. Make comparable histograms or plots of the two distributions. Use shared
+   axis limits and a stated bin width. Compare SD among means with SD among
+   source observations. A larger sample size changes the estimate's variation,
+   not the original recorded plant values.
+5. Repeat with a second seed, retaining the first result as a separate object.
+   Write a paragraph identifying a broad stable feature and an unstable exact
+   value. Explain why the number of simulation repeats and number of plants
+   per simulated sample are different settings with different meanings.
+6. End with a real design decision: if you could either measure each of two
+   plants twenty more times or obtain ten additional independent plants, which
+   option better informs a population mean, assuming comparable measurements?
+   State the assumptions and also name a situation where checking measurement
+   repeatability first would still be useful.
+
+**Additional outputs:** four labelled design diagrams, a table distinguishing
+source spread from estimate spread, transfer simulation CSV/figure, and a
+250-word interpretation. Your answer should remain sensible if the exact
+simulation histogram bins change. No hypothesis test is required today.
+
 **Keep:** `day14-sampling.R`, your replicate diagrams, and the two-sentence explanation.
 Next: [write a descriptive report](15-descriptive-report.qmd).

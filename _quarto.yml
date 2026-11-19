@@ -4,6 +4,7 @@ project:
   render:
   - index.qmd
   - overview.qmd
+  - study-plan.qmd
   - intro/*.qmd
   - downloads/index.qmd
   - reference/*.qmd
@@ -37,6 +38,8 @@ website:
       contents:
       - href: overview.qmd
         text: Course overview
+      - text: Five-week study plan
+        href: study-plan.qmd
       - href: intro/ubuntu-windows.qmd
         text: 'Windows: install Ubuntu / Mac: open Terminal'
       - href: intro/r-rstudio.qmd

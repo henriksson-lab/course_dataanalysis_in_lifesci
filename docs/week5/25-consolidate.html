@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -926,6 +932,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#station-4-your-complete-report" id="toc-station-4-your-complete-report" class="nav-link" data-scroll-target="#station-4-your-complete-report">Station 4 — your complete report</a></li>
   <li><a href="#station-5-local-and-remote-when-available" id="toc-station-5-local-and-remote-when-available" class="nav-link" data-scroll-target="#station-5-local-and-remote-when-available">Station 5 — local and remote, when available</a></li>
   <li><a href="#your-handover-to-the-next-biology-course" id="toc-your-handover-to-the-next-biology-course" class="nav-link" data-scroll-target="#your-handover-to-the-next-biology-course">Your handover to the next biology course</a></li>
+  <li><a href="#extended-practical-investigate-before-changing-a-result" id="toc-extended-practical-investigate-before-changing-a-result" class="nav-link" data-scroll-target="#extended-practical-investigate-before-changing-a-result">Extended practical — investigate before changing a result</a></li>
+  <li><a href="#independent-transfer-complete-a-laboratory-handover" id="toc-independent-transfer-complete-a-laboratory-handover" class="nav-link" data-scroll-target="#independent-transfer-complete-a-laboratory-handover">Independent transfer — complete a laboratory handover</a></li>
   </ul>
 </nav>
     </div>
@@ -1065,6 +1073,49 @@ Compare your reasoning
 <section id="your-handover-to-the-next-biology-course" class="level2">
 <h2 class="anchored" data-anchor-id="your-handover-to-the-next-biology-course">Your handover to the next biology course</h2>
 <p>Save <code>reports/next-lab.txt</code> with a short workflow you can reuse: where to store raw data, how to open a project, which checks to make, how to choose a figure, and how to render and back up your report. Include one question you would ask a lab teacher before analysing a dataset, such as “what was independently assigned to treatment?” or “what do blank cells mean?”</p>
+</section>
+<section id="extended-practical-investigate-before-changing-a-result" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-investigate-before-changing-a-result">Extended practical — investigate before changing a result</h2>
+<p>Allow about 90 minutes. Use your algae script and brief report from days 23–24, so the final day consolidates familiar methods. Work in copies for diagnostic changes, keep the primary result from all available measurements, and record what you changed in <code>reports/final-investigation.txt</code>.</p>
+<ol type="1">
+<li>From the file manager, locate the project, <code>algae-transfer.R</code>, <code>algae-brief.Rmd</code>, input CSV, and generated HTML without using recent files. Write their project-relative paths. If one is missing, repair that part of the portfolio before changing the analysis.</li>
+<li>Open the supplied algae CSV without editing it. Identify the largest reference-group measurement and its culture ID. Check the dictionary for evidence that it is erroneous. There is none: a large value is a question to investigate, not permission to remove an observation.</li>
+<li>Recreate the primary group summaries from all available measurements. State the observed supplement-minus-reference mean difference in mg. Label this result “primary, all available measurements”. A19 remains unavailable.</li>
+<li>Create a separately named diagnostic object that omits <strong>A11</strong>, and repeat the group means and observed difference. The aim is to see how one high reference value influences a small-sample summary. Label the diagnostic result “sensitivity check, A11 omitted without evidence of error”. This label is essential: do not silently replace the primary result.</li>
+<li>Compare the two differences and reference means. Explain why the supplement mean is unchanged, why the reference mean changes, and why the diagnostic sample count is different. Do not select the preferred result by its p-value. No new inferential method is needed for this comparison.</li>
+<li>In a copied report, add a short limitations paragraph distinguishing unavailable A19, unusually high but recorded A11, and the simplifying assumptions of the study. These are three different issues. Restore or retain the primary analysis as the main result, with the diagnostic clearly marked if included at all.</li>
+<li>Render, close, and reopen the report. Confirm the prose, counts, and plotted observations all refer to the primary dataset. A diagnostic object left in memory must not accidentally change the main figure or inline results.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: separate objects make the decision visible
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Start from the imported <code>algae</code> object and use a name such as <code>algae_without_a11 &lt;- filter(algae, culture_id != "A11")</code> for the diagnostic. Use <code>na.rm = TRUE</code> in a summary while still reporting available counts. Do not write this object over <code>data/algae.csv</code>. The primary reference mean is about 28.20 mg and the available supplement mean about 33.92 mg; use your unrounded values for the difference. Omitting a high reference value will lower that reference mean and increase the observed difference, without establishing that the altered estimate is more scientifically justified.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-complete-a-laboratory-handover" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-complete-a-laboratory-handover">Independent transfer — complete a laboratory handover</h2>
+<p>Allow about 60–90 minutes. This is a rehearsal of working from a question and saved files. Use references when needed, but start by writing the sequence in words instead of copying a whole worked solution. Work alone first; then let a peer inspect the result. There is no grade or new examination component.</p>
+<ol type="1">
+<li>Write a handover request of about 100 words for a future lab partner: the scientific question, where the original data are, what one row means, and which report should be rendered. Include the missing-value meaning and expected output. If using your organic main report, restate the supplied theoretical maximum, collected mass, and percentage formula; do not assume the partner remembers chemistry.</li>
+<li>Close RStudio and reopen the project from its saved location. Starting in a fresh session, run your chosen source from the top or Knit the report. Record the first point at which you needed a reference and how it helped. The aim is an understandable workflow, not unaided memorisation.</li>
+<li>Independently verify one input record and one group summary using a small separate calculation. For the algae memo, count the available values in each group; for an organic report, check one yield’s numerator, denominator, and units. Explain how an arithmetic check differs from validating the experimental design.</li>
+<li>Give a peer the tested share package and the handover request. Ask them to locate the input, render the source, and state the main result and one limitation. Working alone, extract to a differently named parent folder and follow the handover text after another station. Record which route you used.</li>
+<li>If the recipient finds an ambiguity, revise the source or README and make a new clearly named package. Extract and check that replacement too. An edit in the original Windows copy does not update an Ubuntu copy already packaged; use the transfer/version checks from day 21.</li>
+<li>Open the returned HTML as a reader. Find the axes’ units, figure’s observational unit, available counts, and limitation. Write one sentence explaining why a successful render alone cannot supply those meanings.</li>
+<li>Save a one-page <code>reports/readiness-review.txt</code>: three actions you can now perform reliably, two actions needing another rehearsal, and the concrete next practice task for each. List remote login/desktop/transfer as pending if you have not used the actual service. Store your final source, data, results, and retrievable backup according to the supported course route.</li>
+</ol>
+<p><strong>Keep:</strong> the primary report, labelled diagnostic calculation, final investigation, verified handover package, and readiness review. This is evidence of actions performed and outputs checked, not a claim that a particular number of saved files establishes mastery. Use remaining time to practise the weak step you identified; do not fill it with a new statistical method.</p>
 <p><strong>Before you finish:</strong> locate the final report, source, input, and backup without using a recent-files menu. Keep the <a href="../reference/r.html">reference pages</a> and your working project template for later practicals.</p>
 
 

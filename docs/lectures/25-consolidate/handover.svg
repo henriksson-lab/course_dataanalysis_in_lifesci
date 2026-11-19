@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>A usable handover connects the recipient to source, inputs, and a tested result</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="35" y="110" width="265" height="230" rx="10" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="168" y="165" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Recipient</text>
+<circle cx="168" cy="225" r="35" fill="#2a7f8f" stroke="none" stroke-width="3"/>
+<path d="M470,110 h120 l30,30 v120 h-150 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="590" y1="110" x2="590" y2="140" stroke="#3b5bab" stroke-width="3"/>
+<line x1="590" y1="140" x2="620" y2="140" stroke="#3b5bab" stroke-width="3"/>
+<text x="545.0" y="295" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">source + data</text>
+<path d="M830,150 v-20 h88.0 l20,20 h112.0 v110 h-220 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="940.0" y="213.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">Tested project</text>
+<line x1="325" y1="220" x2="445" y2="220" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="655" y1="220" x2="800" y2="220" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="550" y="430" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">Instructions are usable when another person can follow them</text>
+</svg>

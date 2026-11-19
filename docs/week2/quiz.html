@@ -155,6 +155,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -890,6 +896,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#plot-the-quantity-asked-for" id="toc-plot-the-quantity-asked-for" class="nav-link" data-scroll-target="#plot-the-quantity-asked-for">4. Plot the quantity asked for</a></li>
   <li><a href="#a-report-works-in-the-console-but-fails-when-knitted" id="toc-a-report-works-in-the-console-but-fails-when-knitted" class="nav-link" data-scroll-target="#a-report-works-in-the-console-but-fails-when-knitted">5. A report works in the Console but fails when knitted</a></li>
   <li><a href="#transfer-choice-a-fully-supplied-product-calculation" id="toc-transfer-choice-a-fully-supplied-product-calculation" class="nav-link" data-scroll-target="#transfer-choice-a-fully-supplied-product-calculation">6. Transfer choice: a fully supplied product calculation</a></li>
+  <li><a href="#a-stored-result-becomes-stale" id="toc-a-stored-result-becomes-stale" class="nav-link" data-scroll-target="#a-stored-result-becomes-stale">7. A stored result becomes stale</a></li>
+  <li><a href="#equal-lengths-but-wrong-plants" id="toc-equal-lengths-but-wrong-plants" class="nav-link" data-scroll-target="#equal-lengths-but-wrong-plants">8. Equal lengths but wrong plants</a></li>
+  <li><a href="#audit-the-new-input" id="toc-audit-the-new-input" class="nav-link" data-scroll-target="#audit-the-new-input">9. Audit the new input</a></li>
+  <li><a href="#a-supplied-concentration-calculation" id="toc-a-supplied-concentration-calculation" class="nav-link" data-scroll-target="#a-supplied-concentration-calculation">10. A supplied concentration calculation</a></li>
+  <li><a href="#an-impossible-dilution-request" id="toc-an-impossible-dilution-request" class="nav-link" data-scroll-target="#an-impossible-dilution-request">11. An impossible dilution request</a></li>
+  <li><a href="#source-html-and-a-revision" id="toc-source-html-and-a-revision" class="nav-link" data-scroll-target="#source-html-and-a-revision">12. Source, HTML and a revision</a></li>
   </ul>
 </nav>
     </div>
@@ -1032,6 +1044,126 @@ Answer and check
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The yield is <strong>62%</strong>. The gram units cancel. Purity was an assumption, not a finding from this ratio. Keep the maximum and collected masses as distinct inputs; a larger raw mass is not necessarily a greater percentage when starting scales differ. This question is a numerical transfer check, not a lab procedure.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="a-stored-result-becomes-stale" class="level2">
+<h2 class="anchored" data-anchor-id="a-stored-result-becomes-stale">7. A stored result becomes stale</h2>
+<p>After assigning initial_mm &lt;- 20, final_mm &lt;- 37, and growth_mm &lt;- final_mm - initial_mm, you set final_mm &lt;- 39. What is growth_mm before and after rerunning the subtraction?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Worked answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>It remains 17 until the subtraction runs again, then becomes 19 mm. An assigned object holds its stored result; it is not a live spreadsheet formula that automatically recomputes every dependency. Save the correct order in the script and rerun from its inputs.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="equal-lengths-but-wrong-plants" class="level2">
+<h2 class="anchored" data-anchor-id="equal-lengths-but-wrong-plants">8. Equal lengths but wrong plants</h2>
+<p>Initial lengths are c(20,22,19). The correct final vector is c(37,40,34), but a copy has been reordered to c(34,37,40). Both vectors have length three. Is subtraction biologically justified?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Worked answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Not by equal length alone. R subtracts positions, so the reordered copy gives 14,15,21 mm for incorrect pairs. The correct correspondence gives 17,18,15 mm. Verify identities and order as well as compatible vector lengths.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="audit-the-new-input" class="level2">
+<h2 class="anchored" data-anchor-id="audit-the-new-input">9. Audit the new input</h2>
+<p>The transfer study is supplied as 18 independent plants, nine per group. Your report still says 24 plants. Which evidence and source lines should you inspect?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Worked answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Check the imported filename, project and object; inspect dim(), distinct plant IDs, group labels/counts and missingness. Then check inline and manually written prose against that input. The expected transfer table is 18 by 4 with 18 unique IDs, nine records per group and no missing lengths.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="a-supplied-concentration-calculation" class="level2">
+<h2 class="anchored" data-anchor-id="a-supplied-concentration-calculation">10. A supplied concentration calculation</h2>
+<p>No chemistry recall is needed: amount in mol = mass_g / supplied molar_mass_g_mol; concentration in mmol/L = 1000 × amount / final_volume_l. For 0.2922 g, 58.44 g/mol and 100 mL final volume, what is the result?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Worked answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>100 mL = 0.100 L. The amount is 0.005 mol, giving 0.050 mol/L or 50 mmol/L. Doubling only mass gives 100 mmol/L; doubling only volume gives 25 mmol/L. The quantity refers to final total solution volume, not a solvent volume before addition.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="an-impossible-dilution-request" class="level2">
+<h2 class="anchored" data-anchor-id="an-impossible-dilution-request">11. An impossible dilution request</h2>
+<p>The supplied rule is stock volume = target × final volume / stock concentration. A request has stock 100 mmol/L, target 200 mmol/L and final volume 50 mL. What numerical result appears, and why is it not a valid preparation recipe?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Worked answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The formula gives 100 mL of stock, exceeding the requested 50 mL total. The target is more concentrated than the stock, so dilution by adding solvent alone cannot achieve it. Preserve the row and flag it rather than deleting it or inventing stronger stock. These are numerical cases, not wet-lab instructions.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="source-html-and-a-revision" class="level2">
+<h2 class="anchored" data-anchor-id="source-html-and-a-revision">12. Source, HTML and a revision</h2>
+<p>You corrected an HTML caption directly, then rendered the R Markdown source again and the correction vanished. Where should the revision live, and what should be tested?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Worked answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Edit the .Rmd source and render it. The HTML is a generated reading copy and can be replaced. Check the new output location, caption, units, input description and inline counts, then rerender from a fresh session with the required ordinary data files included.</p>
 </div>
 </div>
 </div>

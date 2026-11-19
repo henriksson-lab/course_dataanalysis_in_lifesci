@@ -402,6 +402,206 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
+<section id="a-slope-changes-numerically-when-its-units-change" class="slide level2">
+<h2>A slope changes numerically when its units change</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-area-units.svg" height="350"></p>
+<figcaption>Identical fitted leaf masses are shown with area in square centimetres and square millimetres.</figcaption>
+</figure>
+</div>
+<p>The biological observations did not change.</p>
+<aside class="notes">
+<p>One cm² equals100mm². Slope 4.1101 mg/cm² becomes.041101 mg/mm². The intercept and fitted masses stay the same apart from numerical precision. Preserve both area columns for the demonstration.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="check-the-unit-conversion-through-fitted-values" class="slide level2">
+<h2>Check the unit conversion through fitted values</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>leaves <span class="ot">&lt;-</span> <span class="fu">mutate</span>(leaves, <span class="at">leaf_area_mm2 =</span> <span class="dv">100</span> <span class="sc">*</span> leaf_area_cm2)</span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>unit_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(dry_mass_mg <span class="sc">~</span> leaf_area_mm2, <span class="at">data =</span> leaves)</span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(unit_fit)</span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">abs</span>(<span class="fu">fitted</span>(leaf_fit) <span class="sc">-</span> <span class="fu">fitted</span>(unit_fit)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The final difference should be essentially zero.</p>
+<aside class="notes">
+<p>A tiny floating-point difference is normal. This is a consistency check,not another independent biological result. A smaller numeric slope in different units does not establish a weaker association.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-residual-is-attached-to-a-particular-measured-leaf" class="slide level2">
+<h2>A residual is attached to a particular measured leaf</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-residual-check.svg" height="350"></p>
+<figcaption>One leaf observation and its fitted value are connected by its vertical residual.</figcaption>
+</figure>
+</div>
+<p>Residual = observed mass − fitted mass, in mg.</p>
+<aside class="notes">
+<p>Locate the same identifier in the table and plot. Positive residual means the observed leaf lies above the line. The fitted relationship describes mean tendency and leaves individual variation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="influence-is-a-question-not-an-exclusion-rule" class="slide level2">
+<h2>Influence is a question, not an exclusion rule</h2>
+<p>Keep the full-data fit as primary. Fit without A18 in a separate object and compare.</p>
+<p>Ask what changed and why; do not discard a valid value to obtain a preferred story.</p>
+<aside class="notes">
+<p>The main slope is4.110117 mg/cm² and the fit without A18 is4.064927. The difference is small here,but sensitivity does not depend on getting a dramatic answer. Source evidence is needed for an actual correction or exclusion.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-defined-formula-and-an-empirical-relationship-differ" class="slide level2">
+<h2>A defined formula and an empirical relationship differ</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-formula-versus-data.svg" height="350"></p>
+<figcaption>Calculated solution concentrations fall on a prescribed arithmetic relationship;measuredleaf values vary around an empiricalfit.</figcaption>
+</figure>
+</div>
+<p>A perfect relationship created by a formula is not experimental validation.</p>
+<aside class="notes">
+<p>The solution example supplies all masses,molar masses and volumes; its concentration calculation is arithmetic. The leaf line summarises measured associations. Do not treat a line fitted to formula-generated values as proof of a new biological or chemical law.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-new-association-retains-its-study-context" class="slide level2">
+<h2>A new association retains its study context</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-transfer-association.svg" height="350"></p>
+<figcaption>Initial and final transferseedling lengths are plotted with allocationcolour and one descriptive combined line.</figcaption>
+</figure>
+</div>
+<p>This asks about starting and final size, not the mean treatment effect on growth.</p>
+<aside class="notes">
+<p>These are18 independent source plants,but the two lengths on each plant are related. Allocation and other differences may contribute to the combined pattern. We do not add a multiple regression or claim an intervention on initial size.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="fit-the-question-you-actually-stated" class="slide level2">
+<h2>Fit the question you actually stated</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/seedlings-transfer.csv'</span>,</span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>size_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(final_mm <span class="sc">~</span> initial_mm, <span class="at">data =</span> transfer)</span>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(size_fit)</span>
+<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(transfer<span class="sc">$</span>initial_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Use an in-range initial length for a worked fitted-value calculation.</p>
+<aside class="notes">
+<p>A predictor value of zero may be outside the useful biological range even though the model calculates an intercept. The report should include a residual plot and one checked observed-minus-fitted example.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="choose-the-analysis-through-the-design-and-outcome" class="slide level2">
+<h2>Choose the analysis through the design and outcome</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-question-map.svg" height="350"></p>
+<figcaption>Independentgroups,paired measurements,and an observed scatter pattern lead to different familiaranalysisquestions.</figcaption>
+</figure>
+</div>
+<p>Mean difference, within-unit change, and a slope answer different questions.</p>
+<aside class="notes">
+<p>This is not an automatic menu based on a normality test or whichever function gives a small p-value. Name the independent unit,outcome,units,and limitation before applying the appropriate taught method.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="finish-with-a-comparison-sheet-you-can-reuse" class="slide level2">
+<h2>Finish with a comparison sheet you can reuse</h2>
+<p>For each familiar question, record:</p>
+<ul>
+<li>Independent units and what was measured.</li>
+<li>Outcome, units, and the method/output.</li>
+<li>A design or interpretation limitation.</li>
+</ul>
+<p>Keep source, data, figure, and report together.</p>
+<aside class="notes">
+<p>Students revise the leaf report and independently write transfer-association.Rmd. Their three-question sheet becomes a practical reference for future labs. Do not turn this consolidation into a survey of advanced models.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="practical-explain-the-line-the-residuals-and-one-limit" class="slide level2">
 <h2>Practical: explain the line, the residuals, and one limit</h2>
 <p>Create <strong><code>association-report.Rmd</code></strong> with observations, fitted line, slope units, and residuals.</p>

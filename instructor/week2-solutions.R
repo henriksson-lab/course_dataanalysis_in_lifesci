@@ -124,3 +124,141 @@ if ("--figures" %in% commandArgs(trailingOnly = TRUE)) {
             "week2/seedling-growth.png", overwrite = TRUE)
 }
 cat("Week 2 worked calculations and report rendered successfully. Artifacts:", out, "\n")
+
+# Expanded days6–10: dependency, units, inspection, derived tables and reports.
+initial_single_mm <- 20
+final_single_mm <- 37
+stored_growth_mm <- final_single_mm - initial_single_mm
+final_single_mm <- 39
+stopifnot(stored_growth_mm == 17)
+stored_growth_mm <- final_single_mm - initial_single_mm
+stopifnot(stored_growth_mm == 19,
+          identical(c(34,37,40) - c(20,22,19), c(14,15,21)),
+          abs(mean(c(17,18,15)/10) - mean(c(17,18,15))/10) < 1e-12)
+solutions <- read_csv("data/solutions.csv", show_col_types = FALSE) |>
+  mutate(amount_mol = mass_g / molar_mass_g_mol,
+         final_volume_l = final_volume_ml / 1000,
+         concentration_mmol_l = 1000 * amount_mol / final_volume_l)
+stopifnot(nrow(solutions) == 6, anyDuplicated(solutions$solution_id) == 0,
+          !anyNA(solutions), length(unique(solutions$solute)) == 2,
+          isTRUE(all.equal(solutions$concentration_mmol_l,c(50,100,150,50,100,150))),
+          abs(1000*(0.2922/58.44)/.1 - 50) < 1e-10,
+          abs(1000*(0.9008/180.16)/.1 - 50) < 1e-10,
+          abs(1000*(2*.2922/58.44)/.1 - 100) < 1e-10,
+          abs(1000*(.2922/58.44)/.2 - 25) < 1e-10)
+transfer <- read_csv("data/seedlings-transfer.csv", show_col_types = FALSE) |>
+  mutate(growth_mm = final_mm - initial_mm)
+stopifnot(nrow(transfer) == 18, ncol(transfer) == 5,
+          anyDuplicated(transfer$plant_id) == 0, !anyNA(transfer),
+          all(table(transfer$treatment) == 9),
+          abs(transfer$growth_mm[transfer$plant_id=="T01"] - 15) < 1e-10,
+          transfer$treatment[transfer$plant_id=="T18"] == "treated",
+          abs(transfer$initial_mm[transfer$plant_id=="T18"] - 21.6) < 1e-10,
+          abs(transfer$final_mm[transfer$plant_id=="T18"] - 43) < 1e-10)
+stopifnot(is.na(mean(c(10,NA,20))), mean(c(10,NA,20),na.rm=TRUE)==15,
+          mean(c(10,0,20))==10)
+transfer_growth <- transfer |> select(plant_id,treatment,growth_mm)
+transfer_treated <- transfer_growth |> filter(treatment=="treated")
+stopifnot(nrow(transfer_treated)==9)
+write_csv(transfer_growth,file.path(out,"transfer-growth.csv"))
+write_csv(transfer_treated,file.path(out,"transfer-treated.csv"))
+transfer_plot <- ggplot(transfer,aes(treatment,growth_mm)) +
+  geom_point(position=position_jitter(width=.08,height=0,seed=8)) +
+  labs(x="Allocation",y="Seven-day growth (mm)") + theme_minimal()
+ggsave(file.path(out,"transfer-growth.png"),transfer_plot,width=6,height=4)
+transfer_size <- ggplot(transfer,aes(initial_mm,final_mm)) + geom_point() +
+  labs(x="Initial length (mm)",y="Final length (mm)") + theme_minimal()
+ggsave(file.path(out,"transfer-size.png"),transfer_size,width=6,height=4)
+dilutions <- read_csv("data/dilutions.csv",show_col_types=FALSE) |>
+  mutate(stock_volume_ml = target_mmol_l * final_volume_ml / stock_mmol_l,
+         possible_by_dilution = target_mmol_l <= stock_mmol_l)
+stopifnot(isTRUE(all.equal(dilutions$stock_volume_ml,c(2.5,5,10,100))),
+          identical(dilutions$possible_by_dilution,c(TRUE,TRUE,TRUE,FALSE)))
+supported <- dilutions |> filter(possible_by_dilution)
+stopifnot(nrow(supported)==3,all(supported$stock_volume_ml <= supported$final_volume_ml))
+write_csv(dilutions,file.path(out,"dilution-check.csv"))
+dilution_plot <- ggplot(supported,aes(final_volume_ml,stock_volume_ml)) +
+  geom_point() + labs(x="Final total volume (mL)",y="Required stock volume (mL)") +
+  theme_minimal()
+ggsave(file.path(out,"dilution-plot.png"),dilution_plot,width=6,height=4)
+write_csv(solutions,file.path(out,"solution-concentrations.csv"))
+
+# Complete reference source for the fresh-session transfer report.
+transfer_source <- c(
+ '---','title: "Eighteen seedlings: a transfer report"','output: html_document','---','',
+ '# Question and design','',
+ 'How does seven-day growth vary among these simulated seedlings?',
+ 'Eighteen independent potted plants were randomly allocated control or treatment,',
+ 'nine per group. Each row contains initial and final length for the same plant.',
+ 'Lengths and derived growth are millimetres. This report is descriptive.', '',
+ '# Methods','',
+ 'We checked identifiers, groups, types and missingness, and calculated final',
+ 'minus initial length. Raw measurements remain in their original CSV.', '',
+ '```{r import}', 'library(readr)','library(dplyr)','library(ggplot2)',
+ 'transfer <- read_csv("data/seedlings-transfer.csv",show_col_types=FALSE)',
+ 'dim(transfer)', 'length(unique(transfer$plant_id))','table(transfer$treatment)',
+ 'sum(is.na(transfer$initial_mm))','sum(is.na(transfer$final_mm))',
+ 'transfer <- transfer |> mutate(growth_mm=final_mm-initial_mm)', '```', '',
+ '# Results','', 'The input contains `r nrow(transfer)` plants.', '',
+ '```{r plot, fig.cap="Each point is an independent plant; horizontal jitter only separates overlaps."}',
+ 'ggplot(transfer,aes(treatment,growth_mm)) +',
+ ' geom_point(position=position_jitter(width=.08,height=0,seed=8)) +',
+ ' labs(x="Allocation",y="Seven-day growth (mm)") + theme_minimal()', '```', '',
+ '# Interpretation','',
+ 'Growth varies among plants within both groups, with overlap between groups.',
+ 'The figure describes this sample; it does not establish that every treated',
+ 'plant grows more, nor quantify uncertainty in a population mean difference.'
+)
+transfer_source_path <- file.path(out,"transfer-report.Rmd")
+writeLines(transfer_source,transfer_source_path)
+rmarkdown::render(transfer_source_path,output_dir=out,knit_root_dir=root,
+                  envir=new.env(parent=globalenv()),quiet=TRUE)
+solution_source <- c(
+ '---','title: "Laboratory brief: supplied solution calculations"','output: html_document','---','',
+ '# Question','',
+ 'What amount concentrations follow from the supplied numerical inputs?',
+ 'These six simulated cases are calculated preparations, not independently',
+ 'treated biological samples. A mole is a chemical amount unit and molar mass',
+ 'is grams per mole. All constants and the calculation relationship are supplied.', '',
+ '# Methods','',
+ 'Amount in mol is mass in g divided by molar mass in g/mol. Final mL are',
+ 'divided by 1000 to give litres; amount per litre is multiplied by 1000 for mmol/L.', '',
+ '```{r calculate}', 'library(readr)','library(dplyr)','library(ggplot2)',
+ 'solutions <- read_csv("data/solutions.csv",show_col_types=FALSE) |>',
+ ' mutate(concentration_mmol_l=1000*(mass_g/molar_mass_g_mol)/(final_volume_ml/1000))',
+ 'knitr::kable(solutions,digits=3)', '```', '',
+ '# Results','',
+ '```{r plot, fig.cap="Calculated values from the supplied rule; points are preparation cases, not independent treatment evidence."}',
+ 'ggplot(solutions,aes(mass_g,concentration_mmol_l,colour=solute)) +',
+ ' geom_point() + labs(x="Supplied mass (g)",y="Calculated concentration (mmol/L)") +',
+ ' theme_minimal()', '```', '',
+ '# Interpretation','',
+ 'Each solute has concentrations of 50, 100 and 150 mmol/L. Different masses',
+ 'can yield the same amount concentration because molar masses differ. The',
+ 'relationship is supplied by the calculation, not discovered from a biological',
+ 'experiment. Measurement and preparation uncertainty are not quantified here.'
+)
+solution_source_path <- file.path(out,"laboratory-brief.Rmd")
+writeLines(solution_source,solution_source_path)
+rmarkdown::render(solution_source_path,output_dir=out,knit_root_dir=root,
+                  envir=new.env(parent=globalenv()),quiet=TRUE)
+cat("Expanded weeks1–2 numerical checks, transfer figures, and both new report examples passed.\n")
+
+# Check the failure mechanisms demonstrated in the day9 recovery workshop.
+duplicate_source <- c('```{r repeated_label}', '1 + 1', '```', '',
+                      '```{r repeated_label}', '2 + 2', '```')
+duplicate_error <- tryCatch(
+  knitr::knit(text=duplicate_source,quiet=TRUE,envir=new.env(parent=globalenv())),
+  error=identity)
+stopifnot(inherits(duplicate_error,"error"),
+          grepl("Duplicate chunk label",conditionMessage(duplicate_error)))
+missing_input_error <- tryCatch(
+  read_csv("data/this-input-is-deliberately-absent.csv",show_col_types=FALSE),
+  error=identity)
+stopifnot(inherits(missing_input_error,"error"))
+missing_object_error <- tryCatch(
+  eval(quote(mean(not_created_growth_mm)),envir=new.env(parent=baseenv())),
+  error=identity)
+stopifnot(inherits(missing_object_error,"error"),
+          grepl("not_created_growth_mm",conditionMessage(missing_object_error)))
+cat("Expected duplicate-label, missing-input and missing-object failures verified.\n")

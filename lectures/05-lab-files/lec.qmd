@@ -107,6 +107,97 @@ Saving the instructions will let us repeat that calculation tomorrow.
 The numbers come from the complete 24-plant R dataset, not the four-record shell archive. Do not type the Console prompt. [1] in printed output labels the first element; it is not part of the measurement. Demonstrate a supplied report briefly to show where these skills lead without teaching its syntax yet.
 :::
 
+## A ZIP is a snapshot
+
+![An older ZIP retains version1 while the ordinary source and a newly made ZIP contain version2.](version-snapshot.svg){height=350px}
+
+Editing a source folder does not update an existing archive.
+
+::: notes
+Create v1, extract and inspect it; revise the ordinary note; inspect v1 again before packaging v2. The change must be recognisable in contents, not only a renamed archive. This is file version discipline, not a Git topic.
+:::
+
+## What must the receiver know?
+
+A README should identify:
+
+- The source and what each included file does.
+- What one record represents and its units.
+- Which selection was performed.
+- Any input the receiver still needs.
+
+::: notes
+Students should test whether a partner can identify a selected sample without oral guidance. A shortcut is not the target dataset. If the raw source is not included, the receipt must give its actual available source rather than pretending the package is complete.
+:::
+
+## Extraction can add another folder level
+
+![The received note is inside receiver-v1/report/findings.txt, not directly inside receiver-v1.](zip-nesting.svg){height=350px}
+
+Inspect the extracted tree before constructing a path.
+
+::: notes
+The folder name inside the archive is preserved. A new extraction destination is outside it, so an additional level is expected. This connects the archive exercise to the extra wrapper folder sometimes created when the course project is downloaded.
+:::
+
+## Keep the archive outside what it packages
+
+```bash
+zip -r report-v2.zip report/
+unzip -l report-v2.zip
+unzip report-v2.zip -d receiver-v2
+```
+
+Run from the folder containing report/.
+
+::: notes
+The package should not contain itself. When source changes, create a fresh named snapshot rather than assuming an old ZIP is live. The receiver test checks ordinary extracted files, not merely an archive listing.
+:::
+
+## Test the handover from a new location
+
+![A sharing archive is extracted in a separate receiver location and checked from its README.](receiver-proof.svg){height=350px}
+
+The receiver’s successful check is stronger evidence than your own familiar view.
+
+::: notes
+A single laptop copy tests portability but not all cross-machine software differences. If remote transfer is available, identify the supported direction and destination. Do not claim local rehearsal completes remote access.
+:::
+
+## Find the stale copy before recalculating
+
+A partner says the correction is absent.
+
+What would you ask first?
+
+Check the archive version, extraction folder, and actual note contents.
+
+::: notes
+A missing revision can be a location/version problem rather than an editing failure. Have students compare v1 and v2 contents and record the correction sentence in handover-check.txt. Do not create final-final2 files without explaining which to use.
+:::
+
+## The interpreter matters too
+
+![Shell and R Console accept different instruction languages.](interpreter-choice.svg){height=350px}
+
+The wrong window needs a changed context, not system repair.
+
+::: notes
+Classify pwd, grep, unzip as shell commands, and arithmetic/mean as R. Run 44.3 − 25.7 = 18.6 and mean(c(12, 14, 16)) = 14 in R if setup works. Keep Windows native RStudio and local Ubuntu workspace separate.
+:::
+
+## Explain what was actually reproduced
+
+A receiver can identify the selection and inspect the saved records.
+
+What would they still need to recompute a future report?
+
+Keep a source/input/output distinction in the receipt.
+
+::: notes
+The current week5 R work has not happened yet; students are meeting R, not required to construct a report from scratch today. The ordinary source files, data dictionary and later R code will make calculations repeatable. A screenshot or HTML alone is not the complete recipe.
+:::
+
 ## Finish with a clear handover
 
 [Open the practical and notes](../../week1/05-lab-files.qmd).

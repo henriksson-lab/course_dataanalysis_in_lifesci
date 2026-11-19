@@ -361,6 +361,177 @@ seedlings &lt;- read_csv("data/seedlings.csv",
           display:block!important;
       }</style></aside>
 </section>
+<section id="chunk-labels-locate-code-in-a-report" class="slide level2">
+<h2>Chunk labels locate code in a report</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="chunk-collision.svg" height="350"></p>
+<figcaption>Two chunks named import collide; unique labels allow the report to identify code locations.</figcaption>
+</figure>
+</div>
+<p>Unique descriptive labels help diagnose an error.</p>
+<aside class="notes">
+<p>Duplicate a label only in the disposable workshop copy. Read the first meaningful error, restore unique labels, and render successfully. Chunk labels locate code sections; they are not the headings in the final prose.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="break-one-thing-record-it-then-repair" class="slide level2">
+<h2>Break one thing, record it, then repair</h2>
+<p>In a workshop copy, test:</p>
+<ul>
+<li>A duplicated chunk label.</li>
+<li>A misspelt input filename.</li>
+<li>A plot placed before its required calculation.</li>
+</ul>
+<p>Restore a successful render after each test.</p>
+<aside class="notes">
+<p>Change one cause at a time. Log the changed line, exact error, diagnosis, repair and successful rerun. Keep the original template available. Adding repeated imports randomly is not a diagnostic strategy.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="inline-results-are-calculated-dependencies" class="slide level2">
+<h2>Inline results are calculated dependencies</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="inline-dependency.svg" height="350"></p>
+<figcaption>A number in report prose derives from the imported table and its row count.</figcaption>
+</figure>
+</div>
+<p>When the input changes, the data description must change too.</p>
+<aside class="notes">
+<p>The transfer report must describe 18 plants, nine per group, from the correct input. Inline calculations reduce copied stale numbers, but they do not automatically repair a written description of the wrong experimental design.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="input-replacement-needs-a-narrative-audit" class="slide level2">
+<h2>Input replacement needs a narrative audit</h2>
+<p>Change the import to seedlings-transfer.csv.</p>
+<p>Then check the question, methods, caption, inline count, and interpretation.</p>
+<p>A new plot beneath an old 24-plant description is inconsistent.</p>
+<aside class="notes">
+<p>The source and narrative must describe one deliberate study. Search for the old filename and the number 24 as prompts to investigate; not every occurrence is necessarily wrong. Retain separate workshop and transfer reports.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="source-alone-cannot-supply-a-missing-dataset" class="slide level2">
+<h2>Source alone cannot supply a missing dataset</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="missing-input.svg" height="350"></p>
+<figcaption>Both source and ordinary input files are needed to regenerate the HTML.</figcaption>
+</figure>
+</div>
+<p>A shortcut or screenshot does not replace the measurement file.</p>
+<aside class="notes">
+<p>The local portability test uses a separate extracted project and its own root. Preserve relative input paths. This rehearsal does not verify authentication, remote software, or actual network transfer.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="run-the-renderer-outside-the-report" class="slide level2">
+<h2>Run the renderer outside the report</h2>
+<p>Use Knit, or run in the R Console:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"report-workshop.Rmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Do not place this command inside that report.</p>
+<aside class="notes">
+<p>A render call inside the document would cause the report to try to render itself. Packages and calculations belong in its appropriate chunks; installing software belongs to the separate setup step.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="change-the-recipe-then-rebuild-its-output" class="slide level2">
+<h2>Change the recipe, then rebuild its output</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="source-html.svg" height="350"></p>
+<figcaption>Editing an HTML output does not update the saved RMarkdown source.</figcaption>
+</figure>
+</div>
+<p>Make revisions in .Rmd, then render and inspect the new HTML.</p>
+<aside class="notes">
+<p>Source prose and code are editable instructions; HTML is the reading copy. A browser can show an older file if a student opens the wrong output location. Locate the actual rendered filename and folder.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-recovery-log-preserves-the-lesson-from-an-error" class="slide level2">
+<h2>A recovery log preserves the lesson from an error</h2>
+<p>Save the exact failure and successful repair.</p>
+<p>Then restart R and render the corrected source without manual Console preparation.</p>
+<aside class="notes">
+<p>Keep report-workshop.Rmd, transfer-report.Rmd, their HTML outputs and render-recovery.txt. Ask students to explain why code order and input location matter rather than memorising one particular error message.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="make-one-change-and-check-it" class="slide level2">
 <h2>Make one change and check it</h2>
 <p><a href="../../week2/09-rmarkdown.html">Open the practical and notes</a>.</p>

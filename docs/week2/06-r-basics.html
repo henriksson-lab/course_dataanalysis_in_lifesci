@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../study-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Five-week study plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../intro/ubuntu-windows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows: install Ubuntu / Mac: open Terminal</span></a>
   </div>
@@ -926,6 +932,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#alternative-ratio-exercise-how-much-product-was-collected" id="toc-alternative-ratio-exercise-how-much-product-was-collected" class="nav-link" data-scroll-target="#alternative-ratio-exercise-how-much-product-was-collected">Alternative ratio exercise: how much product was collected?</a></li>
   </ul></li>
+  <li><a href="#extended-practical-trace-a-calculation-through-its-inputs" id="toc-extended-practical-trace-a-calculation-through-its-inputs" class="nav-link" data-scroll-target="#extended-practical-trace-a-calculation-through-its-inputs">Extended practical — trace a calculation through its inputs</a></li>
+  <li><a href="#independent-transfer-calculate-a-solution-from-a-supplied-rule" id="toc-independent-transfer-calculate-a-solution-from-a-supplied-rule" class="nav-link" data-scroll-target="#independent-transfer-calculate-a-solution-from-a-supplied-rule">Independent transfer — calculate a solution from a supplied rule</a></li>
   <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
   </ul>
 </nav>
@@ -1036,6 +1044,47 @@ Hint: an object is not found
 </div>
 </section>
 </section>
+<section id="extended-practical-trace-a-calculation-through-its-inputs" class="level2">
+<h2 class="anchored" data-anchor-id="extended-practical-trace-a-calculation-through-its-inputs">Extended practical — trace a calculation through its inputs</h2>
+<p>Plan about 90 minutes. Today you will investigate why saving code is more reliable than remembering the final number. Create <code>day06-extended.R</code> at the project root. Keep all numerical inputs and comments in that file. Use the Console to inspect results, then recreate them from the saved script after a restart. Record predictions before running each changed calculation.</p>
+<ol type="1">
+<li>Begin with <code>initial_mm &lt;- 20</code>, <code>final_mm &lt;- 37</code>, and <code>growth_mm &lt;- final_mm - initial_mm</code>. Print all three objects. Now change only <code>final_mm</code> to 39 and print <code>growth_mm</code> <strong>without rerunning the subtraction</strong>. Explain the stale value: assigning a number to one object does not make every previous calculation update automatically like a spreadsheet formula.</li>
+<li>Rerun the subtraction, check the new answer, and add a comment identifying the dependency. Put the lines in their correct order and run the script from the top. A reliable source creates inputs before it uses them.</li>
+<li>Recreate the three-plant vectors from the demonstration. Make a deliberately reordered <strong>copy</strong> of the final vector, <code>c(34, 37, 40)</code>, and calculate apparent changes. The arithmetic can run while pairing the wrong plants. State the missing assumption; do not interpret these copied results as biology.</li>
+<li>Return to the correctly ordered vectors. Print <code>length(initial_mm)</code> and <code>length(final_mm)</code> before subtracting. Extend both to four plants as in the earlier practical. Explain why equal lengths are necessary here but do not prove that the same plant occupies each position.</li>
+<li>Convert the correctly calculated growth vector from millimetres to centimetres using division by ten. Store it under a new name ending <code>_cm</code>, print it, and compare its mean with the mean in mm. Do not change only the object name or unit label while leaving the numbers unchanged.</li>
+<li>Calculate the final/initial ratio for the corrected vectors, or the supplied product-yield ratio from the alternative task. Describe in comments which operation is subtraction and which is division, what quantity each produces, and why its units differ. Keep the input masses or lengths alongside the calculation so a reader can repeat it.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint: a name stores the current result, not a live recipe
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>With initial 20 and final 37, the assigned growth is 17. Updating final to 39 leaves that stored growth at 17 until you execute the subtraction again; it then becomes 19 mm. A script supplies an order of operations you can rerun. R may recycle a shorter vector, so do not treat the absence of an error as proof that measurement correspondence was correct.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-transfer-calculate-a-solution-from-a-supplied-rule" class="level2">
+<h2 class="anchored" data-anchor-id="independent-transfer-calculate-a-solution-from-a-supplied-rule">Independent transfer — calculate a solution from a supplied rule</h2>
+<p>Allow 60–90 minutes. No chemistry course is required. A solution contains a substance in a solvent. A <strong>mole</strong>, abbreviated mol, is a unit of chemical amount. <strong>Molar mass</strong> tells us how many grams correspond to one mole. A concentration in mol/L is the amount per litre of <strong>final solution</strong>, not the amount per litre of solvent before adding the substance. This is a numerical exercise, not a laboratory preparation protocol.</p>
+<ol type="1">
+<li>Use these supplied values: sodium chloride mass <strong>0.2922 g</strong>, molar mass <strong>58.44 g/mol</strong>, final volume <strong>100 mL</strong>. Write them as named R objects with units in comments. Do not look up a constant or infer a chemical formula.</li>
+<li>Convert final volume to litres by dividing by 1000. Calculate amount in mol as mass in g divided by molar mass in g/mol. Divide that amount by final volume in litres to obtain mol/L. Print the intermediate values so the unit conversions can be checked separately.</li>
+<li>Multiply mol/L by 1000 to obtain mmol/L; one mmol is one-thousandth of a mol. Write the complete result and units in a comment. Predict the effect of doubling mass while keeping final volume fixed, then check with the script.</li>
+<li>Instead restore the original mass and double final volume. Predict whether the concentration doubles or halves. Run the changed calculation from its inputs and explain how this differs from the previous experiment.</li>
+<li>Repeat the original calculation for glucose using supplied mass <strong>0.9008 g</strong>, molar mass <strong>180.16 g/mol</strong>, and final volume <strong>100 mL</strong>. Compare its mmol/L result with the sodium-chloride result. Different masses can correspond to the same amount concentration because the molar masses differ.</li>
+<li>Save the source, restart R, and reproduce both original results. Add a short <code>reports/calculation-check.txt</code> stating the formula in words, the conversion factors, the meaning of final volume, and one error you corrected. Preserve your predictions even when they were wrong; they make the reasoning visible.</li>
+</ol>
+<p><strong>Check and retain:</strong> the original sodium-chloride and glucose examples each give 0.005 mol in 0.100 L: <strong>0.050 mol/L = 50 mmol/L</strong>. Doubling only mass gives 100 mmol/L; doubling only volume gives 25 mmol/L. Keep these results in a saved script with inputs, not only a copied Console printout.</p>
+</section>
 <section id="check-your-understanding" class="level2">
 <h2 class="anchored" data-anchor-id="check-your-understanding">Check your understanding</h2>
 <ul>
@@ -1044,7 +1093,7 @@ Hint: an object is not found
 <li>What must be true for two vectors to be subtracted position by position?</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1053,7 +1102,7 @@ Check your answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The saved script survives; objects must be recreated. IDs name plants rather than measure quantities, so an average ID has no meaning. The vectors must refer to corresponding observations in the same order and have compatible lengths.</p>
 </div>

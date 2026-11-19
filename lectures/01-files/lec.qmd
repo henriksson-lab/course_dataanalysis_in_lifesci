@@ -95,6 +95,92 @@ Use a plain-text editor, not a word processor's rich format. If the editor adds 
 Expected reasoning: closing a normal editor does not delete a saved file; a separate practice copy can be edited without changing the source; a filename alone may not locate a unique file. Ask students to demonstrate the answers on their own saved work. Avoid a memory test of operating-system vocabulary.
 :::
 
+## Read the whole filename
+
+![The base name and .csv extension play different roles in seedlings-practice.csv.](filename-parts.svg){height=350px}
+
+Make extensions visible before deciding that two names match.
+
+::: notes
+Demonstrate the file-manager extension setting on the supported system. A folder need not have an extension. A hidden extension can make a student think that adding .txt corrected a file when it produced .txt.rtf instead. Use a disposable practice file.
+:::
+
+## A format is not an application
+
+A CSV can open in a spreadsheet or a text editor.
+
+- The saved information is still comma-separated text.
+- The application presents that information differently.
+- A filename extension is a clue; it does not prove the contents.
+
+::: notes
+Ask students to close one view and reopen the same ordinary file in the other. Keep the input unchanged. The key observation is identity of the file and path, not that a particular application is always best.
+:::
+
+## Connect a row to a plant
+
+![The header labels fields while a record describes one plant.](header-records.svg){height=350px}
+
+P01 ended at 44.3 mm; it did not increase by 44.3 mm.
+
+::: notes
+Read all four P01 fields in order and give the mm units from the dictionary. Work 44.3 minus 25.7 equals 18.6. The computer cannot infer that study design or those units from the comma characters.
+:::
+
+## Prediction: what would a screenshot preserve?
+
+A partner sends a picture of the measurement table.
+
+What can you inspect? What would you still request before calculating?
+
+::: notes
+A screenshot can help discuss an error, show column headings, or locate a visible value. It is not the ordinary machine-readable table, may omit rows, and is awkward to update. Ask for the CSV and its dictionary; do not introduce OCR as a new tool.
+:::
+
+## Several copies need an explicit choice
+
+![One original can lead to several extracted project folders with similar names.](canonical-copy.svg){height=350px}
+
+Choose a working project by its contents and path, not its position in a recent-files list.
+
+::: notes
+Show an extra extraction folder and a download with (1) in its name. Open until data, output and .Rproj are directly inside the chosen root. No deletion is required; students should ask for help before removing a similarly named folder.
+:::
+
+## Check saving with a closed window
+
+1. Write a sentence in a plain-text note.
+2. Save to a named folder.
+3. Close the editor and file manager.
+4. Navigate back and reopen the ordinary file.
+
+::: notes
+An application may autosave or restore drafts. The reliable check is the actual saved ordinary file. Have students state its computer, folder and full name, and compare it with the source measurements rather than storing observations only in a screenshot.
+:::
+
+## Renaming does not convert the contents
+
+![A CSV and the same text renamed .txt contain identical records.](format-rename.svg){height=350px}
+
+Only test on a copy. Restore its informative name afterwards.
+
+::: notes
+The practical uses output/name-test.txt made from a practice copy. Its commas and measurements remain. Do not apply this to installed applications or raw originals. A filename can become misleading without changing the underlying information.
+:::
+
+## A receipt makes another input understandable
+
+For the transfer study, save a note identifying:
+
+- The source and your inspection copy.
+- What one row records and its units.
+- T01’s initial, final, and change values.
+- Where to find the ordinary file again.
+
+::: notes
+Use the new eighteen-plant table only after defining its study. T01 is 25.3 to 40.3 mm, an increase of 15.0 mm. T18 is treated, 21.6 to 43.0 mm. The independent task assesses file handling and interpretation, not importing into R yet.
+:::
+
 ## Now practise the complete route
 
 [Open the practical and notes](../../week1/01-files.qmd).

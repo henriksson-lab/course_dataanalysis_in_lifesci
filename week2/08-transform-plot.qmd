@@ -165,6 +165,88 @@ Printing `growth_plot` shows the plot; assigning it alone may not. Check
 check `names(seedlings)` and run the earlier `mutate()` line.
 :::
 
+
+## Extended practical — derive, select, plot, and verify
+
+Allow about 90 minutes. Start `day08-transfer.R` at the project root. The new
+`seedlings-transfer.csv` is an independent simulated seven-day study of eighteen
+plants, nine per group. Its variable definitions match the main seedling table,
+but its values and identifiers differ. Reusing a workflow means changing the
+input deliberately and checking the outputs, not simply changing a plot title.
+
+1. Import the new table into `transfer`, inspect it, and calculate `growth_mm`
+   using `mutate()`. Check T01 by hand: 40.3 − 25.3 = 15.0 mm. Verify the row
+   count before and after adding the column; a calculation should not itself
+   remove plants.
+2. Create a compact table of plant ID, treatment, and growth. Then create a
+   separate table containing treated plants only. State in comments which step
+   selected columns and which selected rows. Record the expected row counts
+   before running each selection.
+3. Make an initial-length versus final-length plot, then an initial-length
+   versus growth plot. Keep the horizontal units in mm and label the actual
+   vertical quantity on each. Explain why a conclusion about final size is not
+   automatically a conclusion about how much a plant changed.
+4. Make the individual-growth-by-group plot with horizontal jitter and zero
+   vertical jitter. Change only the horizontal jitter width and compare the
+   display. The measured growth values must not change. Explain that spreading
+   points sideways helps visibility but does not create additional plants.
+5. Save the derived full table, the selected treated table, and two useful
+   plots under names starting `transfer-` in `output/`. Open each saved file
+   graphically and confirm its contents. A plot object printed in R is not
+   automatically an exported image; writing a CSV is not exporting a figure.
+6. Write a caption stating the independent unit, outcome, units, and meaning of
+   each point. Add two interpretation sentences and one limitation. Compare
+   the workflow with the main seedling example: which names changed, which
+   operations stayed the same, and which conclusions depend on the new data?
+
+::: {.callout-tip collapse="true"}
+## Hint: check the result before polishing the plot
+
+There should be 18 rows in the full derived table and nine in the treated
+subset. `growth_mm` has the same length as the input. Check the original columns
+remain available. To select treated rows use the given label with `==`; do not
+accidentally assign an object or assume every second row is treated.
+:::
+
+## Independent transfer — calculate requested dilutions
+
+Plan 60–90 minutes. A **stock** is a supplied solution of known concentration.
+Dilution uses some stock and solvent to reach a **final total volume**. Assume
+no solute reacts or is lost. The amount stays the same, so the stock volume
+required is `target concentration × final total volume / stock concentration`.
+Both concentrations are supplied in mmol/L; using mL for final volume gives mL
+for the required stock. These are numerical cases, not laboratory instructions.
+
+1. Import `data/dilutions.csv`, inspect its four rows, and retain every original
+   request. Use `mutate()` to add `stock_volume_ml` from the stated formula.
+   Work D02 by hand before running the table calculation: stock 500 mmol/L,
+   target 50 mmol/L, final total volume 50 mL.
+2. Add a logical column `possible_by_dilution` using
+   `target_mmol_l <= stock_mmol_l`. Explain that `<=` means “less than or equal”.
+   A target more concentrated than the stock cannot be obtained by adding
+   solvent alone. Keep that row flagged; do not drop it silently or invent a
+   stronger stock concentration.
+3. Inspect `stock_volume_ml <= final_volume_ml` as a second check for these
+   positive supplied cases. Identify the request that fails and explain why a
+   numerical result can be calculable while the intended procedure is impossible.
+4. Save the complete flagged table as `output/dilution-check.csv`. Use
+   `filter(possible_by_dilution)` to create a separate supported-results table.
+   Plot final total volume against required stock volume for those supported
+   cases, with both axes in mL. Do not interpret this supplied formula relation
+   as an observed biological association needing a statistical test.
+5. Write `reports/dilution-interpretation.txt` with the requested outputs,
+   impossible-case explanation, and a sentence distinguishing “bring to 50 mL
+   total” from “add 50 mL solvent”. Preserve the denominator units in the source.
+6. Restart R and regenerate tables and plot. A partner should identify the
+   impossible request from the saved flagged table without seeing your Console.
+   They should also be able to explain why its row still appears in the audit.
+
+**Check and retain:** D01–D03 need 2.5, 5, and 10 mL of stock respectively. D04's
+formula produces 100 mL stock for a 50 mL final request and must be flagged;
+its target is 200 mmol/L while its stock is only 100 mmol/L. Do not present
+that number as a preparation recipe or erase the input that revealed the issue.
+
+
 ## Check your understanding
 
 ::: {.callout-note collapse="true"}
