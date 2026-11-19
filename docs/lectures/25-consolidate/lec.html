@@ -205,8 +205,8 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="reuse-the-workflow-not-a-memorised-answer" class="slide level2">
-<h2>Reuse the workflow, not a memorised answer</h2>
+<section id="reuse-the-workflow" class="slide level2">
+<h2>Reuse the workflow</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="workflow.svg" height="390"></p>
@@ -259,7 +259,7 @@ seedlings &lt;- mutate(seedlings, growth_mm = final_mm + initial_mm)
 mean(seedlings$Growth_mm)</code></pre>
 <p>Find the path, name, case, and calculation problems.</p>
 <aside class="notes">
-<p>Correct path is data/seedlings.csv from the project root. Use a consistent seedlings object and growth_mm column, load readr/dplyr, and subtract initial from final length. P01 grew 44.3 − 25.7 = 18.6 mm. Do not run broken code as if it were the course’s suggested solution.</p>
+<p>Correct path is data/seedlings.csv from the project root. Use a consistent seedlings object and growth_mm column, load readr/dplyr, and subtract initial from final length. P01 grew 44.3 − 25.7 = 18.6 mm.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -305,7 +305,7 @@ mean(seedlings$Growth_mm)</code></pre>
 </div>
 <p>A large number of readings cannot repair a lack of independent replication.</p>
 <aside class="notes">
-<p>Transfer to future practicals: ask what was independently sampled or assigned to treatment. Cells, time points, or repeat balance readings may be related. Do not decide the test sample size merely from the row count.</p>
+<p>Transfer to future practicals: ask what was independently sampled or assigned to treatment. Cells, time points, or repeat balance readings may be related. Determine sample size from independent units and available measurements.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -408,7 +408,7 @@ mean(seedlings$Growth_mm)</code></pre>
 <span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>algae_without_a11 <span class="ot">&lt;-</span> <span class="fu">filter</span>(algae, culture_id <span class="sc">!=</span> <span class="st">"A11"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The primary result uses <strong>all available measurements</strong>.</p>
 <aside class="notes">
-<p>The new object is a sensitivity demonstration, not a replacement raw file. Counts must be recomputed for each version. Preserve A19 as missing. Do not choose a dataset by which p-value is smaller; the task only examines how one record changes a descriptive summary.</p>
+<p>The new object is a sensitivity demonstration, not a replacement raw file. Recompute counts for each version and preserve A19 as missing. The task examines how one record changes a descriptive summary; evidence for exclusion must come from the study records.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -522,7 +522,7 @@ mean(seedlings$Growth_mm)</code></pre>
 </div>
 <p>Give directions another person can follow, then test them.</p>
 <aside class="notes">
-<p>The final independent task is a handover request and readiness review. A peer should locate input, render source, and state a limitation. Working alone, use a differently named extracted folder. Keep only tested packages and clearly identify revisions, including separate Windows and Ubuntu copies.</p>
+<p>Test the handover instructions in a freshly extracted folder: locate input, render source, and identify a limitation. Clearly label revisions, including separate Windows and Ubuntu copies.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -540,7 +540,7 @@ mean(seedlings$Growth_mm)</code></pre>
 <p>Write three reliable actions, two weak steps, and a concrete next practice task.</p>
 <p>Keep unfinished remote skills explicitly pending.</p>
 <aside class="notes">
-<p>Self-review should identify an action, not only confidence. “I can render after restarting” has a checkable meaning; “I understand R” is too broad. Remaining time belongs to the weak step. Do not fill it with an advanced topic merely because some students finish earlier.</p>
+<p>Ask for checkable actions such as “I can render after restarting”, rather than a broad claim such as “I understand R”. Use the identified weak step for further practice.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -555,7 +555,7 @@ mean(seedlings$Growth_mm)</code></pre>
 </section>
 <section id="exercises-leave-with-work-you-can-find-again" class="slide level2">
 <h2>Exercises: leave with work you can find again</h2>
-<p><a href="../../week5/25-consolidate.html">Open day 25 exercises</a>.</p>
+<p><a href="../../week5/25-consolidate.html">Open exercises</a> · <a href="../../week5/25-consolidate-quiz.html">Quiz</a>.</p>
 <ul>
 <li>Locate your project without a recent-files menu.</li>
 <li>Render your chosen report from a fresh session.</li>
@@ -564,7 +564,7 @@ mean(seedlings$Growth_mm)</code></pre>
 <li>Keep a labelled sensitivity check, handover, and readiness review.</li>
 </ul>
 <aside class="notes">
-<p>Stop adding topics. Use the time to make these tasks dependable. The descriptive organic alternative stays descriptive; higher yield alone does not prove higher purity. The course’s written examination design remains outside these materials.</p>
+<p>Use the consolidation tasks for further practice. The organic alternative stays descriptive; higher yield alone does not demonstrate higher purity.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

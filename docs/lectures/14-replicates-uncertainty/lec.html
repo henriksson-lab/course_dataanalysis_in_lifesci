@@ -259,7 +259,7 @@ Data Analysis in Life Sciences
 <figcaption>Plants grouped within two trays share one treatment per tray.</figcaption>
 </figure>
 </div>
-<p>Do not count every plant as independently assigned.</p>
+<p>Count the independently assigned trays.</p>
 <aside class="notes">
 <p>This is a schematic layout, not the actual course experiment. If treatment was assigned once to each tray, plants within that tray share its allocation and environment. Ask how many treatment assignments occurred, not how many measurements fill the spreadsheet.</p>
 <style type="text/css">
@@ -326,7 +326,7 @@ Data Analysis in Life Sciences
 </div>
 <p>Individual values and estimated means are different objects.</p>
 <aside class="notes">
-<p>This additional picture is regenerated from the course values using a fixed illustrative random generator; exact bins need not match the R demonstration. The concept is the narrower distribution of larger-sample means. Do not interpret SD of means as SD among plants within a sample.</p>
+<p>This additional picture is regenerated from the course values using a fixed illustrative random generator; exact bins need not match the R demonstration. The concept is the narrower distribution of larger-sample means. Distinguish SD among means from SD among plants within a sample.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -339,8 +339,8 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="run-the-supplied-demonstration-do-not-write-a-simulator" class="slide level2">
-<h2>Run the supplied demonstration; do not write a simulator</h2>
+<section id="run-the-supplied-sampling-demonstration" class="slide level2">
+<h2>Run the supplied sampling demonstration</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/seedlings.csv'</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>

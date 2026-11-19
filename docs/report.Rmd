@@ -61,7 +61,7 @@ ggplot(seedlings, aes(x = treatment, y = growth_mm)) +
 
 # Interpretation
 
-Write two or three sentences about the direction of the observed difference,
+Describe the direction of the observed difference,
 variation among plants, and what these simulated observations do and do not
 establish. The template deliberately leaves this interpretation for you.
 

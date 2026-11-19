@@ -1,0 +1,67 @@
+---
+title: "Quiz: Importing and inspecting tables"
+---
+
+[Lecture](../lectures/07-import/lec.qmd) · [Exercises](07-import.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** An imported table has 24 rows and four columns. `head()` displays six rows. How many plants are in the full table if each row represents one plant?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A preview and the full table dimensions answer different questions.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+**24** plants. `head()` displays a preview; `dim()` reports the full row and column counts.
+:::
+
+---
+
+**Q2.** What does `file.exists("data/seedlings.csv")` returning `TRUE` establish? Does it establish that the file contains the intended study and units?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Separate finding a path from interpreting its contents.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The file exists at that path relative to R's working directory. Inspect the table and data dictionary to establish the study, column meanings, and units.
+:::
+
+---
+
+**Q3.** Predict `mean(c(10, NA, 20))`, `mean(c(10, NA, 20), na.rm = TRUE)`, and `mean(c(10, 0, 20))`.
+
+::: {.callout-tip collapse="true" title="Hint"}
+`NA` represents an unavailable value; zero is an observed number.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The results are `NA`, **15**, and **10**, respectively. The available-value mean uses two observations, while the last mean uses three.
+:::
+
+---
+
+**Q4.** An 18-row table is described as one row per plant. It has 17 distinct plant IDs. Should you immediately delete a row?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A discrepancy is a reason to inspect the data and study description.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Investigate which ID repeats and why. A recording error, mistaken import, or different row structure could explain it. Repeated IDs can be legitimate in a repeated-measurement table, so deletion needs evidence.
+:::
+
+---
+
+**Q5.** A solution table contains `solution_id`, `solute`, `mass_g`, `molar_mass_g_mol`, and `final_volume_ml`. Which are labels, and what does the numeric type tell you about units?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Distinguish an identifier from a measured or supplied quantity.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+`solution_id` and `solute` are labels. The other columns are quantities. Numeric storage alone does not supply units or justify combining different quantities; use the dictionary and formula.
+:::

@@ -215,7 +215,7 @@ Data Analysis in Life Sciences
 </div>
 <p>Pair by <strong>identity</strong>, not accidental row position.</p>
 <aside class="notes">
-<p>The file paired.csv stores one plant per row with both readings, so matching is preserved. The diagram imagines two differently ordered lists to make the identity principle visible. Students do not need a join operation for this practical; they need to recognise that labels carry meaning.</p>
+<p>The file paired.csv stores one plant per row with both readings, so matching is preserved. The diagram imagines two differently ordered lists to make the identity principle visible. The example teaches identity matching using the supplied single-table layout.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -327,7 +327,7 @@ Data Analysis in Life Sciences
 <p>A paired comparison asks whether the <strong>mean within-plant change</strong> is zero.</p>
 <p>A one-sample comparison of those changes gives the same result:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(paired_data<span class="sc">$</span>change, <span class="at">mu =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Do not independently sort the before and after columns.</p>
+<p>Keep before and after readings matched by plant ID.</p>
 <aside class="notes">
 <p>This equivalence supports understanding, not a demand to learn another method. The subject-to-subject differences in starting level are accounted for through within-subject subtraction. Pairing must be justified by design, and the pairs still need to be independent of one another.</p>
 <style type="text/css">
@@ -352,7 +352,7 @@ Data Analysis in Life Sciences
 </div>
 <p>No unchanged-light group; the same order was used for every plant.</p>
 <aside class="notes">
-<p>We observe a change after the procedure, but light, elapsed time and measurement order accompany one another. The paired t-test does not separate them. Do not claim that a small p-value proves light alone caused the change.</p>
+<p>We observe a change after the procedure, but light, elapsed time and measurement order accompany one another. The paired t-test does not separate them. A small p-value does not isolate light as the cause.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -482,7 +482,7 @@ Data Analysis in Life Sciences
 </div>
 <p>Three plants are limited support for a population inference.</p>
 <aside class="notes">
-<p>The three illustrative plants had before5,8,6 and after7,9,9 in the stated rate units. Mean change2,SD 1. The interval is provided to practise interpretation. Do not teach that a function guarantees reliable inference at tiny n.</p>
+<p>The three illustrative plants had before5,8,6 and after7,9,9 in the stated rate units. Mean change2,SD 1. The interval is provided to practise interpretation. The tiny sample provides limited support for model-based inference.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -504,7 +504,7 @@ Data Analysis in Life Sciences
 <li>Name the small-sample and design limitations separately.</li>
 </ul>
 <aside class="notes">
-<p>All supplied individual changes are positive, yet the model-based95% mean interval includes zero. This does not make the data erroneous or establish equality. Do not select a different test merely to obtain a preferred threshold label.</p>
+<p>All supplied individual changes are positive, yet the model-based95% mean interval includes zero. This does not make the data erroneous or establish equality. Retain the stated analysis and explain its uncertainty.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

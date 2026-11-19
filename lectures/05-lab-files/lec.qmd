@@ -63,7 +63,7 @@ Explain -r as including folder contents, including nested folders. The extractio
 Always name the computer that holds the file or runs the command.
 
 ::: notes
-This is a conceptual preview; actual service settings remain pending. SSH gives a terminal and remote desktop a graphical workspace. Neither automatically synchronises Downloads. Do not imply that all processes survive disconnection. Use the supported course route when available.
+This is a conceptual preview; actual service settings remain pending. SSH gives a terminal and remote desktop a graphical workspace. Neither automatically synchronises Downloads. Explain that process behaviour after disconnection depends on how it was started. Use the supported course route when available.
 :::
 
 ## Transfer the same skill to another lab record
@@ -75,10 +75,10 @@ grep -F ester inventory.tsv
 grep -F ester inventory.tsv | wc -l
 ```
 
-Two records match: **O02 and O03**. No chemistry classification is required.
+Two records match: **O02 and O03**.
 
 ::: notes
-Students choose this instead of one partner transfer check, not as extra compulsory work. The sample classes are already assigned labels. Searching ester is a text operation, not identification from a molecular structure. The archive also contains a later numerical practice table; no need to analyse it today.
+Students choose this or the seedling file-route check. The sample classes are already assigned labels. Searching ester is a text operation, not identification from a molecular structure. The archive also contains a later numerical practice table; no need to analyse it today.
 :::
 
 ## Shell commands and R expressions differ
@@ -104,7 +104,7 @@ P01 grew **18.6 mm** between the two measurements.
 Saving the instructions will let us repeat that calculation tomorrow.
 
 ::: notes
-The numbers come from the complete 24-plant R dataset, not the four-record shell archive. Do not type the Console prompt. [1] in printed output labels the first element; it is not part of the measurement. Demonstrate a supplied report briefly to show where these skills lead without teaching its syntax yet.
+The numbers come from the complete 24-plant R dataset, not the four-record shell archive. Type the expression after the Console prompt. [1] in printed output labels the first element; it is not part of the measurement. Demonstrate a supplied report briefly to show where these skills lead without teaching its syntax yet.
 :::
 
 ## A ZIP is a snapshot
@@ -127,7 +127,7 @@ A README should identify:
 - Any input the receiver still needs.
 
 ::: notes
-Students should test whether a partner can identify a selected sample without oral guidance. A shortcut is not the target dataset. If the raw source is not included, the receipt must give its actual available source rather than pretending the package is complete.
+Students should close the source windows and identify a selected sample using only the extracted README and files. A shortcut is not the target dataset. If the raw source is not included, the receipt must give its actual available source rather than pretending the package is complete.
 :::
 
 ## Extraction can add another folder level
@@ -161,19 +161,19 @@ The package should not contain itself. When source changes, create a fresh named
 The receiver’s successful check is stronger evidence than your own familiar view.
 
 ::: notes
-A single laptop copy tests portability but not all cross-machine software differences. If remote transfer is available, identify the supported direction and destination. Do not claim local rehearsal completes remote access.
+A single laptop copy tests portability but not all cross-machine software differences. If remote transfer is available, identify the supported direction and destination. Distinguish testing another local folder from transferring between computers.
 :::
 
 ## Find the stale copy before recalculating
 
-A partner says the correction is absent.
+The extracted copy lacks your correction.
 
 What would you ask first?
 
 Check the archive version, extraction folder, and actual note contents.
 
 ::: notes
-A missing revision can be a location/version problem rather than an editing failure. Have students compare v1 and v2 contents and record the correction sentence in handover-check.txt. Do not create final-final2 files without explaining which to use.
+A missing revision can be a location/version problem rather than an editing failure. Have students compare v1 and v2 contents and record the correction sentence in handover-check.txt. Use distinct version names and a change note to identify the current package.
 :::
 
 ## The interpreter matters too
@@ -207,5 +207,5 @@ The current week5 R work has not happened yet; students are meeting R, not requi
 - Follow the R/RStudio setup guide if installation support is needed.
 
 ::: notes
-Ask students to find all the relevant files after closing their windows. Save the optional ester extract if that route was chosen. Leave enough time for unresolved file-location problems; those are prerequisites for next week's R work.
+Ask students to find all the relevant files after closing their windows. Save the optional ester extract if that route was chosen. Resolve file-location problems before starting next week's R work.
 :::

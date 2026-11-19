@@ -1,5 +1,5 @@
 ---
-title: "Can someone else reproduce it?"
+title: "Reproduce the saved analysis"
 subtitle: "Day 24 — test the saved analysis"
 author: "Data Analysis in Life Sciences"
 format:
@@ -28,8 +28,7 @@ toc: false
 
 ::: notes
 An imported object can remain in interactive memory while its import is missing
-from the report. The recipient lacks that session. Do not add machinery such as
-saving an entire workspace; put the needed imports and calculations in the source.
+from the report. Put the needed imports and calculations in the saved source.
 :::
 
 ## Source and result have different jobs
@@ -81,8 +80,8 @@ Revised source → recopy → repackage → test the returned ZIP.
 ::: notes
 This is especially important for Windows students using Ubuntu shell tools but
 native RStudio. After making a ZIP in Ubuntu, copy it back to a normal Windows
-folder for extraction and the native application test. Do not accidentally
-test stale files or rely on WSL paths in the shared report.
+folder for extraction and the native application test. Check that it contains
+the revised source and relative input paths.
 :::
 
 ## Test in a different location
@@ -92,9 +91,9 @@ test stale files or rely on WSL paths in the shared report.
 Open its `.Rproj`, restart, and render the source without repairing it first.
 
 ::: notes
-Peer exchange tests a recipient's environment. A fresh folder on the same laptop
-checks portability but not all software differences. Keeping the relative data/
-path tests that the analysis does not rely on an author's personal path.
+A fresh folder on the same laptop checks portability within that software
+environment. Keeping the relative data/ path tests independence from the
+original project location.
 :::
 
 ## Diagnose one dependency at a time
@@ -119,7 +118,7 @@ the full cause. Credentials never belong in an error log or screenshot.
 - Does the prose agree with the actual results?
 - Are missing data and limitations explained?
 
-For a descriptive organic report, do not invent a test or confidence interval.
+The organic alternative uses descriptive means and SDs.
 
 ::: notes
 A successful render can reproduce a mistaken analysis. Ask the reader to locate
@@ -186,7 +185,7 @@ error. Restore the exact name and confirm the original counts and main result.
 The absence of an error alone is not enough evidence of a correct repair.
 :::
 
-## Do not invent a value to silence an error
+## Match the repair to the problem
 
 A missing file, a missing measurement, and an unknown R object are different.
 
@@ -278,15 +277,14 @@ Record what changed, what you predicted, what happened, and what confirmed repai
 Share the corrected source, not an unresolved test case.
 
 ::: notes
-Use a short case log and a new clear package name after revision. A successful
-rerun is a bounded result in a tested environment. If working alone, leave the
-case for another task and then follow only the written directions; this helps
-expose instructions that rely on remembered undocumented actions.
+Keep a case log and give revised packages clear names. Revisit a diagnostic
+case after another exercise and follow the written procedure to expose any
+undocumented steps.
 :::
 
 ## Exercises: keep a reproduction log
 
-[Open day 24 exercises](../../week5/24-reproduce.qmd).
+[Open exercises](../../week5/24-reproduce.qmd) · [Quiz](../../week5/24-reproduce-quiz.qmd).
 
 - Test the chosen main-study package and the brief algae-share package.
 - Record destination, first error, fix, and rerun outcome.

@@ -1,0 +1,72 @@
+---
+title: "Quiz: Inspecting an archive"
+---
+
+[Lecture](../lectures/04-inspect-archive/lec.qmd) · [Exercises](04-inspect-archive.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** What differs between `unzip -l lab-data.zip` and `unzip lab-data.zip -d lab-data`?
+
+::: {.callout-tip collapse="true" title="Hint"}
+The `-l` and `-d` options have different roles.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+`-l` lists entries without extracting them. The second command extracts ordinary files into `lab-data`. Both leave the ZIP available.
+:::
+
+---
+
+**Q2.** A manifest has one header line and four sample lines, each ending with a newline. Two samples are labelled `treated`; the header lacks that word. What do these commands print?
+
+```bash
+wc -l samples.tsv
+grep -F treated samples.tsv | wc -l
+```
+
+::: {.callout-tip collapse="true" title="Hint"}
+The first counts all lines; the second counts only matching lines.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The counts are **5** and **2**. Five lines represent four samples plus a header.
+:::
+
+---
+
+**Q3.** In a practice manifest, S01 is `untreated`, S03 and S04 are `treated`, and S02 is `control`. How many records match `grep -F treated`? Are they all treated samples?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Literal text matching also finds a search word inside a longer word.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Three records match: S01, S03, and S04. `untreated` contains `treated`, so a text match is not the same as selecting a treatment category.
+:::
+
+---
+
+**Q4.** What does `grep -F treated samples.tsv > treated-samples.txt` change if the destination already exists?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Consider both the input and the redirection destination.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+It replaces `treated-samples.txt` with the matching lines. The distinct input `samples.tsv` stays unchanged. Redirection needs a separate destination because `>` can truncate a file before reading starts.
+:::
+
+---
+
+**Q5.** The manifest names `measurements/S04.csv`, but a practice copy contains `S04-renamed.csv`. What evidence would support restoring its name?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A similar filename alone does not prove sample identity.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+In this exercise the rename was deliberate and known. Check the file's recorded sample ID and 39.8 mm measurement against the source, restore `S04.csv`, and recheck the manifest path. An unexplained discrepancy would need source evidence.
+:::

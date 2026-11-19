@@ -44,7 +44,7 @@ Rereading the same plant may reveal consistency of the measurement process. It d
 
 ![Plants grouped within two trays share one treatment per tray.](shared-trays.svg){height=350px}
 
-Do not count every plant as independently assigned.
+Count the independently assigned trays.
 
 ::: notes
 This is a schematic layout, not the actual course experiment. If treatment was assigned once to each tray, plants within that tray share its allocation and environment. Ask how many treatment assignments occurred, not how many measurements fill the spreadsheet.
@@ -79,10 +79,10 @@ The supplied R demonstration uses the combined growth values as a fixed toy popu
 Individual values and estimated means are different objects.
 
 ::: notes
-This additional picture is regenerated from the course values using a fixed illustrative random generator; exact bins need not match the R demonstration. The concept is the narrower distribution of larger-sample means. Do not interpret SD of means as SD among plants within a sample.
+This additional picture is regenerated from the course values using a fixed illustrative random generator; exact bins need not match the R demonstration. The concept is the narrower distribution of larger-sample means. Distinguish SD among means from SD among plants within a sample.
 :::
 
-## Run the supplied demonstration; do not write a simulator
+## Run the supplied sampling demonstration
 
 ```r
 library(readr)

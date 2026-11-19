@@ -2,27 +2,26 @@
 title: "Day 6 — Let R keep track of a calculation"
 ---
 
-[Lecture slides](../lectures/06-r-basics/lec.qmd) · [Weekly self-check](quiz.qmd)
+[Lecture slides](../lectures/06-r-basics/lec.qmd) · [Quiz](06-r-basics-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
 ## Today's question
 
 A seedling was 20 mm long at the start of an experiment and 37 mm long at the
-end. How much did it grow? The answer is simple; our task is to make the computer
-keep a readable, repeatable record of how we obtained it. All plant measurements
-in this course are simulated teaching data, not results from a real experiment.
+end. How much did it grow? Save a calculation that reproduces the answer.
+The measurements are simulated teaching data.
 
 Open the extracted `introcomputing-course` folder and double-click
 `introcomputing.Rproj`. R is the program that calculates. RStudio is the workspace
 we use to write instructions, run R, inspect results, and prepare reports. Its
 **Console** accepts R instructions. An **R script** is a saved text file containing
-instructions. The terminal from week 1 accepts shell commands; do not type `ls`
-into the R Console or R expressions into the Ubuntu shell.
+instructions. Use the R Console for R expressions and the terminal from week 1
+for shell commands such as `ls`.
 
 ## Start with a calculation
 
-Type the following in the R Console, pressing Enter after each line. Do not type
-the Console's `>` prompt. The `[1]` in an answer labels the first printed element;
+Type the following in the R Console, pressing Enter after each line. The Console
+already supplies the `>` prompt. The `[1]` in an answer labels the first printed element;
 it is not part of your measurement.
 
 ```{r}
@@ -90,15 +89,14 @@ text whereas `20` is a number. Plant IDs belong in text even if they contain
 numbers. To open help for a function, run `?mean` in the Console and read its
 Description and Examples rather than every option.
 
-## Your practical
+## Calculate growth and a ratio
 
 1. Keep the three-plant calculation in `day06.R` and explain the units in comments.
 2. Add a fourth plant that grew from 21 to 39 mm. Extend **both** vectors, rerun
    the calculation, and check `length(growth_mm)`.
 3. Choose one ratio exercise: calculate each plant's final/initial ratio in an
    object called `length_ratio`, explaining how it differs from growth in mm;
-   **or** use the product-yield calculation below. Both practise division and
-   named inputs; you do not need to do both.
+   **or** use the product-yield calculation below.
 4. Change the first final length from 37 to 38 mm. Predict which growth value
    changes and check your prediction.
 5. Save the script, restart R through **Session → Restart R**, and run its lines
@@ -110,7 +108,7 @@ In a synthesis, starting materials are used to make a product. For this
 simulated example, the maximum possible product mass has already been calculated
 for you: **1.00 g**. Call it `theoretical_mass_g`. The collected dry product has
 mass **0.62 g**, called `isolated_mass_g`. Assume this collected material is pure
-product for this simplified calculation. You do not need a reaction equation.
+product for this simplified calculation.
 
 **Percentage yield** means the collected product as a percentage of the supplied
 maximum. Compute `100 × isolated mass / theoretical mass`, using the same mass
@@ -126,8 +124,7 @@ yield_percent
 The answer is **62%**. The gram units cancel in the ratio. Predict the result
 if collected mass changes to 0.70 g, then rerun; it should be **70%**. Add a
 comment explaining why 0.62 g is a mass and 62% is a proportion relative to a
-maximum. A larger percentage does not establish greater purity or safety. This
-is numerical practice, not instructions for carrying out a chemical experiment.
+maximum.
 
 ::: {.callout-tip collapse="true"}
 ## Hint: an object is not found
@@ -138,10 +135,9 @@ is unfinished: check quotes or parentheses, or press Esc to cancel it.
 :::
 
 
-## Extended practical — trace a calculation through its inputs
+## Trace a calculation through its inputs
 
-Plan about 90 minutes. Today you will investigate why saving code is more
-reliable than remembering the final number. Create `day06-extended.R` at the
+Create `day06-extended.R` at the
 project root. Keep all numerical inputs and comments in that file. Use the
 Console to inspect results, then recreate them from the saved script after a
 restart. Record predictions before running each changed calculation.
@@ -156,16 +152,15 @@ restart. Record predictions before running each changed calculation.
    the top. A reliable source creates inputs before it uses them.
 3. Recreate the three-plant vectors from the demonstration. Make a deliberately
    reordered **copy** of the final vector, `c(34, 37, 40)`, and calculate apparent
-   changes. The arithmetic can run while pairing the wrong plants. State the
-   missing assumption; do not interpret these copied results as biology.
+   changes. Compare these with the correctly paired changes and explain the
+   difference.
 4. Return to the correctly ordered vectors. Print `length(initial_mm)` and
    `length(final_mm)` before subtracting. Extend both to four plants as in the
    earlier practical. Explain why equal lengths are necessary here but do not
    prove that the same plant occupies each position.
 5. Convert the correctly calculated growth vector from millimetres to centimetres
    using division by ten. Store it under a new name ending `_cm`, print it, and
-   compare its mean with the mean in mm. Do not change only the object name or
-   unit label while leaving the numbers unchanged.
+   compare its mean with the mean in mm.
 6. Calculate the final/initial ratio for the corrected vectors, or the supplied
    product-yield ratio from the alternative task. Describe in comments which
    operation is subtraction and which is division, what quantity each produces,
@@ -178,22 +173,20 @@ restart. Record predictions before running each changed calculation.
 With initial 20 and final 37, the assigned growth is 17. Updating final to 39
 leaves that stored growth at 17 until you execute the subtraction again; it then
 becomes 19 mm. A script supplies an order of operations you can rerun. R may
-recycle a shorter vector, so do not treat the absence of an error as proof that
-measurement correspondence was correct.
+recycle a shorter vector; check both vector lengths and plant correspondence.
 :::
 
-## Independent transfer — calculate a solution from a supplied rule
+## Calculate a solution concentration
 
-Allow 60–90 minutes. No chemistry course is required. A solution contains a
+A solution contains a
 substance in a solvent. A **mole**, abbreviated mol, is a unit of chemical amount.
 **Molar mass** tells us how many grams correspond to one mole. A concentration
 in mol/L is the amount per litre of **final solution**, not the amount per litre
-of solvent before adding the substance. This is a numerical exercise, not a
-laboratory preparation protocol.
+of solvent before adding the substance.
 
 1. Use these supplied values: sodium chloride mass **0.2922 g**, molar mass
    **58.44 g/mol**, final volume **100 mL**. Write them as named R objects with
-   units in comments. Do not look up a constant or infer a chemical formula.
+   units in comments.
 2. Convert final volume to litres by dividing by 1000. Calculate amount in mol
    as mass in g divided by molar mass in g/mol. Divide that amount by final
    volume in litres to obtain mol/L. Print the intermediate values so the unit
@@ -210,8 +203,7 @@ laboratory preparation protocol.
    the same amount concentration because the molar masses differ.
 6. Save the source, restart R, and reproduce both original results. Add a short
    `reports/calculation-check.txt` stating the formula in words, the conversion
-   factors, the meaning of final volume, and one error you corrected. Preserve
-   your predictions even when they were wrong; they make the reasoning visible.
+   factors, the meaning of final volume, and any error you corrected.
 
 **Check and retain:** the original sodium-chloride and glucose examples each give
 0.005 mol in 0.100 L: **0.050 mol/L = 50 mmol/L**. Doubling only mass gives

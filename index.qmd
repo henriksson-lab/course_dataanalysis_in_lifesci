@@ -22,15 +22,13 @@ they are not evidence about actual biological effects.
 ## Your five-week route
 
 Each topic in the left menu has separate **Lecture (slides)** and
-**Exercises** links. Lecture links are green; practicals are italic;
-weekly quiz links are blue. Coloured week bands follow the Quantitative Biology
-course scaffold. The labels identify their roles even without colour.
+**Exercises** links, followed by a **Quiz**. Lecture links are green, exercises
+italic, and quizzes blue. Coloured bands distinguish the weeks.
 
-Use the [five-week study plan](study-plan.qmd) to organise the work. Each daily
-practical includes **Extended practical** and **Independent transfer** blocks:
-apply the taught ideas to a changed problem, save the result, explain it, and
-reproduce it from a fresh start. These are core practice, with gradually fewer
-prompts. Weekly self-checks and protected review/support time complete the plan.
+Use the [five-week study plan](study-plan.qmd) to organise the work. Exercises
+move from worked examples to new problems with fewer prompts. Save your results
+and reproduce them from a fresh start. Each topic has a quiz with hints and
+answers; weekly quizzes provide further review.
 
 | Week | Biological question | What you will do |
 | --- | --- | --- |
@@ -53,5 +51,4 @@ confirmed. Installation help will be provided during the course.
 Begin with [Day 1: save, find, and reopen a file](week1/01-files.qmd).
 You can keep the [terminal reference](reference/terminal.qmd),
 [R reference](reference/r.qmd), [statistics reference](reference/statistics.qmd),
-and [glossary](reference/glossary.qmd) open while working. Using a reference is
-part of the workflow, not a sign that you should have memorised everything.
+and [glossary](reference/glossary.qmd) open while working.

@@ -2,8 +2,7 @@
 title: "Day 13 — Summarise groups without hiding the plants"
 ---
 
-[Lecture slides](../lectures/13-group-summaries/lec.qmd) · [Weekly self-check](quiz.qmd)
-
+[Lecture slides](../lectures/13-group-summaries/lec.qmd) · [Quiz](13-group-summaries-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 ## Today's question
 
@@ -64,8 +63,7 @@ group_plot
 
 The second point layer uses the summary table. Its `inherit.aes = FALSE` means
 we supply its mappings explicitly instead of inheriting a column absent from
-that table. You can reuse this worked pattern; understanding the two tables
-matters more than memorising the option today.
+that table. Reuse this pattern for other grouped plots.
 
 If adding error bars, name exactly what they represent. Mean ± SD describes
 spread among observations. A confidence interval describes uncertainty in an
@@ -88,7 +86,7 @@ twelve observations per group, its shape changes noticeably with the bin width.
 `facet_wrap()` gives a separate panel per treatment. Shared scales help compare
 the panels; small samples warrant cautious descriptions.
 
-## Your practical
+## Create the table and figures
 
 1. Reproduce the summary table and dot plot. Check one group mean using
    `filter()` and `mean()` as on day 12.
@@ -110,12 +108,12 @@ product-making experiment, or synthesis run. The supplied `theoretical_mass_g`
 is its maximum possible product mass; `isolated_mass_g` is dry collected
 product, assumed pure for this simplified exercise. Both are in grams. Derive
 `yield_percent = 100 * isolated_mass_g / theoretical_mass_g`; the first run is
-`100 * 0.62 / 1.00 = 62%`. No chemical reaction calculation is required.
+`100 * 0.62 / 1.00 = 62%`.
 
 Import the file, derive yield, then adapt today's grouped-summary pattern to
 group by `protocol`. Report the number of runs, mean percentage yield, and SD
 in **percentage points**. Adapt the individual-point plot to show yield by
-protocol. Do not plot group summaries as though they were individual runs.
+protocol, using the run-level table for individual points.
 Save `output/organic-yield-summary.csv`, `output/organic-yield-summary.png`, and
 its caption instead of the extra cleaned-seedling summary.
 
@@ -149,13 +147,9 @@ plant grew more than every control plant. The repaired dataset retains twelve
 control plants but only eleven observed control growth values.
 :::
 
-## Extended practical — make a figure that survives a misleading caption
+## Make the figure and caption agree
 
-Spend about 75–90 minutes on a small figure-and-table package. Use the main
-seedling table or your selected organic yield context; do not do both merely
-to increase the amount of work. Start with the observations and group summary
-already created above. Your goal is a reader who can distinguish the inputs,
-observations, summaries, and meaning of visual symbols without guessing.
+Use your selected plant or product-yield dataset and its existing group summary.
 
 1. Write down the number of input rows, the number of groups, and the number
    of summary rows. Locate one actual observation in each group. Explain why
@@ -171,8 +165,7 @@ observations, summaries, and meaning of visual symbols without guessing.
    and explain at least three specific repairs.
 4. Create histograms using two defensible bin widths. Compare apparent modes,
    gaps, and group overlap. Record which broad statement remains supported in
-   both displays and which detail depends on the bin choice. Do not select
-   the prettiest bin width because it exaggerates a treatment difference.
+   both displays and which detail depends on the bin choice.
 5. Produce a compact table containing available n, mean, median, and SD per
    group. Round for readable display only after calculation. Preserve the
    full-precision summary object for further arithmetic and any CSV export.
@@ -181,10 +174,9 @@ observations, summaries, and meaning of visual symbols without guessing.
    organic yield uses percent, and an SD of yield is expressed in percentage
    points. Revise both the axis and the caption if switching contexts. Merely
    changing a figure title can leave a convincing but false unit label.
-7. Give your package to a partner. Ask them to identify n, one observation,
-   the mean marker, the measurement units, and what “overlap” refers to. Keep
-   their answers and revise any element they could not identify. Working alone,
-   apply the same reader questions after closing the code for a few minutes.
+7. Close the code and inspect the exported figure and table. Locate n, an
+   individual observation, the mean marker, units, and group overlap. Revise
+   labels or captions where these are unclear.
 
 ::: {.callout-tip collapse="true"}
 ## Hint: two tables have different roles
@@ -196,17 +188,15 @@ teacher demonstrates mean ± SD, label it as SD among observations, not a 95%
 interval or a measurement instrument's error bound.
 :::
 
-## Independent transfer — a second class's figure request
+## Create figures for a second study
 
-Use another 60–90 minutes for `data/seedlings-transfer.csv`. The class wants
-both a figure suitable for a report and a table suitable for checking the
-calculation. It does not want a test or only a screenshot of RStudio.
+Use `data/seedlings-transfer.csv` to produce a report figure and a summary table.
 The file contains 18 independently potted plants, with nine observations per
 allocation and no missing lengths. All lengths are mm, measured seven days apart.
 
 1. Create `day13-transfer.R` from a blank script. Import, inspect, and derive
    `growth_mm`; check the meaning and units from the dictionary. Retain all
-   rows and original columns. Do not manually retype the measurement vectors.
+   rows and original columns.
 2. Create one group summary and export it as
    `output/day13-transfer-summary.csv`. Include available n, mean, median, and
    SD, using distinct informative column names. Describe the difference between
@@ -219,18 +209,14 @@ allocation and no missing lengths. All lengths are mm, measured seven days apart
    width. Compare it with the point plot for this small sample. Which better
    permits identifying individual observations? Which highlights the grouping
    of nearby numeric values? Keep both, with different filenames and captions.
-5. Write an email-length request to a future lab partner describing exactly
-   which two data files and which script they need to recreate the figures.
-   Do not actually send a message. The saved request should make it clear
-   which input was supplied and which table was derived.
+5. Save a handover note listing the data files and script needed to recreate
+   the figures. Identify supplied inputs and derived outputs.
 6. Run the script in a fresh R session. Open the PNGs and CSV in the file manager,
    not only through RStudio's recent tabs. Verify one summary against a filtered
    vector and `mean()`. Save a short reproducibility note identifying the check.
 
 **Additional outputs:** a caption-repair log, the chosen-context figure pair,
-transfer summary/figures, and a saved handover request. A complete package lets
-its reader identify the experimental unit and units without consulting your
-screen. Treat comments about layout separately from biological conclusions.
+transfer summary/figures, and a saved handover note.
 
 **Keep:** `day13-groups.R`, the summary CSV, figure, and caption.
 Next: [replicates and uncertainty](14-replicates-uncertainty.qmd).

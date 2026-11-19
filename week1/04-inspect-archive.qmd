@@ -2,12 +2,12 @@
 title: "Day 4 — Unpack and inspect laboratory data"
 ---
 
-[Lecture slides](../lectures/04-inspect-archive/lec.qmd) · [Weekly self-check](quiz.qmd)
+[Lecture slides](../lectures/04-inspect-archive/lec.qmd) · [Quiz](04-inspect-archive-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
 ## Which seedlings received the treatment?
 
-A lab partner has sent a small archive containing measurements and sample
+A laboratory has supplied a small archive containing measurements and sample
 information. Before doing statistics, we need to establish what is in the
 archive and which files belong to the treated samples. We will do this with
 ordinary command-line utilities. The data are simulated for teaching.
@@ -25,7 +25,6 @@ the manifest to the measurements.
 4. Open that folder graphically using `explorer.exe .` in local Ubuntu on Windows
    or `open .` on Mac.
 5. **Copy the downloaded ZIP into this workspace using the file manager.**
-   Do not assume your Windows browser downloaded it into Ubuntu's home folder.
 6. Back in the terminal, run `ls`. Confirm that `lab-data.zip` appears.
 
 On a remote computer, use the course's supported transfer route when available.
@@ -42,7 +41,7 @@ unzip -l lab-data.zip
 The `-l` option lists archive contents without extracting them. Identify
 `README.txt`, `samples.tsv`, and the `measurements` and `field-notes` folders.
 There should be four measurement files, S01 through S04. The displayed sizes
-and dates are information about the archive entries; do not type them.
+and dates describe the archive entries.
 
 Now extract:
 
@@ -63,8 +62,7 @@ prompt. A short file may already fit on one screen.
 
 You have probably extracted into the same destination before. Stop and inspect
 the destination in the file manager. For this first run, choose a fresh destination
-name if necessary and use that name in `cd`. Do not automatically agree to replace
-files that may contain your work.
+name if necessary and use that name in `cd`.
 :::
 
 ## Read a table without changing it
@@ -128,7 +126,7 @@ to `wc -l`, which counts them. The result should be **2**. The pipe does not
 need an intermediate saved file. Count lines only when lines really represent
 the records you intend to count.
 
-## Practical: preserve and organise a working copy
+## Preserve and organise a working copy
 
 Still inside `lab-data`, run:
 
@@ -156,18 +154,14 @@ workspace there. In either case, saved files can be on that other computer,
 even while your laptop displays the session.
 
 When account details are available, follow the supplied instructions and try
-`pwd` and `ls` remotely. State aloud: “This command runs on ___; this path is
-on ___.” If accounts are not ready, continue the local practical. Do not guess
-a login address.
+`pwd` and `ls` remotely. Record which computer runs the command and holds the
+files. If accounts are not ready, continue with the local exercises.
 
 
-## Extended practical — audit the archive and the search
+## Audit the archive and the search
 
-Allow about 90 minutes. Complete this in a newly extracted disposable copy,
-such as `lab-audit`, rather than mixing it into yesterday's work. The archive
-contains four sample records, not the 24 plants in the R dataset. We use this
-small known structure to test what commands do before trusting a search on a
-larger laboratory export. Save an audit note with evidence and actual filenames.
+Extract a fresh copy as `lab-audit`. Use its four known sample records to test
+searches and redirection. Save the commands and results in an audit note.
 
 1. From the folder containing `lab-data.zip`, list its entries with `unzip -l`.
    Predict the extraction tree, then extract with `unzip lab-data.zip -d lab-audit`.
@@ -181,8 +175,7 @@ larger laboratory export. Save an audit note with evidence and actual filenames.
    both answers in words, including the header. Inspect the actual matched lines
    rather than assuming a count proves that the right records were selected.
 4. Copy the manifest to `search-trap.tsv` using `cp`. Open only that copy in the
-   text editor, and replace S01's `control` label by `untreated`. Do not change
-   the actual manifest. Predict whether `grep -F treated search-trap.tsv` will
+   text editor, and replace S01's `control` label by `untreated`. Predict whether `grep -F treated search-trap.tsv` will
    select S01; run it and explain why literal text search is not a treatment-aware
    table operation. Save this as a demonstration of a limitation, not a corrected
    biological annotation.
@@ -207,9 +200,9 @@ records both the command and the records selected. It does not silently rename
 those selected lines “three treated plants”.
 :::
 
-## Independent transfer — find a file discrepancy and report it
+## Find a file discrepancy and report it
 
-Allow 60–90 minutes. You are checking a received folder before analysis. The
+You are checking a received folder before analysis. The
 following discrepancies are created in a disposable copy so you can practise
 recovery; they are not claims that the supplied archive is faulty.
 
@@ -220,7 +213,7 @@ recovery; they are not claims that the supplied archive is faulty.
 2. Starting from the copied manifest, check whether each listed relative file
    path exists by navigating and listing the relevant folder. Identify the one
    discrepancy. Explain why a manifest record can still exist while the named
-   file cannot be opened. Do not solve it by deleting the sample record.
+   file cannot be opened.
 3. Read the renamed measurement and identify S04 from its contents. Restore the
    original name using the evidence of the known deliberate rename. Recheck the
    manifest path, record the action, and distinguish a supported repair from
@@ -235,10 +228,9 @@ recovery; they are not claims that the supplied archive is faulty.
    location, header/record counts, search limitations, discrepancy, evidence,
    repair, and final check. Include the current computer, because the same path
    on a remote machine would describe different storage.
-6. Ask a partner to inspect your audit without hearing your explanation. They
-   should be able to locate the restored measurement from the manifest and
-   explain why a count alone was insufficient. Keep the original source archive
-   and raw extracted manifest available for comparison.
+6. Close the measurement file, then locate it again using the manifest and
+   your audit. Check its ID and length against the source archive. Explain in
+   the audit why a line count alone could not detect the renamed file.
 
 **Check and retain:** both audit notes, the preserved source manifest, search
 extracts, and the deliberately labelled trap file. S03's length is 42.4 mm and

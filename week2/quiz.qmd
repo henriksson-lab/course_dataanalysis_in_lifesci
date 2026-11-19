@@ -1,9 +1,11 @@
 ---
-title: "Week 2 self-check — R and a first report"
+title: "Week 2 revision — R and a first report"
 ---
 
-Predict the result, explain it, then use R to check. These are formative
-self-checks, not grades. The [R reference](../reference/r.qmd) is available.
+Predict the result, explain it, then use R to check. The
+[R reference](../reference/r.qmd) is available.
+
+Topic quizzes: [6](06-r-basics-quiz.qmd) · [7](07-import-quiz.qmd) · [8](08-transform-plot-quiz.qmd) · [9](09-rmarkdown-quiz.qmd) · [10](10-first-report-quiz.qmd)
 
 ## 1. Assignment is an action when the line runs
 
@@ -79,7 +81,7 @@ not be placed inside a report that would then try to render itself.
 
 ## 6. Transfer choice: a fully supplied product calculation
 
-No chemistry knowledge is needed here. The supplied maximum product mass is
+The supplied maximum product mass is
 1.00 g; collected dry product is 0.62 g, assumed pure for this simplified task.
 Percentage yield is `100 × collected mass / maximum mass`. What is the yield,
 and does that number independently establish the product's purity?
@@ -90,7 +92,7 @@ and does that number independently establish the product's purity?
 The yield is **62%**. The gram units cancel. Purity was an assumption, not a
 finding from this ratio. Keep the maximum and collected masses as distinct
 inputs; a larger raw mass is not necessarily a greater percentage when starting
-scales differ. This question is a numerical transfer check, not a lab procedure.
+scales differ.
 :::
 
 ## 7. A stored result becomes stale
@@ -125,7 +127,7 @@ Check the imported filename, project and object; inspect dim(), distinct plant I
 
 ## 10. A supplied concentration calculation
 
-No chemistry recall is needed: amount in mol = mass_g / supplied molar_mass_g_mol; concentration in mmol/L = 1000 × amount / final_volume_l. For 0.2922 g, 58.44 g/mol and 100 mL final volume, what is the result?
+Amount in mol = mass_g / supplied molar_mass_g_mol; concentration in mmol/L = 1000 × amount / final_volume_l. For 0.2922 g, 58.44 g/mol and 100 mL final volume, what is the result?
 
 ::: {.callout-note collapse="true"}
 ## Worked answer
@@ -140,7 +142,7 @@ The supplied rule is stock volume = target × final volume / stock concentration
 ::: {.callout-note collapse="true"}
 ## Worked answer
 
-The formula gives 100 mL of stock, exceeding the requested 50 mL total. The target is more concentrated than the stock, so dilution by adding solvent alone cannot achieve it. Preserve the row and flag it rather than deleting it or inventing stronger stock. These are numerical cases, not wet-lab instructions.
+The formula gives 100 mL of stock, exceeding the requested 50 mL total. The target is more concentrated than the stock, so dilution by adding solvent alone cannot achieve it. Preserve the row and flag it rather than deleting it or inventing stronger stock.
 :::
 
 ## 12. Source, HTML and a revision

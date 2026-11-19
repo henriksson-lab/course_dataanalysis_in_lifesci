@@ -2,8 +2,7 @@
 title: "Day 15 — Describe the experiment without overstating it"
 ---
 
-[Lecture slides](../lectures/15-descriptive-report/lec.qmd) · [Weekly self-check](quiz.qmd)
-
+[Lecture slides](../lectures/15-descriptive-report/lec.qmd) · [Quiz](15-descriptive-report-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 ## Today's question
 
@@ -21,20 +20,19 @@ seven days apart; the nutrient formulation is unspecified.
 Produce **one** descriptive report today. The teacher may choose the organic
 laboratory alternative below instead of the seedling report. In that case save
 `organic-report.Rmd` at the same project root and use its stated variables and
-units throughout; do not mix the two datasets in one set of results.
+units throughout.
 
 ## Choose and state which input you use
 
 Use **`data/seedlings.csv` for the core report**. It contains 24 complete plant
 records. Include a data-quality note explaining the checks you performed: unique
 plant IDs, allowed treatment labels, numeric length columns, and missing-value
-counts. A statement that “R loaded the file” is not a data-quality check.
+counts.
 
 If the teacher asks you to report the repaired day 11 data instead, include the
-repair code or source it from a saved script within the project. Do not read a
-derived file that cannot be recreated from the shared raw data. State which
-source you used and retain the unavailable P06 observation; do not silently mix
-results from the repaired and complete datasets.
+repair code or source it from a saved script within the project. State the
+source and retain the unavailable P06 observation. Keep all results consistent
+with that input.
 
 ## Build the report in a clear order
 
@@ -93,8 +91,7 @@ units and identify the independent unit without declaring a universal result.
 For the complete data, the group means are about 15.3 mm for controls and 21.5 mm
 for treated plants. Check your table rather than copying these numbers into
 prose without verification. The treated group also has more spread in these
-data. Do not say that every treated plant outgrew every control plant: the
-individual observations overlap.
+data. The individual observations overlap even though group means differ.
 
 ## Alternative context: report collected-product yield
 
@@ -103,15 +100,14 @@ percentage of the supplied maximum product mass was collected in each run, and
 how does it vary between protocols?** All data are simulated. A synthesis run
 is one independently carried-out product-making experiment. Twelve independent
 runs were randomly assigned to two protocols, six to each. A protocol is a
-specified method; no knowledge of its chemical steps is required here.
+specified method.
 
 `theoretical_mass_g` is the supplied maximum possible product mass for that
 run's starting amounts. `isolated_mass_g` is the dry collected product mass,
 assumed pure for this simplified calculation. Both are in grams. Calculate
 percentage yield with `100 * isolated_mass_g / theoretical_mass_g`, so Y01 is
 `100 * 0.62 / 1.00 = 62%`. Theoretical masses differ with starting scale;
-compare the percentages, not the raw masses. You do not need to balance a
-reaction or calculate a theoretical mass yourself.
+compare percentage yields to account for the different starting amounts.
 
 ```{r}
 organic <- read_csv("data/organic-recovery.csv", show_col_types = FALSE) |>
@@ -129,14 +125,14 @@ and individual-run plot; then interpret centre, spread, and overlap. Both groups
 have six available runs. Mean yields are about 68.67% and 77.00%; SDs are about
 4.32 and 3.74 **percentage points** for standard and modified protocols.
 Label the y-axis “Isolated product yield (%)” and identify one point as one run.
-Do not call repeated weighings of one product batch independent runs.
+Repeated weighings of one product batch are technical repeats, not new runs.
 
 This is descriptive work: no t-test is needed. A higher mean yield does not
 establish greater purity, safety, environmental benefit, or superiority in other
 reactions. Write a limitation tied to the small simulated set and the assumed
 purity. Keep the source and data together so the report can render from scratch.
 
-## Your practical and a reader check
+## Build and check the report
 
 1. Complete the report with a question, data/design paragraph, methods, table,
    figure, and interpretation. Keep it short enough that each part earns its place.
@@ -153,12 +149,12 @@ rmarkdown::render("descriptive-report.Rmd", output_dir = "reports")
 For the organic alternative, replace the quoted filename with
 `"organic-report.Rmd"`; render only the report you chose.
 
-4. Ask a partner to read the HTML. Can they identify the units, input file,
-   observational unit, main pattern, and main limitation without opening RStudio?
+4. Read the HTML with RStudio closed. Check that it identifies the units, input
+   file, observational unit, main pattern, and main limitation.
 5. If remote R access is available, locate the project on that computer and
    repeat the render there using the supplied connection instructions. First
    identify whether the R session and data are local or remote. Otherwise,
-   repeat from a newly opened local project; do not invent connection details.
+   repeat from a newly opened local project.
 
 ::: {.callout-tip collapse="true"}
 ## Hint: reproducibility is a file relationship
@@ -179,13 +175,10 @@ sample without yet estimating uncertainty in a treatment difference. Missing
 observations, when present, should also be counted and discussed.
 :::
 
-## Extended practical — edit a report as a reader, then as an analyst
+## Revise the report
 
-Plan 75–90 minutes of revision of the one descriptive report you selected.
-Do not create a second compulsory biology/chemistry report just to make the
-session longer. The goal is a complete short scientific account with a traceable
-analysis, not more headings or a longer printout. Save a revision log in
-`reports/day15-revision.txt` alongside your own report source at project root.
+Revise your selected descriptive report. Save a revision log in
+`reports/day15-revision.txt`; keep the report source at project root.
 
 1. Read only the rendered HTML, with the code initially closed. Write down the
    question, independent unit, input filename, measurement or derived outcome,
@@ -204,20 +197,16 @@ analysis, not more headings or a longer printout. Save a revision log in
 4. Check that the figure shows observations with units. Identify what each
    summary symbol means. Put the figure beside a small table that answers a
    complementary question; remove redundant raw printouts if they do not help
-   a reader. More pages are not automatically more reproducible.
+   a reader.
 5. Add two inline values in the results prose using the R Markdown pattern
    already introduced: one count and one mean or SD. Test them by rendering.
    The object must be created earlier inside the document. Keep interpretation
    in ordinary prose rather than assuming inline code writes a conclusion.
-6. Ask a partner to reproduce the report from a complete project copy. If
-   working alone, extract a fresh course folder in a new temporary location,
-   add your source and required inputs, and render there. Record the first
-   failure before fixing it. A relative input path is useful only if the
-   needed data file was actually included.
+6. Extract a fresh course folder in a new location, add your source and
+   required inputs, and render there. Record and fix any failure, then rerun.
 7. Save the revised HTML and its `.Rmd` source. Write a compact change log:
    issue, evidence, correction, and rerun result. Keep the previous source as
-   a clearly named backup or ordinary copied file, without inventing a
-   complicated version-control workflow.
+   a clearly named backup.
 
 ::: {.callout-tip collapse="true"}
 ## Hint: separate numerical checks from wording checks
@@ -229,18 +218,17 @@ route, but cannot switch silently between these denominators. Use the Console
 for a `rmarkdown::render()` call; never put a self-render command into the report.
 :::
 
-## Independent transfer — a new class asks for a concise descriptive report
+## Describe a second study
 
-Allow 60–90 minutes, extending to another session if rendering needs support.
-The new class supplies `data/seedlings-transfer.csv`: 18 independent potted
+The second study supplies `data/seedlings-transfer.csv`: 18 independent potted
 plants, nine randomly assigned to each allocation, initial and final lengths
 in mm seven days apart. The task is to **describe** growth and its variation;
-it is not yet a request for a significance test.
+use descriptive summaries and figures.
 
 1. Create `transfer-description.Rmd` in the project root. Start from your
    chosen source's structure, but remove old imports, variable names, numbers,
    and biological descriptions that no longer apply. A template is a structure
-   to adapt, not evidence that the old findings describe new observations.
+   to adapt to the new data.
 2. State the new question, independent unit, input, units, and growth formula.
    Include checks for identifiers, group counts, and missingness in the saved
    source. If you used the transfer dataset in earlier scripts, recreate its
@@ -248,22 +236,19 @@ it is not yet a request for a significance test.
 3. Produce one labelled individual-point figure and a group table with n,
    mean, median, and SD. Choose sensible rounding in the displayed table.
    Explain the distinction between the 18 input rows and the two summary rows.
-4. Write 150–250 words of results and interpretation, using calculated numbers
-   and one limitation. Address direction, overlap, and spread. Do not translate
-   a higher mean into “every treated plant did better”, or SD into uncertainty
-   in a difference. Independent comparison methods arrive in the next block.
+4. Write results and interpretation using calculated numbers and one
+   limitation. Address direction, overlap, and spread among plants.
 5. Render after restarting and locate the actual output HTML. If you render
    into `reports/`, document that destination. Confirm that changing only the
    report title does not change its calculations, and that changing an input
    filename requires appropriate new checks and prose.
-6. Make a one-page handover note listing the minimum files needed to reproduce
+6. Make a handover note listing the files needed to reproduce
    the new report. Open the report on another computer if supported; otherwise
    use a separately located project copy. Record which kind of portability
    check you actually performed, without claiming an untested environment.
 
 **Additional outputs:** revised chosen report, revision log, the self-contained
-transfer report and HTML, and the handover note. You should now be able to
-explain both what the observations show and how a reader can regenerate them.
+transfer report and HTML, and the handover note.
 
 **Keep:** your chosen `descriptive-report.Rmd` or `organic-report.Rmd` and its
 HTML, with the code and data needed to render it.

@@ -3,7 +3,7 @@ title: "Terminal reference: find, inspect, and package files"
 ---
 
 Use Ubuntu on Windows, Terminal on Mac, or the terminal provided remotely.
-Do not type the prompt (`$` or `%`). Commands act on the computer to which the
+Type commands after the prompt (`$` or `%`). They act on the computer to which the
 current shell belongs. Type `pwd` whenever you are unsure where you are.
 
 | Command | Meaning | Example |
@@ -25,8 +25,7 @@ current shell belongs. Type `pwd` whenever you are unsure where you are.
 | `exit` | End this shell; in SSH, return to the local shell | `exit` |
 
 Some commands overwrite existing files. Practise in the course workspace and
-read the destination name before pressing Enter. We do not need recursive
-deletion commands for the core practicals.
+read the destination name before pressing Enter.
 
 ## Paths and punctuation
 
@@ -61,7 +60,7 @@ grep -F treated samples.tsv > treated-samples.txt
 ```
 
 The `>` writes to a file instead of the screen and replaces existing contents
-at that path. `>>` appends, but we do not need it for this practical. The search
+at that path. `>>` appends. The search
 does not parse a table or understand treatment groups: it matches text. It would
 also match `untreated` if that label occurred in the file.
 

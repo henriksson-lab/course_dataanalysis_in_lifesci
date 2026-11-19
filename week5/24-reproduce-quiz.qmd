@@ -1,0 +1,67 @@
+---
+title: "Quiz: reproduce a saved analysis"
+---
+
+[Exercises](24-reproduce.qmd) · [Weekly revision](quiz.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** A report uses an object imported only in the R console. Which check is most likely to expose this dependency?
+
+(i) Change the plot colour.
+
+(ii) Restart R and Knit from the saved source.
+
+(iii) Rename the HTML.
+
+::: {.callout-tip collapse="true" title="Hint"}
+Restarting clears interactive session objects.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(ii). The report should create its objects in its own chunks. Add the import before the analysis that uses it.
+:::
+
+---
+
+**Q2.** A share folder contains `introcomputing.Rproj` and `duckweed-report.html`. Is that enough to recalculate the analysis for new data? What is missing?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A project file sets context; HTML displays a result.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No. Include the `.Rmd` source, actual input CSV, dictionary, required output folder, and README naming packages and the file to render. The `.Rproj` does not contain the dataset.
+:::
+
+---
+
+**Q3.** In a disposable project copy, the input CSV is renamed but the report still requests its old path. In another copy, only the prose is changed to falsely say every duckweed flask had a measured outcome. Which fault should stop rendering?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Software can encounter an unavailable input without recognising a false scientific sentence.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The unchanged path to the renamed input should cause a file error. The false prose may render successfully, so counts and interpretation also need review.
+:::
+
+---
+
+**Q4.** A report renders correctly after extraction into a new folder. Which claim follows?
+
+(i) The source and supplied inputs regenerate the result in the tested environment.
+
+(ii) The scientific interpretation is proved correct.
+
+(iii) The ZIP protects against losing the only disk.
+
+::: {.callout-tip collapse="true" title="Hint"}
+Reproduction, scientific validity and backup are separate checks.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(i). Successful reproduction is evidence about the tested source, inputs and environment. Design and interpretation still need review, and disk loss needs a separately stored backup.
+:::

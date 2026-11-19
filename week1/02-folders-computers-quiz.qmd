@@ -1,0 +1,67 @@
+---
+title: "Quiz: Paths and the working computer"
+---
+
+[Lecture](../lectures/02-folders-computers/lec.qmd) · [Exercises](02-folders-computers.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** A project contains neighbouring `data` and `reports` folders. From the project root, `data/seedlings.csv` reaches the input. From inside `reports`, where does that same relative path point?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A relative path starts from the current folder.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+It asks for `data` inside `reports`: `reports/data/seedlings.csv` relative to the project root. That is a different location. Return to the project root before following the original route.
+:::
+
+---
+
+**Q2.** Which remains after an ordinary application closes: (i) its running process, (ii) a deliberately saved text file, or (iii) every unsaved edit?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Storage and current application state have different jobs.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(ii). A saved file remains on storage. The process stops. Unsaved edits may be lost or recovered by a particular editor; inspect the saved file.
+:::
+
+---
+
+**Q3.** Would adding RAM automatically provide more space for saved microscope photographs?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Which component holds saved files between sessions?
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No. RAM supports running work; persistent storage, such as an SSD, holds saved photographs.
+:::
+
+---
+
+**Q4.** You move the practice folder `map-a` into `map-b`. Does its note necessarily change? Will its old path still locate it?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Compare contents with location.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The note's contents can stay identical while its location changes. Its old path no longer locates it; update the route to include `map-b`.
+:::
+
+---
+
+**Q5.** You see `report.html` in a remote desktop. Is that file automatically in your laptop's Downloads folder? Is a ZIP beside the original a backup against losing the laptop?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Identify the computer and storage holding each copy.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No to both. Remote access displays another computer; file transfer is a separate action. A local ZIP is still lost with the laptop unless another copy is stored elsewhere.
+:::

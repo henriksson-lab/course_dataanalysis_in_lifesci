@@ -140,7 +140,7 @@ The shifted vector22,24,26 has mean 24 and SD 2. Show subtraction from each set 
 Unit conversion changes numbers; it does not change the measured plants.
 
 ::: notes
-Original variance 4 mm² becomes.04 cm²; SD 2 mm becomes.2 cm. Variance scales with the square of the conversion factor. Do not equate a smaller numeric SD after conversion with less biological variation.
+Original variance 4 mm² becomes.04 cm²; SD 2 mm becomes.2 cm. Variance scales with the square of the conversion factor. The smaller numeric SD reflects a different unit, not less biological variation.
 :::
 
 ## Calculate before rounding
@@ -184,7 +184,7 @@ sd(transfer_control$growth_mm)
 T01 grew **15.0 mm**; check that subtraction independently.
 
 ::: notes
-Load readr and dplyr as earlier. New data need their own import and growth column. Each group has 9 complete independent observations. Do not reuse a control vector from another file accidentally.
+Load readr and dplyr as earlier. New data need their own import and growth column. Each group has 9 complete independent observations. Use separately named objects for the two studies.
 :::
 
 ## The SD does not identify its own cause
@@ -224,5 +224,5 @@ What changes when mm become cm?
 [Open exercises](../../week3/12-variation.qmd).
 
 ::: notes
-Keep the by-hand three-number example before the full dataset. Ask for a two-sentence explanation of centre and spread. Students should retain the measurement unit and recognise that SD among plants is not uncertainty in a treatment difference.
+Keep the by-hand three-number example before the full dataset. Ask for an explanation of centre and spread. Students should retain the measurement unit and recognise that SD among plants is not uncertainty in a treatment difference.
 :::

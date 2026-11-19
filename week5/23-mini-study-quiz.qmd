@@ -1,0 +1,73 @@
+---
+title: "Quiz: a small biological study"
+---
+
+[Exercises](23-mini-study.qmd) · [Weekly revision](quiz.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** Twenty duckweed flasks were independently allocated to control or nutrient conditions, ten each. F17 in the nutrient group spilled before weighing. What is the experimental unit, and how many biomass measurements are available per group?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Fronds in one flask share a treatment allocation.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The flask is the independent unit. There are 10 control and 9 nutrient biomass measurements, 19 in total.
+:::
+
+---
+
+**Q2.** Which code preserves the documented unavailable measurement when selecting observations for a biomass plot?
+
+(i) Replace its biomass by zero.
+
+(ii) Keep the original table and create `available <- filter(duckweed, !is.na(biomass_mg))`.
+
+(iii) Delete every nutrient flask.
+
+::: {.callout-tip collapse="true" title="Hint"}
+Keep the raw record and distinguish missing from measured zero.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(ii). The plotting object contains available measurements, while the original table retains F17 and its missing value. State the unavailable count in the caption.
+:::
+
+---
+
+**Q3.** You run `t.test(nutrient$biomass_mg, control$biomass_mg)`. Which directed difference does its confidence interval describe?
+
+::: {.callout-tip collapse="true" title="Hint"}
+For two supplied vectors, the comparison follows first minus second.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Nutrient mean minus control mean. A positive difference means the nutrient group has the larger mean biomass.
+:::
+
+---
+
+**Q4.** For a synthesis run, percentage yield is defined as `100 × collected mass / supplied maximum mass`, with both masses in grams. A run collects 1.17 g from a supplied maximum of 1.50 g. Calculate its yield. Does this measure purity?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Divide matching mass units before multiplying by 100.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+`100 × 1.17 / 1.50 = 78%`. This is yield under the supplied assumptions; it is not a purity measurement.
+:::
+
+---
+
+**Q5.** Protocol means are 68.67% and 77.00%. Express modified minus standard in the correct units. Is this the same as relative percentage change?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Subtracting percentages gives a difference on the percentage scale.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The difference is 8.33 percentage points. Relative change would divide that difference by the standard mean and multiply by 100, giving about 12.13%. These answer different questions.
+:::

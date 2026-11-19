@@ -1,10 +1,17 @@
 ---
-title: "Week 3 self-check — measurements and variation"
+title: "Week 3 revision — measurements and variation"
 ---
 
-Explain the quantities before calculating. Use these checks to identify what to
-practise again; they are not an assessment. Keep the
-[statistics reference](../reference/statistics.qmd) nearby.
+Review questions from the week. See the [statistics reference](../reference/statistics.qmd)
+for definitions.
+
+Topic quizzes:
+
+- [Day 11 quiz](11-data-quality-quiz.qmd)
+- [Day 12 quiz](12-variation-quiz.qmd)
+- [Day 13 quiz](13-group-summaries-quiz.qmd)
+- [Day 14 quiz](14-replicates-uncertainty-quiz.qmd)
+- [Day 15 quiz](15-descriptive-report-quiz.qmd)
 
 ## 1. Mean, variance, and SD
 
@@ -60,7 +67,7 @@ plant records and available growth measurements are there per group?
 There are **12 control and 12 treated plant records**, but **11 control and
 12 treated available growth measurements**. The complete clean seedling file
 used later is a separate teaching dataset with 12 available per group. State
-which file the analysis uses, and do not silently mix those counts.
+which file the analysis uses so its counts match the results.
 :::
 
 ## 5. More readings or more independent units?
@@ -121,7 +128,7 @@ The transfer study has a larger treated mean but a smaller treated SD. Is that i
 ::: {.callout-note collapse="true"}
 ## Answer and reasoning
 
-It is consistent: centre and individual spread describe different features. Use seven-day growth in mm, available n=9 per group, and the actual group summaries. Do not copy the first study pattern, where the treated SD was larger, into the second study.
+It is consistent: centre and individual spread describe different features. Use seven-day growth in mm, available n=9 per group, and the actual group summaries. Centre and spread need separate descriptions.
 :::
 
 ## 10. Read the units after a transformation

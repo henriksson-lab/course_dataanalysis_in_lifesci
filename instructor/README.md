@@ -35,13 +35,13 @@ For a quick cross-section, read these student pages in order:
 | `week4/17-welch-test.qmd` | Does the interpretation emphasise size, uncertainty, and independent units? |
 | `week4/19-calibration.qmd` | Does it prepare students for ordinary biochemistry practicals? |
 | `week5/23-mini-study.qmd` | Could a student transfer the workflow to a new small dataset? |
-| `week5/24-reproduce.qmd` | Does the project work when another student receives it? |
+| `week5/24-reproduce.qmd` | Does the project render from a newly extracted copy? |
 
 Each daily topic now pairs a separate RevealJS lecture deck with its existing
 Exercises page. The slide theme and coloured sidebar follow the Quantitative
 Biology scaffold. Lecture links are green, quizzes blue, and practical links
-italic; week bands use the scaffold's five colours. The weekly quizzes are
-formative self-checks with worked explanations, not a grading scheme.
+italic; week bands use the scaffold's five colours. Each topic has a quiz with separate collapsible hints and answers; weekly
+quizzes provide further revision. No grading scheme is introduced.
 
 Decks use lecturer notes and explanatory diagrams/plots on roughly half their
 slides. The user permits up to 45 slides but prefers fewer: do not add slides
@@ -53,9 +53,9 @@ that recordings exist.
 The subsequent [workload expansion](workload-expansion.md) roughly doubles
 lecture depth and active practice. Each daily practical now has extended core
 work and an independent transfer task, with fresh inputs and checkable outputs.
-The student [study plan](../study-plan.qmd) budgets about 35 structured plus 5
-flexible learner hours per week. This is a planning estimate requiring a pilot,
-not a claim of 40 contact hours or examination requirements.
+The student [study plan](../study-plan.qmd) gives weekly checkpoints without
+prescribing task durations. The [subsequent audit](audit-results.md) removes
+required collaboration and redundant prose while retaining the expanded practice.
 
 ## What's supplied
 
@@ -64,8 +64,8 @@ not a claim of 40 contact hours or examination requirements.
 - A Quarto website using the sibling course's actual sidebar CSS, slide theme,
   RevealJS format, lecture/practical pairing, navigation controls, and week colours.
   Website code execution is disabled; example figures are generated separately
-  from the actual teaching datasets. Five weekly self-check quizzes give brief
-  worked answers.
+  from the actual teaching datasets. Twenty-five topic quizzes have separate collapsed hints and answers.
+  Five weekly quizzes provide further revision.
 - Fifteen CSV datasets, an organic sample-label TSV, and a tiny DNA string, all
   simulated. The data dictionary
   identifies units, experimental units, and missing values. A separate source
@@ -103,16 +103,16 @@ shell commands against the actual lab archive and verifies built local links.
 ## Pacing and support
 
 Use each day number as a study unit. A reasonable initial teaching pattern is
-10–15 minutes of explanation followed by demonstration and guided work, then a
-second short explanation and practice. Actual contact hours are not specified.
+a short explanation followed by demonstration and guided work, then another
+explanation and practice. Actual contact hours are not specified.
 Many students will need substantially more time for installations, paths, typing,
 and reopening work than the conceptual explanation takes.
 
 On day 1, find who can save and reopen a file without a recent-files menu. On
 day 5, find who can name the current folder and explain an extracted archive.
 On day 10, find who can render after restarting R. Use these as support signals,
-not grades. Pair work can help troubleshooting, but each student needs hands-on
-practice controlling their own session and locating their own saved files.
+not grades. Collaboration can be optional, and every task must be completable independently.
+Each student practises controlling their session and locating their saved files.
 
 Keep day 25 as consolidation and catch-up. If overloaded, shorten the representations demonstration
 and paired-test calculation practice while retaining the paired-design concept.

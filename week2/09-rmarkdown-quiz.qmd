@@ -1,0 +1,67 @@
+---
+title: "Quiz: R Markdown reports"
+---
+
+[Lecture](../lectures/09-rmarkdown/lec.qmd) · [Exercises](09-rmarkdown.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** Which file is the editable recipe for a report: (i) `report.Rmd`, (ii) `report.html`, or (iii) the plot shown in RStudio?
+
+::: {.callout-tip collapse="true" title="Hint"}
+One file combines prose and code chunks.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(i). The `.Rmd` is the source. Rendering it produces HTML for reading; the input data remain separate files.
+:::
+
+---
+
+**Q2.** A report plots `growth_mm` before the chunk that imports measurements and calculates growth. What should be changed?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Rendering follows the document's chunk order.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Put package loading, import, and calculation before the plot. The saved report should create every object it uses.
+:::
+
+---
+
+**Q3.** You created a table only in the Console. A chunk runs interactively, but the report fails in a fresh session because that table is missing. What belongs in the report?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A fresh session cannot rely on earlier manual commands.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Include the required package calls, import, and transformations in the report before their results are used. Restart R and render again.
+:::
+
+---
+
+**Q4.** After changing the input from 24 seedlings to an 18-seedling study, the figure updates but the methods still say 24 plants. Has the report transferred correctly?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Code output and written descriptions must refer to the same study.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No. Update the methods, question, captions, and manually written counts. Inline R can connect reported counts to the imported table, but it cannot automatically fix an incorrect study description.
+:::
+
+---
+
+**Q5.** You correct a caption directly in `report.html`. What happens when you render `report.Rmd` again, and where should the correction be saved?
+
+::: {.callout-tip collapse="true" title="Hint"}
+HTML is generated from the source.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The generated HTML can overwrite the direct edit. Correct the caption in `report.Rmd`, render again, and inspect the resulting HTML.
+:::

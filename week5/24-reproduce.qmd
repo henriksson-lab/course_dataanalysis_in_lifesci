@@ -1,20 +1,17 @@
 ---
-title: "Day 24 — can someone else render your report?"
+title: "Day 24 — reproduce your report from saved files"
 ---
 
-[Lecture slides](../lectures/24-reproduce/lec.qmd) · [Weekly self-check](quiz.qmd)
+[Lecture slides](../lectures/24-reproduce/lec.qmd) · [Quiz](24-reproduce-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
 ## Today's question
 
-A result that appears on your screen may depend on objects you created hours
-ago or a file stored outside your project. Today you will find those dependencies
-and produce a folder someone else can use. Reproducibility is a property you
-check by running the work, not an adjective you add to the title.
+A result on screen may depend on console objects or files outside your project.
+Find those dependencies and test a complete project in a new location.
 
 **You need:** yesterday's `.Rmd`, its data, and your project folder. Save the
-revised report, its HTML, and a `reports/reproduction-log.txt`. A peer can help;
-if working alone, use a separately extracted copy and a fresh R session.
+revised report, its HTML, and `reports/reproduction-log.txt`.
 
 Use the study you selected on day 23. The folder example below uses duckweed;
 for the organic alternative, substitute `organic-study.Rmd`, its HTML, and
@@ -30,12 +27,10 @@ direction labelled? Can you distinguish SD among flasks from uncertainty in the
 estimated difference?
 
 For the descriptive organic alternative, check SD among independent synthesis
-runs and the observed difference in percentage points. No test or confidence
-interval was required, so do not add one just to fill a report heading.
+runs and the observed difference in percentage points.
 
 Replace notes such as “insert result here” with your interpretation. Keep enough
-code to reproduce the result. For this course, visible code is helpful; hiding
-code cannot correct a missing explanation.
+code to reproduce the result, alongside an explanation of its meaning.
 
 ## 2. Render after restarting
 
@@ -52,8 +47,8 @@ the first meaningful error before changing several things at once.
 | Export fails | Destination directory was not included | Include the empty output folder or create it explicitly |
 | Old text contradicts new numbers | Result was manually typed and not updated | Check interpretation and use inline results where useful |
 
-Do not add `install.packages()` to fix every render: software installation is
-separate setup. Tell the reader which packages are needed.
+List required packages in the README. Install them during setup and load them
+in the report's setup chunk.
 
 ## 3. Package the necessary inputs and source
 
@@ -91,19 +86,15 @@ shell workspace. Check its location before running the command. Native RStudio
 still uses the Windows copy. If you revise that Windows copy, copy the revised
 files into Ubuntu again before creating a replacement ZIP; the copies do not
 synchronise. Copy the finished ZIP back to a normal Windows folder before
-extracting it for the native RStudio check below. The archive should be outside the folder being
-archived; do not package a folder containing its own growing ZIP.
+extracting it for the native RStudio check below. Keep the archive outside the
+folder being archived.
 
 ## 4. Reproduce from a different location
 
-Exchange the ZIP with a peer using the supported course sharing route. Extract
-it into a new folder, open its `.Rproj`, and render the `.Rmd` in a fresh R
-session. Do not silently fix the author's source before trying it.
-
-If working alone, rename the new parent folder so its path differs from the
-original. This checks that the report does not depend on a personal absolute
-path. A second folder on your own laptop checks portability, but does not fully
-test differences between software environments.
+Extract the ZIP into a new parent folder with a different path. Open its
+`.Rproj` and render the `.Rmd` in a fresh R session. Record the outcome before
+changing any source. This tests relative paths and included files on your
+laptop; it does not test every software environment.
 
 Compare the numerical results, group counts, and interpretation. Plot layout
 may vary slightly across software versions; a jitter seed helps point placement
@@ -113,14 +104,13 @@ stay consistent. Record the software information if results differ:
 sessionInfo()
 ```
 
-You can put this in a report appendix or save its output in your log. You do not
-need to understand every entry: R version and loaded package versions help
-another person investigate a difference.
+Save this output in your log when needed. R and loaded package versions help
+investigate differences.
 
 ::: {.callout-tip collapse="true"}
 ## Hint: the project opens, but input is still missing
 
-Look at the recipient's actual extracted folder tree. A `.Rproj` file does not
+Look at the actual extracted folder tree. A `.Rproj` file does not
 contain the data; it sets the project context. A shortcut to your original data
 folder is also not a transferred dataset. Include the ordinary CSV itself.
 :::
@@ -129,8 +119,7 @@ folder is also not a transferred dataset. Include the ordinary CSV itself.
 
 In `reports/reproduction-log.txt`, write the source archive name, destination
 folder, whether rendering succeeded before fixes, any exact error, the correction,
-and whether the rerun reproduced the key values. Thank your peer by making their
-feedback actionable, not by rating the appearance of their report.
+and whether the rerun reproduced the key values.
 
 ## Check your understanding
 
@@ -149,20 +138,18 @@ feedback actionable, not by rating the appearance of their report.
 :::
 
 
-## Extended practical — run a controlled failure investigation
+## Investigate controlled failures
 
-Allow about 90 minutes. Use a **disposable copy of the share project**, named
+Use a **disposable copy of the share project**, named
 `report-investigation`, outside your original working project. Keep the original
-report and raw data intact. Choose the same main study as yesterday. A failure
-investigation is useful only if you know what changed and can return to a known
-working state.
+report and raw data intact. Use the same main study as yesterday.
 
 1. Render the unmodified copied report first. Record the input filename,
    available group counts, one key numerical result, and the output location
    in `reports/reproduction-cases.txt` in your original project. This is the
    successful reference run against which later cases will be compared.
 2. In the disposable copy only, rename the required input CSV by adding
-   `-temporarily-missing` to its name. Do not change the report's path. Restart
+   `-temporarily-missing` to its name, leaving the report's path unchanged. Restart
    R, render, and record the first meaningful error and chunk. Predict whether
    any valid new result can be produced from the now unavailable input.
 3. Restore the input's exact name, render again, and confirm that the key result
@@ -176,17 +163,13 @@ working state.
    Rendering can succeed while this interpretation is false or unsupported.
 5. Record whether each case is an execution failure, an interpretation failure,
    or neither. Rewrite the incorrect sentence using the evidence. Keep the
-   final source correct; do not let an intentionally misleading example become
-   the copy you later share. Record filenames so you can tell the cases apart.
-6. Ask a peer to select one case without announcing which fault it contains.
-   Diagnose it by locating the input, running from a fresh session, and comparing
-   prose with results. Working alone, revisit the case after completing the
-   transfer exercise below and follow only your written investigation procedure.
+   final source correct and label each diagnostic copy.
+6. After completing the algae exercise below, revisit one diagnostic copy.
+   Follow your written procedure to locate the input, render from a fresh
+   session, and compare prose with results. Revise ambiguous instructions.
 
 A useful case record has columns for changed item, predicted effect, observed
-error or inconsistency, repair, and confirming rerun. Add the approximate time
-spent diagnosing each. A large number of attempts is not the goal: the goal is
-to change one thing, observe its consequence, and preserve a path back.
+error or inconsistency, repair, and confirming rerun.
 
 ::: {.callout-tip collapse="true"}
 ## Hint: three questions before making a repair
@@ -196,20 +179,17 @@ that relative path? Does the saved source create the objects and make claims
 supported by the data? Renaming a copied CSV should cause an input error;
 replacing a sentence with a false claim may cause no software error at all.
 A successful rerun therefore checks computational reproduction, not scientific
-validity by itself. Never “repair” a missing value by inventing a number.
+validity by itself.
 :::
 
-## Independent transfer — package a short analysis for another reader
+## Package the algae analysis
 
-Allow about 60–90 minutes. Use yesterday's algae transfer script and results.
-This is a brief data memo using existing work, not an additional full biological
-project. It checks whether the workflow transfers when the dataset and filenames
-change. If the file is not present, extract the updated course ZIP separately
-and copy its algae CSV and dictionary into the project, preserving your own code.
+Use yesterday's algae script and results. If the input is missing, copy
+`data/algae.csv` and its dictionary from a separately extracted course ZIP.
 
 1. Create `algae-brief.Rmd` at the project root. Include a short question, the
    supplied culture design, the missing A19 account, your import/check/summary
-   code, one individual-point figure, and the 100–150-word interpretation.
+   code, one individual-point figure, and the interpretation.
    All required objects and packages must be created or loaded in its chunks.
 2. Turn the stated available sample sizes into inline calculated results rather
    than typing them independently of the data. Check the rendered counts against
@@ -235,10 +215,8 @@ and copy its algae CSV and dictionary into the project, preserving your own code
    any correction, and a limitation of the test. A second folder on one laptop
    does not establish that every other software environment will work.
 
-**Keep:** the tested main-study package, controlled-case record, brief algae
-source/HTML, and tested `algae-share` package. The key independent skill is
-knowing what another reader needs and then verifying the supplied package,
-not accumulating archives whose contents you have never opened.
+**Keep:** the tested main-study package, controlled-case record, algae
+source/HTML, and tested `algae-share` package.
 
 **Before you finish:** retain the corrected report, tested ZIP, and a copy on the
 supported backup storage. Next: [consolidation and error recovery](25-consolidate.qmd).

@@ -1,10 +1,11 @@
 ---
-title: "Week 1 self-check — files and computers"
+title: "Week 1 revision — files and computers"
 ---
 
-Try each question before opening its answer. These are practice checks, not
-graded examination questions. Use your file manager, terminal, and
+Try each question before opening its answer. Use your file manager, terminal, and
 [terminal reference](../reference/terminal.qmd) to check actions as well as words.
+
+Topic quizzes: [1](01-files-quiz.qmd) · [2](02-folders-computers-quiz.qmd) · [3](03-terminal-quiz.qmd) · [4](04-inspect-archive-quiz.qmd) · [5](05-lab-files-quiz.qmd)
 
 ## 1. Find the saved work
 
@@ -147,12 +148,12 @@ The manifest lists measurements/S04.csv, but the copied folder contains S04-rena
 ::: {.callout-note collapse="true"}
 ## Worked answer
 
-Investigate. In the deliberate classroom rename, the file contents still identify S04 and 39.8 mm, and the known rename supports restoring its filename. In a real ambiguous case, obtain source evidence. Do not delete a record simply because a path fails.
+Investigate. In the deliberate classroom rename, the file contents still identify S04 and 39.8 mm, and the known rename supports restoring its filename. In a real ambiguous case, obtain source evidence.
 :::
 
 ## 12. The recipient has the old correction
 
-You edited ordinary report/findings.txt after creating report-v1.zip. A partner extracts v1 and sees the old sentence. What happened, and what is a useful verification?
+You edited ordinary report/findings.txt after creating report-v1.zip. You extract v1 and see the old sentence. What happened, and what is a useful verification?
 
 ::: {.callout-note collapse="true"}
 ## Worked answer
@@ -160,5 +161,5 @@ You edited ordinary report/findings.txt after creating report-v1.zip. A partner 
 The archive is a snapshot and did not update when the source changed. Create a newly named package, extract it into a fresh receiver location, and inspect the actual corrected sentence. Confirm both archive version and extracted folder before assuming editing failed.
 :::
 
-Return to [day 5 practical](05-lab-files.qmd) for a complete file workflow, or
+Return to [day 5 exercises](05-lab-files.qmd) for a complete file workflow, or
 continue to [week 2](../week2/06-r-basics.qmd).

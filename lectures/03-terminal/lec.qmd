@@ -34,7 +34,7 @@ Explain why this is worth learning: repeatable file work and remote Linux access
 
 ![The terminal prompt, cd command, and practice destination have distinct roles.](command-anatomy.svg){height=390}
 
-Do not type the example prompt, `$`, or `%`. Press Enter to run the command.
+Type only the command after the prompt. Press Enter to run it.
 
 ::: notes
 A prompt indicates readiness, not a command to copy. A Mac prompt may end in percent. Our example username is illustrative. Distinguish command from argument now; an option such as -p is an instruction modifying a command's behaviour.
@@ -55,7 +55,7 @@ ls
 `pwd` reports the location. `ls` should include `practice`.
 
 ::: notes
-cd without a destination takes the user home. mkdir -p creates needed parent folders and accepts an existing folder. This workspace is deliberately separate from the native R project on Windows. Pause to confirm pwd and the practice name; do not assume browser Downloads is this location.
+cd without a destination takes the user home. mkdir -p creates needed parent folders and accepts an existing folder. This workspace is deliberately separate from the native R project on Windows. Pause to confirm pwd and the practice name; browser Downloads may be elsewhere.
 :::
 
 ## Navigation changes the starting point
@@ -126,7 +126,7 @@ pwd
 Name the command, destination argument, and resulting location.
 
 ::: notes
-Options modify behaviour; arguments supply values. Here quotes group the two-word destination, not a new kind of folder. Do not type the prompt. Explain the distinction before students copy the examples.
+Options modify behaviour; arguments supply values. Here quotes group the two-word destination, not a new kind of folder. Type only the command after the prompt. Explain the distinction before students copy the examples.
 :::
 
 ## A failed cd leaves you where you were
@@ -136,7 +136,7 @@ Options modify behaviour; arguments supply values. Here quotes group the two-wor
 An error message is information about the attempted action.
 
 ::: notes
-The practical asks students to record the failed destination and pwd result. They should not try sudo, random system settings, or broad deletion. Return to a known workspace and inspect names to recover.
+Record the failed destination and pwd result. Return to a known workspace and inspect names to recover.
 :::
 
 ## Prediction: which commands create something?

@@ -1,0 +1,71 @@
+---
+title: "Quiz: work on another computer"
+---
+
+[Exercises](21-remote-workflow.qmd) · [Weekly revision](quiz.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** After connecting with SSH, which command shows your current folder on the remote computer?
+
+(i) `hostname`  (ii) `pwd`  (iii) `exit`  (iv) `getwd()`
+
+::: {.callout-tip collapse="true" title="Hint"}
+`hostname` names the machine. `getwd()` belongs in R.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(ii), `pwd`. It prints the working directory of that shell. `hostname` identifies the answering machine; `exit` ends the shell session.
+:::
+
+---
+
+**Q2.** A report rendered remotely, but your laptop’s Downloads folder is empty. Which step should come first?
+
+(i) Reinstall R.  (ii) Render five more copies.  (iii) Locate the remote output and check the transfer destination.
+
+::: {.callout-tip collapse="true" title="Hint"}
+Rendering and transferring are separate actions.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(iii). Find the saved output on the remote computer, check whether it was transferred, and locate that destination on the laptop.
+:::
+
+---
+
+**Q3.** Two project copies both contain `reports/receipt.txt`. You edit and save the laptop copy. Must the remote copy change too? What should you inspect before sending it?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A shared filename does not establish shared storage.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No. Separately copied folders need a new transfer unless a configured sharing service updates them. Open the saved contents of the intended source and receiving copy; record their locations.
+:::
+
+---
+
+**Q4.** A received algae table has 24 rows and 23 available biomass measurements, matching the source. Does this establish that every recorded biomass is identical?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Two values can contain the same number of characters while differing numerically.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No. These are useful structural checks, but a changed value can leave both counts unchanged. Compare saved contents or named records using the supported method before making a stronger claim.
+:::
+
+---
+
+**Q5.** What happens to saved remote files when you run `exit` in an SSH shell? Does the same answer guarantee that a running R process continues?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A saved file and a running process are different things.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The shell connection ends; saved files remain subject to the service’s storage policy. Whether a running process continues depends on the service and how it was started.
+:::

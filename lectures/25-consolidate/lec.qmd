@@ -20,7 +20,7 @@ format:
 toc: false
 ---
 
-## Reuse the workflow, not a memorised answer
+## Reuse the workflow
 
 ![The analysis workflow moves from finding and checking data to analysing, explaining, and reproducing.](workflow.svg){height=390px}
 
@@ -59,8 +59,7 @@ Find the path, name, case, and calculation problems.
 ::: notes
 Correct path is data/seedlings.csv from the project root. Use a consistent
 seedlings object and growth_mm column, load readr/dplyr, and subtract initial
-from final length. P01 grew 44.3 − 25.7 = 18.6 mm. Do not run broken code as if it were
-the course's suggested solution.
+from final length. P01 grew 44.3 − 25.7 = 18.6 mm.
 :::
 
 ## A mean does not describe every observation
@@ -84,7 +83,7 @@ A large number of readings cannot repair a lack of independent replication.
 ::: notes
 Transfer to future practicals: ask what was independently sampled or assigned
 to treatment. Cells, time points, or repeat balance readings may be related.
-Do not decide the test sample size merely from the row count.
+Determine sample size from independent units and available measurements.
 :::
 
 ## Interpret an uncertain result carefully
@@ -155,9 +154,9 @@ The primary result uses **all available measurements**.
 
 ::: notes
 The new object is a sensitivity demonstration, not a replacement raw file.
-Counts must be recomputed for each version. Preserve A19 as missing. Do not
-choose a dataset by which p-value is smaller; the task only examines how one
-record changes a descriptive summary.
+Recompute counts for each version and preserve A19 as missing. The task
+examines how one record changes a descriptive summary; evidence for exclusion
+must come from the study records.
 :::
 
 ## The diagnostic changes the answer, not the evidence for exclusion
@@ -220,10 +219,9 @@ is not proof of an intervention's effect.
 Give directions another person can follow, then test them.
 
 ::: notes
-The final independent task is a handover request and readiness review. A peer
-should locate input, render source, and state a limitation. Working alone, use
-a differently named extracted folder. Keep only tested packages and clearly
-identify revisions, including separate Windows and Ubuntu copies.
+Test the handover instructions in a freshly extracted folder: locate input,
+render source, and identify a limitation. Clearly label revisions, including
+separate Windows and Ubuntu copies.
 :::
 
 ## Choose the next rehearsal from evidence
@@ -233,15 +231,14 @@ Write three reliable actions, two weak steps, and a concrete next practice task.
 Keep unfinished remote skills explicitly pending.
 
 ::: notes
-Self-review should identify an action, not only confidence. “I can render after
-restarting” has a checkable meaning; “I understand R” is too broad. Remaining
-time belongs to the weak step. Do not fill it with an advanced topic merely
-because some students finish earlier.
+Ask for checkable actions such as “I can render after restarting”, rather than
+a broad claim such as “I understand R”. Use the identified weak step for further
+practice.
 :::
 
 ## Exercises: leave with work you can find again
 
-[Open day 25 exercises](../../week5/25-consolidate.qmd).
+[Open exercises](../../week5/25-consolidate.qmd) · [Quiz](../../week5/25-consolidate-quiz.qmd).
 
 - Locate your project without a recent-files menu.
 - Render your chosen report from a fresh session.
@@ -250,7 +247,6 @@ because some students finish earlier.
 - Keep a labelled sensitivity check, handover, and readiness review.
 
 ::: notes
-Stop adding topics. Use the time to make these tasks dependable. The descriptive
-organic alternative stays descriptive; higher yield alone does not prove higher
-purity. The course's written examination design remains outside these materials.
+Use the consolidation tasks for further practice. The organic alternative
+stays descriptive; higher yield alone does not demonstrate higher purity.
 :::

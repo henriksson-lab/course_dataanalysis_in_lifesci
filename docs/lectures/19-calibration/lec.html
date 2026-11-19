@@ -347,7 +347,7 @@ Data Analysis in Life Sciences
 <p>Result ≈ <strong>7.40 mg/L</strong>.</p>
 <p>This simple estimate omits full calibration and measurement uncertainty.</p>
 <aside class="notes">
-<p>The[1] and[2] select coefficients. The denominator is the fitted slope, with absorbance per mg/L units. The practical uses range checks to avoid pretending every numeric inversion is supported. Do not present this point estimate as an exact concentration.</p>
+<p>The[1] and[2] select coefficients. The denominator is the fitted slope, with absorbance per mg/L units. The practical uses range checks to avoid pretending every numeric inversion is supported. The inverse result is an uncertain point estimate.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -370,7 +370,7 @@ Data Analysis in Life Sciences
 </div>
 <p>U3 is beyond range: flag for a new suitable measurement.</p>
 <aside class="notes">
-<p>The practical assigns NA to the unsupported concentration rather than presenting an extrapolated number. Do not invent a dilution correction for a measurement that was never made. The instrument’s calibrated range is evidence, not an inconvenience to bypass.</p>
+<p>The practical assigns NA to the unsupported concentration rather than presenting an extrapolated number. A dilution correction requires a new measurement and recorded volumes. The instrument’s calibrated range is evidence, not an inconvenience to bypass.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -518,7 +518,7 @@ Data Analysis in Life Sciences
 <figcaption>The new six-standard instrument calibration has its own intercept and slope.</figcaption>
 </figure>
 </div>
-<p>Do not reuse the first instrument coefficient objects.</p>
+<p>Create separate coefficient objects for the second instrument.</p>
 <aside class="notes">
 <p>Transfer standards span0–5 mg/L. Fit absorbance on known concentration. Their fitted intercept is.02161905 and slope.10008571 per mg/L. This is another empirical calibration,not a universal optical law.</p>
 <style type="text/css">

@@ -52,7 +52,7 @@ coef(leaf_fit)
 Fitted mass ≈ **9.48 + 4.11 × area**.
 
 ::: notes
-The input columns and units differ, but the lm syntax is the same as calibration. Intercept is about 9.476606 mg; slope about 4.110117 mg per cm². The intercept locates the line at area 0, outside the observed area range; do not interpret it as measured mass of a zero-area leaf.
+The input columns and units differ, but the lm syntax is the same as calibration. Intercept is about 9.476606 mg; slope about 4.110117 mg per cm². The intercept locates the line at area 0, outside the observed area range; it is not a measured mass of a zero-area leaf.
 :::
 
 ## The slope has units
@@ -84,7 +84,7 @@ Use the stored unrounded coefficients in actual calculations. The point predicti
 Residuals are in **milligrams**, the outcome’s units.
 
 ::: notes
-A positive residual means heavier than fitted at that area. Look for structure or a dominating point while remembering that small samples provide limited diagnostics. The line need not explain every biological difference. We do not teach a formal normality-test decision tree.
+A positive residual means heavier than fitted at that area. Look for structure or a dominating point while remembering that small samples provide limited diagnostics. The line need not explain every biological difference.
 :::
 
 ## Investigate influence without deleting inconvenient data
@@ -160,7 +160,7 @@ Locate the same identifier in the table and plot. Positive residual means the ob
 Keep the full-data fit as primary.
 Fit without A18 in a separate object and compare.
 
-Ask what changed and why; do not discard a valid value to obtain a preferred story.
+Ask what changed and why; keep valid observations in the main fit.
 
 ::: notes
 The main slope is4.110117 mg/cm² and the fit without A18 is4.064927. The difference is small here,but sensitivity does not depend on getting a dramatic answer. Source evidence is needed for an actual correction or exclusion.
@@ -173,7 +173,7 @@ The main slope is4.110117 mg/cm² and the fit without A18 is4.064927. The differ
 A perfect relationship created by a formula is not experimental validation.
 
 ::: notes
-The solution example supplies all masses,molar masses and volumes; its concentration calculation is arithmetic. The leaf line summarises measured associations. Do not treat a line fitted to formula-generated values as proof of a new biological or chemical law.
+The solution example supplies all masses,molar masses and volumes; its concentration calculation is arithmetic. The leaf line summarises measured associations. A line through formula-generated values illustrates the supplied arithmetic relationship.
 :::
 
 ## A new association retains its study context
@@ -183,7 +183,7 @@ The solution example supplies all masses,molar masses and volumes; its concentra
 This asks about starting and final size, not the mean treatment effect on growth.
 
 ::: notes
-These are18 independent source plants,but the two lengths on each plant are related. Allocation and other differences may contribute to the combined pattern. We do not add a multiple regression or claim an intervention on initial size.
+These are18 independent source plants,but the two lengths on each plant are related. Allocation and other differences may contribute to the combined pattern. The combined line is descriptive and does not adjust for allocation.
 :::
 
 ## Fit the question you actually stated
@@ -223,7 +223,7 @@ For each familiar question, record:
 Keep source, data, figure, and report together.
 
 ::: notes
-Students revise the leaf report and independently write transfer-association.Rmd. Their three-question sheet becomes a practical reference for future labs. Do not turn this consolidation into a survey of advanced models.
+Students revise the leaf report and independently write transfer-association.Rmd. Their three-question sheet becomes a practical reference for future labs. Keep the comparison focused on question, design, and interpretation.
 :::
 
 ## Exercises: explain the line, the residuals, and one limit

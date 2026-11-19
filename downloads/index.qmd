@@ -20,14 +20,12 @@ should be saved in its root, beside `introcomputing.Rproj`, so paths such as
 
 The shell practice archive is separate. On Windows, the Ubuntu home folder and
 your normal Windows Documents folder are different locations. A remote computer
-is another location again. Practise transferring one small file deliberately;
-do not assume these copies synchronise.
+is another location again. Transfer files explicitly between these locations.
 
 The course project also includes `data/organic-recovery.csv`, for short organic
 laboratory transfer exercises. It supplies the maximum possible and collected
 product masses, with the calculation defined in each exercise. Choose a transfer
-option where a lesson offers it; you do not need to complete every context or
-have taken another chemistry course.
+option where a lesson offers it.
 
 The expanded practice uses six further CSV files included in the project ZIP:
 `seedlings-transfer.csv`, `solutions.csv`, `dilutions.csv`,

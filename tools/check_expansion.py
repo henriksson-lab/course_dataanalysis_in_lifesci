@@ -1,4 +1,8 @@
-"""Audit the requested content expansion; counts do not validate learner hours."""
+"""Report historical content counts without enforcing minimum writing volume.
+
+Historical comparisons describe the material, not its quality or learner time.
+Quiz structure, computations, assets, links, and slide limits have separate checks.
+"""
 
 from pathlib import Path
 import json
@@ -13,8 +17,6 @@ rows = []
 for stem, old in baseline["days"].items():
     practical = next(ROOT.glob(f"week[1-5]/{stem}.qmd"))
     source = practical.read_text()
-    assert re.search(r"^## Extended practical", source, re.M), practical
-    assert re.search(r"^## Independent transfer", source, re.M), practical
     deck = ROOT / "lectures" / stem / "lec.qmd"
     slides = re.split(r"^## ", visible_source(deck.read_text()), flags=re.M)[1:]
     row = {
@@ -31,14 +33,10 @@ for stem, prior, current, steps in rows:
     print(f"{stem}: {prior} → {current}; {steps} steps")
 for key in totals:
     print(f"{key}: {before[key]} → {totals[key]} ({totals[key] / before[key]:.2f}×)")
-assert totals["content_slides"] >= before["content_slides"] * 1.8, "Lecture depth has not approximately doubled"
-assert totals["numbered_steps"] >= before["numbered_steps"] * 1.8, "Active practical work has not approximately doubled"
-assert totals["practical_words"] >= before["practical_words"] * 1.5, "New practical instructions need more substance"
-assert totals["visual_slides"] / totals["content_slides"] >= 0.40, "Preserve the requested visual balance"
 for week, old_count in baseline["quiz_questions"].items():
     source = (ROOT / week / "quiz.qmd").read_text()
-    current = len(re.findall(r"^## \d+[.)] ", source, re.M))
-    print(f"{week} quiz questions: {old_count} → {current}")
-    assert current >= old_count * 1.8, week
-assert (ROOT / "docs/study-plan.html").is_file()
-print("Expansion and daily study blocks verified. Hour estimates still need a beginner pilot.")
+    current = len(re.findall(r"^(?:## \d+[.)] |\*\*Q\d+\.)", source, re.M))
+    topic_questions = sum(len(re.findall(r"^\*\*Q\d+\.", p.read_text(), re.M))
+                          for p in (ROOT / week).glob("*-quiz.qmd"))
+    print(f"{week}: {current} weekly revision questions; {topic_questions} topic questions")
+print("Historical counts only; no minimum prose, step, slide, or question quota.")

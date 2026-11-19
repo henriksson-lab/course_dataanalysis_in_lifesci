@@ -1,7 +1,7 @@
 # Lecture scaffold and authoring contract
 
 The course must follow the quantbio scaffold: topic sections link separately to
-lecture slides and Exercises pages. Preserve the 25 existing daily pages
+lecture slides, Exercises pages, and topic quizzes. Preserve the 25 existing daily pages
 and their URLs. New decks live at `lectures/<daily-stem>/lec.qmd`.
 
 User requirements: decks may be up to **45 slides**, but favour fewer slides and
@@ -11,7 +11,8 @@ a table alone is not counted as a picture. Existing data plots may be reused.
 Keep each teaching deck focused on its topic rather than reproducing all
 practical prose. Consolidation develops case discussion and recovery rather than
 introducing another statistical method. The expanded teaching depth is described
-below; the introductory topic boundaries remain.
+below; the introductory topic boundaries remain. The later wording audit
+supersedes minimum volume targets and mandatory peer tasks.
 
 The later user-requested [workload expansion](expansion-contract.md) supersedes
 the initial short-deck volume: roughly double explanations/demonstrations and
@@ -83,14 +84,14 @@ chemistry prerequisites, and pending remote details apply to slides.
 
 - Worker A: decks 01–10, `instructor/make-lecture-figures-weeks1-2.py`.
 - Worker B: decks 11–20, `instructor/make-lecture-figures-weeks3-4.py`.
-- Worker C: decks 21–25, `instructor/make-lecture-figures-week5.py`, plus
-  `week1/quiz.qmd` through `week5/quiz.qmd` (five short formative self-check pages).
+- Worker C: decks 21–25, `instructor/make-lecture-figures-week5.py`, plus the quizzes within those weeks.
 - Root: navigation, copied scaffold/theme/style, shared helper, checking,
   cross-links to decks, docs, packaging, commit/push and publication.
 
 No other paths may be changed by workers. Quizzes use ordinary HTML (no reveal
-front matter), refer to each week's taught content, and include brief collapsible
-worked answers; no new examination/grades. No teacher-only files in student ZIPs.
+front matter). Each topic links to `weekN/<daily-stem>-quiz.qmd`, with short
+questions and separate collapsible Hint and Answer callouts. Weekly quizzes
+provide revision; no new examination/grades. No teacher-only files in student ZIPs.
 Keep every lecture <=45 slides. Report slide/image counts and validation.
 
 Daily stems are listed in `instructor/development.md` and match existing pages.

@@ -215,7 +215,7 @@ Data Analysis in Life Sciences
 </div>
 <p>The simulated study measures 24 plants twice, seven days apart.</p>
 <aside class="notes">
-<p>This is a consolidation briefing, not another statistics lecture. Each plant has its own pot and a randomly allocated control/nutrient treatment. The nutrient formulation is unspecified. Two time measurements on the same plant are not two separate plants. Do not invent experimental details beyond the dictionary.</p>
+<p>This briefing consolidates import, calculation, plotting, and reporting. Each plant has its own pot and a randomly allocated control/nutrient treatment. The nutrient formulation is unspecified. Two time measurements on the same plant are not two separate plants.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -280,7 +280,7 @@ Data Analysis in Life Sciences
 </div>
 <p>Say what you observe and what the observations alone cannot settle.</p>
 <aside class="notes">
-<p>Possible prose: growth varied among plants in both groups, and treated values tended to be higher but overlapped controls. The small simulated sample and lack of a quantified uncertainty comparison limit conclusions. Do not prescribe a single identical sentence for everyone; ask what evidence supports their wording.</p>
+<p>Possible prose: growth varied among plants in both groups, and treated values tended to be higher but overlapped controls. The small simulated sample and lack of a quantified uncertainty comparison limit conclusions. Ask what evidence supports the student’s wording.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -303,7 +303,7 @@ Data Analysis in Life Sciences
 </div>
 <p><code>data/seedlings.csv</code> should not contain your personal username.</p>
 <aside class="notes">
-<p>The .Rmd stays at the project root. Generated HTML can be next to it or in the documented reports/ output folder. A project file sets a working context; it does not embed the data. The diagram motivates later peer reproduction without adding a new remote service procedure.</p>
+<p>The .Rmd stays at the project root. Generated HTML can be next to it or in the documented reports/ output folder. A project file sets a working context; it does not embed the data. The diagram motivates testing the project from another folder.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -322,7 +322,7 @@ Data Analysis in Life Sciences
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"first-report.Rmd"</span>, <span class="at">output_dir =</span> <span class="st">"reports"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If an object is missing, repair the source rather than hiding the gap in Console state.</p>
 <aside class="notes">
-<p>Do not insert this render command into the report itself. Work from the first relevant error and its chunk. Check file paths, package loading, and the growth calculation before rewriting the whole report. A successful fresh-session render is evidence of reproducibility in this environment, not proof the interpretation is correct.</p>
+<p>Run this render command in the Console. Work from the first relevant error and its chunk. Check file paths, package loading, and the growth calculation before rewriting the whole report. A successful fresh-session render is evidence of reproducibility in this environment, not proof the interpretation is correct.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -409,7 +409,7 @@ Data Analysis in Life Sciences
 <p>Compare final-size and growth plots.</p>
 <p>Keep one as the main evidence. Retain another only if it answers a stated useful question.</p>
 <aside class="notes">
-<p>More figures are not automatically better. This session expands revision and transfer rather than adding a statistical test. A partner should state which measured or derived quantity the vertical axis actually shows.</p>
+<p>More figures are not automatically better. This session expands revision and transfer rather than adding a statistical test. Have students identify which measured or derived quantity the vertical axis shows.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -451,7 +451,7 @@ Data Analysis in Life Sciences
 <p>Import, check, calculate, plot, and write a short laboratory brief.</p>
 <p>Save one selected brief, not both contexts.</p>
 <aside class="notes">
-<p>For plants derive growth. For solutions, every formula and molar mass is given. The row roles differ: plants are experimental units, while solutions are numerical preparation cases. Do not call a supplied formula relation a discovered biological effect.</p>
+<p>For plants derive growth. For solutions, every formula and molar mass is given. The row roles differ: plants are experimental units, while solutions are numerical preparation cases. Distinguish a supplied formula relation from an observed biological effect.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -520,7 +520,7 @@ Data Analysis in Life Sciences
 <li><strong>Interpretation:</strong> pattern, variation, and one limitation.</li>
 </ol>
 <aside class="notes">
-<p>Save first-report.Rmd and its HTML. A partner should be able to read the HTML without RStudio and identify the units and meaning of a point. With spare practice time, the provided leaf-area/mass table offers a transfer exercise; it does not require fitting a line today. Keep time for support rather than extending the deck.</p>
+<p>Save first-report.Rmd and its HTML. Open the HTML in a browser and identify the units and meaning of a point. The leaf-area/mass table provides practice transferring the import and scatter-plot workflow to different measurements.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

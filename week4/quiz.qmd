@@ -1,10 +1,17 @@
 ---
-title: "Week 4 self-check — comparisons and fitted lines"
+title: "Week 4 revision — comparisons and fitted lines"
 ---
 
-Use the stated design, units, and direction before interpreting output. These
-questions are formative and need no new statistical method. Refer to the
-[statistics reference](../reference/statistics.qmd) as needed.
+Review questions from the week. Use the stated design, units, and comparison
+direction. See the [statistics reference](../reference/statistics.qmd) for definitions.
+
+Topic quizzes:
+
+- [Day 16 quiz](16-comparisons-quiz.qmd)
+- [Day 17 quiz](17-welch-test-quiz.qmd)
+- [Day 18 quiz](18-paired-quiz.qmd)
+- [Day 19 quiz](19-calibration-quiz.qmd)
+- [Day 20 quiz](20-association-quiz.qmd)
 
 ## 1. Interpret the direction and interval
 
@@ -114,7 +121,7 @@ With identical data and model, would a99% interval normally be narrower or wider
 ::: {.callout-note collapse="true"}
 ## Answer and reasoning
 
-The99% procedure gives the wider interval to target greater long-run coverage. The sample means do not change. Do not select a confidence level after seeing which one gives a preferred conclusion; retain the stated analysis.
+The99% procedure gives the wider interval to target greater long-run coverage. The sample means do not change. Retain the confidence level chosen for the main analysis.
 :::
 
 ## 9. What if the smaller study has a narrower interval?
@@ -144,7 +151,7 @@ Transfer standards cover measured signals0.024–0.525. X1 reads0.270 and X2 rea
 ::: {.callout-note collapse="true"}
 ## Answer and reasoning
 
-X1 is within the measured range and estimates about 2.48 mg/L using the new fitted coefficients. X2 remains in the output with its reading, an out-of-range flag, and no supported concentration estimate. A new suitable measurement is required; do not delete its ID or invent dilution evidence.
+X1 is within the measured range and estimates about 2.48 mg/L using the new fitted coefficients. X2 remains in the output with its reading, an out-of-range flag, and no supported concentration estimate. A suitable new measurement is required.
 :::
 
 ## 12. A unit conversion changes a slope

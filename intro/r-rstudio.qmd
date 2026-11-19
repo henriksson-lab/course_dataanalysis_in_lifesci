@@ -57,8 +57,8 @@ the available binary packages. Installing compilers is not a course exercise.
 
 ## 4. Download and extract the course folder
 
-If you extracted the course folder during day 1, reuse that same folder and
-continue with step 4 below. Do not make a second project just for this setup check.
+If you extracted the course folder during day 1, reuse it and continue with
+step 4 below.
 
 1. If you do not already have it, download [course-files.zip](../downloads/course-files.zip).
 2. Find it in your browser's downloads, then show it in the file manager.
@@ -93,7 +93,7 @@ file.exists("data/seedlings.csv")
 
 The first result should end with `introcomputing-course`; the second should be
 `TRUE`. `data/seedlings.csv` means “inside the data folder of this project”.
-Do not replace it with a path containing your own username.
+Keep this relative path so the project works in another location too.
 
 ## 5. Check packages and the first report
 

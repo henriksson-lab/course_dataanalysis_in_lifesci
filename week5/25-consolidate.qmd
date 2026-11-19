@@ -2,20 +2,17 @@
 title: "Day 25 — practise the complete workflow"
 ---
 
-[Lecture slides](../lectures/25-consolidate/lec.qmd) · [Weekly self-check](quiz.qmd)
+[Lecture slides](../lectures/25-consolidate/lec.qmd) · [Quiz](25-consolidate-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
 ## Today's purpose
 
-There is no new statistical method today. Use the time to practise the actions
-you want to be dependable in later biology practicals: locate measurements,
-check them, make a useful figure, explain variation, and produce a report that
-another person can open and reproduce. Written examination design is outside
-these teaching materials.
+Practise the workflow for later biology laboratories: locate measurements,
+check them, make a figure, explain variation, and produce a reproducible report.
 
 Choose the station where you need practice first. Everyone should eventually
-complete the file recovery, R recovery, and interpretation checks. Use reference
-pages freely: fluency includes knowing where to find an explanation.
+complete the file recovery, R recovery, and interpretation checks. Use the
+reference pages when needed.
 
 ## Station 1 — find and inspect the laboratory files
 
@@ -39,8 +36,7 @@ manifest has two treated records; its header is not one of them.
 
 ## Station 2 — repair a small R analysis
 
-The following is deliberately broken code shown as text. Do not copy it into a
-working report unchanged. Find at least three problems, then write a corrected
+The following code contains errors. Identify them and write a corrected
 version in `recovery.R` in your project root:
 
 ```text
@@ -73,7 +69,7 @@ did not establish that `readr` and `dplyr` were loaded in this session.
 
 ## Station 3 — explain before calculating
 
-Write a sentence responding to each situation. No new test is required.
+Explain each situation:
 
 1. One treated plant has 100 cells measured; one control plant also has 100.
    A student says there are 100 independent replicates per group. What is wrong?
@@ -117,9 +113,8 @@ fresh session, render it without running console code first. Check that it has:
 - Relative input paths, all required code, and an HTML output you can locate
   beside the source or in the documented `reports/` output folder.
 
-If these work reliably, use the time to repeat them on an earlier dataset rather
-than adding another statistical method. Discuss with a peer which parts would
-change for a new biology practical and which parts would stay the same.
+Repeat the workflow on an earlier dataset. Record which steps would change
+for a new biology practical and which would stay the same.
 
 If you chose the organic alternative on day 23, use `organic-study.Rmd` and
 `data/organic-recovery.csv` here. Its descriptive group means and SD are enough;
@@ -142,9 +137,9 @@ lab teacher before analysing a dataset, such as “what was independently assign
 to treatment?” or “what do blank cells mean?”
 
 
-## Extended practical — investigate before changing a result
+## Investigate a high measurement
 
-Allow about 90 minutes. Use your algae script and brief report from days 23–24,
+Use your algae script and brief report from days 23–24,
 so the final day consolidates familiar methods. Work in copies for diagnostic
 changes, keep the primary result from all available measurements, and record
 what you changed in `reports/final-investigation.txt`.
@@ -164,11 +159,10 @@ what you changed in `reports/final-investigation.txt`.
    the group means and observed difference. The aim is to see how one high
    reference value influences a small-sample summary. Label the diagnostic
    result “sensitivity check, A11 omitted without evidence of error”. This
-   label is essential: do not silently replace the primary result.
+   label distinguishes it from the primary result.
 5. Compare the two differences and reference means. Explain why the supplement
    mean is unchanged, why the reference mean changes, and why the diagnostic
-   sample count is different. Do not select the preferred result by its p-value.
-   No new inferential method is needed for this comparison.
+   sample count is different.
 6. In a copied report, add a short limitations paragraph distinguishing
    unavailable A19, unusually high but recorded A11, and the simplifying
    assumptions of the study. These are three different issues. Restore or
@@ -183,58 +177,50 @@ what you changed in `reports/final-investigation.txt`.
 
 Start from the imported `algae` object and use a name such as
 `algae_without_a11 <- filter(algae, culture_id != "A11")` for the diagnostic.
-Use `na.rm = TRUE` in a summary while still reporting available counts. Do not
-write this object over `data/algae.csv`. The primary reference mean is about
+Use `na.rm = TRUE` in a summary while still reporting available counts. Save
+derived output separately from `data/algae.csv`. The primary reference mean is about
 28.20 mg and the available supplement mean about 33.92 mg; use your unrounded
 values for the difference. Omitting a high reference value will lower that
 reference mean and increase the observed difference, without establishing that
 the altered estimate is more scientifically justified.
 :::
 
-## Independent transfer — complete a laboratory handover
+## Test a laboratory handover
 
-Allow about 60–90 minutes. This is a rehearsal of working from a question and
-saved files. Use references when needed, but start by writing the sequence in
-words instead of copying a whole worked solution. Work alone first; then let a
-peer inspect the result. There is no grade or new examination component.
+Write a workflow from the question and saved files, then test it. Use references
+when needed.
 
-1. Write a handover request of about 100 words for a future lab partner: the
+1. Write handover instructions for a future reader: the
    scientific question, where the original data are, what one row means, and
    which report should be rendered. Include the missing-value meaning and
    expected output. If using your organic main report, restate the supplied
-   theoretical maximum, collected mass, and percentage formula; do not assume
-   the partner remembers chemistry.
+   theoretical maximum, collected mass, and percentage formula.
 2. Close RStudio and reopen the project from its saved location. Starting in a
    fresh session, run your chosen source from the top or Knit the report.
    Record the first point at which you needed a reference and how it helped.
-   The aim is an understandable workflow, not unaided memorisation.
 3. Independently verify one input record and one group summary using a small
    separate calculation. For the algae memo, count the available values in
    each group; for an organic report, check one yield's numerator, denominator,
    and units. Explain how an arithmetic check differs from validating the
    experimental design.
-4. Give a peer the tested share package and the handover request. Ask them to
-   locate the input, render the source, and state the main result and one
-   limitation. Working alone, extract to a differently named parent folder
-   and follow the handover text after another station. Record which route you used.
-5. If the recipient finds an ambiguity, revise the source or README and make
+4. Extract the tested package into a new parent folder. Follow the handover
+   instructions to locate the input, render the source, and identify the main
+   result and a limitation.
+5. If you find an ambiguity, revise the source or README and make
    a new clearly named package. Extract and check that replacement too. An
    edit in the original Windows copy does not update an Ubuntu copy already
    packaged; use the transfer/version checks from day 21.
 6. Open the returned HTML as a reader. Find the axes' units, figure's
-   observational unit, available counts, and limitation. Write one sentence
-   explaining why a successful render alone cannot supply those meanings.
-7. Save a one-page `reports/readiness-review.txt`: three actions you can now
+   observational unit, available counts, and limitation. Explain why a
+   successful render alone cannot supply those meanings.
+7. Save `reports/readiness-review.txt`: three actions you can now
    perform reliably, two actions needing another rehearsal, and the concrete
    next practice task for each. List remote login/desktop/transfer as pending
    if you have not used the actual service. Store your final source, data,
    results, and retrievable backup according to the supported course route.
 
-**Keep:** the primary report, labelled diagnostic calculation, final investigation,
-verified handover package, and readiness review. This is evidence of actions
-performed and outputs checked, not a claim that a particular number of saved
-files establishes mastery. Use remaining time to practise the weak step you
-identified; do not fill it with a new statistical method.
+**Keep:** the primary report, labelled diagnostic calculation, investigation log,
+verified handover package, and readiness review.
 
 **Before you finish:** locate the final report, source, input, and backup without
 using a recent-files menu. Keep the [reference pages](../reference/r.qmd) and your

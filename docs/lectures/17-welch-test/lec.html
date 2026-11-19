@@ -253,7 +253,7 @@ Data Analysis in Life Sciences
 <li>Keep genuine unusual values; seek advice when the simple model is unsuitable.</li>
 </ul>
 <aside class="notes">
-<p>Welch’s method does not require equal population variances, but does not repair dependence, biased allocation or data quality. Do not introduce formal normality-testing thresholds or a catalogue of alternative methods. The assumptions should be described in biological terms.</p>
+<p>Welch’s method does not require equal population variances, but does not repair dependence, biased allocation or data quality. Describe the assumptions in biological terms.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -454,7 +454,7 @@ Data Analysis in Life Sciences
 <span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>reverse_comparison<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Use separate objects so the stated primary result is preserved.</p>
 <aside class="notes">
-<p>This follows the main paired-independent setup from day16: treated/control are numeric growth vectors. The function order determines the sign, not an object name such as treatment_effect.</p>
+<p>This follows the independent-group setup from day 16: treated/control are numeric growth vectors. The function order determines the sign, not an object name such as treatment_effect.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -477,7 +477,7 @@ Data Analysis in Life Sciences
 </div>
 <p>Keep the 95% interval as the stated main analysis.</p>
 <aside class="notes">
-<p>Higher long-run coverage requires a wider procedure under the same model. Do not select a level after seeing which interval permits a preferred statement. Changing conf.level does not change the observed means.</p>
+<p>Higher long-run coverage requires a wider procedure under the same model. Keep the confidence level chosen for the main analysis. Changing conf.level does not change the observed means.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -590,7 +590,7 @@ Data Analysis in Life Sciences
 </ul>
 <p>A printout alone does not answer all three.</p>
 <aside class="notes">
-<p>Students extend transfer-comparison.Rmd with a concise results paragraph, then peer-check direction and units in rendered HTML. Earlier descriptive work remains useful and should not disappear after adding a test.</p>
+<p>Students extend transfer-comparison.Rmd with a concise results paragraph, then check direction and units in the rendered HTML. Earlier descriptive work remains useful and should not disappear after adding a test.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

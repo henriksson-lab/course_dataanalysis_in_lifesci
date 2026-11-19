@@ -2,7 +2,7 @@
 title: "Day 3 — The terminal describes the same folders"
 ---
 
-[Lecture slides](../lectures/03-terminal/lec.qmd) · [Weekly self-check](quiz.qmd)
+[Lecture slides](../lectures/03-terminal/lec.qmd) · [Quiz](03-terminal-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
 ## Why type commands?
@@ -19,8 +19,7 @@ Tomorrow it will hold files from a biological laboratory exercise.
 
 Follow the supported [Windows/Mac setup page](../intro/ubuntu-windows.qmd).
 Windows students use **Ubuntu** for these commands. Mac students use **Terminal**.
-If local installation is unavailable, the teacher will help arrange a supported
-environment. Do not spend the lesson trying to repair system settings alone.
+If local installation is unavailable, ask the teacher for a supported environment.
 
 On Windows, Ubuntu has a different home folder from Windows itself. For this
 week's terminal exercises we deliberately use a separate folder in the Ubuntu
@@ -36,8 +35,7 @@ anna@laptop:~$
 ```
 
 This is a **prompt**. It means the shell is ready. Your prompt will differ and
-may end with `%` on a Mac. **Do not type the prompt, `$`, or `%` from an example.**
-Type the command and press Enter once to run it.
+may end with `%` on a Mac. Type only the command after the prompt and press Enter.
 
 ## Worked example: where am I?
 
@@ -87,7 +85,7 @@ The dot means the current directory. The graphical window should show the
 Linux system these laptop-specific commands are not the remote file-transfer
 method; follow the supplied remote instructions instead.
 
-## Practical 1: make a map and follow it
+## Make a map and follow it
 
 From `introcomputing-shell`, run:
 
@@ -134,7 +132,7 @@ An empty listing from `ls` means there are no visible entries to list. It does
 not mean the command failed. Many commands report success by simply returning
 to the prompt.
 
-## Practical 2: recover from an ordinary mistake
+## Recover from an ordinary mistake
 
 Return to `practice` with `cd ..`, then try `cd Observations`. We created `observations` with a
 lowercase `o`. Ubuntu distinguishes uppercase and lowercase names. Many Macs
@@ -155,7 +153,7 @@ and `ls` before trying again. Ask “where am I, and what is actually here?”
 
 Run `cd ~/introcomputing-shell`, then `pwd`. `~` is shorthand for your home
 directory. This route works even if you have navigated into several nested
-folders. Do not replace it with someone else's username.
+folders.
 :::
 
 ## Small keyboard habits that save effort
@@ -169,18 +167,15 @@ folders. Do not replace it with someone else's username.
 - **Quotes:** keep a name containing spaces together, for example
   `mkdir "field notes"`. Without quotes those words can become separate arguments.
 
-We are not using deletion commands today. Practise on the supplied workspace,
-and ask before removing something you did not mean to create.
 
+## Predict, run, and recover
 
-## Extended practical — predict, run, and recover
-
-Allow about 90 minutes. Work in `~/introcomputing-shell`, which is the shell
+Work in `~/introcomputing-shell`, which is the shell
 workspace on the computer running this terminal. It is separate from the native
 RStudio project on Windows. A command sequence is easier to understand when you
 predict its effect on a drawn tree before running it. Save a plain-text command
 log with the command, your prediction, the observed result, and a correction if
-needed. You need not record every keystroke or install a logging application.
+needed.
 
 1. Draw the starting tree using the folders you actually have. Run `pwd` and
    `ls` to check it. Enter `practice`, create a child `day03`, and enter that
@@ -207,20 +202,16 @@ needed. You need not record every keystroke or install a logging application.
    through the graphical view does not make it a different kind of storage.
 
 ::: {.callout-tip collapse="true"}
-## Hint: a safe return point makes a mistaken route ordinary
+## Hint: return to a known location
 
 Run `pwd` to establish where you actually are, then return to
-`~/introcomputing-shell`. Inspect `ls` before entering the next folder. Do not
-repair a typo using administrator mode, and do not delete a tree because its
-location is confusing. Use `q` only when inside `less`; Ctrl+C interrupts a
-running shell command and is not the terminal's normal copy shortcut.
+`~/introcomputing-shell`. Inspect `ls` before entering the next folder.
 :::
 
-## Independent transfer — give a partner a route they can test
+## Write and test a route
 
-Plan 60–90 minutes. Create a new subtree called `route-challenge` under your
-shell workspace. This block removes the line-by-line recipe. The required result
-is a predictable tree and a tested explanation, not a long command collection.
+Create a new subtree called `route-challenge` under your shell workspace.
+Save its tree and tested navigation routes in `navigation-transfer.txt`.
 
 1. Inside `route-challenge`, create neighbouring `inputs` and `results` folders,
    and place a `notes` folder inside `results`. Draw the intended tree before
@@ -231,13 +222,12 @@ is a predictable tree and a tested explanation, not a long command collection.
    State the purpose of each child and mark the data as a practice exercise.
    Locate it from the terminal without assuming that your browser Downloads
    happens to be the current directory.
-3. Write three navigation challenges for a partner: root to `notes`, `notes`
+3. Write three navigation routes: `route-challenge` to `notes`, `notes`
    to `inputs`, and `inputs` back to the workspace home. For each, state the
    starting folder. Include one route with `..` and one with `~`.
-4. Exchange instructions. Before running a route, the receiver should predict
-   the ending location. After running, use `pwd` to check. If working alone,
-   close the terminal, reopen it, and follow your instructions from the named
-   start. Revise an instruction that depended on unrecorded session state.
+4. Open a new terminal window. Follow each route from its stated starting
+   folder, predicting the ending location and checking with `pwd`. Revise any
+   instruction that depended on an unrecorded starting location.
 5. Deliberately mistype one directory name. Record the error, actual location,
    and recovery command. Then demonstrate how Tab or command history can reduce
    retyping while still requiring you to check what you are about to run.
@@ -249,7 +239,7 @@ is a predictable tree and a tested explanation, not a long command collection.
 **Check and retain:** the command log and route challenge. A correct path from
 `results/notes` to its neighbouring `inputs` climbs two levels before entering
 `inputs`. `cd` changes the current directory of a shell; it does not move the
-folders or alter their contents. Ask your partner to explain that difference.
+folders or alter their contents.
 
 
 ## Check your understanding

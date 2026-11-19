@@ -34,7 +34,8 @@ def visible_source(source):
 
 
 def check():
-    practicals = sorted(ROOT.glob("week[1-5]/[0-9][0-9]-*.qmd"))
+    practicals = sorted(p for p in ROOT.glob("week[1-5]/[0-9][0-9]-*.qmd")
+                       if not p.stem.endswith("-quiz"))
     decks = sorted(ROOT.glob("lectures/*/lec.qmd"))
     assert len(practicals) == len(decks) == 25
     config = (ROOT / "_quarto.yml").read_text()
@@ -74,7 +75,7 @@ def check():
         quiz = ROOT / f"week{week}" / "quiz.qmd"
         assert quiz.is_file() and quiz.relative_to(ROOT).as_posix() in config
         assert (ROOT / "docs" / quiz.relative_to(ROOT).with_suffix(".html")).is_file()
-    print(f"25 lecture/practical pairs, five quizzes, {total_slides} slides incl. titles, {total_visual} visual slides. All decks <=45 slides.")
+    print(f"25 lecture/exercise pairs, five weekly revision quizzes, {total_slides} slides incl. titles, {total_visual} visual slides. All decks <=45 slides.")
 
 
 if __name__ == "__main__":

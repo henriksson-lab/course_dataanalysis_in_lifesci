@@ -31,32 +31,23 @@ does not teach database searching, sequence alignment, or omics analysis.
 Prior chemistry courses are not required to understand an exercise. Chemistry
 contexts supply all definitions, inputs, constants, units, and calculation
 relationships. For example, percentage yield means 100 times the collected mass
-divided by a supplied maximum possible mass. You are practising data handling
-and interpretation, not deriving a chemical reaction. Where a practical offers
-a choice of biological or organic-laboratory data, complete one route rather
-than treating both as additional required reports.
+divided by a supplied maximum possible mass. Where an exercise offers biological
+or organic-laboratory data, choose one route.
 
-## A lesson is a study unit, not a full day of new lectures
+## Working through a topic
 
 Use each topic's **Lecture (slides)** for the explanation and worked visual
 examples, then open **Exercises** for the complete instructions and
-saved deliverable. Slides use the arrow keys or navigation controls; return to
-the practical using the link in the deck. Each week has a short self-check quiz
-with explanations, for practice rather than an additional examination.
+saved output. Slides use the arrow keys or navigation controls; the link in
+each deck opens its exercises. Each topic has a quiz with collapsible hints
+and answers. Weekly quizzes provide further review.
 
-The numbered lessons suggest a five-week progression. Spend substantial time
-running examples, explaining results, recovering from mistakes, and returning to
-work after closing the applications. The exact contact timetable is arranged by
-the teaching team. If an installation fails, ask for support rather than spending
-the whole study unit trying unrelated system changes.
+The numbered lessons follow a five-week progression. The teaching team supplies
+the contact timetable separately. Ask for setup support if an installation fails.
 
-The [five-week study plan](study-plan.qmd) sets out lecture/demonstration,
-guided work, extended practice, independent transfer, writing/recovery, and
-review time. It plans about 35 structured learner hours plus 5 flexible hours
-per week, not 40 contact hours. The estimates need a beginner pilot. Complete
-the extended and transfer blocks on your chosen context as part of the course;
-they are not optional advanced tails. Keep the named outputs and checks so you
-can judge what you can now do independently.
+The [five-week study plan](study-plan.qmd) lists the weekly work and checkpoints.
+Exercises include new questions and datasets to apply what you have learned.
+Keep the named outputs and check that you can regenerate them independently.
 
 For most R lessons, a useful working rhythm is:
 

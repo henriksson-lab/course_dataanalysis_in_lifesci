@@ -1,0 +1,102 @@
+---
+title: "Quiz: A biological association"
+---
+
+[Exercises](20-association.qmd) · [Lecture slides](../lectures/20-association/lec.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** A dry-mass-on-leaf-area line has slope 4.11, with mass in mg and area
+in cm². Give the slope units and interpretation.
+
+::: {.callout-tip collapse="true" title="Hint"}
+A slope is change in response divided by change in predictor.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+**4.11 mg/cm²**. Within the observed range, an additional 1 cm² of area
+is associated with about 4.11 mg greater fitted mean dry mass.
+:::
+
+---
+
+**Q2.** For `mass_mg = 9.48 + 4.11 * area_cm2`, calculate fitted mass at 8 cm².
+Must an individual leaf at that area have exactly this mass?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Insert 8 into the fitted equation; distinguish a mean relationship from
+an individual measurement.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+$9.48+4.11\times8 = 42.36$ **mg**. No: individual masses vary around
+the fitted relationship, and the fitted line also has uncertainty.
+:::
+
+---
+
+**Q3.** Areas were observed from 2.96 to 14.68 cm². Is the intercept 9.48 mg
+a measured mass of a zero-area leaf? Is prediction at 80 cm² supported by this range?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Both zero and 80 are outside the observed predictor range.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No to both. The intercept positions the fitted line over the observed
+range; zero-area mass is not measured. A prediction at 80 cm² extrapolates far
+beyond the evidence.
+:::
+
+---
+
+**Q4.** A18 changes the slope when omitted, but has no documented error.
+What belongs in the main analysis, and what does the omitted-point fit show?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Influence and invalidity are different questions.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Retain A18 in the main fit. The separate fit is a sensitivity check showing
+how much this observation influences the line; influence alone does not justify
+removal.
+:::
+
+---
+
+**Q5.** If area is converted from cm² to mm² by multiplying by 100, what happens
+to the 4.11 mg/cm² slope and fitted masses?
+
+::: {.callout-tip collapse="true" title="Hint"}
+The same physical area has a numeric value 100 times larger in mm².
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The slope becomes **0.0411 mg/mm²**. The intercept and fitted masses
+stay the same apart from numerical rounding.
+:::
+
+---
+
+**Q6.** Leaf area was measured rather than randomly assigned. Which statement
+is supported by the fitted line?
+
+(i) Larger leaves tended to have greater dry mass in this sample.  
+
+(ii) Adding 1 cm² causes every leaf to gain 4.11 mg.  
+
+(iii) Area is the only influence on mass.
+
+::: {.callout-tip collapse="true" title="Hint"}
+Association is a pattern among observed variables; causation needs design
+and subject knowledge.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(i). Age, species, environment, and other factors may influence both
+measurements. The observational line alone establishes neither causation nor
+a complete explanation of mass.
+:::

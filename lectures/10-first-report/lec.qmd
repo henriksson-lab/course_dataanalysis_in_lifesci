@@ -27,7 +27,7 @@ toc: false
 The simulated study measures 24 plants twice, seven days apart.
 
 ::: notes
-This is a consolidation briefing, not another statistics lecture. Each plant has its own pot and a randomly allocated control/nutrient treatment. The nutrient formulation is unspecified. Two time measurements on the same plant are not two separate plants. Do not invent experimental details beyond the dictionary.
+This briefing consolidates import, calculation, plotting, and reporting. Each plant has its own pot and a randomly allocated control/nutrient treatment. The nutrient formulation is unspecified. Two time measurements on the same plant are not two separate plants.
 :::
 
 ## Explain the method in biological terms
@@ -59,7 +59,7 @@ Expect one independently potted plant and change in length in mm. Ask for a conc
 Say what you observe and what the observations alone cannot settle.
 
 ::: notes
-Possible prose: growth varied among plants in both groups, and treated values tended to be higher but overlapped controls. The small simulated sample and lack of a quantified uncertainty comparison limit conclusions. Do not prescribe a single identical sentence for everyone; ask what evidence supports their wording.
+Possible prose: growth varied among plants in both groups, and treated values tended to be higher but overlapped controls. The small simulated sample and lack of a quantified uncertainty comparison limit conclusions. Ask what evidence supports the student's wording.
 :::
 
 ## Keep the project portable
@@ -69,7 +69,7 @@ Possible prose: growth varied among plants in both groups, and treated values te
 `data/seedlings.csv` should not contain your personal username.
 
 ::: notes
-The .Rmd stays at the project root. Generated HTML can be next to it or in the documented reports/ output folder. A project file sets a working context; it does not embed the data. The diagram motivates later peer reproduction without adding a new remote service procedure.
+The .Rmd stays at the project root. Generated HTML can be next to it or in the documented reports/ output folder. A project file sets a working context; it does not embed the data. The diagram motivates testing the project from another folder.
 :::
 
 ## Test it after restarting R
@@ -83,7 +83,7 @@ rmarkdown::render("first-report.Rmd", output_dir = "reports")
 If an object is missing, repair the source rather than hiding the gap in Console state.
 
 ::: notes
-Do not insert this render command into the report itself. Work from the first relevant error and its chunk. Check file paths, package loading, and the growth calculation before rewriting the whole report. A successful fresh-session render is evidence of reproducibility in this environment, not proof the interpretation is correct.
+Run this render command in the Console. Work from the first relevant error and its chunk. Check file paths, package loading, and the growth calculation before rewriting the whole report. A successful fresh-session render is evidence of reproducibility in this environment, not proof the interpretation is correct.
 :::
 
 ## Descriptions need evidence
@@ -126,7 +126,7 @@ Compare final-size and growth plots.
 Keep one as the main evidence. Retain another only if it answers a stated useful question.
 
 ::: notes
-More figures are not automatically better. This session expands revision and transfer rather than adding a statistical test. A partner should state which measured or derived quantity the vertical axis actually shows.
+More figures are not automatically better. This session expands revision and transfer rather than adding a statistical test. Have students identify which measured or derived quantity the vertical axis shows.
 :::
 
 ## The received project needs the same internal structure
@@ -148,7 +148,7 @@ Import, check, calculate, plot, and write a short laboratory brief.
 Save one selected brief, not both contexts.
 
 ::: notes
-For plants derive growth. For solutions, every formula and molar mass is given. The row roles differ: plants are experimental units, while solutions are numerical preparation cases. Do not call a supplied formula relation a discovered biological effect.
+For plants derive growth. For solutions, every formula and molar mass is given. The row roles differ: plants are experimental units, while solutions are numerical preparation cases. Distinguish a supplied formula relation from an observed biological effect.
 :::
 
 ## Converting a label is not converting values
@@ -184,5 +184,5 @@ The solution checks are 50, 100 and 150 mmol/L for each solute. The transfer pla
 4. **Interpretation:** pattern, variation, and one limitation.
 
 ::: notes
-Save first-report.Rmd and its HTML. A partner should be able to read the HTML without RStudio and identify the units and meaning of a point. With spare practice time, the provided leaf-area/mass table offers a transfer exercise; it does not require fitting a line today. Keep time for support rather than extending the deck.
+Save first-report.Rmd and its HTML. Open the HTML in a browser and identify the units and meaning of a point. The leaf-area/mass table provides practice transferring the import and scatter-plot workflow to different measurements.
 :::

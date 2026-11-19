@@ -16,17 +16,18 @@ are not copied. Student reports will use **R Markdown (`.Rmd`)**; the teaching
 website uses Quarto (`.qmd`).
 
 The draft contains 25 separate RevealJS lecture decks paired with 25 daily
-Exercises pages, five weekly self-check quizzes, worked examples, hints,
+Exercises pages, 25 topic quizzes, five weekly revision quizzes, worked examples, hints,
 biological datasets and dictionaries, a working R Markdown template, setup
 guides, references, and instructor solutions. Datasets are simulated. The
 sidebar and slide theme are copied from the Quantitative Biology scaffold:
 coloured week bands, green lecture links, blue quizzes, and italic practicals.
 
 The [five-week study plan](study-plan.qmd) allocates structured practice and
-independent transfer alongside explanation. Every day has additional core
-`Extended practical` and `Independent transfer` work. The instructor
-[expansion audit](instructor/workload-expansion.md) compares this larger version
-with the original draft; its hour estimates require a beginner pilot.
+independent transfer alongside explanation. The instructor
+[expansion record](instructor/workload-expansion.md) compares the larger version
+with the original draft. The subsequent [wording and quiz audit](instructor/audit-results.md)
+removes prescribed timings, required collaboration, and writing quotas while
+retaining substantive practice.
 
 Run `make render` to package the downloads and build the student site into
 `docs/`, or `make preview` for a local preview. Quarto is required; rendering

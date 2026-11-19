@@ -2,7 +2,7 @@
 title: "Day 5 — Share laboratory files, then meet R"
 ---
 
-[Lecture slides](../lectures/05-lab-files/lec.qmd) · [Weekly self-check](quiz.qmd)
+[Lecture slides](../lectures/05-lab-files/lec.qmd) · [Quiz](05-lab-files-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
 ## Repeat a useful workflow
@@ -16,7 +16,7 @@ We then meet R, which will calculate and plot the measurements. The terminal
 and R console are different places to enter instructions; recognising the
 difference will prevent a common beginner problem.
 
-## Practical 1: a fresh investigation folder
+## A fresh investigation folder
 
 Return to your shell workspace:
 
@@ -53,15 +53,15 @@ Inside the extracted folder use `grep -F treated samples.tsv`. Add
 redirect output into `samples.tsv`: that is the original input.
 :::
 
-## Practical 2: make a package another person can inspect
+## Make a package another person can inspect
 
 Inside the extracted `lab-data` folder, make a folder called `report`. Copy
 `treated-samples.txt` into it. Copy `README.txt` into it with the destination
 name `context.txt`. These copies keep the original files available.
 
-Through the file manager, add `report/findings.txt` with four short statements:
-the number of samples, which received treatment, what the measurements mean,
-and what you have **not** yet analysed. For example, identifying a treated
+Through the file manager, add `report/findings.txt` describing the sample count,
+which samples received treatment, what the measurements mean, and the limits
+of this file-selection exercise. For example, identifying a treated
 sample does not establish that its treatment changed growth.
 
 ::: {.callout-tip collapse="true"}
@@ -97,17 +97,15 @@ Editing the ordinary `report/findings.txt` does not automatically update the
 ZIP. Make a new clearly named package after making changes. An archive stored
 only next to its originals is still vulnerable if the whole computer is lost.
 
-## Practical 3: choose one transfer check
+## Choose one transfer check
 
-Choose the partner explanation below **or** the organic-laboratory file task
-that follows. They practise the same file skills; you do not need to do both.
+Choose the seedling file check **or** the organic-laboratory inventory task.
 
-### Explain the seedling files to a partner
+### Check the seedling file routes
 
-Take turns. Point to the original archive, extracted source files, selected
-records, your findings, and the final report archive. Explain the role of each.
-Ask your partner to locate a particular measurement file using the manifest.
-Check the path rather than relying on a file that happened to be open already.
+Make a note identifying the original archive, extracted files, selected records,
+findings, and final report archive. Explain each file's role. Close any open
+measurement file, then locate S04's measurement using the manifest.
 
 If the supported remote environment is ready, repeat just the navigation and
 inspection part there. Use the provided transfer route to move a small file,
@@ -117,9 +115,8 @@ the local practical still stands on its own.
 ### Or: find records in a small organic-laboratory inventory
 
 An inventory is a list of samples. Our simulated organic-chemistry inventory
-already labels each sample with a class, such as `alcohol` or `ester`. These are
-supplied text labels; you do not need to recognise a molecular structure or know
-its reactions. The task is simply to find the records labelled `ester`.
+already labels each sample with a class, such as `alcohol` or `ester`. Find the
+records labelled `ester` using text search.
 
 1. Download [organic-lab.zip](../downloads/organic-lab.zip) and locate it in your
    file manager. As on day 4, open `~/introcomputing-shell` graphically and copy
@@ -149,8 +146,8 @@ grep -F ester inventory.tsv | wc -l
 There are four sample records plus a header. Two records match: O02 and O03.
 The header does not contain `ester`. This command matches literal text, not
 chemical structures or a particular table column. The extracted
-`organic-recovery.csv` is for later calculations; you do not need to analyse it
-today. If the extraction folder already exists, inspect it and use a fresh name.
+`organic-recovery.csv` is for later calculations. If the extraction folder
+already exists, inspect it and use a fresh name.
 :::
 
 ## Meet R and RStudio
@@ -188,8 +185,7 @@ a final length. We will learn these ideas carefully next week; today identify
 the axes and check that there are three points. This example includes only
 three plants, not the full experiment.
 
-Do not paste `cd`, `grep`, or `unzip` at the R prompt. Likewise, do not paste
-R calculations into the Ubuntu shell and expect R to run them automatically.
+Use the shell for `cd`, `grep`, and `unzip`, and the R Console for calculations.
 When a command fails, first identify which program is reading it.
 
 ## From a plot to a report
@@ -201,13 +197,10 @@ report can be produced again when new measurements arrive. You will build your
 first version next week.
 
 
-## Extended practical — test a handover as the receiver
+## Test a handover as the receiver
 
-Allow about 90 minutes. A useful shared package must contain enough information
-for someone who was absent from the practical. Today you will make and test a
-second version of your small report package. This is ordinary laboratory file
-management; we are not introducing a version-control system or expecting you to
-memorise commands without references. Work on course practice material only.
+Make two versions of your practice report package and test what each contains
+after extraction.
 
 Use previously unused ZIP names for each snapshot; if a suggested name already
 exists, choose the next unused version name before running `zip`. Updating an
@@ -222,13 +215,11 @@ old archive can retain entries that are no longer in the source folder.
    archive with `unzip -l`, then extract it to a **new** destination named
    `receiver-v1`. Navigate through that destination to find the report folder.
    Notice that the archived folder name can add another level after extraction.
-3. Open the extracted findings note in the file manager. Ask a partner to check
-   a stated sample ID against the extract and manifest/source reference. If a
-   source file is deliberately not included, the README must say where the
-   recipient is expected to obtain it; do not imply that a shortcut transfers
-   its target data.
+3. Open the extracted findings note in the file manager. Check a stated
+   sample ID against the extract and source manifest. If a source file is not
+   included, state in the README where it can be obtained.
 4. In the original ordinary report folder, add a dated correction sentence or
-   clearer unit label. Do not change the received copy. Reopen the copy inside
+   clearer unit label. Reopen the unchanged received copy inside
    `receiver-v1` and explain why it still contains the older text. A ZIP is a
    package made at a particular time, not a live connection to its source folder.
 5. Make a new `report-v2.zip`, list it, and extract it to `receiver-v2`. Check
@@ -250,12 +241,10 @@ ZIP. Repackage after correcting, then verify the newly extracted result; naming
 it v2 alone is not evidence that it contains the new text.
 :::
 
-## Independent transfer — prepare a new laboratory receipt
+## Prepare a new laboratory receipt
 
-Allow 60–90 minutes. Choose the seedling archive or the organic-laboratory
-archive already used for your transfer check. Complete one route. The operations
-below are the same for both; chemistry background is unnecessary because organic
-classes are supplied text labels, and no product calculation is required here.
+Choose the seedling archive or the organic-laboratory archive from your earlier
+file check. Complete the following workflow for that archive.
 
 1. Begin with a fresh extraction and read its README/dictionary. Write your own
    receipt listing the input filenames, their roles, and the known number of
@@ -264,16 +253,14 @@ classes are supplied text labels, and no product calculation is required here.
    naming columns from an actual sample record.
 2. Define one selection question: treated seedlings, or inventory records with
    the supplied `ester` label. Predict the count, run the literal search, save
-   its output with an informative filename, and inspect the IDs. Do not claim
-   the tool interpreted a treatment or identified a molecular structure.
+   its output with an informative filename, and inspect the IDs.
 3. Create a sharing folder containing your receipt, selected records, and a
-   source note. Write one sentence explaining what a recipient could reproduce
+   source note. Explain what a recipient could reproduce
    from that package and which original inputs they would still need. Include
-   only course material; no personal files or account information.
-4. Package the sharing folder, extract into a new test location, and ask another
-   student to answer the selection question from the received contents. Have
-   them record the route they followed. Working alone, close the windows and
-   act as the receiver after a break, using only the README you wrote.
+   the files needed for this exercise.
+4. Package the sharing folder and extract it into a new test location. Close
+   the source windows. Use only the extracted README and files to answer the
+   selection question, and record the route you followed.
 5. Make a short two-column note titled “shell or R?”. Classify `pwd`, `grep -F`,
    `unzip`, `44.3 - 25.7`, and `mean(c(12, 14, 16))`. In RStudio, run the two
    R expressions if setup works. They should give 18.6 and 14 respectively;

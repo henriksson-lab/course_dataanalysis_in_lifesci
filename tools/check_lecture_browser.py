@@ -82,6 +82,48 @@ assert sidebar["bands"] == ["rgb(42, 127, 143)", "rgb(107, 79, 160)",
 shot = command("Page.captureScreenshot", {"format": "png"})
 (OUT / "sidebar.png").write_bytes(base64.b64decode(shot["data"]))
 
+navigation = []
+for width, height, mobile in [(1440, 900, False), (390, 844, True)]:
+    command("Emulation.setDeviceMetricsOverride", {"width": width, "height": height,
+            "deviceScaleFactor": 1, "mobile": mobile})
+    navigate("index.html")
+    if mobile:
+        evaluate("document.querySelector('button[aria-label=\"Toggle sidebar navigation\"]').click()")
+        evaluate("new Promise(resolve => setTimeout(resolve, 450))")
+    state = evaluate("""(() => {
+      const sidebar = document.querySelector('#quarto-sidebar');
+      const quiz = sidebar.querySelector('a[href$="01-files-quiz.html"]');
+      const section = quiz.closest('ul');
+      const toggle = sidebar.querySelector('[data-bs-target="#' + section.id + '"]');
+      const initiallyCollapsed = !section.classList.contains('show');
+      if (initiallyCollapsed) toggle.click();
+      return new Promise(resolve => setTimeout(() => {
+        const box = quiz.getBoundingClientRect();
+        resolve({width: innerWidth, initiallyCollapsed,
+          expanded: section.classList.contains('show'),
+          visible: box.width > 0 && box.height > 0,
+          colour: getComputedStyle(quiz).color,
+          label: quiz.textContent.trim()});
+      }, 450));
+    })()""")
+    assert state["initiallyCollapsed"] and state["expanded"] and state["visible"], state
+    assert state["label"] == "Quiz" and state["colour"] == "rgb(42, 85, 194)", state
+    navigation.append(state)
+    navigate("week1/01-files-quiz.html")
+    answer = evaluate("""(() => {
+      const callout = [...document.querySelectorAll('.callout')]
+        .find(el => el.querySelector('.callout-title-container')?.textContent.trim() === 'Answer');
+      const content = callout.querySelector('.callout-collapse');
+      const collapsed = !content.classList.contains('show');
+      callout.querySelector('[data-bs-toggle="collapse"]').click();
+      return new Promise(resolve => setTimeout(() => resolve({collapsed,
+        opens: content.classList.contains('show'),
+        horizontalOverflow: document.documentElement.scrollWidth > innerWidth + 2}), 450));
+    })()""")
+    assert answer["collapsed"] and answer["opens"] and not answer["horizontalOverflow"], answer
+command("Emulation.setDeviceMetricsOverride", {"width": 1440, "height": 900,
+        "deviceScaleFactor": 1, "mobile": False})
+
 overflows = []
 counts = {}
 for deck in sorted(ROOT.glob("lectures/*/lec.qmd")):
@@ -110,10 +152,11 @@ for deck in sorted(ROOT.glob("lectures/*/lec.qmd")):
         if number == 2 and deck.parent.name in {"01-files", "12-variation", "19-calibration", "23-mini-study"}:
             shot = command("Page.captureScreenshot", {"format": "png"})
             (OUT / f"{deck.parent.name}.png").write_bytes(base64.b64decode(shot["data"]))
-report = {"sidebar": sidebar, "slides": counts, "overflows": overflows}
+report = {"sidebar": sidebar, "quiz_navigation": navigation,
+          "slides": counts, "overflows": overflows}
 (OUT / "browser-check.json").write_text(json.dumps(report, indent=2))
 socket.close()
-print(f"Browser checked {len(counts)} decks / {sum(counts.values())} slides; sidebar colours verified.")
+print(f"Browser checked {len(counts)} decks / {sum(counts.values())} slides; sidebar colours and desktop/mobile quiz navigation verified.")
 if overflows:
     print(json.dumps(overflows, indent=2))
     raise SystemExit(1)

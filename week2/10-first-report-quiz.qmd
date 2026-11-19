@@ -1,0 +1,73 @@
+---
+title: "Quiz: A complete first report"
+---
+
+[Lecture](../lectures/10-first-report/lec.qmd) · [Exercises](10-first-report.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** A report includes an attractive figure but gives no input filename, sample size, or definition of a point. What information should be added?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A reader needs to connect the question to the data and result.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Identify the input and study design, number of plants, what one point represents, measured quantity, and units. Include methods explaining how the plotted outcome was calculated.
+:::
+
+---
+
+**Q2.** A plant-growth plot shows overlapping groups, with treated observations tending higher. Which statement is supported by that description?
+
+(i) Every treated plant grew more than every control.
+
+(ii) The treated observations tended to show greater growth in this sample, with overlap.
+
+(iii) The treatment always increases growth.
+
+::: {.callout-tip collapse="true" title="Hint"}
+A description of this sample has a narrower scope than a universal claim.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(ii). Overlap contradicts (i), and this plot alone does not establish the universal claim in (iii).
+:::
+
+---
+
+**Q3.** One figure has initial length on x and final length on y. Another has treatment on x and change in length on y. Which more directly addresses whether growth differs between the groups?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Identify where change in length is actually plotted.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The treatment-versus-change figure directly compares growth by group. Initial versus final length addresses a different relationship.
+:::
+
+---
+
+**Q4.** A concentration is calculated as `1000 × (mass_g / molar_mass_g_mol) / (final_volume_ml / 1000)`, in mmol/L. For glucose mass 0.9008 g, molar mass 180.16 g/mol, and final volume 100 mL, what is the result? Is a graph of these calculated cases independent evidence of a biological treatment effect?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Trace the supplied formula, then ask where its plotted values came from.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+**50 mmol/L**. The cases illustrate a supplied calculation; they are not independent evidence of a biological treatment effect.
+:::
+
+---
+
+**Q5.** What check tests whether a saved report can be reproduced: (i) seeing an old figure in RStudio, or (ii) restarting R and rendering the source with its input files?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A visible old result may depend on earlier session state.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(ii). Check that the fresh render succeeds and that its figures, numbers, units, and input description agree. Rendering success alone does not prove the interpretation is correct.
+:::

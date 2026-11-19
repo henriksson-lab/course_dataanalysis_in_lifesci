@@ -15,8 +15,8 @@ sections. Its sidebar places Quiz within each topic. This course currently has
 five weekly self-check pages; they do not provide the same topic-level structure.
 The separate Quantbio Canvas/bonus-quiz system is not assumed to apply here.
 
-This document plans the audit; it does not implement the full rewrite. The
-separately requested navigation label change to **Exercises** is implemented.
+This is the agreed audit plan. See [audit results](audit-results.md) for the
+implemented revisions and verification.
 
 ## Rules for the revision
 

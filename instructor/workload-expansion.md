@@ -1,5 +1,10 @@
 # Expanding the course to a full five-week study plan
 
+Historical expansion record. The later [audit](audit-results.md) supersedes the
+time estimates and minimum writing/step targets below. These counts describe a
+past version; they are not continuing authoring requirements.
+
+
 The user judged the initial volume insufficient and requested approximately
 twice as much lecture and exercise material. Three parallel workers developed
 weeks 1–2, weeks 3–4, and week 5. Root integration supplies the shared datasets,

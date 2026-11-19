@@ -1,0 +1,74 @@
+---
+title: "Quiz: Files and folders"
+---
+
+[Lecture](../lectures/01-files/lec.qmd) · [Exercises](01-files.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** Which is a file: (i) Excel, (ii) `seedlings.csv`, or (iii) File Explorer?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A file stores named information; an application opens or changes it.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(ii). `seedlings.csv` stores measurements. Excel is a spreadsheet application; File Explorer is a file manager.
+:::
+
+---
+
+**Q2.** You close the application displaying a saved CSV. Has the saved file been deleted?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Distinguish the window displaying information from the file on storage.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No. Closing the application leaves the saved file in its folder. You can find it in the file manager and reopen it.
+:::
+
+---
+
+**Q3.** A practice copy of `seedlings.csv` is renamed `seedlings.jpg`. Has it become a photograph?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Does renaming rewrite the contents into another format?
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No. The comma-separated table remains. The extension is now misleading. Open the practice copy as text to inspect its contents.
+:::
+
+---
+
+**Q4.** The first lines of a CSV are:
+
+```text
+plant_id,treatment,initial_mm,final_mm
+P01,control,25.7,44.3
+```
+
+How many plant records are shown? What was P01's increase in length?
+
+::: {.callout-tip collapse="true" title="Hint"}
+The first line names columns. Increase is final length minus initial length.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+One plant record is shown; the header is not a plant. P01 increased by `44.3 - 25.7 = 18.6` mm.
+:::
+
+---
+
+**Q5.** You copy a file from `data` to `output`, then edit the copy. Which file changes? What route information would let you find it again?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A copy is another file. The application name alone is not a location.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The file under `output` changes; the original under `data` stays as supplied. Record the computer, folder route, and full filename of the saved copy.
+:::

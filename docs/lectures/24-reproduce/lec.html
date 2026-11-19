@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.7.30">
 
   <meta name="author" content="Data Analysis in Life Sciences">
-  <title>Data Analysis in Life Sciences – Can someone else reproduce it?</title>
+  <title>Data Analysis in Life Sciences – Reproduce the saved analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -127,7 +127,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Can someone else reproduce it?</h1>
+  <h1 class="title">Reproduce the saved analysis</h1>
   <p class="subtitle">Day 24 — test the saved analysis</p>
 
 <div class="quarto-title-authors">
@@ -149,7 +149,7 @@ Data Analysis in Life Sciences
 </div>
 <p>“It works on my screen” is a starting observation, not a reproduction check.</p>
 <aside class="notes">
-<p>An imported object can remain in interactive memory while its import is missing from the report. The recipient lacks that session. Do not add machinery such as saving an entire workspace; put the needed imports and calculations in the source.</p>
+<p>An imported object can remain in interactive memory while its import is missing from the report. Put the needed imports and calculations in the saved source.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -241,7 +241,7 @@ Data Analysis in Life Sciences
 </div>
 <p>Revised source → recopy → repackage → test the returned ZIP.</p>
 <aside class="notes">
-<p>This is especially important for Windows students using Ubuntu shell tools but native RStudio. After making a ZIP in Ubuntu, copy it back to a normal Windows folder for extraction and the native application test. Do not accidentally test stale files or rely on WSL paths in the shared report.</p>
+<p>This is especially important for Windows students using Ubuntu shell tools but native RStudio. After making a ZIP in Ubuntu, copy it back to a normal Windows folder for extraction and the native application test. Check that it contains the revised source and relative input paths.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -264,7 +264,7 @@ Data Analysis in Life Sciences
 </div>
 <p>Open its <code>.Rproj</code>, restart, and render the source without repairing it first.</p>
 <aside class="notes">
-<p>Peer exchange tests a recipient’s environment. A fresh folder on the same laptop checks portability but not all software differences. Keeping the relative data/ path tests that the analysis does not rely on an author’s personal path.</p>
+<p>A fresh folder on the same laptop checks portability within that software environment. Keeping the relative data/ path tests independence from the original project location.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -331,7 +331,7 @@ Data Analysis in Life Sciences
 <li>Does the prose agree with the actual results?</li>
 <li>Are missing data and limitations explained?</li>
 </ul>
-<p>For a descriptive organic report, do not invent a test or confidence interval.</p>
+<p>The organic alternative uses descriptive means and SDs.</p>
 <aside class="notes">
 <p>A successful render can reproduce a mistaken analysis. Ask the reader to locate evidence for the conclusions, not just confirm that an HTML file exists.</p>
 <style type="text/css">
@@ -438,8 +438,8 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="do-not-invent-a-value-to-silence-an-error" class="slide level2">
-<h2>Do not invent a value to silence an error</h2>
+<section id="match-the-repair-to-the-problem" class="slide level2">
+<h2>Match the repair to the problem</h2>
 <p>A missing file, a missing measurement, and an unknown R object are different.</p>
 <ul>
 <li>Restore the required input file/path.</li>
@@ -576,7 +576,7 @@ Data Analysis in Life Sciences
 <p>Record what changed, what you predicted, what happened, and what confirmed repair.</p>
 <p>Share the corrected source, not an unresolved test case.</p>
 <aside class="notes">
-<p>Use a short case log and a new clear package name after revision. A successful rerun is a bounded result in a tested environment. If working alone, leave the case for another task and then follow only the written directions; this helps expose instructions that rely on remembered undocumented actions.</p>
+<p>Keep a case log and give revised packages clear names. Revisit a diagnostic case after another exercise and follow the written procedure to expose any undocumented steps.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -591,7 +591,7 @@ Data Analysis in Life Sciences
 </section>
 <section id="exercises-keep-a-reproduction-log" class="slide level2">
 <h2>Exercises: keep a reproduction log</h2>
-<p><a href="../../week5/24-reproduce.html">Open day 24 exercises</a>.</p>
+<p><a href="../../week5/24-reproduce.html">Open exercises</a> · <a href="../../week5/24-reproduce-quiz.html">Quiz</a>.</p>
 <ul>
 <li>Test the chosen main-study package and the brief algae-share package.</li>
 <li>Record destination, first error, fix, and rerun outcome.</li>

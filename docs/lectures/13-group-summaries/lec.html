@@ -439,7 +439,7 @@ Data Analysis in Life Sciences
 </div>
 <p>Record the bin width and distinguish stable patterns from unstable detail.</p>
 <aside class="notes">
-<p>The underlying18 measurements are unchanged. Small samples can look multimodal or gapped depending on bins. Do not select a display solely because it exaggerates a desired difference.</p>
+<p>The underlying18 measurements are unchanged. Small samples can look multimodal or gapped depending on bins. Compare broad stable patterns across bin widths.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -460,7 +460,7 @@ Data Analysis in Life Sciences
 <figcaption>The same individual growth observations appear under broader and narrower vertical ranges.</figcaption>
 </figure>
 </div>
-<p>Read values and labels; do not judge effect size from screen distance alone.</p>
+<p>Read values and axis labels when comparing effects.</p>
 <aside class="notes">
 <p>Both displays can be useful with clear axes, but a reader should not mistake a changed scale for changed observations. This is particularly important when comparing figures from different groups or experiments.</p>
 <style type="text/css">
@@ -485,7 +485,7 @@ Data Analysis in Life Sciences
 <li>Available n and the actual meaning of any error bars.</li>
 </ol>
 <aside class="notes">
-<p>Do not invent error bars where none are shown. Mean±SD describes individual spread. A confidence interval describes uncertainty in an estimate. Neither phrase can be replaced by a generic word error.</p>
+<p>Identify only the symbols actually plotted. Mean±SD describes individual spread. A confidence interval describes uncertainty in an estimate. Neither phrase can be replaced by a generic word error.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -531,7 +531,7 @@ Data Analysis in Life Sciences
 <span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
 <span id="cb3-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">'output/growth-summary.png'</span>, <span class="at">plot =</span> group_plot,</span>
 <span id="cb3-8"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Use new names for transfer outputs; do not overwrite the first study’s figures.</p>
+<p>Use distinct output filenames for the two studies.</p>
 <aside class="notes">
 <p>In the independent task students create transfer_summary and transfer_plot with analogous exports. Explain why a plot object in memory, a PNG, and a summary CSV are not interchangeable outputs.</p>
 <style type="text/css">
@@ -548,7 +548,7 @@ Data Analysis in Life Sciences
 </section>
 <section id="a-reader-test-is-more-specific-than-does-this-look-good" class="slide level2">
 <h2>A reader test is more specific than “does this look good?”</h2>
-<p>Ask a peer to identify:</p>
+<p>Check the exported figure for:</p>
 <ul>
 <li>One observation and the mean marker.</li>
 <li>Units, available sample size, and independent unit.</li>
@@ -556,7 +556,7 @@ Data Analysis in Life Sciences
 </ul>
 <p>Record the ambiguity and the correction.</p>
 <aside class="notes">
-<p>The practical requires a caption-repair log and reproducible outputs. Working alone, reread the figure after closing the code. Biological claims need numerical meaning, not just attractive layout.</p>
+<p>The exercises include a caption-repair log and reproducible outputs. Reread the figure with the code closed. Biological claims need numerical meaning, not just attractive layout.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

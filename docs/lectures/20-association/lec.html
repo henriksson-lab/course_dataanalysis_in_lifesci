@@ -259,7 +259,7 @@ Data Analysis in Life Sciences
 <span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(leaf_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Fitted mass ≈ <strong>9.48 + 4.11 × area</strong>.</p>
 <aside class="notes">
-<p>The input columns and units differ, but the lm syntax is the same as calibration. Intercept is about 9.476606 mg; slope about 4.110117 mg per cm². The intercept locates the line at area 0, outside the observed area range; do not interpret it as measured mass of a zero-area leaf.</p>
+<p>The input columns and units differ, but the lm syntax is the same as calibration. Intercept is about 9.476606 mg; slope about 4.110117 mg per cm². The intercept locates the line at area 0, outside the observed area range; it is not a measured mass of a zero-area leaf.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -324,7 +324,7 @@ Data Analysis in Life Sciences
 </div>
 <p>Residuals are in <strong>milligrams</strong>, the outcome’s units.</p>
 <aside class="notes">
-<p>A positive residual means heavier than fitted at that area. Look for structure or a dominating point while remembering that small samples provide limited diagnostics. The line need not explain every biological difference. We do not teach a formal normality-test decision tree.</p>
+<p>A positive residual means heavier than fitted at that area. Look for structure or a dominating point while remembering that small samples provide limited diagnostics. The line need not explain every biological difference.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -473,7 +473,7 @@ Data Analysis in Life Sciences
 <section id="influence-is-a-question-not-an-exclusion-rule" class="slide level2">
 <h2>Influence is a question, not an exclusion rule</h2>
 <p>Keep the full-data fit as primary. Fit without A18 in a separate object and compare.</p>
-<p>Ask what changed and why; do not discard a valid value to obtain a preferred story.</p>
+<p>Ask what changed and why; keep valid observations in the main fit.</p>
 <aside class="notes">
 <p>The main slope is4.110117 mg/cm² and the fit without A18 is4.064927. The difference is small here,but sensitivity does not depend on getting a dramatic answer. Source evidence is needed for an actual correction or exclusion.</p>
 <style type="text/css">
@@ -498,7 +498,7 @@ Data Analysis in Life Sciences
 </div>
 <p>A perfect relationship created by a formula is not experimental validation.</p>
 <aside class="notes">
-<p>The solution example supplies all masses,molar masses and volumes; its concentration calculation is arithmetic. The leaf line summarises measured associations. Do not treat a line fitted to formula-generated values as proof of a new biological or chemical law.</p>
+<p>The solution example supplies all masses,molar masses and volumes; its concentration calculation is arithmetic. The leaf line summarises measured associations. A line through formula-generated values illustrates the supplied arithmetic relationship.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -521,7 +521,7 @@ Data Analysis in Life Sciences
 </div>
 <p>This asks about starting and final size, not the mean treatment effect on growth.</p>
 <aside class="notes">
-<p>These are18 independent source plants,but the two lengths on each plant are related. Allocation and other differences may contribute to the combined pattern. We do not add a multiple regression or claim an intervention on initial size.</p>
+<p>These are18 independent source plants,but the two lengths on each plant are related. Allocation and other differences may contribute to the combined pattern. The combined line is descriptive and does not adjust for allocation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -589,7 +589,7 @@ Data Analysis in Life Sciences
 </ul>
 <p>Keep source, data, figure, and report together.</p>
 <aside class="notes">
-<p>Students revise the leaf report and independently write transfer-association.Rmd. Their three-question sheet becomes a practical reference for future labs. Do not turn this consolidation into a survey of advanced models.</p>
+<p>Students revise the leaf report and independently write transfer-association.Rmd. Their three-question sheet becomes a practical reference for future labs. Keep the comparison focused on question, design, and interpretation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

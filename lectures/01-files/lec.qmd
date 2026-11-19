@@ -38,7 +38,7 @@ Begin with the biological task: we have seedling lengths to inspect, not a codin
 4. Open a file from the extracted folder, not from a ZIP preview.
 
 ::: notes
-Demonstrate on the supported operating system. Pause after locating Downloads; do not rush because some students know this. Windows Extract All and Mac double-click may produce an extra parent directory. Choose one working copy. R is not required today, even though the extracted folder contains future R files.
+Demonstrate on the supported operating system. Pause after locating Downloads and check that everyone can find the file. Windows Extract All and Mac double-click may produce an extra parent directory. Choose one working copy.
 :::
 
 ## Locate the measurement inside its folder
@@ -129,12 +129,12 @@ Read all four P01 fields in order and give the mm units from the dictionary. Wor
 
 ## Prediction: what would a screenshot preserve?
 
-A partner sends a picture of the measurement table.
+You receive a picture of the measurement table.
 
 What can you inspect? What would you still request before calculating?
 
 ::: notes
-A screenshot can help discuss an error, show column headings, or locate a visible value. It is not the ordinary machine-readable table, may omit rows, and is awkward to update. Ask for the CSV and its dictionary; do not introduce OCR as a new tool.
+A screenshot can help discuss an error, show column headings, or locate a visible value. It is not the ordinary machine-readable table, may omit rows, and is awkward to update. Ask for the CSV and its dictionary.
 :::
 
 ## Several copies need an explicit choice
@@ -165,7 +165,7 @@ An application may autosave or restore drafts. The reliable check is the actual 
 Only test on a copy. Restore its informative name afterwards.
 
 ::: notes
-The practical uses output/name-test.txt made from a practice copy. Its commas and measurements remain. Do not apply this to installed applications or raw originals. A filename can become misleading without changing the underlying information.
+The practical uses output/name-test.txt made from a practice copy. Its commas and measurements remain. Use the practice copy for renaming. A filename can become misleading without changing the underlying information.
 :::
 
 ## A receipt makes another input understandable

@@ -47,7 +47,7 @@ data/seedlings.csv
 Your username and complete home path may differ.
 
 ::: notes
-Show Windows and Mac equivalents in the practical if needed. An absolute path supplies the full route from a drive or root. A relative path starts from the current folder. Do not have students copy the illustrative username; personal absolute paths are one reason analyses fail when moved.
+Show Windows and Mac equivalents in the practical if needed. An absolute path supplies the full route from a drive or root. A relative path starts from the current folder. The illustrative username will differ from each student's account; personal absolute paths are one reason analyses fail when moved.
 :::
 
 ## A relative path needs a starting point
@@ -81,7 +81,7 @@ Try this only on a practice note:
 If the editor restores unsaved state, discuss what it has restored.
 
 ::: notes
-The exercise reveals the difference between storage and current application state. Autosave changes the experience, so do not claim every editor behaves the same way. Ask the class where the saved note is and which sentence is actually stored there.
+The exercise reveals the difference between storage and current application state. Autosave and recovery differ between editors. Ask the class where the saved note is and which sentence is actually stored there.
 :::
 
 ## Home folders belong to particular environments
@@ -125,7 +125,7 @@ Put a note in map-a, write its route, then move map-a into map-b.
 Which written route needs revising?
 
 ::: notes
-Do not move the real data folder. Contents may remain identical while the address changes. Compare with copy: copying would leave the original route valid and create a second location. Ask students to predict before clicking.
+Move only the disposable practice folder. Contents may remain identical while the address changes. Compare with copy: copying would leave the original route valid and create a second location. Ask students to predict before clicking.
 :::
 
 ## Closing a process and saving a file differ
@@ -135,7 +135,7 @@ Do not move the real data folder. Contents may remain identical while the addres
 Inspect the saved file to find out which changes survived.
 
 ::: notes
-Use the plain-text disposable experiment and acknowledge autosave/recovery. Do not promise that every application loses every unsaved change. RAM supports running information; storage retains deliberately saved information between sessions.
+Use the plain-text disposable experiment and acknowledge autosave/recovery. Some applications restore unsaved changes. RAM supports running information; storage retains deliberately saved information between sessions.
 :::
 
 ## A personal absolute path is a poor shared instruction
@@ -163,7 +163,7 @@ The second route still assumes an agreed root and an intact folder structure. It
 More RAM and more saved-file capacity solve different problems.
 
 ::: notes
-Ask whether a closed editor remains installed. Yes, its saved program is still available to launch. A process is its current execution. Do not add computer architecture derivations; use these distinctions to explain everyday observation and recovery.
+Ask whether a closed editor remains installed. Yes, its saved program is still available to launch. A process is its current execution. Use these distinctions to explain everyday observation and recovery.
 :::
 
 ## Plan the next laboratory folder
@@ -185,7 +185,7 @@ The independent task creates a disposable future-lab project and text placeholde
 Draw only the copying or sync links you actually know are configured.
 
 ::: notes
-Cloud-managed folders can have local placeholders. A remote desktop is another interface, not automatic transfer. The course service details remain pending; do not invent an account or hostname. Students can put a question mark on unknown links.
+Cloud-managed folders can have local placeholders. A remote desktop is another interface, not automatic transfer. The course service details remain pending. Students can put a question mark on unknown links.
 :::
 
 ## Test portability by moving the structure
@@ -197,7 +197,7 @@ Find its README and data from the new root.
 Explain which relative routes remain valid and which old absolute routes point elsewhere.
 
 ::: notes
-This is a test of organisation, not a separate backup against losing the laptop. Keep one clearly named working course project. The student output is the two maps and investigation note; a peer should follow the documented route without oral rescue.
+This is a test of organisation, not a separate backup against losing the laptop. Keep one clearly named working course project. The student output is two maps and an investigation note, tested by reopening the files along the documented routes.
 :::
 
 ## Practise explaining the route
@@ -211,5 +211,5 @@ Save `reports/day02-map.txt` with:
 - A note naming the computer holding your project.
 
 ::: notes
-The practical also creates practice/field-notes and figures for tomorrow's navigation. Let pairs give directions without pointing or touching the other's computer, then swap. Keep backup discussions tied to the supported storage route when it is announced.
+The practical also creates practice/field-notes and figures for tomorrow's navigation. Have students write directions, close their windows, and test the routes from the stated start. Keep backup discussions tied to the supported storage route when it is announced.
 :::

@@ -158,9 +158,9 @@ length on horizontal axis and final length on vertical axis. These three P01–P
 records are controls; do not present their plot as a treatment comparison. The
 purpose is distinguishing R console, editor, and shell and seeing a future result.
 
-### Day 5 alternative partner task: organic inventory
+### Day 5 alternative inventory task
 
-This replaces the partner explanation exercise; it is not extra required work.
+This replaces the seedling inventory route.
 Use the separate `organic-lab.zip` download so the original `lab-data.zip`
 fixture and its treated-sample answers stay unchanged. Students must first use
 the file manager to copy the downloaded ZIP into `~/introcomputing-shell`,
@@ -196,8 +196,8 @@ resolve the misconception before adding syntax.
 ## Expanded practicals and independent transfer, days 1–5
 
 These are core practice blocks, not additional chemistry alternatives or grades.
-Allow about 75–90 minutes for a guided extension and 60–90 minutes for transfer;
-include time for prediction, checking, explaining and recovering saved work.
+Check prediction, explanation, and recovery from saved work; each task can be
+completed independently.
 
 | Day | Expected evidence and checks |
 | --- | --- |

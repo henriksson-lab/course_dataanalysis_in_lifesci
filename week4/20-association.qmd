@@ -2,8 +2,7 @@
 title: "Day 20 — A biological association"
 ---
 
-[Lecture slides](../lectures/20-association/lec.qmd) · [Weekly self-check](quiz.qmd)
-
+[Lecture slides](../lectures/20-association/lec.qmd) · [Quiz](20-association-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 ## Today's question
 
@@ -54,9 +53,8 @@ range(leaves$leaf_area_cm2)
 ![One leaf from each of eighteen plants, with the fitted dry-mass relationship.](figures/day20-leaf-line.png)
 
 The observed areas range from 2.96 to 14.68 cm². An intercept is mathematically
-the fitted mass at zero area, but zero lies outside our data. Do not claim that
-a leaf with no area biologically weighs 9.48 mg. The fitted intercept helps
-position a line over the observed range.
+the fitted mass at zero area, outside the observed range. Its role here is to
+position the line over the measured areas; it is not a measurement of a zero-area leaf.
 
 ## A line leaves individual differences
 
@@ -93,8 +91,7 @@ coef(sensitivity_fit)
 
 This is a demonstration, not a search for the slope we prefer. A18 has no known
 recording error and belongs in the main result. Compare the slopes and note
-whether omitting it changes the broad description. Never select observations
-according to which omission gives the smallest p-value.
+whether omitting it changes the broad description.
 
 ## Keep prediction within the evidence
 
@@ -110,7 +107,7 @@ uncertainty in the line itself. An area of 80 cm² is far outside the measured
 range; extrapolating there would rely on an untested assumption that the same
 relationship continues.
 
-## Practical: choose an analysis for a question
+## Write an association report
 
 Create `association-report.Rmd` at the project root. Include the study design,
 point plot with fitted line, residual plot, slope interpretation with units,
@@ -118,7 +115,7 @@ and observed range. Add a short sensitivity note explaining what the A18
 exercise showed, while retaining all observations in the main model. Save the
 main figure as `output/day20-leaf-line.png` and render the report.
 
-Finish with three sentences that answer different questions:
+Answer these questions in the conclusion:
 
 1. What association did we observe?
 2. What does the fitted slope mean numerically and biologically?
@@ -144,13 +141,9 @@ the leaf larger causes …”, because this study did not manipulate area.
 - Would 18 leaves from one plant provide the same independent sample as 18
   plants? **No; leaves sharing a plant may be dependent.**
 
-## Extended practical — distinguish a fitted relationship from a cause
+## Check units, predictions, and influence
 
-Use 75–90 minutes to make the observational leaf analysis defensible. Work with
-`data/leaf-mass.csv`, whose independent units are plants, with one leaf measured
-per plant. Dry mass is in mg and leaf area in cm². The file supplies observations,
-not a randomised intervention on leaf area. Continue the report and preserve
-all original rows in its main analysis.
+Continue the leaf report, retaining all observations in the main analysis.
 
 1. Write a complete slope sentence before discussing a test: the fitted change
    in dry mass for a one-cm² increase in area in this observed sample. Include
@@ -190,9 +183,9 @@ and fitted masses are unchanged apart from numerical precision. A18 is retained
 in the main analysis; the separate fit only illustrates sensitivity.
 :::
 
-## Independent transfer — interpret an association in growth records
+## Relate initial and final length
 
-Allow another 60–90 minutes. Use `data/seedlings-transfer.csv`, containing 18
+Use `data/seedlings-transfer.csv`, containing 18
 independent plants, initial and final lengths in mm, and a supplied allocation
 label. Explore initial versus final length as an observational association.
 This is a different question from the mean treatment effect on growth. A line
@@ -202,8 +195,7 @@ through the combined data does not adjust for allocation or establish causation.
    initial length the predictor for this descriptive question. Import and check
    the data, retaining the allocation labels and the meaning of each row.
 2. Draw a scatter plot coloured by allocation. Identify what the colour adds
-   to a combined plot. Do not add a multiple regression or fit separate lines
-   merely to find a preferred story; those are not required methods here.
+   to a combined plot.
 3. Fit the simple final-on-initial line using `lm()`. Report slope and intercept
    meanings with units. Explain why the intercept at zero initial length may
    be outside the meaningful observed range even though R calculates it.
@@ -218,7 +210,7 @@ through the combined data does not adjust for allocation or establish causation.
    independent mean growth comparison, paired before/after change, and a simple
    observational line. Give the experimental unit, outcome, units, appropriate
    supplied dataset, and one limitation for each. This is selection by question
-   and design, not an automatic menu chosen from a p-value.
+   and design.
 
 **Additional outputs:** the unit/sensitivity check, revised leaf report,
 transfer association report with figures, and the three-question comparison

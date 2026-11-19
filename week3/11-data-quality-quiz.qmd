@@ -1,0 +1,90 @@
+---
+title: "Quiz: Check and repair data"
+---
+
+[Exercises](11-data-quality.qmd) · [Lecture slides](../lectures/11-data-quality/lec.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** The file is intended to have one row per plant. It has 25 rows but 24 unique
+plant IDs. What should you inspect before removing a row?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Compare every field in the repeated records and consult the source notes.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Inspect the repeated ID's full records and the source notes. Here both P01
+records are identical and the recorder confirms an import duplicate. In a
+time-series table, a repeated plant ID could be legitimate.
+:::
+
+---
+
+**Q2.** P21 has a final length of 4.38. Which evidence justifies changing it to 43.8 mm?
+
+(i) Other plants are larger.  
+
+(ii) The correction increases the group mean.  
+
+(iii) The original source record gives 43.8 mm.
+
+::: {.callout-tip collapse="true" title="Hint"}
+A surprising value suggests a check; it does not specify the correct value.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(iii). The source record supports this correction. Size or a preferred result
+alone does not establish an error.
+:::
+
+---
+
+**Q3.** P06 started at 24.7 mm and its final measurement is missing. What growth
+would replacing the missing final value with zero produce? What should the
+cleaned table retain?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Growth is final minus initial. A missing value states that the measurement
+is unavailable.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+It would invent $0 - 24.7 = -24.7$ mm growth. Retain `NA` for final length
+and growth; there is no supported replacement.
+:::
+
+---
+
+**Q4.** After repair there are 12 plant records in each group, with one control
+growth unavailable. What are the available growth sample sizes?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Count observed values separately from enrolled plant records.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+11 controls and 12 treated plants have observed growth. Both groups still
+contain 12 plant records. `sum(!is.na(growth_mm))` counts available growths.
+:::
+
+---
+
+**Q5.** Which files allow you to reproduce and explain a repair?
+
+(i) Only the cleaned CSV.  
+
+(ii) Raw CSV, source notes, and repair script.  
+
+(iii) A screenshot of RStudio.
+
+::: {.callout-tip collapse="true" title="Hint"}
+A reproducible repair needs both its input and the reasons for changing it.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(ii). The script regenerates derived data from the original, and the source
+notes explain the correction evidence.
+:::

@@ -27,7 +27,7 @@ toc: false
 The saved input is separate from the imported object.
 
 ::: notes
-Open the course project before importing. A CSV is text; importing interprets it as a table. Do not imply that editing the object automatically changes the CSV. Conversely, changing the CSV does not update an already imported object until reread. These are the same disk/memory distinctions from week 1.
+Open the course project before importing. A CSV is text; importing interprets it as a table. Editing the object leaves the CSV unchanged. Conversely, changing the CSV does not update an already imported object until reread. These are the same disk/memory distinctions from week 1.
 :::
 
 ## Columns have roles and types
@@ -68,7 +68,7 @@ file.exists("data/seedlings.csv")
 ```
 
 ::: notes
-The second command should give TRUE. If not, identify the current folder, the actual extracted tree, and the computer holding the file. Common causes are an extra extraction folder or opening a ZIP preview. Do not fix this by copying a personal absolute path into every analysis line.
+The second command should give TRUE. If not, identify the current folder, the actual extracted tree, and the computer holding the file. Common causes are an extra extraction folder or opening a ZIP preview. Reopen the intended project before retrying the relative path.
 :::
 
 ## An unavailable value is not a measured zero
@@ -188,7 +188,7 @@ Define a mole as a chemical amount unit and molar mass as grams per mole. Today 
 Check which input produced the result before changing the written sample size.
 
 ::: notes
-A wrong project with a plausible-looking filename can produce plausible output. Have a peer rerun the script fresh and identify each audit. Source provenance matters even when file.exists returns TRUE.
+A wrong project with a plausible-looking filename can produce plausible output. Restart R, rerun the script, and identify the input behind each audit. Source provenance matters even when file.exists returns TRUE.
 :::
 
 ## Keep the import audit useful to another person
@@ -212,5 +212,5 @@ Save `day07.R`, then inspect `data/leaf-mass.csv` too.
 Which columns and units differ? What does one row represent there?
 
 ::: notes
-The leaf table has eighteen independent plants, one leaf each, area in square centimetres and dry mass in milligrams. Students need not infer any causal relationship. Reuse the import/inspect workflow while reading that dataset's dictionary rather than assuming the seedling schema applies.
+The leaf table has eighteen independent plants, one leaf each, area in square centimetres and dry mass in milligrams. A scatter plot can describe association without establishing causation. Reuse the import/inspect workflow while reading that dataset's dictionary rather than assuming the seedling schema applies.
 :::

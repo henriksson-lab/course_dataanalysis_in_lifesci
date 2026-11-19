@@ -2,15 +2,13 @@
 title: "Day 10 — A first biological report"
 ---
 
-[Lecture slides](../lectures/10-first-report/lec.qmd) · [Weekly self-check](quiz.qmd)
+[Lecture slides](../lectures/10-first-report/lec.qmd) · [Quiz](10-first-report-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
 ## Today's question
 
-What can we say about seedling growth from the measurements alone? Today is
-practice in carrying an analysis from saved data to a readable result. No new
-statistical test is required. The purpose is to combine skills you have already
-used and notice where you still need a reference or help.
+What can we say about seedling growth from the measurements alone? Combine
+your import, calculation, plotting, and reporting skills in a reproducible report.
 
 Open your course project and save a copy of `report.Rmd` as `first-report.Rmd`
 in the **project root**. Keeping both source files there preserves the familiar
@@ -27,8 +25,7 @@ terms. The code makes the calculation repeatable.
 The supplied experiment has 24 independently potted seedlings, twelve randomly
 assigned to each group. Initial and final measurements come from the same
 plant, seven days apart. The treatment label `treated` denotes a nutrient
-treatment; the nutrient formulation is unspecified. Do not invent details
-beyond the dictionary. These are simulated measurements.
+treatment; the nutrient formulation is unspecified. These are simulated measurements.
 
 Start with the familiar analysis:
 
@@ -79,8 +76,8 @@ Create these sections in `first-report.Rmd`:
 3. **Results:** include the labelled individual-plant figure and a small number
    of calculated facts that help answer the question. Use inline R for at least
    one result if you are comfortable; correct prose is more important than novelty.
-4. **Interpretation:** write three or four sentences describing the pattern,
-   variation, and an important limitation. No p-value is needed.
+4. **Interpretation:** describe the pattern, variation, and an important
+   limitation.
 
 Now restart R and run this in the **R Console**, not inside the report (a report
 must not try to render itself):
@@ -89,16 +86,15 @@ must not try to render itself):
 rmarkdown::render("first-report.Rmd", output_dir = "reports")
 ```
 
-If it fails, work from the first error. Do not repeatedly run random Console
-commands until it happens to work. Add missing prerequisites to the report.
+If it fails, work from the first error and add missing prerequisites to the report.
 
 ## Transfer to a second table
 
-With remaining practice time, inspect `data/leaf-mass.csv`. It records one leaf
+Inspect `data/leaf-mass.csv`. It records one leaf
 from each of 18 independent plants, with area in square centimetres and dry mass
 in milligrams. Make an area-versus-mass scatter plot in a script called
-`leaf-first-look.R`. Use the actual column names from `names(leaves)` and do not
-subtract quantities with different units. A larger mass and a larger area may
+`leaf-first-look.R`. Use the actual column names from `names(leaves)`. The two
+measurements have different units, so their difference would have no physical meaning. A larger mass and a larger area may
 be associated; one does not establish that one causes the other.
 
 ::: {.callout-tip collapse="true"}
@@ -111,13 +107,10 @@ labels, and explanation.
 :::
 
 
-## Extended practical — turn a draft into an evidence-based report
+## Turn a draft into an evidence-based report
 
-Allow about 90 minutes. Use the seedling report you have already drafted; this
-is a revision workshop, not a requirement to write every context's report.
-Good scientific reporting is more than placing a plot beneath code. A reader
-needs to connect the question, experimental unit, measurement, calculation,
-figure, and conclusion. Keep a short revision log so improvements are visible.
+Revise your seedling report. Keep a log of the issue, correction, and result
+in `reports/report-revision.txt`.
 
 1. Read your HTML without looking at the source. Mark where it tells you the
    biological question, independent unit, number of observations, group labels,
@@ -127,7 +120,7 @@ figure, and conclusion. Keep a short revision log so improvements are visible.
    figure, or study-description sentence supporting it. Label the claim as a
    description of these observations, a design fact supplied by the dictionary,
    or an unsupported inference. Revise a claim that the present analysis cannot
-   support; do not add another statistical method to rescue the wording.
+   support.
 3. Compare two figures made from the same plants: initial versus final length,
    and group versus growth. Choose the one most directly addressing your main
    question. Retain another figure only if it answers a stated useful question,
@@ -137,10 +130,10 @@ figure, and conclusion. Keep a short revision log so improvements are visible.
    use? Is growth calculated by subtraction? Are source inputs kept unchanged?
    Are output names informative? Remove obsolete scratch objects and duplicated
    chunks only after checking which later lines depend on them.
-5. Have a partner read the HTML and answer the main question in one sentence.
-   Ask them to locate a limitation and identify whether every treated plant
-   outgrew every control plant. If working alone, return after a break and read
-   it as a recipient. Revise vague wording such as “the graph shows a difference”.
+5. Read the HTML without the source. Locate the answer to the main question
+   and a limitation. Does every treated plant outgrow every control plant?
+   Replace vague wording such as “the graph shows a difference” with a
+   description of the plotted observations.
 6. Restart R and render again, using Knit or a Console render command. Check
    that the HTML's figures and numbers reflect the saved revision. Save
    `reports/report-revision.txt` with the original issue, your correction, and
@@ -157,13 +150,12 @@ is taught, state the pattern, overlap, and limits of this small teaching study.
 The words should answer the actual plotted quantity, not a memorised template.
 :::
 
-## Independent transfer — deliver a second, smaller laboratory brief
+## Deliver a second, smaller laboratory brief
 
-Plan 75–90 minutes. Choose **one** of the following familiar input contexts:
+Choose **one** of the following familiar input contexts:
 `seedlings-transfer.csv` (another plant study) or `solutions.csv` (calculated
 solution concentrations). Produce one short report named `laboratory-brief.Rmd`
-at the project root. This is independent transfer with fewer instructions, not
-an invitation to use methods beyond the course's current vocabulary.
+at the project root.
 
 1. Write a clear question and identify what one row represents. For seedlings,
    use the supplied independent-pot design and millimetre measurements seven
@@ -176,33 +168,27 @@ an invitation to use methods beyond the course's current vocabulary.
    minus initial length. For solutions, amount in mol is mass in grams divided
    by supplied molar mass in g/mol; final volume in litres is mL/1000; mmol/L
    is `1000 * (mass_g / molar_mass_g_mol) / (final_volume_ml / 1000)`.
-   All constants are supplied; this is a calculation, not a preparation protocol.
 4. Make one labelled figure and a small derived table. For solutions, compare
    supplied mass and calculated concentration by solute, explaining why equal
    mmol/L need not mean equal weighed grams. For seedlings, show individual
    growth by group. No test or fitted line is required.
-5. Write a short methods paragraph, two or three result sentences, and a
-   limitation specific to the chosen context. Calculated concentration cases
-   demonstrate a supplied relationship, whereas plant measurements show
-   variation among observations; do not describe the former as a discovered
-   biological effect.
-6. Render in a fresh session, then ask a partner to find the input and output
-   from your report's description. Save one derived CSV and figure using a
+5. Explain your method, results, and a limitation specific to the chosen
+   context. Distinguish concentrations calculated from a supplied formula
+   from variation measured among plants.
+6. Render in a fresh session, then locate the input and output using your
+   report's description. Save one derived CSV and figure using a
    `laboratory-brief-` filename prefix. Include the brief's source and data in
    a tested practice package, and record its location in the revision log.
 
 **Check and retain:** the plant route has 18 plants and T01 grew 15.0 mm. The
 solution route produces 50, 100, and 150 mmol/L for each solute. Keep one complete
 laboratory brief, your revised earlier report, and the audit/revision notes.
-These are practice products, not a proposed grading scheme or written examination.
 
 
 ## Completion check
 
-Ask a partner to open the HTML without RStudio. Can they identify the question,
-units, meaning of a dot, and the main limitation? Then check your own source:
-can it render after restarting R? These checks concern readability and
-reproducibility, not marks.
+Open the HTML in a browser. Can you identify the question, units, meaning of a
+dot, and main limitation? Then restart R and check that the saved source renders.
 
 ::: {.callout-note collapse="true"}
 ## Self-check

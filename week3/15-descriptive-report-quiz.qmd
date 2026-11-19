@@ -1,0 +1,87 @@
+---
+title: "Quiz: A descriptive report"
+---
+
+[Exercises](15-descriptive-report.qmd) · [Lecture slides](../lectures/15-descriptive-report/lec.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** Which input gives 24 complete plant growth values: `seedlings.csv` or
+the repaired `seedlings-messy.csv`? What should a report state?
+
+::: {.callout-tip collapse="true" title="Hint"}
+The repair exercise retains one unavailable final measurement.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+`seedlings.csv` has 24 complete growth values. The repaired messy input
+has 24 plant records but 23 observed growths. State the input and report
+available sample sizes consistent with it.
+:::
+
+---
+
+**Q2.** A report says “Treated plants had a higher mean, so every treated plant
+outgrew every control.” What should you inspect, and how would you revise it?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A group mean summarises observations without ordering every pair of plants.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Inspect the individual-point plot for overlap. Report the larger observed
+mean with its units and sample sizes, while noting individual variation and
+overlap between groups.
+:::
+
+---
+
+**Q3.** What should the Methods and figure caption identify so a reader can
+understand the growth summary?
+
+::: {.callout-tip collapse="true" title="Hint"}
+How were measurements obtained, and what does one point represent?
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Identify the independent plant, treatment groups, initial/final readings
+seven days apart, growth = final − initial in mm, input file, relevant data
+checks, available n, and plotted symbol meanings. Label SD as individual spread.
+:::
+
+---
+
+**Q4.** Your HTML renders only while objects remain in the RStudio Environment.
+Which action tests and repairs this?
+
+(i) Save a screenshot.  
+
+(ii) Restart R and render, adding missing imports/calculations to the source.  
+
+(iii) Rename the HTML.
+
+::: {.callout-tip collapse="true" title="Hint"}
+The source should create every object needed by later chunks.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(ii). A fresh-session render reveals hidden dependencies. Include loading,
+import, checks, derived variables, summaries, and plots in the saved workflow.
+:::
+
+---
+
+**Q5.** A report reads data from `/home/sam/Downloads/plants.csv`. Why might
+a copied project fail? Give a more portable layout.
+
+::: {.callout-tip collapse="true" title="Hint"}
+A personal absolute path points outside the copied project.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+That path may not exist elsewhere. Keep data inside the project, for
+example `data/seedlings.csv`, and use that relative path from the report at
+project root. Test the complete copy in a newly located folder.
+:::

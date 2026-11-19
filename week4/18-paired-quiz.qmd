@@ -1,0 +1,85 @@
+---
+title: "Quiz: Paired measurements"
+---
+
+[Exercises](18-paired.qmd) · [Lecture slides](../lectures/18-paired/lec.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** Plants D1, D2, D3 have before readings 5, 8, 6 and after readings 7, 9, 9
+in the same order, in µmol m⁻² s⁻¹. Calculate their changes and mean change.
+
+::: {.callout-tip collapse="true" title="Hint"}
+Subtract before from after for each matching identifier.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Changes are **2, 1, 3**; mean change is **2 µmol m⁻² s⁻¹**. These are
+three independent pairs, not six independent plants.
+:::
+
+---
+
+**Q2.** Which function call estimates after minus before for matched plants?
+
+(i) `t.test(after, before, paired = TRUE)`  
+
+(ii) `t.test(before, after, paired = TRUE)`  
+
+(iii) `t.test(after, before, paired = FALSE)`
+
+::: {.callout-tip collapse="true" title="Hint"}
+Both the pairing argument and vector order matter.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(i). (ii) estimates the reverse direction; (iii) treats the two vectors as
+independent groups.
+:::
+
+---
+
+**Q3.** Independently sorting the before and after columns preserves their
+means. Does that make the resulting paired test valid?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Pairing carries subject identity, which is more information than two means.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No. Sorting columns separately destroys the original plant matching. The
+mean difference can remain unchanged while the SD of within-plant changes and
+the confidence interval change. Move complete rows together.
+:::
+
+---
+
+**Q4.** A 95% interval for mean change is [−0.48, 4.48] in the stated rate units.
+Does it prove no change, or contain 95% of individual changes?
+
+::: {.callout-tip collapse="true" title="Hint"}
+The interval describes uncertainty in a mean change under the assumptions.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Neither. It spans zero and both positive and negative mean changes; the
+small dataset does not resolve direction at this interval level. It is not an
+individual-change range or proof of equivalence.
+:::
+
+---
+
+**Q5.** All plants are measured before, then after changing light. A paired
+test gives a small p-value. Why is light alone still not established as the cause?
+
+::: {.callout-tip collapse="true" title="Hint"}
+What else changes between the first and second reading?
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Elapsed time, acclimation, measurement order, or equipment drift may
+contribute. The test addresses mean change; a suitable comparison and design
+addressing order effects are needed to isolate causes.
+:::

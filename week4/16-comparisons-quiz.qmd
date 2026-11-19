@@ -1,0 +1,86 @@
+---
+title: "Quiz: A difference between groups"
+---
+
+[Exercises](16-comparisons.qmd) · [Lecture slides](../lectures/16-comparisons/lec.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** Control mean growth is 15.28 mm and treated mean growth is 21.49 mm.
+Calculate treated minus control from these rounded means. What does a
+positive sign mean?
+
+::: {.callout-tip collapse="true" title="Hint"}
+State the subtraction order before calculating.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+$21.49-15.28=6.21$ mm (about 6.22 mm from unrounded data). A positive
+sign means greater mean growth in the treated sample.
+:::
+
+---
+
+**Q2.** Twelve plants per treatment are measured initially and finally. How
+many independent growth values are there per treatment: 12 or 24?
+
+::: {.callout-tip collapse="true" title="Hint"}
+The two measurements belong to the same plant and yield one growth value.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+**12**. Initial and final measurements are combined into one final-minus-initial
+growth value per plant.
+:::
+
+---
+
+**Q3.** Some control plants grew more than some treated plants. Does that force
+the two sample means to be equal?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Individual overlap and equality of group means are different properties.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No. Groups can overlap and still have different means. Use the observations
+to describe overlap and calculate the group means separately.
+:::
+
+---
+
+**Q4.** Which is the null hypothesis for the planned two-sided comparison?
+
+(i) Every plant has identical growth.  
+
+(ii) The two population mean growths are equal.  
+
+(iii) The treatment must increase growth.
+
+::: {.callout-tip collapse="true" title="Hint"}
+The hypothesis concerns population means, and a two-sided question allows
+both directions of difference.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(ii). The alternative allows either population mean to be larger. Individual
+plants may vary under either hypothesis.
+:::
+
+---
+
+**Q5.** The new class has a smaller sample mean difference than the first class.
+Does the difference alone establish that the treatment stopped working? What
+else do you need?
+
+::: {.callout-tip collapse="true" title="Hint"}
+An estimate varies across samples and conditions.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No. Consider sampling uncertainty, observed variability, sample size, and
+study conditions. A sample difference alone does not determine its uncertainty
+or establish a universal treatment effect.
+:::

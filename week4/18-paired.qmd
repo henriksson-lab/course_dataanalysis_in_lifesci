@@ -2,8 +2,7 @@
 title: "Day 18 — The same plant measured twice"
 ---
 
-[Lecture slides](../lectures/18-paired/lec.qmd) · [Weekly self-check](quiz.qmd)
-
+[Lecture slides](../lectures/18-paired/lec.qmd) · [Quiz](18-paired-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 ## Today's question
 
@@ -13,8 +12,7 @@ twice, so this is a **paired** design. We compare changes within plants rather
 than pretending that the two sets of readings came from different plants.
 
 The file `data/paired.csv` contains simulated measurements in micromoles of CO2 per
-square metre per second, written `µmol m⁻² s⁻¹`. You do not need the chemistry to
-analyse this example: each number measures a rate, and higher means a greater
+square metre per second, written `µmol m⁻² s⁻¹`. A higher number means a greater
 rate of photosynthesis. Before and after were always measured in that order.
 That matters for our eventual interpretation.
 
@@ -88,9 +86,8 @@ therefore after minus before. The estimated mean change is about 1.98, with a
 describes uncertainty in the **mean change**, not the spread of individual
 changes. Its independent observations are the ten plants' changes.
 
-A paired t-test can also be understood as a one-sample t-test of the change
-values against zero. Try the following only after you can explain the first
-version; it should give the same estimated change, interval, and p-value:
+A paired t-test is also a one-sample t-test of the change values against zero.
+The following gives the same estimated change, interval, and p-value:
 
 ```{r}
 t.test(paired$change_umol_m2_s, mu = 0)
@@ -109,7 +106,7 @@ with a zero mean change, and what caused any change? A test addresses the first
 under assumptions; the experimental design determines what we can say about the
 second.
 
-## Practical: a short paired report
+## Write a paired report
 
 Copy the root report template to `paired-report.Rmd` at the project root. Include:
 
@@ -117,7 +114,7 @@ Copy the root report template to `paired-report.Rmd` at the project root. Includ
 2. An import and ID check, the change calculation, and the change plot.
 3. The paired t-test and an interpretation in the stated after-minus-before
    direction.
-4. One sentence distinguishing the confidence interval from individual spread.
+4. An explanation distinguishing the confidence interval from individual spread.
 5. A limitation about order and an idea for improving the design.
 
 Save `change_plot` as `output/day18-changes.png` and render the HTML. All the
@@ -140,18 +137,16 @@ calculation and the two vectors supplied to `t.test()`.
 - Does a small p-value establish that light caused the change? **No; the fixed
   measurement order remains a limitation.**
 
-## Extended practical — protect the identity of a pair
+## Check the matching
 
-Use about 75–90 minutes to investigate why the paired design matters. Continue
-`paired-report.Rmd`; keep the original paired CSV unchanged. One independent
-plant supplies two related photosynthesis readings, in micromoles CO2 per square
-metre per second. A change is after minus before for the **same identifier**.
+Continue `paired-report.Rmd`. A change is after minus before for the
+**same identifier**.
 
 1. Inspect L01, L02, and L03. Calculate their changes by hand and compare with
    your derived column. Give units. Check that the two readings share an
    identifier, not merely a similar numeric size or neighbouring row position.
 2. Make a plot joining before and after readings for each plant, using the
-   supplied pattern or a teacher demonstration. Retain your plot of within-plant
+   pattern below. Retain your plot of within-plant
    changes as well. Explain what each display makes easier to see, including
    individual change and variation in starting levels.
 3. Compare `mean(after - before)` with `mean(after) - mean(before)` for these
@@ -159,22 +154,38 @@ metre per second. A change is after minus before for the **same identifier**.
    justify forgetting the pairing. The uncertainty calculation also depends
    on the variation of the within-plant differences.
 4. Create a separate demonstration object by sorting the before column and
-   after column independently. Do not alter the source file or the proper
-   paired object. Calculate changes and run the same paired function on this
+   after column independently. Keep the valid `paired` object unchanged. Calculate changes and run the same paired function on this
    artificial matching. Compare its mean change, SD of changes, and interval
    with the valid result. Save both under unmistakably different names.
 5. Explain the trap: the two marginal means and mean difference can remain
    unchanged while the paired variability changes greatly. A smaller p-value
    after sorting is not improved evidence; the identities were destroyed.
    Recover the original matching using the supplied rows and plant IDs.
-6. Analyse the original change vector with the supplied one-sample equivalence
-   check `t.test(change_umol_m2_s, mu = 0)`. Compare its estimate, interval,
+6. Analyse the original change vector with the supplied equivalent one-sample
+   calculation `t.test(paired$change_umol_m2_s, mu = 0)`. Compare its estimate, interval,
    and p-value with the correctly paired call. This is a check of the same
    analysis, not an additional independent experiment or a search for a result.
 7. Add a limitation paragraph naming the fixed before/after order and absence
    of an unchanged-light comparison. Explain why the observed change cannot
    isolate light from every possible time/order influence. A small p-value
    does not remove this design limitation.
+
+::: {.callout-tip collapse="true"}
+## Hint: connect each plant's two readings
+
+```r
+ggplot(paired) +
+  geom_segment(aes(x = 0, xend = 1, y = before_umol_m2_s,
+                   yend = after_umol_m2_s), alpha = 0.5) +
+  geom_point(aes(x = 0, y = before_umol_m2_s)) +
+  geom_point(aes(x = 1, y = after_umol_m2_s)) +
+  scale_x_continuous(breaks = c(0, 1), labels = c("Before", "After")) +
+  labs(x = "Measurement", y = "Photosynthesis (µmol m⁻² s⁻¹)") +
+  theme_minimal()
+```
+
+Each segment uses one complete row, so its endpoints belong to the same plant.
+:::
 
 ::: {.callout-tip collapse="true"}
 ## Hint: preserve the valid object before the bad example
@@ -186,9 +197,9 @@ sorted-column demonstration has the same mean change but a different SD and
 interval, which exposes why means alone cannot validate paired analysis.
 :::
 
-## Independent transfer — a small explicitly supplied paired case
+## Interpret a small paired example
 
-Allow 60–90 minutes for reasoning and a short source report. A teaching
+A teaching
 example measures the same three independently sampled plants before and after
 changing light. The before rates are 5, 8, and 6; after rates are 7, 9, and 9,
 in micromoles CO2 per square metre per second. The plant IDs are D1, D2, D3 in
@@ -212,8 +223,8 @@ support for population inference.
    the model assumptions rather than treating the function as a guarantee.
 5. Write a design recommendation for a later real experiment: explain how
    more independent plants, a suitable comparison, and recording identities
-   would address different limitations. Do not claim that simply reweighing
-   or rereading these same three plants creates more independent pairs.
+   would address different limitations. Distinguish additional independent
+   plants from repeated readings of the same plants.
 6. Save `paired-transfer.Rmd` and render it after restarting. Include all values
    and code inside the source, a short interpretation, and a statement that
    the case is illustrative. Keep a note comparing it with the ten-plant

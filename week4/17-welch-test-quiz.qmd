@@ -1,0 +1,105 @@
+---
+title: "Quiz: Welch t-test"
+---
+
+[Exercises](17-welch-test.qmd) · [Lecture slides](../lectures/17-welch-test/lec.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** Which study matches the independent groups used in this lesson?
+
+(i) The same plants measured before and after treatment.  
+
+(ii) Separate plants randomly allocated to treated and control groups.  
+
+(iii) Several leaves taken from one plant in each group.
+
+::: {.callout-tip collapse="true" title="Hint"}
+Identify the unit that received treatment independently.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(ii). The independent unit is a plant. Measurements on the same plant are
+related; many leaves from one plant do not supply many independently treated
+plants.
+:::
+
+---
+
+**Q2.** Mean growth is 21.49 mm in treated plants and 15.28 mm in controls.
+What difference does `t.test(treated, control)` estimate, and in what units?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Subtract the second group's mean from the first group's mean.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Treated minus control: $21.49 - 15.28 = 6.21$ mm using the rounded means.
+The difference from the full data is about 6.22 mm.
+:::
+
+---
+
+**Q3.** A treated-minus-control 95% confidence interval is [2.70, 9.73] mm.
+What interval and two-sided p-value would result from reversing the vector order?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Negate both endpoints, then put the lower endpoint first. The equal-means
+question is the same in either direction.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The interval is [−9.73, −2.70] mm. The two-sided p-value is unchanged.
+:::
+
+---
+
+**Q4.** Which statement correctly interprets a 95% confidence interval for a
+mean difference?
+
+(i) It contains 95% of individual plants' growth values.  
+
+(ii) Its procedure covers the true mean difference in about 95% of repeated
+experiments under the assumptions.  
+
+(iii) Every value inside it has the same probability of being the true difference.
+
+::: {.callout-tip collapse="true" title="Hint"}
+The interval describes uncertainty in a population mean difference.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(ii). The coverage statement concerns repeated use of the procedure. The interval
+is not an individual-growth range, and it does not give equally probable values
+of the fixed population difference.
+:::
+
+---
+
+**Q5.** The p-value is 0.0015. Does this mean there is a 0.15% probability that
+the treatment has no effect? What does the p-value describe?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Begin with “If the equal-means model and its assumptions held …”.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No. If the equal-means model and assumptions held, a two-sided t statistic at
+least this extreme would occur with probability about 0.0015. The p-value does
+not assign a probability to the hypothesis or measure biological importance.
+:::
+
+---
+
+**Q6.** For the same observations, will a 99% confidence interval be wider or
+narrower than the 95% interval? Will the group means change?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A higher coverage target requires more room around the same estimate.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Wider. The observed group means stay the same; only the interval level changes.
+:::

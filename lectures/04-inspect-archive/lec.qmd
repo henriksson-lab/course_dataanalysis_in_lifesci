@@ -148,7 +148,7 @@ Read S04’s listed path, then locate its file.
 
 What if the record is present but the file has been renamed?
 
-Do not erase a sample simply because its file could not be found.
+Investigate the file discrepancy using the manifest and source.
 
 ::: notes
 The independent exercise deliberately renames S04.csv only in a disposable received-check copy. The contents still identify S04 and length39.8mm. The manifest is an index of intended paths; it does not guarantee files currently occupy them.
@@ -198,7 +198,7 @@ Keep:
 - A checked output and explanation of the units.
 
 ::: notes
-The source archive still contains the original known fixture. The practical should end with a peer able to find the restored measurement and explain why line counts alone were insufficient. Record current computer and extraction location.
+The source archive still contains the original known fixture. The exercise ends with students locating the restored measurement from the manifest and explaining why line counts alone were insufficient. Record current computer and extraction location.
 :::
 
 ## Save an inspection someone can explain
@@ -210,5 +210,5 @@ Keep the selected records, a practice manifest, and `working/observations.txt`.
 Explain **5 lines**, **4 samples**, and **2 treated records** in your own words.
 
 ::: notes
-The practical also introduces the local/remote distinction via a teacher demonstration when access is ready. If service accounts are pending, complete local file skills; do not invent a remote address or treat a local rehearsal as completed SSH access.
+The practical also introduces the local/remote distinction via a teacher demonstration when access is ready. If service accounts are pending, complete the local file exercises and return to remote access when details are supplied.
 :::

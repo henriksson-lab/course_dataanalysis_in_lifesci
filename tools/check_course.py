@@ -12,7 +12,8 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 
 # The daily progression must be present in the student site.
-lessons = sorted(ROOT.glob("week[1-5]/[0-9][0-9]-*.qmd"))
+lessons = sorted(p for p in ROOT.glob("week[1-5]/[0-9][0-9]-*.qmd")
+                       if not p.stem.endswith("-quiz"))
 assert len(lessons) == 25, f"Expected 25 daily lessons, found {len(lessons)}"
 for source in lessons:
     assert (ROOT / "docs" / source.relative_to(ROOT).with_suffix(".html")).is_file(), source

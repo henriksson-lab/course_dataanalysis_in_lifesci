@@ -7,9 +7,10 @@
 - Give concise tasks, supplied quantities/formulas, and checks. Remove redundant
   prohibitions and reassurance; do not add prose to satisfy a length quota.
 - The student-facing role label is **Exercises**.
-- The planned audit in `instructor/audit-plan.md` covers topic-level quizzes
-  matching Quantbio's public question/hint/answer format. That quiz restructure
-  and the course-wide wording rewrite are planned, not yet implemented.
+- Each topic has a quiz matching Quantbio's public question/hint/answer format:
+  short questions and separate collapsible hints and answers. Use questions that
+  check the topic's outcomes, without a question quota. See `audit-plan.md` and
+  `audit-results.md` for the revision scope and findings.
 
 ## Course background
 
@@ -18,10 +19,11 @@ Students have no assumed file-system or programming knowledge. The current
 five-week sequence is in `contentplan.md`.
 
 The user subsequently requested approximately doubling lecture and exercise
-content to support five weeks of study. `instructor/expansion-contract.md` defines
-that work: substantial daily extended/independent blocks and fresh inputs,
-without broadening the statistical method list or adding chemistry prerequisites.
-`study-plan.qmd` sets out learner-workload estimates; these require piloting.
+content to support five weeks of study. Substantive practice and fresh inputs
+remain, without broadening the method list or adding chemistry prerequisites.
+The later audit supersedes the historical expansion contract's timing, prose,
+and step targets. `study-plan.qmd` lists the sequence and checkpoints without
+prescribing how long a student should take.
 
 Chemistry contexts must be self-contained. Completion of Fundamentals of
 Chemistry (5KE165), or recall of a chemical formula or method, is not required
@@ -48,8 +50,9 @@ See `instructor/organic-exercise-contract.md` for the shared data and review sco
 - Topic sections pair `lectures/<daily-stem>/lec.qmd` RevealJS lectures with the
   existing daily practical URLs. Reuse the Quantitative Biology sidebar colours
   and root `theme.scss`. Keep decks as short as useful, at most 45 slides,
-  roughly half using explanatory diagrams/plots. Weekly quiz.qmd pages are
-  formative self-checks. See `instructor/lecture-contract.md` for authoring rules.
+  roughly half using explanatory diagrams/plots. Topic quizzes live at
+  `weekN/<daily-stem>-quiz.qmd`; weekly `quiz.qmd` pages provide revision.
+  See `instructor/lecture-contract.md` for authoring rules.
 - Students download `downloads/course-files.zip`, extract the enclosed
   `introcomputing-course/` folder, and use it as their project root. It contains
   `introcomputing.Rproj`, `data/`, `output/`, `report.Rmd`, and `reports/`.
@@ -91,9 +94,8 @@ See `instructor/organic-exercise-contract.md` for the shared data and review sco
 - Instructor solutions go in `instructor/`; exclude them from the website and
   student downloads. Hints and short self-check answers may be student-visible.
   Do not introduce assessment requirements or grades.
-- Root agent owns navigation, shared data/assets, setup pages, week 5,
-  validation, and packaging. Workers own only their assigned week directories
-  and named instructor solution files.
+- Root agent owns navigation, shared data/assets, setup pages, validation,
+  and packaging. Parallel editors own their assigned weeks and lecture folders.
 
 ## Daily filenames
 

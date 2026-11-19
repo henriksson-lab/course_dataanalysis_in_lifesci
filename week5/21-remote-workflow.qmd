@@ -2,14 +2,13 @@
 title: "Day 21 — the same workflow on another computer"
 ---
 
-[Lecture slides](../lectures/21-remote-workflow/lec.qmd) · [Weekly self-check](quiz.qmd)
+[Lecture slides](../lectures/21-remote-workflow/lec.qmd) · [Quiz](21-remote-workflow-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
 ## Today's question
 
 You saved a report on a remote computer. Where is it, and how can you bring it
-back? Today joins the command-line work from week 1 with the R reports you can
-now make. The key skill is tracking the computer, folder, and copy of a file.
+back? Track the computer, folder, and copy of each file.
 
 **You need:** the course project, a working local R setup, and the course's
 remote-access instructions when issued. Save a short `reports/remote-log.txt`
@@ -20,10 +19,9 @@ with the locations and checks below. Never record passwords or login codes.
 
 HPC2N or another Linux environment will be used. The hostname, account route,
 authentication, remote desktop, transfer method, permitted execution location,
-and supported R application will be provided separately. Do not guess a host or
-run work on an arbitrary login node. Until access is available, complete the
-local rehearsal below; it practises file handling, but is not evidence that you
-have completed the remote connection skill.
+and supported R application will be provided separately. Use those instructions
+for remote work. Until access is available, complete the local rehearsal below
+and mark the connection tasks pending.
 :::
 
 ## 1. Draw the locations before connecting
@@ -46,17 +44,19 @@ SSH provides a shell on the remote system. A remote desktop provides a graphical
 workspace. These are interfaces, not automatic transfer services. The course
 instructions will confirm whether both sessions share the same home directory.
 
-In your log, draw two boxes, label the laptop and the service, and leave space
-for the actual project paths. Keep the log free of credentials.
+In your log, draw two boxes labelled laptop and remote service, with their
+actual project paths.
 
 ## 2. Connect, find your work, and return
 
-Use the supplied SSH command from Ubuntu on Windows or Terminal on Mac. Its
-general form is shown below as a description, **not a command to copy**:
+Use the supplied SSH command from Ubuntu on Windows or Terminal on Mac.
+Its general form is:
 
 ```text
 ssh your-course-username@the-provided-host
 ```
+
+Replace these placeholders using the service guide when issued.
 
 Follow the supplied host-key verification and authentication instructions.
 After connecting, run these commands in the remote shell:
@@ -108,10 +108,8 @@ Rscript -e 'rmarkdown::render("report.Rmd")'
 ```
 
 Run this only from the project root in the supported execution environment.
-It asks R to render the saved document; it does not use objects in an already
-open interactive session. This is the same analysis, with a different way to
-start it. On Windows, local Ubuntu does not necessarily have R installed; use
-native RStudio there rather than installing another R just for this command.
+It renders the saved document in a new R process. On Windows, continue using
+native RStudio locally; this command is for a configured remote shell.
 
 Transfer the resulting HTML back to your laptop into a folder you can name.
 Open the downloaded copy in your browser. Record both paths and the transfer
@@ -129,10 +127,9 @@ list the remote tasks still to complete.
 ::: {.callout-tip collapse="true"}
 ## Hint: the file exists, but R cannot find it
 
-Check three things in order: which computer R is running on, the result of
-`getwd()`, and the actual path beneath that folder. Look for an extra folder
-created during extraction. Do not solve this by copying your personal absolute
-path into the report.
+Check which computer R is running on, `getwd()`, and the actual path beneath
+that folder. Look for an extra folder created during extraction. Keep report
+paths relative to the project root.
 :::
 
 ## Check your understanding
@@ -154,47 +151,41 @@ path into the report.
 :::
 
 
-## Extended practical — audit a transfer, not just a login
+## Audit a transferred project
 
-Allow about 75–90 minutes. Work on the real service if access has been issued;
-otherwise use two clearly named local rehearsal folders. Record the difference
-in your log. The purpose is to establish which copy produced an output. A
-successful login alone does not establish that you transferred the intended data.
+Use the real service when available, or two clearly named local rehearsal
+folders. Record which route you used.
 
 1. Before copying anything, create `reports/transfer-plan.txt`. Name the source
    computer, source project path, destination computer, and destination project
    path. For a local rehearsal, label both as local and give different parent
    folders. List the intended input `data/algae.csv`, its dictionary, and the
-   report source you will use. Do not record authentication details.
+   report source you will use.
 2. Open `data/algae.csv` in the original project without editing it. Read its
    dictionary: 24 separately grown cultures were assigned to `reference` or
    `supplement`, twelve each, and harvested once after seven days. A19 spilled
    before weighing, so its biomass is unavailable. The culture is the
    independent unit; the many cells within it are not independent cultures.
 3. Record three checks in your plan: number of culture records, number of
-   available biomass measurements, and A19's state. Use the familiar R checks
-   `nrow()`, `sum(!is.na(...))`, and filtering by identifier. These are useful
-   content checks, whereas a matching filename is not.
+   available biomass measurements, and A19's state. Use `nrow()`,
+   `sum(!is.na(...))`, and filtering by identifier.
 4. Transfer or copy the complete project into the designated destination. Open
    the destination `.Rproj`, run `getwd()`, and repeat the checks there. Record
-   both paths, the method, and the results in a small table in
-   `reports/remote-log.txt`. Only claim a real remote transfer if one occurred.
+   both paths, the method, and the results in `reports/remote-log.txt`.
 5. Write a new plain-text note, `reports/transfer-receipt.txt`, **in the
    destination copy**. Include the date, the destination project path, the input
    filename, and the three checked results. Locate it through the supported
-   graphical workspace as well as through the file listing. This tests that you
-   can identify a newly saved file rather than only recognise a supplied one.
+   graphical workspace as well as through the file listing.
 6. Bring that note back to the source using the supported route and open the
    returned copy. State whether you now have two independently stored copies.
-   Ask a partner to locate the returned receipt using your directions, or close
-   both applications and follow your own written directions from the start.
+   Close both applications and follow your written directions to locate the
+   returned receipt.
 
 Now investigate a deliberately stale copy. In a **disposable copy** of the
 project, change only the returned receipt's text to say “second revision”. Save
 it, close the editor, and reopen both receipt copies. Does the other copy change?
-Keep both and explain the observation. Do not modify a raw CSV to perform this
-exercise. Repeating a transfer after an edit creates a new decision about which
-version should be retained; it is not a reason to delete an unfamiliar folder.
+Keep both receipt copies and explain the observation. Identify which version
+you would transfer next.
 
 ::: {.callout-tip collapse="true"}
 ## Hint: compare contents as well as names
@@ -204,26 +195,23 @@ A19's biomass remains missing. For small text receipts, open both in a text
 editor and compare the actual sentences. If you use R, the supplied expression
 `identical(readLines("path-to-first-note"), readLines("path-to-second-note"))`
 asks whether the text lines match; replace the two descriptions with your real
-paths. `readLines()` reads saved text, not an unsaved editor buffer. You do not
-need a new comparison package or a memorised command here.
+paths. `readLines()` reads saved text, not an unsaved editor buffer.
 :::
 
-## Independent transfer — recover a misplaced result
+## Recover a misplaced result
 
-Allow about 60–75 minutes. Use a small report you already know renders. The task
-is to make a colleague's next action unambiguous, including when your first
-expectation about location is wrong.
+Use a report you already know renders. Save directions that identify its
+output, source, and input.
 
 1. In the destination project, render the report once and locate its real HTML
    output. It may be beside its `.Rmd` or in a documented output folder. Write
    its full location and the time of your check in the transfer log.
 2. In the file manager, copy that HTML into a new folder named
-   `returned-results`. Open **that copy**. Do not infer the location from a
-   browser tab title: use the file manager or browser file address to check it.
-3. Give a partner only the project location and a sentence describing the
-   desired result. They must find the HTML, its source, and its input without
-   using your recent-files list. Working alone, close applications and wait
-   until you have completed another exercise, then use those directions again.
+   `returned-results`. Open **that copy** and check its location in the file
+   manager or browser file address.
+3. Write the project location and a description of the desired result. Close
+   applications, then follow those directions to find the HTML, source, and
+   input without using recent files.
 4. Record one failed assumption or ambiguous direction, and repair the
    instructions. Include a concrete recovery sequence such as “identify the
    computer; open the project; find its output folder; inspect the file”.
@@ -235,10 +223,7 @@ expectation about location is wrong.
    pending, include a separate list of the authentication, desktop, and transfer
    steps that still need real service practice. Local success cannot tick them off.
 
-**Keep:** your plan, receipt, location log, and audit. A strong audit makes a
-specific, bounded claim about tested copies. It does not claim that network
-connections never fail, that remote storage is automatically backed up, or that
-an application keeps running when a connection closes.
+**Keep:** your plan, receipt, location log, and audit.
 
 **Before you finish:** save your location log, mark any pending access-dependent
 steps, and identify the report copy you opened. End the desktop session using the

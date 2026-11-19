@@ -2,7 +2,7 @@
 title: "Day 17 — A guided Welch t-test"
 ---
 
-[Lecture slides](../lectures/17-welch-test/lec.qmd) · [Weekly self-check](quiz.qmd)
+[Lecture slides](../lectures/17-welch-test/lec.qmd) · [Quiz](17-welch-test-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
 ## Today's question
@@ -12,9 +12,8 @@ that estimated difference, and how does the experiment compare with an equal-mea
 model? We will add a **Welch two-sample t-test** to yesterday's report. We use this
 method for two independent groups and do not require their variances to be equal.
 
-Open the project and `comparison.Rmd`. Run its import and preparation chunks so
-that `seedlings`, `treated`, and `control` exist. All code needed to create these
-objects must remain in the report: a successful console session is not enough.
+Open `comparison.Rmd` and run its import and preparation chunks to create
+`seedlings`, `treated`, and `control`. Keep that code in the report.
 
 ## Check the design before calling a function
 
@@ -23,8 +22,7 @@ plant's growth. The groups are independent, treatments were randomly assigned,
 and we have not selected plants according to whether their growth supports our
 expectations. Inspect yesterday's plot for severe skew, questionable values, or
 one observation dominating a group. With small groups, these features can make
-the usual interval and test unreliable. Seek advice when the method looks
-unsuitable; do not delete valid extreme observations to improve a p-value.
+the usual interval and test unreliable. Keep valid extreme observations and seek advice if the model looks unsuitable.
 
 The test does not repair dependence, biased sampling, or measurement errors. We
 are using a small, deliberately simple dataset to learn an analysis workflow.
@@ -56,9 +54,8 @@ mean of x  mean of y
  21.4917    15.2750
 ```
 
-Small printing differences are normal. The `t` statistic and degrees of freedom
-are part of the calculation; you do not need to derive them here. Concentrate on
-the question, difference, interval, and assumptions.
+Read the difference, interval, and p-value below; small printing differences are
+normal. The `t` statistic and degrees of freedom describe the test calculation.
 
 ## Read the result in a useful order
 
@@ -79,7 +76,7 @@ evidence against equal population means in this model. It is not a 99.85%
 probability that the treatment works, and it does not tell us whether 6 mm matters
 biologically. That judgment needs the organism, duration, and purpose of the study.
 
-## Practical: extend your report
+## Extend your report
 
 Add a Methods paragraph naming the two independent groups, growth calculation,
 direction of comparison, and Welch two-sample t-test. Keep the individual-point
@@ -90,7 +87,7 @@ estimated difference, interval, and p-value. A possible structure is:
 > estimated treated-minus-control difference was … mm (95% confidence interval
 > … to … mm; Welch two-sample t-test, p = …). This suggests … under … .
 
-Use your own words for the last sentence. Do not report only “significant”.
+Explain the biological size and limitations in the last sentence.
 
 Extract numbers rather than retyping a long printout:
 
@@ -123,13 +120,10 @@ level. It would not establish equivalence or prove that there is no effect.
 
 Restart R and render the report.
 
-## Extended practical — read and challenge the complete test output
+## Read and check the test output
 
-Allow about 75–90 minutes. Keep the question and plant-level figure from day
-16. Work in the saved report and a small `day17-checks.R` script. We are using
-one guided model, not learning a catalogue of tests or a rule based on automatic
-normality testing. Every claim remains conditional on the independent units,
-measurement quality, and appropriateness of the small-sample model.
+Keep the question and plant-level figure from day 16. Save these checks in
+`day17-checks.R`.
 
 1. Predict the sign of the estimated difference from the group means before
    calling `t.test()`. Run it in the stated treated-minus-control order. Locate
@@ -145,23 +139,22 @@ measurement quality, and appropriateness of the small-sample model.
    interval for the population mean difference.
 4. Using the same observations, compare 90%, 95%, and 99% intervals by changing
    only `conf.level`. State which procedure gives the widest interval and why
-   a higher coverage target costs precision. Do not choose a confidence level
-   after looking for one that permits a preferred conclusion. Keep the
-   original 95% result as the main reported analysis.
+   a higher coverage target produces a wider interval. Keep the stated 95%
+   result as the main analysis.
 5. Repair these statements in your own words: “There is a 0.15% probability
    that the treatment has no effect”; “95% of treated plants gained between
    2.70 and 9.73 mm more”; “the test shows this difference matters in any
    biological setting.” Identify the conditioning, individual-versus-mean,
    and generalisation errors separately.
 6. Discuss a supplied different study with a mean difference of 2 mm and a
-   95% interval from −1 to 5 mm. No new calculation is required. Explain
+   95% interval from −1 to 5 mm. Explain
    whether equality has been established, whether positive differences remain
    compatible with the interval, and what information would help decide if
    such a difference would matter biologically.
 7. Revise `comparison.Rmd` so the methods, figure, numerical results, and
    interpretation agree. Render after restarting, without creating the vectors
    manually in the Console first. Add a short note describing the checks you
-   performed and retain the code that produced them.
+   performed and retain their code.
 
 ::: {.callout-tip collapse="true"}
 ## Hint: separate an interval's level from the data
@@ -172,12 +165,11 @@ not change the observed means. Reversing the two vectors reverses and negates
 interval endpoints, while a two-sided test asks the same equal-means question.
 :::
 
-## Independent transfer — add uncertainty to your new-class report
+## Add uncertainty to the second study
 
-Spend another 60–90 minutes extending yesterday's `transfer-comparison.Rmd`.
-If you did not retain it, recreate its own import, checks, growth calculation,
-summary, and individual-point figure from `data/seedlings-transfer.csv`. There
-are nine complete independent plants in each allocation; this is not paired data.
+Open `transfer-comparison.Rmd` from day 16. It uses
+`data/seedlings-transfer.csv`, with nine independent plants per group, their
+seven-day growth summaries, and an individual-point figure.
 
 1. State the analysis direction before fitting: treated minus control mean
    seven-day growth, in mm. Extract the two numeric growth vectors by their
@@ -187,21 +179,18 @@ are nine complete independent plants in each allocation; this is not paired data
    in that same direction and verify that your prose agrees with the code.
 3. Add a results paragraph containing the available n, two means, directed
    difference, interval, p-value, and a biological interpretation restricted
-   to these simulated conditions. An output printout alone is not the paragraph.
+   to these simulated conditions.
 4. Compare the width of this interval with the first study's interval. List
    plausible contributing features, including sample size and observed spread.
-   Do not attribute the width to sample size alone when other quantities differ.
-5. Create a three-sentence conclusion for a reader who does not know t-tests:
+   Consider both sample size and variability because both differ between studies.
+5. Write a conclusion for a reader who does not know t-tests:
    what difference was estimated, how uncertain it is under the model, and
-   what remains limited by design or context. Avoid a conclusion consisting
-   only of a threshold label.
-6. Render and give the HTML to a peer. Ask them to state the comparison
-   direction, units, and independent unit without opening your source. Correct
-   any ambiguity and save the complete source, inputs, and output together.
+   what remains limited by design or context.
+6. Render the HTML. Check that the comparison direction, units, and independent
+   unit are clear from the report. Save the source, inputs, and output together.
 
 **Additional outputs:** a test-output reading table, interval-level check,
-corrected interpretation statements, and the extended transfer report. Numerical
-checking should support a defensible explanation rather than replace one.
+corrected interpretation statements, and the second study report.
 
 **Leave with:** an updated `comparison.Rmd`
 and HTML that explain both the size and uncertainty of the estimated effect.

@@ -111,7 +111,7 @@ need not derive the test or choose an alternative method catalogue.
 
 ![Y01 yielded 0.62 grams from a supplied maximum of 1.00 gram, giving 62 percent.](yield.svg){height=365px}
 
-Both masses use grams. No reaction equation or molar-mass lookup is needed.
+Yield (%) = 100 × collected mass (g) / supplied maximum mass (g).
 
 ::: notes
 Define theoretical mass as the supplied maximum and isolated mass as collected
@@ -142,7 +142,7 @@ superiority, safety, or sustainability.
 | Guided Welch comparison and interval | Descriptive mean/SD comparison |
 | One missing biomass | All outcomes available |
 
-Do not transfer an old conclusion merely by changing a plot title.
+Adapt the interpretation to the selected design and outcome.
 
 ::: notes
 Students may reuse code patterns, but must change the roles, units, and study
@@ -187,7 +187,7 @@ CSV and keep derived output separate.
 Write the plan before changing the code.
 
 ::: notes
-The additional exercise asks for a 150–250 word plan covering question, unit,
+The analysis plan covers question, unit,
 outcome, units, missingness, plot and direction. The descriptive organic route
 stops at a directed observed comparison; the duckweed route adds the taught
 independent inference. One chosen main study is enough.
@@ -317,10 +317,9 @@ Include unit, available n, direction, spread or overlap, and a limitation.
 A larger mean does not imply every treated observation is larger.
 
 ::: notes
-The algae transfer memo is 100–150 words with a saved summary and figure. Keep
-number precision sensible, but calculate with the unrounded means. A19's
-loss needs reporting, even when na.rm=TRUE supplies a numeric summary.
-Do not generalise the simulated conditions to all organisms or supplements.
+The algae memo includes a saved summary and figure. Calculate with unrounded
+means and report A19's loss. Interpret this simulated study within its design
+and assumptions.
 :::
 
 ## Retain a decision trail with the result
@@ -330,15 +329,13 @@ Save the analysis plan, checks, chosen direction, and interpretation revision.
 Then restart and recreate the outputs from the saved source.
 
 ::: notes
-The extended practical turns a short command sequence into a reviewable
-analysis. Students do not need to produce a second full main study. The
-fresh culture memo supplies transfer evidence and becomes a small
-reproducibility task on the following day.
+The analysis plan records decisions for the chosen main study. The algae memo
+applies the workflow to new data and becomes the next reproduction task.
 :::
 
 ## Exercises: a first complete version today
 
-[Open day 23 exercises](../../week5/23-mini-study.qmd).
+[Open exercises](../../week5/23-mini-study.qmd) · [Quiz](../../week5/23-mini-study-quiz.qmd).
 
 - Default: `duckweed-report.Rmd` plus HTML.
 - Alternative: `organic-study.Rmd` plus HTML.
@@ -349,6 +346,6 @@ If extending day 15's `organic-report.Rmd`, use **Save As** to preserve it.
 
 ::: notes
 The immediate goal is a complete first version, not decorative perfection.
-Tomorrow's peer or fresh-folder reproduction will reveal hidden dependencies.
+The next fresh-folder reproduction will expose hidden dependencies.
 Students should save a note of any failed step rather than conceal it.
 :::

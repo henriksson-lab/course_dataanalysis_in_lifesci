@@ -1,45 +1,64 @@
 ---
-title: "Week 5 self-check — reproduce and transfer"
+title: "Week 5 revision — reproduce and transfer"
 ---
 
-Use these questions to check the whole workflow and locate any unfinished
-practical skills. They are not a graded test. Remote tasks requiring an account
-remain pending until the actual course service is provided.
+Try each question before opening its hint or answer.
 
-## 1. Name the location, not just the filename
+Topic quizzes: [remote work](21-remote-workflow-quiz.qmd) ·
+[sequences and pixels](22-data-representations-quiz.qmd) ·
+[small study](23-mini-study-quiz.qmd) ·
+[reproduction](24-reproduce-quiz.qmd) ·
+[consolidation](25-consolidate-quiz.qmd).
+
+---
+
+**Q1. Name the location, not just the filename**
 
 Your report rendered remotely, but local Downloads is empty. What should you
 check? Does closing the SSH terminal necessarily delete saved remote output?
 
-::: {.callout-note collapse="true"}
-## Answer
+::: {.callout-tip collapse="true" title="Hint"}
+Rendering, transferring, and locating the received copy are separate actions.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
 
 Locate the output on the remote computer, then check whether it was transferred
 and to which destination. A remote desktop is not automatic synchronisation.
 Closing SSH ends a session, not saved files, subject to the service's storage
-policy. Do not assume a running process will continue after disconnecting.
+policy. Whether a running process continues depends on the service.
 :::
 
-## 2. Count the represented thing
+---
+
+**Q2. Count the represented thing**
 
 `dna <- readLines("data/dna.txt")` reads one invented 40-letter line. What are
 `length(dna)` and `nchar(dna)`? Why do they differ?
 
-::: {.callout-note collapse="true"}
-## Answer
+::: {.callout-tip collapse="true" title="Hint"}
+Count strings separately from characters within them.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
 
 `length(dna)` is **1** stored string; `nchar(dna)` is **40** characters in that
 string. Counting vector elements and counting characters answer different
 questions. The final newline in the file is not another DNA base.
 :::
 
-## 3. Pixels are positions, not plants
+---
+
+**Q3. Pixels are positions, not plants**
 
 The teaching image has 64 pixels, 24 above intensity 100. What fraction is bright?
 Does that make 64 independent biological replicates or identify one cell?
 
-::: {.callout-note collapse="true"}
-## Answer
+::: {.callout-tip collapse="true" title="Hint"}
+Divide bright positions by all positions; identify what those positions represent.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
 
 The fraction is **24/64 = 0.375**. Pixels are related positions in one artificial
 image. Their count does not establish independent treatment replication or
@@ -47,14 +66,19 @@ biological identity. Interpretation needs acquisition context, scale, and
 validation. The threshold count alone does not establish a cell's area in mm².
 :::
 
-## 4. Available duckweed measurements
+---
+
+**Q4. Available duckweed measurements**
 
 Twenty independent flasks were started, ten per allocation. Nutrient flask F17
 spilled before weighing. How many available biomass observations are there, and
 why is replacing the missing value by zero inappropriate?
 
-::: {.callout-note collapse="true"}
-## Answer
+::: {.callout-tip collapse="true" title="Hint"}
+Start with ten per group, then account for the documented spill.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
 
 There are **10 control and 9 nutrient observations**, 19 in total. Zero would
 invent a known biomass; unavailable and absent biomass are different meanings.
@@ -62,14 +86,19 @@ Retain the original row, report the loss, and make the comparison conditional
 on the observed data and missingness limitation.
 :::
 
-## 5. A percentage difference needs its units
+---
+
+**Q5. A percentage difference needs its units**
 
 In the supplied alternative, percentage yield is `100 × collected mass / supplied
 maximum mass`, with matching mass units. Protocol means are 68.67% and 77.00%.
 Is their difference an 8.33% relative increase? Does it establish greater purity?
 
-::: {.callout-note collapse="true"}
-## Answer
+::: {.callout-tip collapse="true" title="Hint"}
+Subtracting two percentages gives a difference in percentage points.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
 
 The modified-minus-standard difference is **8.33 percentage points**. A relative
 percentage change would divide by the starting mean and multiply by 100; it is
@@ -78,29 +107,39 @@ safety, sustainability, or general superiority. Product purity was an explicit
 simplifying assumption in this numerical exercise, not a measured finding.
 :::
 
-## 6. Share a recipe, not only its output
+---
 
-A peer receives your HTML but cannot update the analysis for new data. What
+**Q6. Share a recipe, not only its output**
+
+A reader receives your HTML but cannot update the analysis for new data. What
 else should be in the shared project? Why test extraction in a new location?
 
-::: {.callout-note collapse="true"}
-## Answer
+::: {.callout-tip collapse="true" title="Hint"}
+HTML displays a result; source and inputs are needed to update it.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
 
 Include the `.Rmd` source, actual input CSV, dictionary, project file, required
 output folder if used, and a short README naming packages and the file to render.
 Testing a new location detects dependencies on personal absolute paths or missing
 files. The `.Rproj` does not contain the dataset. A fresh session detects hidden
-interactive objects. Do not include credentials or unrelated personal work.
+interactive objects. Include only the study files.
 :::
 
-## 7. What does successful reproduction establish?
+---
 
-The peer renders your source successfully from the shared input. Does that prove
-the experimental design and interpretation are correct, or provide a backup
+**Q7. What does successful reproduction establish?**
+
+Your report renders successfully from the shared source and input. Does that
+prove the design and interpretation are correct, or provide a backup
 against losing your only disk?
 
-::: {.callout-note collapse="true"}
-## Answer
+::: {.callout-tip collapse="true" title="Hint"}
+Test reproduction, scientific validity, and backup separately.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
 
 It establishes that the supplied work regenerates the result in the tested
 environment. A flawed analysis can be reproducible. Scientific validity still
@@ -108,30 +147,40 @@ needs the design, assumptions, checks, and reasoning. Backup is a separate actio
 keep a retrievable copy using supported separate storage.
 :::
 
-## 8. Checks have limits
+---
+
+**Q8. Checks have limits**
 
 The received table has the same filename, byte size, row count, and column names
 as the source. Does this prove that every measurement matches? What would you
 check in a small transfer audit before making a stronger claim?
 
-::: {.callout-note collapse="true"}
-## Answer
+::: {.callout-tip collapse="true" title="Hint"}
+A changed value can leave a table’s dimensions unchanged.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
 
 No. A changed value can occupy the same number of characters, and tables can
 have identical dimensions but different contents. Inspect the intended saved
 input, verify named records and missing values, and compare the contents using
 the supported method. Record the actual source and destination locations.
-Do not confuse an unsaved editor change with the bytes that were sent.
+Check saved contents rather than an unsaved editor buffer.
 :::
 
-## 9. One changed label, one unchanged length
+---
+
+**Q9. One changed label, one unchanged length**
 
 The invented DNA string has A11, C9, G9, T11. Its first A is replaced by G in
 a new object. What are the changed A/G counts, total length, and GC fraction,
 defined here as (G + C) / all letters? Did the original file necessarily change?
 
-::: {.callout-note collapse="true"}
-## Answer and calculation
+::: {.callout-tip collapse="true" title="Hint"}
+Replacement changes a label, not the number of positions.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
 
 A10 and G10, still 40 letters, with GC fraction `(10 + 9) / 40 = 0.475`.
 The original fraction was `18 / 40 = 0.45`. Changing a new R object does not
@@ -139,14 +188,19 @@ write a file unless a save/write operation is performed. A count-based fraction
 does not establish what a DNA sequence does biologically.
 :::
 
-## 10. A threshold can change its answer without moving an object
+---
+
+**Q10. A threshold can change its answer without moving an object**
 
 The toy image has 24 pixels at 210 and 40 at 25. Add 30 to every intensity in
 a new object. Compare counts above 220 before and after. What about counts
 above 100? Explain the difference between `> 210` and `>= 210` in the original.
 
-::: {.callout-note collapse="true"}
-## Answer
+::: {.callout-tip collapse="true" title="Hint"}
+The shifted intensity levels are 55 and 240. Read strict and inclusive comparisons separately.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
 
 Above 220 changes from zero to 24 because the bright pixels become 240. Above
 100 stays at 24. Original `> 210` excludes equality and selects zero, whereas
@@ -154,7 +208,9 @@ Above 220 changes from zero to 24 because the bright pixels become 240. Above
 alone cannot establish a larger organism or a change in physical object area.
 :::
 
-## 11. A fresh dataset requires fresh counts
+---
+
+**Q11. A fresh dataset requires fresh counts**
 
 The algae table has 24 independent cultures, twelve per allocation. A19 in the
 supplement group spilled before weighing. Its available group means are 28.20
@@ -162,8 +218,11 @@ mg for reference and 33.91818 mg for supplement. Give available n and the
 observed supplement-minus-reference difference. Must supplement contain the
 largest single observation?
 
-::: {.callout-note collapse="true"}
-## Answer and calculation
+::: {.callout-tip collapse="true" title="Hint"}
+One supplement outcome is unavailable; subtract reference mean from supplement mean.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
 
 Available n is **12 reference and 11 supplement**, 23 in total. The directed
 difference is `33.91818 - 28.20 ≈ 5.72 mg`. A higher group mean does not require
@@ -171,14 +230,19 @@ every value to be higher: reference culture A11 at 41.7 mg is the largest
 individual observation. Describe both the centre and observations.
 :::
 
-## 12. A sensitivity check does not justify deletion
+---
+
+**Q12. A sensitivity check does not justify deletion**
 
 Omitting A11 lowers the algae reference mean to 26.97273 mg and increases the
 observed difference to about 6.95 mg. No source record identifies A11 as an
 error. Which result should be primary, and how should the other be labelled?
 
-::: {.callout-note collapse="true"}
-## Answer
+::: {.callout-tip collapse="true" title="Hint"}
+Ask whether the source record supports an exclusion.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
 
 Keep the **all-available-measurements result** primary: about 5.72 mg. The
 other is a diagnostic sensitivity calculation with an explicitly changed sample
@@ -187,14 +251,19 @@ convenient p-value cannot justify removing a recorded observation. A19 remains
 a distinct missing measurement; omitting A11 does not repair that loss.
 :::
 
-## 13. Rendering can miss the more serious fault
+---
+
+**Q13. Rendering can miss the more serious fault**
 
 In a disposable report copy, an input is temporarily renamed. In another copy,
 the prose claims that every enrolled duckweed flask had a measured outcome.
 Which fault should stop rendering, and which may render successfully?
 
-::: {.callout-note collapse="true"}
-## Answer
+::: {.callout-tip collapse="true" title="Hint"}
+A missing input can stop execution; software can reproduce false prose.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
 
 The unchanged input path should fail when its required file is unavailable.
 Restore its exact name/path, rerun, and compare the result. The false prose can
@@ -203,14 +272,19 @@ It contradicts the documented missing F17 measurement. Check scientific meaning
 as well as execution; keep intentionally faulty copies out of the final package.
 :::
 
-## 14. Is this a rounding difference or a different analysis?
+---
+
+**Q14. Is this a rounding difference or a different analysis?**
 
 One memo gives a mean of 33.91818 mg and the report displays 33.92 mg. Another
 report gives 34.32 mg. What should be investigated, and why should you check the
 input and calculation before changing display precision?
 
-::: {.callout-note collapse="true"}
-## Answer
+::: {.callout-tip collapse="true" title="Hint"}
+Round 33.91818 to two decimal places, then compare it with both displayed values.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
 
 33.92 is the first value rounded to two decimal places. 34.32 is not explained
 by that rounding. Check the saved input, available counts, group selection,

@@ -307,7 +307,7 @@ Data Analysis in Life Sciences
 </div>
 <p>Keep P06’s final length as <code>NA</code>.</p>
 <aside class="notes">
-<p>A missing final measurement prevents us calculating its growth. A measured growth of zero would mean that initial and final readings were equal. Do not copy the complete teaching file’s P06 value into this separate missing-data exercise.</p>
+<p>A missing final measurement prevents us calculating its growth. A measured growth of zero would mean that initial and final readings were equal. The complete teaching file is a separate dataset, not a source for filling this missing observation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -440,7 +440,7 @@ Data Analysis in Life Sciences
 <figcaption>A text entry with a unit suffix is converted only after its meaning is confirmed.</figcaption>
 </figure>
 </div>
-<p>Correct representation after checking meaning; do not just strip inconvenient characters.</p>
+<p>Check meaning before converting text to numbers.</p>
 <aside class="notes">
 <p>R cannot infer that every suffix or magnitude reflects the same unit. P18 is confirmed as 18.7 mm. Compare character versus numeric columns using str before and after parse_double.</p>
 <style type="text/css">
@@ -511,7 +511,7 @@ Data Analysis in Life Sciences
 </div>
 <p>The column pattern is familiar; the values, identifiers, and checks are new.</p>
 <aside class="notes">
-<p>The transfer study has 18 independent potted plants,9 per allocation, measured7 days apart. No source note authorises corrections. Do not reuse the first study denominator, P21 repair, or prior means.</p>
+<p>The transfer study has 18 independent potted plants,9 per allocation, measured7 days apart. No source note authorises corrections. Check the new file and calculate its own counts and summaries.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -551,7 +551,7 @@ Data Analysis in Life Sciences
 <h2>Decide whether a change is justified</h2>
 <p>An unfamiliar value appears in the transfer file.</p>
 <p><strong>What can you do immediately, and what requires more evidence?</strong></p>
-<p>Inspect the record and unit; preserve the input; ask the recorder. Do not change it merely because it is far from the others.</p>
+<p>Inspect the record and unit; preserve the input; ask the recorder. Keep valid unusual observations.</p>
 <aside class="notes">
 <p>Ask students to distinguish a diagnostic flag from an authorised correction. Their independent transfer output must explicitly state that no correction is supported in the supplied complete transfer file.</p>
 <style type="text/css">
@@ -576,7 +576,7 @@ Data Analysis in Life Sciences
 </ul>
 <p><a href="../../week3/11-data-quality.html">Open exercises</a>.</p>
 <aside class="notes">
-<p>Students should run inspection first, then the repairs, then verify counts. Ask a partner to locate the original, script, field notes, and output. Do not add an outlier-removal exercise: distinguishing evidence from convenience is the main outcome.</p>
+<p>Students should run inspection first, then the repairs, then verify counts. Have students locate the original, script, field notes, and output in their saved project. Corrections need source evidence.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

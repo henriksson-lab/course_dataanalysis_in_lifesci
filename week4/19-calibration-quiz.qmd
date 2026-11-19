@@ -1,0 +1,84 @@
+---
+title: "Quiz: Calibration and unknown samples"
+---
+
+[Exercises](19-calibration.qmd) · [Lecture slides](../lectures/19-calibration/lec.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** Known concentration is in mg/L; the measured response is absorbance.
+Which formula fits the calibration used here?
+
+(i) `lm(absorbance ~ concentration_mg_l, data = standards)`  
+
+(ii) `lm(concentration_mg_l ~ absorbance, data = standards)`
+
+::: {.callout-tip collapse="true" title="Hint"}
+The response is left of `~`; the predictor is right of it.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(i). Prepared concentration is the predictor and absorbance the response.
+The unknown concentration is later estimated by rearranging that fitted line.
+:::
+
+---
+
+**Q2.** For `absorbance = 0.04 + 0.065 * concentration_mg_l`, estimate
+concentration from an in-range reading of 0.30. What does the slope mean?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Rearrange to `(reading - intercept) / slope`.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+$(0.30-0.04)/0.065 = 4$ **mg/L**. The slope is an increase of 0.065
+absorbance per mg/L increase in concentration.
+:::
+
+---
+
+**Q3.** A standard has observed absorbance 0.30 and fitted absorbance 0.28.
+What is its residual, and where is its point relative to the line?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Residual = observed − fitted.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The residual is **+0.02 absorbance**, so the point lies above the fitted
+line. It is a signal-scale difference, not a concentration.
+:::
+
+---
+
+**Q4.** Measured standard signals span 0.024–0.525. Unknown X1 reads 0.270
+and X2 reads 0.700. Which gets a supported inverse estimate, and how should
+the other appear in the saved table?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Check the measured signal range before inverting.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+X1 is in range. Retain X2's ID and reading with an out-of-range flag and
+a missing concentration estimate. A suitable new measurement is needed.
+:::
+
+---
+
+**Q5.** A new sample is diluted from 1.00 mL to 10.00 mL total volume. Its
+new in-range reading corresponds to 7.40 mg/L. Estimate the original concentration
+assuming no measured substance is lost or reacts.
+
+::: {.callout-tip collapse="true" title="Hint"}
+Multiply the diluted estimate by final total volume / original-sample volume.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+$7.40\times(10.00/1.00) = 74.0$ **mg/L** using the rounded estimate.
+This uses a measured dilution and stated volumes; it does not validate a
+different sample's out-of-range reading.
+:::

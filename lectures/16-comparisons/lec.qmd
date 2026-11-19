@@ -37,7 +37,7 @@ The course data are simulated. The study description supplies the random-allocat
 A group mean does not describe every plant.
 
 ::: notes
-Ask students what a dot represents and whether any value obviously contradicts the documented measurement process. There is no known source error in this complete table. Do not remove values simply because they reduce a group difference.
+Ask students what a dot represents and whether any value obviously contradicts the documented measurement process. There is no known source error in this complete table. Keep valid measurements in the main analysis.
 :::
 
 ## State the direction before calculating
@@ -75,7 +75,7 @@ Load readr, dplyr, ggplot2 before these lines, as in the practical. pull extract
 Two columns or two labels alone do not establish pairing.
 
 ::: notes
-Today compares separate plants. Later, the same plant measured before and after a light change will require within-plant matching. Do not pair unrelated plants merely because their rows happen to align.
+Today compares separate plants. Later, the same plant measured before and after a light change will require within-plant matching. Pairing requires matching subject identity, not matching row positions.
 :::
 
 ## Do we have plants or shared treatment units?
@@ -97,7 +97,7 @@ The group SDs describe how much plants vary within each group.
 Tomorrow we estimate uncertainty in the population mean difference.
 
 ::: notes
-Do not use the two within-group SDs as if they were a confidence interval for the difference. Variation among measurements is the starting information for uncertainty, but the quantities answer different questions. Avoid introducing an extra formula today.
+Within-group SD and a confidence interval for the difference describe different quantities. Variation among measurements is the starting information for uncertainty, but the quantities answer different questions. Avoid introducing an extra formula today.
 :::
 
 ## What might weaken the interpretation?
@@ -158,7 +158,7 @@ Include n, group means, directed difference, units, and individual variation.
 Then name the unanswered question: **how uncertain is the estimated population difference?**
 
 ::: notes
-Students should have a meaningful results paragraph before day17. Prohibit neither ordinary uncertainty nor cautious wording; the point is to stop a p-value replacing the experimental question.
+Students should have a meaningful results paragraph before day17. Keep the experimental question and observed difference clear before introducing test output.
 :::
 
 ## An independent study gives another estimate

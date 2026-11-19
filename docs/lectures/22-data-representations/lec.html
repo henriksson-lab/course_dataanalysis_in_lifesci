@@ -215,7 +215,7 @@ Data Analysis in Life Sciences
 </div>
 <p>Our task: identify what each stored value represents.</p>
 <aside class="notes">
-<p>This is a short breadth session using invented DNA and an artificial image. We are not introducing a sequence-analysis or image-processing pipeline. Students can transfer vectors, tables, logical comparisons, and interpretation.</p>
+<p>Use invented DNA and an artificial image to practise vectors, tables, logical comparisons, and interpretation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -238,7 +238,7 @@ Data Analysis in Life Sciences
 </div>
 <p>Renaming <code>photo.jpg</code> to <code>photo.csv</code> does not convert the contents.</p>
 <aside class="notes">
-<p>A bit has two possible values; eight bits yield 256 patterns. We do not need binary arithmetic. One format may use a byte for brightness; another uses encoded characters. The extension helps an application choose how to read it.</p>
+<p>A bit has two possible values; eight bits yield 256 patterns. One format may use a byte for brightness; another uses encoded characters. The extension helps an application choose how to read it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -436,7 +436,7 @@ Data Analysis in Life Sciences
 </div>
 <p>The original object and file can remain unchanged.</p>
 <aside class="notes">
-<p>The sequence begins with A. Predict the total and two counts before running the replacement. Do not edit the raw DNA file: make a changed R object. Counts are numerical descriptions of this invented string, not evidence about the function of a real DNA sequence.</p>
+<p>The sequence begins with A. Predict the total and two counts before running the replacement. Make a changed R object while preserving the raw file. Counts are numerical descriptions of this invented string, not evidence about the function of a real DNA sequence.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -457,7 +457,7 @@ Data Analysis in Life Sciences
 <span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bases)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>[1]</code> selects the first element. Inspect <strong>both</strong> objects after the change.</p>
 <aside class="notes">
-<p>The important observation is that bases retains its original values while bases_changed holds the modified values. No R memory-internals explanation is needed. Saving neither object to the raw path also leaves the supplied file unchanged. Ask which actions would be needed to persist the changed string.</p>
+<p>Inspect bases and bases_changed to distinguish the original and modified values. Ask which operation would save the changed string to a file.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -606,7 +606,7 @@ Data Analysis in Life Sciences
 </section>
 <section id="explain-the-operation-in-a-short-report" class="slide level2">
 <h2>Explain the operation in a short report</h2>
-<p>Use two figures, the threshold table, and a few explanatory sentences.</p>
+<p>Use two figures, the threshold table, and an interpretation.</p>
 <p>Name the original object, controlled change, observed result, and limit.</p>
 <aside class="notes">
 <p>The independent task is representation-report.Rmd, rendered from its own saved code. A reader should be able to distinguish pixel brightness from physical area and label counts from sequence function. The required short conclusions matter more than another elaborate plotting layer.</p>
@@ -624,7 +624,7 @@ Data Analysis in Life Sciences
 </section>
 <section id="exercises-explain-the-representation" class="slide level2">
 <h2>Exercises: explain the representation</h2>
-<p><a href="../../week5/22-data-representations.html">Open day 22 exercises</a>.</p>
+<p><a href="../../week5/22-data-representations.html">Open exercises</a> · <a href="../../week5/22-data-representations-quiz.html">Quiz</a>.</p>
 <ul>
 <li>Save <code>representations.R</code>, controlled copies, and the threshold table.</li>
 <li>Render <code>representation-report.Rmd</code> with two figures and interpretation.</li>
@@ -632,7 +632,7 @@ Data Analysis in Life Sciences
 <li>Keep original files intact and rerun from a fresh session.</li>
 </ul>
 <aside class="notes">
-<p>Keep operations at the level already taught. The added depth is predicting controlled changes, interpreting the result, and testing the saved report; it should not become a third specialist software unit.</p>
+<p>Ask students to predict controlled changes, interpret the result, and test the saved report using the supplied operations.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

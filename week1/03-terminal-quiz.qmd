@@ -1,0 +1,78 @@
+---
+title: "Quiz: The terminal"
+---
+
+[Lecture](../lectures/03-terminal/lec.qmd) · [Exercises](03-terminal.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** You are in `route-challenge/results/notes`. The folder `inputs` is directly
+inside `route-challenge`. Which command reaches it?
+
+(i) `cd ../inputs`  (ii) `cd ../../inputs`  (iii) `cd inputs`
+
+::: {.callout-tip collapse="true" title="Hint"}
+Draw the route back to the folder containing both `results` and `inputs`.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(ii). The first `..` reaches `results`; the second reaches `route-challenge`.
+From there, enter `inputs`.
+:::
+
+---
+
+**Q2.** What differs between `mkdir field notes` and `mkdir "field notes"`?
+
+::: {.callout-tip collapse="true" title="Hint"}
+How many destination arguments does the shell read in each command?
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The first creates two directories, `field` and `notes`. The second creates one
+directory whose name contains a space: `field notes`.
+:::
+
+---
+
+**Q3.** A terminal is in `practice`. You run `cd missing-folder`, and the shell
+reports that the folder does not exist. What does `pwd` show afterwards?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Did the requested change of directory succeed?
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The path to `practice`. A failed `cd` leaves the current working directory
+unchanged. Use `ls` to inspect the names that actually exist.
+:::
+
+---
+
+**Q4.** Two terminal windows are in the same directory. In the first, you run
+`cd seedlings`. Does the second window move too? Have any files moved?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Distinguish a shell's current location from the stored folder tree.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Each shell has its own working directory, so the second stays where it was.
+`cd` changes a shell's location; it moves no files or folders.
+:::
+
+---
+
+**Q5.** Which command creates a directory: `pwd`, `ls`, `mkdir readings`, or
+`cd readings`? What do the other three do?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Which commands inspect storage, and which change a location?
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+`mkdir readings` creates the directory. `pwd` prints the current directory;
+`ls` lists its entries; `cd readings` enters an existing directory.
+:::

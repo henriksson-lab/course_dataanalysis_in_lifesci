@@ -1,0 +1,93 @@
+---
+title: "Quiz: Independent units and sampling"
+---
+
+[Exercises](14-replicates-uncertainty.qmd) · [Lecture slides](../lectures/14-replicates-uncertainty/lec.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** One plant is measured twelve times with a ruler. How many independently
+treated plants does this provide? What can the repeated readings help assess?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Separate the unit assigned to treatment from repeated measurement of it.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+**One plant**. The repeats help assess measurement consistency; they do
+not create twelve independent plants.
+:::
+
+---
+
+**Q2.** Treatment is assigned to whole trays, with twelve plants in each tray.
+Which is the treatment unit?
+
+(i) A ruler reading.  
+
+(ii) Each plant independently.  
+
+(iii) A tray.
+
+::: {.callout-tip collapse="true" title="Hint"}
+All plants in a tray receive the same allocation together.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(iii), a tray. Plants within it share the treatment unit and potentially
+the environment. More independently allocated trays are needed for independent
+tray-level replication.
+:::
+
+---
+
+**Q3.** The supplied simulation draws from one fixed source distribution. Will
+means of samples of sixteen usually spread more or less than means of samples
+of four? Does the source SD change?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Distinguish variation among observations from variation among estimated means.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The sixteen-draw means usually spread **less**. The stored source values
+and their SD stay unchanged.
+:::
+
+---
+
+**Q4.** What do the 400 values in `means_16` represent?
+
+(i) 400 newly measured plants.  
+
+(ii) Means of 400 simulated samples, each with sixteen draws.  
+
+(iii) Sixteen means from samples of 400 plants.
+
+::: {.callout-tip collapse="true" title="Hint"}
+Read the outer repetition count and inner sample size separately.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(ii). `replicate(400, mean(sample(..., size = 16, replace = TRUE)))`
+calculates 400 means. The draws simulate sampling; they are not new measurements.
+:::
+
+---
+
+**Q5.** You increase simulation repetitions from 400 to 1000 while retaining
+sixteen draws per sample. Does this have the same effect as increasing plants
+per sample? What does `set.seed()` control?
+
+::: {.callout-tip collapse="true" title="Hint"}
+One setting changes how well the simulated distribution is represented;
+the other changes what each estimate averages.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No. More repetitions give a more stable picture of the same sampling
+distribution; more independent draws per mean typically narrow it. `set.seed()`
+sets the random generator state so the simulated sequence can be reproduced.
+:::

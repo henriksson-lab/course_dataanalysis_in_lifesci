@@ -283,7 +283,7 @@ seedlings &lt;- read_csv("data/seedlings.csv",
 <li>In which chunk should the repair go?</li>
 </ul>
 <aside class="notes">
-<p>The raw CSV does not contain growth_mm. Add final minus initial in a preparation chunk before plotting. Do not try to cure this by repeatedly creating objects in the Console. Deliberately introduce one misspelling in a demonstration, read the reported chunk, fix it, and render again.</p>
+<p>The raw CSV does not contain growth_mm. Add final minus initial in a preparation chunk before plotting. Include the dependency in the saved report. Deliberately introduce one misspelling in a demonstration, read the reported chunk, fix it, and render again.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -306,7 +306,7 @@ seedlings &lt;- read_csv("data/seedlings.csv",
 </div>
 <p>Put all required imports and calculations in the source document.</p>
 <aside class="notes">
-<p>Run an import only in the Console, then explain why a recipient cannot reproduce that unstated step. The Knit route uses a separate rendering process; the direct render function can use a calling environment, so the practical’s restart-and-render check is important. Do not promise every rendering invocation automatically isolates all state.</p>
+<p>Run an import only in the Console, then explain why a recipient cannot reproduce that unstated step. The Knit route uses a separate rendering process; the direct render function can use a calling environment, so the practical’s restart-and-render check is important. Explain why the fresh-session check matters.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -346,7 +346,7 @@ seedlings &lt;- read_csv("data/seedlings.csv",
 <h2>Render from the Console, not from inside itself</h2>
 <p>Save the document, then use <strong>Knit</strong>, or run in the <strong>R Console</strong>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"report.Rmd"</span>, <span class="at">output_dir =</span> <span class="st">"reports"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Do not put that command inside the report you are rendering.</p>
+<p>Run this command in the Console, outside the report.</p>
 <aside class="notes">
 <p>The double colon calls a function from a package. output_dir changes where the HTML is written, not where the source belongs. The Knit button may put the output beside the source; locate the actual file. Restart R before a reproducibility check. A self-rendering chunk would create a recursive workflow and is not required.</p>
 <style type="text/css">
@@ -476,7 +476,7 @@ seedlings &lt;- read_csv("data/seedlings.csv",
 <h2>Run the renderer outside the report</h2>
 <p>Use Knit, or run in the R Console:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"report-workshop.Rmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Do not place this command inside that report.</p>
+<p>Run this command in the Console, outside the report.</p>
 <aside class="notes">
 <p>A render call inside the document would cause the report to try to render itself. Packages and calculations belong in its appropriate chunks; installing software belongs to the separate setup step.</p>
 <style type="text/css">

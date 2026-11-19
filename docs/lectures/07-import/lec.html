@@ -215,7 +215,7 @@ Data Analysis in Life Sciences
 </div>
 <p>The saved input is separate from the imported object.</p>
 <aside class="notes">
-<p>Open the course project before importing. A CSV is text; importing interprets it as a table. Do not imply that editing the object automatically changes the CSV. Conversely, changing the CSV does not update an already imported object until reread. These are the same disk/memory distinctions from week 1.</p>
+<p>Open the course project before importing. A CSV is text; importing interprets it as a table. Editing the object leaves the CSV unchanged. Conversely, changing the CSV does not update an already imported object until reread. These are the same disk/memory distinctions from week 1.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -286,7 +286,7 @@ Data Analysis in Life Sciences
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">file.exists</span>(<span class="st">"data/seedlings.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <aside class="notes">
-<p>The second command should give TRUE. If not, identify the current folder, the actual extracted tree, and the computer holding the file. Common causes are an extra extraction folder or opening a ZIP preview. Do not fix this by copying a personal absolute path into every analysis line.</p>
+<p>The second command should give TRUE. If not, identify the current folder, the actual extracted tree, and the computer holding the file. Common causes are an extra extraction folder or opening a ZIP preview. Reopen the intended project before retrying the relative path.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -509,7 +509,7 @@ Data Analysis in Life Sciences
 </div>
 <p>Check which input produced the result before changing the written sample size.</p>
 <aside class="notes">
-<p>A wrong project with a plausible-looking filename can produce plausible output. Have a peer rerun the script fresh and identify each audit. Source provenance matters even when file.exists returns TRUE.</p>
+<p>A wrong project with a plausible-looking filename can produce plausible output. Restart R, rerun the script, and identify the input behind each audit. Source provenance matters even when file.exists returns TRUE.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -547,7 +547,7 @@ Data Analysis in Life Sciences
 <p>Save <code>day07.R</code>, then inspect <code>data/leaf-mass.csv</code> too.</p>
 <p>Which columns and units differ? What does one row represent there?</p>
 <aside class="notes">
-<p>The leaf table has eighteen independent plants, one leaf each, area in square centimetres and dry mass in milligrams. Students need not infer any causal relationship. Reuse the import/inspect workflow while reading that dataset’s dictionary rather than assuming the seedling schema applies.</p>
+<p>The leaf table has eighteen independent plants, one leaf each, area in square centimetres and dry mass in milligrams. A scatter plot can describe association without establishing causation. Reuse the import/inspect workflow while reading that dataset’s dictionary rather than assuming the seedling schema applies.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

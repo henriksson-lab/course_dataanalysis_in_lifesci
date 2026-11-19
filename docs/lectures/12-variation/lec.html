@@ -440,7 +440,7 @@ Data Analysis in Life Sciences
 </div>
 <p>Unit conversion changes numbers; it does not change the measured plants.</p>
 <aside class="notes">
-<p>Original variance 4 mm² becomes.04 cm²; SD 2 mm becomes.2 cm. Variance scales with the square of the conversion factor. Do not equate a smaller numeric SD after conversion with less biological variation.</p>
+<p>Original variance 4 mm² becomes.04 cm²; SD 2 mm becomes.2 cm. Variance scales with the square of the conversion factor. The smaller numeric SD reflects a different unit, not less biological variation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -509,7 +509,7 @@ Data Analysis in Life Sciences
 <span id="cb4-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(transfer_control<span class="sc">$</span>growth_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>T01 grew <strong>15.0 mm</strong>; check that subtraction independently.</p>
 <aside class="notes">
-<p>Load readr and dplyr as earlier. New data need their own import and growth column. Each group has 9 complete independent observations. Do not reuse a control vector from another file accidentally.</p>
+<p>Load readr and dplyr as earlier. New data need their own import and growth column. Each group has 9 complete independent observations. Use separately named objects for the two studies.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -571,7 +571,7 @@ Data Analysis in Life Sciences
 <p>What changes when mm become cm?</p>
 <p><a href="../../week3/12-variation.html">Open exercises</a>.</p>
 <aside class="notes">
-<p>Keep the by-hand three-number example before the full dataset. Ask for a two-sentence explanation of centre and spread. Students should retain the measurement unit and recognise that SD among plants is not uncertainty in a treatment difference.</p>
+<p>Keep the by-hand three-number example before the full dataset. Ask for an explanation of centre and spread. Students should retain the measurement unit and recognise that SD among plants is not uncertainty in a treatment difference.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

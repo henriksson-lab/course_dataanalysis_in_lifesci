@@ -2,7 +2,7 @@
 title: "Day 1 — Find, save, and reopen your laboratory files"
 ---
 
-[Lecture slides](../lectures/01-files/lec.qmd) · [Weekly self-check](quiz.qmd)
+[Lecture slides](../lectures/01-files/lec.qmd) · [Quiz](01-files-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
 ## Today's biological question
@@ -37,7 +37,7 @@ stored. You can explore it using **File Explorer** on Windows or **Finder** on
 Mac. A browser such as Firefox or Safari displays websites; it is a different
 application from the file manager.
 
-## Practical 1: download and locate the course folder
+## Download and locate the course folder
 
 1. Download [the course files](../downloads/course-files.zip).
 2. Open the browser's downloads list. Use its option to show the download in
@@ -47,8 +47,7 @@ application from the file manager.
    double-click it to extract it. If the browser already extracted it, locate
    the resulting folder instead.
 4. Find the extracted folder called `introcomputing-course`. Move this ordinary
-   folder into **Documents** using the file manager. Do not work inside the ZIP's
-   preview window.
+   folder into **Documents** using the file manager. Work in this extracted folder.
 5. Open `introcomputing-course`. You should see a `data` folder, an `output`
    folder, a `reports` folder, `report.Rmd`, and `introcomputing.Rproj`.
 6. Open `data` and find `seedlings.csv`. Keep this file unchanged.
@@ -80,14 +79,14 @@ File name extensions**; older versions place the checkbox directly under View.
 In Finder, use **Settings → Advanced → Show all filename extensions**.
 Menu wording can vary. Ask for help if you cannot find the setting.
 
-## Practical 2: open a copy in two ways
+## Open a copy in two ways
 
 1. Copy `data/seedlings.csv` and paste the copy into `output`.
 2. Rename the copy `seedlings-practice.csv`. Confirm that it still ends in `.csv`.
 3. Open this practice copy. If a spreadsheet opens automatically, notice its
    rows and columns, then close it **without saving changes**.
 4. Right-click the practice file and choose **Open with** a text editor, such as
-   Notepad on Windows or TextEdit on Mac. Do not save changes here either.
+   Notepad on Windows or TextEdit on Mac. Close it without saving changes.
 
 The first lines should contain the following information:
 
@@ -102,13 +101,13 @@ P01. Its initial length was 25.7 millimetres and its final length was 44.3
 millimetres. A spreadsheet displays the commas as column boundaries; the text
 editor displays the commas themselves. Both applications opened the same file.
 
-Discuss: did P01 grow by 44.3 mm, or did it end at 44.3 mm? Its increase was
+Did P01 grow by 44.3 mm, or did it end at 44.3 mm? Its increase was
 44.3 − 25.7 = 18.6 mm. Keeping the meaning and units of a measurement matters
 as much as knowing how to open its file.
 
-## Practical 3: save a note you can find again
+## Save a note you can find again
 
-Open a plain-text editor and write three short sentences: what a row represents,
+Open a plain-text editor and describe what a row represents,
 what the length units are, and where the original measurements are stored. Use
 **Save As** and save the note as `day01-notes.txt` in `reports`.
 
@@ -121,14 +120,11 @@ navigate from Documents to your note. Open it. If you can only find it through
 an application's “recent files” list, repeat the folder route once more.
 
 
-## Extended practical — build a record you can audit
+## Build a record you can audit
 
-Allow about 75–90 minutes for this block, including explanation and checking.
-Work in the graphical file manager and a plain-text editor. You are receiving
-measurements as a future laboratory student: a reader should be able to identify
-which file is original, which is your practice copy, and which contains your
-explanation. Speed is not the objective. Pause after each action and identify
-what changed on storage. Keep the course's `data` folder unchanged throughout.
+
+Work in the graphical file manager and a plain-text editor. Keep original
+measurements under `data` and practice copies under `output`.
 
 1. Create `reports/file-audit.txt`. In it, record the project folder's name and
    the route you take to reach it from Documents. Include the computer you are
@@ -145,15 +141,13 @@ what changed on storage. Keep the course's `data` folder unchanged throughout.
    `output/name-test.txt`. Open it as plain text. Do you still see commas and the
    same plant measurements? Rename that copy `name-test.csv` again. Record the
    observation: changing the extension changes the name, not the saved information.
-   Do not try this on the original or on an application file.
 5. Open `reports/file-audit.txt`, add today's progress, and save explicitly.
    Close the editor. Locate and reopen the note from the file manager rather
    than from a recent-files list. Check that the last sentence is present. If
    it is absent, investigate whether you saved another copy or an unexpected
    extension before writing the sentence again.
-6. Ask a partner to find your note using only the route written in it. If working
-   alone, close all windows, take a short break, and follow your own instructions.
-   Revise an ambiguous instruction such as “open the file” into a named action.
+6. Close all windows and follow the route written in your note. Revise any
+   instruction that does not identify a folder or file clearly.
 
 ::: {.callout-tip collapse="true"}
 ## Hint: comparing names is easier when extensions are visible
@@ -162,29 +156,25 @@ The file manager may hide extensions even while a text editor displays them.
 Show them before deciding that two names are identical. A name such as
 `file-audit.txt.rtf` is a formatted document, not the plain-text note requested.
 Use the editor's plain-text mode and Save As, then inspect the resulting file
-again. Do not solve a file-format problem by repeatedly appending `.txt`.
+again.
 :::
 
-## Independent transfer — receive a second measurement file
+## Receive a second measurement file
 
-Allow about 60–90 minutes. The new `data/seedlings-transfer.csv` is another
+The new `data/seedlings-transfer.csv` is another
 **simulated** study: 18 separate potted seedlings, nine randomly assigned to each
 of `control` and `treated`, with initial and final lengths seven days apart.
-Its columns have the same definitions as the first seedling table. No calculation
-software is needed today. The challenge is handling another input accurately,
-not remembering a filename from the demonstration.
+Its columns have the same definitions as the first seedling table.
 
 1. Locate this second file and make a copy called
    `output/transfer-inspection.csv`. State in your audit which remains the
    original. Open the copy in a text editor and find its header and first record.
-2. Read T01 aloud: initial length 25.3 mm and final length 40.3 mm. Write a
+2. Find T01: initial length 25.3 mm and final length 40.3 mm. Write a
    sentence saying what was measured. Compute the increase by ordinary arithmetic
-   and explain why 40.3 mm is not the increase. Do not change either measurement
-   in the CSV to store your answer; put the interpretation in your note.
+   and explain why 40.3 mm is not the increase. Put your answer in the note.
 3. Inspect T18 near the end of the file. Record its treatment and two lengths,
-   then show your partner where the record came from. The table has one header
-   and 18 plant records; you do not need to count with a terminal yet.
-4. In `reports/transfer-receipt.txt`, write a small receipt for your partner:
+   and record where you found it. The table has one header and 18 plant records.
+4. In `reports/transfer-receipt.txt`, record:
    source filename, copy filename, number of plants stated in the study, length
    units, and the difference between initial length, final length, and change.
    Include a sentence explaining that these numbers are teaching data.
@@ -195,8 +185,8 @@ not remembering a filename from the demonstration.
    the measurement file.
 
 **Check and retain:** T01's increase is 15.0 mm. T18 is treated, 21.6 mm initially
-and 43.0 mm finally. Keep the two text notes and your practice copies. A partner
-should be able to point to the original input and your interpretation separately.
+and 43.0 mm finally. Keep the notes and practice copies, with the original input
+and your interpretation in separate files.
 
 
 ## Check your understanding

@@ -2,7 +2,7 @@
 title: "Day 8 — Turn measurements into a useful figure"
 ---
 
-[Lecture slides](../lectures/08-transform-plot/lec.qmd) · [Weekly self-check](quiz.qmd)
+[Lecture slides](../lectures/08-transform-plot/lec.qmd) · [Quiz](08-transform-plot-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
 ## Today's question
@@ -107,16 +107,16 @@ The supplied project includes `output/`. These commands create files there; they
 may replace files with the same names. The plot object in memory and the PNG on
 disk are different things. Locate and open both saved outputs in the file manager.
 
-## Your practical
+## Exercises
 
 1. Recreate both plots from the start of the script and calculate P02's growth
    by hand to check the subtraction.
 2. Save a table containing only treated plants' IDs and growth measurements.
 3. Choose one transfer task: make a plot of initial length against growth with
    axes labelled in mm, **or** adapt the same workflow to the organic-product
-   table below. Do one, not both.
-4. Write two sentences: one describing a visible pattern, one identifying a
-   question the plot alone cannot settle.
+   table below.
+4. Describe a visible pattern and identify a question the plot alone cannot
+   settle.
 5. Restart R and run the script. Confirm the saved files still open afterwards.
 
 ### Alternative transfer task: a derived yield column
@@ -124,13 +124,13 @@ disk are different things. Locate and open both saved outputs in the file manage
 Our simulated table `data/organic-recovery.csv` records twelve separate runs of
 an organic synthesis, six assigned to each of two protocols, `standard` and
 `modified`. A run is one independently performed preparation. These labels
-identify procedures; you do not need to know their chemical steps.
+identify the two procedures being compared.
 
 Each row supplies a `theoretical_mass_g`: the maximum product mass from that
 run's starting materials. `isolated_mass_g` is collected dry product, assumed
 pure for this simplified exercise. Both are grams. Calculate
 `yield_percent = 100 × isolated_mass_g / theoretical_mass_g`. You are given the
-maximum and do not need to derive it from a reaction. The first run, Y01, has
+maximum for each run. The first run, Y01, has
 1.00 g maximum and 0.62 g collected, so its yield is **62%**.
 
 ```{r}
@@ -153,8 +153,7 @@ the derived table to `output/organic-yields.csv` and your plot to
 Use `organic` as the plot's data, `protocol` for x, and `yield_percent` for y.
 Choose horizontal jitter with zero vertical jitter as above. Use `write_csv()`
 for the derived table and `ggsave()` for the figure. Expect 12 rows, no missing
-masses, and Y01 at 62%. A plot shows these results; it does not establish that
-one protocol is generally better or that a higher yield means purer product.
+masses, and Y01 at 62%.
 :::
 
 ::: {.callout-tip collapse="true"}
@@ -166,13 +165,12 @@ check `names(seedlings)` and run the earlier `mutate()` line.
 :::
 
 
-## Extended practical — derive, select, plot, and verify
+## Derive, select, plot, and verify
 
-Allow about 90 minutes. Start `day08-transfer.R` at the project root. The new
+Start `day08-transfer.R` at the project root. The new
 `seedlings-transfer.csv` is an independent simulated seven-day study of eighteen
 plants, nine per group. Its variable definitions match the main seedling table,
-but its values and identifiers differ. Reusing a workflow means changing the
-input deliberately and checking the outputs, not simply changing a plot title.
+but its values and identifiers differ.
 
 1. Import the new table into `transfer`, inspect it, and calculate `growth_mm`
    using `mutate()`. Check T01 by hand: 40.3 − 25.3 = 15.0 mm. Verify the row
@@ -195,7 +193,7 @@ input deliberately and checking the outputs, not simply changing a plot title.
    graphically and confirm its contents. A plot object printed in R is not
    automatically an exported image; writing a CSV is not exporting a figure.
 6. Write a caption stating the independent unit, outcome, units, and meaning of
-   each point. Add two interpretation sentences and one limitation. Compare
+   each point. Interpret the pattern and state a limitation. Compare
    the workflow with the main seedling example: which names changed, which
    operations stayed the same, and which conclusions depend on the new data?
 
@@ -204,13 +202,13 @@ input deliberately and checking the outputs, not simply changing a plot title.
 
 There should be 18 rows in the full derived table and nine in the treated
 subset. `growth_mm` has the same length as the input. Check the original columns
-remain available. To select treated rows use the given label with `==`; do not
-accidentally assign an object or assume every second row is treated.
+remain available. Select treated rows with `treatment == "treated"`, using the
+supplied label rather than the row order.
 :::
 
-## Independent transfer — calculate requested dilutions
+## Calculate requested dilutions
 
-Plan 60–90 minutes. A **stock** is a supplied solution of known concentration.
+A **stock** is a supplied solution of known concentration.
 Dilution uses some stock and solvent to reach a **final total volume**. Assume
 no solute reacts or is lost. The amount stays the same, so the stock volume
 required is `target concentration × final total volume / stock concentration`.
@@ -224,27 +222,26 @@ for the required stock. These are numerical cases, not laboratory instructions.
 2. Add a logical column `possible_by_dilution` using
    `target_mmol_l <= stock_mmol_l`. Explain that `<=` means “less than or equal”.
    A target more concentrated than the stock cannot be obtained by adding
-   solvent alone. Keep that row flagged; do not drop it silently or invent a
-   stronger stock concentration.
+   solvent alone. Retain and flag that row in the full output.
 3. Inspect `stock_volume_ml <= final_volume_ml` as a second check for these
    positive supplied cases. Identify the request that fails and explain why a
    numerical result can be calculable while the intended procedure is impossible.
 4. Save the complete flagged table as `output/dilution-check.csv`. Use
    `filter(possible_by_dilution)` to create a separate supported-results table.
    Plot final total volume against required stock volume for those supported
-   cases, with both axes in mL. Do not interpret this supplied formula relation
-   as an observed biological association needing a statistical test.
+   cases, with both axes in mL. Explain how the supplied formula produces the
+   plotted relationship.
 5. Write `reports/dilution-interpretation.txt` with the requested outputs,
    impossible-case explanation, and a sentence distinguishing “bring to 50 mL
    total” from “add 50 mL solvent”. Preserve the denominator units in the source.
-6. Restart R and regenerate tables and plot. A partner should identify the
+6. Restart R and regenerate tables and plot. Identify the
    impossible request from the saved flagged table without seeing your Console.
-   They should also be able to explain why its row still appears in the audit.
+   Explain why its row still appears in the audit.
 
 **Check and retain:** D01–D03 need 2.5, 5, and 10 mL of stock respectively. D04's
 formula produces 100 mL stock for a 50 mL final request and must be flagged;
-its target is 200 mmol/L while its stock is only 100 mmol/L. Do not present
-that number as a preparation recipe or erase the input that revealed the issue.
+its target is 200 mmol/L while its stock is only 100 mmol/L. The flagged row
+records a request that dilution cannot achieve.
 
 
 ## Check your understanding

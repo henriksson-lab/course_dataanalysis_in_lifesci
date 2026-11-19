@@ -27,9 +27,8 @@ toc: false
 Our task: identify what each stored value represents.
 
 ::: notes
-This is a short breadth session using invented DNA and an artificial image. We
-are not introducing a sequence-analysis or image-processing pipeline. Students
-can transfer vectors, tables, logical comparisons, and interpretation.
+Use invented DNA and an artificial image to practise vectors, tables, logical
+comparisons, and interpretation.
 :::
 
 ## A file format gives bytes meaning
@@ -39,8 +38,8 @@ can transfer vectors, tables, logical comparisons, and interpretation.
 Renaming `photo.jpg` to `photo.csv` does not convert the contents.
 
 ::: notes
-A bit has two possible values; eight bits yield 256 patterns. We do not need
-binary arithmetic. One format may use a byte for brightness; another uses
+A bit has two possible values; eight bits yield 256 patterns. One format may
+use a byte for brightness; another uses
 encoded characters. The extension helps an application choose how to read it.
 :::
 
@@ -176,7 +175,7 @@ The original object and file can remain unchanged.
 
 ::: notes
 The sequence begins with A. Predict the total and two counts before running
-the replacement. Do not edit the raw DNA file: make a changed R object. Counts
+the replacement. Make a changed R object while preserving the raw file. Counts
 are numerical descriptions of this invented string, not evidence about the
 function of a real DNA sequence.
 :::
@@ -193,10 +192,8 @@ table(bases)
 `[1]` selects the first element. Inspect **both** objects after the change.
 
 ::: notes
-The important observation is that bases retains its original values while
-bases_changed holds the modified values. No R memory-internals explanation is
-needed. Saving neither object to the raw path also leaves the supplied file
-unchanged. Ask which actions would be needed to persist the changed string.
+Inspect bases and bases_changed to distinguish the original and modified
+values. Ask which operation would save the changed string to a file.
 :::
 
 ## A fraction needs a stated numerator and denominator
@@ -289,7 +286,7 @@ Ask what one row represents in each version.
 
 ## Explain the operation in a short report
 
-Use two figures, the threshold table, and a few explanatory sentences.
+Use two figures, the threshold table, and an interpretation.
 
 Name the original object, controlled change, observed result, and limit.
 
@@ -302,7 +299,7 @@ matter more than another elaborate plotting layer.
 
 ## Exercises: explain the representation
 
-[Open day 22 exercises](../../week5/22-data-representations.qmd).
+[Open exercises](../../week5/22-data-representations.qmd) · [Quiz](../../week5/22-data-representations-quiz.qmd).
 
 - Save `representations.R`, controlled copies, and the threshold table.
 - Render `representation-report.Rmd` with two figures and interpretation.
@@ -310,7 +307,6 @@ matter more than another elaborate plotting layer.
 - Keep original files intact and rerun from a fresh session.
 
 ::: notes
-Keep operations at the level already taught. The added depth is predicting
-controlled changes, interpreting the result, and testing the saved report;
-it should not become a third specialist software unit.
+Ask students to predict controlled changes, interpret the result, and test
+the saved report using the supplied operations.
 :::

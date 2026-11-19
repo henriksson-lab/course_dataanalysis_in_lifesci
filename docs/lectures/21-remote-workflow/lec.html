@@ -238,7 +238,7 @@ Data Analysis in Life Sciences
 </div>
 <p>The service guide will tell us whether these views share a home directory.</p>
 <aside class="notes">
-<p>SSH provides the shell. Remote desktop provides the graphical workspace. The actual service, authentication, permitted execution host, R application, and transfer route are still to be supplied. Do not turn this schematic into a promise that arbitrary desktop and SSH sessions share storage.</p>
+<p>SSH provides the shell. Remote desktop provides the graphical workspace. The actual service, authentication, permitted execution host, R application, and transfer route are still to be supplied. Confirm shared storage using that guide.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -308,7 +308,7 @@ Remote R:    data/seedlings.csv</code></pre>
 </div>
 <p><code>exit</code> returns from SSH to the local shell. Reconnect and find the file again.</p>
 <aside class="notes">
-<p>Saved storage is different from an interactive session. Do not promise that running programs continue after disconnecting; that depends on the service. This exercise concerns locating saved files, not managing long HPC jobs.</p>
+<p>Saved storage is different from an interactive session. Whether a running program continues after disconnecting depends on the service.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -351,7 +351,7 @@ Remote R:    data/seedlings.csv</code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">'rmarkdown::render("report.Rmd")'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Run from the project root on the <strong>permitted execution host</strong>.</p>
 <aside class="notes">
-<p>This is an alternative way to start the same rendering function. Local Ubuntu on Windows need not contain R; students can keep using native RStudio there. Only demonstrate the command when the service setup supports it. Do not ask beginners to install another environment to satisfy this slide.</p>
+<p>This is an alternative way to start the same rendering function. Local Ubuntu on Windows need not contain R; students can keep using native RStudio there. Demonstrate the command only when the remote service setup supports it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -618,7 +618,7 @@ Remote R:    data/seedlings.csv</code></pre>
 <p>Save <code>transfer-plan.txt</code>, the receipt, and the audit in <code>reports/</code>.</p>
 <p>State what was checked, which copies were compared, and what remains unknown.</p>
 <aside class="notes">
-<p>These artifacts support the extended practical and independent recovery task. A local copy check is valuable but cannot complete SSH authentication or remote desktop access. Likewise a successful transfer does not establish a backup policy or guarantee that a disconnected process continues running.</p>
+<p>These files support the transfer audit and result-recovery tasks. A local copy check is valuable but cannot complete SSH authentication or remote desktop access. Likewise a successful transfer does not establish a backup policy or guarantee that a disconnected process continues running.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -633,7 +633,7 @@ Remote R:    data/seedlings.csv</code></pre>
 </section>
 <section id="exercises-locate-render-return" class="slide level2">
 <h2>Exercises: locate, render, return</h2>
-<p><a href="../../week5/21-remote-workflow.html">Open day 21 exercises</a>.</p>
+<p><a href="../../week5/21-remote-workflow.html">Open exercises</a> · <a href="../../week5/21-remote-workflow-quiz.html">Quiz</a>.</p>
 <ul>
 <li>Save <code>reports/remote-log.txt</code> with computer names and project locations.</li>
 <li>Connect, disconnect, reconnect, and find saved work.</li>
@@ -642,7 +642,7 @@ Remote R:    data/seedlings.csv</code></pre>
 </ul>
 <p>Until access is provided, complete the <strong>local rehearsal</strong> and mark remote steps pending.</p>
 <aside class="notes">
-<p>Do not mark local rehearsal as a completed remote skill. It can check portable paths and project structure while service-specific details are pending.</p>
+<p>Local rehearsal checks portable paths and project structure; remote connection skills remain pending until practised on the actual service.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

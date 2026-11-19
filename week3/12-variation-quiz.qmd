@@ -1,0 +1,91 @@
+---
+title: "Quiz: Mean, variance, and SD"
+---
+
+[Exercises](12-variation.qmd) · [Lecture slides](../lectures/12-variation/lec.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** For growth values 12, 14, and 16 mm, calculate the mean, sample variance,
+and sample SD, with units.
+
+::: {.callout-tip collapse="true" title="Hint"}
+The squared deviations from 14 are 4, 0, and 4. Sample variance divides
+their sum by $n-1$.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Mean **14 mm**; sample variance $(4+0+4)/2 = 4$ **mm²**;
+sample SD $\sqrt{4}=2$ **mm**.
+:::
+
+---
+
+**Q2.** What will this return, and why?
+
+```r
+mean(c(10, 10, 10, 100))
+median(c(10, 10, 10, 100))
+```
+
+::: {.callout-tip collapse="true" title="Hint"}
+The mean uses every value; the median uses the ordered middle values.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The mean is **32.5** and median **10**. The large value strongly affects
+the mean; neither result is an arithmetic error.
+:::
+
+---
+
+**Q3.** A vector has mean 14 mm and SD 2 mm. What happens when 10 mm is added to
+every value? What happens when the original values are divided by ten to
+express centimetres?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A common addition leaves deviations unchanged. Unit conversion rescales
+both measurements and their deviations.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Adding 10 mm gives mean **24 mm**, SD **2 mm**. Converting the original
+values gives mean **1.4 cm**, SD **0.2 cm** and variance **0.04 cm²**.
+:::
+
+---
+
+**Q4.** Two groups have the same mean but SDs of 1 and 6 mm. Which statement is
+supported?
+
+(i) The second group has greater observed spread.  
+
+(ii) Every second-group plant is larger.  
+
+(iii) The second group was measured incorrectly.
+
+::: {.callout-tip collapse="true" title="Hint"}
+SD describes variation among observations, not its cause.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(i). The observations in the second group vary more around their mean.
+SD alone does not identify biological or measurement causes.
+:::
+
+---
+
+**Q5.** A synthesis run collects 0.62 g from a supplied maximum of 1.00 g.
+Percentage yield is `100 * collected / maximum`. What is the yield? If
+another run yields 70%, how many percentage points higher is that?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Use the supplied ratio, then subtract the percentages.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+**62%** yield; 70% is **8 percentage points** higher. The difference is
+not an 8% relative increase.
+:::

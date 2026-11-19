@@ -64,7 +64,7 @@ Open the extracted .Rproj first. Run each line using the editor's Run action. Ex
 The order must refer to the same plants in both vectors.
 
 ::: notes
-Work through P02's 40 minus 22 equals 18. The picture is positional arithmetic, not R automatically matching plant IDs. Later tables will preserve correspondence explicitly. Do not suggest that arbitrary equal-length vectors can be subtracted meaningfully.
+Work through P02's 40 minus 22 equals 18. The picture is positional arithmetic, not R automatically matching plant IDs. Later tables will preserve correspondence explicitly. Equal lengths alone do not establish matching plant identities.
 :::
 
 ## Calculate, summarise, compare
@@ -91,7 +91,7 @@ c combines values into a vector; mean and length are functions with parentheses.
 **Percentage yield = 100 × collected dry mass / supplied maximum mass.**
 
 ::: notes
-This is the optional substitute for the extra plant-ratio exercise. Define synthesis as making a product; supply the theoretical mass without reaction balancing. Assume collected product is pure only for this calculation. Both masses use grams. Changing collected mass to 0.70 g gives 70%. A higher yield does not establish purity or safety.
+This is the optional substitute for the extra plant-ratio exercise. Define synthesis as making a product; supply the theoretical mass without reaction balancing. Assume collected product is pure only for this calculation. Both masses use grams. Changing collected mass to 0.70 g gives 70%.
 :::
 
 ## Predict what survives a restart
@@ -161,7 +161,7 @@ A renamed object or axis label does not convert units. Preserve original values 
 
 ![Mass divided by supplied molar mass yields amount; dividing by litres gives concentration.](solution-units.svg){height=350px}
 
-A mole is a unit of chemical amount; no reaction equation is required.
+A mole is a unit of chemical amount. Molar mass gives grams per mole.
 
 ::: notes
 Define molar mass as grams per mole. The supplied calculation is 0.2922 g / 58.44 g/mol = 0.005 mol; 100 mL = 0.100 L; amount divided by volume gives 0.050 mol/L, or 50 mmol/L. This is arithmetic, not laboratory preparation instructions.

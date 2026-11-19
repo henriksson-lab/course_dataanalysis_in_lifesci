@@ -2,7 +2,7 @@
 title: "Day 9 — Make a report that runs its own calculations"
 ---
 
-[Lecture slides](../lectures/09-rmarkdown/lec.qmd) · [Weekly self-check](quiz.qmd)
+[Lecture slides](../lectures/09-rmarkdown/lec.qmd) · [Quiz](09-rmarkdown-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
 ## Today's question
@@ -97,7 +97,7 @@ explaining what the vertical axis measures. A caption identifies what a figure
 shows; the surrounding text explains why it matters. Code can be visible in this
 first report so that your method is easy to inspect.
 
-## Your practical
+## Exercises
 
 1. Render the supplied template before changing it. Confirm the HTML opens.
 2. Change its title, question, and author information; save and render again.
@@ -118,13 +118,11 @@ closing fence. Ask for help with the error text; never attach passwords.
 :::
 
 
-## Extended practical — make and diagnose a small complete report
+## Make and diagnose a small complete report
 
-Allow about 90 minutes. Save a root-level copy of the starter as
-`report-workshop.Rmd`. Keep the original template available. Today's aim is to
-connect each reported value to the code and file needed to recreate it, and to
-practise reading an error without changing unrelated parts. Do all deliberate
-breakages in this workshop copy, and restore a successful render after each.
+Save a root-level copy of the starter as `report-workshop.Rmd`. Make deliberate
+errors in this copy, record their messages and repairs, and restore a successful
+render after each.
 
 1. Add a sentence describing the input file, simulated study, independent unit,
    and growth calculation. Read the report in source form and identify which
@@ -137,7 +135,6 @@ breakages in this workshop copy, and restore a successful render after each.
 3. Give every chunk a unique descriptive label. In the disposable workshop copy,
    deliberately give two chunks the same label and attempt a render. Read the
    error, record it in `reports/render-recovery.txt`, then restore unique labels.
-   Do not repeatedly add new import chunks just to make an error disappear.
 4. Deliberately misspell the CSV filename in the import, render, and record the
    first useful error. Check the project location and actual filename, then fix
    the spelling. Notice that an object left over in the Console does not make
@@ -156,14 +153,13 @@ breakages in this workshop copy, and restore a successful render after each.
 
 For each experiment write the changed line or chunk label, exact first useful
 error, diagnosis, repair, and successful check. A screenshot may support that
-record, but the saved source is needed to investigate code. Do not put
-`rmarkdown::render("report-workshop.Rmd")` inside this report; render from Knit
-or the Console so it never tries to render itself.
+record, but the saved source is needed to investigate code. Render using Knit
+or the Console.
 :::
 
-## Independent transfer — switch inputs without leaving misleading prose
+## Switch inputs without leaving misleading prose
 
-Plan 60–90 minutes. Create `transfer-report.Rmd` at the project root with **Save
+Create `transfer-report.Rmd` at the project root with **Save
 As**, leaving the workshop source intact. It will describe the eighteen-plant
 `data/seedlings-transfer.csv` study: independent pots, nine allocated to each
 group, lengths in mm measured seven days apart. This is another simulated study,
@@ -176,23 +172,22 @@ not evidence about a real plant treatment. Use only skills already taught.
 2. Update the question, methods, caption, and any manually written sample-size
    text. Use an inline calculation for the total row count so the number is
    tied to the imported table. A report with a new figure but an old dataset
-   description is not an acceptable transfer.
+   description mixes two different studies.
 3. Add the initial-versus-final plot and the individual-growth-by-group plot
    from your saved day 8 transfer script. Identify the vertical quantity in each
    caption. You may use the reference pattern rather than reconstructing every
    plotting option from memory. State what one point represents.
-4. Write three sentences describing what you observe, one question the plots
-   cannot establish alone, and one limitation. There is no t-test today. A
-   useful report can describe the observations without claiming a population
-   treatment effect or proving causation from a scatter plot.
+4. Describe what you observe, identify a question the plots cannot settle,
+   and state a limitation.
 5. Render from a fresh session, locate the produced HTML, and check that the
    caption, figures, inline count, input name, and prose all describe this same
    study. Search your source for the old filename and the number 24; investigate
    any remaining occurrence instead of assuming it is harmless.
-6. Package a copy of the source and required `data` inputs into a small practice
-   project folder, keeping relative locations. Open that copy's `.Rproj` and
+6. Copy the source, `introcomputing.Rproj`, and required `data` inputs into a
+   practice project folder, keeping relative locations. Include `output` and
+   `reports` folders if your code writes there. Open that copy's `.Rproj` and
    render from its root. Record any missing dependency in `render-recovery.txt`.
-   This is a portability test on your laptop, not a completed remote-access test.
+   This tests whether the project works from another location on your laptop.
 
 **Check and retain:** the transfer report describes 18 plants, nine per group,
 with no missing initial/final lengths; T01 grew 15.0 mm. Keep both `.Rmd` sources,

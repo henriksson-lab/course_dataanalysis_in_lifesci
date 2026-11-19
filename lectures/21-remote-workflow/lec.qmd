@@ -42,8 +42,7 @@ The service guide will tell us whether these views share a home directory.
 ::: notes
 SSH provides the shell. Remote desktop provides the graphical workspace. The
 actual service, authentication, permitted execution host, R application, and
-transfer route are still to be supplied. Do not turn this schematic into a
-promise that arbitrary desktop and SSH sessions share storage.
+transfer route are still to be supplied. Confirm shared storage using that guide.
 :::
 
 ## Identify the computer, then the folder
@@ -95,9 +94,8 @@ computer, project, and folder before inserting an absolute laptop path.
 `exit` returns from SSH to the local shell. Reconnect and find the file again.
 
 ::: notes
-Saved storage is different from an interactive session. Do not promise that
-running programs continue after disconnecting; that depends on the service.
-This exercise concerns locating saved files, not managing long HPC jobs.
+Saved storage is different from an interactive session. Whether a running
+program continues after disconnecting depends on the service.
 :::
 
 ## Transfer creates a copy in a named place
@@ -127,8 +125,7 @@ Run from the project root on the **permitted execution host**.
 ::: notes
 This is an alternative way to start the same rendering function. Local Ubuntu
 on Windows need not contain R; students can keep using native RStudio there.
-Only demonstrate the command when the service setup supports it. Do not ask
-beginners to install another environment to satisfy this slide.
+Demonstrate the command only when the remote service setup supports it.
 :::
 
 ## Complete the round trip
@@ -301,7 +298,7 @@ Save `transfer-plan.txt`, the receipt, and the audit in `reports/`.
 State what was checked, which copies were compared, and what remains unknown.
 
 ::: notes
-These artifacts support the extended practical and independent recovery task.
+These files support the transfer audit and result-recovery tasks.
 A local copy check is valuable but cannot complete SSH authentication or remote
 desktop access. Likewise a successful transfer does not establish a backup
 policy or guarantee that a disconnected process continues running.
@@ -309,7 +306,7 @@ policy or guarantee that a disconnected process continues running.
 
 ## Exercises: locate, render, return
 
-[Open day 21 exercises](../../week5/21-remote-workflow.qmd).
+[Open exercises](../../week5/21-remote-workflow.qmd) · [Quiz](../../week5/21-remote-workflow-quiz.qmd).
 
 - Save `reports/remote-log.txt` with computer names and project locations.
 - Connect, disconnect, reconnect, and find saved work.
@@ -319,6 +316,6 @@ policy or guarantee that a disconnected process continues running.
 Until access is provided, complete the **local rehearsal** and mark remote steps pending.
 
 ::: notes
-Do not mark local rehearsal as a completed remote skill. It can check portable
-paths and project structure while service-specific details are pending.
+Local rehearsal checks portable paths and project structure; remote connection
+skills remain pending until practised on the actual service.
 :::

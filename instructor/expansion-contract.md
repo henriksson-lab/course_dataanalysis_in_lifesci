@@ -1,5 +1,9 @@
 # Five-week workload expansion
 
+Historical brief for the expansion. The later [audit](audit-plan.md) supersedes
+its time estimates, minimum word/step targets, fixed section names, and required
+peer work. Preserve substantive practice without enforcing volume quotas.
+
 The user finds the current lecture/practical volume too small for five weeks
 and explicitly requests roughly doubling it, using parallel workers. Expand
 depth and independent practice within the existing first-year topic scope.

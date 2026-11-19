@@ -64,7 +64,7 @@ Suppose a plot refers to `growth_mm`, but the report only imports the raw table.
 - In which chunk should the repair go?
 
 ::: notes
-The raw CSV does not contain growth_mm. Add final minus initial in a preparation chunk before plotting. Do not try to cure this by repeatedly creating objects in the Console. Deliberately introduce one misspelling in a demonstration, read the reported chunk, fix it, and render again.
+The raw CSV does not contain growth_mm. Add final minus initial in a preparation chunk before plotting. Include the dependency in the saved report. Deliberately introduce one misspelling in a demonstration, read the reported chunk, fix it, and render again.
 :::
 
 ## Your Console is not the report's saved method
@@ -74,7 +74,7 @@ The raw CSV does not contain growth_mm. Add final minus initial in a preparation
 Put all required imports and calculations in the source document.
 
 ::: notes
-Run an import only in the Console, then explain why a recipient cannot reproduce that unstated step. The Knit route uses a separate rendering process; the direct render function can use a calling environment, so the practical's restart-and-render check is important. Do not promise every rendering invocation automatically isolates all state.
+Run an import only in the Console, then explain why a recipient cannot reproduce that unstated step. The Knit route uses a separate rendering process; the direct render function can use a calling environment, so the practical's restart-and-render check is important. Explain why the fresh-session check matters.
 :::
 
 ## HTML is useful, but keep its inputs and source
@@ -95,7 +95,7 @@ Save the document, then use **Knit**, or run in the **R Console**:
 rmarkdown::render("report.Rmd", output_dir = "reports")
 ```
 
-Do not put that command inside the report you are rendering.
+Run this command in the Console, outside the report.
 
 ::: notes
 The double colon calls a function from a package. output_dir changes where the HTML is written, not where the source belongs. The Knit button may put the output beside the source; locate the actual file. Restart R before a reproducibility check. A self-rendering chunk would create a recursive workflow and is not required.
@@ -165,7 +165,7 @@ Use Knit, or run in the R Console:
 rmarkdown::render("report-workshop.Rmd")
 ```
 
-Do not place this command inside that report.
+Run this command in the Console, outside the report.
 
 ::: notes
 A render call inside the document would cause the report to try to render itself. Packages and calculations belong in its appropriate chunks; installing software belongs to the separate setup step.

@@ -1,83 +1,40 @@
 ---
-title: "Five weeks of study: work, outputs, and review"
+title: "Five-week study plan"
 ---
 
-The course is organised as 25 study units. Each combines explanation, guided
-work, independent transfer, and a result you can save, explain, and regenerate.
-The independent tasks are part of the course, not optional advanced extensions.
-They gradually remove prompts so that a later laboratory dataset is manageable.
-
-## Planning a full study week
-
-The planning estimate is **35 hours of structured study plus 5 flexible hours
-per week**, about 200 learner hours over five weeks. These are not contact
-hours or a requirement to keep working after a task is securely understood.
-They include reading, demonstrations, active practicals, writing, troubleshooting,
-and independent review. Actual timing will be checked with beginners; previous
-experience and installation problems can change it substantially. The teaching
-team supplies the contact timetable separately. Examination design is outside
-these materials.
-
-| Activity on a typical study day | Planning allowance | Evidence of work |
-| --- | --- | --- |
-| Lecture, prediction pauses, and teacher demonstrations | 1 hour | Predictions and a short explanation of the worked example |
-| Guided practical and checking results | 2 hours | Saved commands/code, checked numerical or file results |
-| Extended practical and independent transfer | 2 hours | New outputs from a changed question, file, or dataset |
-| Interpretation, report writing, and fresh-session recovery | 1 hour | A readable conclusion and a reproducible saved result |
-| Supported catch-up or further rehearsal of that day's tasks | 1 hour | Corrected work and a record of an issue resolved |
-
-Across five days this gives 35 hours. Use the remaining **5 flexible hours each
-week** for the weekly quiz and explanation review, unfinished practical work,
-help sessions, or repeating the workflow without looking at the worked example.
-Breaks are additional; this table does not prescribe seven uninterrupted hours
-at a screen. A substantial independent report may span more than one session.
-
-The allowances are a shared daily budget, not upper bounds to add together.
-If an extended/transfer block takes three hours, use the protected catch-up
-hour for that work rather than adding another hour to the day. A context choice
-replaces its alternative; it does not double that task. Bring persistent timing
-problems to the teaching team so the plan can be adjusted from actual experience.
-
-## What makes the second half of a practical different?
-
-The first examples show how to perform a task. The **Extended practical** asks
-you to trace consequences, diagnose a plausible mistake, or work through a
-larger case. **Independent transfer** changes the question or input and gives
-fewer prompts. You should choose and explain operations already taught, rather
-than reproduce a screenshot by changing only the title.
-
-Use hints when stuck, but record what changed and why. The target is being able
-to find and regenerate work after closing the applications. A calculation typed
-once in a console is not the final output of a data-analysis task.
+The course has 25 study units. Each includes a lecture, exercises, and a quiz.
+Worked examples introduce the tools; later tasks apply them to another question
+or dataset. Save your results and check that you can reproduce them after
+closing the applications.
 
 ## Weekly sequence and checkpoints
 
-| Week | Main work | Checkpoint before moving on |
+| Week | Main work | Checkpoint |
 | --- | --- | --- |
-| 1 — Files and computers | Save/find/reopen; folder trees; memory/storage/processes; terminal navigation; archives; text search; deliberate transfer and recovery | Identify the same folder in graphical and terminal views, inspect a new archive, preserve originals, and package findings |
-| 2 — R and reports | Objects/vectors; table import and units; calculations; plots; R Markdown; apply the workflow to another small table | Run saved code from the top and render a report whose objects all come from its source |
-| 3 — Reliable measurements | Evidence-based cleaning; missingness; mean/variance/SD; grouped observations; independent units; sampling uncertainty | Explain counts and units, distinguish spread from uncertainty, and produce a descriptive report with visible observations |
-| 4 — Comparisons and lines | Independent and paired comparisons; interpretation of effects/intervals/p-values; calibration and range checks; observational line fits | Explain the design and comparison direction; apply the same simple method to fresh measurements and report its limits |
-| 5 — Reproduce and transfer | Local/remote project workflow; representations; a substantial integrated study; fresh data; peer reproduction; debugging and consolidation | Supply source/input/output together, render from another location, and explain an independent transfer result |
+| 1 — Files and computers | Save, find, and reopen files; folders and paths; memory and storage; terminal navigation; archives and text search | Find the same folder in graphical and terminal views, inspect an archive, and package your findings |
+| 2 — R and reports | Objects and vectors; importing tables; units and calculations; plots; R Markdown | Run saved code from the top and render a report from its source |
+| 3 — Measurements and variation | Data cleaning; missing values; mean, variance, and SD; group summaries; independent units; uncertainty | Explain counts and units, distinguish spread from uncertainty, and show individual observations in a report |
+| 4 — Comparisons and lines | Independent and paired comparisons; effects, intervals, and p-values; calibration; fitted lines | Explain the study design, calculate a comparison or prediction, and describe its limits |
+| 5 — Reproduce and transfer | Local and remote projects; data representations; an integrated study; debugging | Package source, inputs, and outputs together, then render from a new location |
 
-All chemistry contexts give their quantities, units, relationships, and meaning
-of terms. You do not need to have taken a chemistry course to know what to
-compute. Where an organic or biological context is offered as a choice, work
-through the chosen route in depth; you are not expected to complete duplicate
-reports for every context.
+## Working through a topic
 
-## A study log that helps you learn
+1. Open the lecture and work through its examples.
+2. Complete the exercises, saving the named files in your course project.
+3. Check the results against the supplied values or hints.
+4. Use the topic quiz to check your understanding; open its hints and answers
+   when needed.
+5. Reopen your saved work and reproduce a result in a fresh session.
 
-Keep a short daily note in `reports/study-log.txt`. Record the output you saved,
-one result you checked, one decision you can explain, and one question remaining.
-Examples: “the count includes a header”, “these two readings belong to one plant”,
-or “the report depended on an object only in the console”. This is a learning
-record, not a grading scheme.
+All exercises can be completed independently. Where a task offers biological
+and chemistry contexts, choose one route. The exercise supplies the definitions,
+quantities, units, and formulas for its calculations.
 
-If a task runs much longer than planned, bring the exact error and the last
-successful step to a support session. If you finish quickly, try the transfer
-without the hints, explain it to a peer, or reproduce a previous result from its
-raw input. Do not fill spare time by inventing additional statistical methods.
+## Getting help and reviewing
 
-Start with [day 1](week1/01-files.qmd), consult the
+Bring the exact error, the relevant filename, and the last successful step to a
+support session. For review, use the weekly quizzes or repeat a workflow from
+its raw inputs without following the worked example.
+
+Start with [files and folders](week1/01-files.qmd), consult the
 [course overview](overview.qmd), or return to the [weekly route](index.qmd).

@@ -27,7 +27,7 @@ toc: false
 Pair by **identity**, not accidental row position.
 
 ::: notes
-The file paired.csv stores one plant per row with both readings, so matching is preserved. The diagram imagines two differently ordered lists to make the identity principle visible. Students do not need a join operation for this practical; they need to recognise that labels carry meaning.
+The file paired.csv stores one plant per row with both readings, so matching is preserved. The diagram imagines two differently ordered lists to make the identity principle visible. The example teaches identity matching using the supplied single-table layout.
 :::
 
 ## Read the within-plant paths
@@ -89,7 +89,7 @@ A one-sample comparison of those changes gives the same result:
 t.test(paired_data$change, mu = 0)
 ```
 
-Do not independently sort the before and after columns.
+Keep before and after readings matched by plant ID.
 
 ::: notes
 This equivalence supports understanding, not a demand to learn another method. The subject-to-subject differences in starting level are accounted for through within-subject subtraction. Pairing must be justified by design, and the pairs still need to be independent of one another.
@@ -102,7 +102,7 @@ This equivalence supports understanding, not a demand to learn another method. T
 No unchanged-light group; the same order was used for every plant.
 
 ::: notes
-We observe a change after the procedure, but light, elapsed time and measurement order accompany one another. The paired t-test does not separate them. Do not claim that a small p-value proves light alone caused the change.
+We observe a change after the procedure, but light, elapsed time and measurement order accompany one another. The paired t-test does not separate them. A small p-value does not isolate light as the cause.
 :::
 
 ## Report change, uncertainty, and the ordering limit
@@ -175,7 +175,7 @@ The estimate,interval, and p-value agree when the exact same complete difference
 Three plants are limited support for a population inference.
 
 ::: notes
-The three illustrative plants had before5,8,6 and after7,9,9 in the stated rate units. Mean change2,SD 1. The interval is provided to practise interpretation. Do not teach that a function guarantees reliable inference at tiny n.
+The three illustrative plants had before5,8,6 and after7,9,9 in the stated rate units. Mean change2,SD 1. The interval is provided to practise interpretation. The tiny sample provides limited support for model-based inference.
 :::
 
 ## A positive observed change does not prove a universal change
@@ -187,7 +187,7 @@ For the illustrative case:
 - Name the small-sample and design limitations separately.
 
 ::: notes
-All supplied individual changes are positive, yet the model-based95% mean interval includes zero. This does not make the data erroneous or establish equality. Do not select a different test merely to obtain a preferred threshold label.
+All supplied individual changes are positive, yet the model-based95% mean interval includes zero. This does not make the data erroneous or establish equality. Retain the stated analysis and explain its uncertainty.
 :::
 
 ## Pairing does not remove an order effect

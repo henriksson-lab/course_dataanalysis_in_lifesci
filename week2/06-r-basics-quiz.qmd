@@ -1,0 +1,103 @@
+---
+title: "Quiz: R calculations"
+---
+
+[Lecture](../lectures/06-r-basics/lec.qmd) · [Exercises](06-r-basics.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** What does the last line print?
+
+```r
+initial_mm <- 20
+final_mm <- 37
+growth_mm <- final_mm - initial_mm
+final_mm <- 39
+growth_mm
+```
+
+(i) 17  (ii) 19  (iii) 39
+
+::: {.callout-tip collapse="true" title="Hint"}
+Which assignment last changed `growth_mm`?
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+(i), 17. R stored that result when the subtraction ran. Running
+`growth_mm <- final_mm - initial_mm` again would update it to 19.
+:::
+
+---
+
+**Q2.** Three plants have initial lengths `c(20, 22, 19)` mm and final lengths
+`c(37, 40, 34)` mm, in the same plant order. What are their growth values and
+mean growth?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Subtract position by position, then divide the total growth by three.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Growth is `c(17, 18, 15)` mm. The mean is `50 / 3`, about 16.67 mm.
+The matching plant order makes the position-by-position subtraction meaningful.
+:::
+
+---
+
+**Q3.** Which survives closing a fresh R session: an object created only in the
+Console, or instructions saved in `day06.R`? How can you recreate the object?
+
+::: {.callout-tip collapse="true" title="Hint"}
+One is in session memory; the other is a file on storage.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The saved script survives. Open it and run the instructions from the top to
+recreate its objects. This assumes the session workspace was not separately saved
+and restored.
+:::
+
+---
+
+**Q4.** A collected product mass is 0.62 g and the supplied maximum is 1.00 g.
+Using `yield_percent = 100 × collected mass / maximum mass`, what is the yield?
+What would change if the collected mass were 0.70 g?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Both masses use grams, so their units cancel in the ratio.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The yields are 62% and 70%, respectively.
+:::
+
+---
+
+**Q5.** Amount in mol is `mass_g / molar_mass_g_mol`. Concentration in mol/L is
+amount divided by final solution volume in litres. For 0.2922 g, 58.44 g/mol,
+and 100 mL final solution, what is the concentration in mmol/L?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Convert 100 mL to 0.100 L. Multiply mol/L by 1000 to obtain mmol/L.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Amount is `0.2922 / 58.44 = 0.005` mol. Concentration is
+`0.005 / 0.100 = 0.050` mol/L, or **50 mmol/L**.
+:::
+
+---
+
+**Q6.** In the previous question, what happens to concentration if you double
+only the mass? What if you instead double only the final volume?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Mass is in the numerator; final volume is in the denominator.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Doubling mass gives 100 mmol/L. Restoring the original mass and doubling final
+volume gives 25 mmol/L.
+:::

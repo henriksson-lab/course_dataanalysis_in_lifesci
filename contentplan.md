@@ -24,10 +24,10 @@ The maximum is 45 slides, with fewer preferred and no padding to meet a count.
 The user then requested roughly twice the teaching/practice volume. The expanded
 version develops worked examples, diagnosis, interpretation, and independent
 transfer within the existing topics, with two substantial additional practice
-blocks per day. See [the student study plan](study-plan.qmd) for a provisional
-35 structured plus 5 flexible learner hours per week, and the
-[expansion audit](instructor/workload-expansion.md) for before/after evidence.
-These are planning estimates, not contact hours or validated student timings.
+blocks per day. The [student study plan](study-plan.qmd) lists the sequence and
+checkpoints. The [expansion record](instructor/workload-expansion.md) preserves
+before/after evidence. The later [wording audit](instructor/audit-results.md)
+removes pace prescriptions and required peer work and adds topic quizzes.
 
 ## Purpose and audience
 
@@ -254,7 +254,7 @@ recognise a limitation and seek advice, not to select from a menu of tests.
 - **Day 23:** Start a small integrated practice study using a new, documented
   dataset with a familiar structure. Students organise files, check the data,
   plot measurements, and perform one appropriate guided analysis.
-- **Day 24:** Finish the R Markdown report; trade project folders with a peer
+- **Day 24:** Finish the R Markdown report; extract the project into a new folder
   and attempt to render from a fresh session. Resolve missing files, absolute
   paths, console-only objects, and missing explanations. This is formative
   practice, not a proposed examination component.

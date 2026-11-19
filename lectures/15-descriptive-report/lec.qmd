@@ -27,7 +27,7 @@ toc: false
 How does seedling growth vary among plants and groups?
 
 ::: notes
-This is a consolidation briefing. Do not introduce another statistical technique. The reader should learn the question, how the measurements arose, and what the observations show. An organic-yield report may replace this context, but is not an extra required report.
+This briefing consolidates descriptive analysis. The reader should learn the question, how the measurements arose, and what the observations show. An organic-yield report may replace this context, but is not an extra required report.
 :::
 
 ## Give each part of the report a job
@@ -103,7 +103,7 @@ Ask a reader to identify where the mean came from, which rows contributed, and w
 Include the ordinary input CSV, not just a shortcut to its old location.
 
 ::: notes
-An Rproj provides context; it does not package data. Reproduction in a newly named folder tests personal paths and omitted files. Do not silently fix a peer source before recording the original failure.
+An Rproj provides context; it does not package data. Reproduction in a newly named folder tests personal paths and omitted files. Record any failure before fixing it, then rerun.
 :::
 
 ## Keep claims at the level supported by the work
@@ -147,7 +147,7 @@ Analyst review: input, checks, transformations, available n, regeneration.
 A change log records the issue, correction, and rerun result.
 
 ::: notes
-The practical includes one revised chosen report plus a new descriptive transfer report. The new work is a transfer challenge, not another required organic/biology branch completed for its own sake.
+The exercises include a revision of the selected report and a report on the second seedling study.
 :::
 
 ## A short report can contain strong evidence
@@ -159,7 +159,7 @@ Remove a redundant printout before removing a limitation or a unit label.
 Can another person regenerate and explain the result?
 
 ::: notes
-Wordiness is not workload quality. Students spend time inspecting, drafting, checking, revising, and reproducing. Their saved outputs demonstrate those actions rather than the number of headings.
+Review the saved checks, interpretation, and fresh-session render.
 :::
 
 ## Exercises: one report that reopens and renders
@@ -168,7 +168,7 @@ Save **`descriptive-report.Rmd`** or the chosen **`organic-report.Rmd`**, plus H
 
 Put explicit rendering commands in the **R Console**, not inside the report.
 
-Ask a partner to identify the question, unit, units, and limitation.
+Check that the HTML states the question, independent unit, measurement units, and limitation.
 
 [Open exercises](../../week3/15-descriptive-report.qmd).
 

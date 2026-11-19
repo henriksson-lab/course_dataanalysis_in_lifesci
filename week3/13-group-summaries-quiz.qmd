@@ -1,0 +1,80 @@
+---
+title: "Quiz: Group summaries and figures"
+---
+
+[Exercises](13-group-summaries.qmd) · [Lecture slides](../lectures/13-group-summaries/lec.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** A table has 24 plants in two treatment groups. After
+`group_by(treatment) |> summarise(mean_mm = mean(growth_mm))`, how many rows
+should the summary have? What does one row mean?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A grouped summary produces one result per group.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+**Two rows**, one per treatment. Each row describes a group; it is not an
+additional plant observation.
+:::
+
+---
+
+**Q2.** Which table supplies each layer in a plot showing individual dots and
+group-mean diamonds?
+
+::: {.callout-tip collapse="true" title="Hint"}
+The individual layer and summary layer have different observational levels.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The plant-level table supplies individual dots. The grouped summary table
+supplies one mean diamond per treatment.
+:::
+
+---
+
+**Q3.** Why use horizontal jitter with `height = 0` for a growth dot plot?
+
+::: {.callout-tip collapse="true" title="Hint"}
+The vertical position encodes the measured growth.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Horizontal jitter separates overlapping dots without changing their
+measured growth heights. Vertical jitter would move the displayed measurements.
+:::
+
+---
+
+**Q4.** A histogram looks two-peaked with bins 2 mm wide and one-peaked with bins
+6 mm wide. What can you conclude about the two peaks?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Small-sample histogram shape depends on how nearby values are grouped.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The apparent two-peak detail is sensitive to bin choice. Compare the
+individual points and describe broad features that remain stable rather than
+claiming two biological populations from this display alone.
+:::
+
+---
+
+**Q5.** A caption says “Bars show error.” What information is missing? If the
+figure has only individual dots and mean diamonds, what should its caption say?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Identify the plotted quantity, units, observation unit, and symbol meanings.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+An error bar must specify its quantity, such as SD or a confidence interval.
+For this figure, state that dots are individual plants, diamonds are group means,
+and growth is measured in mm; include available sample sizes. There are no
+error bars to describe.
+:::

@@ -75,7 +75,7 @@ Read the axes before discussing the pattern. Every point is a plant and colour i
 Horizontal jitter separates overlapping points; vertical values stay unchanged.
 
 ::: notes
-The practical's position_jitter uses height = 0 and a seed for repeatable display. Ask the class what higher/lower means on this axis and whether the groups overlap. Do not declare a treatment effect solely from a plotted cloud; formal comparison and uncertainty come later.
+The practical's position_jitter uses height = 0 and a seed for repeatable display. Ask the class what higher/lower means on this axis and whether the groups overlap. Describe the pattern and overlap; formal comparison and uncertainty come later.
 :::
 
 ## Name the objects before exporting them
@@ -135,7 +135,7 @@ Define theoretical mass as the supplied maximum and isolated mass as dry collect
 Predict the row and column counts before running the selection.
 
 ::: notes
-Use the eighteen-plant transfer dataset. The full derived table has 18 rows; the treated subset has nine. Adding a growth column should not remove plants. Do not select every second row as a proxy for the supplied allocation label.
+Use the eighteen-plant transfer dataset. The full derived table has 18 rows; the treated subset has nine. Adding a growth column should not remove plants. Select using the supplied allocation label.
 :::
 
 ## Derive from recorded values, preserve the input
@@ -180,7 +180,7 @@ Printing a plot object does not automatically save an image. write_csv exports a
 
 ![The D04 calculated stock volume exceeds the final requested volume.](dilution-feasibility.svg){height=350px}
 
-Retain the request and flag it; do not invent a feasible answer.
+Retain and flag the impossible request.
 
 ::: notes
 Define stock as known concentration and dilution as adding solvent to a final total volume while conserving solute. D01–D03 need 2.5, 5 and 10 mL. D04 targets 200 from a stock of 100 mmol/L, so dilution alone cannot satisfy it.
@@ -219,7 +219,7 @@ A plant scatter plot shows measured observations.
 Which needs an explanation of the input rule, and which needs a description of observed variation?
 
 ::: notes
-Do not fit a hypothesis test to these formula-generated dilution cases as though they supplied independent biological evidence. Save the complete flagged table, supported subset, plot and explanation of the impossible request.
+These dilution cases illustrate supplied formulas rather than independent biological evidence. Save the complete flagged table, supported subset, plot and explanation of the impossible request.
 :::
 
 ## Make a figure someone can read

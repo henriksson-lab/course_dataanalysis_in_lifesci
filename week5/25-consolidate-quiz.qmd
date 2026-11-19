@@ -1,0 +1,59 @@
+---
+title: "Quiz: recover and check a complete workflow"
+---
+
+[Exercises](25-consolidate.qmd) · [Weekly revision](quiz.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** A seedling’s initial length is 25.7 mm and final length is 44.3 mm. Repair this outcome calculation:
+
+```r
+growth_mm = final_mm + initial_mm
+```
+
+::: {.callout-tip collapse="true" title="Hint"}
+Growth here means final length minus initial length.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+`growth_mm = final_mm - initial_mm`, giving 18.6 mm.
+:::
+
+---
+
+**Q2.** An estimated treatment-minus-control difference is 3 mm with a 95% confidence interval from −2 to 8 mm. Does this establish that the treatment has no effect?
+
+::: {.callout-tip collapse="true" title="Hint"}
+The interval includes zero and values on both sides of it.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No. The estimate is positive, but the interval includes decreases and increases. Report the estimate and uncertainty rather than claiming equality.
+:::
+
+---
+
+**Q3.** The algae reference mean is 28.20 mg and supplement mean is 33.91818 mg. Omitting the largest reference value, A11, changes its mean to 26.97273 mg. Calculate both supplement-minus-reference differences. Which should be primary if A11 has no documented error?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Compare the unchanged supplement mean with each reference mean.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+All available observations: about 5.72 mg. Omitting A11: about 6.95 mg. Keep the all-available result primary; label the other as a sensitivity check with a changed sample, not an established correction.
+:::
+
+---
+
+**Q4.** A summary shows 33.91818 mg; a rendered report shows 33.92 mg. Another report shows 34.32 mg. Which discrepancy is ordinary rounding, and what would you check for the other?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Round the first value to two decimal places.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+33.92 mg is ordinary rounding. Investigate 34.32 mg by checking the saved input, available counts, group selection, exclusions, outcome calculation and which output file was opened.
+:::

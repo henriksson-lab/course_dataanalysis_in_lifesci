@@ -2,7 +2,7 @@
 title: "Day 7 — Read a table and find out what it means"
 ---
 
-[Lecture slides](../lectures/07-import/lec.qmd) · [Weekly self-check](quiz.qmd)
+[Lecture slides](../lectures/07-import/lec.qmd) · [Quiz](07-import-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
 ## Today's question
@@ -92,14 +92,14 @@ The second is 15 mm, calculated from two observed values. `na.rm = TRUE` request
 omitting missing values for this calculation. A report must still explain how
 many observations were missing and why, if known.
 
-## Your practical
+## Exercises
 
 1. Import `seedlings.csv` and save the import and inspection commands in `day07.R`.
 2. Record in comments the row count, column count, column meanings, and units.
 3. Inspect `tail(seedlings)` to see the last rows. Find P24 and its treatment.
 4. Use `sum(is.na(seedlings$final_mm))` to count missing final measurements.
 5. Import `data/leaf-mass.csv` into `leaves`, inspect it, and use its dictionary
-   to explain what one row represents. Do not assume it has the seedling columns.
+   to explain what one row represents and what its columns mean.
 6. Restart R and run your script from the top. The raw CSV files should remain
    exactly as supplied.
 
@@ -112,11 +112,9 @@ copy from `names(seedlings)`; `initial_mm` and `initial` are different names.
 :::
 
 
-## Extended practical — inspect an unfamiliar table systematically
+## Inspect an unfamiliar table systematically
 
-Allow about 90 minutes. A copied import line is not enough to establish that the
-right data arrived with the right meaning. Create `day07-inspection.R` and use
-it to investigate the new `data/seedlings-transfer.csv`. This simulated study
+Create `day07-inspection.R` to investigate `data/seedlings-transfer.csv`. This simulated study
 has 18 independently potted seedlings, nine randomly assigned to control and
 nine to treated. Initial and final lengths are millimetres, measured seven days
 apart. Each row is one plant, not one independent measurement occasion.
@@ -135,8 +133,8 @@ apart. Each row is one plant, not one independent measurement occasion.
    description—not a universal “duplicates are bad” rule—sets the expectation.
 4. Inspect `unique(transfer$treatment)` and `table(transfer$treatment)`. Here
    `table()` counts the supplied labels. Check the expected group labels and
-   nine records per group. Do not infer random assignment from the sorted row
-   order; that information comes from the supplied study design.
+   nine records per group. Random assignment is stated in the study design;
+   row order alone would not establish it.
 5. Count missing initial and final lengths using `sum(is.na(...))`. Use
    `range(transfer$initial_mm)` and `range(transfer$final_mm)` to inspect minima
    and maxima. Range is a check on recorded values; it cannot determine the
@@ -156,15 +154,14 @@ initial/final readings. Matching these expectations helps identify the file but
 does not replace understanding its measurements.
 :::
 
-## Independent transfer — inspect quantities in different units
+## Inspect quantities in different units
 
-Plan 60–90 minutes. The supplied `data/solutions.csv` table contains six simulated
+The supplied `data/solutions.csv` table contains six simulated
 calculation cases, not six independent treatment experiments. It lists solution
 IDs, a solute name, mass in grams, molar mass in grams per mole, and final total
 volume in millilitres. A mole is a unit of chemical amount; the supplied molar
 mass converts grams to moles. You will inspect the input today, then use these
-quantities in later calculation and report practice. No prior chemistry
-knowledge is needed.
+quantities in later calculation and report practice.
 
 1. Import the table into `solutions` using a project-relative path. Before
    running `str()`, predict which columns should contain text and which should
@@ -184,11 +181,10 @@ knowledge is needed.
 5. Save `reports/solutions-import-audit.txt` describing the table, its units,
    and what you could calculate from the supplied inputs. Include the formula
    in words if helpful: amount = mass / molar mass; concentration = amount /
-   final volume in litres. This is not a request to operate laboratory equipment.
-6. Ask a partner to run your saved inspection script from a fresh session.
-   Have them identify which input generated each audit. If they see a table of
-   24 plants where the note promises 18, investigate the filename/object choice
-   before changing the note to match whichever result happened to appear.
+   final volume in litres.
+6. Restart R and run the saved inspection script. Check which input generated
+   each audit. If a table has 24 plants where its note promises 18, inspect the
+   input filename and object name.
 
 **Check and retain:** `solutions.csv` has six rows, five columns, six unique IDs,
 two supplied solute labels, and no missing inputs. The available-value mean of

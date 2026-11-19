@@ -19,6 +19,7 @@ check: downloads
 	Rscript tools/check_report.R
 	python3 tools/check_course.py
 	python3 tools/check_lectures.py
+	python3 tools/check_quizzes.py
 	python3 tools/check_expansion.py
 
 figures:

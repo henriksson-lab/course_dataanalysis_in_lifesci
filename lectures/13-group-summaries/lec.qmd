@@ -146,14 +146,14 @@ Individual-point layer uses the raw/derived plant table. Mean-marker layer uses 
 Record the bin width and distinguish stable patterns from unstable detail.
 
 ::: notes
-The underlying18 measurements are unchanged. Small samples can look multimodal or gapped depending on bins. Do not select a display solely because it exaggerates a desired difference.
+The underlying18 measurements are unchanged. Small samples can look multimodal or gapped depending on bins. Compare broad stable patterns across bin widths.
 :::
 
 ## An axis range changes the visual emphasis
 
 ![The same individual growth observations appear under broader and narrower vertical ranges.](extended-axis-choice.svg){height=350px}
 
-Read values and labels; do not judge effect size from screen distance alone.
+Read values and axis labels when comparing effects.
 
 ::: notes
 Both displays can be useful with clear axes, but a reader should not mistake a changed scale for changed observations. This is particularly important when comparing figures from different groups or experiments.
@@ -170,7 +170,7 @@ Repair it by naming:
 3. Available n and the actual meaning of any error bars.
 
 ::: notes
-Do not invent error bars where none are shown. Mean±SD describes individual spread. A confidence interval describes uncertainty in an estimate. Neither phrase can be replaced by a generic word error.
+Identify only the symbols actually plotted. Mean±SD describes individual spread. A confidence interval describes uncertainty in an estimate. Neither phrase can be replaced by a generic word error.
 :::
 
 ## A new class needs a complete figure package
@@ -196,7 +196,7 @@ ggsave('output/growth-summary.png', plot = group_plot,
        width = 6, height = 4)
 ```
 
-Use new names for transfer outputs; do not overwrite the first study's figures.
+Use distinct output filenames for the two studies.
 
 ::: notes
 In the independent task students create transfer_summary and transfer_plot with analogous exports. Explain why a plot object in memory, a PNG, and a summary CSV are not interchangeable outputs.
@@ -204,7 +204,7 @@ In the independent task students create transfer_summary and transfer_plot with 
 
 ## A reader test is more specific than “does this look good?”
 
-Ask a peer to identify:
+Check the exported figure for:
 
 - One observation and the mean marker.
 - Units, available sample size, and independent unit.
@@ -213,7 +213,7 @@ Ask a peer to identify:
 Record the ambiguity and the correction.
 
 ::: notes
-The practical requires a caption-repair log and reproducible outputs. Working alone, reread the figure after closing the code. Biological claims need numerical meaning, not just attractive layout.
+The exercises include a caption-repair log and reproducible outputs. Reread the figure with the code closed. Biological claims need numerical meaning, not just attractive layout.
 :::
 
 ## Exercises: describe the sample before testing it
