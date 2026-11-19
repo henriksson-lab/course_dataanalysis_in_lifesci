@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Twelve independently potted plants are twelve units when independently allocated</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<path d="M77.4,180 h35.2 l-5.6000000000000005,27.200000000000003 h-24.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="95" y1="180" x2="95" y2="133.6" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M95,157.6 Q59.0,128.0 71.0,128.0 Q95,128.0 95,157.6" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M95,146.4 Q131.0,116.0 119.0,116.0 Q95,116.0 95,146.4" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M257.4,180 h35.2 l-5.6000000000000005,27.200000000000003 h-24.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="275" y1="180" x2="275" y2="133.6" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M275,157.6 Q239.0,128.0 251.0,128.0 Q275,128.0 275,157.6" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M275,146.4 Q311.0,116.0 299.0,116.0 Q275,116.0 275,146.4" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M437.4,180 h35.2 l-5.6000000000000005,27.200000000000003 h-24.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="455" y1="180" x2="455" y2="133.6" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M455,157.6 Q419.0,128.0 431.0,128.0 Q455,128.0 455,157.6" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M455,146.4 Q491.0,116.0 479.0,116.0 Q455,116.0 455,146.4" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M617.4,180 h35.2 l-5.6000000000000005,27.200000000000003 h-24.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="635" y1="180" x2="635" y2="133.6" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M635,157.6 Q599.0,128.0 611.0,128.0 Q635,128.0 635,157.6" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M635,146.4 Q671.0,116.0 659.0,116.0 Q635,116.0 635,146.4" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M797.4,180 h35.2 l-5.6000000000000005,27.200000000000003 h-24.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="815" y1="180" x2="815" y2="133.6" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M815,157.6 Q779.0,128.0 791.0,128.0 Q815,128.0 815,157.6" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M815,146.4 Q851.0,116.0 839.0,116.0 Q815,116.0 815,146.4" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M977.4,180 h35.2 l-5.6000000000000005,27.200000000000003 h-24.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="995" y1="180" x2="995" y2="133.6" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M995,157.6 Q959.0,128.0 971.0,128.0 Q995,128.0 995,157.6" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M995,146.4 Q1031.0,116.0 1019.0,116.0 Q995,116.0 995,146.4" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M77.4,370 h35.2 l-5.6000000000000005,27.200000000000003 h-24.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="95" y1="370" x2="95" y2="323.6" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M95,347.6 Q59.0,318.0 71.0,318.0 Q95,318.0 95,347.6" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M95,336.4 Q131.0,306.0 119.0,306.0 Q95,306.0 95,336.4" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M257.4,370 h35.2 l-5.6000000000000005,27.200000000000003 h-24.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="275" y1="370" x2="275" y2="323.6" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M275,347.6 Q239.0,318.0 251.0,318.0 Q275,318.0 275,347.6" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M275,336.4 Q311.0,306.0 299.0,306.0 Q275,306.0 275,336.4" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M437.4,370 h35.2 l-5.6000000000000005,27.200000000000003 h-24.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="455" y1="370" x2="455" y2="323.6" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M455,347.6 Q419.0,318.0 431.0,318.0 Q455,318.0 455,347.6" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M455,336.4 Q491.0,306.0 479.0,306.0 Q455,306.0 455,336.4" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M617.4,370 h35.2 l-5.6000000000000005,27.200000000000003 h-24.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="635" y1="370" x2="635" y2="323.6" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M635,347.6 Q599.0,318.0 611.0,318.0 Q635,318.0 635,347.6" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M635,336.4 Q671.0,306.0 659.0,306.0 Q635,306.0 635,336.4" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M797.4,370 h35.2 l-5.6000000000000005,27.200000000000003 h-24.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="815" y1="370" x2="815" y2="323.6" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M815,347.6 Q779.0,318.0 791.0,318.0 Q815,318.0 815,347.6" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M815,336.4 Q851.0,306.0 839.0,306.0 Q815,306.0 815,336.4" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M977.4,370 h35.2 l-5.6000000000000005,27.200000000000003 h-24.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="995" y1="370" x2="995" y2="323.6" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M995,347.6 Q959.0,318.0 971.0,318.0 Q995,318.0 995,347.6" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M995,336.4 Q1031.0,306.0 1019.0,306.0 Q995,306.0 995,336.4" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<text x="550" y="475" font-family="Arial, sans-serif" font-size="32" fill="#203247" text-anchor="middle" font-weight="normal">Treatment allocated to individual pots</text>
+</svg>

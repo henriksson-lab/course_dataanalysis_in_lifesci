@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>A relative path depends on the starting folder</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<path d="M60,90 v-20 h106.0 l20,20 h139.0 v80 h-265 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="192.5" y="138.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">course project</text>
+<path d="M60,320 v-20 h106.0 l20,20 h139.0 v80 h-265 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="192.5" y="368.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">reports</text>
+<path d="M760,90 v-20 h96.0 l20,20 h124.0 v80 h-240 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="880.0" y="138.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">data</text>
+<path d="M790,270 h150 l30,30 v75 h-180 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="940" y1="270" x2="940" y2="300" stroke="#3b5bab" stroke-width="3"/>
+<line x1="940" y1="300" x2="970" y2="300" stroke="#3b5bab" stroke-width="3"/>
+<text x="880.0" y="410" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">seedlings.csv</text>
+<line x1="350" y1="125" x2="725" y2="125" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="540" y="85" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">data/seedlings.csv</text>
+<line x1="350" y1="355" x2="725" y2="355" stroke="#a8324a" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="540" y="320" font-family="Arial, sans-serif" font-size="23" fill="#a8324a" text-anchor="middle" font-weight="normal">same words, wrong start</text>
+<line x1="760" y1="390" x2="1000" y2="430" stroke="#a8324a" stroke-width="3"/>
+<line x1="760" y1="430" x2="1000" y2="390" stroke="#a8324a" stroke-width="3"/>
+<text x="550" y="475" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="normal">The file did not move; your starting point changed.</text>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Independent groups and repeated measurements are different designs</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<path d="M128,245 h44 l-7,34 h-30 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="150" y1="245" x2="150" y2="187" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M150,217 Q105,180 120,180 Q150,180 150,217" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M150,203 Q195,165 180,165 Q150,165 150,203" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<text x="150" y="305" font-family="Arial, sans-serif" font-size="22" fill="#203247" text-anchor="middle" font-weight="normal">P01</text>
+<path d="M358,245 h44 l-7,34 h-30 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="380" y1="245" x2="380" y2="187" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M380,217 Q335,180 350,180 Q380,180 380,217" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M380,203 Q425,165 410,165 Q380,165 380,203" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<text x="380" y="305" font-family="Arial, sans-serif" font-size="22" fill="#203247" text-anchor="middle" font-weight="normal">P13</text>
+<text x="265" y="100" font-family="Arial, sans-serif" font-size="33" fill="#203247" text-anchor="middle" font-weight="normal">Different plants</text>
+<line x1="550" y1="40" x2="550" y2="440" stroke="#64748b" stroke-width="3" stroke-dasharray="10 8"/>
+<path d="M708,245 h44 l-7,34 h-30 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="730" y1="245" x2="730" y2="187" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M730,217 Q685,180 700,180 Q730,180 730,217" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M730,203 Q775,165 760,165 Q730,165 730,203" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<text x="730" y="305" font-family="Arial, sans-serif" font-size="22" fill="#203247" text-anchor="middle" font-weight="normal">L01 before</text>
+<path d="M938,245 h44 l-7,34 h-30 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="960" y1="245" x2="960" y2="187" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M960,217 Q915,180 930,180 Q960,180 960,217" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M960,203 Q1005,165 990,165 Q960,165 960,203" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<text x="960" y="305" font-family="Arial, sans-serif" font-size="22" fill="#203247" text-anchor="middle" font-weight="normal">L01 after</text>
+<line x1="800" y1="195" x2="885" y2="195" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="850" y="100" font-family="Arial, sans-serif" font-size="33" fill="#203247" text-anchor="middle" font-weight="normal">Same plant twice</text>
+<text x="550" y="450" font-family="Arial, sans-serif" font-size="27" fill="#203247" text-anchor="middle" font-weight="normal">Pairing comes from identities and design, not from two columns.</text>
+</svg>

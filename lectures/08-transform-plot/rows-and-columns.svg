@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Filtering chooses rows; selecting chooses columns</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="35" y="95" width="110" height="50" rx="0" fill="#dceaf6" stroke="#cbd5e1" stroke-width="3"/>
+<text x="47" y="128" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="bold">ID</text>
+<rect x="145" y="95" width="160" height="50" rx="0" fill="#dceaf6" stroke="#cbd5e1" stroke-width="3"/>
+<text x="157" y="128" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="bold">group</text>
+<rect x="305" y="95" width="130" height="50" rx="0" fill="#dceaf6" stroke="#cbd5e1" stroke-width="3"/>
+<text x="317" y="128" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="bold">growth</text>
+<rect x="35" y="147" width="110" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="47" y="180" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">P01</text>
+<rect x="145" y="147" width="160" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="157" y="180" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">control</text>
+<rect x="305" y="147" width="130" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="317" y="180" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">18.6</text>
+<rect x="35" y="199" width="110" height="50" rx="0" fill="#d7f1e7" stroke="#cbd5e1" stroke-width="3"/>
+<text x="47" y="232" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">P13</text>
+<rect x="145" y="199" width="160" height="50" rx="0" fill="#d7f1e7" stroke="#cbd5e1" stroke-width="3"/>
+<text x="157" y="232" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">treated</text>
+<rect x="305" y="199" width="130" height="50" rx="0" fill="#d7f1e7" stroke="#cbd5e1" stroke-width="3"/>
+<text x="317" y="232" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">30.8</text>
+<rect x="35" y="251" width="110" height="50" rx="0" fill="#d7f1e7" stroke="#cbd5e1" stroke-width="3"/>
+<text x="47" y="284" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">P14</text>
+<rect x="145" y="251" width="160" height="50" rx="0" fill="#d7f1e7" stroke="#cbd5e1" stroke-width="3"/>
+<text x="157" y="284" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">treated</text>
+<rect x="305" y="251" width="130" height="50" rx="0" fill="#d7f1e7" stroke="#cbd5e1" stroke-width="3"/>
+<text x="317" y="284" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">21.4</text>
+<line x1="450" y1="210" x2="570" y2="210" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="620" y="95" width="150" height="50" rx="0" fill="#dceaf6" stroke="#cbd5e1" stroke-width="3"/>
+<text x="632" y="128" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="bold">ID</text>
+<rect x="770" y="95" width="230" height="50" rx="0" fill="#dceaf6" stroke="#cbd5e1" stroke-width="3"/>
+<text x="782" y="128" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="bold">growth</text>
+<rect x="620" y="147" width="150" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="632" y="180" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">P13</text>
+<rect x="770" y="147" width="230" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="782" y="180" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">30.8</text>
+<rect x="620" y="199" width="150" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="632" y="232" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">P14</text>
+<rect x="770" y="199" width="230" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="782" y="232" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">21.4</text>
+<text x="260" y="420" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">filter: which observations?</text>
+<text x="810" y="420" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">select: which variables?</text>
+</svg>

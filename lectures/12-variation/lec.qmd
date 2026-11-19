@@ -1,0 +1,128 @@
+---
+title: "An average is not every plant"
+subtitle: "Day 12 — Mean, variance and standard deviation"
+author: "Data Analysis in Life Sciences"
+format:
+  revealjs:
+    theme: [simple, ../../theme.scss]
+    slide-number: c/t
+    width: 1280
+    height: 720
+    transition: none
+    history: false
+    highlight-style: github
+    code-overflow: wrap
+    code-line-numbers: false
+    incremental: false
+    chalkboard: false
+    menu: true
+    html-math-method: katex
+toc: false
+---
+
+## Same average; different observations
+
+![Two toy growth groups have the same 14 millimetre mean but different standard deviations.](../../week3/variation-examples.png){height=350px}
+
+What does the mean leave out?
+
+::: notes
+Give students a moment to read the axis before naming SD. Both sets have mean 14 mm; one contains 13,14,15 and the other 8,14,20. The second set has greater spread. We need to describe centre and variation, not choose one number to represent all plants.
+:::
+
+## Mean and median describe a centre
+
+```r
+x <- c(10, 10, 10, 100)
+mean(x)       # 32.5
+median(x)     # 10
+```
+
+The mean uses every value. The median is the middle of the ordered values.
+
+::: notes
+For an even number of observations, the median averages the two middle values. The large observation changes the mean strongly; it does not make either function wrong. Check unusual values against source information rather than deleting them to make summaries agree.
+:::
+
+## Measure deviations from the mean
+
+![Growth values 12,14,16 have deviations minus 2,0,plus 2 millimetres from their mean.](deviations.svg){height=350px}
+
+Adding the signed deviations gives zero, even with spread.
+
+::: notes
+Work through the three numbers slowly. Subtraction uses the same units as the measurement. Positive and negative deviations cancel. Squaring is one way to avoid cancellation and leads to the sample variance used by R.
+:::
+
+## Variance has squared units; SD has the original units
+
+![A two millimetre deviation squared corresponds to four square millimetres.](squared-units.svg){height=350px}
+
+For 12, 14, 16: variance = **4 mm²**, SD = **2 mm**.
+
+::: notes
+The sum of squared deviations is 4+0+4=8. Divide by n−1=2 for sample variance, giving 4 mm². The square root is 2 mm. Explain the denominator as a sample-variance convention that estimates population variance; no derivation is needed. SD is not an error bar for the mean.
+:::
+
+## Let R do the arithmetic, while you keep the meaning
+
+```r
+x <- c(12, 14, 16)
+mean(x)
+var(x)
+sd(x)
+```
+
+A mean or SD needs its measurement unit in the report.
+
+::: notes
+Ask students to predict 14,4,2 before running. Their task is not memorising function names: it is choosing the quantity that answers their question and labelling the output correctly. Neither SD nor variance means every observation lies within a specified range.
+:::
+
+## Our control plants vary around their mean
+
+![Individual control growth values and their 15.275 millimetre mean are shown on one axis.](control-centre.svg){height=350px}
+
+Mean ≈ **15.28 mm**; sample SD ≈ **3.19 mm**.
+
+::: notes
+These are the complete clean seedling data, not yesterday’s deliberately incomplete export. State the switch explicitly:12 control plants now contribute. The mean is a summary, not an observed “average plant”. Biological and measurement variation may both contribute to spread.
+:::
+
+## Changing the origin is different from changing the unit
+
+![Adding a constant shifts the mean; converting millimetres to centimetres changes the numeric scale.](shift-and-scale.svg){height=350px}
+
+Predict what happens to SD before running R.
+
+::: notes
+Adding 10 mm changes 13,14,15 into 23,24,25: mean shifts from 14 to 24, SD remains 1 mm. Dividing by 10 gives 1.3,1.4,1.5 cm: mean 1.4 cm and SD 0.1 cm. Variance divides by 100. This is a units check, not a new statistical method.
+:::
+
+## Transfer choice: a yield is a percentage
+
+A supplied maximum is **1.00 g**; collected dry product is **0.62 g**.
+
+`yield_percent = 100 × collected mass / supplied maximum mass`
+
+- Yield = **62%**; no reaction equation is needed.
+- SD of several yields is in **percentage points**.
+- A higher yield alone does not establish higher purity.
+
+::: notes
+This is an alternative small task, not additional compulsory work. Theoretical maximum masses are supplied in organic-recovery.csv. Collected dry material is assumed pure for this simplified calculation. Across six standard runs mean yield is 68.67% and SD 4.32 percentage points. Distinguish a percentage scale from relative percentage change.
+:::
+
+## Practical: explain the number you calculate
+
+Choose one short transfer task and keep **`day12-variation.R`**.
+
+What would stay the same if every measurement increased by 10 mm?
+
+What changes when mm become cm?
+
+[Open the practical and answer checks](../../week3/12-variation.qmd).
+
+::: notes
+Keep the by-hand three-number example before the full dataset. Ask for a two-sentence explanation of centre and spread. Students should retain the measurement unit and recognise that SD among plants is not uncertainty in a treatment difference.
+:::

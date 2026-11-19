@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Changing directory changes the starting location</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<path d="M60,90 v-20 h92.0 l20,20 h118.0 v80 h-230 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="175.0" y="138.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">home</text>
+<path d="M430,90 v-20 h92.0 l20,20 h118.0 v80 h-230 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="545.0" y="138.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">workspace</text>
+<path d="M800,90 v-20 h92.0 l20,20 h118.0 v80 h-230 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="915.0" y="138.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">practice</text>
+<line x1="315" y1="120" x2="410" y2="120" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="685" y1="120" x2="780" y2="120" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="360" y="65" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="normal">cd</text>
+<text x="730" y="65" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="normal">cd</text>
+<line x1="905" y1="260" x2="550" y2="260" stroke="#6b4fa0" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="730" y="310" font-family="Arial, sans-serif" font-size="26" fill="#6b4fa0" text-anchor="middle" font-weight="normal">cd ..</text>
+<text x="550" y="430" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="normal">pwd reports the location; it does not move you.</text>
+</svg>

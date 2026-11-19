@@ -1,0 +1,153 @@
+---
+title: "Turn an instrument reading into a concentration"
+subtitle: "Day 19 — Calibration and supported predictions"
+author: "Data Analysis in Life Sciences"
+format:
+  revealjs:
+    theme: [simple, ../../theme.scss]
+    slide-number: c/t
+    width: 1280
+    height: 720
+    transition: none
+    history: false
+    highlight-style: github
+    code-overflow: wrap
+    code-line-numbers: false
+    incremental: false
+    chalkboard: false
+    menu: true
+    html-math-method: katex
+toc: false
+---
+
+## A reading is not yet a concentration
+
+![Six known standard concentrations establish a measurement scale before an unknown is interpreted.](standards.svg){height=350px}
+
+Use known **standards** before estimating unknown samples.
+
+::: notes
+These are simulated values for a fictional colour assay; no reagent or prior chemistry course is assumed. A standard is a solution whose concentration is supplied. Absorbance describes light attenuation and is dimensionless. The standards span 0–10 mg/L.
+:::
+
+## Know which quantity was prepared and which was measured
+
+We **prepared concentration** and **measured absorbance**.
+
+Fit:
+
+`absorbance = intercept + slope × concentration`
+
+One standard is a calibration point, not a biological treatment replicate.
+
+::: notes
+This direction is deliberate. Later we rearrange the forward calibration to estimate an unknown concentration. Regressing concentration directly on absorbance would be a different fit. The zero-concentration standard includes background signal; no blank subtraction has been performed.
+:::
+
+## Fit the straight line
+
+```r
+library(readr)
+standards <- read_csv("data/calibration.csv", show_col_types = FALSE)
+calibration_fit <- lm(absorbance ~ concentration_mg_l,
+                      data = standards)
+coef(calibration_fit)
+```
+
+Intercept ≈ **0.03957**; slope ≈ **0.06489 per mg/L**.
+
+::: notes
+Load readr, dplyr, ggplot2 as usual. Explain the tilde as response on the left and explanatory variable on the right. The practical supplies full precision. A nonzero intercept may represent background, so “zero concentration” does not justify forcing the fit through zero.
+:::
+
+## Does a line describe the tested range?
+
+![Prepared standards are shown with their fitted linear calibration.](../../week4/figures/day19-calibration.png){height=350px}
+
+A fitted line need not pass through every measured standard.
+
+::: notes
+Point to each measured value and the line’s fitted value. The fitted slope is the rise in absorbance for one mg/L increase in concentration. This is a working approximation within the tested range, not a chemical law established for every concentration.
+:::
+
+## A residual is observed minus fitted
+
+![Calibration residuals show measured readings minus their fitted readings.](../../week4/figures/day19-residuals.png){height=350px}
+
+Look for curvature or an unusual point, not zero residuals everywhere.
+
+::: notes
+Positive means the observed absorbance is above the line. The six small residuals show no obvious curved pattern, but six standards remain limited evidence. A plot is a check on the approximation, not a guarantee of validity outside the data.
+:::
+
+## Read backward from the measured signal
+
+![A measured absorbance 0.520 intersects the fitted line near 7.40 mg/L.](inverse-reading.svg){height=350px}
+
+The unknown concentration is obtained by rearranging the line.
+
+::: notes
+Trace horizontally from the observed reading to the calibration line, then down to concentration. This visual separates the measured input from the estimated output. Keep the unrounded coefficients for the calculation even though slide labels are rounded.
+:::
+
+## Calculate a supported point estimate
+
+```r
+intercept <- coef(calibration_fit)[1]
+slope <- coef(calibration_fit)[2]
+concentration_mg_l <- (0.520 - intercept) / slope
+```
+
+Result ≈ **7.40 mg/L**.
+
+This simple estimate omits full calibration and measurement uncertainty.
+
+::: notes
+The[1] and[2] select coefficients. The denominator is the fitted slope, with absorbance per mg/L units. The practical uses range checks to avoid pretending every numeric inversion is supported. Do not present this point estimate as an exact concentration.
+:::
+
+## A number can be calculable but unsupported
+
+![The U3 absorbance 0.900 is greater than every measured standard reading.](unsupported-reading.svg){height=350px}
+
+U3 is beyond range: flag for a new suitable measurement.
+
+::: notes
+The practical assigns NA to the unsupported concentration rather than presenting an extrapolated number. Do not invent a dilution correction for a measurement that was never made. The instrument’s calibrated range is evidence, not an inconvenience to bypass.
+:::
+
+## A new diluted measurement can bring the signal in range
+
+![One millilitre of original sample is brought to ten millilitres total by adding solvent.](dilution.svg){height=350px}
+
+**1.00 mL original → 10.00 mL total** gives a dilution factor of 10.
+
+::: notes
+This is a stated new numerical example, not a wet-lab protocol or a new reading for U3. Define dilution without assuming chemical preparation knowledge. Total 10 mL does not mean adding 10 mL of solvent to the 1 mL sample. Assume no measured material is lost or reacts.
+:::
+
+## Distinguish the measured and original concentrations
+
+New diluted reading: **0.520** → **7.40 mg/L** diluted.
+
+Original estimate = diluted estimate × total volume / original volume.
+
+**7.404227 × 10 ≈ 74.04 mg/L** original.
+
+The new measured reading, not the original concentration, is within calibration range.
+
+::: notes
+An original concentration above 10 mg/L can be estimated through a new in-range diluted measurement and a justified factor. That is different from extrapolating the old calibration directly to a high absorbance. Full dilution and calibration uncertainty remain outside this exercise.
+:::
+
+## Practical: report the line and its limits
+
+Save **`calibration-report.Rmd`**, supported concentration estimates, and both figures.
+
+Explain U3’s missing estimate and the new dilution example.
+
+[Open the practical](../../week4/19-calibration.qmd).
+
+::: notes
+Students should explain the standard, slope units, residual sign, supported range, and uncertainty limitation. They need no memorised optical law. Keep the dataset and formula visible so the chemistry setting does not become a prerequisite.
+:::

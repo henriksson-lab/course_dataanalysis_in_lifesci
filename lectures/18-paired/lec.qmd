@@ -1,0 +1,130 @@
+---
+title: "The same plant measured twice"
+subtitle: "Day 18 — Paired changes and identity"
+author: "Data Analysis in Life Sciences"
+format:
+  revealjs:
+    theme: [simple, ../../theme.scss]
+    slide-number: c/t
+    width: 1280
+    height: 720
+    transition: none
+    history: false
+    highlight-style: github
+    code-overflow: wrap
+    code-line-numbers: false
+    incremental: false
+    chalkboard: false
+    menu: true
+    html-math-method: katex
+toc: false
+---
+
+## Which two readings belong together?
+
+![Plant IDs connect before and after observations even when their row order differs.](match-identities.svg){height=350px}
+
+Pair by **identity**, not accidental row position.
+
+::: notes
+The file paired.csv stores one plant per row with both readings, so matching is preserved. The diagram imagines two differently ordered lists to make the identity principle visible. Students do not need a join operation for this practical; they need to recognise that labels carry meaning.
+:::
+
+## Read the within-plant paths
+
+![Each of ten independent plants connects its before and after photosynthesis readings.](paired-lines.svg){height=350px}
+
+Ten plants, ten pairs; not twenty independent plants.
+
+::: notes
+Photosynthesis rate is measured in micromoles CO2 per square metre per second. Each line links one plant’s non-destructive reading before and after increasing illumination. The prepared data show positive changes for every plant, but other datasets could have mixed directions.
+:::
+
+## Subtract within each plant first
+
+![Three example plants show their after-minus-before change on the original measurement scale.](within-plant-change.svg){height=350px}
+
+Positive change means the measured rate increased.
+
+::: notes
+L01 changes 6.95−5.87=1.08; L02 changes 11.92−7.75=4.17; L03 changes 10.12−8.81=1.31. These examples show why pairing concerns each plant’s change, not merely comparing two unlabelled collections of readings.
+:::
+
+## One paired comparison in R
+
+```r
+library(readr)
+library(dplyr)
+paired_data <- read_csv("data/paired.csv", show_col_types = FALSE)
+paired_data <- paired_data |>
+  mutate(change = after_umol_m2_s - before_umol_m2_s)
+paired_comparison <- t.test(
+  paired_data$after_umol_m2_s, paired_data$before_umol_m2_s,
+  paired = TRUE)
+```
+
+After minus before is the direction of the result.
+
+::: notes
+Load readr and dplyr first in the report. The paired argument tells t.test that each position in the first vector belongs with the corresponding position in the second. Keeping both readings in one ID-checked table prevents independent sorting. This is not a method for pairing arbitrary groups.
+:::
+
+## Changes differ among plants
+
+![The ten within-plant changes are plotted against plant identifiers.](../../week4/figures/day18-changes.png){height=350px}
+
+Mean change ≈ **1.983 µmol CO₂ m⁻² s⁻¹**.
+
+::: notes
+The y-axis is the difference, not the after reading. Its zero line means no recorded within-plant change. L02 has a larger change than several others; this alone is not a recording error. The mean change and its uncertainty use 10 independent pairs.
+:::
+
+## Pairing changes the information used
+
+A paired comparison asks whether the **mean within-plant change** is zero.
+
+A one-sample comparison of those changes gives the same result:
+
+```r
+t.test(paired_data$change, mu = 0)
+```
+
+Do not independently sort the before and after columns.
+
+::: notes
+This equivalence supports understanding, not a demand to learn another method. The subject-to-subject differences in starting level are accounted for through within-subject subtraction. Pairing must be justified by design, and the pairs still need to be independent of one another.
+:::
+
+## The design has a limit the test cannot remove
+
+![The study changes light condition while time passes between the before and after readings.](order-confounding.svg){height=350px}
+
+No unchanged-light group; the same order was used for every plant.
+
+::: notes
+We observe a change after the procedure, but light, elapsed time and measurement order accompany one another. The paired t-test does not separate them. Do not claim that a small p-value proves light alone caused the change.
+:::
+
+## Report change, uncertainty, and the ordering limit
+
+Mean after-minus-before change: **1.983 µmol CO₂ m⁻² s⁻¹**.
+
+95% CI: **1.255 to 2.711**; paired two-sided **p ≈ 0.000166**.
+
+These describe a change under the study conditions, not an isolated light effect.
+
+::: notes
+The confidence interval concerns the population mean change, under the assumptions. It does not describe the range of most plants’ individual changes. Sensible precision and a direct order/time limitation matter more than copying every decimal from the console.
+:::
+
+## Practical: keep the pair visible
+
+Make **`paired-report.Rmd`** with the design, matched changes, a figure, result, and limitation.
+
+Could a reader identify what counted as one independent pair?
+
+[Open the practical](../../week4/18-paired.qmd).
+
+::: notes
+Check the practical’s chosen source report filename and use its code from the top. Ask students to explain why two unrelated groups cannot become paired by putting them beside one another. No new biology or chemical prerequisite is needed.
+:::

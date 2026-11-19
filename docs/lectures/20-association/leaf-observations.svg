@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>One leaf from each of eighteen independent plants</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<path d="M190,310.0 Q112.0,238.5 190,160.5 Q268.0,238.5 190,310.0" fill="#b8d9b3" stroke="#2a7f8f" stroke-width="3"/>
+<line x1="190" y1="310.0" x2="190" y2="180.0" stroke="#2a7f8f" stroke-width="3"/>
+<text x="190" y="440" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="normal">one different plant</text>
+<path d="M540,345 Q420,235 540,115 Q660,235 540,345" fill="#b8d9b3" stroke="#2a7f8f" stroke-width="3"/>
+<line x1="540" y1="345" x2="540" y2="145" stroke="#2a7f8f" stroke-width="3"/>
+<text x="540" y="440" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="normal">one different plant</text>
+<path d="M890,380.0 Q728.0,231.5 890,69.5 Q1052.0,231.5 890,380.0" fill="#b8d9b3" stroke="#2a7f8f" stroke-width="3"/>
+<line x1="890" y1="380.0" x2="890" y2="110.0" stroke="#2a7f8f" stroke-width="3"/>
+<text x="890" y="440" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="normal">one different plant</text>
+<text x="550" y="55" font-family="Arial, sans-serif" font-size="27" fill="#203247" text-anchor="middle" font-weight="normal">Area and dry mass are measured; no treatment was assigned.</text>
+</svg>

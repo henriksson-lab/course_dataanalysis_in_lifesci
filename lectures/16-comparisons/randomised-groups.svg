@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Two groups with independent pots and random allocation</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<path d="M89.0,150 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="100" y1="150" x2="100" y2="121.0" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M100,136.0 Q77.5,117.5 85.0,117.5 Q100,117.5 100,136.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M100,129.0 Q122.5,110.0 115.0,110.0 Q100,110.0 100,129.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M169.0,150 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="180" y1="150" x2="180" y2="121.0" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M180,136.0 Q157.5,117.5 165.0,117.5 Q180,117.5 180,136.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M180,129.0 Q202.5,110.0 195.0,110.0 Q180,110.0 180,129.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M249.0,150 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="260" y1="150" x2="260" y2="121.0" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M260,136.0 Q237.5,117.5 245.0,117.5 Q260,117.5 260,136.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M260,129.0 Q282.5,110.0 275.0,110.0 Q260,110.0 260,129.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M329.0,150 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="340" y1="150" x2="340" y2="121.0" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M340,136.0 Q317.5,117.5 325.0,117.5 Q340,117.5 340,136.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M340,129.0 Q362.5,110.0 355.0,110.0 Q340,110.0 340,129.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M409.0,150 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="420" y1="150" x2="420" y2="121.0" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M420,136.0 Q397.5,117.5 405.0,117.5 Q420,117.5 420,136.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M420,129.0 Q442.5,110.0 435.0,110.0 Q420,110.0 420,129.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M489.0,150 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="500" y1="150" x2="500" y2="121.0" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M500,136.0 Q477.5,117.5 485.0,117.5 Q500,117.5 500,136.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M500,129.0 Q522.5,110.0 515.0,110.0 Q500,110.0 500,129.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M89.0,300 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="100" y1="300" x2="100" y2="271.0" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M100,286.0 Q77.5,267.5 85.0,267.5 Q100,267.5 100,286.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M100,279.0 Q122.5,260.0 115.0,260.0 Q100,260.0 100,279.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M169.0,300 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="180" y1="300" x2="180" y2="271.0" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M180,286.0 Q157.5,267.5 165.0,267.5 Q180,267.5 180,286.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M180,279.0 Q202.5,260.0 195.0,260.0 Q180,260.0 180,279.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M249.0,300 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="260" y1="300" x2="260" y2="271.0" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M260,286.0 Q237.5,267.5 245.0,267.5 Q260,267.5 260,286.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M260,279.0 Q282.5,260.0 275.0,260.0 Q260,260.0 260,279.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M329.0,300 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="340" y1="300" x2="340" y2="271.0" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M340,286.0 Q317.5,267.5 325.0,267.5 Q340,267.5 340,286.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M340,279.0 Q362.5,260.0 355.0,260.0 Q340,260.0 340,279.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M409.0,300 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="420" y1="300" x2="420" y2="271.0" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M420,286.0 Q397.5,267.5 405.0,267.5 Q420,267.5 420,286.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M420,279.0 Q442.5,260.0 435.0,260.0 Q420,260.0 420,279.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M489.0,300 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="500" y1="300" x2="500" y2="271.0" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M500,286.0 Q477.5,267.5 485.0,267.5 Q500,267.5 500,286.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M500,279.0 Q522.5,260.0 515.0,260.0 Q500,260.0 500,279.0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<text x="285" y="400" font-family="Arial, sans-serif" font-size="33" fill="#203247" text-anchor="middle" font-weight="normal">12 controls</text>
+<path d="M649.0,150 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="660" y1="150" x2="660" y2="121.0" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M660,136.0 Q637.5,117.5 645.0,117.5 Q660,117.5 660,136.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M660,129.0 Q682.5,110.0 675.0,110.0 Q660,110.0 660,129.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M729.0,150 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="740" y1="150" x2="740" y2="121.0" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M740,136.0 Q717.5,117.5 725.0,117.5 Q740,117.5 740,136.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M740,129.0 Q762.5,110.0 755.0,110.0 Q740,110.0 740,129.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M809.0,150 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="820" y1="150" x2="820" y2="121.0" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M820,136.0 Q797.5,117.5 805.0,117.5 Q820,117.5 820,136.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M820,129.0 Q842.5,110.0 835.0,110.0 Q820,110.0 820,129.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M889.0,150 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="900" y1="150" x2="900" y2="121.0" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M900,136.0 Q877.5,117.5 885.0,117.5 Q900,117.5 900,136.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M900,129.0 Q922.5,110.0 915.0,110.0 Q900,110.0 900,129.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M969.0,150 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="980" y1="150" x2="980" y2="121.0" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M980,136.0 Q957.5,117.5 965.0,117.5 Q980,117.5 980,136.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M980,129.0 Q1002.5,110.0 995.0,110.0 Q980,110.0 980,129.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M1049.0,150 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="1060" y1="150" x2="1060" y2="121.0" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M1060,136.0 Q1037.5,117.5 1045.0,117.5 Q1060,117.5 1060,136.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M1060,129.0 Q1082.5,110.0 1075.0,110.0 Q1060,110.0 1060,129.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M649.0,300 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="660" y1="300" x2="660" y2="271.0" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M660,286.0 Q637.5,267.5 645.0,267.5 Q660,267.5 660,286.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M660,279.0 Q682.5,260.0 675.0,260.0 Q660,260.0 660,279.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M729.0,300 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="740" y1="300" x2="740" y2="271.0" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M740,286.0 Q717.5,267.5 725.0,267.5 Q740,267.5 740,286.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M740,279.0 Q762.5,260.0 755.0,260.0 Q740,260.0 740,279.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M809.0,300 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="820" y1="300" x2="820" y2="271.0" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M820,286.0 Q797.5,267.5 805.0,267.5 Q820,267.5 820,286.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M820,279.0 Q842.5,260.0 835.0,260.0 Q820,260.0 820,279.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M889.0,300 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="900" y1="300" x2="900" y2="271.0" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M900,286.0 Q877.5,267.5 885.0,267.5 Q900,267.5 900,286.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M900,279.0 Q922.5,260.0 915.0,260.0 Q900,260.0 900,279.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M969.0,300 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="980" y1="300" x2="980" y2="271.0" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M980,286.0 Q957.5,267.5 965.0,267.5 Q980,267.5 980,286.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M980,279.0 Q1002.5,260.0 995.0,260.0 Q980,260.0 980,279.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M1049.0,300 h22.0 l-3.5,17.0 h-15.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="1060" y1="300" x2="1060" y2="271.0" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M1060,286.0 Q1037.5,267.5 1045.0,267.5 Q1060,267.5 1060,286.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M1060,279.0 Q1082.5,260.0 1075.0,260.0 Q1060,260.0 1060,279.0" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<text x="845" y="400" font-family="Arial, sans-serif" font-size="33" fill="#203247" text-anchor="middle" font-weight="normal">12 treated</text>
+<text x="550" y="465" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">Allocation is part of the study description, not something a sorted table proves.</text>
+</svg>

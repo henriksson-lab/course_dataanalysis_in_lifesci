@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Literal text search selects the two treated records</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="140" y="70" width="170" height="50" rx="0" fill="#dceaf6" stroke="#cbd5e1" stroke-width="3"/>
+<text x="152" y="103" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="bold">sample_id</text>
+<rect x="310" y="70" width="200" height="50" rx="0" fill="#dceaf6" stroke="#cbd5e1" stroke-width="3"/>
+<text x="322" y="103" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="bold">treatment</text>
+<rect x="510" y="70" width="430" height="50" rx="0" fill="#dceaf6" stroke="#cbd5e1" stroke-width="3"/>
+<text x="522" y="103" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="bold">file</text>
+<rect x="140" y="122" width="170" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="152" y="155" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">S01</text>
+<rect x="310" y="122" width="200" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="322" y="155" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">control</text>
+<rect x="510" y="122" width="430" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="522" y="155" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">measurements/S01.csv</text>
+<rect x="140" y="174" width="170" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="152" y="207" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">S02</text>
+<rect x="310" y="174" width="200" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="322" y="207" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">control</text>
+<rect x="510" y="174" width="430" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="522" y="207" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">measurements/S02.csv</text>
+<rect x="140" y="226" width="170" height="50" rx="0" fill="#d7f1e7" stroke="#cbd5e1" stroke-width="3"/>
+<text x="152" y="259" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">S03</text>
+<rect x="310" y="226" width="200" height="50" rx="0" fill="#d7f1e7" stroke="#cbd5e1" stroke-width="3"/>
+<text x="322" y="259" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">treated</text>
+<rect x="510" y="226" width="430" height="50" rx="0" fill="#d7f1e7" stroke="#cbd5e1" stroke-width="3"/>
+<text x="522" y="259" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">measurements/S03.csv</text>
+<rect x="140" y="278" width="170" height="50" rx="0" fill="#d7f1e7" stroke="#cbd5e1" stroke-width="3"/>
+<text x="152" y="311" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">S04</text>
+<rect x="310" y="278" width="200" height="50" rx="0" fill="#d7f1e7" stroke="#cbd5e1" stroke-width="3"/>
+<text x="322" y="311" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">treated</text>
+<rect x="510" y="278" width="430" height="50" rx="0" fill="#d7f1e7" stroke="#cbd5e1" stroke-width="3"/>
+<text x="522" y="311" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">measurements/S04.csv</text>
+<text x="550" y="430" font-family="Arial, sans-serif" font-size="29" fill="#203247" text-anchor="middle" font-weight="normal">grep -F treated samples.tsv</text>
+</svg>

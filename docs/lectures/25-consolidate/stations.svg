@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Choose the practice station that addresses your current difficulty</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<circle cx="550" cy="95" r="48" fill="#2a7f8f" stroke="none" stroke-width="3"/>
+<text x="550" y="104" font-family="Arial, sans-serif" font-size="26" fill="white" text-anchor="middle" font-weight="normal">You</text>
+<line x1="550" y1="150" x2="150" y2="245" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="35" y="260" width="235" height="130" rx="10" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<text x="152" y="305" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Files</text>
+<text x="152" y="350" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="middle" font-weight="normal">locate + inspect</text>
+<line x1="550" y1="150" x2="420" y2="245" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="305" y="260" width="235" height="130" rx="10" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<text x="422" y="305" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">R</text>
+<text x="422" y="350" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="middle" font-weight="normal">repair + rerun</text>
+<line x1="550" y1="150" x2="690" y2="245" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="575" y="260" width="235" height="130" rx="10" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<text x="692" y="305" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Meaning</text>
+<text x="692" y="350" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="middle" font-weight="normal">units + limits</text>
+<line x1="550" y1="150" x2="960" y2="245" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="845" y="260" width="235" height="130" rx="10" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<text x="962" y="305" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Report</text>
+<text x="962" y="350" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="middle" font-weight="normal">render + share</text>
+</svg>

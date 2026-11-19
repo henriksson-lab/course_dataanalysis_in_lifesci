@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Laptop, Ubuntu home, and remote storage are distinct locations</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="40" y="100" width="290" height="180" rx="10" fill="#f8fafc" stroke="#3b5bab" stroke-width="3"/>
+<line x1="185" y1="285" x2="185" y2="325" stroke="#3b5bab" stroke-width="6"/>
+<line x1="120" y1="325" x2="250" y2="325" stroke="#3b5bab" stroke-width="6"/>
+<text x="185" y="60" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Windows / Mac</text>
+<path d="M90,180 v-20 h76.0 l20,20 h94.0 v70 h-190 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="185.0" y="223.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">home</text>
+<text x="185" y="390" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">laptop project</text>
+<rect x="410" y="100" width="290" height="180" rx="10" fill="#f8fafc" stroke="#3b5bab" stroke-width="3"/>
+<line x1="555" y1="285" x2="555" y2="325" stroke="#3b5bab" stroke-width="6"/>
+<line x1="490" y1="325" x2="620" y2="325" stroke="#3b5bab" stroke-width="6"/>
+<text x="555" y="60" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Local Ubuntu</text>
+<path d="M460,180 v-20 h76.0 l20,20 h94.0 v70 h-190 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="555.0" y="223.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">home</text>
+<text x="555" y="390" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">Windows users&#x27; shell</text>
+<rect x="780" y="100" width="290" height="180" rx="10" fill="#f8fafc" stroke="#3b5bab" stroke-width="3"/>
+<line x1="925" y1="285" x2="925" y2="325" stroke="#3b5bab" stroke-width="6"/>
+<line x1="860" y1="325" x2="990" y2="325" stroke="#3b5bab" stroke-width="6"/>
+<text x="925" y="60" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Remote Linux</text>
+<path d="M830,180 v-20 h76.0 l20,20 h94.0 v70 h-190 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="925.0" y="223.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">home</text>
+<text x="925" y="390" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">another computer</text>
+<line x1="345" y1="195" x2="405" y2="195" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="715" y1="195" x2="775" y2="195" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="550" y="465" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="normal">Moving a window is not transferring a file.</text>
+</svg>

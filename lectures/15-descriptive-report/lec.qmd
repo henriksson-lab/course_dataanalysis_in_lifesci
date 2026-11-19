@@ -1,0 +1,101 @@
+---
+title: "Tell the reader what was measured"
+subtitle: "Day 15 — A short descriptive report"
+author: "Data Analysis in Life Sciences"
+format:
+  revealjs:
+    theme: [simple, ../../theme.scss]
+    slide-number: c/t
+    width: 1280
+    height: 720
+    transition: none
+    history: false
+    highlight-style: github
+    code-overflow: wrap
+    code-line-numbers: false
+    incremental: false
+    chalkboard: false
+    menu: true
+    html-math-method: katex
+toc: false
+---
+
+## One question, one short evidence trail
+
+![A biological question connects measured data to a readable report.](question-to-report.svg){height=350px}
+
+How does seedling growth vary among plants and groups?
+
+::: notes
+This is a consolidation briefing. Do not introduce another statistical technique. The reader should learn the question, how the measurements arose, and what the observations show. An organic-yield report may replace this context, but is not an extra required report.
+:::
+
+## Give each part of the report a job
+
+![A short report has a question,data and methods,results with a figure,and an interpretation.](report-anatomy.svg){height=350px}
+
+The plot shows the result; your words explain its meaning.
+
+::: notes
+Walk through the drawing as a structure, not as a required page count or formatting template. Distinguish methods from results. A caption identifies the unit and visual encodings. Interpretation describes direction, variation and limits rather than repeating all printed output.
+:::
+
+## Choose and name the actual input
+
+Use **`data/seedlings.csv`** for the complete core example.
+
+- 24 independently potted plants; 12 per group.
+- Initial and final lengths are measured in mm.
+- Growth is final minus initial length.
+- State explicitly if you choose the repaired incomplete file instead.
+
+::: notes
+The complete and repaired datasets have different available counts. Keep those distinctions visible. The existing practical uses the complete file for the main report. The alternative organic-report.Rmd must identify independent synthesis runs and yield percentage units throughout.
+:::
+
+## Keep the source where its relative paths make sense
+
+![The report sits at the project root beside its data and output subfolders.](portable-project.svg){height=350px}
+
+Save the `.Rmd` at the project root, not inside `reports/`.
+
+::: notes
+Knit normally resolves relative data paths from the source report’s folder. Moving the source into reports/ would change where data/ points. An output_dir argument can place the generated HTML in reports/ while leaving the source at root.
+:::
+
+## Render from files, not from your memory of the session
+
+![A fresh session rebuilds results from the saved data and saved report source.](fresh-session.svg){height=350px}
+
+Restart, then Knit without running console calculations first.
+
+::: notes
+The report needs its own library calls, import and derived columns. An object existing only in the Environment pane is not a reproducible report dependency. Installation commands belong in setup, not inside an analysis that should run repeatedly.
+:::
+
+## Check the interpretation against the figure
+
+“Mean treated growth was about 21.5 mm; control growth about 15.3 mm.
+Individual observations overlap.”
+
+What would be wrong with “every treated plant grew more”?
+
+We have described the sample; we have not estimated uncertainty in the difference.
+
+::: notes
+The individual-point plot shows overlap. Keep SD as spread, not uncertainty in a group mean. In the optional organic context, standard mean yield 68.67% and modified 77% describe independent runs; higher yield does not verify purity or general protocol superiority.
+:::
+
+## Practical: one report that reopens and renders
+
+Save **`descriptive-report.Rmd`** or the chosen **`organic-report.Rmd`**, plus HTML.
+
+Put explicit rendering commands in the **R Console**, not inside the report.
+
+Ask a partner to identify the question, unit, units, and limitation.
+
+[Open the report practical](../../week3/15-descriptive-report.qmd).
+
+::: notes
+Have students locate both source and rendered output. No hypothesis test is required today. If rendering fails, use the first meaningful error and chunk name to recover. Avoid spending the entire session on cosmetic formatting while inputs or interpretation remain unclear.
+:::

@@ -2,6 +2,9 @@
 title: "Day 9 — Make a report that runs its own calculations"
 ---
 
+[Lecture slides](../lectures/09-rmarkdown/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Today's question
 
 Can someone read our explanation, inspect our calculation, and see the figure

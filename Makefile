@@ -1,4 +1,4 @@
-.PHONY: render preview downloads check figures
+.PHONY: render preview downloads check figures lecture-figures
 
 render: downloads
 	quarto render
@@ -17,8 +17,14 @@ check: downloads
 	Rscript instructor/week5-solutions.R
 	Rscript tools/check_report.R
 	python3 tools/check_course.py
+	python3 tools/check_lectures.py
 
 figures:
 	Rscript instructor/week2-solutions.R --figures
 	Rscript instructor/week3-solutions.R --figures
 	Rscript instructor/week4-solutions.R --figures
+
+lecture-figures:
+	python3 instructor/make-lecture-figures-weeks1-2.py
+	python3 instructor/make-lecture-figures-weeks3-4.py
+	python3 instructor/make-lecture-figures-week5.py

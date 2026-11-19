@@ -2,6 +2,9 @@
 title: "Day 8 — Turn measurements into a useful figure"
 ---
 
+[Lecture slides](../lectures/08-transform-plot/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Today's question
 
 Do plants that started longer also end longer? And how much did each plant grow?

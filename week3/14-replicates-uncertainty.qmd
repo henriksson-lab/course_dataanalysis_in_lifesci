@@ -2,6 +2,9 @@
 title: "Day 14 — More readings are not always more independent evidence"
 ---
 
+[Lecture slides](../lectures/14-replicates-uncertainty/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Today's question
 
 Would measuring the same plant ten times tell us as much about other plants as

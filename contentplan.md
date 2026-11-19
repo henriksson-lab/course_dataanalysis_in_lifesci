@@ -15,6 +15,12 @@ and reference pages are included. The plan below remains editable as the content
 is reviewed. Remote service details, beginner pacing, and student-machine setup
 still require a pilot and the forthcoming HPC2N/environment information.
 
+The Quantitative Biology scaffold is now used for separate RevealJS lecture
+decks paired with each daily practical, coloured weekly sidebar sections, green
+lecture links, blue formative quiz links, and italic practical links. Decks use
+speaker notes and explanatory diagrams/plots on roughly half their slides.
+The maximum is 45 slides, with fewer preferred and no padding to meet a count.
+
 ## Purpose and audience
 
 Students should leave able to handle ordinary data from later biology practicals

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>The laboratory analysis workflow returns to saved and reproducible work</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<circle cx="125" cy="175" r="67" fill="#2a7f8f" stroke="none" stroke-width="3"/>
+<text x="125" y="185" font-family="Arial, sans-serif" font-size="36" fill="white" text-anchor="middle" font-weight="normal">1</text>
+<text x="125" y="290" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="bold">Find</text>
+<line x1="200" y1="175" x2="240" y2="175" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<circle cx="340" cy="175" r="67" fill="#6b4fa0" stroke="none" stroke-width="3"/>
+<text x="340" y="185" font-family="Arial, sans-serif" font-size="36" fill="white" text-anchor="middle" font-weight="normal">2</text>
+<text x="340" y="290" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="bold">Check</text>
+<line x1="415" y1="175" x2="455" y2="175" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<circle cx="555" cy="175" r="67" fill="#3b5bab" stroke="none" stroke-width="3"/>
+<text x="555" y="185" font-family="Arial, sans-serif" font-size="36" fill="white" text-anchor="middle" font-weight="normal">3</text>
+<text x="555" y="290" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="bold">Analyse</text>
+<line x1="630" y1="175" x2="670" y2="175" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<circle cx="770" cy="175" r="67" fill="#a8324a" stroke="none" stroke-width="3"/>
+<text x="770" y="185" font-family="Arial, sans-serif" font-size="36" fill="white" text-anchor="middle" font-weight="normal">4</text>
+<text x="770" y="290" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="bold">Explain</text>
+<line x1="845" y1="175" x2="885" y2="175" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<circle cx="985" cy="175" r="67" fill="#2a7f8f" stroke="none" stroke-width="3"/>
+<text x="985" y="185" font-family="Arial, sans-serif" font-size="36" fill="white" text-anchor="middle" font-weight="normal">5</text>
+<text x="985" y="290" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="bold">Reproduce</text>
+<path d="M980,345 V415 H125 V345" fill="none" stroke="#64748b" stroke-width="4"/>
+<text x="550" y="460" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">Save the source, inputs, output, and a supported backup</text>
+</svg>

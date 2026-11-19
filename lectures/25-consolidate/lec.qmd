@@ -1,0 +1,131 @@
+---
+title: "A workflow for the next laboratory"
+subtitle: "Day 25 — consolidate, recover, and hand over"
+author: "Data Analysis in Life Sciences"
+format:
+  revealjs:
+    theme: [simple, ../../theme.scss]
+    slide-number: c/t
+    width: 1280
+    height: 720
+    transition: none
+    history: false
+    highlight-style: github
+    code-overflow: wrap
+    code-line-numbers: false
+    incremental: false
+    chalkboard: false
+    menu: true
+    html-math-method: katex
+toc: false
+---
+
+## Reuse the workflow, not a memorised answer
+
+![The analysis workflow moves from finding and checking data to analysing, explaining, and reproducing.](workflow.svg){height=390px}
+
+Today adds no new statistical method.
+
+::: notes
+Keep the final day as protected practice and catch-up. Students need reliable
+file handling and report rendering more than another model. Use their saved
+projects and reference sheets, not an assumption of memorised commands.
+:::
+
+## Begin where you need practice
+
+![Practice stations branch into files, R recovery, interpretation, and report reproduction.](stations.svg){height=380px}
+
+Use references and explain the action you chose.
+
+::: notes
+Students may start at different stations. Everyone should practise file recovery,
+R recovery, and interpretation. Remote access is another skill when the actual
+service is available, not a reason to delay local practice indefinitely.
+:::
+
+## Repair meaning as well as spelling
+
+This is intentionally broken code:
+
+```text
+seedling <- read_csv("seedlings.csv")
+seedlings <- mutate(seedlings, growth_mm = final_mm + initial_mm)
+mean(seedlings$Growth_mm)
+```
+
+Find the path, name, case, and calculation problems.
+
+::: notes
+Correct path is data/seedlings.csv from the project root. Use a consistent
+seedlings object and growth_mm column, load readr/dplyr, and subtract initial
+from final length. P01 grew 44.3 − 25.7 = 18.6 mm. Do not run broken code as if it were
+the course's suggested solution.
+:::
+
+## A mean does not describe every observation
+
+![Two toy groups have equal means but different SDs and individual spreads.](../../week3/variation-examples.png){height=380px}
+
+Keep centre, individual spread, and uncertainty in an estimate distinct.
+
+::: notes
+The groups have means 14 mm, SDs 1 and 6 mm. A larger SD need not mean worse technique;
+biological differences also cause spread. Neither SD is automatically a
+confidence interval or a range containing every observation.
+:::
+
+## Count the independent units
+
+![Flasks and synthesis runs supply independent treatment units; fronds or repeated weighings do not.](../23-mini-study/independent-units.svg){height=380px}
+
+A large number of readings cannot repair a lack of independent replication.
+
+::: notes
+Transfer to future practicals: ask what was independently sampled or assigned
+to treatment. Cells, time points, or repeat balance readings may be related.
+Do not decide the test sample size merely from the row count.
+:::
+
+## Interpret an uncertain result carefully
+
+A treatment-minus-control estimate is **3 mm**, with a 95% interval from
+**−2 to 8 mm**.
+
+Does this establish no effect?
+
+**No:** it includes zero and effects in both directions. State the uncertainty.
+
+::: notes
+Pause before showing the answer. This is a supplied interpretation exercise,
+not a calculation from the course dataset. Avoid equating absence of a small
+p-value with proof of equality. No additional test is needed.
+:::
+
+## Your next-lab questions
+
+- What does one row represent, and what was independently assigned?
+- What are the units and the meaning of blank cells?
+- Which figure answers the question without hiding observations?
+- Where are the source, raw data, output, and backup?
+
+::: notes
+Invite students to write a question they would ask a later practical teacher.
+The workflow replaces manual spreadsheet calculations, but still needs subject
+context and a valid experimental design. Asking these questions is competence.
+:::
+
+## Practical: leave with work you can find again
+
+[Open day 25 practical and notes](../../week5/25-consolidate.qmd).
+
+- Locate your project without a recent-files menu.
+- Render your chosen report from a fresh session.
+- Save `reports/next-lab.txt` as your reusable workflow.
+- Identify the supported backup and any pending remote-access skill.
+
+::: notes
+Stop adding topics. Use the time to make these tasks dependable. The descriptive
+organic alternative stays descriptive; higher yield alone does not prove higher
+purity. The course's written examination design remains outside these materials.
+:::

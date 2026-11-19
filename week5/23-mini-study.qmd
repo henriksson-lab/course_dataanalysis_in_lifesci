@@ -2,6 +2,9 @@
 title: "Day 23 — plan and analyse a small biological study"
 ---
 
+[Lecture slides](../lectures/23-mini-study/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## The question
 
 Duckweed is a small aquatic plant that grows as floating fronds. In our simulated

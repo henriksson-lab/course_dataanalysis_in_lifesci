@@ -1,0 +1,122 @@
+---
+title: "Inspect laboratory data before calculating"
+subtitle: "Day 4 — Which samples received the treatment?"
+author: "Data Analysis in Life Sciences"
+format:
+  revealjs:
+    theme: [simple, ../../theme.scss]
+    slide-number: c/t
+    width: 1280
+    height: 720
+    transition: none
+    history: false
+    highlight-style: github
+    code-overflow: wrap
+    code-line-numbers: false
+    incremental: false
+    chalkboard: false
+    menu: true
+    html-math-method: katex
+toc: false
+---
+
+## Four samples, one manifest
+
+![The supplied manifest contains one header and four sample records linked to measurement filenames.](manifest-lines.svg){height=390}
+
+This small simulated shell dataset is separate from the 24-plant R dataset.
+
+::: notes
+Read a manifest as a list of what is present. IDs connect metadata to measurements. The file paths locate measurements, while the README supplies their meaning and units. Distinguish four sample records from five text lines before discussing any command count.
+:::
+
+## An archive is a package of files
+
+![Extracting lab-data.zip creates a folder of ordinary files while leaving the archive intact.](extract-archive.svg){height=390}
+
+Copy the downloaded ZIP into the shell workspace deliberately.
+
+::: notes
+On Windows the browser download is not automatically in Ubuntu. Open the shell workspace graphically and copy the file. On Mac use the same explicit location check. In a remote environment, use the provided transfer route; no login hostname is assumed here.
+:::
+
+## Inspect first; extract to a known destination
+
+```bash
+unzip -l lab-data.zip
+unzip lab-data.zip -d lab-data
+cd lab-data
+less README.txt
+```
+
+`-l` lists; `-d` names the extraction destination. Press **q** to leave `less`.
+
+::: notes
+The archive has four measurement files and supporting notes. If extraction asks to overwrite, inspect the existing destination and choose a fresh folder rather than automatically replacing work. These commands do not remove the original ZIP. Keep the command sequence tied to the current working directory.
+:::
+
+## Text search selects matching lines
+
+![Literal grep search highlights the S03 and S04 records containing treated.](grep-selection.svg){height=390}
+
+```bash
+grep -F treated samples.tsv
+```
+
+::: notes
+-F requests literal text matching. The prepared file has control and treated labels; its header does not include treated. Explain that untreated would also contain treated, so grep does not understand treatment allocation or table columns. Inspect selected lines before interpreting them.
+:::
+
+## A pipe connects the outputs and inputs
+
+![Four records enter a grep selection, two matching lines leave it, and wc counts two.](pipe-stream.svg){height=390}
+
+```bash
+grep -F treated samples.tsv | wc -l
+```
+
+::: notes
+The pipe passes matching lines directly to the next program. wc -l counts newline-terminated lines, which represent records in this controlled file. No intermediate saved file is required. Ask students to predict 2 before running it, and compare with wc -l samples.tsv, which returns 5 including the header.
+:::
+
+## Redirection writes a separate output
+
+```bash
+grep -F treated samples.tsv > treated-samples.txt
+less treated-samples.txt
+```
+
+- The manifest is read; the extract is written.
+- `>` replaces existing contents at the destination.
+- Never use the input filename as this destination.
+
+::: notes
+Students should explain which file changed. A text extract is not a full replacement manifest because it lacks the nonmatching header and control records. Show it in the file manager. Treat redirection as a concrete write action, not punctuation to memorise.
+:::
+
+## Work through one sample and one copy
+
+```bash
+head measurements/S03.csv
+mkdir working
+cp samples.tsv working/samples-copy.tsv
+mv working/samples-copy.tsv working/manifest-practice.tsv
+```
+
+Which original files should still be present?
+
+::: notes
+The original archive and manifest remain. Only the practice copy is renamed. The S03 measurement file has one observed length; find its units in README. cp and mv may replace a destination, so inspect the names before running. Ask students to identify S04's path without copying the S03 line blindly.
+:::
+
+## Save an inspection someone can explain
+
+[Open the practical and notes](../../week1/04-inspect-archive.qmd).
+
+Keep the selected records, a practice manifest, and `working/observations.txt`.
+
+Explain **5 lines**, **4 samples**, and **2 treated records** in your own words.
+
+::: notes
+The practical also introduces the local/remote distinction via a teacher demonstration when access is ready. If service accounts are pending, complete local file skills; do not invent a remote address or treat a local rehearsal as completed SSH access.
+:::

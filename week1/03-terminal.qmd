@@ -2,6 +2,9 @@
 title: "Day 3 — The terminal describes the same folders"
 ---
 
+[Lecture slides](../lectures/03-terminal/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Why type commands?
 
 The terminal gives us another way to ask the computer to work with files. It

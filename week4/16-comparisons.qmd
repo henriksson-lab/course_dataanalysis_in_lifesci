@@ -2,6 +2,9 @@
 title: "Day 16 — What does a difference between groups mean?"
 ---
 
+[Lecture slides](../lectures/16-comparisons/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Today's question
 
 Does the treatment change how much a seedling grows? We already know how to

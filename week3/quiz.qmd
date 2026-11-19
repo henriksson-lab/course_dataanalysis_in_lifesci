@@ -1,0 +1,98 @@
+---
+title: "Week 3 self-check — measurements and variation"
+---
+
+Explain the quantities before calculating. Use these checks to identify what to
+practise again; they are not an assessment. Keep the
+[statistics reference](../reference/statistics.qmd) nearby.
+
+## 1. Mean, variance, and SD
+
+Three growth measurements are 12, 14, and 16 mm. What are the mean, sample
+variance, and sample SD? Show the units.
+
+::: {.callout-note collapse="true"}
+## Worked answer
+
+Mean = **14 mm**. Deviations are −2, 0, and 2 mm; squared deviations sum to 8.
+Divide by `n − 1 = 2` to obtain sample variance **4 mm²**. Its square root is
+sample SD **2 mm**. SD describes spread among these measurements, not the
+uncertainty in their mean.
+:::
+
+## 2. A common shift and a unit conversion
+
+If every measurement above gains 10 mm, what happens to mean and SD? If the
+original lengths are converted from mm to cm, how do mean, SD, and variance change?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+Adding 10 shifts the mean to **24 mm** but leaves SD at **2 mm**, since deviations
+from the mean are unchanged. Dividing lengths by ten gives mean **1.4 cm**,
+SD **0.2 cm**, and variance **0.04 cm²**. Variance scales by the square of the
+conversion factor.
+:::
+
+## 3. An unusual number is a question, not proof of an error
+
+The messy table contains final length 4.38 for P21. What permits correcting it
+to 43.8 mm? What should happen to the unavailable final measurement for P06?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+The supplied source notes confirm a transcription/unit error and give **43.8 mm**.
+The unusual value alone would not justify multiplying by ten. P06 remains
+missing because there is no supported replacement in this exercise. Preserve
+the raw file and record repairs in code; zero would invent a measurement.
+:::
+
+## 4. Rows versus available measurements
+
+After the confirmed identical duplicate is removed, the repaired table has
+24 plants and one unavailable growth value in the control group. How many
+plant records and available growth measurements are there per group?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+There are **12 control and 12 treated plant records**, but **11 control and
+12 treated available growth measurements**. The complete clean seedling file
+used later is a separate teaching dataset with 12 available per group. State
+which file the analysis uses, and do not silently mix those counts.
+:::
+
+## 5. More readings or more independent units?
+
+One treated plant is measured twelve times. A second study independently
+assigns twelve plants to treatment. Are these equivalent sources of information
+about differences among plants?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+No. Repeated readings of one plant may reveal measurement consistency but do
+not create twelve independently treated plants. The design determines the
+experimental unit. Likewise, reweighing one synthesis run does not create more
+independently prepared runs.
+:::
+
+## 6. Spread of observations versus spread of sample means
+
+The supplied simulation draws means from samples of four or sixteen plants
+from the same fixed toy population. Why can the means of sixteen spread less
+without changing the population's individual SD?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+The source measurements stay the same. A mean averages independent sampling
+variation, so repeated means based on more observations typically vary less.
+The SD among repeated sample means describes sampling variability of an estimate;
+it is not SD among individual plants. A precise estimate can still be biased
+or based on an inappropriate design.
+:::
+
+Return to [the descriptive report](15-descriptive-report.qmd), or continue to
+[comparisons](../week4/16-comparisons.qmd).

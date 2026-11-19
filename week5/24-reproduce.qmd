@@ -2,6 +2,9 @@
 title: "Day 24 — can someone else render your report?"
 ---
 
+[Lecture slides](../lectures/24-reproduce/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Today's question
 
 A result that appears on your screen may depend on objects you created hours

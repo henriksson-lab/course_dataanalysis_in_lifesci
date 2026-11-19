@@ -2,6 +2,9 @@
 title: "Day 15 — Describe the experiment without overstating it"
 ---
 
+[Lecture slides](../lectures/15-descriptive-report/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Today's question
 
 Can a reader understand the seedling measurements, their variation, and the limits

@@ -1,0 +1,110 @@
+---
+title: "Find, save, and reopen"
+subtitle: "Day 1 — Where are the seedling measurements?"
+author: "Data Analysis in Life Sciences"
+format:
+  revealjs:
+    theme: [simple, ../../theme.scss]
+    slide-number: c/t
+    width: 1280
+    height: 720
+    transition: none
+    history: false
+    highlight-style: github
+    code-overflow: wrap
+    code-line-numbers: false
+    incremental: false
+    chalkboard: false
+    menu: true
+    html-math-method: katex
+toc: false
+---
+
+## A file is not the window showing it
+
+![One saved CSV can be read as text or as a table in different applications.](file-and-applications.svg){height=390}
+
+The saved measurements can remain after either application closes.
+
+::: notes
+Begin with the biological task: we have seedling lengths to inspect, not a coding puzzle. Ask students what they think happens to the measurements when the window closes. Demonstrate one CSV in a text editor and a table viewer, without assuming experience of either. The point is one file and different applications, not software selection.
+:::
+
+## Downloading is only the first step
+
+1. Download the course ZIP using the browser.
+2. Show the download in File Explorer or Finder.
+3. Extract the **whole folder** into a place you can find again.
+4. Open a file from the extracted folder, not from a ZIP preview.
+
+::: notes
+Demonstrate on the supported operating system. Pause after locating Downloads; do not rush because some students know this. Windows Extract All and Mac double-click may produce an extra parent directory. Choose one working copy. R is not required today, even though the extracted folder contains future R files.
+:::
+
+## Locate the measurement inside its folder
+
+![The project contains data, output, and reports folders; seedlings.csv is inside data.](find-the-file.svg){height=390}
+
+Find `data/seedlings.csv` by opening folders, without using “recent files”.
+
+::: notes
+Use this as a map before introducing the formal path vocabulary tomorrow. The diagram is deliberately incomplete: the real project has other datasets too. Identify data as the input location and output as a place for derived work. Ask students to point at the correct file in their own graphical window.
+:::
+
+## The filename gives clues, not a calculation
+
+| Name | Intended content |
+| --- | --- |
+| `seedlings.csv` | A text table of measurements |
+| `day01-notes.txt` | Your plain-text note |
+| `report.Rmd` | Source for a future report |
+
+The extension is part of the name. Renaming a file does not convert its contents.
+
+::: notes
+Show file extensions in the file manager. Define CSV as comma-separated values; students do not need to know parsing yet. Read P01's first row as a plant ID, treatment label, initial length 25.7 mm, final length 44.3 mm. Units and meaning come from the dictionary, not from an application guessing them.
+:::
+
+## Preserve the original measurements
+
+![Copying the raw CSV into output creates a separate practice file while retaining the original.](copy-preserves-source.svg){height=390}
+
+Our supplied data are simulated. Keep the raw file unchanged.
+
+::: notes
+Demonstrate copying data/seedlings.csv to output/seedlings-practice.csv. Point out the two locations and the two names. Edit only the practice copy. A duplicate is useful here because it separates input from practice; unexplained duplicate projects are different and should be resolved before continuing.
+:::
+
+## Save, close, and reopen
+
+![An edited note is saved to disk and then reopened from its folder.](save-and-reopen.svg){height=390}
+
+Save `day01-notes.txt` inside `reports/`. Then find it again.
+
+::: notes
+Use a plain-text editor, not a word processor's rich format. If the editor adds .txt automatically, check the final filename rather than creating a duplicate extension. Some editors autosave or restore unsaved state; ask what is in the actual file, not only what the application remembers.
+:::
+
+## Predict before clicking
+
+- You close the editor. Did the saved file disappear?
+- You edit the practice copy. Did the raw CSV change?
+- You know a file's name. Do you also know which folder contains it?
+
+::: notes
+Expected reasoning: closing a normal editor does not delete a saved file; a separate practice copy can be edited without changing the source; a filename alone may not locate a unique file. Ask students to demonstrate the answers on their own saved work. Avoid a memory test of operating-system vocabulary.
+:::
+
+## Now practise the complete route
+
+[Open the practical and notes](../../week1/01-files.qmd).
+
+Leave with:
+
+- `reports/day01-notes.txt`.
+- `output/seedlings-practice.csv`.
+- The ability to locate both after closing their applications.
+
+::: notes
+The practical supplies the detailed click sequence and hints. Give time for independent reopening. A student unable to locate their files needs support before tomorrow's path lesson; finishing a screenshot alone does not establish this skill.
+:::

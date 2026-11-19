@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>An empty directory is a valid directory</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<path d="M60,90 v-20 h124.0 l20,20 h166.0 v100 h-310 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="215.0" y="148.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">observations</text>
+<rect x="570" y="85" width="460" height="290" rx="10" fill="#203247" stroke="#203247" stroke-width="3"/>
+<text x="610" y="155" font-family="Arial, sans-serif" font-size="30" fill="white" text-anchor="start" font-weight="normal">$ ls</text>
+<text x="610" y="280" font-family="Arial, sans-serif" font-size="30" fill="white" text-anchor="start" font-weight="normal">$</text>
+<text x="250" y="350" font-family="Arial, sans-serif" font-size="27" fill="#203247" text-anchor="middle" font-weight="normal">No visible entries</text>
+<line x1="390" y1="205" x2="545" y2="205" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="550" y="455" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="normal">No names printed is different from an error message.</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Transfer, render remotely, and bring the output back</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="35" y="90" width="260" height="190" rx="10" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="165" y="135" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Laptop</text>
+<path d="M120,165 h60 l30,30 v40 h-90 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="180" y1="165" x2="180" y2="195" stroke="#3b5bab" stroke-width="3"/>
+<line x1="180" y1="195" x2="210" y2="195" stroke="#3b5bab" stroke-width="3"/>
+<text x="165.0" y="270" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">source + data</text>
+<rect x="420" y="90" width="260" height="190" rx="10" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="550" y="135" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Remote</text>
+<path d="M505,165 h60 l30,30 v40 h-90 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="565" y1="165" x2="565" y2="195" stroke="#3b5bab" stroke-width="3"/>
+<line x1="565" y1="195" x2="595" y2="195" stroke="#3b5bab" stroke-width="3"/>
+<text x="550.0" y="270" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">render report</text>
+<rect x="805" y="90" width="260" height="190" rx="10" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="935" y="135" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Laptop</text>
+<path d="M890,165 h60 l30,30 v40 h-90 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="950" y1="165" x2="950" y2="195" stroke="#3b5bab" stroke-width="3"/>
+<line x1="950" y1="195" x2="980" y2="195" stroke="#3b5bab" stroke-width="3"/>
+<text x="935.0" y="270" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">open output</text>
+<line x1="315" y1="185" x2="400" y2="185" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="700" y1="185" x2="785" y2="185" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="355" y="340" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">transfer in</text>
+<text x="745" y="340" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">transfer out</text>
+<text x="550" y="435" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="normal">Identify the computer and folder at every step</text>
+</svg>

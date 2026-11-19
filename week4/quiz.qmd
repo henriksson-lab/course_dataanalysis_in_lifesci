@@ -1,0 +1,101 @@
+---
+title: "Week 4 self-check — comparisons and fitted lines"
+---
+
+Use the stated design, units, and direction before interpreting output. These
+questions are formative and need no new statistical method. Refer to the
+[statistics reference](../reference/statistics.qmd) as needed.
+
+## 1. Interpret the direction and interval
+
+For independent seedlings, the estimated treated-minus-control mean growth
+difference is 6.22 mm, with a 95% confidence interval from 2.70 to 9.73 mm.
+What quantity is this interval describing? Is it a range for 95% of the plants?
+
+::: {.callout-note collapse="true"}
+## Answer
+
+It describes uncertainty in the **population mean difference**, under the
+model assumptions and in the stated treated-minus-control direction. It is not
+a range containing 95% of individual plants. A 95% confidence procedure covers
+the fixed true quantity in about 95% of repeated samples when its assumptions hold.
+:::
+
+## 2. What does the p-value condition on?
+
+Does a p-value of 0.0015 mean a 0.15% probability that the null hypothesis is
+true, or prove that a 6 mm difference matters biologically?
+
+::: {.callout-note collapse="true"}
+## Answer
+
+Neither. It describes the probability, **under the null model and its assumptions**,
+of a test statistic at least as extreme as observed. It is not the probability
+of the hypothesis. Biological importance needs the effect's size, units,
+uncertainty, organism, and purpose. The test cannot repair dependent units.
+:::
+
+## 3. Pair by identity
+
+The same ten plants were measured before and after increasing light. Why should
+the analysis use within-plant differences? Could independently sorting the two
+measurement columns improve their pairing?
+
+::: {.callout-note collapse="true"}
+## Answer
+
+The two readings belong to each same plant, so calculate after minus before
+within matching IDs. There are ten independent pairs, not twenty independent
+plants. Sorting columns independently destroys that identity and does not
+improve pairing. The fixed before/after order also leaves a time/order limitation.
+:::
+
+## 4. Invert the calibration in the stated direction
+
+The fitted line is approximately
+`absorbance = 0.03957 + 0.06489 × concentration_mg_l`.
+For an in-range absorbance of 0.310, what formula estimates concentration?
+
+::: {.callout-note collapse="true"}
+## Worked answer
+
+Rearrange to `concentration = (0.310 - 0.03957) / 0.06489`, giving about
+**4.17 mg/L**. Use full fitted coefficients in code. We fitted absorbance as
+the measured response to known concentration; reversing the regression is a
+different fit. The inverse calculation is a point estimate, not full calibration
+uncertainty.
+:::
+
+## 5. A diluted reading is new evidence
+
+An unknown's original reading is above the measured standards. Can you simply
+report the line's extrapolated concentration? If a new in-range reading gives
+7.40 mg/L after 1.00 mL was diluted to 10.00 mL total, what is the original estimate?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+Flag the original as outside range rather than treat extrapolation as a supported
+result. A **new** in-range diluted measurement permits a stated correction:
+`7.40 × (10.00 / 1.00) ≈ 74.0 mg/L`, using rounded numbers. The dilution assumes
+no measured material was lost or reacted. It does not validate another old
+out-of-range reading without its own new measurement.
+:::
+
+## 6. Slope units and causal limits
+
+A fitted dry-mass-versus-leaf-area slope is about 4.11. Dry mass is in mg and
+area in cm². What are the slope's units, and what claim is not established by
+this observational fit?
+
+::: {.callout-note collapse="true"}
+## Answer
+
+The units are **mg per cm²**: fitted change in dry mass for a one-cm² increase
+in area. The sample association does not establish that experimentally changing
+area would cause this mass change. Inspect residuals and the measured range,
+and avoid extrapolating far beyond observed leaf areas.
+:::
+
+Return to [association practice](20-association.qmd), or continue to
+[remote workflow](../week5/21-remote-workflow.qmd).

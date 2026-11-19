@@ -1,0 +1,112 @@
+---
+title: "Week 5 self-check — reproduce and transfer"
+---
+
+Use these questions to check the whole workflow and locate any unfinished
+practical skills. They are not a graded test. Remote tasks requiring an account
+remain pending until the actual course service is provided.
+
+## 1. Name the location, not just the filename
+
+Your report rendered remotely, but local Downloads is empty. What should you
+check? Does closing the SSH terminal necessarily delete saved remote output?
+
+::: {.callout-note collapse="true"}
+## Answer
+
+Locate the output on the remote computer, then check whether it was transferred
+and to which destination. A remote desktop is not automatic synchronisation.
+Closing SSH ends a session, not saved files, subject to the service's storage
+policy. Do not assume a running process will continue after disconnecting.
+:::
+
+## 2. Count the represented thing
+
+`dna <- readLines("data/dna.txt")` reads one invented 40-letter line. What are
+`length(dna)` and `nchar(dna)`? Why do they differ?
+
+::: {.callout-note collapse="true"}
+## Answer
+
+`length(dna)` is **1** stored string; `nchar(dna)` is **40** characters in that
+string. Counting vector elements and counting characters answer different
+questions. The final newline in the file is not another DNA base.
+:::
+
+## 3. Pixels are positions, not plants
+
+The teaching image has 64 pixels, 24 above intensity 100. What fraction is bright?
+Does that make 64 independent biological replicates or identify one cell?
+
+::: {.callout-note collapse="true"}
+## Answer
+
+The fraction is **24/64 = 0.375**. Pixels are related positions in one artificial
+image. Their count does not establish independent treatment replication or
+biological identity. Interpretation needs acquisition context, scale, and
+validation. The threshold count alone does not establish a cell's area in mm².
+:::
+
+## 4. Available duckweed measurements
+
+Twenty independent flasks were started, ten per allocation. Nutrient flask F17
+spilled before weighing. How many available biomass observations are there, and
+why is replacing the missing value by zero inappropriate?
+
+::: {.callout-note collapse="true"}
+## Answer
+
+There are **10 control and 9 nutrient observations**, 19 in total. Zero would
+invent a known biomass; unavailable and absent biomass are different meanings.
+Retain the original row, report the loss, and make the comparison conditional
+on the observed data and missingness limitation.
+:::
+
+## 5. A percentage difference needs its units
+
+In the supplied alternative, percentage yield is `100 × collected mass / supplied
+maximum mass`, with matching mass units. Protocol means are 68.67% and 77.00%.
+Is their difference an 8.33% relative increase? Does it establish greater purity?
+
+::: {.callout-note collapse="true"}
+## Answer
+
+The modified-minus-standard difference is **8.33 percentage points**. A relative
+percentage change would divide by the starting mean and multiply by 100; it is
+a different quantity. Greater yield alone does not establish greater purity,
+safety, sustainability, or general superiority. Product purity was an explicit
+simplifying assumption in this numerical exercise, not a measured finding.
+:::
+
+## 6. Share a recipe, not only its output
+
+A peer receives your HTML but cannot update the analysis for new data. What
+else should be in the shared project? Why test extraction in a new location?
+
+::: {.callout-note collapse="true"}
+## Answer
+
+Include the `.Rmd` source, actual input CSV, dictionary, project file, required
+output folder if used, and a short README naming packages and the file to render.
+Testing a new location detects dependencies on personal absolute paths or missing
+files. The `.Rproj` does not contain the dataset. A fresh session detects hidden
+interactive objects. Do not include credentials or unrelated personal work.
+:::
+
+## 7. What does successful reproduction establish?
+
+The peer renders your source successfully from the shared input. Does that prove
+the experimental design and interpretation are correct, or provide a backup
+against losing your only disk?
+
+::: {.callout-note collapse="true"}
+## Answer
+
+It establishes that the supplied work regenerates the result in the tested
+environment. A flawed analysis can be reproducible. Scientific validity still
+needs the design, assumptions, checks, and reasoning. Backup is a separate action:
+keep a retrievable copy using supported separate storage.
+:::
+
+Return to [day 25 consolidation](25-consolidate.qmd) and save your next-lab
+workflow with the [reference pages](../reference/r.qmd).

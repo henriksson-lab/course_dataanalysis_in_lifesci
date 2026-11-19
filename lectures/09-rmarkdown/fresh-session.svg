@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>A console-only object is absent from an independent report render</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="70" y="90" width="370" height="105" rx="10" fill="#f4eefb" stroke="#6b4fa0" stroke-width="3"/>
+<text x="255.0" y="151.5" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">interactive R session</text>
+<rect x="660" y="90" width="370" height="105" rx="10" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="845.0" y="151.5" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">fresh report render</text>
+<text x="255" y="290" font-family="Arial, sans-serif" font-size="27" fill="#203247" text-anchor="middle" font-weight="normal">seedlings exists here</text>
+<text x="845" y="290" font-family="Arial, sans-serif" font-size="27" fill="#203247" text-anchor="middle" font-weight="normal">must import its own data</text>
+<line x1="465" y1="235" x2="635" y2="235" stroke="#a8324a" stroke-width="4"/>
+<line x1="500" y1="195" x2="600" y2="275" stroke="#a8324a" stroke-width="4"/>
+<line x1="500" y1="275" x2="600" y2="195" stroke="#a8324a" stroke-width="4"/>
+<text x="550" y="445" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">Put prerequisites in the source; do not rely on remembered state.</text>
+</svg>

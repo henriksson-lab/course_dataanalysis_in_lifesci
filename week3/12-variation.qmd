@@ -2,6 +2,9 @@
 title: "Day 12 — An average does not describe every plant"
 ---
 
+[Lecture slides](../lectures/12-variation/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Today's question
 
 Two groups can have the same average growth yet look very different. How can we

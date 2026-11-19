@@ -37,17 +37,28 @@ For a quick cross-section, read these student pages in order:
 | `week5/23-mini-study.qmd` | Could a student transfer the workflow to a new small dataset? |
 | `week5/24-reproduce.qmd` | Does the project work when another student receives it? |
 
-The course currently uses lesson pages combining explanation and practical work.
-There are no recorded lectures or separate slide decks yet. Evaluate the level
-and workflow before adapting the prose into recordings or slides.
+Each daily topic now pairs a separate RevealJS lecture deck with its existing
+practical/notes page. The slide theme and coloured sidebar follow the Quantitative
+Biology scaffold. Lecture links are green, quizzes blue, and practical links
+italic; week bands use the scaffold's five colours. The weekly quizzes are
+formative self-checks with worked explanations, not a grading scheme.
+
+Decks use lecturer notes and explanatory diagrams/plots on roughly half their
+slides. The user permits up to 45 slides but prefers fewer: do not add slides
+to reach a quota. Report/consolidation briefings are intentionally shorter.
+Use speaker view for notes; the slides and embedded notes are public teaching
+material. There are no recorded lecture videos yet, so the menu does not imply
+that recordings exist.
 
 ## What's supplied
 
-- 25 student lessons with biological context, examples, practicals, hints,
+- 25 lecture decks and 25 practical/notes pages with biological context, examples, practicals, hints,
   completion questions, and explicitly named saved outputs.
-- A small Quarto website following the sibling course's Cosmo/docked-sidebar
-  structure. Website code execution is disabled; example figures are generated
-  separately from the actual teaching datasets.
+- A Quarto website using the sibling course's actual sidebar CSS, slide theme,
+  RevealJS format, lecture/practical pairing, navigation controls, and week colours.
+  Website code execution is disabled; example figures are generated separately
+  from the actual teaching datasets. Five weekly self-check quizzes give brief
+  worked answers.
 - Nine CSV datasets, an organic sample-label TSV, and a tiny DNA string, all
   simulated. The data dictionary
   identifies units, experimental units, and missing values. A separate source
@@ -135,3 +146,12 @@ make preview
 If the execution environment prevents Quarto writing its normal cache, point
 `XDG_CACHE_HOME` at a writable temporary cache directory for the render command.
 This is an environment workaround, not a student installation step.
+
+Lecture diagrams can be regenerated with `make lecture-figures`. The ordinary
+checks include `tools/check_lectures.py`: paired links, real image assets,
+RevealJS output, slide limits, and visual-slide counts. An optional local-browser
+check (`tools/check_lecture_browser.py`) inspects all presentation frames for
+overflow and verifies the actual computed sidebar colours. It needs a local
+Chrome debugging endpoint, a localhost server for `docs/`, and websocket-client;
+those are developer tools, not student dependencies. Inspection screenshots and
+reports go to ignored `output/lecture-preview/`.

@@ -2,6 +2,9 @@
 title: "Day 13 — Summarise groups without hiding the plants"
 ---
 
+[Lecture slides](../lectures/13-group-summaries/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Today's question
 
 How can a figure and a small table show both the typical growth and differences

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Twenty flasks started; one nutrient biomass measurement is unavailable</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<text x="60" y="100" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="start" font-weight="bold">Control</text>
+<rect x="260" y="70" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="284" y="170" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F01</text>
+<rect x="335" y="70" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="359" y="170" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F02</text>
+<rect x="410" y="70" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="434" y="170" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F03</text>
+<rect x="485" y="70" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="509" y="170" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F04</text>
+<rect x="560" y="70" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="584" y="170" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F05</text>
+<rect x="635" y="70" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="659" y="170" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F06</text>
+<rect x="710" y="70" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="734" y="170" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F07</text>
+<rect x="785" y="70" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="809" y="170" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F08</text>
+<rect x="860" y="70" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="884" y="170" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F09</text>
+<rect x="935" y="70" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="959" y="170" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F10</text>
+<text x="60" y="290" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="start" font-weight="bold">Nutrient</text>
+<rect x="260" y="260" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="284" y="360" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F11</text>
+<rect x="335" y="260" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="359" y="360" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F12</text>
+<rect x="410" y="260" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="434" y="360" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F13</text>
+<rect x="485" y="260" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="509" y="360" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F14</text>
+<rect x="560" y="260" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="584" y="360" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F15</text>
+<rect x="635" y="260" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="659" y="360" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F16</text>
+<rect x="710" y="260" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="734" y="360" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F17</text>
+<line x1="710" y1="260" x2="758" y2="325" stroke="#a8324a" stroke-width="5"/>
+<line x1="758" y1="260" x2="710" y2="325" stroke="#a8324a" stroke-width="5"/>
+<rect x="785" y="260" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="809" y="360" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F18</text>
+<rect x="860" y="260" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="884" y="360" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F19</text>
+<rect x="935" y="260" width="48" height="65" rx="3" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="959" y="360" font-family="Arial, sans-serif" font-size="17" fill="#203247" text-anchor="middle" font-weight="normal">F20</text>
+<text x="550" y="435" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">F17 spilled: 10 + 9 available measurements; never insert zero</text>
+</svg>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>A shared tray treatment creates a tray-level experimental unit</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="35" y="90" width="505" height="305" rx="10" fill="#f6f0de" stroke="#9a7820" stroke-width="3"/>
+<path d="M102.9,190 h24.200000000000003 l-3.8500000000000005,18.700000000000003 h-16.5 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="115" y1="190" x2="115" y2="158.1" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M115,174.6 Q90.25,154.25 98.5,154.25 Q115,154.25 115,174.6" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M115,166.9 Q139.75,146.0 131.5,146.0 Q115,146.0 115,166.9" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M272.9,190 h24.200000000000003 l-3.8500000000000005,18.700000000000003 h-16.5 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="285" y1="190" x2="285" y2="158.1" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M285,174.6 Q260.25,154.25 268.5,154.25 Q285,154.25 285,174.6" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M285,166.9 Q309.75,146.0 301.5,146.0 Q285,146.0 285,166.9" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M442.9,190 h24.200000000000003 l-3.8500000000000005,18.700000000000003 h-16.5 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="455" y1="190" x2="455" y2="158.1" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M455,174.6 Q430.25,154.25 438.5,154.25 Q455,154.25 455,174.6" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M455,166.9 Q479.75,146.0 471.5,146.0 Q455,146.0 455,166.9" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M102.9,315 h24.200000000000003 l-3.8500000000000005,18.700000000000003 h-16.5 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="115" y1="315" x2="115" y2="283.1" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M115,299.6 Q90.25,279.25 98.5,279.25 Q115,279.25 115,299.6" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M115,291.9 Q139.75,271.0 131.5,271.0 Q115,271.0 115,291.9" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M272.9,315 h24.200000000000003 l-3.8500000000000005,18.700000000000003 h-16.5 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="285" y1="315" x2="285" y2="283.1" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M285,299.6 Q260.25,279.25 268.5,279.25 Q285,279.25 285,299.6" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M285,291.9 Q309.75,271.0 301.5,271.0 Q285,271.0 285,291.9" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M442.9,315 h24.200000000000003 l-3.8500000000000005,18.700000000000003 h-16.5 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="455" y1="315" x2="455" y2="283.1" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M455,299.6 Q430.25,279.25 438.5,279.25 Q455,279.25 455,299.6" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M455,291.9 Q479.75,271.0 471.5,271.0 Q455,271.0 455,291.9" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<text x="285" y="55" font-family="Arial, sans-serif" font-size="31" fill="#203247" text-anchor="middle" font-weight="normal">tray A: control</text>
+<rect x="595" y="90" width="505" height="305" rx="10" fill="#f6f0de" stroke="#9a7820" stroke-width="3"/>
+<path d="M662.9,190 h24.200000000000003 l-3.8500000000000005,18.700000000000003 h-16.5 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="675" y1="190" x2="675" y2="158.1" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M675,174.6 Q650.25,154.25 658.5,154.25 Q675,154.25 675,174.6" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M675,166.9 Q699.75,146.0 691.5,146.0 Q675,146.0 675,166.9" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M832.9,190 h24.200000000000003 l-3.8500000000000005,18.700000000000003 h-16.5 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="845" y1="190" x2="845" y2="158.1" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M845,174.6 Q820.25,154.25 828.5,154.25 Q845,154.25 845,174.6" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M845,166.9 Q869.75,146.0 861.5,146.0 Q845,146.0 845,166.9" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M1002.9,190 h24.200000000000003 l-3.8500000000000005,18.700000000000003 h-16.5 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="1015" y1="190" x2="1015" y2="158.1" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M1015,174.6 Q990.25,154.25 998.5,154.25 Q1015,154.25 1015,174.6" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M1015,166.9 Q1039.75,146.0 1031.5,146.0 Q1015,146.0 1015,166.9" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M662.9,315 h24.200000000000003 l-3.8500000000000005,18.700000000000003 h-16.5 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="675" y1="315" x2="675" y2="283.1" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M675,299.6 Q650.25,279.25 658.5,279.25 Q675,279.25 675,299.6" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M675,291.9 Q699.75,271.0 691.5,271.0 Q675,271.0 675,291.9" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M832.9,315 h24.200000000000003 l-3.8500000000000005,18.700000000000003 h-16.5 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="845" y1="315" x2="845" y2="283.1" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M845,299.6 Q820.25,279.25 828.5,279.25 Q845,279.25 845,299.6" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M845,291.9 Q869.75,271.0 861.5,271.0 Q845,271.0 845,291.9" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M1002.9,315 h24.200000000000003 l-3.8500000000000005,18.700000000000003 h-16.5 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="1015" y1="315" x2="1015" y2="283.1" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M1015,299.6 Q990.25,279.25 998.5,279.25 Q1015,279.25 1015,299.6" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M1015,291.9 Q1039.75,271.0 1031.5,271.0 Q1015,271.0 1015,291.9" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<text x="845" y="55" font-family="Arial, sans-serif" font-size="31" fill="#203247" text-anchor="middle" font-weight="normal">tray B: treated</text>
+<text x="550" y="465" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">Many plants per tray do not create more independently treated trays.</text>
+</svg>

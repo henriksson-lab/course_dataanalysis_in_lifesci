@@ -2,6 +2,9 @@
 title: "Day 5 — Share laboratory files, then meet R"
 ---
 
+[Lecture slides](../lectures/05-lab-files/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Repeat a useful workflow
 
 Today you will repeat yesterday's investigation with fewer prompts. Repetition

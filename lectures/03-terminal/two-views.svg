@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>File manager and terminal refer to the same folder</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="40" y="70" width="450" height="330" rx="10" fill="#f8fafc" stroke="#3b5bab" stroke-width="3"/>
+<text x="265" y="115" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">File manager</text>
+<path d="M100,200 v-20 h88.0 l20,20 h112.0 v80 h-220 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="210.0" y="248.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">practice</text>
+<rect x="610" y="70" width="450" height="330" rx="10" fill="#203247" stroke="#203247" stroke-width="3"/>
+<text x="835" y="115" font-family="Arial, sans-serif" font-size="26" fill="white" text-anchor="middle" font-weight="bold">Terminal</text>
+<text x="645" y="205" font-family="Arial, sans-serif" font-size="30" fill="white" text-anchor="start" font-weight="normal">$ ls</text>
+<text x="645" y="265" font-family="Arial, sans-serif" font-size="30" fill="#bce9d2" text-anchor="start" font-weight="normal">practice</text>
+<line x1="500" y1="235" x2="600" y2="235" stroke="#2a7f8f" stroke-width="5"/>
+<text x="550" y="465" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">Two views, one saved folder; each window has its own location.</text>
+</svg>

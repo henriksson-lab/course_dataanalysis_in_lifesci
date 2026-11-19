@@ -2,6 +2,9 @@
 title: "Day 10 — A first biological report"
 ---
 
+[Lecture slides](../lectures/10-first-report/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Today's question
 
 What can we say about seedling growth from the measurements alone? Today is

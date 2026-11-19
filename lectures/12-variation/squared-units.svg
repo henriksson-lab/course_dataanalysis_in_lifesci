@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Squaring a two millimetre deviation gives four square millimetres</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="120" y="100" width="220" height="220" rx="10" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<line x1="230" y1="100" x2="230" y2="320" stroke="#2a7f8f" stroke-width="3"/>
+<line x1="120" y1="210" x2="340" y2="210" stroke="#2a7f8f" stroke-width="3"/>
+<text x="230" y="370" font-family="Arial, sans-serif" font-size="31" fill="#203247" text-anchor="middle" font-weight="normal">2 mm</text>
+<text x="75" y="220" font-family="Arial, sans-serif" font-size="31" fill="#203247" text-anchor="middle" font-weight="normal">2</text>
+<line x1="385" y1="210" x2="500" y2="210" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="770" y="170" font-family="Arial, sans-serif" font-size="48" fill="#6b4fa0" text-anchor="middle" font-weight="normal">4 mm²</text>
+<text x="770" y="235" font-family="Arial, sans-serif" font-size="30" fill="#203247" text-anchor="middle" font-weight="normal">one squared deviation</text>
+<text x="770" y="305" font-family="Arial, sans-serif" font-size="28" fill="#203247" text-anchor="middle" font-weight="normal">SD takes the square root</text>
+<text x="770" y="355" font-family="Arial, sans-serif" font-size="28" fill="#203247" text-anchor="middle" font-weight="normal">back to millimetres</text>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Separate projects on a laptop and remote computer</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="50" y="85" width="360" height="210" rx="10" fill="#f8fafc" stroke="#2a7f8f" stroke-width="3"/>
+<line x1="230" y1="295" x2="230" y2="335" stroke="#2a7f8f" stroke-width="8"/>
+<line x1="150" y1="335" x2="310" y2="335" stroke="#2a7f8f" stroke-width="8"/>
+<text x="230" y="65" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Your laptop</text>
+<rect x="690" y="85" width="360" height="210" rx="10" fill="#f8fafc" stroke="#6b4fa0" stroke-width="3"/>
+<line x1="870" y1="295" x2="870" y2="335" stroke="#6b4fa0" stroke-width="8"/>
+<line x1="790" y1="335" x2="950" y2="335" stroke="#6b4fa0" stroke-width="8"/>
+<text x="870" y="65" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Remote computer</text>
+<path d="M105,175 v-20 h100.0 l20,20 h130.0 v80 h-250 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="230.0" y="223.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">course project</text>
+<path d="M745,175 v-20 h100.0 l20,20 h130.0 v80 h-250 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="870.0" y="223.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">course project</text>
+<text x="230" y="390" font-family="Arial, sans-serif" font-size="26" fill="#2a7f8f" text-anchor="middle" font-weight="normal">local files</text>
+<text x="870" y="390" font-family="Arial, sans-serif" font-size="26" fill="#6b4fa0" text-anchor="middle" font-weight="normal">remote files</text>
+<line x1="550" y1="30" x2="550" y2="450" stroke="#64748b" stroke-width="3" stroke-dasharray="10 8"/>
+</svg>

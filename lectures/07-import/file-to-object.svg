@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Import reads a saved CSV into an R object</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<path d="M80,145 h180 l30,30 v140 h-210 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="260" y1="145" x2="260" y2="175" stroke="#3b5bab" stroke-width="3"/>
+<line x1="260" y1="175" x2="290" y2="175" stroke="#3b5bab" stroke-width="3"/>
+<text x="185.0" y="350" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">data/seedlings.csv</text>
+<line x1="350" y1="225" x2="650" y2="225" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="500" y="170" font-family="Arial, sans-serif" font-size="29" fill="#203247" text-anchor="middle" font-weight="normal">read_csv()</text>
+<rect x="730" y="110" width="280" height="230" rx="10" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="870" y="165" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">R memory</text>
+<text x="870" y="240" font-family="Arial, sans-serif" font-size="32" fill="#203247" text-anchor="middle" font-weight="normal">seedlings</text>
+<text x="870" y="295" font-family="Arial, sans-serif" font-size="22" fill="#203247" text-anchor="middle" font-weight="normal">24 rows × 4 columns</text>
+<text x="550" y="440" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">The file remains on disk; the object lives in this session.</text>
+</svg>

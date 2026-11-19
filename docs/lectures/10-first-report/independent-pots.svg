@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>The experimental unit is the independently treated plant and pot</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<text x="80" y="105" font-family="Arial, sans-serif" font-size="31" fill="#203247" text-anchor="start" font-weight="bold">control</text>
+<path d="M310,155 h60 l-10,50 h-40 Z" fill="#bf8f63" stroke="#795438" stroke-width="2"/>
+<line x1="340" y1="155" x2="340" y2="70" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M340,110 q-50,-55 -45,-10 q35,25 45,10" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M340,85 q50,-45 45,-5 q-35,25 -45,5" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M430,155 h60 l-10,50 h-40 Z" fill="#bf8f63" stroke="#795438" stroke-width="2"/>
+<line x1="460" y1="155" x2="460" y2="70" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M460,110 q-50,-55 -45,-10 q35,25 45,10" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M460,85 q50,-45 45,-5 q-35,25 -45,5" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M550,155 h60 l-10,50 h-40 Z" fill="#bf8f63" stroke="#795438" stroke-width="2"/>
+<line x1="580" y1="155" x2="580" y2="70" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M580,110 q-50,-55 -45,-10 q35,25 45,10" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M580,85 q50,-45 45,-5 q-35,25 -45,5" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M670,155 h60 l-10,50 h-40 Z" fill="#bf8f63" stroke="#795438" stroke-width="2"/>
+<line x1="700" y1="155" x2="700" y2="70" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M700,110 q-50,-55 -45,-10 q35,25 45,10" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M700,85 q50,-45 45,-5 q-35,25 -45,5" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M790,155 h60 l-10,50 h-40 Z" fill="#bf8f63" stroke="#795438" stroke-width="2"/>
+<line x1="820" y1="155" x2="820" y2="70" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M820,110 q-50,-55 -45,-10 q35,25 45,10" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M820,85 q50,-45 45,-5 q-35,25 -45,5" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M910,155 h60 l-10,50 h-40 Z" fill="#bf8f63" stroke="#795438" stroke-width="2"/>
+<line x1="940" y1="155" x2="940" y2="70" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M940,110 q-50,-55 -45,-10 q35,25 45,10" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M940,85 q50,-45 45,-5 q-35,25 -45,5" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<text x="80" y="325" font-family="Arial, sans-serif" font-size="31" fill="#203247" text-anchor="start" font-weight="bold">treated</text>
+<path d="M310,375 h60 l-10,50 h-40 Z" fill="#bf8f63" stroke="#795438" stroke-width="2"/>
+<line x1="340" y1="375" x2="340" y2="290" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M340,330 q-50,-55 -45,-10 q35,25 45,10" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M340,305 q50,-45 45,-5 q-35,25 -45,5" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M430,375 h60 l-10,50 h-40 Z" fill="#bf8f63" stroke="#795438" stroke-width="2"/>
+<line x1="460" y1="375" x2="460" y2="290" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M460,330 q-50,-55 -45,-10 q35,25 45,10" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M460,305 q50,-45 45,-5 q-35,25 -45,5" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M550,375 h60 l-10,50 h-40 Z" fill="#bf8f63" stroke="#795438" stroke-width="2"/>
+<line x1="580" y1="375" x2="580" y2="290" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M580,330 q-50,-55 -45,-10 q35,25 45,10" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M580,305 q50,-45 45,-5 q-35,25 -45,5" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M670,375 h60 l-10,50 h-40 Z" fill="#bf8f63" stroke="#795438" stroke-width="2"/>
+<line x1="700" y1="375" x2="700" y2="290" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M700,330 q-50,-55 -45,-10 q35,25 45,10" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M700,305 q50,-45 45,-5 q-35,25 -45,5" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M790,375 h60 l-10,50 h-40 Z" fill="#bf8f63" stroke="#795438" stroke-width="2"/>
+<line x1="820" y1="375" x2="820" y2="290" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M820,330 q-50,-55 -45,-10 q35,25 45,10" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M820,305 q50,-45 45,-5 q-35,25 -45,5" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M910,375 h60 l-10,50 h-40 Z" fill="#bf8f63" stroke="#795438" stroke-width="2"/>
+<line x1="940" y1="375" x2="940" y2="290" stroke="#2a7f8f" stroke-width="5"/>
+<path d="M940,330 q-50,-55 -45,-10 q35,25 45,10" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M940,305 q50,-45 45,-5 q-35,25 -45,5" fill="#8fcbaa" stroke="#2a7f8f" stroke-width="2"/>
+<text x="550" y="475" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">Schematic: separate pots; the actual dataset has 12 per group.</text>
+</svg>

@@ -2,6 +2,9 @@
 title: "Day 4 — Unpack and inspect laboratory data"
 ---
 
+[Lecture slides](../lectures/04-inspect-archive/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Which seedlings received the treatment?
 
 A lab partner has sent a small archive containing measurements and sample

@@ -2,6 +2,9 @@
 title: "Day 17 — A guided Welch t-test"
 ---
 
+[Lecture slides](../lectures/17-welch-test/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Today's question
 
 Our sample shows about 6.22 mm more growth in the treated group. How uncertain is

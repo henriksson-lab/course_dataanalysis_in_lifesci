@@ -2,6 +2,9 @@
 title: "Day 11 — Check the table before trusting the answer"
 ---
 
+[Lecture slides](../lectures/11-data-quality/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Today's question
 
 What if a length was entered in the wrong unit, a plant appears twice, or a

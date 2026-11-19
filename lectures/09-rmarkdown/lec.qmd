@@ -1,0 +1,113 @@
+---
+title: "A report that runs its calculations"
+subtitle: "Day 9 — Text, code, results, and their dependencies"
+author: "Data Analysis in Life Sciences"
+format:
+  revealjs:
+    theme: [simple, ../../theme.scss]
+    slide-number: c/t
+    width: 1280
+    height: 720
+    transition: none
+    history: false
+    highlight-style: github
+    code-overflow: wrap
+    code-line-numbers: false
+    incremental: false
+    chalkboard: false
+    menu: true
+    html-math-method: katex
+toc: false
+---
+
+## Keep explanation connected to calculation
+
+![An R Markdown source combining prose and code is rendered into an HTML report containing a plot.](render-report.svg){height=390}
+
+Your report source is **`.Rmd`**. Its readable output is **`.html`**.
+
+::: notes
+Open the supplied report.Rmd beside its HTML. These lecture webpages are made with Quarto, but students do not need to author Quarto. The course's report format is R Markdown. Rendering runs the calculations and combines their output with prose instead of requiring manual copy-and-paste of results.
+:::
+
+## Code chunks have opening and closing fences
+
+<pre><code>&#96;&#96;&#96;{r import}
+library(readr)
+seedlings &lt;- read_csv("data/seedlings.csv",
+                      show_col_types = FALSE)
+&#96;&#96;&#96;
+</code></pre>
+
+Ordinary sentences go outside chunks. Give each chunk a unique label.
+
+::: notes
+The displayed fences are literal R Markdown syntax. Show the opening three backticks, braces with r and an optional label, then the closing fence. The report header between --- lines sets title and html_document output. Demonstrate in the supplied template rather than asking students to reconstruct everything from memory.
+:::
+
+## A report runs in order
+
+![Import and package loading must precede derived calculations, which precede the plot and interpretation.](chunk-order.svg){height=390}
+
+Ask what each chunk needs before it can run.
+
+::: notes
+Use seedlings then growth_mm then a figure as the concrete dependency. A correct expression can still fail when its input object does not yet exist. Package installation is separate setup; library calls belong in the report. Repeated unnecessary imports can obscure the sequence.
+:::
+
+## Read the first useful error
+
+Suppose a plot refers to `growth_mm`, but the report only imports the raw table.
+
+- Which earlier calculation is missing?
+- Is the name spelled exactly as created?
+- In which chunk should the repair go?
+
+::: notes
+The raw CSV does not contain growth_mm. Add final minus initial in a preparation chunk before plotting. Do not try to cure this by repeatedly creating objects in the Console. Deliberately introduce one misspelling in a demonstration, read the reported chunk, fix it, and render again.
+:::
+
+## Your Console is not the report's saved method
+
+![An object in an interactive R session does not automatically exist in a fresh report render.](fresh-session.svg){height=390}
+
+Put all required imports and calculations in the source document.
+
+::: notes
+Run an import only in the Console, then explain why a recipient cannot reproduce that unstated step. The Knit route uses a separate rendering process; the direct render function can use a calling environment, so the practical's restart-and-render check is important. Do not promise every rendering invocation automatically isolates all state.
+:::
+
+## HTML is useful, but keep its inputs and source
+
+![The report source, original data, and HTML output have distinct roles and should be kept together.](three-files.svg){height=390}
+
+The report belongs at the project root so `data/` paths stay consistent.
+
+::: notes
+A .Rmd file does not contain the original CSV simply because it mentions its name. An HTML file can be read without RStudio, but it is not the editable analysis source. Moving the report into reports/ would change ordinary relative paths; output HTML may go there while the source remains in the project root.
+:::
+
+## Render from the Console, not from inside itself
+
+Save the document, then use **Knit**, or run in the **R Console**:
+
+```r
+rmarkdown::render("report.Rmd", output_dir = "reports")
+```
+
+Do not put that command inside the report you are rendering.
+
+::: notes
+The double colon calls a function from a package. output_dir changes where the HTML is written, not where the source belongs. The Knit button may put the output beside the source; locate the actual file. Restart R before a reproducibility check. A self-rendering chunk would create a recursive workflow and is not required.
+:::
+
+## Make one change and check it
+
+[Open the practical and notes](../../week2/09-rmarkdown.qmd).
+
+Render the unchanged template first. Then add your question, methods, labelled
+figure, and interpretation. Restart and render the saved source again.
+
+::: notes
+Begin with a known-working baseline. Ask the student to name the source, output, and input locations before editing. The practical supplies a complete minimal report and error-recovery hints. A short caption plus clear prose is more useful than formatting additions that obscure the calculation.
+:::

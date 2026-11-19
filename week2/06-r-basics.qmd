@@ -2,6 +2,9 @@
 title: "Day 6 — Let R keep track of a calculation"
 ---
 
+[Lecture slides](../lectures/06-r-basics/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Today's question
 
 A seedling was 20 mm long at the start of an experiment and 37 mm long at the

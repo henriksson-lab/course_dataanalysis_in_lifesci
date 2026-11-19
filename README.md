@@ -15,15 +15,26 @@ navigation tree for this course. Advanced course content and its dependencies
 are not copied. Student reports will use **R Markdown (`.Rmd`)**; the teaching
 website uses Quarto (`.qmd`).
 
-The draft contains 25 daily lessons, worked examples, practicals, hints,
-self-checks, biological datasets and dictionaries, a working R Markdown template,
-setup guides, references, and instructor solutions. Datasets are simulated.
+The draft contains 25 separate RevealJS lecture decks paired with 25 daily
+practical/notes pages, five weekly self-check quizzes, worked examples, hints,
+biological datasets and dictionaries, a working R Markdown template, setup
+guides, references, and instructor solutions. Datasets are simulated. The
+sidebar and slide theme are copied from the Quantitative Biology scaffold:
+coloured week bands, green lecture links, blue quizzes, and italic practicals.
 
 Run `make render` to package the downloads and build the student site into
 `docs/`, or `make preview` for a local preview. Quarto is required; rendering
 lesson code fences also uses R and knitr, though student example execution is
 disabled for the website. Install the R packages listed in the setup page to
 run instructor checks and reports.
+
+Slide themes live in `theme.scss`; the inherited sidebar styling is in
+`styles.css`. New lecture diagrams have reproducible generators; run
+`make lecture-figures` to rebuild them. Speaker notes are embedded in the slides
+and can be opened using RevealJS's speaker view. Lecture source is under
+`lectures/<topic>/lec.qmd`; existing practical URLs remain stable.
+The diagram/plot generators use Python, NumPy, and Matplotlib on the instructor
+machine; students do not need those packages to view the slides or do practicals.
 
 Run `make check` after rendering to verify the instructor calculations, reports,
 archive workflow, and built local links. `make figures` regenerates the embedded

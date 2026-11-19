@@ -1,0 +1,97 @@
+---
+title: "Week 2 self-check — R and a first report"
+---
+
+Predict the result, explain it, then use R to check. These are formative
+self-checks, not grades. The [R reference](../reference/r.qmd) is available.
+
+## 1. Assignment is an action when the line runs
+
+You saved `growth_mm <- 37 - 20` in a script but did not run it. Must
+`growth_mm` now exist in R's memory? What are its value and units after running?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+Saving the script does not run it. After execution, the object contains **17 mm**.
+Restarting removes that session object, while the saved script remains. Run the
+source from the top to recreate the calculation.
+:::
+
+## 2. Matched values in vectors
+
+For three plants, initial lengths are 20, 22, 19 mm and final lengths are
+37, 40, 34 mm. What does position-by-position subtraction assume, and what are
+the resulting growth values?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+Both vectors must refer to the same plants in the same order, with compatible
+lengths. The growth vector is **17, 18, 15 mm**. Its mean is about **16.67 mm**.
+Correct arithmetic on unmatched plants would still answer the wrong question.
+:::
+
+## 3. A table is more than its numbers
+
+The imported seedling table has 24 rows and four columns. What identifies a
+plant, what units do the length columns use, and why is averaging the plant ID
+not a meaningful biological summary?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+`plant_id` identifies the plant; the two length columns use **millimetres**, as
+specified in the dictionary. IDs label observations rather than measure a
+quantity, so an average ID has no interpretation. The header names columns and
+is not another plant. Initial and final lengths in one row belong to one plant.
+:::
+
+## 4. Plot the quantity asked for
+
+For P01, initial length is 25.7 mm and final length is 44.3 mm. Calculate growth.
+Does a plot with initial length on x and final length on y directly display
+that growth on its vertical axis?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+Growth is **44.3 − 25.7 = 18.6 mm**. The first plot's vertical axis is final
+size, not change. Create `growth_mm = final_mm - initial_mm` and plot that
+derived column when growth is the outcome. Label axes with the actual variables
+and units, and keep the original CSV unchanged.
+:::
+
+## 5. A report works in the Console but fails when knitted
+
+The error says an object is not found. You created that object interactively
+before opening the report. What needs repairing, and which files should remain
+after a successful render?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+Put the needed import/calculation into the report before it uses the object,
+and load its packages there. Keep the `.Rmd` source, input data, and generated
+HTML. Render from a fresh session. A Console call to `rmarkdown::render()` must
+not be placed inside a report that would then try to render itself.
+:::
+
+## 6. Transfer choice: a fully supplied product calculation
+
+No chemistry knowledge is needed here. The supplied maximum product mass is
+1.00 g; collected dry product is 0.62 g, assumed pure for this simplified task.
+Percentage yield is `100 × collected mass / maximum mass`. What is the yield,
+and does that number independently establish the product's purity?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+The yield is **62%**. The gram units cancel. Purity was an assumption, not a
+finding from this ratio. Keep the maximum and collected masses as distinct
+inputs; a larger raw mass is not necessarily a greater percentage when starting
+scales differ. This question is a numerical transfer check, not a lab procedure.
+:::
+
+Return to [your first report](10-first-report.qmd), or continue to
+[data quality](../week3/11-data-quality.qmd).

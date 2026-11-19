@@ -2,6 +2,9 @@
 title: "Day 2 — Folders, paths, and the working computer"
 ---
 
+[Lecture slides](../lectures/02-folders-computers/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Start by finding yesterday's work
 
 Open the file manager and find `day01-notes.txt` using the folders, rather than

@@ -2,6 +2,9 @@
 title: "Day 18 — The same plant measured twice"
 ---
 
+[Lecture slides](../lectures/18-paired/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Today's question
 
 Ten plants had their leaf photosynthesis measured before and after changing the

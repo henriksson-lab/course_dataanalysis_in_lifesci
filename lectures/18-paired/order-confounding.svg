@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Light condition and time both change in an ordered before-after study</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<path d="M193.6,240 h52.8 l-8.4,40.8 h-36.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="220" y1="240" x2="220" y2="170.4" stroke="#2a7f8f" stroke-width="3"/>
+<path d="M220,206.4 Q166.0,162.0 184.0,162.0 Q220,162.0 220,206.4" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<path d="M220,189.6 Q274.0,144.0 256.0,144.0 Q220,144.0 220,189.6" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="2"/>
+<text x="220" y="350" font-family="Arial, sans-serif" font-size="27" fill="#203247" text-anchor="middle" font-weight="normal">before: lower light</text>
+<path d="M843.6,240 h52.8 l-8.4,40.8 h-36.0 Z" fill="#cfb797" stroke="#80664b" stroke-width="2"/>
+<line x1="870" y1="240" x2="870" y2="170.4" stroke="#6b4fa0" stroke-width="3"/>
+<path d="M870,206.4 Q816.0,162.0 834.0,162.0 Q870,162.0 870,206.4" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<path d="M870,189.6 Q924.0,144.0 906.0,144.0 Q870,144.0 870,189.6" fill="#6b4fa0" stroke="#6b4fa0" stroke-width="2"/>
+<text x="870" y="350" font-family="Arial, sans-serif" font-size="27" fill="#203247" text-anchor="middle" font-weight="normal">after: higher light</text>
+<line x1="380" y1="200" x2="700" y2="200" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="540" y="135" font-family="Arial, sans-serif" font-size="31" fill="#a8324a" text-anchor="middle" font-weight="normal">time passes</text>
+<text x="550" y="445" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">Without an unchanged-light comparison, change is not isolated to light.</text>
+</svg>

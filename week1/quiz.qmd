@@ -1,0 +1,104 @@
+---
+title: "Week 1 self-check — files and computers"
+---
+
+Try each question before opening its answer. These are practice checks, not
+graded examination questions. Use your file manager, terminal, and
+[terminal reference](../reference/terminal.qmd) to check actions as well as words.
+
+## 1. Find the saved work
+
+You edited a note in an application, closed it, and cannot find it in the
+application's recent-files list. What should you be able to identify, and why
+does the application name alone not tell you where the file is?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+Identify the computer, folder, and filename where the note was saved. An
+application can open files from many locations. Navigate to the saved folder in
+the file manager and reopen the ordinary file. If the changes were not saved,
+the saved contents may differ from the previous screen.
+:::
+
+## 2. A relative path needs a starting place
+
+From `introcomputing-course`, the path `data/seedlings.csv` works. From inside
+`reports`, why does the same path ask for a different location?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+A relative path starts at the current folder. From `reports` it asks for
+`reports/data/seedlings.csv`, not the neighbouring `data` folder. Return to the
+project root, then locate `data/seedlings.csv`. The file did not move; your
+starting location changed. In a shell, use `pwd` to identify that starting place.
+:::
+
+## 3. Predict a pipe and a saved extract
+
+The supplied `samples.tsv` has a header plus four records: two `control` and
+two `treated`. The header does not contain `treated`. What does this print,
+and does the second command change the source manifest?
+
+```bash
+grep -F treated samples.tsv | wc -l
+grep -F treated samples.tsv > treated-samples.txt
+```
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+The first command prints a line count of **2**. `grep` sends matching lines
+through the pipe to `wc`. The second saves matches to `treated-samples.txt`;
+it does not change `samples.tsv`. `>` replaces any previous contents of the
+destination. This is literal text matching, not interpretation of treatment
+groups or chemical classes. It could also match `untreated` if that word occurred.
+:::
+
+## 4. Copy, move, and extract
+
+What remains after copying `notes.txt` to `notes-copy.txt`? How is moving the
+original different? Does opening a ZIP preview necessarily mean its files have
+been extracted into an ordinary project folder?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+A copy leaves the original and makes another file. A move changes the original's
+location or name. A ZIP preview is a view of an archive; use extraction to create
+the ordinary folder and files needed for the project. Locate the actual extracted
+`.Rproj`, rather than opening one inside an archive preview.
+:::
+
+## 5. Memory and storage
+
+Would adding RAM automatically provide more room for saved photographs? Why
+can restarting R remove objects while leaving a saved CSV intact?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+RAM supports running work; persistent storage holds saved files. They have
+different roles. An R object in session memory must be recreated after restart;
+the CSV remains on storage and can be imported again. Saving a script preserves
+the instructions, not an automatically running process.
+:::
+
+## 6. The same filename on two computers
+
+You see `report.html` in a remote desktop. Is it automatically in your laptop's
+Downloads folder? Would a ZIP stored beside the original be a separate backup
+against losing the laptop?
+
+::: {.callout-note collapse="true"}
+## Answer and check
+
+No to both. Remote access is not automatic file transfer, and identical names
+can refer to separate copies. Use the supported transfer route and name the
+destination. A ZIP on the same disk is a convenient sharing package; use supported
+separate storage for protection against losing that disk.
+:::
+
+Return to [day 5 practical](05-lab-files.qmd) for a complete file workflow, or
+continue to [week 2](../week2/06-r-basics.qmd).

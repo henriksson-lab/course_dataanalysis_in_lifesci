@@ -1,0 +1,133 @@
+---
+title: "Summarise without hiding the observations"
+subtitle: "Day 13 — Groups, plots and interpretation"
+author: "Data Analysis in Life Sciences"
+format:
+  revealjs:
+    theme: [simple, ../../theme.scss]
+    slide-number: c/t
+    width: 1280
+    height: 720
+    transition: none
+    history: false
+    highlight-style: github
+    code-overflow: wrap
+    code-line-numbers: false
+    incremental: false
+    chalkboard: false
+    menu: true
+    html-math-method: katex
+toc: false
+---
+
+## A summary row is not a new observation
+
+![Twenty-four plant measurements become two group summary values, with information necessarily compressed.](observations-to-summary.svg){height=350px}
+
+Keep the measurement table as well as its summary.
+
+::: notes
+A table with two group means is not a dataset with two newly measured plants. Show the original and summary objects in R. Summarisation deliberately compresses information, which is why an individual-point plot remains useful.
+:::
+
+## Tell R which groups to summarise
+
+```r
+library(readr)
+library(dplyr)
+seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE) |>
+  mutate(growth_mm = final_mm - initial_mm)
+group_summary <- seedlings |>
+  group_by(treatment) |>
+  summarise(n_plants = n(),
+    n_observed = sum(!is.na(growth_mm)),
+    mean_mm = mean(growth_mm, na.rm = TRUE),
+    sd_mm = sd(growth_mm, na.rm = TRUE), .groups = "drop")
+```
+
+The result has one row per treatment.
+
+::: notes
+Recreate the clean import and growth calculation in the practical before this code. Read the pipe aloud. n counts plant records; !is.na selects available measurements. .groups="drop" leaves an ordinary ungrouped summary table. No missing growths occur in today’s clean data.
+:::
+
+## How many plants contributed?
+
+In the complete teaching file:
+
+- Control: **12 plants, 12 available growth values**.
+- Treated: **12 plants, 12 available growth values**.
+
+The repaired file from day 11 has only **11 available control growths**.
+
+::: notes
+Explicitly distinguish the two supplied files. Missingness changes the contributing count without inventing a zero measurement. The counts belong beside the summaries, not hidden in an undocumented filter.
+:::
+
+## Show observations and identify the mean
+
+![Individual growth measurements are shown with red diamonds marking group means.](individuals-and-means.svg){height=350px}
+
+Small dots = plants. Red diamonds = group means.
+
+::: notes
+Control mean 15.275 mm; treated mean 21.49167 mm. Overlap means the larger group mean is not a claim that every treated plant outgrew every control. Horizontal jitter only separates overlapping dots; measured vertical values remain unchanged.
+:::
+
+## If you draw whiskers, define them
+
+![Mean plus or minus sample SD is drawn alongside individual plant measurements.](sd-bars.svg){height=350px}
+
+These whiskers show **mean ± SD**, not confidence intervals.
+
+::: notes
+Ask what a reader could infer if the caption simply said “error bars”. The answer is too little. SD describes spread among plants. A confidence interval for an estimate has another interpretation, introduced later. It is acceptable to omit whiskers today and show observations and means.
+:::
+
+## A histogram describes the distribution
+
+![Separate histograms show the counts of control and treated growth values in four-millimetre bins.](group-histograms.svg){height=350px}
+
+The vertical axis counts observations, not a biological response.
+
+::: notes
+The horizontal axis contains growth intervals; the height counts plants in each bin. The panels use comparable scales. With 12 plants per group, apparent shape is unstable. A histogram does not show measurement order or the identities of plants.
+:::
+
+## A bin boundary can change the picture
+
+![The same twelve control values produce different histogram detail under bin widths two,four,six millimetres.](histogram-bins.svg){height=350px}
+
+Describe stable features; be cautious with tiny samples.
+
+::: notes
+Nothing about the plants changed between panels. Changing a display choice changes what detail looks prominent. Invite students to compare the raw dot plot with all three histograms before interpreting an apparent peak or gap.
+:::
+
+## Save the right object for the intended use
+
+```r
+write_csv(group_summary, "output/growth-summary.csv")
+ggsave("output/growth-summary.png", plot = group_plot,
+       width = 6, height = 4)
+```
+
+A CSV stores numbers; a PNG stores a figure. Keep both traceable to raw data.
+
+::: notes
+The practical defines group_plot and output/ already exists in the supplied project. Assigning an R object does not export it. After saving, ask students to find the two ordinary files in a file manager and explain which application could open each.
+:::
+
+## Practical: describe the sample before testing it
+
+Write a caption that identifies the unit, units, and symbols.
+
+Choose a transfer summary: repaired seedlings **or** supplied organic yields.
+
+Save the script, summary CSV, and figure.
+
+[Open the practical](../../week3/13-group-summaries.qmd).
+
+::: notes
+The organic option reuses the same computations, not a second required practical. Each row is an independently prepared run; yield uses supplied theoretical and isolated masses. SD is expressed in percentage points. No t-test is introduced here.
+:::

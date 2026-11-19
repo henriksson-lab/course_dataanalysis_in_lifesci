@@ -38,6 +38,12 @@ than treating both as additional required reports.
 
 ## A lesson is a study unit, not a full day of new lectures
 
+Use each topic's **Lecture (slides)** for the explanation and worked visual
+examples, then open **Practical and notes** for the complete instructions and
+saved deliverable. Slides use the arrow keys or navigation controls; return to
+the practical using the link in the deck. Each week has a short self-check quiz
+with explanations, for practice rather than an additional examination.
+
 The numbered lessons suggest a five-week progression. Spend substantial time
 running examples, explaining results, recovering from mistakes, and returning to
 work after closing the applications. The exact contact timetable is arranged by

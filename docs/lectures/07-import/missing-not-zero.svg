@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Missing values are not measured zeros</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<line x1="110" y1="360" x2="250" y2="360" stroke="#203247" stroke-width="3"/>
+<rect x="135" y="180" width="90" height="180" rx="0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="3"/>
+<text x="180" y="415" font-family="Arial, sans-serif" font-size="30" fill="#203247" text-anchor="middle" font-weight="normal">12 mm</text>
+<line x1="470" y1="360" x2="610" y2="360" stroke="#203247" stroke-width="3"/>
+<text x="540" y="270" font-family="Arial, sans-serif" font-size="90" fill="#a8324a" text-anchor="middle" font-weight="normal">?</text>
+<text x="540" y="415" font-family="Arial, sans-serif" font-size="30" fill="#203247" text-anchor="middle" font-weight="normal">NA</text>
+<line x1="830" y1="360" x2="970" y2="360" stroke="#203247" stroke-width="3"/>
+<rect x="855" y="90" width="90" height="270" rx="0" fill="#2a7f8f" stroke="#2a7f8f" stroke-width="3"/>
+<text x="900" y="415" font-family="Arial, sans-serif" font-size="30" fill="#203247" text-anchor="middle" font-weight="normal">18 mm</text>
+<text x="550" y="475" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">Available-value mean: 15 mm from two observed measurements.</text>
+</svg>

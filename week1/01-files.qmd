@@ -2,6 +2,9 @@
 title: "Day 1 — Find, save, and reopen your laboratory files"
 ---
 
+[Lecture slides](../lectures/01-files/lec.qmd) · [Weekly self-check](quiz.qmd)
+
+
 ## Today's biological question
 
 Did seedlings grow differently after a treatment? Before we calculate anything,

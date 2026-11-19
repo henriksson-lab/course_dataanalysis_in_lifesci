@@ -26,6 +26,11 @@ See `instructor/organic-exercise-contract.md` for the shared data and review sco
   substitute lists of topics for teaching content. Use ordinary HTML pages.
 - Website pages are Quarto; student reports are R Markdown. Teach these as
   different things. Students never need to author Quarto for this course.
+- Topic sections pair `lectures/<daily-stem>/lec.qmd` RevealJS lectures with the
+  existing daily practical URLs. Reuse the Quantitative Biology sidebar colours
+  and root `theme.scss`. Keep decks as short as useful, at most 45 slides,
+  roughly half using explanatory diagrams/plots. Weekly quiz.qmd pages are
+  formative self-checks. See `instructor/lecture-contract.md` for authoring rules.
 - Students download `downloads/course-files.zip`, extract the enclosed
   `introcomputing-course/` folder, and use it as their project root. It contains
   `introcomputing.Rproj`, `data/`, `output/`, `report.Rmd`, and `reports/`.

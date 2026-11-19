@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Identifiers and treatments are text; measurements are numeric</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="70" y="80" width="180" height="50" rx="0" fill="#dceaf6" stroke="#cbd5e1" stroke-width="3"/>
+<text x="82" y="113" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="bold">plant_id</text>
+<rect x="250" y="80" width="250" height="50" rx="0" fill="#dceaf6" stroke="#cbd5e1" stroke-width="3"/>
+<text x="262" y="113" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="bold">treatment</text>
+<rect x="500" y="80" width="250" height="50" rx="0" fill="#dceaf6" stroke="#cbd5e1" stroke-width="3"/>
+<text x="512" y="113" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="bold">initial_mm</text>
+<rect x="750" y="80" width="250" height="50" rx="0" fill="#dceaf6" stroke="#cbd5e1" stroke-width="3"/>
+<text x="762" y="113" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="bold">final_mm</text>
+<rect x="70" y="132" width="180" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="82" y="165" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">P01</text>
+<rect x="250" y="132" width="250" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="262" y="165" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">control</text>
+<rect x="500" y="132" width="250" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="512" y="165" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">25.7</text>
+<rect x="750" y="132" width="250" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="762" y="165" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">44.3</text>
+<rect x="70" y="184" width="180" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="82" y="217" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">P02</text>
+<rect x="250" y="184" width="250" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="262" y="217" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">control</text>
+<rect x="500" y="184" width="250" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="512" y="217" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">24.3</text>
+<rect x="750" y="184" width="250" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="762" y="217" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">32.3</text>
+<rect x="70" y="236" width="180" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="82" y="269" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">P13</text>
+<rect x="250" y="236" width="250" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="262" y="269" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">treated</text>
+<rect x="500" y="236" width="250" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="512" y="269" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">24.0</text>
+<rect x="750" y="236" width="250" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="762" y="269" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">54.8</text>
+<text x="285" y="390" font-family="Arial, sans-serif" font-size="26" fill="#6b4fa0" text-anchor="middle" font-weight="normal">labels / text</text>
+<text x="785" y="390" font-family="Arial, sans-serif" font-size="26" fill="#2a7f8f" text-anchor="middle" font-weight="normal">lengths / numeric / mm</text>
+<text x="550" y="460" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">One row = one plant; two lengths do not create two plants.</text>
+</svg>

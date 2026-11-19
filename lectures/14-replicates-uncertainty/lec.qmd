@@ -1,0 +1,125 @@
+---
+title: "What counts as independent evidence?"
+subtitle: "Day 14 — Replication and sampling uncertainty"
+author: "Data Analysis in Life Sciences"
+format:
+  revealjs:
+    theme: [simple, ../../theme.scss]
+    slide-number: c/t
+    width: 1280
+    height: 720
+    transition: none
+    history: false
+    highlight-style: github
+    code-overflow: wrap
+    code-line-numbers: false
+    incremental: false
+    chalkboard: false
+    menu: true
+    html-math-method: katex
+toc: false
+---
+
+## What received its own treatment allocation?
+
+![Twelve separate pots illustrate individual plants as independently allocated units.](independent-pots.svg){height=350px}
+
+In our seedling study, **the pot/plant is the experimental unit**.
+
+::: notes
+The picture illustrates separate pots, but physical separation alone is not proof of independence. The design description specifies independent allocation and handling. Ask students which entity could receive control while another receives treatment.
+:::
+
+## More readings can still mean one plant
+
+![Six separate ruler readings all refer to the same plant P01.](repeated-readings.svg){height=350px}
+
+Technical repeats help describe measurement variation.
+
+::: notes
+Rereading the same plant may reveal consistency of the measurement process. It does not create new independently allocated plants or evidence about how different plants respond. The organic analogue is repeatedly weighing one collected product batch.
+:::
+
+## A shared treatment can make the tray the unit
+
+![Plants grouped within two trays share one treatment per tray.](shared-trays.svg){height=350px}
+
+Do not count every plant as independently assigned.
+
+::: notes
+This is a schematic layout, not the actual course experiment. If treatment was assigned once to each tray, plants within that tray share its allocation and environment. Ask how many treatment assignments occurred, not how many measurements fill the spreadsheet.
+:::
+
+## SD among plants and uncertainty in a mean differ
+
+**Spread:** how much individual plants vary.
+
+**Sampling uncertainty:** how much our mean would vary across repeated samples.
+
+A larger independent sample can stabilise its mean without making plants identical.
+
+::: notes
+A group SD and a standard error answer different questions. Larger sample size does not make the underlying biological distribution narrower. Repeated dependent observations do not necessarily provide the information gain promised by more independent samples.
+:::
+
+## Each point in a sampling distribution is a mean
+
+![Means of sixteen simulated draws cluster more tightly than means of four draws from the same toy distribution.](../../week3/sampling-means.png){height=360px}
+
+The source values stay fixed.
+
+::: notes
+The supplied R demonstration uses the combined growth values as a fixed toy population and samples with replacement. It is not a new treatment experiment or a claim about nature. Each histogram entry summarises one simulated sample, not one freshly measured plant.
+:::
+
+## Read the horizontal axis before comparing spread
+
+![Individual growth values,means of four draws,and means of sixteen draws are distinct distributions.](values-versus-estimates.svg){height=350px}
+
+Individual values and estimated means are different objects.
+
+::: notes
+This additional picture is regenerated from the course values using a fixed illustrative random generator; exact bins need not match the R demonstration. The concept is the narrower distribution of larger-sample means. Do not interpret SD of means as SD among plants within a sample.
+:::
+
+## Run the supplied demonstration; do not write a simulator
+
+```r
+set.seed(14)
+means_4 <- replicate(400,
+  mean(sample(population_mm, size = 4, replace = TRUE)))
+means_16 <- replicate(400,
+  mean(sample(population_mm, size = 16, replace = TRUE)))
+```
+
+`set.seed()` makes the random demonstration repeatable.
+
+::: notes
+The practical imports and defines population_mm before these lines. Explain sample as drawing values, replace=TRUE as allowing a source value again, and replicate as repeating the calculation. Students predict and interpret the result; functions and loops are not a new programming requirement.
+:::
+
+## A stable estimate can still answer the wrong question
+
+If one unrepresentative tray is measured very precisely, have we learned the population mean accurately?
+
+Which problem would another ruler reading fix?
+
+Which problem needs another independently chosen unit?
+
+::: notes
+Precision does not remove bias, dependence, or unrepresentative sampling. Another reading may help measurement consistency; another independently allocated or sampled unit addresses a different uncertainty. Avoid claiming that sample size alone guarantees a valid study.
+:::
+
+## Practical: draw the design and explain the mean
+
+Label independently treated units in three designs.
+
+Run the supplied sampling demonstration and explain the axis.
+
+Keep your diagrams and **`day14-sampling.R`**.
+
+[Open the practical](../../week3/14-replicates-uncertainty.qmd).
+
+::: notes
+Protect time for diagrams and discussion. The organic diagram can substitute for one plant example, not add another simulation. A useful explanation identifies what was repeated, what remained the same, and what increased the independent information.
+:::
