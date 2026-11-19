@@ -2747,7 +2747,7 @@
     "href": "lectures/01-files/lec.html#a-file-is-not-the-window-showing-it",
     "title": "Find, save, and reopen",
     "section": "A file is not the window showing it",
-    "text": "A file is not the window showing it\n\n\n\nThe file is what is saved on disk. An application opens it and shows a view.\nOne CSV can be shown as plain text (a text editor) or as a grid (a spreadsheet). The saved content is the same comma-separated text.\nClosing the application does not delete the file. Deleting the file is a separate action.\nThe format (CSV) is not the application (Excel). R, a text editor, and Excel can all read the same CSV.\n\n\n\n\n\nOne saved CSV can be read as text or as a table in different applications.\n\n\n\n\nDemonstrate: open seedlings.csv in a text editor, then in a spreadsheet viewer. Same file, same path, two views. Ask what happens to the measurements when both windows close: nothing; they are still on disk. This is the mental model that everything else rests on, so make it explicit. Avoid turning this into a software preference discussion; the point is one file, several applications.",
+    "text": "A file is not the window showing it\n\n\n\nOne saved CSV can be read as text or as a table in different applications.\n\n\n\nThe same seedlings.csv can be opened in a text editor or a spreadsheet.\nClosing the window does not delete the file.\n\n\nShow it both ways. Ask what happens to the measurements when both windows close: nothing, they are still saved. Avoid a discussion of which program is best; the point is one file, several programs.",
     "crumbs": [
       "Home",
       "Week 1: files and computers",
@@ -2812,7 +2812,7 @@
     "href": "lectures/01-files/lec.html#save-close-and-reopen",
     "title": "Find, save, and reopen",
     "section": "Save, close, and reopen",
-    "text": "Save, close, and reopen\n\n\n\nAn edited note is saved to disk and then reopened from its folder.\n\n\nSave day01-notes.txt inside reports/. Then find it again.\n\nUse a plain-text editor, not a word processor’s rich format. If the editor adds .txt automatically, check the final filename rather than creating a duplicate extension. Some editors autosave or restore unsaved state; ask what is in the actual file, not only what the application remembers.",
+    "text": "Save, close, and reopen\n\n\n\nAn edited note is saved to disk and then reopened from its folder.\n\n\nSave day01-notes.txt in reports/. Close the editor. Find the note through its folder and open it again.\n\nUse a plain-text editor. Some editors restore unsaved text when reopened, so the test is: can you find the saved file in its folder? Have students say where their note is: which folder, which full name.",
     "crumbs": [
       "Home",
       "Week 1: files and computers",
@@ -2838,7 +2838,7 @@
     "href": "lectures/01-files/lec.html#read-the-whole-filename",
     "title": "Find, save, and reopen",
     "section": "Read the whole filename",
-    "text": "Read the whole filename\n\n\n\n\n\nName\nContent\n\n\n\n\nseedlings.csv\nText table of measurements\n\n\nday01-notes.txt\nYour plain-text note\n\n\nreport.Rmd\nSource for a future report\n\n\n\n\nThe extension (.csv, .txt) is part of the name. It tells applications what to expect.\nMany systems hide extensions by default. Turn them on, or notes.txt can silently become notes.txt.rtf.\n\n\n\n\n\nThe base name and .csv extension play different roles in seedlings-practice.csv.\n\n\n\n\nShow the file-manager setting that displays extensions; do it live on the supported system. Define CSV as comma-separated values. A folder normally has no extension. The classic trap: a word processor saves rich text, the student types “.txt” into the name, and the real name becomes notes.txt.rtf. With extensions hidden, it looks right and behaves wrong.",
+    "text": "Read the whole filename\n\n\n\nThe base name and .csv extension play different roles in seedlings-practice.csv.\n\n\n\nThe ending (.csv, .txt) is part of the name. Turn on “show file extensions”.\nRenaming a file does not change what is inside it.\n\n\nShow the file-manager setting for extensions. With extensions hidden, a note can end up as notes.txt.rtf without anyone noticing. Renaming .csv to .txt leaves the same commas and numbers inside; the exercises let students try this on a copy.",
     "crumbs": [
       "Home",
       "Week 1: files and computers",
@@ -10349,7 +10349,7 @@
     "href": "lectures/01-files/lec.html#about-this-lecture",
     "title": "Find, save, and reopen",
     "section": "About this lecture",
-    "text": "About this lecture\nEvery measurement you take in a lab course, a project, or a thesis ends up as a file: an instrument export, a spreadsheet from a colleague, a photo of a gel. Before any statistics, you must be able to find that file, keep the original safe, and get back to your own work tomorrow.\n\nA file is saved information with a name and a location. An application only displays or changes it.\nA file’s full name (including its extension) and its folder together say what it is and where it is.\nThe raw data stay unchanged; you work on a copy and you know which copy.\n“Saved” means you can close everything and reopen it — not that a window still shows it.\n\nThis is a concept and practice day with no programming. Everything later in the course — the terminal, R, reports — assumes these habits.\n\nOpen with the biology, not the computer: we have seedling measurements and want to know whether a treatment changed growth. Then say plainly why we spend a whole day on files. In later lab courses, the instrument writes a file; the analysis reads a file; the report is a file you hand in. Most early failures are not statistical: a student cannot find the export, has typed over the raw values, or hands in a copy from last week. The four bullets are the whole lecture; the rest of the slides make each one concrete.",
+    "text": "About this lecture\nDid a treatment make seedlings grow more? The measurements are in a file. Before we can analyse anything, we need that file on our own computer, and we need to be able to find it again.\nToday you will:\n\ndownload the course files and unpack them into a folder you choose;\nfind and open the seedling measurements;\nsave a note, close everything, and open the note again.\n\nNo programming today. Every later day starts from files you can find.\n\nKeep the opening concrete. The biology question motivates the course; today’s job is getting the data onto the laptop and being sure where it is. Many students have only used files through “recent” lists or cloud apps, so finding a file by its folder is a real skill, not a formality.",
     "crumbs": [
       "Home",
       "Week 1: files and computers",
@@ -10440,7 +10440,7 @@
     "href": "lectures/01-files/lec.html#summary",
     "title": "Find, save, and reopen",
     "section": "Summary",
-    "text": "Summary\n\n\n\n\n\n\n\nIdea\nKey fact\n\n\n\n\nFile vs application\nThe file is saved on disk; applications only show or change it\n\n\nLocation\nA file is identified by its folder and its full name\n\n\nExtension\nPart of the name; a clue to the format. Renaming does not convert\n\n\nRaw data\nNever edit the original; work on a named copy in output/\n\n\nSaved\nYou can close everything and reopen it from its folder\n\n\nSeveral copies\nChoose one working project by contents and path\n\n\nReceiving data\nNote source, copy, row meaning, units, and one checked record\n\n\n\nNext (Day 2, folders and the working computer): how to write down where a file is as a path, so you and others can find it without clicking.\nNow: open the Day 1 exercises. Leave with reports/day01-notes.txt and output/seedlings-practice.csv, and be able to find both after closing every window.\n\nWalk back to the “what goes wrong” table and match each row to a summary line: lost export → location; typed over → raw data; older copy → several copies; screenshot → receiving data; renamed docx → extension. The exercises give the detailed click sequence and hints. A student who cannot yet reopen their files needs help before Day 2, because paths build directly on this.",
+    "text": "Summary\n\nA file is saved in a folder. Programs only open and show it.\nThe full filename includes its ending, such as .csv.\nKeep the original data unchanged; work on a copy.\nSaved means you can close everything and open it again from its folder.\n\nNext (Day 2): writing down where a file is, as a path.\nNow: open the Day 1 exercises. Leave with reports/day01-notes.txt and output/seedlings-practice.csv, and be able to find both after closing every window.\n\nThe exercises give the detailed click sequence and hints. A student who cannot yet find their files again needs help before Day 2, because paths build directly on this.",
     "crumbs": [
       "Home",
       "Week 1: files and computers",
@@ -10614,6 +10614,71 @@
       "Home",
       "Week 4: comparisons and lines",
       "17. A guided Welch t-test",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/01-files/lec.html#the-data-one-row-per-seedling",
+    "href": "lectures/01-files/lec.html#the-data-one-row-per-seedling",
+    "title": "Find, save, and reopen",
+    "section": "The data: one row per seedling",
+    "text": "The data: one row per seedling\n\n\n\nThe header labels fields while a record describes one plant.\n\n\n\n24 seedlings: 12 treated, 12 controls. Each was measured at the start and at the end (mm).\nP01 grew from 25.7 mm to 44.3 mm, so it grew 18.6 mm.\n\n\nThese are simulated teaching data. Read P01’s row aloud: plant ID, group, initial length, final length. The units come from the data dictionary in the data folder; the file itself only contains commas and numbers.",
+    "crumbs": [
+      "Home",
+      "Week 1: files and computers",
+      "1. Files: save, find, reopen",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/01-files/lec.html#download-and-unpack-the-course-files",
+    "href": "lectures/01-files/lec.html#download-and-unpack-the-course-files",
+    "title": "Find, save, and reopen",
+    "section": "Download and unpack the course files",
+    "text": "Download and unpack the course files\n\n\n\nDownload the course ZIP.\nShow it in File Explorer (Windows) or Finder (Mac).\nExtract the whole ZIP.\nMove the extracted folder to Documents.\nOpen data, then seedlings.csv.\n\nOpen files from the extracted folder, not from inside the ZIP.\n\n\n\n\nThe project contains data, output, and reports folders; seedlings.csv is inside data.\n\n\n\n\nDemonstrate on the supported system and wait until everyone has found the Downloads folder. Windows “Extract All” and a Mac double-click can create an extra folder level; check that data, output and reports are directly inside the folder you will work in. Find the file by opening folders, not through “recent files”.",
+    "crumbs": [
+      "Home",
+      "Week 1: files and computers",
+      "1. Files: save, find, reopen",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/01-files/lec.html#keep-the-original-work-on-a-copy",
+    "href": "lectures/01-files/lec.html#keep-the-original-work-on-a-copy",
+    "title": "Find, save, and reopen",
+    "section": "Keep the original; work on a copy",
+    "text": "Keep the original; work on a copy\n\n\n\nCopying the raw CSV into output creates a separate practice file while retaining the original.\n\n\nCopy data/seedlings.csv to output/seedlings-practice.csv. Change only the copy.\n\nThe original is what was measured. If something goes wrong in the copy, start again from the original. Demonstrate the copy in the file manager.",
+    "crumbs": [
+      "Home",
+      "Week 1: files and computers",
+      "1. Files: save, find, reopen",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/01-files/lec.html#two-similar-folders-pick-one",
+    "href": "lectures/01-files/lec.html#two-similar-folders-pick-one",
+    "title": "Find, save, and reopen",
+    "section": "Two similar folders? Pick one",
+    "text": "Two similar folders? Pick one\n\n\n\nOne original can lead to several extracted project folders with similar names.\n\n\nDownloading or extracting twice gives similar folders. Choose one to work in, and do not delete the other until you know what is in it.\n\nShow a “course-files (1)” example. The working folder is the one with data, output, reports and the .Rproj file directly inside. Students should ask before deleting anything.",
+    "crumbs": [
+      "Home",
+      "Week 1: files and computers",
+      "1. Files: save, find, reopen",
+      "Lecture (slides)"
+    ]
+  },
+  {
+    "objectID": "lectures/01-files/lec.html#check-yourself",
+    "href": "lectures/01-files/lec.html#check-yourself",
+    "title": "Find, save, and reopen",
+    "section": "Check yourself",
+    "text": "Check yourself\n\nYou close the editor. Is the saved note gone?\nYou change seedlings-practice.csv. Did data/seedlings.csv change?\nYou rename a .csv to .txt. Did the numbers change?\nYou know a file’s name. Do you know which folder it is in?\n\n\nAnswers: 1 no; 2 no, it is a separate copy; 3 no, renaming does not convert; 4 not necessarily, several folders can contain files with the same name. Ask students to check 1 and 2 on their own computers rather than just answering.",
+    "crumbs": [
+      "Home",
+      "Week 1: files and computers",
+      "1. Files: save, find, reopen",
       "Lecture (slides)"
     ]
   }
