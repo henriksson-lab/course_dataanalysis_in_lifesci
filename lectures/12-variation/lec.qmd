@@ -20,209 +20,241 @@ format:
 toc: false
 ---
 
-## Same average; different observations
+## About this lecture
 
-![Two toy growth groups have the same 14 millimetre mean but different standard deviations.](../../week3/variation-examples.png){height=350px}
+You write in a lab report: "control seedlings grew 15.3 mm on average." A reader cannot tell whether every plant grew about 15 mm, or whether some grew 8 mm and others nearly 19 mm. Those are very different biological pictures: one unusual plant, or a treatment that makes plants more variable, would be invisible. **How do we describe both the typical value and how much plants differ?**
 
-What does the mean leave out?
+- The **mean** and **median** describe the centre; one unusual value moves them differently.
+- **Deviations** from the mean lead to the **variance** (squared units) and the **standard deviation** (SD, original units).
+- Adding a constant or changing units changes the numbers in predictable ways, which makes a useful **check**.
+- The SD describes how much **individual plants** vary. It is not the uncertainty of the mean (Day 14) and does not tell you *why* plants vary.
+
+This is a concept day with small hand calculations; centre and spread are used in every later day.
 
 ::: notes
-Give students a moment to read the axis before naming SD. Both sets have mean 14 mm; one contains 13,14,15 and the other 8,14,20. The second set has greater spread. We need to describe centre and variation, not choose one number to represent all plants.
+Ask students to imagine two seed batches with the same mean growth: one uniform, one with a few plants that hardly grew. A breeder, a field ecologist or a reviewer would care about that difference. Today's numbers are the tools to say it.
 :::
 
-## Mean and median describe a centre
+## The problem: same mean, different plants
 
+:::: {.columns}
+::: {.column width="42%"}
+- Group A: 13, 14, 15 mm. Group B: 8, 14, 20 mm.
+- Both means are **14 mm**.
+- In A plants are alike (SD **1 mm**); in B they differ a lot (SD **6 mm**).
+- Reporting only "mean 14 mm" makes the two groups look identical.
+
+A description needs a **centre** *and* a **spread**.
+:::
+::: {.column width="58%"}
+![Two toy growth groups share a mean of 14 millimetres; one set of dots is tightly clustered and the other widely spread.](../../week3/variation-examples.png){width="100%"}
+:::
+::::
+
+::: notes
+Give students a moment to read the axis before naming SD. A larger spread is not automatically sloppy work: organisms really differ, and measurement noise also contributes. We need words and numbers for both centre and spread.
+:::
+
+## Mean and median: two ways to describe the centre
+
+:::: {.columns}
+::: {.column width="45%"}
 ```r
-x <- c(10, 10, 10, 100)
-mean(x)       # 32.5
-median(x)     # 10
+uneven_mm <- c(10, 10, 10, 100)
+mean(uneven_mm)     # 32.5
+median(uneven_mm)   # 10
 ```
 
-The mean uses every value. The median is the middle of the ordered values.
+- **Mean:** add all values, divide by how many. Every value pulls on it.
+- **Median:** the middle of the sorted values (average of the two middle ones if n is even).
+- Change 12, 14, **16** to 12, 14, **26** mm: the mean moves from 14 to **17.33 mm**; the median stays **14 mm**.
+- Neither is wrong. A large value is checked against the source and **kept** if real.
+:::
+::: {.column width="55%"}
+![Changing one value from 16 to 26 millimetres moves the group mean, shown as a diamond, from 14 to 17.33 millimetres.](extended-one-high-value.svg){width="100%"}
+:::
+::::
 
 ::: notes
-For an even number of observations, the median averages the two middle values. The large observation changes the mean strongly; it does not make either function wrong. Check unusual values against source information rather than deleting them to make summaries agree.
+Ask for predictions before showing the numbers. The changed set also has variance 57.33 mm² and SD 7.57 mm, against 4 mm² and 2 mm before: one value changes spread a lot. This is sensitivity reasoning, not permission to remove a real large value. Day 11's rule still holds: only source evidence justifies a change.
 :::
 
-## Measure deviations from the mean
+## Spread starts with deviations from the mean
 
-![Growth values 12,14,16 have deviations minus 2,0,plus 2 millimetres from their mean.](deviations.svg){height=350px}
-
-Adding the signed deviations gives zero, even with spread.
+:::: {.columns}
+::: {.column width="42%"}
+- Take three growth values: **12, 14, 16 mm**. Their mean is 14 mm.
+- Each **deviation** is value minus mean: **−2, 0, +2 mm**.
+- Deviations carry the measurement's units.
+- Adding them gives **0**, always: positives and negatives cancel. So the plain average deviation cannot measure spread.
+- Squaring removes the sign: 4, 0, 4.
+:::
+::: {.column width="58%"}
+![Growth values 12, 14 and 16 millimetres have deviations of minus 2, 0 and plus 2 millimetres from their mean of 14 millimetres.](deviations.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Work through the three numbers slowly. Subtraction uses the same units as the measurement. Positive and negative deviations cancel. Squaring is one way to avoid cancellation and leads to the sample variance used by R.
+Work through the three numbers slowly on the board. Students do this by hand in the exercises and then check with R. The cancellation is a property of the mean, not a coincidence of this example.
 :::
 
-## Variance has squared units; SD has the original units
+## Variance and standard deviation
 
-![A two millimetre deviation squared corresponds to four square millimetres.](squared-units.svg){height=350px}
+:::: {.columns}
+::: {.column width="45%"}
+For 12, 14, 16 mm:
 
-For 12, 14, 16: variance = **4 mm²**, SD = **2 mm**.
+1. Squared deviations: 4 + 0 + 4 = **8 mm²**.
+2. Divide by **n − 1 = 2**: variance = **4 mm²**.
+3. Square root: SD = **2 mm**.
+
+- Variance is in **squared units** (mm²), hard to picture.
+- SD is back in **mm**, the same units as the plants, so it can be read next to the mean.
+- Dividing by n − 1 rather than n is the convention for estimating spread from a sample; R uses it.
+:::
+::: {.column width="55%"}
+![A two-millimetre deviation squared gives four square millimetres; the square root of the variance returns to millimetres.](squared-units.svg){width="100%"}
+:::
+::::
 
 ::: notes
-The sum of squared deviations is 4+0+4=8. Divide by n−1=2 for sample variance, giving 4 mm². The square root is 2 mm. Explain the denominator as a sample-variance convention that estimates population variance; no derivation is needed. SD is not an error bar for the mean.
+No derivation of n − 1 is needed; say that with small samples, dividing by n tends to underestimate population spread. SD is not an error bar for the mean, and it does not mean every plant lies within one SD of the mean.
 :::
 
-## Let R do the arithmetic, while you keep the meaning
+## Let R do the arithmetic, and check it by hand
 
 ```r
-x <- c(12, 14, 16)
-mean(x)
-var(x)
-sd(x)
+growth_mm <- c(12, 14, 16)
+deviations_mm <- growth_mm - mean(growth_mm)   # -2  0  2
+sum(deviations_mm^2) / (length(growth_mm) - 1) # 4, by the formula
+var(growth_mm)                                 # 4   (mm²)
+sd(growth_mm)                                  # 2   (mm)
 ```
 
-A mean or SD needs its measurement unit in the report.
+- Predict each result **before** running it. If R disagrees with your hand calculation, find out why.
+- `var()` and `sd()` use n − 1, as on the previous slide.
+- R prints numbers without units. **You** add mm or mm² when you write them down.
 
 ::: notes
-Ask students to predict 14,4,2 before running. Their task is not memorising function names: it is choosing the quantity that answers their question and labelling the output correctly. Neither SD nor variance means every observation lies within a specified range.
+Ask students to predict 14, 4 and 2 before running. Their task is not memorising function names: it is choosing the quantity that answers their question and labelling it correctly.
 :::
 
-## Our control plants vary around their mean
+## Worked example: our control plants
 
-![Individual control growth values and their 15.275 millimetre mean are shown on one axis.](control-centre.svg){height=350px}
-
-Mean ≈ **15.28 mm**; sample SD ≈ **3.19 mm**.
-
-::: notes
-These are the complete clean seedling data, not yesterday’s deliberately incomplete export. State the switch explicitly:12 control plants now contribute. The mean is a summary, not an observed “average plant”. Biological and measurement variation may both contribute to spread.
-:::
-
-## Changing the origin is different from changing the unit
-
-![Adding a constant shifts the mean; converting millimetres to centimetres changes the numeric scale.](shift-and-scale.svg){height=350px}
-
-Predict what happens to SD before running R.
-
-::: notes
-Adding 10 mm changes 13,14,15 into 23,24,25: mean shifts from 14 to 24, SD remains 1 mm. Dividing by 10 gives 1.3,1.4,1.5 cm: mean 1.4 cm and SD 0.1 cm. Variance divides by 100. This is a units check, not a new statistical method.
-:::
-
-## Transfer choice: a yield is a percentage
-
-A supplied maximum is **1.00 g**; collected dry product is **0.62 g**.
-
-`yield_percent = 100 × collected mass / supplied maximum mass`
-
-- Yield = **62%**; no reaction equation is needed.
-- SD of several yields is in **percentage points**.
-- A higher yield alone does not establish higher purity.
-
-::: notes
-This is an alternative small task, not additional compulsory work. Theoretical maximum masses are supplied in organic-recovery.csv. Collected dry material is assumed pure for this simplified calculation. Across six standard runs mean yield is 68.67% and SD 4.32 percentage points. Distinguish a percentage scale from relative percentage change.
-:::
-
-## One changed observation can move several summaries
-
-![Changing16 to26 mm alters the mean,median and spread differently.](extended-one-high-value.svg){height=350px}
-
-Original: 12, 14, 16 mm. Changed: 12, 14, 26 mm.
-
-::: notes
-The new mean is17.33 mm, median14 mm, variance 57.33 mm² and SD 7.57 mm. Ask for predictions before displaying numbers. This is sensitivity reasoning, not permission to remove a real large value.
-:::
-
-## A common shift changes centre, not deviations
-
-![Every value shifts by 10 mm while the pattern of deviations stays unchanged.](extended-shift.svg){height=350px}
-
-Adding 10 mm shifts both the mean and each observation by 10 mm.
-
-::: notes
-The shifted vector22,24,26 has mean 24 and SD 2. Show subtraction from each set mean. An SD change under a common shift would signal a calculation or comparison mistake.
-:::
-
-## Use units as an arithmetic check
-
-![The same three measurements displayed in millimetres and centimetres have rescaled numerical summaries.](extended-units.svg){height=350px}
-
-Unit conversion changes numbers; it does not change the measured plants.
-
-::: notes
-Original variance 4 mm² becomes.04 cm²; SD 2 mm becomes.2 cm. Variance scales with the square of the conversion factor. The smaller numeric SD reflects a different unit, not less biological variation.
-:::
-
-## Calculate before rounding
-
+:::: {.columns}
+::: {.column width="45%"}
 ```r
-x_mm <- c(12, 14, 26)
-mean(x_mm)
-median(x_mm)
-var(x_mm)
-sd(x_mm)
-```
-
-Keep full values for calculations; round the displayed table and prose.
-
-::: notes
-R printing many digits is not proof of precise measurements. Students can show about 17.3 mm mean and 7.57 mm SD while retaining the calculation object. Confirm hand-worked deviations for the original simple vector first.
-:::
-
-## Another study separates mean and spread again
-
-![The new treated group has a larger mean but a smaller observed SD than controls.](extended-transfer-variation.svg){height=350px}
-
-Larger mean does not require larger SD.
-
-::: notes
-Transfer control mean 13.66 mm, SD 2.53 mm; treated mean 17.87 mm, SD 1.94 mm. Use actual values rather than the earlier study pattern, where treated spread was larger.
-:::
-
-## Recreate the calculation in a separate script
-
-```r
-library(readr)
-library(dplyr)
-transfer <- read_csv('data/seedlings-transfer.csv',
-                     show_col_types = FALSE) |>
+seedlings <- read_csv("data/seedlings.csv",
+                      show_col_types = FALSE) |>
   mutate(growth_mm = final_mm - initial_mm)
-transfer_control <- filter(transfer, treatment == 'control')
-sd(transfer_control$growth_mm)
+control <- filter(seedlings,
+                  treatment == "control")
+mean(control$growth_mm)    # 15.28
+median(control$growth_mm)  # 15.65
+var(control$growth_mm)     # 10.18 (mm²)
+sd(control$growth_mm)      # 3.19  (mm)
 ```
 
-T01 grew **15.0 mm**; check that subtraction independently.
+- The 12 control plants grew from **8.0 to 18.7 mm**; none grew exactly 15.28 mm.
+- Treated plants: mean **21.49 mm**, SD **4.87 mm**: higher centre *and* more spread.
+:::
+::: {.column width="55%"}
+![The twelve control growth values spread along one axis from 8 to 18.7 millimetres, with a vertical line at their mean of 15.28 millimetres.](control-centre.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Load readr and dplyr as earlier. New data need their own import and growth column. Each group has 9 complete independent observations. Use separately named objects for the two studies.
+We switch to the complete, clean seedlings.csv today, not yesterday's deliberately incomplete export; say this explicitly. Load readr and dplyr first, as in the practical. The mean is a summary, not an observed "average plant". Report with units and sensible rounding: 15.3 mm, SD 3.2 mm.
 :::
 
-## The SD does not identify its own cause
+## Shifts and unit changes: a built-in check
 
-A group has a larger SD. Is that evidence of:
+:::: {.columns}
+::: {.column width="42%"}
+Start with 13, 14, 15 mm (mean 14, SD 1).
 
-- Greater biological diversity?
-- More measurement noise?
-- A less precise estimated mean?
-
-SD describes the spread. Additional design and measurement information distinguish explanations.
+- **Add 10 mm** to every value: mean becomes **24 mm**, SD stays **1 mm**. Moving all plants together does not change how they differ.
+- **Convert to cm** (÷ 10): mean **1.4 cm**, SD **0.1 cm**, variance ÷ **100** (mm² → cm²).
+- The smaller SD in cm is a different unit, not less variable plants.
+- If a shift changes your SD, there is a mistake in the code.
+:::
+::: {.column width="58%"}
+![The same three values shown in millimetres, shifted by ten millimetres, and converted to centimetres: the centre moves, the spread only changes with the unit.](shift-and-scale.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Observed spread can have multiple sources. Uncertainty in a mean additionally depends on independent sample size and assumptions. A group SD alone does not evaluate all experimental technique.
+In code: mean(close_mm + 10), sd(close_mm + 10), and the same with close_mm / 10. For 12, 14, 16 the variance 4 mm² becomes 0.04 cm² and the SD 2 mm becomes 0.2 cm. Variance scales with the square of the conversion factor. This is a units check, not a new method.
 :::
 
-## Write a summary that survives a unit change
+## What the SD does not tell you
 
-Include the quantity, units, n, centre, and individual spread.
+:::: {.columns}
+::: {.column width="42%"}
+In a second class's study, treated plants have the **larger mean** (17.87 vs 13.66 mm) but the **smaller SD** (1.94 vs 2.53 mm).
 
-If you convert to cm, revise the mean, SD, variance units, and axis together.
-
-**Which biological comparison should remain unchanged?**
+- Centre and spread are separate facts; one does not predict the other.
+- A larger SD can come from **biology** (plants really differ) or **measurement noise**. The SD alone cannot say which.
+- The SD is about **individual plants**, not about how precisely we know the mean. That is Day 14.
+:::
+::: {.column width="58%"}
+![In the transfer study, treated plants have a higher mean growth than controls but their points are less spread out.](extended-transfer-variation.svg){width="100%"}
+:::
+::::
 
 ::: notes
-The ordering of group means and relative spread should remain consistent under a common positive conversion. A data table with correct numbers but wrong unit labels is still a misleading report.
+In the main study the treated group had both the larger mean and the larger SD; here it is the other way round, so students should use the actual values. A claim such as "the group with the larger SD has the worse technique" goes beyond what the SD shows. The transfer data: data/seedlings-transfer.csv, 9 plants per group, T01 grew 15.0 mm.
 :::
 
-## Exercises: explain the number you calculate
+## Same tools in another lab: percentage yield
 
-Choose one short transfer task and keep **`day12-variation.R`**.
+An organic synthesis run gives **0.62 g** of dry product when at most **1.00 g** was possible.
 
-What would stay the same if every measurement increased by 10 mm?
+`yield_percent = 100 * isolated_mass_g / theoretical_mass_g` = **62%**
 
-What changes when mm become cm?
-
-[Open exercises](../../week3/12-variation.qmd).
+- Six standard-protocol runs: mean yield **68.67%**, SD **4.32 percentage points**.
+- A change from 62% to 70% is **8 percentage points**, not an 8% relative increase.
+- Runs used different starting amounts, so raw grams would answer a different question.
+- A higher yield alone does not show higher purity or a better method in general.
 
 ::: notes
-Keep the by-hand three-number example before the full dataset. Ask for an explanation of centre and spread. Students should retain the measurement unit and recognise that SD among plants is not uncertainty in a treatment difference.
+This is a transfer choice from data/organic-recovery.csv, an alternative to the treated-group step in the practical, not extra compulsory work. Collected material is assumed pure in this simplified calculation. Variance is 18.67 squared percentage points.
+:::
+
+## Report centre and spread together
+
+**Good:** "Control seedlings grew a mean of **15.3 mm** (SD **3.2 mm**, median 15.7 mm, **n = 12** plants)."
+
+- Name the **quantity** (seven-day growth), the **unit**, **n**, the centre and the spread.
+- Calculate with full precision; **round only** the numbers you display. Six decimals from R are not six decimals of ruler precision.
+- If you convert units, change the mean, SD, variance units and axis labels **together**.
+
+| Misreading | Better |
+|---|---|
+| "The average plant grew 15.3 mm." | The mean is a summary; individual plants grew 8.0 to 18.7 mm. |
+| "The SD is the error of the mean." | The SD describes plant-to-plant variation. |
+
+::: notes
+A table with correct numbers but wrong unit labels is still a misleading report. The ordering of group means and the relative spread stay the same under a positive unit conversion; that is a good check.
+:::
+
+## Summary {.smaller}
+
+| Concept | Key fact |
+|---|---|
+| Mean | Sum ÷ n; pulled by unusual values (12, 14, 26 → 17.33) |
+| Median | Middle of the sorted values; less affected by one extreme (stays 14) |
+| Deviation | Value − mean; deviations always sum to 0 |
+| Variance | Sum of squared deviations ÷ (n − 1); squared units (mm²) |
+| SD | √variance; original units (mm); describes spread among individuals |
+| Shift / unit | + constant moves the mean only; ÷ 10 divides mean and SD by 10, variance by 100 |
+| Seedlings | Control 15.28 mm (SD 3.19); treated 21.49 mm (SD 4.87), n = 12 each |
+| Limits | SD does not identify its cause, and is not uncertainty in the mean |
+
+**Next (Day 13, group summaries):** calculate these summaries for every group at once, and plot them without hiding the individual plants.
+
+**Now:** [open the Day 12 exercises](../../week3/12-variation.qmd). Leave with `day12-variation.R` and a short interpretation of centre and spread with units.
+
+::: notes
+Ask: what would stay the same if every measurement increased by 10 mm? What changes when mm become cm? Keep the by-hand three-number example before moving to the full dataset.
 :::

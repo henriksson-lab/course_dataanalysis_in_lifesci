@@ -28,6 +28,7 @@ class CourseArchive(ZipFile):
 with CourseArchive(DOWNLOADS / "course-files.zip", "w", ZIP_DEFLATED) as archive:
     files = [ROOT / "introcomputing.Rproj", ROOT / "report.Rmd"]
     files += sorted((ROOT / "data").glob("*"))
+    files += sorted((ROOT / "examples").glob("*"))
     files += [ROOT / "reports/README.txt", ROOT / "output/README.txt"]
     for source in files:
         archive.write(source, "introcomputing-course/" + source.relative_to(ROOT).as_posix())
@@ -35,6 +36,7 @@ with CourseArchive(DOWNLOADS / "course-files.zip", "w", ZIP_DEFLATED) as archive
         "All datasets are simulated teaching data.\n"
         "Extract this entire folder before opening introcomputing.Rproj in RStudio.\n"
         "Use data/README.md for study designs, units, and missing-value meanings.\n"
+        "examples/ holds Day 1 example files: plain text versus Word, Excel, PDF.\n"
         "report.Rmd is an intentionally guided first report; render with Knit.\n"
         "Save new .Rmd reports beside report.Rmd in this project root.\n"
         "Never include passwords or login codes in reports.\n"

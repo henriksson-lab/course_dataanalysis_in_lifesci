@@ -1,5 +1,5 @@
 ---
-title: "Day 4 — Unpack and inspect laboratory data"
+title: "Day 4 — Unzip and inspect laboratory data"
 ---
 
 [Lecture slides](../lectures/04-inspect-archive/lec.qmd) · [Quiz](04-inspect-archive-quiz.qmd) · [Weekly revision](quiz.qmd)
@@ -7,107 +7,92 @@ title: "Day 4 — Unpack and inspect laboratory data"
 
 ## Which seedlings received the treatment?
 
-A laboratory has supplied a small archive containing measurements and sample
-information. Before doing statistics, we need to establish what is in the
-archive and which files belong to the treated samples. We will do this with
-ordinary command-line utilities. The data are simulated for teaching.
+A lab group has sent you `lab-data.zip`. Its README says it holds four seedling
+pots, two control and two nutrient-treated, each measured once after seven days,
+with lengths in millimetres. A table called a **manifest** (`samples.tsv`) lists
+each sample's ID, its treatment and the file holding its measurement. Today you
+use the terminal to find out which samples were treated and whether they are
+longer than the controls.
 
-The archive in this exercise is a **small separate practice dataset** with four
-samples. It is not the 24-plant dataset we will analyse in R. A **manifest** is a
-table describing which samples and files are present. Sample identifiers connect
-the manifest to the measurements.
+This is a small, separate practice dataset with four samples; the 24-plant
+dataset comes back on day 5 in R. The data are simulated.
 
-## Put the download in a known place
+**Save today:** `treated-samples.txt`, `working/manifest-practice.tsv` and
+`working/observations.txt`, all inside the extracted `lab-data` folder.
 
-1. Download [lab-data.zip](../downloads/lab-data.zip) with your browser.
-2. Locate the downloaded file in File Explorer or Finder.
-3. In your terminal, run `cd ~/introcomputing-shell`, then `pwd`.
-4. Open that folder graphically using `explorer.exe .` in local Ubuntu on Windows
-   or `open .` on Mac.
-5. **Copy the downloaded ZIP into this workspace using the file manager.**
-6. Back in the terminal, run `ls`. Confirm that `lab-data.zip` appears.
+## Getting the archive into your workspace
 
-On a remote computer, use the course's supported transfer route when available.
-The browser's local download is not automatically a remote file.
+Download [lab-data.zip](../downloads/lab-data.zip) with your browser. The
+download lands in your Downloads folder, which is not where your terminal works.
+In the terminal, run `cd ~/introcomputing-shell` and then open that folder
+graphically with `explorer.exe .` (Ubuntu on Windows) or `open .` (Mac). Copy the
+ZIP into it with the file manager, then run `ls` in the terminal: `lab-data.zip`
+should be listed.
 
-## Look before extracting
+## What is in the archive?
 
-From `~/introcomputing-shell`, run:
+Use `unzip -l` to find out what the lab group sent before unpacking anything:
 
 ```bash
 unzip -l lab-data.zip
 ```
 
-The `-l` option lists archive contents without extracting them. Identify
-`README.txt`, `samples.tsv`, and the `measurements` and `field-notes` folders.
-There should be four measurement files, S01 through S04. The displayed sizes
-and dates describe the archive entries.
-
-Now extract:
+The listing shows eight files: `README.txt`, `samples.tsv`, four measurement files
+`measurements/S01.csv` to `S04.csv`, and two short field notes. `-l` only lists;
+nothing has been extracted yet. Now extract into a folder of your choice and read
+the README:
 
 ```bash
 unzip lab-data.zip -d lab-data
 cd lab-data
-ls
 less README.txt
 ```
 
-The `-d lab-data` option chooses the destination folder. Extraction creates
-ordinary files you can open; it does not remove the ZIP. In `less`, use Space
-to move down, arrow keys to move by lines, and **q** to quit and return to the
-prompt. A short file may already fit on one screen.
+`-d lab-data` names the destination folder. Extraction makes ordinary files you
+can open and leaves the ZIP as it was. In `less`, Space moves down and **q**
+returns to the prompt.
 
 ::: {.callout-tip collapse="true"}
-## Extraction asks whether to replace a file
+## Hint: `unzip` asks whether to replace a file
 
-You have probably extracted into the same destination before. Stop and inspect
-the destination in the file manager. For this first run, choose a fresh destination
-name if necessary and use that name in `cd`.
+You have extracted into `lab-data` before. Answer `n`, look at the existing folder
+in the file manager, and extract into a fresh name such as `lab-data-2` instead.
+Then use that name in `cd`.
 :::
 
-## Read a table without changing it
+## How many samples are there?
 
-Run:
+Use `head` and `wc -l` to find out how many samples the manifest describes:
 
 ```bash
 head -n 3 samples.tsv
 wc -l samples.tsv
 ```
 
-`head -n 3` prints the first three lines. `wc -l` counts newline-terminated
-lines. The supplied manifest has a header and four sample records, so the count
-is **5**, not four biological samples. Tabs separate the columns in this TSV
-(tab-separated values) file. A CSV uses commas instead.
+`head -n 3` shows the first three lines: a header naming the columns
+(`sample_id`, `treatment`, `file`), then S01 and S02. `wc -l` counts lines and
+prints **5**: one header plus **four** samples. The columns are separated by tabs,
+which is what TSV (tab-separated values) means; a CSV uses commas.
 
-The columns are `sample_id`, `treatment`, and `file`. Follow the file path for
-sample S03:
+## Which samples were treated?
 
-```bash
-head measurements/S03.csv
-```
-
-Before interpreting a number, use the README to find out what it measures and
-which units were used. The filename locates measurements; it does not explain
-their biological meaning by itself.
-
-## Search the manifest with `grep`
-
-Run:
+Use `grep` to find out which samples received the treatment:
 
 ```bash
 grep -F treated samples.tsv
 ```
 
-`grep` prints lines matching a search. `-F` asks for a **literal text** match,
-so we do not need to learn pattern syntax. The supplied manifest should return
-two lines, S03 and S04, labelled `treated`.
+`grep` prints every line that contains the search text; `-F` means plain text,
+not a pattern. You should see two lines, **S03** and **S04**. The header and the
+control lines do not contain the word, so they are not printed.
 
-This is text search, not an understanding of table columns or experiments.
-Searching for `treated` would also match `untreated` if that word were present.
-Our prepared labels are `control` and `treated`; the header does not contain
-the search word. Always inspect what a search actually selected.
+`grep` matches text, not meaning: a line saying `untreated` would also match,
+because it contains `treated`. Always look at the lines it selected, not only
+at how many there are.
 
-## Save a search, then count its records
+## Saving and counting the treated samples
+
+Save the treated lines to a file, and count them with a pipe:
 
 ```bash
 grep -F treated samples.tsv > treated-samples.txt
@@ -115,140 +100,132 @@ less treated-samples.txt
 grep -F treated samples.tsv | wc -l
 ```
 
-`>` redirects the output to a file instead of displaying it. **It replaces the
-contents if that output file already exists.** Never use the input filename on
-the right side here. `treated-samples.txt` is a new text extract; the original
-`samples.tsv` remains unchanged. It has no header, because the header did not
-match our search.
+`>` sends the output into `treated-samples.txt` instead of the screen. The
+manifest is read and stays unchanged. The vertical bar `|` is a **pipe**: it
+passes grep's lines straight to `wc -l`, which prints **2**.
 
-The vertical bar `|` is a **pipe**. It passes the matching lines from `grep`
-to `wc -l`, which counts them. The result should be **2**. The pipe does not
-need an intermediate saved file. Count lines only when lines really represent
-the records you intend to count.
+`>` replaces whatever the destination file contained before, so never put the
+input file after it: `grep … samples.tsv > samples.tsv` can empty the manifest
+before grep reads it.
 
-## Preserve and organise a working copy
+## Are the treated seedlings longer?
 
-Still inside `lab-data`, run:
+The manifest's `file` column says where each measurement is. Use `head` on those
+files to find out how long the treated and control seedlings were:
+
+```bash
+head measurements/S03.csv
+head measurements/S04.csv
+head measurements/S01.csv
+head measurements/S02.csv
+```
+
+Each file has one header line and one value. The treated seedlings are
+**42.4 mm** (S03) and **39.8 mm** (S04); the controls are **32.1 mm** (S01) and
+**35.2 mm** (S02). Both treated seedlings are longer than both controls. With
+two pots per group that is a hint, not a result; the 24-plant dataset in week 2
+is where we start answering the question properly.
+
+## A practice copy of the manifest
+
+You will want a copy of the manifest you can change without risking the
+original. Make one in a `working` folder and give it a clearer name:
 
 ```bash
 mkdir working
 cp samples.tsv working/samples-copy.tsv
 mv working/samples-copy.tsv working/manifest-practice.tsv
 ls working
+ls
 ```
 
-`cp` creates a copy; `mv` moves or renames an entry. Here only the practice copy
-was renamed. Confirm that the original `samples.tsv` still exists. Both commands
-can replace existing destinations, so check names before running them.
+`cp` makes a second file; `mv` renames (or moves) it. `ls working` shows only
+`manifest-practice.tsv`, and `ls` shows that the original `samples.tsv` is still
+there. Both `cp` and `mv` silently replace an existing file with the destination
+name, so check names first.
 
-Use the file manager to create `observations.txt` inside `working`. Record:
-how many sample records there are, which two received treatment, and which
-measurement file you would open for S04. Add the distinction between the five
-manifest lines and the four samples.
+Then use the file manager to create `working/observations.txt` with your answers
+from today: how many samples there are and why `wc -l` says 5, which two were
+treated, their lengths, and which file holds S04's measurement.
 
-## A first look at the remote computer
+## When `untreated` also matches
 
-The teacher will demonstrate [SSH and remote desktop](../intro/remote-linux.qmd).
-SSH gives a terminal on another computer. A remote desktop gives a graphical
-workspace there. In either case, saved files can be on that other computer,
-even while your laptop displays the session.
+A colleague's version of the manifest labels S01 as `untreated` instead of
+`control`. Use your practice copy to find out what `grep -F treated` selects then.
 
-When account details are available, follow the supplied instructions and try
-`pwd` and `ls` remotely. Record which computer runs the command and holds the
-files. If accounts are not ready, continue with the local exercises.
+1. Copy `working/manifest-practice.tsv` to `working/search-trap.tsv`. Open only
+   this copy in a text editor and change S01's `control` to `untreated`.
+2. Predict, then run `grep -F treated working/search-trap.tsv | wc -l`.
 
+The count is **3**: S01, S03 and S04. `untreated` contains the text `treated`, so
+grep cannot tell the two labels apart. Running `grep -F treated working/search-trap.tsv`
+without the count shows you the S01 line and makes the problem visible. The
+original `samples.tsv` still gives 2.
 
-## Audit the archive and the search
+## A measurement file that seems to be missing
 
-Extract a fresh copy as `lab-audit`. Use its four known sample records to test
-searches and redirection. Save the commands and results in an audit note.
+When you receive data, every file the manifest names should exist. Use a copy of
+the folder to find out what you see when one has been renamed.
 
-1. From the folder containing `lab-data.zip`, list its entries with `unzip -l`.
-   Predict the extraction tree, then extract with `unzip lab-data.zip -d lab-audit`.
-   Identify README, manifest, measurement files, and field notes. Listing an
-   archive did not extract its entries; extraction did not remove the ZIP.
-2. Enter `lab-audit` and inspect `samples.tsv` with `head` or `less`. Follow
-   each manifest path to its measurement file. Record which sample and units
-   appear in that file. Confirm that S03 and S04 are the treated records and
-   that their saved lengths differ; two matching labels are not identical samples.
-3. Run `wc -l samples.tsv`, then `grep -F treated samples.tsv | wc -l`. Explain
-   both answers in words, including the header. Inspect the actual matched lines
-   rather than assuming a count proves that the right records were selected.
-4. Copy the manifest to `search-trap.tsv` using `cp`. Open only that copy in the
-   text editor, and replace S01's `control` label by `untreated`. Predict whether `grep -F treated search-trap.tsv` will
-   select S01; run it and explain why literal text search is not a treatment-aware
-   table operation. Save this as a demonstration of a limitation, not a corrected
-   biological annotation.
-5. Save the original treated matches to `treated-audit.txt`. Copy that extract
-   to `extract-backup.txt`. Now run `grep -F control samples.tsv > treated-audit.txt`
-   **only on this disposable extract**. Compare the files with `less`: the name
-   `treated-audit.txt` no longer describes its contents. `>` replaces output;
-   it does not check whether the filename makes scientific sense.
-6. Restore the correctly named treated extract by rerunning the treated search.
-   Write a note recording the misleading-name experiment and the corrected
-   command. Never use `samples.tsv` itself as the output destination: shell
-   redirection can truncate an input before the reader starts. Explain this
-   hazard without experimenting on a raw input.
+1. In the file manager, copy the whole `lab-data` folder to `received-check`.
+   In `received-check/measurements`, rename `S04.csv` to `S04-renamed.csv`.
+2. In the terminal, `cd` into `received-check` and try
+   `head measurements/S04.csv`. It fails with *No such file or directory*,
+   although the manifest still lists that path.
+3. Use `ls measurements` and `head measurements/S04-renamed.csv` to find out
+   which sample that file holds. It contains `S04,39.8`, the S04 measurement.
+4. Because you know it is S04, restore the name with
+   `mv measurements/S04-renamed.csv measurements/S04.csv` and check that
+   `head measurements/S04.csv` works again.
 
-::: {.callout-tip collapse="true"}
-## Hint: use known records to test the operation
+In real data, a file whose identity you cannot confirm from its contents is a
+question for the lab group, not something to rename by guessing. Add the
+problem, the evidence and the repair to `working/observations.txt`.
 
-In the unchanged fixture, `wc -l samples.tsv` gives 5 and the treated pipe gives
-2. In the deliberately altered `search-trap.tsv`, the same substring search
-matches three lines, because `untreated` contains `treated`. A useful audit
-records both the command and the records selected. It does not silently rename
-those selected lines “three treated plants”.
-:::
+## Which samples are esters? (an organic-laboratory inventory)
 
-## Find a file discrepancy and report it
+This optional task uses the same commands on a different archive: a simulated
+inventory of four organic-chemistry samples, each with a supplied class label.
+No chemistry knowledge is needed.
 
-You are checking a received folder before analysis. The
-following discrepancies are created in a disposable copy so you can practise
-recovery; they are not claims that the supplied archive is faulty.
+Download [organic-lab.zip](../downloads/organic-lab.zip), copy it into
+`~/introcomputing-shell` with the file manager as above, and use the day's
+commands to find out which samples are labelled `ester` and how many there are:
 
-1. Copy the extracted `lab-audit` folder using the file manager to a separately
-   named `received-check` folder. Confirm you are in that copy in both terminal
-   and graphical views. Locate its `measurements/S04.csv` and rename it
-   `S04-renamed.csv`. Keep its contents intact.
-2. Starting from the copied manifest, check whether each listed relative file
-   path exists by navigating and listing the relevant folder. Identify the one
-   discrepancy. Explain why a manifest record can still exist while the named
-   file cannot be opened.
-3. Read the renamed measurement and identify S04 from its contents. Restore the
-   original name using the evidence of the known deliberate rename. Recheck the
-   manifest path, record the action, and distinguish a supported repair from
-   guessing which similarly named file “probably belongs” to a sample.
-4. Repeat the treated search on the restored copy. While inside `received-check`, save
-   `treated-received.txt` (its path from the parent is
-   `received-check/treated-received.txt`); use a pipe to count its records and a
-   reader to inspect their IDs. Identify which command wrote a new file and
-   which merely displayed information.
-5. While still inside `received-check`, produce `audit.txt` (from the parent,
-   `received-check/audit.txt`) with the original archive name, extraction
-   location, header/record counts, search limitations, discrepancy, evidence,
-   repair, and final check. Include the current computer, because the same path
-   on a remote machine would describe different storage.
-6. Close the measurement file, then locate it again using the manifest and
-   your audit. Check its ID and length against the source archive. Explain in
-   the audit why a line count alone could not detect the renamed file.
+```bash
+cd ~/introcomputing-shell
+unzip -l organic-lab.zip
+unzip organic-lab.zip -d organic-lab
+cd organic-lab
+less README.txt
+grep -F ester inventory.tsv > ester-samples.txt
+grep -F ester inventory.tsv | wc -l
+```
 
-**Check and retain:** both audit notes, the preserved source manifest, search
-extracts, and the deliberately labelled trap file. S03's length is 42.4 mm and
-S04's is 39.8 mm. Restoring a filename does not alter either measurement.
-
+The inventory has a header and four samples. Two match: **O02** and **O03**.
+grep searched the supplied labels; it does not recognise chemical structures.
+The archive also contains `organic-recovery.csv`, which you will use for
+calculations later in the course.
 
 ## Check your understanding
 
 ::: {.callout-note collapse="true"}
-## Did `grep` change the manifest? Why does `wc -l` sometimes count a header?
+## Did `grep` change the manifest? Why does `wc -l` count 5 for four samples?
 
-`grep` reads the file; redirection saved its output separately. `wc -l` counts
-lines, not their meaning. The full manifest includes a header, while our saved
-matching lines do not. We must know the file's structure to interpret the count.
+`grep` only reads the manifest; `>` wrote its output to a separate file.
+`wc -l` counts lines, and the manifest has one header line plus four sample lines.
+The saved `treated-samples.txt` has no header, because the header did not match.
 :::
 
-**Save today:** `treated-samples.txt`, `working/manifest-practice.tsv`, and
-`working/observations.txt` in the extracted `lab-data` folder. Be able to show
-where the untouched archive and manifest are located.
+::: {.callout-note collapse="true"}
+## Why list a ZIP with `unzip -l` before extracting it?
 
-Next: [repeat the workflow and package your findings](05-lab-files.qmd).
+You see what you received, and the folder structure it will create, before any
+files are written. If something is missing, you can ask the sender straight away.
+:::
+
+**Save today:** `treated-samples.txt`, `working/manifest-practice.tsv` and
+`working/observations.txt` in the extracted `lab-data` folder, and keep
+`lab-data.zip` unchanged.
+
+Next: [Day 5 — meet R and RStudio](05-meet-r.qmd).

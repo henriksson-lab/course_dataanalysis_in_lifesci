@@ -205,17 +205,19 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="reuse-the-workflow" class="slide level2">
-<h2>Reuse the workflow</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="workflow.svg" height="390"></p>
-<figcaption>The analysis workflow moves from finding and checking data to analysing, explaining, and reproducing.</figcaption>
-</figure>
-</div>
-<p>Today adds no new statistical method.</p>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>Next year a lab teacher or thesis supervisor will hand you a spreadsheet and ask: “Can you make a figure and tell me whether the treatment did anything?” Nobody will list the steps for you. Today you practise doing the whole job on familiar data, using your notes and the reference pages.</p>
+<p>Today you will:</p>
+<ul>
+<li>run the complete workflow again: find, check, analyse, explain, reproduce;</li>
+<li>repair a broken analysis and explain results in plain words;</li>
+<li>investigate an unusually high value without deleting it;</li>
+<li>leave with a project, a report and a checklist you can reuse.</li>
+</ul>
+<p>This is the last day of the course. No new method: only practice with what you already know.</p>
 <aside class="notes">
-<p>Keep the final day as protected practice and catch-up. Students need reliable file handling and report rendering more than another model. Use their saved projects and reference sheets, not an assumption of memorised commands.</p>
+<p>Frame the day as rehearsal. Using the reference pages is part of competent practice, not cheating. Students can start at the station where they feel weakest.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -228,17 +230,21 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="begin-where-you-need-practice" class="slide level2">
-<h2>Begin where you need practice</h2>
+<section id="the-workflow-you-can-reuse" class="slide level2">
+<h2>The workflow you can reuse</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="stations.svg" height="380"></p>
-<figcaption>Practice stations branch into files, R recovery, interpretation, and report reproduction.</figcaption>
+<p><img data-src="workflow.svg" height="300"></p>
+<figcaption>Five steps in order: find, check, analyse, explain and reproduce, with the source, inputs, output and a backup saved throughout.</figcaption>
 </figure>
 </div>
-<p>Use references and explain the action you chose.</p>
+<ul>
+<li><strong>Find</strong> the data and the project folder without “recent files”. <strong>Check</strong> rows, units, missing values and the independent unit.</li>
+<li><strong>Analyse</strong> with a plot of individual units first. <strong>Explain</strong> size, spread or uncertainty, and a limitation.</li>
+<li><strong>Reproduce</strong>: restart, render, and back up.</li>
+</ul>
 <aside class="notes">
-<p>Students may start at different stations. Everyone should practise file recovery, R recovery, and interpretation. Remote access is another skill when the actual service is available, not a reason to delay local practice indefinitely.</p>
+<p>Every station today exercises part of this chain. Ask students which step they found hardest during the mini-study and start there.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -251,102 +257,53 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="repair-meaning-as-well-as-spelling" class="slide level2">
-<h2>Repair meaning as well as spelling</h2>
-<p>This is intentionally broken code:</p>
+<section id="practice-stations-start-where-you-are-weakest" class="slide level2">
+<h2>Practice stations: start where you are weakest</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li><strong>Files:</strong> download, unzip, find and inspect files in the terminal.</li>
+<li><strong>R:</strong> repair a broken analysis and rerun it.</li>
+<li><strong>Meaning:</strong> explain units, spread, uncertainty and limits.</li>
+<li><strong>Report:</strong> render your Day 23 report from a fresh session.</li>
+<li><strong>Remote:</strong> log in and transfer a file, if the service is available. Otherwise note it as still to do.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stations.svg" style="width:100.0%"></p>
+<figcaption>Practice branches into four stations: files (locate and inspect), R (repair and rerun), meaning (units and limits) and report (render and share).</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Everyone should eventually do files, R and meaning. Remote access is practised when the real service works; finishing the local stations does not complete the remote task.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="repair-a-broken-analysis" class="slide level2">
+<h2>Repair a broken analysis</h2>
 <pre class="text"><code>seedling &lt;- read_csv("seedlings.csv")
 seedlings &lt;- mutate(seedlings, growth_mm = final_mm + initial_mm)
 mean(seedlings$Growth_mm)</code></pre>
-<p>Find the path, name, case, and calculation problems.</p>
-<aside class="notes">
-<p>Correct path is data/seedlings.csv from the project root. Use a consistent seedlings object and growth_mm column, load readr/dplyr, and subtract initial from final length. P01 grew 44.3 − 25.7 = 18.6 mm.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-mean-does-not-describe-every-observation" class="slide level2">
-<h2>A mean does not describe every observation</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../../week3/variation-examples.png" height="380"></p>
-<figcaption>Two toy groups have equal means but different SDs and individual spreads.</figcaption>
-</figure>
-</div>
-<p>Keep centre, individual spread, and uncertainty in an estimate distinct.</p>
-<aside class="notes">
-<p>The groups have means 14 mm, SDs 1 and 6 mm. A larger SD need not mean worse technique; biological differences also cause spread. Neither SD is automatically a confidence interval or a range containing every observation.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="count-the-independent-units" class="slide level2">
-<h2>Count the independent units</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../23-mini-study/independent-units.svg" height="380"></p>
-<figcaption>Flasks and synthesis runs supply independent treatment units; fronds or repeated weighings do not.</figcaption>
-</figure>
-</div>
-<p>A large number of readings cannot repair a lack of independent replication.</p>
-<aside class="notes">
-<p>Transfer to future practicals: ask what was independently sampled or assigned to treatment. Cells, time points, or repeat balance readings may be related. Determine sample size from independent units and available measurements.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="interpret-an-uncertain-result-carefully" class="slide level2">
-<h2>Interpret an uncertain result carefully</h2>
-<p>A treatment-minus-control estimate is <strong>3 mm</strong>, with a 95% interval from <strong>−2 to 8 mm</strong>.</p>
-<p>Does this establish no effect?</p>
-<p><strong>No:</strong> it includes zero and effects in both directions. State the uncertainty.</p>
-<aside class="notes">
-<p>Pause before showing the answer. This is a supplied interpretation exercise, not a calculation from the course dataset. Avoid equating absence of a small p-value with proof of equality. No additional test is needed.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="your-next-lab-questions" class="slide level2">
-<h2>Your next-lab questions</h2>
+<p>What is wrong?</p>
 <ul>
-<li>What does one row represent, and what was independently assigned?</li>
-<li>What are the units and the meaning of blank cells?</li>
-<li>Which figure answers the question without hiding observations?</li>
-<li>Where are the source, raw data, output, and backup?</li>
+<li><strong>Path:</strong> the file is in <code>data/</code>: <code>"data/seedlings.csv"</code>.</li>
+<li><strong>Names:</strong> <code>seedling</code> versus <code>seedlings</code>; <code>growth_mm</code> versus <code>Growth_mm</code> (R is case sensitive).</li>
+<li><strong>Meaning:</strong> growth is final <strong>minus</strong> initial. P01: 44.3 − 25.7 = <strong>18.6 mm</strong>.</li>
+<li><strong>Packages:</strong> <code>library(readr)</code> and <code>library(dplyr)</code> must come first.</li>
 </ul>
 <aside class="notes">
-<p>Invite students to write a question they would ask a later practical teacher. The workflow replaces manual spreadsheet calculations, but still needs subject context and a valid experimental design. Asking these questions is competence.</p>
+<p>Let students find the problems before revealing them. The last one is the most important: code can run without error and still compute the wrong biology. Checking one row by hand catches it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -359,170 +316,26 @@ mean(seedlings$Growth_mm)</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="evidence-of-a-skill-is-an-action-you-can-repeat" class="slide level2">
-<h2>Evidence of a skill is an action you can repeat</h2>
-<p>Locate the raw input, source, derived table, figure, HTML, and backup.</p>
-<p>Explain the role of each without relying on recent files or session memory.</p>
-<aside class="notes">
-<p>The portfolio is not judged by its number of files. Ask students to demonstrate one reproducible path from question to result. Keep the day as consolidation: no new package, model, or examination format is introduced. The references are part of competent practice rather than forbidden assistance.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-high-recorded-value-is-a-question-to-investigate" class="slide level2">
-<h2>A high recorded value is a question to investigate</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="algae-high-reading.svg" height="350"></p>
-<figcaption>Reference culture A11 is the largest algae observation and is highlighted without removing it.</figcaption>
-</figure>
-</div>
-<p>No source evidence confirms that A11 is erroneous.</p>
-<aside class="notes">
-<p>The value is 41.7 mg. A high point can affect a small-sample summary, but that observation alone does not justify exclusion. The source notes identify A19 as spilled; they do not identify A11 as a transcription error. Distinguish evidence for a repair from a preference for a simpler-looking plot.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="name-the-primary-and-diagnostic-datasets-separately" class="slide level2">
-<h2>Name the primary and diagnostic datasets separately</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>algae <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/algae.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>algae_without_a11 <span class="ot">&lt;-</span> <span class="fu">filter</span>(algae, culture_id <span class="sc">!=</span> <span class="st">"A11"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The primary result uses <strong>all available measurements</strong>.</p>
-<aside class="notes">
-<p>The new object is a sensitivity demonstration, not a replacement raw file. Recompute counts for each version and preserve A19 as missing. The task examines how one record changes a descriptive summary; evidence for exclusion must come from the study records.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="the-diagnostic-changes-the-answer-not-the-evidence-for-exclusion" class="slide level2">
-<h2>The diagnostic changes the answer, not the evidence for exclusion</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="sensitivity-check.svg" height="350"></p>
-<figcaption>Omitting A11 increases the observed mean difference, but the result is explicitly diagnostic.</figcaption>
-</figure>
-</div>
-<p>Primary difference ≈ <strong>5.72 mg</strong>; diagnostic difference ≈ <strong>6.95 mg</strong>.</p>
-<aside class="notes">
-<p>The supplement mean stays 33.91818 mg. The reference mean falls from 28.20 mg to 26.97273 mg, so the observed difference increases to 6.94545 mg. There is no confirmation that the omitted value is wrong. The primary analysis remains the main report; a sensitivity result must carry its changed count and rationale.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="different-problems-require-different-explanations" class="slide level2">
-<h2>Different problems require different explanations</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="missing-and-high.svg" height="350"></p>
-<figcaption>A19 has an unavailable measurement after a spill; A11 has a high recorded value.</figcaption>
-</figure>
-</div>
-<p>Missing is not zero. Unusual is not automatically erroneous.</p>
-<aside class="notes">
-<p>Ask students to explain each issue without giving both the same label of bad data. A19 reduces available n.&nbsp;A11 remains a recorded observation unless independent source evidence supports a correction. Model assumptions are a third issue: they do not disappear merely because the file is tidy.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="an-uncertain-estimate-does-not-establish-equality" class="slide level2">
-<h2>An uncertain estimate does not establish equality</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="uncertain-interval.svg" height="350"></p>
-<figcaption>A supplied difference estimate of 3 mm has a 95 percent interval from minus 2 to 8 mm spanning zero.</figcaption>
-</figure>
-</div>
-<p>State the uncertainty rather than turn it into “no effect”.</p>
-<aside class="notes">
-<p>This is the same interpretation case already in the practical. The picture supports a discussion of compatible differences in both directions. It is not a new computation from algae. It does not mean that 95 percent of plants lie inside the interval or that the null hypothesis has 95 percent probability.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="match-the-output-to-the-question" class="slide level2">
-<h2>Match the output to the question</h2>
+<section id="explain-before-calculating-spread-and-units" class="slide level2">
+<h2>Explain before calculating: spread and units</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
 <ul>
-<li>What values were recorded? Inspect and describe.</li>
-<li>How variable are observations? Show points and SD.</li>
-<li>How uncertain is a guided mean comparison? Use the taught interval/test.</li>
-<li>What concentration matches a signal? Use the supported calibration.</li>
+<li>Two groups can share a mean and still differ in <strong>spread</strong>: both have mean 14 mm, SD 1 and 6 mm.</li>
+<li>A larger SD is not automatically bad technique; organisms vary.</li>
+<li>One plant with 100 cells measured is still <strong>one</strong> independent plant.</li>
+<li>A missing value is <strong>not zero</strong>: zero invents a measurement.</li>
 </ul>
-<aside class="notes">
-<p>Students are not learning a menu of tests. These are familiar workflow questions that should lead to an interpretable output. A calculated dilution formula is not empirical evidence needing regression; an observational line is not proof of an intervention’s effect.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-handover-should-survive-a-change-of-reader" class="slide level2">
-<h2>A handover should survive a change of reader</h2>
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="handover.svg" height="350"></p>
-<figcaption>A recipient follows the source and inputs into a tested project rather than relying on the author’s memory.</figcaption>
+<p><img data-src="../../week3/variation-examples.png" style="width:100.0%"></p>
+<figcaption>Two toy groups with the same mean but very different spreads of individual values.</figcaption>
 </figure>
 </div>
-<p>Give directions another person can follow, then test them.</p>
+</div></div>
 <aside class="notes">
-<p>Test the handover instructions in a freshly extracted folder: locate input, render source, and identify a limitation. Clearly label revisions, including separate Windows and Ubuntu copies.</p>
+<p>These are questions from Station 3 of the practical. Ask students to explain each in one sentence to a neighbour before checking the answers.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -535,36 +348,175 @@ mean(seedlings$Growth_mm)</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="choose-the-next-rehearsal-from-evidence" class="slide level2">
-<h2>Choose the next rehearsal from evidence</h2>
-<p>Write three reliable actions, two weak steps, and a concrete next practice task.</p>
-<p>Keep unfinished remote skills explicitly pending.</p>
-<aside class="notes">
-<p>Ask for checkable actions such as “I can render after restarting”, rather than a broad claim such as “I understand R”. Use the identified weak step for further practice.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="exercises-leave-with-work-you-can-find-again" class="slide level2">
-<h2>Exercises: leave with work you can find again</h2>
-<p><a href="../../week5/25-consolidate.html">Open exercises</a> · <a href="../../week5/25-consolidate-quiz.html">Quiz</a>.</p>
+<section id="explain-before-calculating-uncertainty-and-range" class="slide level2">
+<h2>Explain before calculating: uncertainty and range</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
 <ul>
-<li>Locate your project without a recent-files menu.</li>
-<li>Render your chosen report from a fresh session.</li>
-<li>Save <code>reports/next-lab.txt</code> as your reusable workflow.</li>
-<li>Identify the supported backup and any pending remote-access skill.</li>
-<li>Keep a labelled sensitivity check, handover, and readiness review.</li>
+<li>Estimate <strong>3 mm</strong>, 95% interval <strong>−2 to 8 mm</strong>. Does that show no effect?</li>
+<li><strong>No.</strong> The interval includes zero <strong>and</strong> effects in both directions: the study cannot tell. Report the uncertainty.</li>
+<li>A reading above the highest calibration standard: flag it, dilute, measure again.</li>
+<li>A positive leaf-area slope: an <strong>association</strong>, not proof that changing area changes mass.</li>
 </ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="uncertain-interval.svg" style="width:100.0%"></p>
+<figcaption>An estimated difference of 3 mm with a 95 percent interval from −2 to 8 mm that spans zero.</figcaption>
+</figure>
+</div>
+</div></div>
 <aside class="notes">
-<p>Use the consolidation tasks for further practice. The organic alternative stays descriptive; higher yield alone does not demonstrate higher purity.</p>
+<p>Supplied numbers, not computed from the course data. Avoid “not significant, so no difference”. The calibration and association items revisit Days 19 and 20.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="investigate-a-high-value" class="slide level2">
+<h2>Investigate a high value</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>Algae data: reference culture <strong>A11 = 41.7 mg</strong>, the largest value in the file.</li>
+<li>The data dictionary records a spill for A19, but <strong>nothing wrong with A11</strong>.</li>
+<li>So A11 stays in the <strong>primary</strong> result.</li>
+<li>To see how much it matters, make a <strong>separate</strong> object:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>algae_without_a11 <span class="ot">&lt;-</span> <span class="fu">filter</span>(algae,</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>  culture_id <span class="sc">!=</span> <span class="st">"A11"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="a11-highlight.svg" style="width:100.0%"></p>
+<figcaption>Algae biomass by group with group means; reference culture A11 at 41.7 mg is circled as a recorded value with no evidence of an error.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Start from the imported algae object (library(readr), library(dplyr), read_csv(“data/algae.csv”)). Do not edit the CSV. A high value is a question to investigate, not permission to remove it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="how-much-does-a11-change-the-result" class="slide level2">
+<h2>How much does A11 change the result?</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li><strong>Primary</strong> (all available): reference <strong>28.20</strong>, supplement <strong>33.92 mg</strong>; difference <strong>5.72 mg</strong>.</li>
+<li><strong>Sensitivity check</strong> (A11 omitted): reference <strong>26.97 mg</strong>; difference <strong>6.95 mg</strong>.</li>
+<li>The supplement mean does not change; the reference n drops from 12 to 11.</li>
+<li>Report the primary result. Label the check “A11 omitted <strong>without evidence of error</strong>”.</li>
+<li>Three different issues: A19 <strong>missing</strong>, A11 <strong>high but recorded</strong>, and the study’s simplifying <strong>assumptions</strong>.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="sensitivity-check.svg" style="width:100.0%"></p>
+<figcaption>The observed supplement-minus-reference difference is 5.72 mg with all available data and 6.95 mg when A11 is omitted; the diagnostic does not replace the primary analysis.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Record the steps in reports/final-investigation.txt. After rendering, check that the main figure and inline numbers come from the primary data, not from a diagnostic object left in memory.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="hand-the-work-over-and-test-it" class="slide level2">
+<h2>Hand the work over and test it</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p>Write instructions a stranger could follow:</p>
+<ul>
+<li>the question, and what one row means;</li>
+<li>where the raw data are, what blank cells mean;</li>
+<li>which report to render, and what it should show.</li>
+</ul>
+<p>Then <strong>test them</strong>: extract the project into a new folder, follow your own instructions, and fix anything unclear.</p>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="handover.svg" style="width:100.0%"></p>
+<figcaption>A recipient uses the source and data to reach a tested project, without needing the author’s memory.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>A successful render does not supply the meaning: the reader still needs units, counts and a limitation in the HTML. If the instructions change, make a new clearly named package and test that one too.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="questions-for-your-next-lab" class="slide level2">
+<h2>Questions for your next lab</h2>
+<p>Ask these before analysing any new dataset:</p>
+<ul>
+<li>What does <strong>one row</strong> represent, and what was <strong>independently assigned</strong>?</li>
+<li>What are the <strong>units</strong>, and what do <strong>blank cells</strong> mean?</li>
+<li>Which <strong>figure</strong> shows the individual observations and answers the question?</li>
+<li>Where are the <strong>raw data</strong>, the <strong>source</strong>, the <strong>output</strong> and the <strong>backup</strong>?</li>
+</ul>
+<p>Write them, with your workflow, in <code>reports/next-lab.txt</code>.</p>
+<aside class="notes">
+<p>Asking these questions is a sign of competence, not of not knowing. Encourage students to add one question of their own that they would ask a lab teacher.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>The workflow is the same for every dataset: find, check, analyse, explain, reproduce.</li>
+<li>Check one row by hand: code can run and still compute the wrong biology.</li>
+<li>Missing is not zero; high is not automatically wrong; keep the primary result and label any sensitivity check.</li>
+<li>An interval that includes zero means “uncertain”, not “no effect”.</li>
+<li>A report is finished when someone else can render it from a fresh copy and understand it.</li>
+</ul>
+<p><strong>After this course:</strong> use this project and <code>reports/next-lab.txt</code> in your later lab courses and thesis work. Start every new dataset with the questions on the previous slide.</p>
+<p><strong>Now:</strong> <a href="../../week5/25-consolidate.html">open the Day 25 exercises</a>. Leave with your primary report, the labelled A11 check, <code>reports/final-investigation.txt</code>, a tested handover, <code>reports/next-lab.txt</code> and <code>reports/readiness-review.txt</code>.</p>
+<aside class="notes">
+<p>In the readiness review, students list three things they can now do reliably and two that need more practice, with a concrete next practice task. Remote login and transfer stay listed as pending if the real service was not used.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

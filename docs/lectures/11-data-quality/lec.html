@@ -205,17 +205,19 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="did-we-measure-25-plants" class="slide level2">
-<h2>Did we measure 25 plants?</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="duplicate-record.svg" height="350"></p>
-<figcaption>One independently measured plant can produce two duplicated file records.</figcaption>
-</figure>
-</div>
-<p>The study has <strong>24 plants</strong>. The export has <strong>25 rows</strong>.</p>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>A labmate exports the seedling measurements from the lab spreadsheet and sends you the file. You calculate the group means and email them to your supervisor. A week later someone notices that one plant appears twice and one length was typed in centimetres. R never complained: it calculates a precise-looking answer from whatever table it is given. <strong>How do you know the table is fit to calculate from?</strong></p>
+<p>Today you will:</p>
+<ul>
+<li><strong>inspect</strong> a raw file as text before turning it into numbers;</li>
+<li><strong>repair only what source evidence supports</strong>, in a script, keeping the original file unchanged;</li>
+<li>keep an <strong>unknown value unknown</strong>, and count plant records and usable measurements separately;</li>
+<li><strong>save and re-check</strong> the cleaned file so that someone else can trace every change.</li>
+</ul>
+<p>Week 3 is about describing data. The checked table and these habits carry into Days 12–15 and into the comparisons of week 4.</p>
 <aside class="notes">
-<p>Ask whether the extra row proves another plant existed. It does not. The supplied source notes confirm that P01 was imported twice. A repeated ID can be legitimate in other designs, such as measurements over time; this study specifies one row per plant.</p>
+<p>Motivate from the student’s own future: every lab spreadsheet, field sheet and instrument export contains slips. The skill is not suspicion of every unusual value; it is knowing which changes evidence supports and leaving a trail. The practical file data/seedlings-messy.csv has planted problems, and data/field-notes.txt contains the source evidence.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -228,17 +230,26 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="keep-the-original-and-explain-every-repair" class="slide level2">
-<h2>Keep the original and explain every repair</h2>
+<section id="the-problem-one-slip-changes-the-result" class="slide level2">
+<h2>The problem: one slip changes the result</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>In the export, plant P21’s final length is <strong>4.38</strong>. The source notebook says <strong>43.8 mm</strong>: the value was typed in centimetres.</li>
+<li>Left as it is, P21 “grew” <strong>−19.2 mm</strong>.</li>
+<li>That one cell pulls the treated mean from <strong>21.49 mm</strong> down to <strong>18.21 mm</strong>.</li>
+<li>R prints both numbers with the same confidence. Only a check against the source tells them apart.</li>
+</ul>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="provenance.svg" height="350"></p>
-<figcaption>Original CSV, repair script and derived CSV remain distinct files.</figcaption>
+<p><img data-src="unit-slip-effect.svg" style="width:100.0%"></p>
+<figcaption>Treated growth values with P21 left as 4.38 (one point far below zero, group mean 18.21 mm) and with P21 corrected to 43.8 mm (group mean 21.49 mm).</figcaption>
 </figure>
 </div>
-<p>A script makes the changes inspectable and repeatable.</p>
+</div></div>
 <aside class="notes">
-<p>Locate the raw file in the project before showing code. Preserve it unchanged. A script is not just a way to save typing: it records which evidence justified each transformation. A copy with unexplained edits is harder to audit.</p>
+<p>This is the motivation for the whole day. Ask: if this mean went into a report, who would notice? Usually nobody, until a reviewer or a repeat experiment disagrees. The treated means are computed after the other documented repairs (labels, P18, duplicate). The correction of P21 is justified by the notebook entry, not by the fact that the value looks small.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -251,17 +262,89 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="inspect-the-original-entries-as-text" class="slide level2">
-<h2>Inspect the original entries as text</h2>
+<section id="what-is-wrong-with-this-export" class="slide level2">
+<h2>What is wrong with this export?</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p>The study has <strong>24 plants</strong>; <code>data/seedlings-messy.csv</code> has <strong>25 rows</strong>.</p>
+<ul>
+<li><strong>P01</strong> appears twice: one plant, two identical rows.</li>
+<li>Treatment is written <code>control</code>, <code>Control</code> and <code>treated</code> (with a trailing space).</li>
+<li><strong>P18</strong>’s initial length is the text <code>18.7 mm</code>.</li>
+<li><strong>P21</strong>’s final length is 4.38 (centimetres).</li>
+<li><strong>P06</strong> has no final length.</li>
+</ul>
+<p><code>data/field-notes.txt</code> records what actually happened for each case.</p>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="duplicate-record.svg" style="width:100.0%"></p>
+<figcaption>One plant, P01, produces two identical file records that point to the same measured plant.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Open the CSV in a text editor first so students see the raw characters. A repeated ID is a question, not automatically an error: in a design with one row per time point, repeated IDs are expected. Here the protocol says one row per plant, and the field notes confirm that the second P01 row is an import duplicate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="keep-the-original-repair-in-a-script" class="slide level2">
+<h2>Keep the original; repair in a script</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ul>
+<li>Never edit the raw CSV by hand. Keep it exactly as received.</li>
+<li>Make each repair in <strong><code>day11-cleaning.R</code></strong> and write a <strong>new</strong> derived file.</li>
+<li>For every changed value, the trail is: <strong>observation → evidence → action → check</strong>.</li>
+<li>Then you, a supervisor or a reviewer can see each change, why it was made, and rerun it.</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="provenance.svg" style="width:100.0%"></p>
+<figcaption>Preserve the raw CSV, explain the changes in a repair script, and recreate a separate clean CSV.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>A hand-edited spreadsheet loses the record of what was changed. A script is a record: the comments say which source note justified each line. In the exercises students write output/cleaning-notes.txt with one line per problem: plant, observation, evidence, action.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="inspect-the-entries-as-text-first" class="slide level2">
+<h2>Inspect the entries as text first</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings-messy.csv"</span>,</span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">.default =</span> <span class="fu">col_character</span>()),</span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">trim_ws =</span> <span class="cn">FALSE</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(raw<span class="sc">$</span>treatment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>Control</code>, <code>control</code>, and <code>treated</code> are different stored strings.</p>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings-messy.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">.default =</span> <span class="fu">col_character</span>()), <span class="at">trim_ws =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(raw)                                   <span class="co"># 25 rows, 4 columns</span></span>
+<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(raw<span class="sc">$</span>treatment)                      <span class="co"># "control" "Control" "treated" "treated "</span></span>
+<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>raw <span class="sc">|&gt;</span> <span class="fu">count</span>(plant_id) <span class="sc">|&gt;</span> <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)    <span class="co"># P01 appears twice</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>col_character()</code> reads every column as text, so <code>18.7 mm</code> and <code>4.38</code> stay visible instead of being guessed or turned into missing values.</li>
+<li><code>trim_ws = FALSE</code> keeps the trailing space in <code>"treated "</code>; the default would hide it.</li>
+<li><code>count()</code> finds repeated IDs. Then look at <strong>both P01 rows in full</strong> before deciding anything.</li>
+</ul>
 <aside class="notes">
-<p>The import deliberately preserves whitespace and mixed entries. Demonstrate the trailing space by pointing at the printed quoted value. We are not asking beginners to memorise the importer options; explain why these options help inspect this particular file.</p>
+<p>Demonstrate the printed output and point at the quoted “treated” value. We are not asking beginners to memorise importer options; explain why these options help inspect this particular file. If two rows shared an ID but disagreed in a measurement, they would need investigation, not arbitrary deletion.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -274,17 +357,26 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="a-suspicious-number-is-a-question-not-a-verdict" class="slide level2">
-<h2>A suspicious number is a question, not a verdict</h2>
+<section id="a-suspicious-value-is-a-question-not-a-verdict" class="slide level2">
+<h2>A suspicious value is a question, not a verdict</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ul>
+<li>4.38 is not wrong <em>because it is small</em>. It is wrong because the notebook records <strong>43.8 mm</strong>.</li>
+<li><code>"18.7 mm"</code> becomes the number 18.7 only after we confirm the unit is millimetres.</li>
+<li>A very small or large value <strong>without</strong> source evidence stays in the data. Plants really do vary.</li>
+<li>If you cannot decide, ask the person who recorded it, and note the open question.</li>
+</ul>
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="unit-evidence.svg" height="350"></p>
-<figcaption>Rulers show the same length expressed as 43.8 millimetres and 4.38 centimetres.</figcaption>
+<p><img data-src="unit-evidence.svg" style="width:100.0%"></p>
+<figcaption>Rulers show the same length expressed as 43.8 millimetres and 4.38 centimetres; only the source notebook justifies correcting P21.</figcaption>
 </figure>
 </div>
-<p>The source notebook confirms P21: <strong>43.8 mm</strong>.</p>
+</div></div>
 <aside class="notes">
-<p>The entered 4.38 is not automatically an error because it is small. The supplied source note confirms that a centimetre value was transcribed into a millimetre column. A confirmed conversion is different from changing an inconvenient biological observation.</p>
+<p>The field notes end with: “A low or high measurement by itself is not sufficient reason to change or exclude it.” Read that sentence aloud. Deleting inconvenient biological values to make a result look cleaner is a serious error in research. A confirmed transcription slip is different.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -299,15 +391,24 @@ Data Analysis in Life Sciences
 </section>
 <section id="unknown-is-different-from-zero" class="slide level2">
 <h2>Unknown is different from zero</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>P06’s final length was not recorded. Keep it as <strong><code>NA</code></strong> (not available).</li>
+<li>A zero would claim the plant shrank to nothing: growth <strong>−24.7 mm</strong> (its initial length was 24.7 mm).</li>
+<li>That invented value pulls the overall mean from <strong>18.49 mm</strong> to <strong>16.69 mm</strong>.</li>
+<li>Do not copy a value from another file to fill the gap either. Report the plant as missing.</li>
+</ul>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="missing-versus-zero.svg" height="350"></p>
-<figcaption>An unavailable final reading for P06 is different from an observed zero change.</figcaption>
+<p><img data-src="zero-invented.svg" style="width:100.0%"></p>
+<figcaption>The overall mean growth is 18.49 mm when P06 is kept as missing, and 16.69 mm when its final length is invented as zero.</figcaption>
 </figure>
 </div>
-<p>Keep P06’s final length as <code>NA</code>.</p>
+</div></div>
 <aside class="notes">
-<p>A missing final measurement prevents us calculating its growth. A measured growth of zero would mean that initial and final readings were equal. The complete teaching file is a separate dataset, not a source for filling this missing observation.</p>
+<p>A measured zero growth would mean that initial and final readings were equal: a real observation. A missing value means we do not know. Spreadsheets sometimes turn blanks into zeros on export; always check how missing values are coded. In the exercises students make a separate object wrong_zero_example to see this effect, and keep it apart from the corrected table.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -320,106 +421,24 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="repair-only-what-the-evidence-supports" class="slide level2">
-<h2>Repair only what the evidence supports</h2>
+<section id="the-repair-step-by-step" class="slide level2">
+<h2>The repair, step by step</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>cleaned <span class="ot">&lt;-</span> raw <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">treatment =</span> <span class="fu">tolower</span>(<span class="fu">trimws</span>(treatment)),</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">initial_mm =</span> <span class="fu">if_else</span>(plant_id <span class="sc">==</span> <span class="st">"P18"</span>, <span class="st">"18.7"</span>, initial_mm),</span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">final_mm =</span> <span class="fu">if_else</span>(plant_id <span class="sc">==</span> <span class="st">"P21"</span>, <span class="st">"43.8"</span>, final_mm)) <span class="sc">|&gt;</span></span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">treatment =</span> <span class="fu">tolower</span>(<span class="fu">trimws</span>(treatment)),                       <span class="co"># P03, P15 labels</span></span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>         <span class="at">initial_mm =</span> <span class="fu">if_else</span>(plant_id <span class="sc">==</span> <span class="st">"P18"</span>, <span class="st">"18.7"</span>, initial_mm),  <span class="co"># unit text removed</span></span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>         <span class="at">final_mm =</span> <span class="fu">if_else</span>(plant_id <span class="sc">==</span> <span class="st">"P21"</span>, <span class="st">"43.8"</span>, final_mm)) <span class="sc">|&gt;</span>   <span class="co"># notebook value</span></span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">|&gt;</span>                                                         <span class="co"># identical P01 row</span></span>
 <span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">initial_mm =</span> <span class="fu">parse_double</span>(initial_mm),</span>
-<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">final_mm =</span> <span class="fu">parse_double</span>(final_mm),</span>
-<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The original file stays unchanged; missing measurements remain missing.</p>
-<aside class="notes">
-<p>This is a supplied worked repair. Explain trimws as removing edge spaces and tolower as standardising the confirmed labels. distinct removes identical rows here because the duplicate import is documented. It would be unsafe to keep one arbitrary row for every repeated ID when records disagreed.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="count-records-and-available-measurements-separately" class="slide level2">
-<h2>Count records and available measurements separately</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="available-counts.svg" height="350"></p>
-<figcaption>Both groups retain twelve plant records; one control plant lacks a usable growth value.</figcaption>
-</figure>
-</div>
-<p>24 unique plants; <strong>23 available growth measurements</strong>.</p>
-<aside class="notes">
-<p>After numeric conversion and subtraction, the corrected table has 24 rows, zero duplicated IDs, and one missing growth. Control has 12 records but 11 available growths; treated has 12 and 12. Removing a missing value inside a mean does not make the missingness disappear from reporting.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="prediction-what-should-these-two-means-return" class="slide level2">
-<h2>Prediction: what should these two means return?</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(cleaned<span class="sc">$</span>growth_mm)</span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(cleaned<span class="sc">$</span>growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Explain the missing observation before choosing the second calculation.</p>
-<aside class="notes">
-<p>The first returns NA. The second is about 18.48696 mm across the 23 available growth values. It is not a grouped treatment comparison. Ask students to say how many observations were used and what is unknown about the missing plant.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-repair-needs-an-audit-trail" class="slide level2">
-<h2>A repair needs an audit trail</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-audit-chain.svg" height="350"></p>
-<figcaption>Source evidence connects a specific correction to a checked output.</figcaption>
-</figure>
-</div>
-<p>For every changed value: observation → evidence → action → check.</p>
-<aside class="notes">
-<p>Demonstrate a five-column correction log for P21. The log explains a supported unit correction, not a rule to multiply all small lengths by ten. Keep original, script, and derived output.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="two-matching-ids-do-not-automatically-mean-a-duplicate" class="slide level2">
-<h2>Two matching IDs do not automatically mean a duplicate</h2>
-<p>Compare <strong>all fields</strong>, then consult the design and source note.</p>
+<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a>         <span class="at">final_mm =</span> <span class="fu">parse_double</span>(final_mm),</span>
+<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a>         <span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>One row per plant: a repeated identifier prompts investigation.</li>
-<li>One row per time point: repeated identifiers may be expected.</li>
-<li>Disagreeing records need investigation, not arbitrary deletion.</li>
+<li><code>trimws()</code> removes edge spaces; <code>tolower()</code> makes <code>Control</code> into <code>control</code>.</li>
+<li><code>if_else()</code> changes <strong>one identified record</strong> only, never “every small value”.</li>
+<li><code>distinct()</code> removes rows that are identical in every column; we use it only because the P01 rows are identical and the notes confirm the duplicate.</li>
+<li>P06 stays missing: <code>parse_double()</code> keeps the blank as <code>NA</code>.</li>
 </ul>
 <aside class="notes">
-<p>Show both P01 records in the actual raw file. Here they are identical and the recorder confirms an import duplication. Do not teach distinct(plant_id) as a universal repair.</p>
+<p>Each line maps to one sentence in the field notes; ask students to say which. distinct(plant_id, .keep_all = TRUE) would silently keep one of two disagreeing records and is not used here. The raw object and the CSV on disk are unchanged.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -432,109 +451,29 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="number-text-and-a-measurement-are-different-objects" class="slide level2">
-<h2>Number text and a measurement are different objects</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-types.svg" height="350"></p>
-<figcaption>A text entry with a unit suffix is converted only after its meaning is confirmed.</figcaption>
-</figure>
-</div>
-<p>Check meaning before converting text to numbers.</p>
-<aside class="notes">
-<p>R cannot infer that every suffix or magnitude reflects the same unit. P18 is confirmed as 18.7 mm. Compare character versus numeric columns using str before and after parse_double.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="what-an-invented-zero-would-claim" class="slide level2">
-<h2>What an invented zero would claim</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-zero-consequence.svg" height="350"></p>
-<figcaption>The defensible available-case mean differs from the mean after inventing a zero final length.</figcaption>
-</figure>
-</div>
-<p>P06 initial length is 24.7 mm: a final zero invents −24.7 mm growth.</p>
-<aside class="notes">
-<p>The defensible overall available mean is about 18.49 mm from 23 observations. Replacing the missing final reading by zero gives about 16.69 mm from 24 invented/observed values. This changes meaning, not only sample size. Keep wrong_zero_example separate.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="check-the-saved-output-not-only-the-environment-pane" class="slide level2">
-<h2>Check the saved output, not only the Environment pane</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(cleaned, <span class="st">'output/seedlings-cleaned.csv'</span>)</span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>check_copy <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'output/seedlings-cleaned.csv'</span>,</span>
-<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>                       <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(check_copy)</span>
-<span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">anyDuplicated</span>(check_copy<span class="sc">$</span>plant_id)</span>
-<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(check_copy<span class="sc">$</span>growth_mm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Expect 24 unique plants and one unavailable growth value.</p>
-<aside class="notes">
-<p>A successful in-memory calculation does not establish that the exported file is correct. Save the corrected CSV in the practical, read it back, and compare identifiers and availability. Restart and rerun to test the full script.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-new-class-is-a-new-source" class="slide level2">
-<h2>A new class is a new source</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-transfer-inspection.svg" height="350"></p>
-<figcaption>The transfer file contains eighteen new measured plants with initial and final lengths.</figcaption>
-</figure>
-</div>
-<p>The column pattern is familiar; the values, identifiers, and checks are new.</p>
-<aside class="notes">
-<p>The transfer study has 18 independent potted plants,9 per allocation, measured7 days apart. No source note authorises corrections. Check the new file and calculate its own counts and summaries.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-schema-is-an-expectation-you-can-check" class="slide level2">
-<h2>A schema is an expectation you can check</h2>
-<p>Before importing, state:</p>
+<section id="count-records-and-usable-measurements-separately" class="slide level2">
+<h2>Count records and usable measurements separately</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(cleaned)                 <span class="co"># 24 plants</span></span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(cleaned<span class="sc">$</span>growth_mm)) <span class="co"># 1 unknown</span></span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(cleaned<span class="sc">$</span>growth_mm)       <span class="co"># NA</span></span>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(cleaned<span class="sc">$</span>growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>                              <span class="co"># 18.49 (23 plants)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>What one row represents and which ID should be unique.</li>
-<li>Column names, types, labels, and units.</li>
-<li>What missingness and derived growth would mean.</li>
+<li><code>NA</code> from <code>mean()</code> is R telling you a value is unknown. Good.</li>
+<li><code>na.rm = TRUE</code> gives the mean of the <strong>23 available</strong> growths. Report it as such: “n = 23 of 24 plants”.</li>
 </ul>
-<p>Then record what you actually observed.</p>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="available-counts.svg" style="width:100.0%"></p>
+<figcaption>Both groups retain twelve plant records; one control plant lacks a usable growth value, giving 11 available control growths and 12 treated.</figcaption>
+</figure>
+</div>
+</div></div>
 <aside class="notes">
-<p>This is a checklist, not a new validation package. Use familiar names, str, missing-value checks and group counts. Units come from the dictionary, not solely from numerical size.</p>
+<p>Ask students to predict both mean calls before running them. The first returns NA; the second is about 18.49 mm across 23 available growth values, both groups combined. Control has 12 records but 11 usable growths. Removing a missing value inside a mean does not remove it from the report.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -547,36 +486,112 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="decide-whether-a-change-is-justified" class="slide level2">
-<h2>Decide whether a change is justified</h2>
-<p>An unfamiliar value appears in the transfer file.</p>
-<p><strong>What can you do immediately, and what requires more evidence?</strong></p>
-<p>Inspect the record and unit; preserve the input; ask the recorder. Keep valid unusual observations.</p>
-<aside class="notes">
-<p>Ask students to distinguish a diagnostic flag from an authorised correction. Their independent transfer output must explicitly state that no correction is supported in the supplied complete transfer file.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="exercises-leave-a-repair-trail" class="slide level2">
-<h2>Exercises: leave a repair trail</h2>
-<p>Save <strong><code>day11-cleaning.R</code></strong>, a derived CSV, and short cleaning notes.</p>
+<section id="save-read-back-and-check-the-file-on-disk" class="slide level2">
+<h2>Save, read back, and check the file on disk</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(cleaned, <span class="st">"output/seedlings-cleaned.csv"</span>)</span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>check_copy <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"output/seedlings-cleaned.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(check_copy)                      <span class="co"># 24</span></span>
+<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">anyDuplicated</span>(check_copy<span class="sc">$</span>plant_id)    <span class="co"># 0: no repeated ID</span></span>
+<span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(check_copy<span class="sc">$</span>growth_mm))      <span class="co"># 1: P06</span></span>
+<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a>check_copy <span class="sc">|&gt;</span> <span class="fu">count</span>(treatment)        <span class="co"># control 12, treated 12</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Which source fact justified each change?</li>
-<li>Which measurement stayed unknown?</li>
-<li>Can the script recreate the corrected file after restarting R?</li>
+<li>An object in the Environment pane is not the file a colleague receives. Check the <strong>saved</strong> file.</li>
+<li>Then restart R and rerun the whole script: the raw CSV still has 25 rows, the derived CSV has 24. That difference is expected and documented.</li>
 </ul>
-<p><a href="../../week3/11-data-quality.html">Open exercises</a>.</p>
 <aside class="notes">
-<p>Students should run inspection first, then the repairs, then verify counts. Have students locate the original, script, field notes, and output in their saved project. Corrections need source evidence.</p>
+<p>The output folder already exists in the course project. Restarting R is the test that the script, not leftover console work, produces the file. Students also write output/cleaning-notes.txt describing each change and the value left unknown.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-new-file-is-a-new-source-to-check" class="slide level2">
+<h2>A new file is a new source to check</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p>A second class sends <code>data/seedlings-transfer.csv</code>: 18 plants, 9 per group.</p>
+<p>Before importing, write down what you <strong>expect</strong>: what one row is, which ID must be unique, column names, units, allowed labels. Then check and record what you <strong>observe</strong>.</p>
+<ul>
+<li>No source note reports an error in this file, so <strong>no correction is justified</strong>.</li>
+<li>An unusual value: inspect it, keep it, and ask the recorder.</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-transfer-inspection.svg" style="width:100.0%"></p>
+<figcaption>Initial against final length for the eighteen transfer plants, coloured by control and treated group; a new study needs its own checks.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>The data dictionary in data/README.md gives the meanings and units. The checks are the familiar ones: nrow, unique IDs, unique labels, missing values, numeric types, and whether final minus initial can be calculated. Students record what they observed, not just “passed”. Their handover must state that no correction was supported.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Key fact</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Inspect first</td>
+<td>Read as text (<code>col_character()</code>, <code>trim_ws = FALSE</code>); <code>unique()</code>, <code>count()</code> reveal labels and repeated IDs</td>
+</tr>
+<tr class="even">
+<td>Evidence</td>
+<td>A value is changed only when a source record supports it, never because it looks odd</td>
+</tr>
+<tr class="odd">
+<td>Raw file</td>
+<td>Never edited; repairs live in a script that writes a separate derived file</td>
+</tr>
+<tr class="even">
+<td>Duplicates</td>
+<td>Compare all fields and the design; <code>distinct()</code> only for confirmed identical rows</td>
+</tr>
+<tr class="odd">
+<td>Missing</td>
+<td>Unknown stays <code>NA</code>; a zero is a claim (P06 would “grow” −24.7 mm)</td>
+</tr>
+<tr class="even">
+<td>Counts</td>
+<td>24 plant records, 23 usable growths; report the n behind every mean</td>
+</tr>
+<tr class="odd">
+<td>Check</td>
+<td>Read the saved file back; restart R and rerun the script</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Next (Day 12, variation):</strong> with a table we can trust, we describe how much individual plants differ from each other, not only their average.</p>
+<p><strong>Now:</strong> <a href="../../week3/11-data-quality.html">open the Day 11 exercises</a>. Leave with <code>day11-cleaning.R</code>, <code>output/seedlings-cleaned.csv</code> and your cleaning notes.</p>
+<aside class="notes">
+<p>Ask for one sentence: which source fact justified each change, and which measurement stayed unknown? The exercises add the cleaning notes, the effect of the P21 slip and of an invented zero, and a check of the transfer file.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

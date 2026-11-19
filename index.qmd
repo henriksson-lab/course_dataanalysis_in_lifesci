@@ -2,53 +2,41 @@
 title: "Data Analysis in Life Sciences"
 ---
 
-Learn how computers organise information, how to work in a Linux command line,
-and how to use R to turn biological measurements into figures and reproducible
-reports.
+A five-week introduction to computing for biologists. You will learn what is
+inside your data files, how to work in a terminal, and how to use R to turn
+biological measurements into figures, statistics and reports that anyone can
+re-run. No programming experience is needed.
 
-We start with files and folders. You do not need previous programming experience.
-Each lesson combines an explanation, a worked example, and a practical where you
-save something you can find and use again. The biology includes seedling growth,
-photosynthesis, calibration measurements, and a small duckweed experiment.
-Short transfer choices also use basic organic-laboratory records, such as the
-percentage of a supplied maximum product mass collected. Each exercise explains
-the required quantities and calculation; prior chemistry is not required.
+Start with the [course introduction slides](lectures/00-course-intro/lec.qmd):
+why spreadsheets are not enough for biological data.
 
 ::: {.callout-note}
-All course datasets are simulated teaching data. They help us practise a workflow;
-they are not evidence about actual biological effects.
+All course datasets are simulated teaching data. They are for practising the
+workflow, not evidence about real biological effects.
 :::
 
-## Your five-week route
-
-Each topic in the left menu has separate **Lecture (slides)** and
-**Exercises** links, followed by a **Quiz**. Lecture links are green, exercises
-italic, and quizzes blue. Coloured bands distinguish the weeks.
-
-Use the [five-week study plan](study-plan.qmd) to organise the work. Exercises
-move from worked examples to new problems with fewer prompts. Save your results
-and reproduce them from a fresh start. Each topic has a quiz with hints and
-answers; weekly quizzes provide further review.
+## The five weeks
 
 | Week | Biological question | What you will do |
 | --- | --- | --- |
-| [1 — Files and computers](week1/01-files.qmd) | Where are the seedling measurements? | Save and find files, use a terminal, unpack ZIPs, and search lab records |
-| [2 — R and reports](week2/06-r-basics.qmd) | How much did the seedlings grow? | Import a table, calculate growth, plot it, and render R Markdown |
-| [3 — Variation](week3/11-data-quality.qmd) | How much do individual plants differ? | Check data, summarise groups, understand mean, variance, SD, and replication |
-| [4 — Comparisons and lines](week4/16-comparisons.qmd) | How do treatments and measurements relate? | Interpret a t-test, handle pairs, fit a calibration line, and describe an association |
-| [5 — Reproducibility](week5/21-remote-workflow.qmd) | Can someone repeat our analysis? | Work remotely, analyse another dataset, package a report, and test it in a fresh session |
+| [1 — Files and the terminal](week1/01-files.qmd) | What is in our data files, and where are they? | Tell plain text from Word and Excel files, write paths, use a terminal, unpack and search lab data, meet R |
+| [2 — R and reports](week2/06-r-basics.qmd) | How much did the seedlings grow? | Import a table, calculate growth, plot it, and render an R Markdown report |
+| [3 — Variation](week3/11-data-quality.qmd) | How much do individual plants differ? | Check data, summarise groups, understand mean, SD, and replicates |
+| [4 — Comparisons and lines](week4/16-comparisons.qmd) | Did the treatment work? How do two measurements relate? | Estimate a difference with uncertainty, analyse pairs, fit a calibration line and an association |
+| [5 — Bigger data and reproducibility](week5/21-computer.qmd) | Can someone else repeat our analysis? | Estimate how much memory data need, use a remote computer, run a small study, and reproduce and share it |
+
+Each topic in the left menu has **Lecture (slides)**, **Exercises**, and a
+**Quiz**. More about outcomes and weekly checkpoints: [About the course](overview.qmd).
 
 ## Getting started
 
 - [Windows: install Ubuntu; Mac: open Terminal](intro/ubuntu-windows.qmd).
 - [Install R and RStudio, then open your project](intro/r-rstudio.qmd).
 - [Download the course project and laboratory archive](downloads/index.qmd).
-- [Working on a remote Linux computer](intro/remote-linux.qmd).
+- [Working on a remote Linux computer](intro/remote-linux.qmd). Connection
+  details will be added when the course environment is confirmed.
 
-Remote connection instructions will be added when the course environment is
-confirmed. Installation help will be provided during the course.
-
-Begin with [Day 1: save, find, and reopen a file](week1/01-files.qmd).
-You can keep the [terminal reference](reference/terminal.qmd),
-[R reference](reference/r.qmd), [statistics reference](reference/statistics.qmd),
-and [glossary](reference/glossary.qmd) open while working.
+Then begin with [Day 1: kinds of files](week1/01-files.qmd). Keep the
+[terminal reference](reference/terminal.qmd), [R reference](reference/r.qmd),
+[statistics reference](reference/statistics.qmd), and
+[glossary](reference/glossary.qmd) at hand.

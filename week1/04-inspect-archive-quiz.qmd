@@ -70,3 +70,15 @@ A similar filename alone does not prove sample identity.
 ::: {.callout-note collapse="true" title="Answer"}
 In this exercise the rename was deliberate and known. Check the file's recorded sample ID and 39.8 mm measurement against the source, restore `S04.csv`, and recheck the manifest path. An unexplained discrepancy would need source evidence.
 :::
+
+---
+
+**Q6.** The organic-laboratory inventory has a header and four sample rows; O02 and O03 are labelled `ester`, and no other line contains that word. What does `grep -F ester inventory.tsv | wc -l` print, and what has grep selected?
+
+::: {.callout-tip collapse="true" title="Hint"}
+The pipe counts the matching lines.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+**2**. grep selected the lines whose text contains `ester`; the chemical class comes from the supplied labels, not from grep.
+:::

@@ -1,17 +1,17 @@
 ---
-title: "Day 13 — Summarise groups without hiding the plants"
+title: "Day 13 — Summarising groups without hiding the plants"
 ---
 
 [Lecture slides](../lectures/13-group-summaries/lec.qmd) · [Quiz](13-group-summaries-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 ## Today's question
 
-How can a figure and a small table show both the typical growth and differences
-among individual plants? A pair of bars showing only means would conceal sample
-size, spread, unusual observations, and overlap. We will show the observations
-and use summary numbers as an additional description.
+A bar chart of two group means cannot tell a reader how many plants are behind
+each bar, how much they varied, or whether one unusual plant pulled a mean up.
+Today you make a small table with one row per group and a figure that shows
+every plant together with its group mean, so a reader gets both.
 
-Start `day13-groups.R` at the project root:
+Start `day13-groups.R` in the project root:
 
 ```{r}
 library(readr)
@@ -21,7 +21,13 @@ seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE) |>
   mutate(growth_mm = final_mm - initial_mm)
 ```
 
-## One row per group in a summary
+**Save today:** `day13-groups.R`, `output/growth-summary.csv` and
+`output/growth-summary.png`.
+
+## One row per group
+
+Use `group_by()` and `summarise()` to find out the number of plants, mean,
+median and SD of growth in each treatment group:
 
 ```{r}
 group_summary <- seedlings |>
@@ -35,19 +41,21 @@ group_summary <- seedlings |>
 group_summary
 ```
 
-`group_by(treatment)` tells the next operation to work separately within each
-treatment. `summarise()` returns one row of results per group. The names on the
-left of `=` become output column names. `n()` counts rows; `sum(!is.na(...))`
-counts observed measurements. Here `!` means “not”, so the expression identifies
-values that are not missing. `.groups = "drop"` makes the resulting summary an
-ordinary ungrouped table.
+`group_by(treatment)` makes the next step work separately within each treatment,
+and `summarise()` returns one row per group. The names left of `=` become the
+column names. `n()` counts rows, that is plant records, while
+`sum(!is.na(growth_mm))` counts the growth values that are actually there (`!`
+means "not"). `.groups = "drop"` returns an ordinary table.
 
-This clean dataset has twelve observed growth values per group. The means are
-about 15.3 and 21.5 mm, and SDs about 3.19 and 4.87 mm for control and treated
-plants, respectively. The table is a different object from `seedlings`:
-`group_summary` contains two rows describing groups, not two newly measured plants.
+| treatment | n_plants | n_observed | mean_mm | median_mm | sd_mm |
+|---|---|---|---|---|---|
+| control | 12 | 12 | 15.28 | 15.65 | 3.19 |
+| treated | 12 | 12 | 21.49 | 20.85 | 4.87 |
 
-## Add a clearly identified mean
+`group_summary` has two rows that describe groups; `seedlings` still has the 24
+plants. You need both: the plants for the figure, the summary for the means.
+
+## Plants and means in one figure
 
 ```{r}
 group_plot <- ggplot(seedlings, aes(x = treatment, y = growth_mm)) +
@@ -61,16 +69,23 @@ group_plot <- ggplot(seedlings, aes(x = treatment, y = growth_mm)) +
 group_plot
 ```
 
-The second point layer uses the summary table. Its `inherit.aes = FALSE` means
-we supply its mappings explicitly instead of inheriting a column absent from
-that table. Reuse this pattern for other grouped plots.
+The first `geom_point()` draws one dot per plant from `seedlings`.
+`position_jitter(width = 0.08, height = 0)` moves dots a little sideways so they
+do not hide each other, but never up or down, so every dot stays at its measured
+growth. The second `geom_point()` takes its data from `group_summary` and draws
+the means as red diamonds; `inherit.aes = FALSE` tells it to use its own `x` and
+`y` instead of looking for `growth_mm`, which the summary table does not have.
 
-If adding error bars, name exactly what they represent. Mean ± SD describes
-spread among observations. A confidence interval describes uncertainty in an
-estimated mean; the two are not interchangeable. It is fine to keep today's
-figure as observations and means only.
+The figure shows what the table cannot: the groups overlap, one treated plant grew
+only 12.2 mm, and two treated plants grew about 30 mm. If you add whiskers, say
+what they show. Mean ± SD describes how plants vary; a confidence interval, which
+comes in week 4, describes how uncertain a mean is. Points and means without
+whiskers are a good choice for today.
 
-## A histogram answers a different question
+## Histograms
+
+A **histogram** cuts the growth axis into intervals, called bins, and counts the
+plants in each. Use one to find out the shape of each group's growth values:
 
 ```{r}
 ggplot(seedlings, aes(x = growth_mm)) +
@@ -80,143 +95,97 @@ ggplot(seedlings, aes(x = growth_mm)) +
   theme_minimal()
 ```
 
-A histogram groups nearby numeric measurements into intervals, or bins. It shows
-a rough distribution, not the order in which plants were measured. With only
-twelve observations per group, its shape changes noticeably with the bin width.
-`facet_wrap()` gives a separate panel per treatment. Shared scales help compare
-the panels; small samples warrant cautious descriptions.
+`facet_wrap(~ treatment, ncol = 1)` draws one panel per group, stacked on the same
+growth axis so the panels can be compared. With 4 mm bins, most control plants
+fall between 12 and 20 mm, and most treated plants between 20 and 24 mm, with two
+treated plants in the 28–32 mm bin. With only 12 plants per group the shape
+changes noticeably when you change the bin width.
 
-## Create the table and figures
+## Saving the table and the figure
 
-1. Reproduce the summary table and dot plot. Check one group mean using
-   `filter()` and `mean()` as on day 12.
-2. Save the table as `output/growth-summary.csv` and the plot as
-   `output/growth-summary.png`, using `write_csv()` and `ggsave()`.
-3. Change the histogram's bin width from 4 to 2, then 6. Describe which features
-   are stable and which apparent details depend on the bins.
-4. If you completed day 11, summarise `output/seedlings-cleaned.csv`. Check the
-   distinction between `n_plants` and `n_observed`. Explain why its control mean
-   need not exactly match the complete clean teaching dataset's mean. If the
-   teacher selects the organic transfer below instead, substitute it for this
-   step rather than adding a second analysis.
-5. Draft a caption that identifies the observational unit, units, and symbols.
+```{r}
+write_csv(group_summary, "output/growth-summary.csv")
+ggsave("output/growth-summary.png", plot = group_plot, width = 6, height = 4)
+```
 
-## Transfer choice: summarise product yield
+The CSV holds the numbers and the PNG holds the picture; until you save them,
+both exist only in R's memory. Find the two files in your file manager and open
+them outside RStudio.
 
-In `data/organic-recovery.csv`, one row is one independently carried-out
-product-making experiment, or synthesis run. The supplied `theoretical_mass_g`
-is its maximum possible product mass; `isolated_mass_g` is dry collected
-product, assumed pure for this simplified exercise. Both are in grams. Derive
-`yield_percent = 100 * isolated_mass_g / theoretical_mass_g`; the first run is
-`100 * 0.62 / 1.00 = 62%`.
+## Group summaries for the seedlings
 
-Import the file, derive yield, then adapt today's grouped-summary pattern to
-group by `protocol`. Report the number of runs, mean percentage yield, and SD
-in **percentage points**. Adapt the individual-point plot to show yield by
-protocol, using the run-level table for individual points.
-Save `output/organic-yield-summary.csv`, `output/organic-yield-summary.png`, and
-its caption instead of the extra cleaned-seedling summary.
+1. Use `filter()` and `mean()` to find out whether the control mean in
+   `group_summary` matches the plants it came from. You should get 15.28 mm.
+2. Use the same summary code on `output/seedlings-cleaned.csv` from day 11 (add
+   `growth_mm` if it is not there) to find out how the missing P06 shows up. Control
+   has `n_plants` 12 but `n_observed` 11, and a mean of 15.21 mm instead of
+   15.28 mm, because a different set of plants contributed. This is why the table
+   keeps both counts.
+3. Change the histogram's `binwidth` to 2 and then to 6 and find out which
+   features stay the same. At every width the treated values sit higher than the
+   controls and the two treated plants near 30 mm stand apart; smaller peaks and
+   gaps appear or vanish with the bin width, so do not describe them.
+4. Write a caption for `output/growth-summary.png` that a reader could check
+   without the code: the unit (one plant), the outcome and its unit, what dots and
+   diamonds mean, and n. For example: "Seven-day growth (mm) of 24 individually
+   potted seedlings, 12 per group. Dots are plants; red diamonds are group means."
 
 ::: {.callout-tip collapse="true"}
-## Hint: keep the denominator and the experimental unit
-
-Use `mutate(yield_percent = 100 * isolated_mass_g / theoretical_mass_g)`,
-then `group_by(protocol)` and `summarise()`. Both groups have six independent
-runs. The standard mean is about 68.67% and the modified mean is 77.00%; show
-the individual values before interpreting the difference. Different starting
-scales mean that comparing raw grams would answer a different question.
-:::
-
-::: {.callout-tip collapse="true"}
-## Hint: keep object roles clear
+## Hint: keep the two tables apart
 
 `write_csv(group_summary, "output/growth-summary.csv")` saves the summary, while
 `ggsave("output/growth-summary.png", plot = group_plot, width = 6, height = 4)`
-saves the plot. These outputs have different purposes. Check `names()` if a layer
-mentions a column absent from the table used by that layer.
+saves the plot. If a layer complains about a column it cannot find, use `names()`
+on the table that layer uses.
 :::
+
+## Another lab: percentage yield
+
+Your teacher may choose this instead of task 2 above. In
+`data/organic-recovery.csv` each row is one independent synthesis run. Calculate
+`yield_percent = 100 * isolated_mass_g / theoretical_mass_g`, as on day 12, then
+use `group_by(protocol)` and `summarise()` to find out the number of runs, mean
+yield and SD for each protocol. Both protocols have six runs; the standard mean is
+68.67% (SD 4.32 percentage points) and the modified mean 77.00% (SD 3.74).
+Plot the runs with a mean marker as above, with the y-axis labelled
+"Isolated product yield (%)", and save `output/organic-yield-summary.csv` and
+`output/organic-yield-summary.png`.
+
+## A second class's data
+
+Make the same table and figure for `data/seedlings-transfer.csv` (18 plants, nine
+per group) in a new script, `day13-transfer.R`, with its own `library()` lines,
+import and growth calculation.
+
+1. Use `group_by()` and `summarise()` to make `transfer_summary` with n, mean,
+   median and SD, and save it as `output/day13-transfer-summary.csv`. Use
+   `nrow()` to find out how many rows `transfer` and `transfer_summary` have: 18
+   plants and 2 groups. You should get means of 13.66 mm (control) and 17.87 mm
+   (treated).
+2. Draw the plants with a mean marker from `transfer_summary`, with a caption that
+   says n = 9 per group, and save it as `output/day13-transfer-points.png`. Does
+   any control plant grow more than a treated plant? Yes: three control plants
+   (15.9, 16.3 and 17.4 mm) grew more than the smallest treated plant (15.0 mm).
+3. Restart R and rerun the script to find out whether it rebuilds both files on
+   its own.
 
 ## Check your understanding
 
 ::: {.callout-note collapse="true"}
-## Why show individual dots?
+## Why show individual dots as well as the means?
 
-Dots reveal how many observations overlap, where unusual values lie, and how
-measurements vary around each mean. A higher mean does not mean every treated
-plant grew more than every control plant. The repaired dataset retains twelve
-control plants but only eleven observed control growth values.
+The dots show how many plants there are, how much they vary, where unusual
+values lie and how much the groups overlap. A higher mean does not mean every
+treated plant grew more than every control plant.
 :::
 
-## Make the figure and caption agree
+::: {.callout-note collapse="true"}
+## The summary table has two rows. Are they two new observations?
 
-Use your selected plant or product-yield dataset and its existing group summary.
-
-1. Write down the number of input rows, the number of groups, and the number
-   of summary rows. Locate one actual observation in each group. Explain why
-   the two summary rows are not two additional experimental units.
-2. Save a first figure showing individual observations only. Save another
-   with group means added. Use identical axis limits, units, and point positions
-   so the difference between figures is the added information, not rescaling.
-   Describe one feature that the observations reveal and a mean alone hides.
-3. Draft a deliberately inadequate caption, such as “Treatment makes everything
-   larger; bars show error.” Then replace it with a caption identifying the
-   independent unit, plotted quantity and units, mean symbol if used, available
-   n, and whether any error bars exist. Keep both versions in a caption log
-   and explain at least three specific repairs.
-4. Create histograms using two defensible bin widths. Compare apparent modes,
-   gaps, and group overlap. Record which broad statement remains supported in
-   both displays and which detail depends on the bin choice.
-5. Produce a compact table containing available n, mean, median, and SD per
-   group. Round for readable display only after calculation. Preserve the
-   full-precision summary object for further arithmetic and any CSV export.
-   Explain why printing six decimal places does not add measurement precision.
-6. Inspect how plot labels change between contexts. Plant growth uses mm;
-   organic yield uses percent, and an SD of yield is expressed in percentage
-   points. Revise both the axis and the caption if switching contexts. Merely
-   changing a figure title can leave a convincing but false unit label.
-7. Close the code and inspect the exported figure and table. Locate n, an
-   individual observation, the mean marker, units, and group overlap. Revise
-   labels or captions where these are unclear.
-
-::: {.callout-tip collapse="true"}
-## Hint: two tables have different roles
-
-The raw table supplies individual points; the grouped summary supplies means.
-In a second `geom_point()` layer, use `data = group_summary` and explicit x/y
-mappings. If you omit error bars, your caption should not mention them. If a
-teacher demonstrates mean ± SD, label it as SD among observations, not a 95%
-interval or a measurement instrument's error bound.
+No. Each row describes a group of 12 plants. The 24 plants stay in `seedlings`,
+and that is the table any later analysis uses.
 :::
 
-## Create figures for a second study
-
-Use `data/seedlings-transfer.csv` to produce a report figure and a summary table.
-The file contains 18 independently potted plants, with nine observations per
-allocation and no missing lengths. All lengths are mm, measured seven days apart.
-
-1. Create `day13-transfer.R` from a blank script. Import, inspect, and derive
-   `growth_mm`; check the meaning and units from the dictionary. Retain all
-   rows and original columns.
-2. Create one group summary and export it as
-   `output/day13-transfer-summary.csv`. Include available n, mean, median, and
-   SD, using distinct informative column names. Describe the difference between
-   `nrow(transfer)` and `nrow(transfer_summary)` in a code comment.
-3. Create a point plot with a group mean marker using the summary as a separate
-   layer. Save a PNG. Check that every individual point's vertical position is
-   its measured growth; jitter is horizontal only. Explain why moving points
-   vertically would misrepresent the recorded values.
-4. Make a faceted histogram using a common horizontal range and one stated bin
-   width. Compare it with the point plot for this small sample. Which better
-   permits identifying individual observations? Which highlights the grouping
-   of nearby numeric values? Keep both, with different filenames and captions.
-5. Save a handover note listing the data files and script needed to recreate
-   the figures. Identify supplied inputs and derived outputs.
-6. Run the script in a fresh R session. Open the PNGs and CSV in the file manager,
-   not only through RStudio's recent tabs. Verify one summary against a filtered
-   vector and `mean()`. Save a short reproducibility note identifying the check.
-
-**Additional outputs:** a caption-repair log, the chosen-context figure pair,
-transfer summary/figures, and a saved handover note.
-
-**Keep:** `day13-groups.R`, the summary CSV, figure, and caption.
+**Keep:** `day13-groups.R`, `output/growth-summary.csv`,
+`output/growth-summary.png` and your caption.
 Next: [replicates and uncertainty](14-replicates-uncertainty.qmd).

@@ -1,5 +1,5 @@
 ---
-title: "Quiz: Paths and the working computer"
+title: "Quiz: Folders and paths"
 ---
 
 [Lecture](../lectures/02-folders-computers/lec.qmd) · [Exercises](02-folders-computers.qmd)
@@ -8,60 +8,72 @@ Try each question before opening its hint or answer.
 
 ---
 
-**Q1.** A project contains neighbouring `data` and `reports` folders. From the project root, `data/seedlings.csv` reaches the input. From inside `reports`, where does that same relative path point?
+**Q1.** In the course project, `data` and `reports` are both directly inside `introcomputing-course`. Is `reports` inside `data`? What is their parent folder?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Draw the tree with indentation.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No, they are neighbours. Their parent is the project folder, `introcomputing-course`.
+:::
+
+---
+
+**Q2.** Which of these paths is absolute and which is relative: `/Users/anna/Documents/introcomputing-course/data/seedlings.csv` and `data/seedlings.csv`?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Where does each path start?
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+The first is absolute: it starts at the top of the disk (`/`). The second is relative: it starts from an agreed folder, here the project folder.
+:::
+
+---
+
+**Q3.** From the project folder, `data/seedlings.csv` finds the measurements. From inside `reports`, where does the same path point?
 
 ::: {.callout-tip collapse="true" title="Hint"}
 A relative path starts from the current folder.
 :::
 
 ::: {.callout-note collapse="true" title="Answer"}
-It asks for `data` inside `reports`: `reports/data/seedlings.csv` relative to the project root. That is a different location. Return to the project root before following the original route.
+To a `data` folder inside `reports`, which does not exist. Go up to the project folder first (written `../data/seedlings.csv` from `reports`).
 :::
 
 ---
 
-**Q2.** Which remains after an ordinary application closes: (i) its running process, (ii) a deliberately saved text file, or (iii) every unsaved edit?
+**Q4.** Anna's R code reads `C:\Users\anna\Documents\introcomputing-course\data\seedlings.csv`. Ben runs it on his laptop. What happens, and what should Anna write instead?
 
 ::: {.callout-tip collapse="true" title="Hint"}
-Storage and current application state have different jobs.
+Which part of the path is specific to Anna's laptop?
 :::
 
 ::: {.callout-note collapse="true" title="Answer"}
-(ii). A saved file remains on storage. The process stops. Unsaved edits may be lost or recovered by a particular editor; inspect the saved file.
+It fails, because Ben's laptop has no folder `C:\Users\anna`. Anna should write the relative path `data/seedlings.csv`, which works for anyone who opens the project folder.
 :::
 
 ---
 
-**Q3.** Would adding RAM automatically provide more space for saved microscope photographs?
+**Q5.** You move the folder `practice/map-a` into `practice/map-b`. Does `note.txt` inside it change? What is its new path from the project folder?
 
 ::: {.callout-tip collapse="true" title="Hint"}
-Which component holds saved files between sessions?
+Compare the contents of the file with its location.
 :::
 
 ::: {.callout-note collapse="true" title="Answer"}
-No. RAM supports running work; persistent storage, such as an SSD, holds saved photographs.
+The contents stay the same; only the location changes. The new path is `practice/map-b/map-a/note.txt`.
 :::
 
 ---
 
-**Q4.** You move the practice folder `map-a` into `map-b`. Does its note necessarily change? Will its old path still locate it?
+**Q6.** You add a sentence to a note, close the editor and choose **Don't save**. What is in the file when you reopen it?
 
 ::: {.callout-tip collapse="true" title="Hint"}
-Compare contents with location.
+Where does unsaved text live?
 :::
 
 ::: {.callout-note collapse="true" title="Answer"}
-The note's contents can stay identical while its location changes. Its old path no longer locates it; update the route to include `map-b`.
-:::
-
----
-
-**Q5.** You see `report.html` in a remote desktop. Is that file automatically in your laptop's Downloads folder? Is a ZIP beside the original a backup against losing the laptop?
-
-::: {.callout-tip collapse="true" title="Hint"}
-Identify the computer and storage holding each copy.
-:::
-
-::: {.callout-note collapse="true" title="Answer"}
-No to both. Remote access displays another computer; file transfer is a separate action. A local ZIP is still lost with the laptop unless another copy is stored elsewhere.
+The last saved version, without the new sentence. Unsaved text lives in working memory and disappears when the program closes; saved text is on disk.
 :::

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>A spreadsheet turns gene symbols into dates</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="60" y="70" width="170" height="50" rx="0" fill="#dceaf6" stroke="#cbd5e1" stroke-width="3"/>
+<text x="72" y="103" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="bold">gene</text>
+<rect x="230" y="70" width="140" height="50" rx="0" fill="#dceaf6" stroke="#cbd5e1" stroke-width="3"/>
+<text x="242" y="103" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="bold">log2FC</text>
+<rect x="60" y="122" width="170" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="72" y="155" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">SEPT2</text>
+<rect x="230" y="122" width="140" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="242" y="155" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">-1.31</text>
+<rect x="60" y="174" width="170" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="72" y="207" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">MARCH1</text>
+<rect x="230" y="174" width="140" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="242" y="207" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">-1.53</text>
+<rect x="60" y="226" width="170" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="72" y="259" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">TP53</text>
+<rect x="230" y="226" width="140" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="242" y="259" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">-0.07</text>
+<line x1="400" y1="200" x2="640" y2="200" stroke="#a8324a" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="520" y="165" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">open in Excel</text>
+<rect x="690" y="70" width="170" height="50" rx="0" fill="#dceaf6" stroke="#cbd5e1" stroke-width="3"/>
+<text x="702" y="103" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="bold">gene</text>
+<rect x="860" y="70" width="140" height="50" rx="0" fill="#dceaf6" stroke="#cbd5e1" stroke-width="3"/>
+<text x="872" y="103" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="bold">log2FC</text>
+<rect x="690" y="122" width="170" height="50" rx="0" fill="#f8dde3" stroke="#cbd5e1" stroke-width="3"/>
+<text x="702" y="155" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">2-Sep</text>
+<rect x="860" y="122" width="140" height="50" rx="0" fill="#f8dde3" stroke="#cbd5e1" stroke-width="3"/>
+<text x="872" y="155" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">-1.31</text>
+<rect x="690" y="174" width="170" height="50" rx="0" fill="#f8dde3" stroke="#cbd5e1" stroke-width="3"/>
+<text x="702" y="207" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">1-Mar</text>
+<rect x="860" y="174" width="140" height="50" rx="0" fill="#f8dde3" stroke="#cbd5e1" stroke-width="3"/>
+<text x="872" y="207" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">-1.53</text>
+<rect x="690" y="226" width="170" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="702" y="259" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">TP53</text>
+<rect x="860" y="226" width="140" height="50" rx="0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+<text x="872" y="259" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">-0.07</text>
+<text x="550" y="335" font-family="Arial, sans-serif" font-size="26" fill="#a8324a" text-anchor="middle" font-weight="normal">Saved again, the gene names are gone for good.</text>
+<text x="550" y="385" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">About 1 in 5 published papers with Excel gene lists had such errors</text>
+<text x="550" y="418" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">(Ziemann et al. 2016). In 2020, SEPT2 was renamed SEPTIN2</text>
+<text x="550" y="451" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">and MARCH1 MARCHF1, partly because of this.</text>
+</svg>

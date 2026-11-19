@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Opening introcomputing.Rproj starts RStudio inside the course folder</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<path d="M40,50 v-20 h168.0 l20,20 h232.0 v70 h-420 Z" fill="#fff2cc" stroke="#9a7820" stroke-width="3"/>
+<text x="250.0" y="93.0" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">introcomputing-course</text>
+<line x1="80" y1="130" x2="80" y2="157" stroke="#64748b" stroke-width="3"/>
+<line x1="80" y1="157" x2="110" y2="157" stroke="#64748b" stroke-width="3"/>
+<text x="120" y="165" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="25" fill="#6b4fa0" text-anchor="start" font-weight="bold" xml:space="preserve">introcomputing.Rproj</text>
+<line x1="80" y1="130" x2="80" y2="215" stroke="#64748b" stroke-width="3"/>
+<line x1="80" y1="215" x2="110" y2="215" stroke="#64748b" stroke-width="3"/>
+<text x="120" y="223" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="25" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">report.Rmd</text>
+<line x1="80" y1="130" x2="80" y2="273" stroke="#64748b" stroke-width="3"/>
+<line x1="80" y1="273" x2="110" y2="273" stroke="#64748b" stroke-width="3"/>
+<text x="120" y="281" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="25" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">data/</text>
+<line x1="80" y1="130" x2="80" y2="331" stroke="#64748b" stroke-width="3"/>
+<line x1="80" y1="331" x2="110" y2="331" stroke="#64748b" stroke-width="3"/>
+<text x="120" y="339" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="25" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">output/</text>
+<line x1="80" y1="130" x2="80" y2="389" stroke="#64748b" stroke-width="3"/>
+<line x1="80" y1="389" x2="110" y2="389" stroke="#64748b" stroke-width="3"/>
+<text x="120" y="397" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="25" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">reports/</text>
+<line x1="450" y1="175" x2="610" y2="175" stroke="#6b4fa0" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="530" y="150" font-family="Arial, sans-serif" font-size="22" fill="#6b4fa0" text-anchor="middle" font-weight="normal">double-click</text>
+<rect x="630" y="60" width="430" height="300" rx="10" fill="#f8fafc" stroke="#6b4fa0" stroke-width="3"/>
+<text x="845" y="105" font-family="Arial, sans-serif" font-size="28" fill="#203247" text-anchor="middle" font-weight="bold">RStudio</text>
+<text x="655" y="170" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">&gt; getwd()</text>
+<text x="655" y="205" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#64748b" text-anchor="start" font-weight="normal" xml:space="preserve">…/introcomputing-course</text>
+<text x="655" y="260" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">&gt; file.exists(</text>
+<text x="655" y="292" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">    &quot;data/seedlings.csv&quot;)</text>
+<text x="655" y="330" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#2a7f8f" text-anchor="start" font-weight="normal" xml:space="preserve">[1] TRUE</text>
+<text x="550" y="470" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">R starts in the project folder, so the short path data/seedlings.csv works.</text>
+</svg>

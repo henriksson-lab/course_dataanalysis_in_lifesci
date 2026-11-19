@@ -7,42 +7,52 @@ title: "Day 7 — Read a table and find out what it means"
 
 ## Today's question
 
-We have lengths from 24 seedlings. Twelve independently potted plants were
-randomly assigned to a control group and twelve to a treatment group. Each plant
-was measured at the beginning and end of the same observation period. Can we
-bring the measurements into R without losing their meaning?
+On day 6 you typed plant lengths by hand. The real experiment has 24 seedlings,
+and their lengths are in `data/seedlings.csv`. Can we bring that table into R
+unchanged, and check that it holds what we think it holds: 24 plants, two
+groups, two lengths each?
 
-Open `introcomputing.Rproj` in the extracted course folder. Its `data/` subfolder
-contains the supplied files and a `README.md` explaining them. A **CSV** is a
-text file in which commas separate columns. Its first line is a header naming
-those columns. The file is storage; importing creates an R object in memory.
+The study is described in the data dictionary,
+[`data/README.md`](../data/README.md): 24 seedlings in separate pots, 12
+randomly allocated to a nutrient treatment and 12 to a control, each measured at
+the start and after seven days, in millimetres. These are simulated teaching
+data. Keep the dictionary open; R can count rows, but only the dictionary tells
+you what a row means.
 
-## Start from a known place
+Open `introcomputing.Rproj` and create a new script, `day07.R`, in the project
+folder.
 
-Create `day07.R` in the project root. Run:
+**Save today:** `day07.R`.
+
+## Is R looking in the right folder?
+
+Use `getwd()` and `file.exists()` to find out whether R can see the seedling file:
 
 ```{r}
 getwd()
 file.exists("data/seedlings.csv")
 ```
 
-`getwd()` reports R's working directory. It should be your extracted project
-folder, not the `data` folder. The second line should return `TRUE`. The relative
-path `data/seedlings.csv` means “inside data, find seedlings.csv, starting here”.
-Your full home-folder path differs from a classmate's; this relative path can
-stay the same when they open their own project.
+`getwd()` prints the folder R is working in, which should be your project folder,
+not `data`. The second line should print `TRUE`. The path `data/seedlings.csv`
+starts from the project folder, so the same line works on a classmate's computer,
+even though their full path is different.
 
-If `file.exists()` returns `FALSE`, inspect the folder in the file manager. A
-common problem is opening the ZIP rather than an extracted project, or an extra
-folder layer. Avoid solving this by inserting your personal absolute path into
-every line of code. Open the correct project instead.
+::: {.callout-tip collapse="true"}
+## Hint: `file.exists()` says `FALSE`
 
-## Import and inspect
+You have probably opened a different project, a project inside a ZIP preview, or
+a folder with an extra level from extraction. Open `introcomputing.Rproj` from the
+folder where `data`, `output` and `reports` sit side by side. Do not paste your
+own full path into the code; it would break on every other computer.
+:::
 
-The `readr` package provides a table importer. Packages add functions to R;
-installing a package puts it on disk, while `library()` loads it for this session.
-The [software setup page](../intro/r-rstudio.qmd) explains installation. Loading is needed again after
-restarting R.
+## Reading the CSV into R
+
+The `readr` package provides `read_csv()`, which reads a CSV file into a table.
+A **package** is a collection of extra functions. It is installed once (see the
+[software setup page](../intro/r-rstudio.qmd)) and loaded with `library()` in
+every new R session.
 
 ```{r}
 library(readr)
@@ -53,16 +63,21 @@ names(seedlings)
 str(seedlings)
 ```
 
-`read_csv()` returns a table, displayed as a **tibble**. `head()` shows its first
-rows, not the complete dataset. `dim()` gives 24 rows and 4 columns. `names()`
-returns column names. `str()` describes structure and types: `plant_id` and
-`treatment` are text; the two lengths are numeric. Suppressing the type message
-with `show_col_types = FALSE` does not remove the need to check types.
+The table is now an object called `seedlings` in R's memory; the file on disk is
+unchanged. `head()` shows its first six rows. `dim()` gives **24 rows and 4
+columns**, so all 24 plants arrived. `names()` lists the columns, `plant_id`,
+`treatment`, `initial_mm` and `final_mm`, and `str()` shows their types:
+`plant_id` and `treatment` are text (`chr`), the two lengths are numbers (`num`).
+`show_col_types = FALSE` only hides a message; it does not check anything for you.
 
-Read the first row aloud: plant P01 is in the control group; its initial length
-was 25.7 mm and its final length 44.3 mm. Each **row** represents one plant, each
-**column** one variable. Two lengths from the same row are measurements on the
-same plant, not two independent plants.
+Read the first row aloud: plant **P01**, in the **control** group, was **25.7 mm**
+at the start and **44.3 mm** seven days later. Each row is one plant and each
+column one variable. The two lengths in a row are the same plant measured twice,
+so the table describes 24 plants, not 48.
+
+## One column at a time
+
+`$` takes one column out of the table as a vector, like those you made on day 6:
 
 ```{r}
 seedlings$initial_mm
@@ -70,140 +85,126 @@ length(seedlings$initial_mm)
 mean(seedlings$initial_mm)
 ```
 
-`$` selects a named column from the table, giving a vector. The length is 24. A
-mean without a unit is incomplete: the average initial length is measured in mm.
-The numbers cannot tell you whether the file used mm or cm; the dictionary and
-measurement protocol provide that information.
+There are 24 initial lengths, one per plant, and their mean is **22.47 mm**. The
+unit comes from the dictionary: the file only contains numbers. This mean mixes
+both groups, so it says nothing yet about the treatment.
 
-## Missing is different from zero
+## Missing values
 
-A missing measurement is represented by `NA` after import. `NA` means not
-available. It does not mean zero length, no growth, or a control treatment.
+When a measurement was never made, R shows `NA`, "not available". It is not
+a zero: a seedling of length 0 mm is a different thing from a seedling nobody
+measured.
 
 ```{r}
-example_mm <- c(12, NA, 18)
-mean(example_mm)
-mean(example_mm, na.rm = TRUE)
-is.na(example_mm)
+mean(c(10, NA, 20))
+mean(c(10, NA, 20), na.rm = TRUE)
+mean(c(10, 0, 20))
 ```
 
-The first mean is `NA`: R will not silently pretend all measurements are known.
-The second is 15 mm, calculated from two observed values. `na.rm = TRUE` requests
-omitting missing values for this calculation. A report must still explain how
-many observations were missing and why, if known.
+The first mean is `NA`, because R will not pretend it knows the missing value.
+`na.rm = TRUE` asks R to leave it out, which gives **15** from the two values that
+exist. Writing 0 instead gives **10**, from three values, one of which was
+invented. When you leave missing values out, say how many there were.
 
-## Exercises
+## The seedling table
 
-1. Import `seedlings.csv` and save the import and inspection commands in `day07.R`.
-2. Record in comments the row count, column count, column meanings, and units.
-3. Inspect `tail(seedlings)` to see the last rows. Find P24 and its treatment.
-4. Use `sum(is.na(seedlings$final_mm))` to count missing final measurements.
-5. Import `data/leaf-mass.csv` into `leaves`, inspect it, and use its dictionary
-   to explain what one row represents and what its columns mean.
-6. Restart R and run your script from the top. The raw CSV files should remain
-   exactly as supplied.
+Add each step to `day07.R` with a short comment giving the answer.
 
-::: {.callout-tip collapse="true"}
-## Hint: a function is not found
-
-Run `library(readr)` before `read_csv()`. If loading fails because the package is
-not installed, use the setup instructions or ask for help. For column names,
-copy from `names(seedlings)`; `initial_mm` and `initial` are different names.
-:::
-
-
-## Inspect an unfamiliar table systematically
-
-Create `day07-inspection.R` to investigate `data/seedlings-transfer.csv`. This simulated study
-has 18 independently potted seedlings, nine randomly assigned to control and
-nine to treated. Initial and final lengths are millimetres, measured seven days
-apart. Each row is one plant, not one independent measurement occasion.
-
-1. Open the course project, print `getwd()`, and check the relative input path
-   with `file.exists()`. Import into a new object called `transfer`; keep the
-   original `seedlings` object separate so that outputs from the two studies
-   cannot silently overwrite each other.
-2. Use `head()`, `tail()`, `dim()`, `names()`, and `str()` on the imported table.
-   Record what each command establishes and what it does not. For example,
-   seeing six rows in `head()` does not mean the dataset has six observations.
-3. Check `length(transfer$plant_id)` and
-   `length(unique(transfer$plant_id))`. The latter counts distinct identifiers.
-   Compare them and explain why different counts would prompt investigation.
-   Repeated IDs can be legitimate in a repeated-measurement design, so the study
-   description—not a universal “duplicates are bad” rule—sets the expectation.
-4. Inspect `unique(transfer$treatment)` and `table(transfer$treatment)`. Here
-   `table()` counts the supplied labels. Check the expected group labels and
-   nine records per group. Random assignment is stated in the study design;
-   row order alone would not establish it.
-5. Count missing initial and final lengths using `sum(is.na(...))`. Use
-   `range(transfer$initial_mm)` and `range(transfer$final_mm)` to inspect minima
-   and maxima. Range is a check on recorded values; it cannot determine the
-   intended units or establish that every plausible number was measured correctly.
-6. Make `reports/transfer-import-audit.txt` with the input path, dimensions,
-   column types and roles, unique-ID count, group counts, missing-value counts,
-   and units. State at least two things that required the data dictionary rather
-   than a function call. Restart R and recreate the audit's numerical checks.
+1. Use `tail(seedlings)` to find out which group the last plant, P24, belongs to.
+   It is **treated**, with lengths 22.4 and 44.7 mm.
+2. Use `sum(is.na(seedlings$final_mm))` to find out how many plants have no final
+   length. The answer is **0**: `is.na()` gives `TRUE` for each missing value and
+   `sum()` counts them.
+3. The file `data/leaf-mass.csv` comes from a different study. Read it into an
+   object called `leaves`, and use `dim()`, `names()` and the dictionary to find
+   out what one row is. It has **18 rows and 3 columns**: one leaf from each of 18
+   plants, with its area in cm² (`leaf_area_cm2`) and dry mass in mg
+   (`dry_mass_mg`).
+4. Restart R (**Session → Restart R**) and run `day07.R` from the top. Everything
+   should come back, and the CSV files are still exactly as supplied.
 
 ::: {.callout-tip collapse="true"}
-## Hint: use the object's actual column names
+## Hint: `could not find function "read_csv"`
 
-A column request such as `transfer$initial` is different from
-`transfer$initial_mm`. Copy names from `names(transfer)` while learning. The
-intended table is 18 rows by four columns, with 18 distinct IDs and no missing
-initial/final readings. Matching these expectations helps identify the file but
-does not replace understanding its measurements.
+Run `library(readr)` first; after a restart it has to be run again. If R says
+there is no package called `readr`, install it as on the setup page. For column
+names, copy them from `names(seedlings)`: `initial_mm` works, `initial` does not.
 :::
 
-## Inspect quantities in different units
+## A second class's data
 
-The supplied `data/solutions.csv` table contains six simulated
-calculation cases, not six independent treatment experiments. It lists solution
-IDs, a solute name, mass in grams, molar mass in grams per mole, and final total
-volume in millilitres. A mole is a unit of chemical amount; the supplied molar
-mass converts grams to moles. You will inspect the input today, then use these
-quantities in later calculation and report practice.
+Another class repeated the experiment with 18 seedlings, in
+`data/seedlings-transfer.csv`. According to the dictionary, it has the same
+columns, 9 plants per group, and lengths in mm measured seven days apart. Before
+you use someone else's table, check that it matches that description. Create
+`day07-inspection.R` for this part.
 
-1. Import the table into `solutions` using a project-relative path. Before
-   running `str()`, predict which columns should contain text and which should
-   contain numbers. Compare the result with your prediction and explain why
-   solution IDs and solute names are not measured quantities to average.
-2. Check dimensions, unique solution identifiers, the two solute labels, and
-   the absence or presence of missing values. Read Q01 aloud: 0.2922 g of sodium
-   chloride, supplied molar mass 58.44 g/mol, final volume 100 mL. Identify the
-   meaning and unit of every number before doing arithmetic.
-3. Use `range()` on the numeric columns. Explain why the numbers for molar mass
-   are not interchangeable with those for weighed mass, even though both types
-   are numeric. A numeric storage type alone cannot authorise an operation.
-4. Compare these two supplied vectors in a separate part of the script:
-   `c(10, NA, 20)` and `c(10, 0, 20)`. Calculate their means and, for the first,
-   the available-value mean using `na.rm = TRUE`. Record available and missing
-   counts. Explain why using zero for an unavailable measurement invents evidence.
-5. Save `reports/solutions-import-audit.txt` describing the table, its units,
-   and what you could calculate from the supplied inputs. Include the formula
-   in words if helpful: amount = mass / molar mass; concentration = amount /
-   final volume in litres.
-6. Restart R and run the saved inspection script. Check which input generated
-   each audit. If a table has 24 plants where its note promises 18, inspect the
-   input filename and object name.
+1. Read the file into a new object, `transfer`, so that your `seedlings` table is
+   not overwritten. Use `dim()` to find out how many plants it has: **18 rows, 4
+   columns**.
+2. Use `length(unique(transfer$plant_id))` to find out whether any plant appears
+   twice. `unique()` keeps each ID once, so 18 distinct IDs in 18 rows means
+   every row is a different plant.
+3. Use `table(transfer$treatment)` to find out how many plants are in each group:
+   **9 control and 9 treated**, as promised.
+4. Use `sum(is.na())` on both length columns to find out whether any length is
+   missing (none is), and `range()` to find out whether the lengths look like
+   seedlings in mm: initial **20.0 to 28.8 mm**, final **36.0 to 46.2 mm**.
+5. Write what you found in `reports/transfer-import-audit.txt`, as sentences
+   someone else can check. For example: "`data/seedlings-transfer.csv`: 18 rows ×
+   4 columns, 18 distinct plant IDs, 9 control and 9 treated, no missing lengths.
+   Lengths in mm, seven days apart (from the dictionary)."
 
-**Check and retain:** `solutions.csv` has six rows, five columns, six unique IDs,
-two supplied solute labels, and no missing inputs. The available-value mean of
-10, NA, 20 is 15 from two observations; the mean of 10, 0, 20 is 10 from three.
-Your two audit notes should preserve that distinction.
+::: {.callout-tip collapse="true"}
+## Hint: `transfer$initial` gives `NULL`
 
+The column is called `initial_mm`. Copy names from `names(transfer)`. If your
+note says 24 plants, you have looked at `seedlings`, not `transfer`.
+:::
+
+## Solution recipes
+
+The file `data/solutions.csv` lists six solutions that we will calculate with
+later. Each row gives a solution ID, the dissolved substance (`solute`), its mass
+in g, its molar mass in g/mol, and the final volume in mL. As on day 6, a
+**mole** is a unit of amount of substance and the molar mass says how many grams
+one mole weighs.
+
+1. Read the file into `solutions`. Before running `str()`, predict which columns
+   are text and which are numbers, then check. `solution_id` and `solute` are text;
+   the other three are numbers.
+2. Use `dim()`, `unique(solutions$solute)` and `sum(is.na())` to find out how many
+   solutions there are, which substances, and whether anything is missing:
+   **6 rows, 5 columns**, two substances (`sodium-chloride` and `glucose`), nothing
+   missing.
+3. Use `range()` on `mass_g` and `molar_mass_g_mol` to find out how far each
+   varies: masses from **0.2922 to 2.7024 g**, molar masses **58.44 and 180.16
+   g/mol**. Both columns are numbers, but they measure different things, so adding
+   a mass to a molar mass would be meaningless.
+4. Save `reports/solutions-import-audit.txt`: the size of the table, what each
+   column means and its unit, and the rule you will use later: amount (mol) =
+   mass / molar mass, concentration = amount / final volume in litres.
 
 ## Check your understanding
 
-Why is the header not a plant? Why does the file's name not tell R the units?
-Why should the script work from a classmate's project folder?
+::: {.callout-note collapse="true"}
+## Why is the header not a plant?
+
+The header line holds the column names. `dim()` counts only the 24 data rows.
+:::
 
 ::: {.callout-note collapse="true"}
-## Check your answers
+## Why can R not tell whether the lengths are in mm or cm?
 
-The header labels columns rather than containing an observation. Units are
-metadata supplied by people; R only sees column names and values. The script uses
-relative paths and the same documented folder structure rather than your username.
-There are no missing final lengths in the clean seedling dataset.
+The file contains only names and numbers. Units are written in the dictionary,
+by people. That is why the column names end in `_mm`.
+:::
+
+::: {.callout-note collapse="true"}
+## Why does `day07.R` also work in a classmate's project folder?
+
+It uses the relative path `data/seedlings.csv`, which starts from whatever project
+folder is open, not a path containing your user name.
 :::
 
 **Keep:** `day07.R`. Next: [calculate growth and draw a figure](08-transform-plot.qmd).

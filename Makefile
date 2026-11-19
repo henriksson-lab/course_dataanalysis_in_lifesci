@@ -31,3 +31,8 @@ lecture-figures:
 	python3 instructor/make-lecture-figures-weeks1-2.py
 	python3 instructor/make-lecture-figures-weeks3-4.py
 	python3 instructor/make-lecture-figures-week5.py
+	python3 instructor/make-lecture-figures-intro.py
+	python3 instructor/make-lecture-figures-days-4-5-24.py
+	python3 instructor/make-lecture-figures-makeover-a.py
+	python3 instructor/make-lecture-figures-makeover-b.py
+	python3 instructor/make-lecture-figures-makeover-c.py

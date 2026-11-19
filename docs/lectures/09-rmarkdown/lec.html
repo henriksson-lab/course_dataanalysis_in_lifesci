@@ -194,7 +194,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">A report that runs its calculations</h1>
-  <p class="subtitle">Day 9 — Text, code, results, and their dependencies</p>
+  <p class="subtitle">Day 9 — Text, code and results in one R Markdown file</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -205,17 +205,19 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="keep-explanation-connected-to-calculation" class="slide level2">
-<h2>Keep explanation connected to calculation</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="render-report.svg" height="390"></p>
-<figcaption>An R Markdown source combining prose and code is rendered into an HTML report containing a plot.</figcaption>
-</figure>
-</div>
-<p>Your report source is <strong><code>.Rmd</code></strong>. Its readable output is <strong><code>.html</code></strong>.</p>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>You have a script, a figure and a few numbers. The usual next step is to paste the figure into Word and type the numbers into sentences. Then one value in the data is corrected, and the document keeps the old numbers. Months later, nobody, including you, can say which version of the data produced Figure 2. <strong>An R Markdown report keeps the explanation, the code and its results in one file, and rebuilds all of them from the data each time you render it.</strong></p>
+<p>Today you will:</p>
+<ul>
+<li>read the parts of an <code>.Rmd</code> file: header, text and code chunks;</li>
+<li>render it into an HTML report you can open in any browser;</li>
+<li>put a calculated number into a sentence, so it updates itself;</li>
+<li>find and fix the first error when rendering stops.</li>
+</ul>
+<p>Day 10 uses this to write your first complete short report. Every report in this course is made this way.</p>
 <aside class="notes">
-<p>Open the supplied report.Rmd beside its HTML. These lecture webpages are made with Quarto, but students do not need to author Quarto. The course’s report format is R Markdown. Rendering runs the calculations and combines their output with prose instead of requiring manual copy-and-paste of results.</p>
+<p>Lab reports, thesis chapters and supplementary methods all suffer from copied numbers that no longer match the data. The course webpages are made with Quarto, a close relative; students only need R Markdown.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -228,17 +230,93 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="code-chunks-have-opening-and-closing-fences" class="slide level2">
-<h2>Code chunks have opening and closing fences</h2>
-<pre><code>```{r import}
+<section id="copied-numbers-go-stale" class="slide level2">
+<h2>Copied numbers go stale</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="copy-paste-stale.svg" height="360"></p>
+<figcaption>Top: numbers copied by hand into Word stay old when the data are corrected. Bottom: a rendered report is rebuilt from the corrected data.</figcaption>
+</figure>
+</div>
+<ul>
+<li>Copy and paste: every correction means finding and retyping every affected number and figure.</li>
+<li>R Markdown: correct the data, render again, and text, numbers and figures all agree.</li>
+</ul>
+<aside class="notes">
+<p>Ask who has had to redo a figure in a lab report after a correction. The point is not that Word is bad for writing; it is that results should come from the analysis, not from memory or the clipboard.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="one-source-file-one-readable-report" class="slide level2">
+<h2>One source file, one readable report</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li><code>report.Rmd</code> is the <strong>source</strong>: your text plus R code. You edit this.</li>
+<li><strong>Rendering</strong> runs the code and writes <code>report.html</code>: text, results and figures.</li>
+<li>The HTML is a <strong>reading copy</strong>. Edits made there are lost at the next render.</li>
+<li>Keep the <code>.Rmd</code>, the data and the HTML together.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="render-report.svg" style="width:100.0%"></p>
+<figcaption>An R Markdown source with text and code is rendered into an HTML report containing a plot.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Open the supplied report.Rmd next to its rendered HTML. The source alone does not contain the CSV; it only names it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="inside-an-.rmd-file" class="slide level2">
+<h2>Inside an <code>.Rmd</code> file</h2>
+<div class="columns">
+<div class="column" style="width:52%;">
+<pre><code>---
+title: "Seedling growth"
+output: html_document
+---
+
+## Question
+
+How much did the seedlings grow?
+
+```{r import}
 library(readr)
 seedlings &lt;- read_csv("data/seedlings.csv",
                       show_col_types = FALSE)
 ```
 </code></pre>
-<p>Ordinary sentences go outside chunks. Give each chunk a unique label.</p>
+</div><div class="column" style="width:48%;">
+<ul>
+<li><strong>Header</strong> between the <code>---</code> lines: title and output format.</li>
+<li><strong>Text</strong> as you would write it. <code>## Question</code> is a heading.</li>
+<li><strong>Code chunk</strong> between <code>```{r}</code> and <code>```</code>. <code>import</code> is the chunk’s label; each label must be unique.</li>
+<li><code>#</code> outside a chunk makes a heading; inside a chunk it starts an R comment.</li>
+</ul>
+</div></div>
 <aside class="notes">
-<p>The displayed fences are literal R Markdown syntax. Show the opening three backticks, braces with r and an optional label, then the closing fence. The report header between — lines sets title and html_document output. Demonstrate in the supplied template rather than asking students to reconstruct everything from memory.</p>
+<p>The supplied template has this structure. Students should not have to type the fences from memory; copy from the template. The .Rmd stays in the project root so that data/seedlings.csv points to the data.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -251,17 +329,27 @@ seedlings &lt;- read_csv("data/seedlings.csv",
           display:block!important;
       }</style></aside>
 </section>
-<section id="a-report-runs-in-order" class="slide level2">
-<h2>A report runs in order</h2>
+<section id="render-it" class="slide level2">
+<h2>Render it</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p>Save, then click <strong>Knit</strong>. Or type in the <strong>Console</strong>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"report.Rmd"</span>,</span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>                  <span class="at">output_dir =</span> <span class="st">"reports"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Never put this line inside the report: a report must not render itself.</li>
+<li><code>output_dir</code> puts the HTML in <code>reports/</code>; the <code>.Rmd</code> stays in the project folder.</li>
+</ul>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="chunk-order.svg" height="390"></p>
-<figcaption>Import and package loading must precede derived calculations, which precede the plot and interpretation.</figcaption>
+<p><img data-src="three-files.svg" style="width:100.0%"></p>
+<figcaption>The report source, the original data and the HTML output have different roles and are kept together.</figcaption>
 </figure>
 </div>
-<p>Ask what each chunk needs before it can run.</p>
+</div></div>
 <aside class="notes">
-<p>Use seedlings then growth_mm then a figure as the concrete dependency. A correct expression can still fail when its input object does not yet exist. Package installation is separate setup; library calls belong in the report. Repeated unnecessary imports can obscure the sequence.</p>
+<p>Knit may put the HTML next to the source instead; find the actual file rather than assuming. rmarkdown::render calls the render function from the rmarkdown package without loading the whole package.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -274,16 +362,116 @@ seedlings &lt;- read_csv("data/seedlings.csv",
           display:block!important;
       }</style></aside>
 </section>
-<section id="read-the-first-useful-error" class="slide level2">
-<h2>Read the first useful error</h2>
-<p>Suppose a plot refers to <code>growth_mm</code>, but the report only imports the raw table.</p>
+<section id="chunks-run-from-top-to-bottom" class="slide level2">
+<h2>Chunks run from top to bottom</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
 <ul>
-<li>Which earlier calculation is missing?</li>
-<li>Is the name spelled exactly as created?</li>
-<li>In which chunk should the repair go?</li>
+<li>Rendering runs chunks <strong>in order</strong>, like a script from the top.</li>
+<li>A plot of <code>growth_mm</code> must come <strong>after</strong> the chunk that calculates it.</li>
+<li><code>library()</code> and the import go first.</li>
+<li>Installing packages is setup, not part of the report.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="chunk-order.svg" style="width:100.0%"></p>
+<figcaption>Loading packages and importing come first, then calculating growth, then plotting and interpreting.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>In the exercises students move a plot chunk above the calculation on purpose, read the error, and move it back.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-report-starts-from-nothing" class="slide level2">
+<h2>The report starts from nothing</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>Knit starts a <strong>fresh</strong> R session. Objects you made in the Console do not exist there.</li>
+<li>So every import and calculation the report needs must be written <strong>in the report</strong>.</li>
+<li>The test: restart R, then render. If it works, the report is complete.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fresh-session.svg" style="width:100.0%"></p>
+<figcaption>An object in your interactive R session does not exist when the report is rendered in a fresh session.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>A report that only works after some Console typing cannot be reproduced by anyone else. The direct render() call can see Console objects, which is why the course always says “restart R, then render”.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="put-calculated-numbers-into-sentences" class="slide level2">
+<h2>Put calculated numbers into sentences</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p>In the text of the <code>.Rmd</code>:</p>
+<pre><code>There are `r nrow(seedlings)` plants.</code></pre>
+<p>The HTML reads: <em>There are 24 plants.</em></p>
+<ul>
+<li>Import the 18-plant transfer study instead, and it reads 18. No retyping.</li>
+<li>But words you typed yourself, such as “twelve per group”, do <strong>not</strong> update. Reread the text when the data change.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="inline-dependency.svg" style="width:100.0%"></p>
+<figcaption>The number in the sentence is calculated from the imported table.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Inline R removes stale copied numbers, but it cannot fix a description of the wrong study. The transfer-report exercise asks students to search their source for “24” and the old filename.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-figure-with-a-caption" class="slide level2">
+<h2>A figure with a caption</h2>
+<pre><code>```{r growth-figure, fig.cap="Each point is one independently potted seedling."}
+ggplot(seedlings, aes(x = treatment, y = growth_mm)) +
+  geom_point(position = position_jitter(width = 0.08, height = 0, seed = 8)) +
+  labs(x = "Treatment", y = "Change in seedling length (mm)")
+```
+</code></pre>
+<ul>
+<li>Reuse the plotting code from Day 8; add <code>library(ggplot2)</code> to the first chunk.</li>
+<li>The <strong>caption</strong> says what the figure shows. A sentence below it says what you see in it.</li>
 </ul>
 <aside class="notes">
-<p>The raw CSV does not contain growth_mm. Add final minus initial in a preparation chunk before plotting. Include the dependency in the saved report. Deliberately introduce one misspelling in a demonstration, read the reported chunk, fix it, and render again.</p>
+<p>Code can stay visible in these first reports so the method is easy to inspect. The caption names the unit of observation; the prose interprets.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -296,17 +484,28 @@ seedlings &lt;- read_csv("data/seedlings.csv",
           display:block!important;
       }</style></aside>
 </section>
-<section id="your-console-is-not-the-reports-saved-method" class="slide level2">
-<h2>Your Console is not the report’s saved method</h2>
+<section id="when-rendering-stops-read-the-first-error" class="slide level2">
+<h2>When rendering stops: read the first error</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p>The message names the <strong>chunk</strong>. Check, in order:</p>
+<ol type="1">
+<li>Is the package loaded (<code>library()</code>) before use?</li>
+<li>Are file and column names spelt exactly right?</li>
+<li>Is the object made in an <strong>earlier</strong> chunk?</li>
+<li>Are all chunk labels unique, every fence closed?</li>
+</ol>
+<p>Change one thing, render again.</p>
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="fresh-session.svg" height="390"></p>
-<figcaption>An object in an interactive R session does not automatically exist in a fresh report render.</figcaption>
+<p><img data-src="chunk-collision.svg" style="width:100.0%"></p>
+<figcaption>Two chunks both labelled import stop the render; giving them different labels fixes it.</figcaption>
 </figure>
 </div>
-<p>Put all required imports and calculations in the source document.</p>
+</div></div>
 <aside class="notes">
-<p>Run an import only in the Console, then explain why a recipient cannot reproduce that unstated step. The Knit route uses a separate rendering process; the direct render function can use a calling environment, so the practical’s restart-and-render check is important. Explain why the fresh-session check matters.</p>
+<p>In the workshop copy students break one thing at a time (duplicate label, misspelt file, plot before calculation), record the message and the repair in reports/render-recovery.txt, and restore a working render each time. Recovery, not memorising messages.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -319,105 +518,25 @@ seedlings &lt;- read_csv("data/seedlings.csv",
           display:block!important;
       }</style></aside>
 </section>
-<section id="html-is-useful-but-keep-its-inputs-and-source" class="slide level2">
-<h2>HTML is useful, but keep its inputs and source</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="three-files.svg" height="390"></p>
-<figcaption>The report source, original data, and HTML output have distinct roles and should be kept together.</figcaption>
-</figure>
-</div>
-<p>The report belongs at the project root so <code>data/</code> paths stay consistent.</p>
-<aside class="notes">
-<p>A .Rmd file does not contain the original CSV simply because it mentions its name. An HTML file can be read without RStudio, but it is not the editable analysis source. Moving the report into reports/ would change ordinary relative paths; output HTML may go there while the source remains in the project root.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="render-from-the-console-not-from-inside-itself" class="slide level2">
-<h2>Render from the Console, not from inside itself</h2>
-<p>Save the document, then use <strong>Knit</strong>, or run in the <strong>R Console</strong>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"report.Rmd"</span>, <span class="at">output_dir =</span> <span class="st">"reports"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Run this command in the Console, outside the report.</p>
-<aside class="notes">
-<p>The double colon calls a function from a package. output_dir changes where the HTML is written, not where the source belongs. The Knit button may put the output beside the source; locate the actual file. Restart R before a reproducibility check. A self-rendering chunk would create a recursive workflow and is not required.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="chunk-labels-locate-code-in-a-report" class="slide level2">
-<h2>Chunk labels locate code in a report</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="chunk-collision.svg" height="350"></p>
-<figcaption>Two chunks named import collide; unique labels allow the report to identify code locations.</figcaption>
-</figure>
-</div>
-<p>Unique descriptive labels help diagnose an error.</p>
-<aside class="notes">
-<p>Duplicate a label only in the disposable workshop copy. Read the first meaningful error, restore unique labels, and render successfully. Chunk labels locate code sections; they are not the headings in the final prose.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="break-one-thing-record-it-then-repair" class="slide level2">
-<h2>Break one thing, record it, then repair</h2>
-<p>In a workshop copy, test:</p>
+<section id="sharing-the-.rmd-alone-is-not-enough" class="slide level2">
+<h2>Sharing the <code>.Rmd</code> alone is not enough</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
 <ul>
-<li>A duplicated chunk label.</li>
-<li>A misspelt input filename.</li>
-<li>A plot placed before its required calculation.</li>
+<li>The report reads <code>data/seedlings.csv</code>. Someone who gets only <code>report.Rmd</code> cannot render it.</li>
+<li>Share the <strong>project folder</strong>: <code>.Rproj</code>, <code>.Rmd</code>, <code>data/</code>, <code>output/</code>, <code>reports/</code>, with the same layout.</li>
+<li>A screenshot or a shortcut does not replace the data file.</li>
 </ul>
-<p>Restore a successful render after each test.</p>
-<aside class="notes">
-<p>Change one cause at a time. Log the changed line, exact error, diagnosis, repair and successful rerun. Keep the original template available. Adding repeated imports randomly is not a diagnostic strategy.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="inline-results-are-calculated-dependencies" class="slide level2">
-<h2>Inline results are calculated dependencies</h2>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="inline-dependency.svg" height="350"></p>
-<figcaption>A number in report prose derives from the imported table and its row count.</figcaption>
+<p><img data-src="missing-input.svg" style="width:100.0%"></p>
+<figcaption>Rendering the HTML needs both the report source and its input data file.</figcaption>
 </figure>
 </div>
-<p>When the input changes, the data description must change too.</p>
+</div></div>
 <aside class="notes">
-<p>The transfer report must describe 18 plants, nine per group, from the correct input. Inline calculations reduce copied stale numbers, but they do not automatically repair a written description of the wrong experimental design.</p>
+<p>The last exercise copies the project to another folder and renders it from there. Moving the .Rmd into reports/ would break its relative data path.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -430,114 +549,62 @@ seedlings &lt;- read_csv("data/seedlings.csv",
           display:block!important;
       }</style></aside>
 </section>
-<section id="input-replacement-needs-a-narrative-audit" class="slide level2">
-<h2>Input replacement needs a narrative audit</h2>
-<p>Change the import to seedlings-transfer.csv.</p>
-<p>Then check the question, methods, caption, inline count, and interpretation.</p>
-<p>A new plot beneath an old 24-plant description is inconsistent.</p>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Idea</th>
+<th>Key fact</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Why</td>
+<td>Results come from the data at every render; no copied numbers that go stale</td>
+</tr>
+<tr class="even">
+<td>Source and output</td>
+<td>Edit <code>report.Rmd</code>; <code>report.html</code> is a reading copy, rebuilt at each render</td>
+</tr>
+<tr class="odd">
+<td>Parts</td>
+<td>Header between <code>---</code>; text; code chunks between fences, each with a unique label</td>
+</tr>
+<tr class="even">
+<td>Render</td>
+<td>Knit, or <code>rmarkdown::render()</code> in the Console, never inside the report</td>
+</tr>
+<tr class="odd">
+<td>Order</td>
+<td>Chunks run top to bottom: packages, import, calculation, then plot</td>
+</tr>
+<tr class="even">
+<td>Fresh session</td>
+<td>The report must contain every step; restart R, then render to test</td>
+</tr>
+<tr class="odd">
+<td>Inline R</td>
+<td><code>`r nrow(seedlings)`</code> puts a calculated number in a sentence; typed words still need checking</td>
+</tr>
+<tr class="even">
+<td>Errors</td>
+<td>Read the first error and its chunk label; change one thing at a time</td>
+</tr>
+<tr class="odd">
+<td>Sharing</td>
+<td><code>.Rmd</code> plus data in the same project layout</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Next (Day 10, first report):</strong> write a short report that answers a biological question and that someone else can rerun.</p>
+<p><strong>Now:</strong> <a href="../../week2/09-rmarkdown.html">open the Day 9 exercises</a>. Leave with <code>report.Rmd</code> (question, methods, labelled figure, interpretation) and its rendered HTML, rendered again after restarting R.</p>
 <aside class="notes">
-<p>The source and narrative must describe one deliberate study. Search for the old filename and the number 24 as prompts to investigate; not every occurrence is necessarily wrong. Retain separate workshop and transfer reports.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="source-alone-cannot-supply-a-missing-dataset" class="slide level2">
-<h2>Source alone cannot supply a missing dataset</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="missing-input.svg" height="350"></p>
-<figcaption>Both source and ordinary input files are needed to regenerate the HTML.</figcaption>
-</figure>
-</div>
-<p>A shortcut or screenshot does not replace the measurement file.</p>
-<aside class="notes">
-<p>The local portability test uses a separate extracted project and its own root. Preserve relative input paths. This rehearsal does not verify authentication, remote software, or actual network transfer.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="run-the-renderer-outside-the-report" class="slide level2">
-<h2>Run the renderer outside the report</h2>
-<p>Use Knit, or run in the R Console:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"report-workshop.Rmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Run this command in the Console, outside the report.</p>
-<aside class="notes">
-<p>A render call inside the document would cause the report to try to render itself. Packages and calculations belong in its appropriate chunks; installing software belongs to the separate setup step.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="change-the-recipe-then-rebuild-its-output" class="slide level2">
-<h2>Change the recipe, then rebuild its output</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="source-html.svg" height="350"></p>
-<figcaption>Editing an HTML output does not update the saved RMarkdown source.</figcaption>
-</figure>
-</div>
-<p>Make revisions in .Rmd, then render and inspect the new HTML.</p>
-<aside class="notes">
-<p>Source prose and code are editable instructions; HTML is the reading copy. A browser can show an older file if a student opens the wrong output location. Locate the actual rendered filename and folder.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-recovery-log-preserves-the-lesson-from-an-error" class="slide level2">
-<h2>A recovery log preserves the lesson from an error</h2>
-<p>Save the exact failure and successful repair.</p>
-<p>Then restart R and render the corrected source without manual Console preparation.</p>
-<aside class="notes">
-<p>Keep report-workshop.Rmd, transfer-report.Rmd, their HTML outputs and render-recovery.txt. Ask students to explain why code order and input location matter rather than memorising one particular error message.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="make-one-change-and-check-it" class="slide level2">
-<h2>Make one change and check it</h2>
-<p><a href="../../week2/09-rmarkdown.html">Open the exercises</a>.</p>
-<p>Render the unchanged template first. Then add your question, methods, labelled figure, and interpretation. Restart and render the saved source again.</p>
-<aside class="notes">
-<p>Begin with a known-working baseline. Ask the student to name the source, output, and input locations before editing. The practical supplies a complete minimal report and error-recovery hints. A short caption plus clear prose is more useful than formatting additions that obscure the calculation.</p>
+<p>Start the exercises by rendering the unchanged template, so there is a known working baseline. Extended work: report-workshop.Rmd with deliberate errors, transfer-report.Rmd for the 18-plant study, and render-recovery.txt.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

@@ -20,332 +20,224 @@ format:
 toc: false
 ---
 
-## One question, one report
+## About this lecture
 
-![Choose either duckweed biomass or the supplied organic-product-yield study.](study-choice.svg){height=370px}
+In a later lab course, or in your thesis project, you will be handed a table from an experiment and asked: "what did the treatment do?" You will be expected to answer with a short report: the question, a plot, the numbers, one limitation, and code that someone else can run again. Today you do that whole job once, on one small study.
 
-Complete one selected study; both use the workflow already practised.
+Today you will:
 
-::: notes
-The default duckweed exercise includes a guided Welch comparison. The organic
-alternative is descriptive and does not require a new test or chemistry knowledge.
-Week 4's statistical work remains part of the course in either pathway.
-:::
+- choose one study: **duckweed biomass** or **organic product yield**;
+- check the data and decide what one independent unit is;
+- plot, summarise and compare in a stated direction;
+- write a result paragraph and keep it all in one report that renders from scratch.
 
-## Decide what is independent
-
-![Separate flasks or synthesis runs supply independent units; internal readings do not.](independent-units.svg){height=380px}
-
-The number of rows must be interpreted through the experimental design.
+No new methods today: everything comes from weeks 2–4. Day 24 tests whether someone else can reproduce your report.
 
 ::: notes
-Twenty duckweed flasks were independently allocated nutrients or control. The
-organic table has twelve independent runs allocated a collection protocol.
-Many fronds in a flask or repeated weighings of one run do not add independently
-treated units. Students should state this before calculation.
+Keep the briefing short and leave the time for the work. Students may choose the organic route if their teacher selects it; both routes use only familiar steps. Ask them to keep a note of any step that fails rather than hiding it.
 :::
 
-## A missing measurement is not zero
+## Choose one study
 
-![Twenty flasks were started, but F17 spilled before weighing, leaving 19 available measurements.](missing-flask.svg){height=365px}
+:::: {.columns}
+::: {.column width="45%"}
+**Duckweed (default)**
 
-Retain the raw record. State **10 control + 9 nutrient** available measurements.
+- 20 flasks, randomly given extra **nutrient** or **control**.
+- Outcome: dry biomass after seven days, **mg**.
+- Compare with the Welch test from Day 17.
+- Report: `duckweed-report.Rmd`
+
+**Organic alternative**
+
+- 12 synthesis runs, **standard** or **modified** protocol.
+- Outcome: product yield, **%**.
+- Descriptive comparison, no test.
+- Report: `organic-study.Rmd`
+:::
+::: {.column width="55%"}
+![Two study options: duckweed biomass in flasks, or collected-product yield from synthesis runs.](study-choice.svg){width="100%"}
+:::
+::::
 
 ::: notes
-The supplied source record explains F17. We do not know its biomass. A zero
-would invent a very small biomass and change the comparison. Keep counts of
-started units and available outcomes distinct.
+Duckweed is a small floating aquatic plant. The organic study needs no chemistry: the maximum possible product mass is supplied. If students made organic-report.Rmd on Day 15, they keep it and use Save As for organic-study.Rmd.
 :::
 
-## Import and check before analysing
+## Write the plan before the code
 
+:::: {.columns}
+::: {.column width="50%"}
+Save in `reports/study-decisions.txt`:
+
+1. **Question**, in one sentence.
+2. **Independent unit**: what was randomly assigned?
+3. **Outcome and units**, and how it is calculated.
+4. **Missing values**: which, and what you will do.
+5. **Plot**, and the **direction** of the comparison (e.g. nutrient − control).
+:::
+::: {.column width="50%"}
+![The analysis goes from the question to the independent unit and data, then to a description; inference needs extra model assumptions.](claim-sequence.svg){width="100%"}
+:::
+::::
+
+::: notes
+The plan takes a few lines and prevents most errors later. For the organic route, say explicitly that no confidence interval or test is added.
+:::
+
+## Count the independent units
+
+:::: {.columns}
+::: {.column width="42%"}
+- Duckweed: the **flask** is the unit. The many fronds in one flask share its water and nutrients.
+- Organic: the **synthesis run** is the unit. Weighing one product three times is still one run.
+- More readings of the same unit do not add replicates (Day 14).
+:::
+::: {.column width="58%"}
+![Four flasks with many fronds each are four units; four synthesis runs with repeated weighings are four units.](independent-units.svg){width="100%"}
+:::
+::::
+
+::: notes
+Ask students to say the unit out loud before they calculate anything. This is also the first question to ask a lab teacher about any new dataset.
+:::
+
+## Import, check, and keep the missing flask
+
+:::: {.columns}
+::: {.column width="50%"}
 ```r
 library(readr)
 library(dplyr)
 library(ggplot2)
-duckweed <- read_csv("data/duckweed.csv", show_col_types = FALSE)
+duckweed <- read_csv("data/duckweed.csv",
+                     show_col_types = FALSE)
 glimpse(duckweed)
-available <- duckweed |> filter(!is.na(biomass_mg))
+available <- duckweed |>
+  filter(!is.na(biomass_mg))
 ```
 
-Check IDs, labels, types, units, missing values, and plausible ranges.
+- Expect **20 rows**, 20 unique `flask_id`s, labels `control` and `nutrient`.
+- F17 was spilled: **10 control + 9 nutrient** measurements available.
+:::
+::: {.column width="50%"}
+![Twenty flasks were started, ten per group; F17 in the nutrient group was spilled, leaving 19 measurements.](missing-flask.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Run from the extracted course project root. All report prerequisites must be in
-its code. The available object makes the exclusion explicit without overwriting
-the raw table. No other value is confirmed as an error.
+A zero for F17 would invent a very low biomass and drag the nutrient mean down. Keep the raw table unchanged; the `available` object makes the exclusion visible. Record checks as findings ("20 rows, 1 missing: F17, spilled"), not as "data were checked".
 :::
 
-## Show observations before a test
+## Plot the flasks, then compare
 
-![Individual available duckweed biomass measurements and group means.](duckweed.svg){height=360px}
-
-Each dot is one flask; diamonds are means. Explain overlap and variation.
-
-::: notes
-This plot uses the actual teaching CSV. It excludes only the unavailable F17
-y-value and the caption in the report should say so. A lower control value
-does not automatically justify exclusion. Group means are not new observations.
-:::
-
-## State the comparison direction
-
+:::: {.columns}
+::: {.column width="45%"}
 ```r
-nutrient <- available |> filter(treatment == "nutrient")
-control <- available |> filter(treatment == "control")
-comparison <- t.test(nutrient$biomass_mg, control$biomass_mg)
+nutrient <- available |>
+  filter(treatment == "nutrient")
+control <- available |>
+  filter(treatment == "control")
+comparison <- t.test(nutrient$biomass_mg,
+                     control$biomass_mg)
 ```
 
-Nutrient minus control: about **7.35 mg**, 95% CI **2.27 to 12.44 mg**.
-
-Report sample sizes and assumptions, not only the p-value.
+- Means: nutrient **39.63 mg**, control **32.28 mg**.
+- Nutrient − control: **7.35 mg**, 95% CI **2.27 to 12.44 mg**, Welch p ≈ **0.007**.
+- The groups **overlap**: F11 (nutrient) is below several controls.
+:::
+::: {.column width="55%"}
+![Individual duckweed biomass values by group with group means as diamonds; nutrient flasks are higher on average but the groups overlap.](duckweed.svg){width="100%"}
+:::
+::::
 
 ::: notes
-The supplied data give Welch p about 0.00723. The interval concerns the mean
-difference, not 95% of flasks. The inference remains conditional on independence,
-the distributional assumptions, and the missing-outcome limitation. Students
-need not derive the test or choose an alternative method catalogue.
+The order of the two vectors sets the direction: nutrient minus control. The interval concerns the mean difference, not 95% of flasks. The low control F08 (19.8 mg) has no recorded error, so it stays.
 :::
 
-## Organic alternative: the maximum is given
+## Organic route: compare yields, not grams
 
-![Y01 yielded 0.62 grams from a supplied maximum of 1.00 gram, giving 62 percent.](yield.svg){height=365px}
+:::: {.columns}
+::: {.column width="45%"}
+- Runs started at different scales, so compare **percentages**:
 
-Yield (%) = 100 × collected mass (g) / supplied maximum mass (g).
+  `yield_percent = 100 * isolated_mass_g / theoretical_mass_g`
+
+- Check Y01 by hand: 100 × 0.62 / 1.00 = **62 %**.
+- Means: standard **68.67 %**, modified **77.00 %** (SD 4.32 and 3.74 percentage points).
+- Difference: **8.33 percentage points**, modified − standard. No test needed.
+:::
+::: {.column width="55%"}
+![Individual product yields for six standard and six modified runs, with group means as diamonds.](organic-yields.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Define theoretical mass as the supplied maximum and isolated mass as collected
-dry product. Purity is assumed solely for this simplified calculation, not
-measured. Other runs start at different scales, making raw masses incomparable
-as yield without normalisation.
+8.33 percentage points is not an 8.33% relative increase. Higher yield does not show higher purity: purity was assumed, not measured.
 :::
 
-## Compare percentages across independent runs
+## Write a result paragraph someone can check
 
-![Individual product yields in standard and modified protocols with group means.](organic-yields.svg){height=365px}
+Include: **direction and size** with units, **available n**, the spread or overlap, the **uncertainty** if you estimated it, and **one limitation**.
 
-Describe means, SD, and overlap. No new test is required for this alternative.
+"Nutrient flasks had on average **7.35 mg more** dry biomass than controls (95% CI 2.27 to 12.44 mg; Welch, p ≈ 0.007; 9 nutrient and 10 control flasks). F17 was spilled and has no measurement."
+
+| Faulty draft | Repair |
+|---|---|
+| "There were 20 biomass results." | 20 flasks, **19** measurements; F17 missing. |
+| "The nutrient plants all grew more." | The groups overlap; the **mean** is higher. |
+| "The SD is the error in the treatment effect." | SD is spread of flasks; the CI is uncertainty in the difference. |
+| "p is the probability that nutrients work." | p assumes no difference and asks how surprising the data are. |
 
 ::: notes
-Six runs per group, no missing outcomes. Means 68.67% and 77%; SDs 4.32 and 3.74
-percentage points. The observed mean difference is 8.33 percentage points, not
-an 8.33% relative increase. Higher yield alone does not establish purity or general
-superiority, safety, or sustainability.
+Ask students to point at the code line or table that produced every number in their paragraph. Rewrite the meaning, not only the strength of the wording ("proves" to "suggests" is not enough).
 :::
 
-## Match the output to the selected question
+## Practise on fresh data: algae cultures
 
-| Duckweed | Organic alternative |
-| --- | --- |
-| Outcome: dry biomass in mg | Outcome: isolated yield in % |
-| Independent unit: flask | Independent unit: synthesis run |
-| Guided Welch comparison and interval | Descriptive mean/SD comparison |
-| One missing biomass | All outcomes available |
-
-Adapt the interpretation to the selected design and outcome.
+:::: {.columns}
+::: {.column width="42%"}
+- `data/algae.csv`: 24 cultures, **reference** or **supplement**; A19 was spilled.
+- Available: **12 reference + 11 supplement**.
+- Means: **28.20 mg** and **33.92 mg**: supplement − reference ≈ **+5.72 mg**.
+- The largest single culture, A11 (41.7 mg), is in the **reference** group: a higher mean does not mean every culture is higher.
+- Putting 0 for A19 would drop the supplement mean to 31.09 mg: wrong.
+:::
+::: {.column width="58%"}
+![Individual algae biomass values for reference and supplement cultures with group means marked; the groups overlap and the highest value is a reference culture.](algae-means.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Students may reuse code patterns, but must change the roles, units, and study
-interpretation. They should not invent a confidence interval to fill a heading
-in the descriptive alternative. Neither study needs a new statistical method.
+This is a short script, algae-transfer.R, and a memo in reports/algae-transfer.txt, not a second full report. The culture is the unit; its many cells are not replicates. Day 24 reproduces this script in a fresh folder; Day 25 looks more closely at A11.
 :::
 
-## Write a result someone can assess
+## Before you finish: the report must run on its own
 
-Include:
+1. Packages and import at the **top** of the report.
+2. Checks and calculations, with findings written down.
+3. Plot of individual units and a small summary table.
+4. Comparison in the stated direction, and the result paragraph.
+5. **Restart R, render**, and read the HTML as a stranger would.
 
-- Direction and size, in the outcome's units.
-- Numbers of available independent units.
-- Individual variation and the required uncertainty, if estimated.
-- One limitation tied to the design, missing data, or simplified assumptions.
+Keep `data/` unchanged and outputs in `output/`. If something fails, write down where.
 
 ::: notes
-Prompt students to distinguish an observed numerical difference from a universal
-claim. Simulated teaching data do not establish real biological or chemical
-effects. Ask which code or table supplies each number in their paragraph.
+The report must not depend on objects created in the console. Paths are relative to the project root. A complete first version today is the goal; Day 24 will expose hidden dependencies.
 :::
 
-## Keep the whole recipe in the report
+## Summary
 
-1. Import data and load packages.
-2. Perform checks and calculations.
-3. Produce figures and summaries.
-4. Explain the results and limits.
-5. Save, restart, and render.
+- One question, one independent unit, one outcome with units: write them down first.
+- Missing is not zero: report started and available counts (20 flasks, 19 measured).
+- Plot the individual units before any summary or test.
+- State the direction (nutrient − control) and report size, uncertainty, n and a limitation.
+- The report must render from a fresh R session using only its own code.
 
-::: notes
-The report must not depend on console-only objects. Source files stay in the
-project root so data/relative paths keep the same meaning. Preserve the input
-CSV and keep derived output separate.
-:::
+**Next (Day 24, reproduce and share):** can someone else run your report in a fresh copy of the project and get the same result?
 
-
-## Start with the claim you intend to support
-
-![An analysis moves from question to independent unit and data to a descriptive result; inference needs additional model assumptions.](claim-sequence.svg){height=350px}
-
-Write the plan before changing the code.
+**Now:** [open the Day 23 exercises](../../week5/23-mini-study.qmd). Leave with `duckweed-report.Rmd` (or `organic-study.Rmd`) and its HTML, `reports/study-decisions.txt`, and the algae script and memo.
 
 ::: notes
-The analysis plan covers question, unit,
-outcome, units, missingness, plot and direction. The descriptive organic route
-stops at a directed observed comparison; the duckweed route adds the taught
-independent inference. One chosen main study is enough.
-:::
-
-## Make checks inspectable
-
-For each check, retain **operation and finding**:
-
-- Identifiers and allocation labels.
-- Measurement types, units, and unavailable values.
-- Derived outcome and available counts.
-- Comparison direction and interpretation.
-
-::: notes
-“All checks passed” is not enough for another reader. Ask students to show a
-count or a named record. They can use existing commands rather than a new
-validation package. One hand calculation helps test the operation's meaning,
-but does not by itself validate experimental independence.
-:::
-
-## Transfer the workflow to a fresh culture study
-
-![Twenty-four algae cultures include twelve reference and twelve supplement records, with A19 unavailable.](algae-counts.svg){height=350px}
-
-New file: `data/algae.csv`; outcome: dry biomass in **mg**.
-
-::: notes
-Algae are photosynthetic organisms, but the task requires no microbiology:
-independent cultures were randomly assigned, and one seven-day harvest produced
-a biomass reading. A19 spilled before weighing. This is a short transfer memo,
-not a requirement to do both duckweed and organic main reports.
-:::
-
-## Check before summarising
-
-```r
-library(readr)
-algae <- read_csv("data/algae.csv", show_col_types = FALSE)
-nrow(algae)
-anyDuplicated(algae$culture_id)
-sum(is.na(algae$biomass_mg))
-```
-
-Expect **24 rows**, **0 duplicated IDs**, **1 missing measurement**.
-
-::: notes
-The available counts are twelve reference and eleven supplement. Keep A19's
-raw row and missing value. State that the culture, not its number of cells,
-is the independent unit. The transfer table has different column and allocation
-names from the plant table: adapt the roles, not only the title.
-:::
-
-## Look at the observations before the summary
-
-![Individual biomass measurements overlap between the two culture allocations.](algae-observations.svg){height=350px}
-
-Which group contains the largest individual observation?
-
-::: notes
-Reference culture A11 has 41.7 mg, larger than every supplement observation.
-This does not contradict a greater supplement mean. Let students answer the
-individual-observation question before showing means, so the plot is read as
-data rather than treated as decoration behind a chosen conclusion.
-:::
-
-## A group mean is not a rule for every culture
-
-![Red diamonds mark the group means while individual reference and supplement observations remain visible.](algae-means.svg){height=350px}
-
-Reference mean ≈ **28.20 mg**; supplement mean ≈ **33.92 mg**.
-
-::: notes
-The supplement group has the higher mean but its values do not all exceed the
-reference values. Both individual observations and the summary are informative.
-The plot alone does not isolate every possible source of biological variation;
-the supplied design and assumptions still matter.
-:::
-
-## Zero would invent a different result
-
-![Incorrectly inserting zero for the unavailable culture lowers the supplement mean relative to using available measurements.](zero-changes-mean.svg){height=350px}
-
-The unavailable value has not become observed information.
-
-::: notes
-The correct available supplement mean is 33.91818 mg. Adding a false zero as a
-twelfth measurement changes it to 31.09167 mg. This is a demonstration of why the
-rule matters, not an alternative recommended analysis. Keep the raw missing
-value and explain the loss rather than choosing a convenient invented number.
-:::
-
-## Repair claims as carefully as code
-
-Faulty statements to challenge:
-
-- “All enrolled flasks have measured biomass.”
-- “The group SD is the error in the treatment effect.”
-- “A higher product yield proves greater purity.”
-
-Use the **specific data and assumptions** in the correction.
-
-::: notes
-Duckweed has nineteen available outcomes out of twenty enrolled flasks. SD is
-individual spread. Organic purity was assumed for a simplified calculation,
-not measured by yield. A useful rewrite changes the claim's meaning, not only
-its strength from proves to suggests. Students record their corrections.
-:::
-
-## Give the difference a direction
-
-![Supplement-minus-reference and reference-minus-supplement have equal sizes and opposite signs.](comparison-sign.svg){height=350px}
-
-The observed supplement-minus-reference difference is about **5.72 mg**.
-
-::: notes
-Reversing the order changes the sign without altering the underlying
-observations. In the duckweed test, the order also determines the interval's
-direction. For the algae transfer memo no new hypothesis test is required.
-If a taught test is run, it does not replace the requested descriptive reasoning.
-:::
-
-## Write a bounded result paragraph
-
-Include unit, available n, direction, spread or overlap, and a limitation.
-
-A larger mean does not imply every treated observation is larger.
-
-::: notes
-The algae memo includes a saved summary and figure. Calculate with unrounded
-means and report A19's loss. Interpret this simulated study within its design
-and assumptions.
-:::
-
-## Retain a decision trail with the result
-
-Save the analysis plan, checks, chosen direction, and interpretation revision.
-
-Then restart and recreate the outputs from the saved source.
-
-::: notes
-The analysis plan records decisions for the chosen main study. The algae memo
-applies the workflow to new data and becomes the next reproduction task.
-:::
-
-## Exercises: a first complete version today
-
-[Open exercises](../../week5/23-mini-study.qmd) · [Quiz](../../week5/23-mini-study-quiz.qmd).
-
-- Default: `duckweed-report.Rmd` plus HTML.
-- Alternative: `organic-study.Rmd` plus HTML.
-- Keep the chosen source and HTML in the project, with raw data intact.
-- Retain the analysis plan and short algae transfer memo/script.
-
-If extending day 15's `organic-report.Rmd`, use **Save As** to preserve it.
-
-::: notes
-The immediate goal is a complete first version, not decorative perfection.
-The next fresh-folder reproduction will expose hidden dependencies.
-Students should save a note of any failed step rather than conceal it.
+Remind students to save a note of anything that failed. These files are the input for Day 24.
 :::

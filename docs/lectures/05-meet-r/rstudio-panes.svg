@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" role="img">
+<title>The four panes of RStudio</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="520" fill="white"/>
+<rect x="20" y="15" width="1060" height="495" rx="6" fill="#e2e8f0" stroke="#64748b" stroke-width="3"/>
+<text x="40" y="45" font-family="Arial, sans-serif" font-size="22" fill="#203247" text-anchor="start" font-weight="bold">RStudio</text>
+<text x="1060" y="45" font-family="Arial, sans-serif" font-size="20" fill="#6b4fa0" text-anchor="end" font-weight="normal">Project: introcomputing</text>
+<rect x="35" y="60" width="505" height="210" rx="10" fill="white" stroke="#3b5bab" stroke-width="3"/>
+<text x="53" y="98" font-family="Arial, sans-serif" font-size="25" fill="#3b5bab" text-anchor="start" font-weight="bold">Editor</text>
+<text x="53" y="132" font-family="Arial, sans-serif" font-size="21" fill="#64748b" text-anchor="start" font-weight="normal">open files: report.Rmd, scripts</text>
+<text x="65" y="185" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">saved instructions</text>
+<text x="65" y="223" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">(a file on disk)</text>
+<rect x="35" y="285" width="505" height="210" rx="10" fill="white" stroke="#2a7f8f" stroke-width="3"/>
+<text x="53" y="323" font-family="Arial, sans-serif" font-size="25" fill="#2a7f8f" text-anchor="start" font-weight="bold">Console  |  Terminal</text>
+<text x="53" y="357" font-family="Arial, sans-serif" font-size="21" fill="#64748b" text-anchor="start" font-weight="normal">R runs what you type here</text>
+<text x="65" y="410" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">&gt; 44.3 - 25.7</text>
+<text x="65" y="448" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">[1] 18.6</text>
+<rect x="560" y="60" width="505" height="210" rx="10" fill="white" stroke="#6b4fa0" stroke-width="3"/>
+<text x="578" y="98" font-family="Arial, sans-serif" font-size="25" fill="#6b4fa0" text-anchor="start" font-weight="bold">Environment</text>
+<text x="578" y="132" font-family="Arial, sans-serif" font-size="21" fill="#64748b" text-anchor="start" font-weight="normal">objects R is holding now</text>
+<text x="590" y="185" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">seedlings</text>
+<text x="590" y="223" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">24 obs. of 4 variables</text>
+<rect x="560" y="285" width="505" height="210" rx="10" fill="white" stroke="#9a7820" stroke-width="3"/>
+<text x="578" y="323" font-family="Arial, sans-serif" font-size="25" fill="#9a7820" text-anchor="start" font-weight="bold">Files  |  Plots  |  Help</text>
+<text x="578" y="357" font-family="Arial, sans-serif" font-size="21" fill="#64748b" text-anchor="start" font-weight="normal">the project folder, your plot</text>
+<text x="590" y="410" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">data/  output/  reports/</text>
+<text x="590" y="448" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">report.Rmd</text>
+</svg>

@@ -7,27 +7,38 @@ title: "Day 10 — A first biological report"
 
 ## Today's question
 
-What can we say about seedling growth from the measurements alone? Combine
-your import, calculation, plotting, and reporting skills in a reproducible report.
+What can we honestly say about seedling growth from these measurements? Today you
+write a short report that answers that question for a reader who was not in the
+room: what was measured, how growth was calculated, what the figure shows, and
+what we cannot conclude yet. It uses everything from days 6–9, and it must render
+on a fresh R session so that anyone can rerun it.
 
-Open your course project and save a copy of `report.Rmd` as `first-report.Rmd`
-in the **project root**. Keeping both source files there preserves the familiar
-`data/` paths. Your generated HTML can go into `reports/`.
+Open the project, open `report.Rmd`, and use **Save As** to save a copy as
+`first-report.Rmd` in the **project folder**, so the `data/` paths keep working.
+The rendered HTML can go into `reports/`.
+
+**Save today:** `first-report.Rmd` and its HTML.
 
 ## What a reader needs
 
-A reader who was not in the room needs to know the question, what was measured,
-how you calculated the result, and what the figure shows. A list of function
-calls is not a methods explanation. “We calculated change in length as final
-minus initial length for each plant” explains the calculation in biological
-terms. The code makes the calculation repeatable.
+A short report has four parts, each answering one question a reader has:
 
-The supplied experiment has 24 independently potted seedlings, twelve randomly
-assigned to each group. Initial and final measurements come from the same
-plant, seven days apart. The treatment label `treated` denotes a nutrient
-treatment; the nutrient formulation is unspecified. These are simulated measurements.
+1. **Question and data:** what did you want to know, and what was measured?
+2. **Methods:** how did you get from the file to the result?
+3. **Results:** what does the figure show, and which numbers matter?
+4. **Interpretation:** what do the results mean, and what can they not tell us?
 
-Start with the familiar analysis:
+The study is described in [`data/README.md`](../data/README.md): 24 seedlings in
+separate pots, 12 randomly allocated to a nutrient treatment and 12 to a control,
+each measured at the start and after seven days, in mm. The nutrient is not
+specified, and the data are simulated. Put these facts in your first section;
+the reader cannot see the dictionary.
+
+## Methods and simple checks
+
+Write the method in words a biologist understands: "Growth was calculated as
+final minus initial length for each plant, in mm." That says more than "we used
+`mutate()`". The code goes in the report too, so the calculation can be rerun:
 
 ```{r}
 library(readr)
@@ -37,8 +48,8 @@ seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE)
 seedlings <- mutate(seedlings, growth_mm = final_mm - initial_mm)
 ```
 
-Put these lines in a code chunk before any result that depends on them. Give the
-reader a few simple checks:
+Then use three short checks to find out whether the data are complete and
+plausible, and report the answers:
 
 ```{r}
 nrow(seedlings)
@@ -46,156 +57,137 @@ sum(is.na(seedlings$growth_mm))
 range(seedlings$growth_mm)
 ```
 
-The file has 24 plants and no missing growth values. The minimum and maximum are
-measurements, not plausible bounds for every seedling in nature. The range
-summarises this dataset; it is sensitive to unusual observations.
+There are **24** plants, **no** missing growth values, and growth ranges from
+**8.0 to 30.8 mm**. So every plant was measured, and every plant grew.
 
-## A figure worth discussing
+## The figure, and what to say about it
 
-Recreate the plot of growth against treatment from day 8. Show every plant, label
-the growth axis in mm, and explain that each dot represents one independently
-potted plant. Include the caption and discuss the visible overlap between groups.
+Use the growth-by-treatment plot from day 8, with every plant as a point, growth
+in mm on the y-axis, and a caption saying that each point is one independently
+potted plant.
 
-A useful opening could be: “Growth varied among individual plants in both
-groups.” Follow it with something specific you can see. Avoid declaring that a
-treatment “works” on the strength of a higher-looking cloud of points. We have
-not yet considered how much uncertainty surrounds a group comparison.
+Then describe it. Good sentences say something specific that the reader can see
+in the figure:
 
-You can compute a simple mean for all plants using `mean(seedlings$growth_mm)`.
-Make clear that this combines treatments and does not answer whether they differ.
-We will calculate and interpret group summaries during week 3.
+- "Growth varied among plants in both groups."
+- "Treated plants tended to grow more: controls grew 8.0–18.7 mm and treated
+  plants 12.2–30.8 mm, but the groups overlap."
 
-## Your practical: four short sections
+Two sentences go too far. "Every treated plant grew more than every control" is
+false: P17 (treated) grew 12.2 mm, less than most controls. "The treatment works"
+needs an estimate of how uncertain the difference is, which comes in week 4. A
+fair limitation is that this is one small, simulated study.
 
-Create these sections in `first-report.Rmd`:
+`mean(seedlings$growth_mm)` gives 18.4 mm, but that mixes both groups, so it does
+not answer whether they differ. Group means come in week 3.
 
-1. **Question and data:** state the question, the number of plants, the treatment
-   allocation, and that these are simulated data. Explain the meaning of a row.
-2. **Methods:** explain how the file was imported and how growth was derived.
-   Include working code with relative paths. Say what the units are.
-3. **Results:** include the labelled individual-plant figure and a small number
-   of calculated facts that help answer the question. Use inline R for at least
-   one result if you are comfortable; correct prose is more important than novelty.
-4. **Interpretation:** describe the pattern, variation, and an important
+## Writing the report
+
+Write the four sections in `first-report.Rmd`:
+
+1. **Question and data:** the question, the design (number of plants, groups,
+   random allocation, simulated data) and what one row is.
+2. **Methods:** how the file was read and growth calculated, in words, with
+   the code chunk and its relative path, and the unit.
+3. **Results:** the labelled figure and the three checks. Use inline code for at
+   least one number, such as the number of plants.
+4. **Interpretation:** the pattern, the variation among plants, and one
    limitation.
 
-Now restart R and run this in the **R Console**, not inside the report (a report
-must not try to render itself):
+Restart R and render from the **Console** (not inside the report):
 
 ```{r}
 rmarkdown::render("first-report.Rmd", output_dir = "reports")
 ```
 
-If it fails, work from the first error and add missing prerequisites to the report.
+If it fails, start from the first error and add whatever the report is missing.
 
-## Transfer to a second table
+## Leaf area and leaf mass
 
-Inspect `data/leaf-mass.csv`. It records one leaf
-from each of 18 independent plants, with area in square centimetres and dry mass
-in milligrams. Make an area-versus-mass scatter plot in a script called
-`leaf-first-look.R`. Use the actual column names from `names(leaves)`. The two
-measurements have different units, so their difference would have no physical meaning. A larger mass and a larger area may
-be associated; one does not establish that one causes the other.
+Does a larger leaf also weigh more? The file `data/leaf-mass.csv` has one leaf from
+each of 18 plants, with its area in cm² and its dry mass in mg. In a script
+`leaf-first-look.R`, read it into `leaves` and draw a scatter plot with
+`leaf_area_cm2` on the x-axis and `dry_mass_mg` on the y-axis, with units in the
+axis labels.
+
+The points lie close to a rising line: leaves from **2.96 to 14.68 cm²** weigh
+from **21.19 to 71.33 mg**, and larger leaves are heavier. No treatment was
+applied here; the plot shows that the two measurements go together in these
+plants.
 
 ::: {.callout-tip collapse="true"}
 ## Hint: adapting the plot
 
-Start with `leaves <- read_csv("data/leaf-mass.csv", show_col_types = FALSE)`.
-Then map `leaf_area_cm2` to x and `dry_mass_mg` to y. The same plotting structure
-can serve a different question when you deliberately change the table, columns,
-labels, and explanation.
+Start with `leaves <- read_csv("data/leaf-mass.csv", show_col_types = FALSE)`, then
+reuse the `ggplot()` code from day 8 with the new table, the new columns, new axis
+labels and `geom_point()` without jitter.
 :::
 
+## Reading your report as a stranger
 
-## Turn a draft into an evidence-based report
+Open the HTML in a browser, without looking at the `.Rmd`, and read it as someone
+who has never seen the data. Note every problem and how you fixed it in
+`reports/report-revision.txt`.
 
-Revise your seedling report. Keep a log of the issue, correction, and result
-in `reports/report-revision.txt`.
-
-1. Read your HTML without looking at the source. Mark where it tells you the
-   biological question, independent unit, number of observations, group labels,
-   measured units, and input filename. Add missing information to the source,
-   not by editing HTML that will be replaced at the next render.
-2. Select three claims from your interpretation. For each, identify the table,
-   figure, or study-description sentence supporting it. Label the claim as a
-   description of these observations, a design fact supplied by the dictionary,
-   or an unsupported inference. Revise a claim that the present analysis cannot
-   support.
-3. Compare two figures made from the same plants: initial versus final length,
-   and group versus growth. Choose the one most directly addressing your main
-   question. Retain another figure only if it answers a stated useful question,
-   rather than because the code produced it. Write an appropriate caption with
-   the quantity, units, and observational unit.
-4. Check the source from its first line. Are imports and packages present before
-   use? Is growth calculated by subtraction? Are source inputs kept unchanged?
-   Are output names informative? Remove obsolete scratch objects and duplicated
-   chunks only after checking which later lines depend on them.
-5. Read the HTML without the source. Locate the answer to the main question
-   and a limitation. Does every treated plant outgrow every control plant?
-   Replace vague wording such as “the graph shows a difference” with a
-   description of the plotted observations.
-6. Restart R and render again, using Knit or a Console render command. Check
-   that the HTML's figures and numbers reflect the saved revision. Save
-   `reports/report-revision.txt` with the original issue, your correction, and
-   evidence that the corrected report reruns. Keep the R Markdown source at the
-   project root even if its HTML is written to `reports/`.
+1. Can you find the question, the input file, the number of plants, the two
+   groups, the unit, and what one point in the figure is? Add whatever is
+   missing to the `.Rmd`, not to the HTML, which is replaced at every render.
+2. Take three sentences from your interpretation and find, for each, the figure,
+   number or dictionary fact that supports it. Rewrite any sentence nothing
+   supports, such as one claiming every treated plant grew more.
+3. If you have two figures (initial versus final length, and growth by group),
+   keep the one that answers your question. For "did treated plants grow more?"
+   that is growth by group, because its y-axis is growth.
+4. Restart R, render again, and check that the HTML shows your corrections.
 
 ::: {.callout-tip collapse="true"}
-## Hint: distinguish an observation from a universal conclusion
+## Hint: a description or a conclusion?
 
-“The treated observations tend to be larger in this sample” is a descriptive
-statement you can examine on individual points. “The treatment always increases
-plant growth” extends far beyond these simulated observations. Before inference
-is taught, state the pattern, overlap, and limits of this small teaching study.
-The words should answer the actual plotted quantity, not a memorised template.
+"In this sample, treated plants tended to grow more, but the groups overlap" can
+be checked against the points. "The treatment always increases growth" goes far
+beyond 24 simulated plants. Before week 4, describe the pattern, the overlap and
+the limits of the study.
 :::
 
-## Deliver a second, smaller laboratory brief
+## A second, smaller brief
 
-Choose **one** of the following familiar input contexts:
-`seedlings-transfer.csv` (another plant study) or `solutions.csv` (calculated
-solution concentrations). Produce one short report named `laboratory-brief.Rmd`
-at the project root.
+Write a second short report, `laboratory-brief.Rmd` in the project folder, about
+**one** of these tables, with the same four sections:
 
-1. Write a clear question and identify what one row represents. For seedlings,
-   use the supplied independent-pot design and millimetre measurements seven
-   days apart. For solutions, rows are six supplied numerical preparations,
-   not independent treatment evidence. Define any chemistry term you use.
-2. Import and inspect the selected table. Record dimensions, column types,
-   identifiers, and missing counts in code or a small readable result. Explain
-   the units from the dictionary rather than assuming R knows them automatically.
-3. Calculate the quantity answering your question. For seedlings use final
-   minus initial length. For solutions, amount in mol is mass in grams divided
-   by supplied molar mass in g/mol; final volume in litres is mL/1000; mmol/L
-   is `1000 * (mass_g / molar_mass_g_mol) / (final_volume_ml / 1000)`.
-4. Make one labelled figure and a small derived table. For solutions, compare
-   supplied mass and calculated concentration by solute, explaining why equal
-   mmol/L need not mean equal weighed grams. For seedlings, show individual
-   growth by group. No test or fitted line is required.
-5. Explain your method, results, and a limitation specific to the chosen
-   context. Distinguish concentrations calculated from a supplied formula
-   from variation measured among plants.
-6. Render in a fresh session, then locate the input and output using your
-   report's description. Save one derived CSV and figure using a
-   `laboratory-brief-` filename prefix. Include the brief's source and data in
-   a tested practice package, and record its location in the revision log.
+- **The 18-plant transfer study** (`data/seedlings-transfer.csv`): did treated
+  plants grow more in the second class's experiment? There are 18 plants, 9 per
+  group, and T01 grew 15.0 mm.
+- **The solution recipes** (`data/solutions.csv`): what concentration does each
+  recipe give? Use
+  `1000 * (mass_g / molar_mass_g_mol) / (final_volume_ml / 1000)` for mmol/L.
+  Each substance gives **50, 100 and 150 mmol/L**. The masses differ between the
+  substances because glucose molecules are heavier than sodium chloride, so the
+  same concentration needs more grams.
 
-**Check and retain:** the plant route has 18 plants and T01 grew 15.0 mm. The
-solution route produces 50, 100, and 150 mmol/L for each solute. Keep one complete
-laboratory brief, your revised earlier report, and the audit/revision notes.
+For either choice:
 
+1. Say what one row is: one plant, or one recipe. For the recipes, define mole
+   and molar mass as on day 6.
+2. Check the table's size, column types and missing values, and report them.
+3. Calculate growth or concentration, make one labelled figure, and save it with
+   a derived table as `output/laboratory-brief-...png` and `.csv`.
+4. Write the interpretation with one limitation for this study: for plants, the
+   small sample and overlap; for recipes, that the values follow from a formula,
+   not from measured variation.
+5. Restart R and render. Then copy the brief with its data and `.Rproj` to a
+   practice folder, render it there, and note the folder in `report-revision.txt`.
 
 ## Completion check
 
-Open the HTML in a browser. Can you identify the question, units, meaning of a
-dot, and main limitation? Then restart R and check that the saved source renders.
+Open your HTML in a browser. Can you find the question, the units, what one dot
+is, and the main limitation? Then restart R and check that the saved `.Rmd` renders.
 
 ::: {.callout-note collapse="true"}
 ## Self-check
 
-The `.Rmd` should contain the imports, derived column, and plot. The HTML should
-contain sentences that make sense without reading every code line. A personal
-path such as a username-specific Desktop location makes the report less portable.
+The `.Rmd` contains the imports, the growth calculation and the plot. The HTML
+reads sensibly without the code. There is no personal path such as
+`C:/Users/anna/Desktop` anywhere in the source.
 :::
 
 **Keep:** `first-report.Rmd`, its HTML, and `leaf-first-look.R` if completed.

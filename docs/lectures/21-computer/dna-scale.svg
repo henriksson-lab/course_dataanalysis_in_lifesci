@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>DNA stored as text uses one byte per letter</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<path d="M50,80 h170 l30,30 v120 h-200 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="220" y1="80" x2="220" y2="110" stroke="#3b5bab" stroke-width="3"/>
+<line x1="220" y1="110" x2="250" y2="110" stroke="#3b5bab" stroke-width="3"/>
+<text x="150.0" y="265" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">data/dna.txt</text>
+<text x="150" y="160" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="middle" font-weight="normal">ACGTACGT…</text>
+<text x="150" y="310" font-family="Arial, sans-serif" font-size="22" fill="#203247" text-anchor="middle" font-weight="normal">40 letters + newline</text>
+<text x="150" y="345" font-family="Arial, sans-serif" font-size="26" fill="#3b5bab" text-anchor="middle" font-weight="bold">= 41 bytes</text>
+<line x1="300" y1="170" x2="430" y2="170" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="365" y="140" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="middle" font-weight="normal">scale up</text>
+<rect x="450" y="70" width="600" height="180" rx="10" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<text x="750" y="120" font-family="Arial, sans-serif" font-size="28" fill="#203247" text-anchor="middle" font-weight="bold">Human genome</text>
+<text x="750" y="170" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">≈ 3.1 billion letters × 1 byte</text>
+<text x="750" y="220" font-family="Arial, sans-serif" font-size="30" fill="#3b5bab" text-anchor="middle" font-weight="bold">≈ 3.1 GB as text</text>
+<rect x="450" y="290" width="600" height="150" rx="10" fill="#fbe9ed" stroke="#a8324a" stroke-width="3"/>
+<text x="750" y="335" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">Split into separate letters in R:</text>
+<text x="750" y="380" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">8 bytes per letter</text>
+<text x="750" y="420" font-family="Arial, sans-serif" font-size="30" fill="#a8324a" text-anchor="middle" font-weight="bold">≈ 25 GB</text>
+</svg>

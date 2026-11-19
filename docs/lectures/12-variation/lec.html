@@ -205,173 +205,182 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="same-average-different-observations" class="slide level2">
-<h2>Same average; different observations</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../../week3/variation-examples.png" height="350"></p>
-<figcaption>Two toy growth groups have the same 14 millimetre mean but different standard deviations.</figcaption>
-</figure>
-</div>
-<p>What does the mean leave out?</p>
-<aside class="notes">
-<p>Give students a moment to read the axis before naming SD. Both sets have mean 14 mm; one contains 13,14,15 and the other 8,14,20. The second set has greater spread. We need to describe centre and variation, not choose one number to represent all plants.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="mean-and-median-describe-a-centre" class="slide level2">
-<h2>Mean and median describe a centre</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)       <span class="co"># 32.5</span></span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(x)     <span class="co"># 10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The mean uses every value. The median is the middle of the ordered values.</p>
-<aside class="notes">
-<p>For an even number of observations, the median averages the two middle values. The large observation changes the mean strongly; it does not make either function wrong. Check unusual values against source information rather than deleting them to make summaries agree.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="measure-deviations-from-the-mean" class="slide level2">
-<h2>Measure deviations from the mean</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="deviations.svg" height="350"></p>
-<figcaption>Growth values 12,14,16 have deviations minus 2,0,plus 2 millimetres from their mean.</figcaption>
-</figure>
-</div>
-<p>Adding the signed deviations gives zero, even with spread.</p>
-<aside class="notes">
-<p>Work through the three numbers slowly. Subtraction uses the same units as the measurement. Positive and negative deviations cancel. Squaring is one way to avoid cancellation and leads to the sample variance used by R.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="variance-has-squared-units-sd-has-the-original-units" class="slide level2">
-<h2>Variance has squared units; SD has the original units</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="squared-units.svg" height="350"></p>
-<figcaption>A two millimetre deviation squared corresponds to four square millimetres.</figcaption>
-</figure>
-</div>
-<p>For 12, 14, 16: variance = <strong>4 mm²</strong>, SD = <strong>2 mm</strong>.</p>
-<aside class="notes">
-<p>The sum of squared deviations is 4+0+4=8. Divide by n−1=2 for sample variance, giving 4 mm². The square root is 2 mm. Explain the denominator as a sample-variance convention that estimates population variance; no derivation is needed. SD is not an error bar for the mean.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="let-r-do-the-arithmetic-while-you-keep-the-meaning" class="slide level2">
-<h2>Let R do the arithmetic, while you keep the meaning</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">16</span>)</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x)</span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>A mean or SD needs its measurement unit in the report.</p>
-<aside class="notes">
-<p>Ask students to predict 14,4,2 before running. Their task is not memorising function names: it is choosing the quantity that answers their question and labelling the output correctly. Neither SD nor variance means every observation lies within a specified range.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="our-control-plants-vary-around-their-mean" class="slide level2">
-<h2>Our control plants vary around their mean</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="control-centre.svg" height="350"></p>
-<figcaption>Individual control growth values and their 15.275 millimetre mean are shown on one axis.</figcaption>
-</figure>
-</div>
-<p>Mean ≈ <strong>15.28 mm</strong>; sample SD ≈ <strong>3.19 mm</strong>.</p>
-<aside class="notes">
-<p>These are the complete clean seedling data, not yesterday’s deliberately incomplete export. State the switch explicitly:12 control plants now contribute. The mean is a summary, not an observed “average plant”. Biological and measurement variation may both contribute to spread.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="changing-the-origin-is-different-from-changing-the-unit" class="slide level2">
-<h2>Changing the origin is different from changing the unit</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="shift-and-scale.svg" height="350"></p>
-<figcaption>Adding a constant shifts the mean; converting millimetres to centimetres changes the numeric scale.</figcaption>
-</figure>
-</div>
-<p>Predict what happens to SD before running R.</p>
-<aside class="notes">
-<p>Adding 10 mm changes 13,14,15 into 23,24,25: mean shifts from 14 to 24, SD remains 1 mm. Dividing by 10 gives 1.3,1.4,1.5 cm: mean 1.4 cm and SD 0.1 cm. Variance divides by 100. This is a units check, not a new statistical method.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="transfer-choice-a-yield-is-a-percentage" class="slide level2">
-<h2>Transfer choice: a yield is a percentage</h2>
-<p>A supplied maximum is <strong>1.00 g</strong>; collected dry product is <strong>0.62 g</strong>.</p>
-<p><code>yield_percent = 100 × collected mass / supplied maximum mass</code></p>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>You write in a lab report: “control seedlings grew 15.3 mm on average.” A reader cannot tell whether every plant grew about 15 mm, or whether some grew 8 mm and others nearly 19 mm. Those are very different biological pictures: one unusual plant, or a treatment that makes plants more variable, would be invisible. <strong>How do we describe both the typical value and how much plants differ?</strong></p>
 <ul>
-<li>Yield = <strong>62%</strong>; no reaction equation is needed.</li>
-<li>SD of several yields is in <strong>percentage points</strong>.</li>
-<li>A higher yield alone does not establish higher purity.</li>
+<li>The <strong>mean</strong> and <strong>median</strong> describe the centre; one unusual value moves them differently.</li>
+<li><strong>Deviations</strong> from the mean lead to the <strong>variance</strong> (squared units) and the <strong>standard deviation</strong> (SD, original units).</li>
+<li>Adding a constant or changing units changes the numbers in predictable ways, which makes a useful <strong>check</strong>.</li>
+<li>The SD describes how much <strong>individual plants</strong> vary. It is not the uncertainty of the mean (Day 14) and does not tell you <em>why</em> plants vary.</li>
+</ul>
+<p>This is a concept day with small hand calculations; centre and spread are used in every later day.</p>
+<aside class="notes">
+<p>Ask students to imagine two seed batches with the same mean growth: one uniform, one with a few plants that hardly grew. A breeder, a field ecologist or a reviewer would care about that difference. Today’s numbers are the tools to say it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-problem-same-mean-different-plants" class="slide level2">
+<h2>The problem: same mean, different plants</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>Group A: 13, 14, 15 mm. Group B: 8, 14, 20 mm.</li>
+<li>Both means are <strong>14 mm</strong>.</li>
+<li>In A plants are alike (SD <strong>1 mm</strong>); in B they differ a lot (SD <strong>6 mm</strong>).</li>
+<li>Reporting only “mean 14 mm” makes the two groups look identical.</li>
+</ul>
+<p>A description needs a <strong>centre</strong> <em>and</em> a <strong>spread</strong>.</p>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../week3/variation-examples.png" style="width:100.0%"></p>
+<figcaption>Two toy growth groups share a mean of 14 millimetres; one set of dots is tightly clustered and the other widely spread.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Give students a moment to read the axis before naming SD. A larger spread is not automatically sloppy work: organisms really differ, and measurement noise also contributes. We need words and numbers for both centre and spread.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="mean-and-median-two-ways-to-describe-the-centre" class="slide level2">
+<h2>Mean and median: two ways to describe the centre</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>uneven_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(uneven_mm)     <span class="co"># 32.5</span></span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(uneven_mm)   <span class="co"># 10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>Mean:</strong> add all values, divide by how many. Every value pulls on it.</li>
+<li><strong>Median:</strong> the middle of the sorted values (average of the two middle ones if n is even).</li>
+<li>Change 12, 14, <strong>16</strong> to 12, 14, <strong>26</strong> mm: the mean moves from 14 to <strong>17.33 mm</strong>; the median stays <strong>14 mm</strong>.</li>
+<li>Neither is wrong. A large value is checked against the source and <strong>kept</strong> if real.</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-one-high-value.svg" style="width:100.0%"></p>
+<figcaption>Changing one value from 16 to 26 millimetres moves the group mean, shown as a diamond, from 14 to 17.33 millimetres.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Ask for predictions before showing the numbers. The changed set also has variance 57.33 mm² and SD 7.57 mm, against 4 mm² and 2 mm before: one value changes spread a lot. This is sensitivity reasoning, not permission to remove a real large value. Day 11’s rule still holds: only source evidence justifies a change.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="spread-starts-with-deviations-from-the-mean" class="slide level2">
+<h2>Spread starts with deviations from the mean</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>Take three growth values: <strong>12, 14, 16 mm</strong>. Their mean is 14 mm.</li>
+<li>Each <strong>deviation</strong> is value minus mean: <strong>−2, 0, +2 mm</strong>.</li>
+<li>Deviations carry the measurement’s units.</li>
+<li>Adding them gives <strong>0</strong>, always: positives and negatives cancel. So the plain average deviation cannot measure spread.</li>
+<li>Squaring removes the sign: 4, 0, 4.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="deviations.svg" style="width:100.0%"></p>
+<figcaption>Growth values 12, 14 and 16 millimetres have deviations of minus 2, 0 and plus 2 millimetres from their mean of 14 millimetres.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Work through the three numbers slowly on the board. Students do this by hand in the exercises and then check with R. The cancellation is a property of the mean, not a coincidence of this example.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="variance-and-standard-deviation" class="slide level2">
+<h2>Variance and standard deviation</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p>For 12, 14, 16 mm:</p>
+<ol type="1">
+<li>Squared deviations: 4 + 0 + 4 = <strong>8 mm²</strong>.</li>
+<li>Divide by <strong>n − 1 = 2</strong>: variance = <strong>4 mm²</strong>.</li>
+<li>Square root: SD = <strong>2 mm</strong>.</li>
+</ol>
+<ul>
+<li>Variance is in <strong>squared units</strong> (mm²), hard to picture.</li>
+<li>SD is back in <strong>mm</strong>, the same units as the plants, so it can be read next to the mean.</li>
+<li>Dividing by n − 1 rather than n is the convention for estimating spread from a sample; R uses it.</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="squared-units.svg" style="width:100.0%"></p>
+<figcaption>A two-millimetre deviation squared gives four square millimetres; the square root of the variance returns to millimetres.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>No derivation of n − 1 is needed; say that with small samples, dividing by n tends to underestimate population spread. SD is not an error bar for the mean, and it does not mean every plant lies within one SD of the mean.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="let-r-do-the-arithmetic-and-check-it-by-hand" class="slide level2">
+<h2>Let R do the arithmetic, and check it by hand</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>growth_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">16</span>)</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>deviations_mm <span class="ot">&lt;-</span> growth_mm <span class="sc">-</span> <span class="fu">mean</span>(growth_mm)   <span class="co"># -2  0  2</span></span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(deviations_mm<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (<span class="fu">length</span>(growth_mm) <span class="sc">-</span> <span class="dv">1</span>) <span class="co"># 4, by the formula</span></span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(growth_mm)                                 <span class="co"># 4   (mm²)</span></span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(growth_mm)                                  <span class="co"># 2   (mm)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Predict each result <strong>before</strong> running it. If R disagrees with your hand calculation, find out why.</li>
+<li><code>var()</code> and <code>sd()</code> use n − 1, as on the previous slide.</li>
+<li>R prints numbers without units. <strong>You</strong> add mm or mm² when you write them down.</li>
 </ul>
 <aside class="notes">
-<p>This is an alternative small task, not additional compulsory work. Theoretical maximum masses are supplied in organic-recovery.csv. Collected dry material is assumed pure for this simplified calculation. Across six standard runs mean yield is 68.67% and SD 4.32 percentage points. Distinguish a percentage scale from relative percentage change.</p>
+<p>Ask students to predict 14, 4 and 2 before running. Their task is not memorising function names: it is choosing the quantity that answers their question and labelling it correctly.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -384,155 +393,33 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="one-changed-observation-can-move-several-summaries" class="slide level2">
-<h2>One changed observation can move several summaries</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-one-high-value.svg" height="350"></p>
-<figcaption>Changing16 to26 mm alters the mean,median and spread differently.</figcaption>
-</figure>
-</div>
-<p>Original: 12, 14, 16 mm. Changed: 12, 14, 26 mm.</p>
-<aside class="notes">
-<p>The new mean is17.33 mm, median14 mm, variance 57.33 mm² and SD 7.57 mm. Ask for predictions before displaying numbers. This is sensitivity reasoning, not permission to remove a real large value.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-common-shift-changes-centre-not-deviations" class="slide level2">
-<h2>A common shift changes centre, not deviations</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-shift.svg" height="350"></p>
-<figcaption>Every value shifts by 10 mm while the pattern of deviations stays unchanged.</figcaption>
-</figure>
-</div>
-<p>Adding 10 mm shifts both the mean and each observation by 10 mm.</p>
-<aside class="notes">
-<p>The shifted vector22,24,26 has mean 24 and SD 2. Show subtraction from each set mean. An SD change under a common shift would signal a calculation or comparison mistake.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="use-units-as-an-arithmetic-check" class="slide level2">
-<h2>Use units as an arithmetic check</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-units.svg" height="350"></p>
-<figcaption>The same three measurements displayed in millimetres and centimetres have rescaled numerical summaries.</figcaption>
-</figure>
-</div>
-<p>Unit conversion changes numbers; it does not change the measured plants.</p>
-<aside class="notes">
-<p>Original variance 4 mm² becomes.04 cm²; SD 2 mm becomes.2 cm. Variance scales with the square of the conversion factor. The smaller numeric SD reflects a different unit, not less biological variation.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="calculate-before-rounding" class="slide level2">
-<h2>Calculate before rounding</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>x_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">26</span>)</span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x_mm)</span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(x_mm)</span>
-<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x_mm)</span>
-<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Keep full values for calculations; round the displayed table and prose.</p>
-<aside class="notes">
-<p>R printing many digits is not proof of precise measurements. Students can show about 17.3 mm mean and 7.57 mm SD while retaining the calculation object. Confirm hand-worked deviations for the original simple vector first.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="another-study-separates-mean-and-spread-again" class="slide level2">
-<h2>Another study separates mean and spread again</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-transfer-variation.svg" height="350"></p>
-<figcaption>The new treated group has a larger mean but a smaller observed SD than controls.</figcaption>
-</figure>
-</div>
-<p>Larger mean does not require larger SD.</p>
-<aside class="notes">
-<p>Transfer control mean 13.66 mm, SD 2.53 mm; treated mean 17.87 mm, SD 1.94 mm. Use actual values rather than the earlier study pattern, where treated spread was larger.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="recreate-the-calculation-in-a-separate-script" class="slide level2">
-<h2>Recreate the calculation in a separate script</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/seedlings-transfer.csv'</span>,</span>
-<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
-<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a>transfer_control <span class="ot">&lt;-</span> <span class="fu">filter</span>(transfer, treatment <span class="sc">==</span> <span class="st">'control'</span>)</span>
-<span id="cb4-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(transfer_control<span class="sc">$</span>growth_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>T01 grew <strong>15.0 mm</strong>; check that subtraction independently.</p>
-<aside class="notes">
-<p>Load readr and dplyr as earlier. New data need their own import and growth column. Each group has 9 complete independent observations. Use separately named objects for the two studies.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="the-sd-does-not-identify-its-own-cause" class="slide level2">
-<h2>The SD does not identify its own cause</h2>
-<p>A group has a larger SD. Is that evidence of:</p>
+<section id="worked-example-our-control-plants" class="slide level2">
+<h2>Worked example: our control plants</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings.csv"</span>,</span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>                      <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">filter</span>(seedlings,</span>
+<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>                  treatment <span class="sc">==</span> <span class="st">"control"</span>)</span>
+<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(control<span class="sc">$</span>growth_mm)    <span class="co"># 15.28</span></span>
+<span id="cb3-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(control<span class="sc">$</span>growth_mm)  <span class="co"># 15.65</span></span>
+<span id="cb3-8"><a aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(control<span class="sc">$</span>growth_mm)     <span class="co"># 10.18 (mm²)</span></span>
+<span id="cb3-9"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(control<span class="sc">$</span>growth_mm)      <span class="co"># 3.19  (mm)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Greater biological diversity?</li>
-<li>More measurement noise?</li>
-<li>A less precise estimated mean?</li>
+<li>The 12 control plants grew from <strong>8.0 to 18.7 mm</strong>; none grew exactly 15.28 mm.</li>
+<li>Treated plants: mean <strong>21.49 mm</strong>, SD <strong>4.87 mm</strong>: higher centre <em>and</em> more spread.</li>
 </ul>
-<p>SD describes the spread. Additional design and measurement information distinguish explanations.</p>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="control-centre.svg" style="width:100.0%"></p>
+<figcaption>The twelve control growth values spread along one axis from 8 to 18.7 millimetres, with a vertical line at their mean of 15.28 millimetres.</figcaption>
+</figure>
+</div>
+</div></div>
 <aside class="notes">
-<p>Observed spread can have multiple sources. Uncertainty in a mean additionally depends on independent sample size and assumptions. A group SD alone does not evaluate all experimental technique.</p>
+<p>We switch to the complete, clean seedlings.csv today, not yesterday’s deliberately incomplete export; say this explicitly. Load readr and dplyr first, as in the practical. The mean is a summary, not an observed “average plant”. Report with units and sensible rounding: 15.3 mm, SD 3.2 mm.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -545,13 +432,27 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="write-a-summary-that-survives-a-unit-change" class="slide level2">
-<h2>Write a summary that survives a unit change</h2>
-<p>Include the quantity, units, n, centre, and individual spread.</p>
-<p>If you convert to cm, revise the mean, SD, variance units, and axis together.</p>
-<p><strong>Which biological comparison should remain unchanged?</strong></p>
+<section id="shifts-and-unit-changes-a-built-in-check" class="slide level2">
+<h2>Shifts and unit changes: a built-in check</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p>Start with 13, 14, 15 mm (mean 14, SD 1).</p>
+<ul>
+<li><strong>Add 10 mm</strong> to every value: mean becomes <strong>24 mm</strong>, SD stays <strong>1 mm</strong>. Moving all plants together does not change how they differ.</li>
+<li><strong>Convert to cm</strong> (÷ 10): mean <strong>1.4 cm</strong>, SD <strong>0.1 cm</strong>, variance ÷ <strong>100</strong> (mm² → cm²).</li>
+<li>The smaller SD in cm is a different unit, not less variable plants.</li>
+<li>If a shift changes your SD, there is a mistake in the code.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="shift-and-scale.svg" style="width:100.0%"></p>
+<figcaption>The same three values shown in millimetres, shifted by ten millimetres, and converted to centimetres: the centre moves, the spread only changes with the unit.</figcaption>
+</figure>
+</div>
+</div></div>
 <aside class="notes">
-<p>The ordering of group means and relative spread should remain consistent under a common positive conversion. A data table with correct numbers but wrong unit labels is still a misleading report.</p>
+<p>In code: mean(close_mm + 10), sd(close_mm + 10), and the same with close_mm / 10. For 12, 14, 16 the variance 4 mm² becomes 0.04 cm² and the SD 2 mm becomes 0.2 cm. Variance scales with the square of the conversion factor. This is a units check, not a new method.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -564,14 +465,158 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="exercises-explain-the-number-you-calculate" class="slide level2">
-<h2>Exercises: explain the number you calculate</h2>
-<p>Choose one short transfer task and keep <strong><code>day12-variation.R</code></strong>.</p>
-<p>What would stay the same if every measurement increased by 10 mm?</p>
-<p>What changes when mm become cm?</p>
-<p><a href="../../week3/12-variation.html">Open exercises</a>.</p>
+<section id="what-the-sd-does-not-tell-you" class="slide level2">
+<h2>What the SD does not tell you</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p>In a second class’s study, treated plants have the <strong>larger mean</strong> (17.87 vs 13.66 mm) but the <strong>smaller SD</strong> (1.94 vs 2.53 mm).</p>
+<ul>
+<li>Centre and spread are separate facts; one does not predict the other.</li>
+<li>A larger SD can come from <strong>biology</strong> (plants really differ) or <strong>measurement noise</strong>. The SD alone cannot say which.</li>
+<li>The SD is about <strong>individual plants</strong>, not about how precisely we know the mean. That is Day 14.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-transfer-variation.svg" style="width:100.0%"></p>
+<figcaption>In the transfer study, treated plants have a higher mean growth than controls but their points are less spread out.</figcaption>
+</figure>
+</div>
+</div></div>
 <aside class="notes">
-<p>Keep the by-hand three-number example before the full dataset. Ask for an explanation of centre and spread. Students should retain the measurement unit and recognise that SD among plants is not uncertainty in a treatment difference.</p>
+<p>In the main study the treated group had both the larger mean and the larger SD; here it is the other way round, so students should use the actual values. A claim such as “the group with the larger SD has the worse technique” goes beyond what the SD shows. The transfer data: data/seedlings-transfer.csv, 9 plants per group, T01 grew 15.0 mm.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="same-tools-in-another-lab-percentage-yield" class="slide level2">
+<h2>Same tools in another lab: percentage yield</h2>
+<p>An organic synthesis run gives <strong>0.62 g</strong> of dry product when at most <strong>1.00 g</strong> was possible.</p>
+<p><code>yield_percent = 100 * isolated_mass_g / theoretical_mass_g</code> = <strong>62%</strong></p>
+<ul>
+<li>Six standard-protocol runs: mean yield <strong>68.67%</strong>, SD <strong>4.32 percentage points</strong>.</li>
+<li>A change from 62% to 70% is <strong>8 percentage points</strong>, not an 8% relative increase.</li>
+<li>Runs used different starting amounts, so raw grams would answer a different question.</li>
+<li>A higher yield alone does not show higher purity or a better method in general.</li>
+</ul>
+<aside class="notes">
+<p>This is a transfer choice from data/organic-recovery.csv, an alternative to the treated-group step in the practical, not extra compulsory work. Collected material is assumed pure in this simplified calculation. Variance is 18.67 squared percentage points.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="report-centre-and-spread-together" class="slide level2">
+<h2>Report centre and spread together</h2>
+<p><strong>Good:</strong> “Control seedlings grew a mean of <strong>15.3 mm</strong> (SD <strong>3.2 mm</strong>, median 15.7 mm, <strong>n = 12</strong> plants).”</p>
+<ul>
+<li>Name the <strong>quantity</strong> (seven-day growth), the <strong>unit</strong>, <strong>n</strong>, the centre and the spread.</li>
+<li>Calculate with full precision; <strong>round only</strong> the numbers you display. Six decimals from R are not six decimals of ruler precision.</li>
+<li>If you convert units, change the mean, SD, variance units and axis labels <strong>together</strong>.</li>
+</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Misreading</th>
+<th>Better</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“The average plant grew 15.3 mm.”</td>
+<td>The mean is a summary; individual plants grew 8.0 to 18.7 mm.</td>
+</tr>
+<tr class="even">
+<td>“The SD is the error of the mean.”</td>
+<td>The SD describes plant-to-plant variation.</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>A table with correct numbers but wrong unit labels is still a misleading report. The ordering of group means and the relative spread stay the same under a positive unit conversion; that is a good check.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Key fact</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mean</td>
+<td>Sum ÷ n; pulled by unusual values (12, 14, 26 → 17.33)</td>
+</tr>
+<tr class="even">
+<td>Median</td>
+<td>Middle of the sorted values; less affected by one extreme (stays 14)</td>
+</tr>
+<tr class="odd">
+<td>Deviation</td>
+<td>Value − mean; deviations always sum to 0</td>
+</tr>
+<tr class="even">
+<td>Variance</td>
+<td>Sum of squared deviations ÷ (n − 1); squared units (mm²)</td>
+</tr>
+<tr class="odd">
+<td>SD</td>
+<td>√variance; original units (mm); describes spread among individuals</td>
+</tr>
+<tr class="even">
+<td>Shift / unit</td>
+<td>+ constant moves the mean only; ÷ 10 divides mean and SD by 10, variance by 100</td>
+</tr>
+<tr class="odd">
+<td>Seedlings</td>
+<td>Control 15.28 mm (SD 3.19); treated 21.49 mm (SD 4.87), n = 12 each</td>
+</tr>
+<tr class="even">
+<td>Limits</td>
+<td>SD does not identify its cause, and is not uncertainty in the mean</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Next (Day 13, group summaries):</strong> calculate these summaries for every group at once, and plot them without hiding the individual plants.</p>
+<p><strong>Now:</strong> <a href="../../week3/12-variation.html">open the Day 12 exercises</a>. Leave with <code>day12-variation.R</code> and a short interpretation of centre and spread with units.</p>
+<aside class="notes">
+<p>Ask: what would stay the same if every measurement increased by 10 mm? What changes when mm become cm? Keep the by-hand three-number example before moving to the full dataset.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

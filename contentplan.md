@@ -4,6 +4,17 @@ Working proposal for a five-week first course at Umeå. This is not an approved
 syllabus. No course code, credit value, or formal timetable is assumed here.
 Written examination design is out of scope.
 
+## 2026-11 restructuring
+
+A course-opening lecture (`lectures/00-course-intro`) motivates computing with
+real spreadsheet failures and data growth. Day 1 now teaches kinds of files;
+the hardware tour moved from Day 2 to a new Day 21 (computer and data size);
+remote work moved to Day 22; the DNA/image breadth day was folded into Day 21;
+ZIP sharing moved from Day 5 to Day 24. All decks follow the "About this
+lecture … Summary" structure in `instructor/lecture-contract.md`, and practical
+pages follow `instructor/practical-style.md`. The course overview and study plan
+were merged into `overview.qmd`.
+
 ## First teaching draft now implemented
 
 All 25 study units below now have student lessons in `week1/`–`week5/`, with
@@ -101,16 +112,16 @@ actual timetable is known.
 
 ### Week 1 — Computers, files, and the command line
 
-- **Day 1: A computer as a laboratory tool.** Introduce a small seedling
-  experiment and its measurements. File versus application; browser versus file
-  manager; Downloads; saving versus opening; folders within folders; file
-  extensions. Download, locate, rename, move, close, and reopen a supplied CSV.
-  Show extensions in the file manager. Keep an untouched raw-data copy.
-- **Day 2: Where is my work?** Draw the folder tree before introducing paths.
+- **Day 1: Kinds of files.** Plain text (CSV, TXT, R, Rmd, sequence text)
+  versus formatted files (Word, Excel, PDF, images). A .docx is a package of
+  XML; the same table as CSV versus .xlsx; spreadsheets changing gene names to
+  dates; Swedish-locale CSVs with semicolons and decimal commas; Word's curly
+  quotes breaking code; extensions are labels. Short setup: download and
+  extract the course folder; keep the raw data untouched.
+- **Day 2: Folders and paths.** Draw the folder tree before introducing paths.
   Home directory, parent folder, absolute/relative paths, local disk versus
-  cloud storage. Create a project with `data/`, `reports/`, and `output/`.
-  Practise finding it after closing applications. Explain CPU, RAM, storage,
-  operating system, applications, and processes through opening and saving data.
+  cloud storage. Unsaved work lives in memory; saved work is on disk. (The
+  CPU/RAM/disk tour moved to Day 21, where it is needed.)
 - **Day 3: The terminal describes the same folders.** Supported Ubuntu/WSL setup
   on Windows; Terminal on Mac. Alternate file-manager and terminal views.
   Introduce prompt, command, argument, Enter, case, spaces, `pwd`, `ls`, `cd`,
@@ -122,10 +133,10 @@ actual timetable is known.
   rows. Introduce `unzip -l` and `unzip` using a supplied archive of lab-group
   files; return to these in day 5's practical. Teacher demonstrates SSH and remote desktop. Students practise connecting
   when accounts are available, and name the computer and folder they are using.
-- **Day 5: Consolidate and meet R.** Repeat the download-to-folder-to-terminal
-  workflow with less guidance using the archive practical below. Start R/RStudio; distinguish editor, console, and
-  terminal; run a calculation and a supplied plot. Demonstrate a complete report
-  so students can see the purpose of the next weeks.
+- **Day 5: Meet R and RStudio.** Open the course project; editor, Console and
+  Terminal panes; a first calculation and a supplied plot; render a finished
+  report so students see where the course is heading. (ZIP sharing moved to
+  Day 24.)
 
 #### Command-line practical: receive and share a laboratory dataset
 
@@ -242,22 +253,22 @@ recognise a limitation and seek advice, not to select from a menu of tests.
 
 ### Week 5 — An analysis that survives reopening
 
-- **Day 21:** Rehearse remote access: connect with SSH, identify the remote home
-  directory, locate a file, disconnect, reconnect, and use remote desktop.
+- **Day 21: How a computer works, and how big is your data?** CPU, RAM, disk,
+  GPU; programs and processes. Estimate the memory a table needs (8 bytes per
+  number; working space) and check with `file.size()` and `object.size()`. DNA
+  as text and an image as numbers, sized. Real biological data sizes and what
+  happens when RAM runs out — motivating a bigger computer.
+- **Day 22: Work on a remote computer.** Connect with SSH, identify the remote
+  home directory, locate a file, disconnect, reconnect, and use remote desktop.
   Practise a supported file-transfer route and check which copy was transferred.
-  Render a small report in the supported R environment. If these skills were
-  completed earlier, use the time for troubleshooting and extra data practice.
-- **Day 22:** A brief breadth session: DNA as text and an image as pixel values.
-  Use supplied tiny examples, such as counting letters and viewing intensity
-  values. Reuse familiar objects and plots; explain the biological question.
-  Keep this to a short demonstration/exercise, not two additional workflows.
+  Render a small report in the supported R environment.
 - **Day 23:** Start a small integrated practice study using a new, documented
   dataset with a familiar structure. Students organise files, check the data,
   plot measurements, and perform one appropriate guided analysis.
-- **Day 24:** Finish the R Markdown report; extract the project into a new folder
-  and attempt to render from a fresh session. Resolve missing files, absolute
-  paths, console-only objects, and missing explanations. This is formative
-  practice, not a proposed examination component.
+- **Day 24: Reproduce and share.** Finish the R Markdown report; package the
+  project as a ZIP, extract it into a new folder and render from a fresh
+  session. A ZIP is a snapshot, not a backup. Resolve missing files, absolute
+  paths, console-only objects, and missing explanations.
 - **Day 25:** Protected catch-up, practice on another dataset, and consolidation.
   Repeat file recovery and report rendering as needed. Do not fill this buffer
   with advanced topics.

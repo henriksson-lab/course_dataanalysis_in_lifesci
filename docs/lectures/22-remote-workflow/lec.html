@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-662ae1889177880cb371f83234c0a158.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.30">
+
+  <meta name="author" content="Data Analysis in Life Sciences">
+  <title>Data Analysis in Life Sciences – One workflow, two computers</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">One workflow, two computers</h1>
+  <p class="subtitle">Day 22 — work on a remote computer and bring the result back</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Data Analysis in Life Sciences 
+</div>
+</div>
+</div>
+
+</section>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>Yesterday’s single-cell table needs about 24 GB of RAM; your laptop has 16 GB or less. Research groups solve this by logging in to a <strong>bigger, shared Linux computer</strong> and running the same R analysis there. But then there are two computers, each with its own files. <strong>You rendered a report remotely: where is it, and how do you get it back?</strong></p>
+<p>Today you will:</p>
+<ul>
+<li>connect to a remote computer and find out which computer and folder you are in;</li>
+<li>copy a project there, check that the copy is complete, and render a report;</li>
+<li>bring the result back and keep a short record of what is where.</li>
+</ul>
+<p>This is a hands-on day. The remote service details (host, login, transfer method) will be supplied separately; until then you rehearse locally. On Day 23 you run a small study from question to report.</p>
+<aside class="notes">
+<p>Link back to Day 21: estimate first, and if the data do not fit, use a bigger computer. HPC2N or another Linux environment will be used; do not invent hostnames or login steps. Students only need to understand the ideas today and practise on the real service when the guide is issued.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="two-computers-two-sets-of-files" class="slide level2">
+<h2>Two computers, two sets of files</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>The laptop and the remote computer each have their <strong>own disk</strong>.</li>
+<li>Both may contain a folder called <code>course project</code> with a <code>report.Rmd</code>. They are <strong>separate copies</strong>.</li>
+<li>A filename means little without saying <strong>which computer</strong> and <strong>which folder</strong>.</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="two-computers.svg" style="width:100.0%"></p>
+<figcaption>A laptop and a remote computer each hold their own separate course-project folder.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Ask where a browser download normally lands. Then ask whether logging in to a remote desktop changes that. It does not. Two identically named folders on different computers do not synchronise.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="two-ways-in-a-terminal-or-a-desktop" class="slide level2">
+<h2>Two ways in: a terminal or a desktop</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><strong>SSH</strong> gives a terminal on the remote computer: the same shell commands as Day 3.</li>
+<li>A <strong>remote desktop</strong> shows the remote computer’s screen in a window.</li>
+<li>Neither one copies files for you.</li>
+<li>The service guide will say whether both see the same home folder.</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="two-interfaces.svg" style="width:100.0%"></p>
+<figcaption>SSH and remote desktop lead to the same remote environment through two different interfaces.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>The general SSH form is ssh your-course-username@the-provided-host; replace the placeholders from the service guide when it is issued. Host-key checks and authentication follow that guide. Never write passwords or login codes in notes or logs.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="which-computer-which-folder" class="slide level2">
+<h2>Which computer? Which folder?</h2>
+<p>After connecting, run in the <strong>remote shell</strong>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">hostname</span>   <span class="co"># which computer answered?</span></span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>        <span class="co"># which folder am I in on that computer?</span></span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>         <span class="co"># what is in that folder?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Write the answers in <code>reports/remote-log.txt</code>. A large service may have several computers with different names.</li>
+<li><code>exit</code> ends the connection and returns you to your laptop’s shell. Run <code>pwd</code> again: now it shows a laptop folder.</li>
+</ul>
+<aside class="notes">
+<p>Demonstrate only on the approved environment. Then make a practice folder with mkdir -p introcomputing-practice, cd into it, exit, reconnect, and find it again. Saved files belong to the disk, not to the terminal window.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="leaving-does-not-delete-your-files" class="slide level2">
+<h2>Leaving does not delete your files</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><code>exit</code> closes the <strong>session</strong> (the connection), not the remote disk.</li>
+<li>Reconnect, <code>cd</code> to the folder, and the saved files are still there.</li>
+<li>Same idea as Day 21: closing a process empties its RAM; saved files stay on disk.</li>
+<li>Whether a running program keeps running after you leave depends on the service.</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="session-storage.svg" style="width:100.0%"></p>
+<figcaption>Ending an SSH session closes the connection while the saved project remains in storage.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Ask: if R was running a long analysis in that session, does it continue after exit? Not necessarily: the service guide will explain how to run work that keeps going. Today we only work interactively.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="moving-files-a-transfer-makes-a-copy" class="slide level2">
+<h2>Moving files: a transfer makes a copy</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>Uploading or downloading creates a <strong>second copy</strong> in a named place.</li>
+<li>Before transferring, write down the <strong>source</strong>, the <strong>destination</strong>, and the direction.</li>
+<li>Editing one copy afterwards does <strong>not</strong> change the other.</li>
+<li>Transfer the whole project (ZIP), not single files, so relative paths still work.</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="transfer.svg" style="width:100.0%"></p>
+<figcaption>A deliberate transfer copies a report between laptop and remote storage.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Use the service’s supported upload/download method; if scp turns out to be the route, its exact syntax belongs in the service guide. Extract the ZIP on the remote side and open its .Rproj, exactly as on Day 1.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="check-the-copy-before-you-analyse" class="slide level2">
+<h2>Check the copy before you analyse</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p>In the <strong>remote R console</strong>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">file.exists</span>(<span class="st">"data/algae.csv"</span>)</span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>algae <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/algae.csv"</span>,</span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>                         <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(algae)                      <span class="co"># 24</span></span>
+<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(algae<span class="sc">$</span>biomass_mg))    <span class="co"># 23</span></span>
+<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a>algae<span class="sc">$</span>biomass_mg[algae<span class="sc">$</span>culture_id <span class="sc">==</span> <span class="st">"A19"</span>]  <span class="co"># NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Same checks on both computers, same answers: <strong>24, 23, NA</strong>.</p>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="algae-counts.svg" style="width:100.0%"></p>
+<figcaption>Twenty-four separate culture records, with one unavailable supplement measurement, A19.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>data/algae.csv: 24 separately grown cultures, 12 reference and 12 supplement, harvested once; A19 spilled before weighing, so its biomass is unavailable (NA, not zero). FALSE from file.exists means R did not find that path from its working directory: check computer, project and folder before typing an absolute laptop path. Matching counts are good evidence but do not prove every value matches.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="render-remotely-then-bring-the-result-back" class="slide level2">
+<h2>Render remotely, then bring the result back</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>Open the remote project and render <code>report.Rmd</code> in the provided R application.</li>
+<li>If R is set up in the remote shell, from the project root: <code>Rscript -e 'rmarkdown::render("report.Rmd")'</code></li>
+<li>Download the HTML into a folder you can name, and open <strong>that</strong> copy.</li>
+<li>To recalculate later you need the source and the data, not only the HTML.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="roundtrip.svg" style="width:100.0%"></p>
+<figcaption>Source and data are transferred in, the report is rendered remotely, and the output is transferred back.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Rscript starts a fresh R process and renders the saved document: the same fresh-session idea as restarting R. Run it only on the permitted execution host named in the service guide. On Windows, keep using native RStudio locally; the Rscript line is for a configured remote shell.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-report-is-missing-on-my-laptop" class="slide level2">
+<h2>The report is missing on my laptop</h2>
+<p>The report rendered remotely, but local Downloads is empty. Before rendering again, check:</p>
+<ol type="1">
+<li>Where did rendering write the HTML <strong>on the remote computer</strong>?</li>
+<li>Was that file actually <strong>transferred</strong>?</li>
+<li>Which <strong>destination folder</strong> received it?</li>
+<li>Which copy did the browser open?</li>
+</ol>
+<p>An empty Downloads folder does not mean the render failed. Rendering again only makes another copy in the same unexpected place.</p>
+<aside class="notes">
+<p>Ask students to answer before showing the list. Distinguish three different failures: the calculation failed, the transfer did not happen, or the result is somewhere other than where you looked. Avoid making final2.html, final3.html while the real problem is location.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="plan-the-copy-before-you-make-it" class="slide level2">
+<h2>Plan the copy before you make it</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>Write <code>reports/transfer-plan.txt</code> first:</p>
+<ul>
+<li>source computer and project path;</li>
+<li>destination computer and project path;</li>
+<li>the input file (<code>data/algae.csv</code>) and the checks to repeat;</li>
+<li>the output you expect back.</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="transfer-plan.svg" style="width:100.0%"></p>
+<figcaption>Source and destination copies name the algae file and the content checks to repeat on each side.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>For the local rehearsal, use two different parent folders, both labelled local. Paths are not secrets, but passwords and login codes never belong in these files. A plan written afterwards can hide a wrong assumption.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="same-filename-different-contents" class="slide level2">
+<h2>Same filename, different contents</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>Two copies of <code>receipt.txt</code> can hold different versions.</li>
+<li>Change one copy, save it, and reopen both: the other copy does <strong>not</strong> change.</li>
+<li>Open the saved files and compare the text before deciding which copy to send.</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="same-name-versions.svg" style="width:100.0%"></p>
+<figcaption>Two files named receipt.txt contain a first and a second revision.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Demonstrate with a disposable receipt, not raw data. Keep both versions until you know which is which, rather than deleting an unfamiliar folder.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="an-unsaved-edit-has-not-travelled" class="slide level2">
+<h2>An unsaved edit has not travelled</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>What you see in an editor can differ from the saved file.</li>
+<li>A transfer copies the <strong>saved</strong> file.</li>
+<li>Save, close, reopen, then transfer.</li>
+<li>Likewise, editing <code>report.Rmd</code> does not change an old HTML until you render again.</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="buffer-and-file.svg" style="width:100.0%"></p>
+<figcaption>A changed editor buffer and the saved receipt contain different revisions until the file is saved.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>This is the RAM/disk split from Day 21 again: the editor buffer is in RAM, the file on disk. Some editors autosave or restore unsaved text, so the test is the saved file.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="equal-size-is-not-equal-contents" class="slide level2">
+<h2>Equal size is not equal contents</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><code>version 1</code> and <code>version 2</code> have the same number of characters, so the same file size.</li>
+<li>Equal row counts are a useful check, but two tables can have equal sizes and different values.</li>
+<li>For small text files, open both and read them; in R, <code>identical(readLines(a), readLines(b))</code>.</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="size-is-limited.svg" style="width:100.0%"></p>
+<figcaption>Two notes with different version text occupy the same number of character positions.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Yesterday file.size counted bytes; here that is exactly why it is not enough: one character per byte, and the same number of characters. Replace a and b with the real paths of the two copies. No hashing theory needed.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Idea</th>
+<th>Key fact</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Why remote</td>
+<td>data larger than laptop RAM need a bigger computer (Day 21)</td>
+</tr>
+<tr class="even">
+<td>Two computers</td>
+<td>each has its own disk; same folder names are separate copies</td>
+</tr>
+<tr class="odd">
+<td>SSH / remote desktop</td>
+<td>a terminal or a screen on the remote computer; neither copies files</td>
+</tr>
+<tr class="even">
+<td><code>hostname</code>, <code>pwd</code>, <code>exit</code></td>
+<td>which computer, which folder; leave without deleting saved files</td>
+</tr>
+<tr class="odd">
+<td>Transfer</td>
+<td>makes a copy; name source, destination and direction</td>
+</tr>
+<tr class="even">
+<td>Checks</td>
+<td>repeat <code>nrow</code>, available counts and named records after copying; equal size ≠ equal contents</td>
+</tr>
+<tr class="odd">
+<td>Missing result</td>
+<td>find it on the remote side, then check the transfer and destination</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Next (Day 23, mini-study):</strong> plan and analyse a small biological study from question to report.</p>
+<p><strong>Now:</strong> <a href="../../week5/22-remote-workflow.html">Open exercises</a> · <a href="../../week5/22-remote-workflow-quiz.html">Quiz</a>. Leave with <code>reports/remote-log.txt</code>, <code>reports/transfer-plan.txt</code>, the receipt and the audit. Until access details arrive, do the local rehearsal and mark the remote steps pending.</p>
+<aside class="notes">
+<p>A local rehearsal checks portable paths and project structure; connecting, authenticating and transferring still need practice on the real service once the guide is issued.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': false,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'visible',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

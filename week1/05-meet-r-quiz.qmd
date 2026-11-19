@@ -1,0 +1,79 @@
+---
+title: "Quiz: Meet R and RStudio"
+---
+
+[Lecture](../lectures/05-meet-r/lec.qmd) · [Exercises](05-meet-r.qmd)
+
+Try each question before opening its hint or answer.
+
+---
+
+**Q1.** What is the difference between R and RStudio?
+
+::: {.callout-tip collapse="true" title="Hint"}
+One calculates; the other is the window you work in.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+R is the program that runs calculations. RStudio is the application around it, with an editor, the Console, and panes for files, plots and objects. RStudio starts R for you.
+:::
+
+---
+
+**Q2.** Where should each instruction run: `pwd`, `grep -F treated samples.tsv`, and `44.3 - 25.7`?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Look at the prompt: `>` waits for R, `$` waits for the shell.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Run `pwd` and `grep` in the terminal's shell. Run the subtraction in the R Console, where it gives **18.6** mm for the supplied plant lengths.
+:::
+
+---
+
+**Q3.** You type `pwd` in the R Console and see `Error: object 'pwd' not found`. Is R broken?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Which program read the instruction?
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No. R does not know shell commands. Type `pwd` in the terminal instead.
+:::
+
+---
+
+**Q4.** `file.exists("data/seedlings.csv")` prints `FALSE`. What should you check first?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A relative path starts from the folder R is working in.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Check that the course project is open (its name in RStudio's top-right corner) and that it is the extracted folder in which `data`, `output` and `reports` sit next to `introcomputing.Rproj`. `getwd()` shows the folder R is working in.
+:::
+
+---
+
+**Q5.** The supplied plot has initial length across and final length up, both in mm, with one point per plant. How many points should there be for the course seedlings, and does the vertical axis show growth?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Read what each axis measures before interpreting it.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+24 points, one per plant. The vertical axis shows final length. Growth is final minus initial length for each plant.
+:::
+
+---
+
+**Q6.** After you quit and reopen RStudio, `seedlings` is gone from the Environment pane, but `report.Rmd` and `report.html` are still in the Files pane. Why?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Memory versus saved files.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+`seedlings` was held in R's memory, which is cleared when R stops. The `.Rmd` and `.html` are files saved on disk. Knitting `report.Rmd` again rebuilds the whole report from the saved data file.
+:::

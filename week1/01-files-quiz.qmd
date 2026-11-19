@@ -1,5 +1,5 @@
 ---
-title: "Quiz: Files and folders"
+title: "Quiz: Kinds of files"
 ---
 
 [Lecture](../lectures/01-files/lec.qmd) · [Exercises](01-files.qmd)
@@ -8,67 +8,103 @@ Try each question before opening its hint or answer.
 
 ---
 
-**Q1.** Which is a file: (i) Excel, (ii) `seedlings.csv`, or (iii) File Explorer?
+**Q1.** Which of these are plain-text files: `seedlings.csv`, `report.Rmd`, `seedling-notes.docx`, `dna.txt`, `seedlings.xlsx`?
 
 ::: {.callout-tip collapse="true" title="Hint"}
-A file stores named information; an application opens or changes it.
+Which of them would show readable words and numbers, and nothing else, in Notepad or TextEdit?
 :::
 
 ::: {.callout-note collapse="true" title="Answer"}
-(ii). `seedlings.csv` stores measurements. Excel is a spreadsheet application; File Explorer is a file manager.
+`seedlings.csv`, `report.Rmd` and `dna.txt` are plain text. `seedling-notes.docx` and `seedlings.xlsx` are compressed ZIP packages that need a word processor or spreadsheet program.
 :::
 
 ---
 
-**Q2.** You close the application displaying a saved CSV. Has the saved file been deleted?
+**Q2.** You open a `.docx` file in a text editor and see `PK` followed by strange symbols. Is the file damaged?
 
 ::: {.callout-tip collapse="true" title="Hint"}
-Distinguish the window displaying information from the file on storage.
+What is a `.docx` file really, underneath?
 :::
 
 ::: {.callout-note collapse="true" title="Answer"}
-No. Closing the application leaves the saved file in its folder. You can find it in the file manager and reopen it.
+No. A `.docx` is a ZIP package of XML files, so a text editor shows raw bytes. Copy it, rename the copy to `.zip` and extract it: the text is in `word/document.xml`.
 :::
 
 ---
 
-**Q3.** A practice copy of `seedlings.csv` is renamed `seedlings.jpg`. Has it become a photograph?
-
-::: {.callout-tip collapse="true" title="Hint"}
-Does renaming rewrite the contents into another format?
-:::
-
-::: {.callout-note collapse="true" title="Answer"}
-No. The comma-separated table remains. The extension is now misleading. Open the practice copy as text to inspect its contents.
-:::
-
----
-
-**Q4.** The first lines of a CSV are:
+**Q3.** The first lines of a CSV are:
 
 ```text
 plant_id,treatment,initial_mm,final_mm
 P01,control,25.7,44.3
 ```
 
-How many plant records are shown? What was P01's increase in length?
+How many plant records are shown? How much did P01 grow?
 
 ::: {.callout-tip collapse="true" title="Hint"}
-The first line names columns. Increase is final length minus initial length.
+The first line names the columns. Growth is final length minus initial length.
 :::
 
 ::: {.callout-note collapse="true" title="Answer"}
-One plant record is shown; the header is not a plant. P01 increased by `44.3 - 25.7 = 18.6` mm.
+One plant record; the header is not a plant. P01 grew `44.3 - 25.7 = 18.6` mm.
 :::
 
 ---
 
-**Q5.** You copy a file from `data` to `output`, then edit the copy. Which file changes? What route information would let you find it again?
+**Q4.** Name two things an Excel file can store that a CSV file cannot. Why does this course still keep data as CSV?
 
 ::: {.callout-tip collapse="true" title="Hint"}
-A copy is another file. The application name alone is not a location.
+Think of what you saw in `examples/seedlings.xlsx`.
 :::
 
 ::: {.callout-note collapse="true" title="Answer"}
-The file under `output` changes; the original under `data` stays as supplied. Record the computer, folder route, and full filename of the saved copy.
+Formatting (bold or coloured cells), formulas, and several sheets. CSV stores values only, but any program, including R and a text editor, can read it, and what you see is exactly what is stored.
+:::
+
+---
+
+**Q5.** A gene list contains `SEPT2` and `MARCH1`. A colleague opens it in Excel, saves it, and sends it on. What may have gone wrong?
+
+::: {.callout-tip collapse="true" title="Hint"}
+What do `SEPT` and `MARCH` look like to a spreadsheet?
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Excel may have turned them into dates such as `2-Sep` and `1-Mar`, and saving made that permanent. About one in five published papers with Excel gene lists contained such errors (Ziemann et al. 2016). The genes are now called `SEPTIN2` and `MARCHF1`.
+:::
+
+---
+
+**Q6.** A classmate's CSV contains the line `P01;control;25,7;44,3`. What is different from the course file, and where does such a file come from?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Look at what separates the values, and at the decimal sign.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Values are separated by semicolons and decimals use a comma (25,7 instead of 25.7). Excel set to Swedish (and many other European languages) saves "CSV" this way. Programs expecting commas will split the rows in the wrong places, so always look at a CSV in a text editor first.
+:::
+
+---
+
+**Q7.** You paste `read.csv(“data/seedlings.csv”)` from a Word document into R and get `Error: unexpected input`. Why?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Look closely at the quote marks.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+Word replaced the straight quotes `"` with curly quotes `“ ”`, which R does not understand. Write code in a text editor or RStudio.
+:::
+
+---
+
+**Q8.** You rename `seedlings.csv` to `seedlings.xlsx`. Is it now an Excel file?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Does renaming rewrite the contents?
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No. The contents are still plain text with commas; only the label changed, and Excel will refuse to open it. Converting a format needs a program that rewrites the file, such as **Save As**.
 :::

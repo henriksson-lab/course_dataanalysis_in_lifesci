@@ -7,29 +7,25 @@ title: "Day 9 — Make a report that runs its own calculations"
 
 ## Today's question
 
-Can someone read our explanation, inspect our calculation, and see the figure
-without copying results manually? An **R Markdown report** combines ordinary text
-with executable R code. Rendering turns that source document into a readable HTML
-report. An HTML report can be opened in a browser; the editable source ends in
-`.Rmd` and should be kept too.
+You have code that calculates growth and draws a figure. How do you hand that to
+someone as a readable report, without copying numbers and pictures into a Word
+file by hand, where they go out of date as soon as the data change? An
+**R Markdown report** is one file, ending in `.Rmd`, that holds your text and your
+R code. **Rendering** it runs the code and produces an HTML page with the text,
+the results and the figures together. When the data change, you render again.
 
-These course webpages are built with Quarto. Your reports use R Markdown. You do
-not need to create a Quarto document or learn a second report system.
+(These course webpages are made with Quarto, a close relative. You only need
+R Markdown.)
 
-## Open the supplied template
+**Save today:** `report.Rmd` and its rendered HTML.
 
-Open the project and then `report.Rmd` from its root folder. First save an
-unchanged backup if you want one. Keep your working `.Rmd` at the project root so
-that `data/seedlings.csv` points to the supplied data. Moving it into `reports/`
-would change the relative location of the data during an ordinary knit.
+## The report template
 
-The template has a short header between `---` lines, including a title and
-`output: html_document`. That header configures the document. Leave the output
-format unchanged for now. A heading in ordinary text starts with `#`, while a
-code comment starting with `#` lives inside a code chunk. Their location matters.
+Open the project and click `report.Rmd` in the Files pane. Keep it in the project
+folder, next to `data/`, so that `data/seedlings.csv` still points to the data;
+moved into `reports/`, the same path would point to a folder that does not exist.
 
-Here is a minimal complete report. The three-backtick fences in the box belong
-in your `.Rmd` file.
+A minimal report looks like this:
 
 <pre><code>---
 title: "Seedling growth"
@@ -56,153 +52,147 @@ mean(seedlings$growth_mm)
 Growth is final minus initial length, measured in millimetres.
 </code></pre>
 
-The fences mark where an R **chunk** starts and ends. Chunk labels such as `import` are names
-for sections of code and must be unique within a report. The inline expression
-in the sentence inserts a calculated result into prose; R executes it during
-rendering. You can begin with ordinary prose and add inline calculations later.
+It has three kinds of content. The **header**, between the two `---` lines, sets
+the title and says the output is an HTML page. Ordinary **text** is written as is;
+`## Question` makes a heading. A **code chunk** starts with three backticks and
+`{r}` and ends with three backticks; the word after `r`, such as `import`, is the
+chunk's **label**, and every label must be different. The sentence with
+<code>&#96;r nrow(seedlings)&#96;</code> is **inline code**: when the report is rendered, R
+replaces it with the number of plants, 24.
 
-## Render, rather than assembling results by hand
+A `#` means different things in the two places: in the text it makes a heading,
+inside a chunk it starts an R comment.
 
-Save the source, then choose **Knit**. Rendering runs the chunks in document
-order and creates an HTML file. For an explicit equivalent command from the R
-Console, use the following command. Do not put it inside `report.Rmd`: a report
-must not try to render itself.
+## Rendering the report
+
+Save the file and click **Knit**. R starts a fresh session, runs the chunks from
+top to bottom, and writes an HTML page that opens in a viewer. You can do the
+same from the **Console**:
 
 ```{r}
 rmarkdown::render("report.Rmd", output_dir = "reports")
 ```
 
-`rmarkdown::render` calls a function in the `rmarkdown` package without loading
-all of that package's functions. Its `output_dir` puts the rendered result in
-`reports/`; the `.Rmd` stays at the project root. The Knit button may initially
-put its HTML next to the source instead. Both are HTML reports; locate the
-actual file rather than assuming it appeared in a particular folder.
+`rmarkdown::render` uses the `render()` function from the `rmarkdown` package.
+`output_dir = "reports"` puts the HTML in `reports/`; the `.Rmd` stays where it
+is. Knit may put the HTML next to the `.Rmd` instead, so look for the file rather
+than assuming where it went. Never put the render line inside the report itself:
+the report would try to render itself.
 
-A report must contain its imports and calculations. An object you created only
-in the Console may let a chunk run interactively, yet be absent during knitting.
-The saved source must be sufficient to rebuild the result from the saved data.
+Because rendering starts fresh, the report must contain every step it needs:
+`library()` lines, the import and the calculations. Something you only typed in
+the Console does not exist when the report is rendered.
 
-## Add a figure and its meaning
+## A figure with a caption
 
-In your report, load `ggplot2` and reuse the growth plot from day 8. Give the
-figure a caption by starting its chunk with this line:
+Load `ggplot2` in the first chunk, and add the growth plot from day 8 in its own
+chunk. `fig.cap` gives the figure a caption:
 
-<pre><code>&#96;&#96;&#96;{r growth-figure, fig.cap="Each point represents one independently potted seedling."}
-# Put the plotting code here.
+<pre><code>&#96;&#96;&#96;{r growth-figure, fig.cap="Each point is one independently potted seedling."}
+ggplot(seedlings, aes(x = treatment, y = growth_mm)) +
+  geom_point(position = position_jitter(width = 0.08, height = 0, seed = 8)) +
+  labs(x = "Treatment", y = "Change in seedling length (mm)")
 &#96;&#96;&#96;
 </code></pre>
 
-Replace the comment with the plotting code, keeping both chunk fences. Write a sentence below the figure
-explaining what the vertical axis measures. A caption identifies what a figure
-shows; the surrounding text explains why it matters. Code can be visible in this
-first report so that your method is easy to inspect.
+The caption says what the figure shows. Below it, write a sentence saying what
+you see, for example that growth varies within both groups and the groups
+overlap.
 
-## Exercises
+## Your first report
 
-1. Render the supplied template before changing it. Confirm the HTML opens.
-2. Change its title, question, and author information; save and render again.
-3. Put the import, growth calculation, and labelled plot in chunks in the right
-   order. Remove repeated chunks that create the same object unnecessarily.
-4. Add methods explaining what one row represents and how growth was calculated.
-5. Deliberately misspell a column name, render, and read the error's chunk name.
-   Fix the spelling and render successfully. Practise recovery, not memorisation.
-6. Restart R and render the document again using the command above.
+1. Render the supplied template before changing anything, to find out whether
+   your setup works. An HTML page should open. If it does not, fix that first.
+2. Change the title and the question to your own words and render again.
+3. Put the import, the growth calculation and the labelled growth figure in
+   chunks, in that order. If the template creates the same object twice, keep
+   one.
+4. Write a short methods paragraph: what one row is (one plant), how growth was
+   calculated, and in which unit.
+5. Misspell a column name on purpose, e.g. `growth_m`, and render. Find the
+   chunk label in the error message, fix the spelling, and render again.
+6. Restart R (**Session → Restart R**) and render once more. It works, because
+   the report contains every step it needs.
 
 ::: {.callout-tip collapse="true"}
 ## Hint: rendering stops
 
-Read the first useful error and its chunk label. Check that the document loads
-packages before using their functions, imports the data before calculating, and
-uses the exact filename and column names. Check every chunk has an opening and
-closing fence. Ask for help with the error text; never attach passwords.
+Read the first error and the chunk label it names. Is the package loaded with
+`library()` before its functions are used? Are the data imported before the
+calculation? Are the file and column names spelt exactly? Does every chunk have
+an opening and a closing fence? When you ask for help, include the error text.
 :::
 
+## When rendering stops
 
-## Make and diagnose a small complete report
+Errors are easier to fix once you have seen them on purpose. Save a copy of your
+report as `report-workshop.Rmd`, in the project folder, and break it in three
+ways, one at a time. Each time, note in `reports/render-recovery.txt` what you
+changed, the first line of the error, and how you fixed it; then fix it and
+render again before the next break.
 
-Save a root-level copy of the starter as `report-workshop.Rmd`. Make deliberate
-errors in this copy, record their messages and repairs, and restore a successful
-render after each.
+1. Give two chunks the same label to find out what R says. It stops with a
+   message about a **duplicate chunk label** and names the label.
+2. Misspell the CSV file name in the import, e.g. `data/seedling.csv`, to find out
+   what a missing input looks like. The error says the file **does not exist**.
+   An object of the same name left in your Console does not help, because
+   rendering starts fresh.
+3. Move the plot chunk above the chunk that calculates `growth_mm`. The error says
+   `growth_mm` (or `seedlings`) was **not found**: chunks run from top to bottom,
+   so a figure can only use what earlier chunks made.
 
-1. Add a sentence describing the input file, simulated study, independent unit,
-   and growth calculation. Read the report in source form and identify which
-   parts are ordinary prose, chunk fences, R instructions, and header settings.
-   A heading outside a chunk is not an R comment, even if both start with `#`.
-2. Keep the import/preparation before the plot. Add an inline result displaying
-   the number of input plants, using the pattern already shown in the lesson.
-   Render with Knit, then find that number in the HTML and identify the code
-   that produced it. Keep installation commands out of the report.
-3. Give every chunk a unique descriptive label. In the disposable workshop copy,
-   deliberately give two chunks the same label and attempt a render. Read the
-   error, record it in `reports/render-recovery.txt`, then restore unique labels.
-4. Deliberately misspell the CSV filename in the import, render, and record the
-   first useful error. Check the project location and actual filename, then fix
-   the spelling. Notice that an object left over in the Console does not make
-   a wrong saved import path correct.
-5. Move a plot chunk above the chunk creating its derived variable, render,
-   and explain the dependency error. Restore the correct order and render
-   successfully. Record which object must exist before the plotting instruction.
-   When comparing errors, change one cause at a time.
-6. Reopen the HTML in a browser after a successful render. Compare it with the
-   `.Rmd`: which is the editable recipe, which is the reading copy, and where
-   are the actual measurements? Close and reopen the project, restart R, and
-   knit again without first running analysis commands manually in the Console.
+Finally, open the HTML in a browser next to the `.Rmd`. The `.Rmd` is the recipe
+you edit; the HTML is the reading copy, and changes made to it are lost at the
+next render. The measurements themselves are in `data/seedlings.csv`.
+
+## A report for the second class's data
+
+Use **Save As** to make `transfer-report.Rmd`, in the project folder, for the
+18-plant study in `data/seedlings-transfer.csv`. The point is a report that
+describes that study and nothing else.
+
+1. Change the import to `data/seedlings-transfer.csv` and call the table
+   `transfer`. Keep the `library()` lines and the growth calculation in the report.
+2. Use inline code to state the number of plants, so the report itself finds out
+   how many there are. The HTML should say **18**.
+3. Rewrite the question, methods and caption for this study: 18 plants, 9 per
+   group. Add the growth-by-group figure and the initial-versus-final figure from
+   `day08-transfer.R`, each with a caption saying what one point is and what the
+   y-axis measures.
+4. Restart R and render. Then search the `.Rmd` for `24` and for `seedlings.csv`.
+   Every hit is a sentence or line that may still describe the other study; fix
+   any that do.
+5. Find out whether the report works in another place: copy
+   `transfer-report.Rmd`, `introcomputing.Rproj`, the `data` folder and empty
+   `output` and `reports` folders into a new practice folder, open that copy's
+   `.Rproj` and render there. If something is missing, note it in
+   `render-recovery.txt`.
+
+The finished transfer report describes 18 plants, 9 per group, none missing, and
+T01 grew 15.0 mm.
 
 ::: {.callout-tip collapse="true"}
-## Hint: record a small reproducible failure, not a screenshot alone
+## Hint: the HTML still says 24
 
-For each experiment write the changed line or chunk label, exact first useful
-error, diagnosis, repair, and successful check. A screenshot may support that
-record, but the saved source is needed to investigate code. Render using Knit
-or the Console.
+A number typed into the text does not change when the data change. Replace it
+with inline code such as <code>&#96;r nrow(transfer)&#96;</code>, and check that the import really
+reads the transfer file.
 :::
-
-## Switch inputs without leaving misleading prose
-
-Create `transfer-report.Rmd` at the project root with **Save
-As**, leaving the workshop source intact. It will describe the eighteen-plant
-`data/seedlings-transfer.csv` study: independent pots, nine allocated to each
-group, lengths in mm measured seven days apart. This is another simulated study,
-not evidence about a real plant treatment. Use only skills already taught.
-
-1. Replace the imported filename and use a consistent object name for that
-   table. Include all library calls, import, and growth calculation in the
-   report. Check dimensions, labels, and missing counts rather than relying on
-   the template's earlier 24-plant result.
-2. Update the question, methods, caption, and any manually written sample-size
-   text. Use an inline calculation for the total row count so the number is
-   tied to the imported table. A report with a new figure but an old dataset
-   description mixes two different studies.
-3. Add the initial-versus-final plot and the individual-growth-by-group plot
-   from your saved day 8 transfer script. Identify the vertical quantity in each
-   caption. You may use the reference pattern rather than reconstructing every
-   plotting option from memory. State what one point represents.
-4. Describe what you observe, identify a question the plots cannot settle,
-   and state a limitation.
-5. Render from a fresh session, locate the produced HTML, and check that the
-   caption, figures, inline count, input name, and prose all describe this same
-   study. Search your source for the old filename and the number 24; investigate
-   any remaining occurrence instead of assuming it is harmless.
-6. Copy the source, `introcomputing.Rproj`, and required `data` inputs into a
-   practice project folder, keeping relative locations. Include `output` and
-   `reports` folders if your code writes there. Open that copy's `.Rproj` and
-   render from its root. Record any missing dependency in `render-recovery.txt`.
-   This tests whether the project works from another location on your laptop.
-
-**Check and retain:** the transfer report describes 18 plants, nine per group,
-with no missing initial/final lengths; T01 grew 15.0 mm. Keep both `.Rmd` sources,
-their HTML outputs, and the recovery log. The same workflow now has two deliberately
-separate input files and two narratives that must not be mixed accidentally.
-
 
 ## Check your understanding
 
 ::: {.callout-note collapse="true"}
 ## Which files do you keep?
 
-Keep the `.Rmd` source, its input data, and the generated HTML. HTML is convenient
-for reading; it does not replace the source needed to update the analysis.
-Changing a number in the prose by hand would break the link to its calculation.
+The `.Rmd` source, its input data and the HTML. The HTML is convenient to read,
+but only the `.Rmd` can make it again.
+:::
+
+::: {.callout-note collapse="true"}
+## Why not just type the number of plants into the sentence?
+
+A typed number stays the same when the data change. Inline code recalculates it
+at every render.
 :::
 
 **Keep:** your saved `report.Rmd` and a successfully rendered HTML report.

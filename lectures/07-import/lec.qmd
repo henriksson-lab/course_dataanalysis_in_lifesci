@@ -1,6 +1,6 @@
 ---
 title: "Read a table without losing its meaning"
-subtitle: "Day 7 — From saved measurements to an R object"
+subtitle: "Day 7 — From a saved file to a table in R"
 author: "Data Analysis in Life Sciences"
 format:
   revealjs:
@@ -20,28 +20,85 @@ format:
 toc: false
 ---
 
-## Importing creates an object in this session
+## About this lecture
 
-![read_csv reads the saved seedling file into a 24-row, four-column object in R memory.](file-to-object.svg){height=390}
+Your supervisor sends a CSV file with lengths of 24 seedlings, and later a results file with many thousands of rows. Remember Day 1: opening a table in a spreadsheet and saving it again can quietly change the data. **How do we bring a table into R unchanged, and check that it contains what we think it contains?**
 
-The saved input is separate from the imported object.
+Today you will:
 
-::: notes
-Open the course project before importing. A CSV is text; importing interprets it as a table. Editing the object leaves the CSV unchanged. Conversely, changing the CSV does not update an already imported object until reread. These are the same disk/memory distinctions from week 1.
-:::
+- make sure R is looking in the right folder for the file;
+- import a CSV file into a table and inspect its size, columns and types;
+- tell labels from measurements, and a missing value from a zero;
+- write down what you checked, so someone else can trust the table.
 
-## Columns have roles and types
-
-![Plant IDs and treatments are labels, while initial and final length columns contain numeric measurements in millimetres.](column-roles.svg){height=390}
-
-One row is one plant. The column header is not another observation.
+Day 6 typed values by hand. From today the values come from files. Day 8 calculates and plots from the imported table.
 
 ::: notes
-Read P01's entire row aloud. The two length readings refer to the same plant seven days apart, not two independent plants. Numeric-looking IDs remain labels. The file's contents cannot establish units or randomisation; use the data dictionary's study description.
+Day 1 showed gene names such as SEPT2 turned into dates; only call back to it here. The new example is real: in October 2020 Public Health England missed about 16,000 positive COVID-19 results because results were passed through the old .xls format, which holds at most 65,536 rows. Neither is a reason to fear spreadsheets for looking at data; they are reasons not to let a program silently rewrite your only copy.
 :::
 
-## Load the importer, then inspect the result
+## Why not just open it in a spreadsheet?
 
+:::: {.columns}
+::: {.column width="45%"}
+- Day 1: a spreadsheet turned the gene name *SEPT2* into the date 2-Sep.
+- Size limits fail silently too. The old `.xls` format stops at 65,536 rows; in 2020 this hid about 16,000 positive COVID-19 tests in the UK.
+- `read_csv()` reads the file and leaves it unchanged on disk. Every check, such as the number of rows, is a line in your script.
+:::
+::: {.column width="55%"}
+![An old .xls sheet holds at most 65,536 rows; the rows beyond the limit are not saved, without any warning.](row-limit.svg){width="100%"}
+:::
+::::
+
+::: notes
+The data were not wrong; the container was too small and nothing warned anyone. In R, the size of a table is checked with one line (dim), which we do shortly.
+:::
+
+## A file on disk, a table in memory
+
+:::: {.columns}
+::: {.column width="42%"}
+- As on Day 1, a **CSV** is plain text: a header line with column names, then one line per row.
+- `read_csv()` reads it and creates a **table object** in R's memory.
+- Changing the object does not change the file. Changing the file does not change the object until you import again.
+:::
+::: {.column width="58%"}
+![read_csv reads the saved seedling file into a 24-row, four-column object in R memory.](file-to-object.svg){width="100%"}
+:::
+::::
+
+::: notes
+Same disk versus memory distinction as week 1 and Day 6. Open seedlings.csv in a text editor once so students see the commas. The raw file stays exactly as supplied all course.
+:::
+
+## First: is R looking in the right folder?
+
+:::: {.columns}
+::: {.column width="45%"}
+```r
+getwd()
+file.exists("data/seedlings.csv")
+```
+
+- `getwd()` should print your **project folder**, not `data`.
+- The second line should print `TRUE`.
+- `data/seedlings.csv` is a **relative path**: it starts from the project folder, so it works on a classmate's computer too.
+:::
+::: {.column width="55%"}
+![The course project folder contains data with seedlings.csv, next to output and reports.](project-relative-path.svg){width="100%"}
+:::
+::::
+
+If you get `FALSE`: open `introcomputing.Rproj` from the extracted folder. Do not paste your personal path into the code.
+
+::: notes
+Common causes of FALSE: working inside the ZIP preview, an extra folder level from extraction, or a different project open. Fix by opening the right project, not by writing C:/Users/anna/... into every line.
+:::
+
+## Import and inspect
+
+:::: {.columns}
+::: {.column width="50%"}
 ```r
 library(readr)
 seedlings <- read_csv("data/seedlings.csv",
@@ -51,166 +108,150 @@ dim(seedlings)
 names(seedlings)
 str(seedlings)
 ```
-
-Expect **24 rows × 4 columns** in this complete teaching dataset.
+:::
+::: {.column width="50%"}
+- `library(readr)` loads the importer. Installed once; loaded in every new session.
+- `head()` shows the first 6 rows only, not the whole table.
+- `dim()`: **24 rows, 4 columns**.
+- `str()`: `plant_id` and `treatment` are text (`chr`); the lengths are numbers (`num`).
+:::
+::::
 
 ::: notes
-A package is installed on storage but loaded in each session. read_csv returns a tibble, a table format; head prints only its first rows. Suppressing the importer message does not replace checking types. Point students at names rather than expecting exact column names from memory.
+read_csv returns a tibble, a kind of table. show_col_types = FALSE only hides a message; it does not replace looking at the types with str(). Have students copy column names from names() rather than typing from memory.
 :::
 
-## Start paths from the project root
+## What does one row mean?
 
-![The course folder contains data with seedlings.csv, alongside output and reports.](project-relative-path.svg){height=390}
-
-```r
-getwd()
-file.exists("data/seedlings.csv")
-```
+:::: {.columns}
+::: {.column width="42%"}
+- One row is **one plant**. P01: control, 25.7 mm at the start, 44.3 mm seven days later.
+- Two lengths in one row are the same plant measured twice, not two plants.
+- `plant_id` and `treatment` are **labels**; the `_mm` columns are **measurements**.
+- The file does not say "mm" or "seven days": that comes from `data/README.md`.
+:::
+::: {.column width="58%"}
+![Plant IDs and treatments are labels; initial and final lengths are numeric measurements in millimetres.](column-roles.svg){width="100%"}
+:::
+::::
 
 ::: notes
-The second command should give TRUE. If not, identify the current folder, the actual extracted tree, and the computer holding the file. Common causes are an extra extraction folder or opening a ZIP preview. Reopen the intended project before retrying the relative path.
+Read P01's row aloud. The header is not an observation. Units, random allocation and the fact that the data are simulated are all in the data dictionary, not in anything R can compute.
 :::
 
-## An unavailable value is not a measured zero
-
-![Two measured lengths surround an unavailable value; the available-value mean is based on two readings.](missing-not-zero.svg){height=390}
-
-`NA` means not available. Explain missingness when reporting a result.
-
-::: notes
-This is a separate toy vector, not a missing entry in seedlings.csv, which is complete. Replacing the unknown value by zero would invent a length measurement. A denominator should count what was actually observed for that summary. The practical later explains missing values more fully.
-:::
-
-## Ask R how the calculation handles missingness
-
-```r
-example_mm <- c(12, NA, 18)
-mean(example_mm)
-mean(example_mm, na.rm = TRUE)
-is.na(example_mm)
-```
-
-The first mean is `NA`; the second is **15 mm from two available values**.
-
-::: notes
-na.rm is an argument to the calculation, not deletion of the original row or an explanation of why data are missing. Ask students to read the is.na result. Later exercises will count missing observations explicitly and retain evidence for data corrections.
-:::
-
-## A computation needs a biological description
+## One column, one vector
 
 ```r
 seedlings$initial_mm
-length(seedlings$initial_mm)
-mean(seedlings$initial_mm)
+length(seedlings$initial_mm)    # 24
+mean(seedlings$initial_mm)      # 22.47
 ```
 
-- `$` selects one column as a vector.
-- Count plants, not the header.
-- Describe an average length **in mm**, not only a number.
+- `$` picks one column by name and gives a vector, like those on Day 6.
+- 24 values: one per plant. The header is not counted.
+- The mean initial length is **22.47 mm**. Always give the unit: R only sees numbers.
+- This mean mixes both groups, so it says nothing yet about the treatment.
 
 ::: notes
-Have students distinguish the count from the mean. The mean initial length combines both allocations; it does not estimate a treatment difference. No hypothesis testing is needed today. The code only answers a meaningful question when the variable and observational unit are understood.
+Ask students to say the result as a full sentence with unit and what was averaged. Comparing the groups is Day 8 and week 3.
 :::
 
-## Type and meaning are different checks
+## Missing is not zero
 
-![Imported fields include identifier labels and measurements with stated units.](import-roles.svg){height=350px}
+:::: {.columns}
+::: {.column width="45%"}
+```r
+mean(c(10, NA, 20))                # NA
+mean(c(10, NA, 20), na.rm = TRUE)  # 15
+mean(c(10, 0, 20))                 # 10
+sum(is.na(seedlings$final_mm))     # 0
+```
 
-Numeric storage alone does not authorise averaging or dividing columns.
+- `NA` = not available: no reading exists.
+- `na.rm = TRUE` leaves it out: mean of **two** values.
+- Writing 0 instead invents a plant of zero length.
+:::
+::: {.column width="55%"}
+![Leaving out one unavailable reading gives a mean of 15; a genuine zero gives a mean of 10.](missing-zero-means.svg){width="100%"}
+:::
+::::
 
 ::: notes
-The solutions table has IDs and names as labels, with numeric mass, molar mass and volume. A supplied chemical name is context, not a request to identify a structure. The dictionary establishes units and row meaning.
+R refuses to give a mean when a value is NA unless asked: it will not pretend all values are known. In a report, say how many values were missing and why if known. seedlings.csv is complete; the messy version on Day 11 is not.
 :::
 
-## Inspect more than the first displayed rows
+## Worked example: a second study
 
+:::: {.columns}
+::: {.column width="48%"}
 ```r
 transfer <- read_csv("data/seedlings-transfer.csv",
                      show_col_types = FALSE)
-dim(transfer)
-head(transfer)
+dim(transfer)                       # 18 4
 tail(transfer)
+length(unique(transfer$plant_id))   # 18
+table(transfer$treatment)           # 9 9
+sum(is.na(transfer$final_mm))       # 0
 ```
+:::
+::: {.column width="52%"}
+![The transfer study has 18 plants, nine per group.](transfer-inventory.svg){width="100%"}
+:::
+::::
 
-head() is a preview, not the sample-size definition.
+- A new name, `transfer`, so the 24-plant `seedlings` table is not overwritten.
+- 18 rows, 18 distinct IDs, 9 per group, nothing missing: what the study description promises.
 
 ::: notes
-The imported table is 18 by 4; initial and final measurements belong to the same plant in each row. Inspect both ends and object structure rather than inferring 24 plants from the preceding lesson.
+tail shows the last rows; head alone could hide problems at the end. unique() counts distinct IDs; repeated IDs would prompt investigation here because the design has one row per plant. Random allocation is stated in the design, not visible in the rows.
 :::
 
-## Check the supplied study’s expected structure
+## A plausible table can still be the wrong one
 
-![The independent transfer study has 18 plants split nine per group.](transfer-inventory.svg){height=350px}
-
-Row counts, unique IDs, and group counts answer related but distinct questions.
+:::: {.columns}
+::: {.column width="42%"}
+- Two studies can have the **same column names**. Both import without errors.
+- Check the numbers against the description: 24 plants or 18? 12 or 9 per group?
+- Same for a lab table: `solutions.csv` has **6 rows, 5 columns**. Mass (g) and molar mass (g/mol) are both numbers, but adding them is meaningless.
+:::
+::: {.column width="58%"}
+![Two study folders hold measurement tables with similar columns, one with 24 and one with 18 plant records.](project-identity.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Use length(plant_id), length(unique(plant_id)), and table(treatment). Repeated IDs can be legitimate in another design; here one row per plant sets the expectation. Random allocation is stated in the design, not demonstrated by sorted rows.
+A wrong file with a plausible name produces plausible output. A numeric type tells you R can do arithmetic, not that the arithmetic makes sense; the dictionary says what each column means.
 :::
 
-## A filename that opens is not the whole audit
+## Write down what you checked
 
-Record the source path, dimensions, types, identifiers, groups, and missing counts.
+A useful import note gives evidence, not just "checked":
 
-Name two facts that only the dictionary provides.
+> `data/seedlings-transfer.csv`: 18 rows × 4 columns, 18 distinct plant IDs, 9 control and 9 treated, no missing lengths. Lengths in mm, seven days apart (from `data/README.md`). Simulated teaching data.
+
+- Facts from R: rows, columns, types, IDs, group counts, missing values.
+- Facts from the dictionary: units, what one row is, how plants were allocated.
 
 ::: notes
-Units, random allocation, experimental unit, elapsed time and simulation status are not established by a successful import. Suppressing the type message does not replace inspection.
+The practical asks for reports/transfer-import-audit.txt and reports/solutions-import-audit.txt. Unusual values prompt questions, never silent deletion.
 :::
 
-## Zero and unavailable give different calculations
+## Summary {.smaller}
 
-![Ignoring one unavailable reading gives mean 15, while recording a genuine zero gives mean 10.](missing-zero-means.svg){height=350px}
+| Idea | Key fact |
+|---|---|
+| Why code, not a spreadsheet | `read_csv()` leaves the file unchanged; spreadsheets can silently convert or drop data (row limits) |
+| File vs object | The CSV stays on disk; the imported table lives in R's memory |
+| Relative path | `data/seedlings.csv` from the project folder; check with `file.exists()` |
+| Inspect | `dim()`, `names()`, `str()`, `head()`, `tail()`: 24 × 4 for `seedlings.csv` |
+| Rows and columns | One row = one plant; IDs and groups are labels; lengths are measurements in mm |
+| Missing | `NA` is not 0; `na.rm = TRUE` leaves it out of that calculation; report how many |
+| Meaning | Units and design come from `data/README.md`, not from R |
 
-The number of available measurements changes too.
+**Next (Day 8, transform and plot):** calculate each plant's growth as a new column and draw a figure where every point is a plant.
 
-::: notes
-For c(10, NA, 20), ordinary mean returns NA; na.rm = TRUE gives 15 from two available values. The vector c(10, 0, 20) has mean 10 from three measurements. Replacing missing by zero invents a value.
-:::
-
-## Read the next table before choosing operations
-
-Import solutions.csv, then inspect:
-
-- Six rows and five columns.
-- Unique solution IDs and two solute labels.
-- Numeric mass, molar mass, and final volume.
-- Units and row meaning from the supplied dictionary.
+**Now:** [open the Day 7 exercises](../../week2/07-import.qmd). Leave with `day07.R`, which imports and inspects `seedlings.csv` and `leaf-mass.csv` and runs from the top after a restart.
 
 ::: notes
-Define a mole as a chemical amount unit and molar mass as grams per mole. Today the learner audits inputs; the next lesson derives concentrations. These are numerical preparation cases, not independently allocated experimental groups.
-:::
-
-## The same kind of project may hold different inputs
-
-![Separate study folders may contain 24 or 18 records with similar column names.](project-identity.svg){height=350px}
-
-Check which input produced the result before changing the written sample size.
-
-::: notes
-A wrong project with a plausible-looking filename can produce plausible output. Restart R, rerun the script, and identify the input behind each audit. Source provenance matters even when file.exists returns TRUE.
-:::
-
-## Keep the import audit useful to another person
-
-A strong audit gives evidence:
-
-“18 rows, 18 distinct IDs, nine per group, no missing lengths.”
-
-It also states what was supplied by the study design.
-
-::: notes
-A useful audit records specific evidence rather than simply saying checked. Save the two audit notes and script. Unusual range values prompt questions and source inspection, not automatic deletion.
-:::
-
-## Import a second table deliberately
-
-[Open the exercises](../../week2/07-import.qmd).
-
-Save `day07.R`, then inspect `data/leaf-mass.csv` too.
-
-Which columns and units differ? What does one row represent there?
-
-::: notes
-The leaf table has eighteen independent plants, one leaf each, area in square centimetres and dry mass in milligrams. A scatter plot can describe association without establishing causation. Reuse the import/inspect workflow while reading that dataset's dictionary rather than assuming the seedling schema applies.
+The extended exercises inspect the 18-plant transfer study and solutions.csv and save two short audit notes in reports/.
 :::

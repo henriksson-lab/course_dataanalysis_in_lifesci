@@ -1,51 +1,47 @@
 ---
-title: "Day 15 — Describe the experiment without overstating it"
+title: "Day 15 — A short descriptive report"
 ---
 
 [Lecture slides](../lectures/15-descriptive-report/lec.qmd) · [Quiz](15-descriptive-report-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 ## Today's question
 
-Can a reader understand the seedling measurements, their variation, and the limits
-of our description? A useful biological report does not need a significance test
-on every page. Today you will make the data handling, figure, summary, and
-interpretation fit together.
+You send your supervisor a figure and the line "treated plants grew more". The
+replies come back: which data file, how many plants, what are the dots, and can
+I rerun it? Today you write one short report that answers all of these: it
+states the question, shows the data checks, the summary table and the figure,
+says in words what they show, and rebuilds itself from the saved data.
 
-Save a new source document, `descriptive-report.Rmd`, at the project root. You
-may copy your first report's structure, but deliberately revise its methods and
-interpretation. Keep `data/` paths relative to this root. The supplied measurements
-are simulated. Plants received a control or nutrient treatment and were measured
-seven days apart; the nutrient formulation is unspecified.
+Save a new file, `descriptive-report.Rmd`, in the project root, next to
+`data/`. You may copy the structure of your day 10 report and then rewrite its
+text. The study is described in the [data dictionary](../data/README.md); the
+data are simulated, and the nutrient formulation is not specified.
 
-Produce **one** descriptive report today. The teacher may choose the organic
-laboratory alternative below instead of the seedling report. In that case save
-`organic-report.Rmd` at the same project root and use its stated variables and
-units throughout.
+Make **one** report today. If your teacher chooses the organic-yield context
+below, make `organic-report.Rmd` instead.
 
-## Choose and state which input you use
+**Save today:** `descriptive-report.Rmd` (or `organic-report.Rmd`) and its HTML.
 
-Use **`data/seedlings.csv` for the core report**. It contains 24 complete plant
-records. Include a data-quality note explaining the checks you performed: unique
-plant IDs, allowed treatment labels, numeric length columns, and missing-value
-counts.
+## The parts of the report
 
-If the teacher asks you to report the repaired day 11 data instead, include the
-repair code or source it from a saved script within the project. State the
-source and retain the unavailable P06 observation. Keep all results consistent
-with that input.
+A short report needs four parts, in this order:
 
-## Build the report in a clear order
+1. **Question:** one or two sentences on what you want to find out.
+2. **Data and methods:** the input file, what one row is (one plant), the outcome
+   and its unit, the checks you made, and how growth was calculated.
+3. **Results:** a table with n, mean, median and SD per group, and a figure of
+   the individual plants with the group means.
+4. **Interpretation:** what the numbers show, in plain words, and what they cannot
+   show yet.
 
-Use this order inside the report:
+Use the complete file `data/seedlings.csv`. If your teacher asks you to use the
+repaired day 11 data instead, include the repair code, say so in the methods, and
+use 23 usable growth values in every count.
 
-1. Load packages and import the input file.
-2. Inspect its structure and document relevant data checks.
-3. Derive `growth_mm = final_mm - initial_mm`.
-4. Calculate the grouped summary with sample counts, mean, median, and SD.
-5. Draw the individual-plant figure with group means.
-6. Explain the centre, spread, overlap, and limitations in ordinary language.
+## Data and methods
 
-Here is a compact data-check block that can appear after import:
+Use `anyDuplicated()`, `count()` and `sum(is.na())` to find out, inside the report,
+whether the file has one row per plant, two groups and complete lengths:
 
 ```{r}
 library(readr)
@@ -58,13 +54,14 @@ sum(is.na(seedlings$final_mm))
 seedlings <- mutate(seedlings, growth_mm = final_mm - initial_mm)
 ```
 
-`anyDuplicated()` returns zero when it finds no duplicate; a positive result
-identifies the position of the first duplicate, not a count of duplicates.
-Include only checking output that helps the reader, but keep the code available
-in the source. Reuse your day 13 summary and figure rather than replacing them
-with a screenshot of the RStudio Environment pane.
+`anyDuplicated()` gives 0 when no ID is repeated (a positive number would be the
+position of the first repeat). You should find 12 plants per group and no missing
+lengths, so the methods can say: "24 plants, 12 per group, no missing lengths;
+growth is final minus initial length in mm."
 
-A table in an R Markdown chunk can be displayed neatly with:
+## Results
+
+Reuse the day 13 summary, printed as a neat table with `knitr::kable()`:
 
 ```{r}
 group_summary <- seedlings |>
@@ -77,37 +74,59 @@ knitr::kable(group_summary, digits = 2,
              caption = "Observed growth and variation by treatment; lengths in mm.")
 ```
 
-The table is generated from code. If the data change, the rendered table can
-change too. A caption must distinguish SD among plants from uncertainty in the
-mean. This report has SD, not confidence intervals.
+The table is calculated when the report renders, so if the data change, the table
+changes with them. Below it, add the day 13 figure of individual plants with red
+diamonds for the means, with a caption that names the unit, the symbols and n.
+The SD in the table describes how plants vary; this report has no confidence
+intervals.
 
-## Write with the question in view
+## Writing the interpretation
 
-A useful description distinguishes three ideas: group averages differ in this
-sample; plants vary within each group; and sample descriptions do not quantify
-all uncertainty about a treatment effect. You can report observed values with
-units and identify the independent unit without declaring a universal result.
+Describe three things: how the group means differ, how much plants vary within
+each group, and how much the groups overlap. For the complete data:
 
-For the complete data, the group means are about 15.3 mm for controls and 21.5 mm
-for treated plants. Check your table rather than copying these numbers into
-prose without verification. The treated group also has more spread in these
-data. The individual observations overlap even though group means differ.
+> Treated seedlings grew a mean of 21.5 mm and controls 15.3 mm (12 plants each).
+> Treated plants also varied more (SD 4.9 mm against 3.2 mm), and the two groups
+> overlap: the smallest treated plant grew 12.2 mm, less than most controls.
 
-## Alternative context: report collected-product yield
+Check each number against your table before you write it. "Every treated plant
+grew more" would be false, as the figure shows. How uncertain the 6 mm difference
+is, and whether chance could produce it, is the question of week 4, so end with
+that as the limitation.
 
-Use this in place of the seedling report if selected. The question is: **what
-percentage of the supplied maximum product mass was collected in each run, and
-how does it vary between protocols?** All data are simulated. A synthesis run
-is one independently carried-out product-making experiment. Twelve independent
-runs were randomly assigned to two protocols, six to each. A protocol is a
-specified method.
+## Rendering from a fresh session
 
-`theoretical_mass_g` is the supplied maximum possible product mass for that
-run's starting amounts. `isolated_mass_g` is the dry collected product mass,
-assumed pure for this simplified calculation. Both are in grams. Calculate
-percentage yield with `100 * isolated_mass_g / theoretical_mass_g`, so Y01 is
-`100 * 0.62 / 1.00 = 62%`. Theoretical masses differ with starting scale;
-compare percentage yields to account for the different starting amounts.
+Restart R (**Session → Restart R**) and run this in the **R Console**, not in a
+chunk inside the report:
+
+```{r}
+rmarkdown::render("descriptive-report.Rmd", output_dir = "reports")
+```
+
+The report must then load its own packages, read its own data and create every
+object, because nothing from your earlier session is available. Because the
+`.Rmd` is in the project root, `data/seedlings.csv` points to the right file, and
+`output_dir = "reports"` puts the HTML in `reports/`. A report must never contain
+its own render command.
+
+::: {.callout-tip collapse="true"}
+## Hint: the render fails with "object not found" or "file not found"
+
+"Object not found" means the report uses something that only existed in your
+Console; add the code that creates it to the report. "File not found" usually
+means the `.Rmd` is not in the project root or the path points to a personal
+folder such as `Downloads`. Read the first error message and the chunk name it
+gives.
+:::
+
+## Another lab: percentage yield
+
+Use this instead of the seedling report if your teacher chooses it. Twelve
+independent synthesis runs in `data/organic-recovery.csv` were randomly assigned to
+a standard or a modified protocol, six each. The question is: what percentage of
+the possible product was collected in each run, and how does that differ between
+protocols? Calculate `yield_percent = 100 * isolated_mass_g / theoretical_mass_g`
+(Y01 gives 62%) and summarise by protocol:
 
 ```{r}
 organic <- read_csv("data/organic-recovery.csv", show_col_types = FALSE) |>
@@ -119,137 +138,66 @@ organic_summary <- organic |>
 organic_summary
 ```
 
-Follow the same report order: import and check IDs, labels, numeric masses,
-missing values, and positive theoretical masses; calculate yield; show a table
-and individual-run plot; then interpret centre, spread, and overlap. Both groups
-have six available runs. Mean yields are about 68.67% and 77.00%; SDs are about
-4.32 and 3.74 **percentage points** for standard and modified protocols.
-Label the y-axis “Isolated product yield (%)” and identify one point as one run.
-Repeated weighings of one product batch are technical repeats, not new runs.
+Follow the same four parts, with checks of run IDs, protocol labels, missing
+values and positive theoretical masses. You should find mean yields of 68.67% and
+77.00%, with SDs of 4.32 and 3.74 percentage points (standard and modified). Plot
+one point per run with the y-axis "Isolated product yield (%)". In the
+limitation, say that the product is assumed pure, so yield says nothing about
+purity. Render with `"organic-report.Rmd"` in the command above.
 
-This is descriptive work: no t-test is needed. A higher mean yield does not
-establish greater purity, safety, environmental benefit, or superiority in other
-reactions. Write a limitation tied to the small simulated set and the assumed
-purity. Keep the source and data together so the report can render from scratch.
+## Revising your report
 
-## Build and check the report
+1. Close RStudio, open the HTML in a browser, and find out whether a reader can
+   find the question, the input file, the unit, the outcome with its unit, the
+   meaning of the symbols, and the main limitation. Add a sentence or a label for
+   anything missing.
+2. Replace two numbers in your results text with **inline R**, so they are
+   calculated when the report renders: for example
+   <code>We measured &#96;r nrow(seedlings)&#96; plants.</code> renders as "We
+   measured 24 plants." Render to find out whether they appear; the object must be
+   created earlier in the report.
+3. Rewrite these weak sentences if your draft has anything like them: "The
+   results were good" (name the pattern and its size), "The treated group had more
+   error" ("treated plants varied more, SD 4.9 mm"), "The computer removed the bad
+   values" (say which value changed and which record supported it).
+4. Copy the project folder to a new location and render there to find out whether
+   the report depends on anything outside it. Record what failed, what you changed
+   and the result of the rerun in `reports/day15-revision.txt`.
 
-1. Complete the report with a question, data/design paragraph, methods, table,
-   figure, and interpretation. Keep it short enough that each part earns its place.
-2. Include the number of independent plants, or independent synthesis runs for
-   the alternative, and state what the figure's symbols represent. Name any
-   exclusions or missing measurements.
-3. Restart R and run this command in the **R Console**, not in a code chunk
-   inside the report (a report must not try to render itself):
+## A second class's data
 
-```{r}
-rmarkdown::render("descriptive-report.Rmd", output_dir = "reports")
-```
+Write a second, shorter report, `transfer-description.Rmd`, in the project root,
+about the 18 plants in `data/seedlings-transfer.csv`. Start from your report's
+structure, but replace the import, every object name, number, caption and
+sentence, because the new data tell a different story.
 
-For the organic alternative, replace the quoted filename with
-`"organic-report.Rmd"`; render only the report you chose.
-
-4. Read the HTML with RStudio closed. Check that it identifies the units, input
-   file, observational unit, main pattern, and main limitation.
-5. If remote R access is available, locate the project on that computer and
-   repeat the render there using the supplied connection instructions. First
-   identify whether the R session and data are local or remote. Otherwise,
-   repeat from a newly opened local project.
-
-::: {.callout-tip collapse="true"}
-## Hint: reproducibility is a file relationship
-
-An HTML file beside an `.Rmd` is not enough if the source expects data in your
-personal Downloads folder. Keep the documented project structure, original data,
-and source together. The fresh-session render reveals missing dependencies.
-:::
+1. Use the same checks to find out whether the file is complete: 18 rows, 9 per
+   group, no missing lengths.
+2. Make the table and figure. You should get control: mean 13.66 mm, median
+   12.9 mm, SD 2.53 mm; treated: mean 17.87 mm, median 17.1 mm, SD 1.94 mm.
+3. Write the interpretation. This time the treated plants varied **less** than the
+   controls, so a sentence copied from your first report would be wrong. Render
+   from a fresh session and note in `reports/day15-revision.txt` where the HTML
+   ended up.
 
 ## Check your understanding
 
 ::: {.callout-note collapse="true"}
-## A good limitation is specific
+## What makes a limitation useful?
 
-“The sample is small” is less informative than naming the independent unit,
-noting overlap or variation, and explaining that today's report describes the
-sample without yet estimating uncertainty in a treatment difference. Missing
-observations, when present, should also be counted and discussed.
+It is specific. "The sample is small" says little. "Each group has 12 plants, the
+groups overlap, and this report describes the sample without estimating how
+uncertain the difference between the means is" tells the reader what to be
+careful about.
 :::
 
-## Revise the report
+::: {.callout-note collapse="true"}
+## The report renders only while your objects are in the Environment. What is wrong?
 
-Revise your selected descriptive report. Save a revision log in
-`reports/day15-revision.txt`; keep the report source at project root.
-
-1. Read only the rendered HTML, with the code initially closed. Write down the
-   question, independent unit, input filename, measurement or derived outcome,
-   and units. If any cannot be found, add a specific sentence or label rather
-   than relying on the reader to infer it from an object name.
-2. Inspect every numerical statement. Match it to the code and table that
-   produced it. Check n against available observations, not all lines in a
-   CSV. Record whether you used complete seedling data, the repaired exercise,
-   or the independent organic-run context, and carry that choice through all
-   counts, captions, and limitations.
-3. Replace three weak sentences. Use these starting examples: “The results
-   were good”; “the treatment had more error”; “the computer removed the bad
-   values.” Your replacements must identify a measured pattern, a defined
-   quantity such as SD, or an evidence-supported action. Avoid claiming an
-   effect has been tested in this descriptive report.
-4. Check that the figure shows observations with units. Identify what each
-   summary symbol means. Put the figure beside a small table that answers a
-   complementary question; remove redundant raw printouts if they do not help
-   a reader.
-5. Add two inline values in the results prose using the R Markdown pattern
-   already introduced: one count and one mean or SD. Test them by rendering.
-   The object must be created earlier inside the document. Keep interpretation
-   in ordinary prose rather than assuming inline code writes a conclusion.
-6. Extract a fresh course folder in a new location, add your source and
-   required inputs, and render there. Record and fix any failure, then rerun.
-7. Save the revised HTML and its `.Rmd` source. Write a compact change log:
-   issue, evidence, correction, and rerun result. Keep the previous source as
-   a clearly named backup.
-
-::: {.callout-tip collapse="true"}
-## Hint: separate numerical checks from wording checks
-
-The complete seedling table has 24 plants; the repaired exercise has 24 plant
-records but 23 observed growths. The organic alternative has 12 independent
-runs, six per protocol, with no missing masses. A report may use any selected
-route, but cannot switch silently between these denominators. Use the Console
-for a `rmarkdown::render()` call; never put a self-render command into the report.
+The report uses objects created in the Console. Put the code that creates them in
+the report, restart R and render again.
 :::
 
-## Describe a second study
-
-The second study supplies `data/seedlings-transfer.csv`: 18 independent potted
-plants, nine randomly assigned to each allocation, initial and final lengths
-in mm seven days apart. The task is to **describe** growth and its variation;
-use descriptive summaries and figures.
-
-1. Create `transfer-description.Rmd` in the project root. Start from your
-   chosen source's structure, but remove old imports, variable names, numbers,
-   and biological descriptions that no longer apply. A template is a structure
-   to adapt to the new data.
-2. State the new question, independent unit, input, units, and growth formula.
-   Include checks for identifiers, group counts, and missingness in the saved
-   source. If you used the transfer dataset in earlier scripts, recreate its
-   objects inside this report rather than depending on the Environment pane.
-3. Produce one labelled individual-point figure and a group table with n,
-   mean, median, and SD. Choose sensible rounding in the displayed table.
-   Explain the distinction between the 18 input rows and the two summary rows.
-4. Write results and interpretation using calculated numbers and one
-   limitation. Address direction, overlap, and spread among plants.
-5. Render after restarting and locate the actual output HTML. If you render
-   into `reports/`, document that destination. Confirm that changing only the
-   report title does not change its calculations, and that changing an input
-   filename requires appropriate new checks and prose.
-6. Make a handover note listing the files needed to reproduce
-   the new report. Open the report on another computer if supported; otherwise
-   use a separately located project copy. Record which kind of portability
-   check you actually performed, without claiming an untested environment.
-
-**Additional outputs:** revised chosen report, revision log, the self-contained
-transfer report and HTML, and the handover note.
-
-**Keep:** your chosen `descriptive-report.Rmd` or `organic-report.Rmd` and its
-HTML, with the code and data needed to render it.
+**Keep:** `descriptive-report.Rmd` or `organic-report.Rmd`, its HTML, and the data
+it needs to render.
 Next: [from description to a comparison](../week4/16-comparisons.qmd).

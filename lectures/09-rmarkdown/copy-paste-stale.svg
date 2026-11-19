@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 540" role="img">
+<title>A hand-copied report keeps old numbers after the data change; a rendered report is rebuilt from the data</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1200" height="540" fill="white"/>
+<text x="30" y="50" font-family="Arial, sans-serif" font-size="28" fill="#a8324a" text-anchor="start" font-weight="bold">Copy and paste</text>
+<path d="M40,80 h120 l30,30 v80 h-150 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="160" y1="80" x2="160" y2="110" stroke="#3b5bab" stroke-width="3"/>
+<line x1="160" y1="110" x2="190" y2="110" stroke="#3b5bab" stroke-width="3"/>
+<text x="115.0" y="225" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">data (corrected)</text>
+<path d="M330,80 h120 l30,30 v80 h-150 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="450" y1="80" x2="450" y2="110" stroke="#3b5bab" stroke-width="3"/>
+<line x1="450" y1="110" x2="480" y2="110" stroke="#3b5bab" stroke-width="3"/>
+<text x="405.0" y="225" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">script</text>
+<line x1="205" y1="135" x2="315" y2="135" stroke="#64748b" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="495" y1="135" x2="640" y2="135" stroke="#64748b" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="568" y="120" font-family="Arial, sans-serif" font-size="20" fill="#64748b" text-anchor="middle" font-weight="normal">copy by hand</text>
+<rect x="660" y="70" width="480" height="140" rx="10" fill="#fbeff2" stroke="#a8324a" stroke-width="3"/>
+<text x="680" y="115" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="start" font-weight="normal">Word: &quot;24 plants; mean</text>
+<text x="680" y="148" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="start" font-weight="normal">growth 18.4 mm&quot;  + old figure</text>
+<text x="680" y="185" font-family="Arial, sans-serif" font-size="21" fill="#a8324a" text-anchor="start" font-weight="normal">still the numbers from before</text>
+<line x1="30" y1="270" x2="1170" y2="270" stroke="#cbd5e1" stroke-width="2"/>
+<text x="30" y="320" font-family="Arial, sans-serif" font-size="28" fill="#2a7f8f" text-anchor="start" font-weight="bold">R Markdown</text>
+<path d="M40,350 h120 l30,30 v80 h-150 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="160" y1="350" x2="160" y2="380" stroke="#3b5bab" stroke-width="3"/>
+<line x1="160" y1="380" x2="190" y2="380" stroke="#3b5bab" stroke-width="3"/>
+<text x="115.0" y="495" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">data (corrected)</text>
+<path d="M330,350 h120 l30,30 v80 h-150 Z" fill="#eef2ff" stroke="#3b5bab" stroke-width="3"/>
+<line x1="450" y1="350" x2="450" y2="380" stroke="#3b5bab" stroke-width="3"/>
+<line x1="450" y1="380" x2="480" y2="380" stroke="#3b5bab" stroke-width="3"/>
+<text x="405.0" y="495" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="middle" font-weight="normal">report.Rmd</text>
+<line x1="205" y1="405" x2="315" y2="405" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="495" y1="405" x2="640" y2="405" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="568" y="390" font-family="Arial, sans-serif" font-size="20" fill="#2a7f8f" text-anchor="middle" font-weight="normal">render</text>
+<rect x="660" y="340" width="480" height="140" rx="10" fill="#e6f3f5" stroke="#2a7f8f" stroke-width="3"/>
+<text x="680" y="385" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="start" font-weight="normal">report.html: text, numbers and</text>
+<text x="680" y="418" font-family="Arial, sans-serif" font-size="23" fill="#203247" text-anchor="start" font-weight="normal">figure made from the data now</text>
+<text x="680" y="455" font-family="Arial, sans-serif" font-size="21" fill="#2a7f8f" text-anchor="start" font-weight="normal">change the data → render again</text>
+</svg>

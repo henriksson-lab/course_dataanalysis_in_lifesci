@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.7.30">
 
   <meta name="author" content="Data Analysis in Life Sciences">
-  <title>Data Analysis in Life Sciences – Inspect laboratory data before calculating</title>
+  <title>Data Analysis in Life Sciences – Unzip and inspect laboratory data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -193,7 +193,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Inspect laboratory data before calculating</h1>
+  <h1 class="title">Unzip and inspect laboratory data</h1>
   <p class="subtitle">Day 4 — Which samples received the treatment?</p>
 
 <div class="quarto-title-authors">
@@ -205,17 +205,19 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="four-samples-one-manifest" class="slide level2">
-<h2>Four samples, one manifest</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="manifest-lines.svg" height="390"></p>
-<figcaption>The supplied manifest contains one header and four sample records linked to measurement filenames.</figcaption>
-</figure>
-</div>
-<p>This small simulated shell dataset is separate from the 24-plant R dataset.</p>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>A lab group sends you <code>lab-data.zip</code>: four seedling pots, two treated and two controls, one length measurement each. <strong>Which samples were treated, and are they longer?</strong> Data often arrive like this, as a ZIP of several files. Before any statistics you need to see what you received and pick out the right records.</p>
+<p>Today you will:</p>
+<ul>
+<li>list and unpack a ZIP in the terminal;</li>
+<li>read the manifest that says which file belongs to which sample;</li>
+<li>pick out lines with <code>grep</code>, count them with a pipe, and save them with <code>&gt;</code>;</li>
+<li>work on a copy, never on the original.</li>
+</ul>
+<p>This is the last shell day. On Day 5 you meet R.</p>
 <aside class="notes">
-<p>Read a manifest as a list of what is present. IDs connect metadata to measurements. The file paths locate measurements, while the README supplies their meaning and units. Distinguish four sample records from five text lines before discussing any command count.</p>
+<p>The archive is a small, separate practice dataset (four pots), not the 24-plant dataset students will use in R. Keep the question in view all session: which pots are treated, and how long are they? Every command today answers part of that.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -228,107 +230,29 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="an-archive-is-a-package-of-files" class="slide level2">
-<h2>An archive is a package of files</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extract-archive.svg" height="390"></p>
-<figcaption>Extracting lab-data.zip creates a folder of ordinary files while leaving the archive intact.</figcaption>
-</figure>
-</div>
-<p>Copy the downloaded ZIP into the shell workspace deliberately.</p>
-<aside class="notes">
-<p>On Windows the browser download is not automatically in Ubuntu. Open the shell workspace graphically and copy the file. On Mac use the same explicit location check. In a remote environment, use the provided transfer route; no login hostname is assumed here.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="inspect-first-extract-to-a-known-destination" class="slide level2">
-<h2>Inspect first; extract to a known destination</h2>
+<section id="what-is-in-the-archive" class="slide level2">
+<h2>What is in the archive?</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> <span class="at">-l</span> lab-data.zip</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> lab-data.zip <span class="at">-d</span> lab-data</span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lab-data</span>
 <span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> README.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>-l</code> lists; <code>-d</code> names the extraction destination. Press <strong>q</strong> to leave <code>less</code>.</p>
-<aside class="notes">
-<p>The archive has four measurement files and supporting notes. If extraction asks to overwrite, inspect the existing destination and choose a fresh folder rather than automatically replacing work. These commands do not remove the original ZIP. Keep the command sequence tied to the current working directory.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="text-search-selects-matching-lines" class="slide level2">
-<h2>Text search selects matching lines</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="grep-selection.svg" height="390"></p>
-<figcaption>Literal grep search highlights the S03 and S04 records containing treated.</figcaption>
-</figure>
-</div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-F</span> treated samples.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<aside class="notes">
-<p>-F requests literal text matching. The prepared file has control and treated labels; its header does not include treated. Explain that untreated would also contain treated, so grep does not understand treatment allocation or table columns. Inspect selected lines before interpreting them.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-pipe-connects-the-outputs-and-inputs" class="slide level2">
-<h2>A pipe connects the outputs and inputs</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="pipe-stream.svg" height="390"></p>
-<figcaption>Four records enter a grep selection, two matching lines leave it, and wc counts two.</figcaption>
-</figure>
-</div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-F</span> treated samples.tsv <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<aside class="notes">
-<p>The pipe passes matching lines directly to the next program. wc -l counts newline-terminated lines, which represent records in this controlled file. No intermediate saved file is required. Ask students to predict 2 before running it, and compare with wc -l samples.tsv, which returns 5 including the header.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="redirection-writes-a-separate-output" class="slide level2">
-<h2>Redirection writes a separate output</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-F</span> treated samples.tsv <span class="op">&gt;</span> treated-samples.txt</span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> treated-samples.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>The manifest is read; the extract is written.</li>
-<li><code>&gt;</code> replaces existing contents at the destination.</li>
-<li>Never use the input filename as this destination.</li>
+<li><code>-l</code> <strong>lists</strong> without unpacking.</li>
+<li><code>-d lab-data</code> names the folder to unpack into.</li>
+<li>The ZIP stays as it was. Press <strong>q</strong> to leave <code>less</code>.</li>
 </ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extract-archive.svg" style="width:100.0%"></p>
+<figcaption>Extracting lab-data.zip creates a folder of ordinary files: README, the samples.tsv manifest, four measurement files and field notes, while the archive itself stays.</figcaption>
+</figure>
+</div>
+</div></div>
 <aside class="notes">
-<p>Students should explain which file changed. A text extract is not a full replacement manifest because it lacks the nonmatching header and control records. Show it in the file manager. Treat redirection as a concrete write action, not punctuation to memorise.</p>
+<p>First copy the browser download into ~/introcomputing-shell with the file manager (explorer.exe . on Ubuntu/Windows, open . on Mac); Downloads is not the terminal’s workspace. Read the README aloud: four pots, lengths in mm after seven days. If unzip asks to replace files, answer n and extract to a fresh folder name.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -341,38 +265,167 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="work-through-one-sample-and-one-copy" class="slide level2">
-<h2>Work through one sample and one copy</h2>
+<section id="the-manifest-links-samples-to-files" class="slide level2">
+<h2>The manifest links samples to files</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 samples.tsv</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> samples.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>One header line names the columns: <code>sample_id</code>, <code>treatment</code>, <code>file</code>.</li>
+<li><code>wc -l</code> prints <strong>5</strong>: header + <strong>4 samples</strong>.</li>
+<li>Columns are separated by tabs (TSV).</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="header-lines.svg" style="width:100.0%"></p>
+<figcaption>The manifest has one header line and four sample lines, each pointing to a measurement file.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Ask before running wc -l: how many lines? Students often say 4. The header is not a sample. A CSV is the same idea with commas.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="which-samples-were-treated" class="slide level2">
+<h2>Which samples were treated?</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="grep-selection.svg" height="330"></p>
+<figcaption>grep prints only the lines that contain treated: S03 and S04.</figcaption>
+</figure>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-F</span> treated samples.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>grep</code> prints the lines that contain the text. <code>-F</code> means plain text, not a pattern. Answer: <strong>S03 and S04</strong>.</p>
+<aside class="notes">
+<p>The header and the control lines are not printed. Point out that grep does not know about columns; it just looks for the letters t-r-e-a-t-e-d anywhere on the line. We test that limit in two slides.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="count-with-a-pipe-save-with" class="slide level2">
+<h2>Count with a pipe, save with <code>&gt;</code></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-F</span> treated samples.tsv <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-F</span> treated samples.tsv <span class="op">&gt;</span> treated-samples.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>|</code> passes grep’s lines to <code>wc -l</code>: <strong>2</strong>.</li>
+<li><code>&gt;</code> writes them into a new file. The manifest is unchanged.</li>
+<li><code>&gt;</code> <strong>replaces</strong> what was in the file. Never write to the input: <code>&gt; samples.tsv</code> can empty it.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="pipe-stream.svg" style="width:100.0%"></p>
+<figcaption>Four sample lines go into grep, two matching lines come out, and wc -l counts 2.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Open treated-samples.txt with less: two lines and no header. Ask which file changed (only the new one). Do not demonstrate input = output on real files; just explain the danger.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="grep-matches-text-not-meaning" class="slide level2">
+<h2><code>grep</code> matches text, not meaning</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="grep-substring.svg" height="330"></p>
+<figcaption>In a copy where S01 is labelled untreated, grep -F treated selects S01 as well as S03 and S04.</figcaption>
+</figure>
+</div>
+<p>If S01 were labelled <code>untreated</code>, the count would be <strong>3</strong>: <code>untreated</code> contains <code>treated</code>. Look at the lines selected, not only at the number.</p>
+<aside class="notes">
+<p>Students make this trap file themselves in the exercises, on a copy (search-trap.tsv). The real manifest still gives 2. This is the main reason to print the lines before counting.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="are-the-treated-seedlings-longer" class="slide level2">
+<h2>Are the treated seedlings longer?</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> measurements/S03.csv</span>
-<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> working</span>
-<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> samples.tsv working/samples-copy.tsv</span>
-<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> working/samples-copy.tsv working/manifest-practice.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Which original files should still be present?</p>
-<aside class="notes">
-<p>The original archive and manifest remain. Only the practice copy is renamed. The S03 measurement file has one observed length; find its units in README. cp and mv may replace a destination, so inspect the names before running. Ask students to identify S04’s path without copying the S03 line blindly.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-substring-does-not-understand-a-treatment" class="slide level2">
-<h2>A substring does not understand a treatment</h2>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> measurements/S01.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Sample</th>
+<th>Group</th>
+<th>Length (mm)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>S01</td>
+<td>control</td>
+<td>32.1</td>
+</tr>
+<tr class="even">
+<td>S02</td>
+<td>control</td>
+<td>35.2</td>
+</tr>
+<tr class="odd">
+<td>S03</td>
+<td>treated</td>
+<td>42.4</td>
+</tr>
+<tr class="even">
+<td>S04</td>
+<td>treated</td>
+<td>39.8</td>
+</tr>
+</tbody>
+</table>
+<p>Both treated pots are longer. Two pots per group is a hint, not yet a result.</p>
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="grep-substring.svg" height="350"></p>
-<figcaption>Literal treated search selects untreated as well as the treated labels.</figcaption>
+<p><img data-src="four-lengths.svg" style="width:100.0%"></p>
+<figcaption>Lengths of the four seedlings after seven days: controls S01 32.1 and S02 35.2 mm, treated S03 42.4 and S04 39.8 mm.</figcaption>
 </figure>
 </div>
-<p>Test a search against known records before trusting its count.</p>
+</div></div>
 <aside class="notes">
-<p>The student makes search-trap.tsv from a copy, changes S01 to untreated, and preserves the real manifest. That trap gives three matches, not evidence for three treated biological samples. The baseline fixture remains two treated records.</p>
+<p>The file column of the manifest gives each path. Units come from the README, not from the file. With so few pots we cannot conclude much; the 24-plant dataset in week 2 and the comparisons in week 4 address the question properly.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -385,36 +438,20 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="inspect-selected-ids-not-just-a-number" class="slide level2">
-<h2>Inspect selected IDs, not just a number</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-F</span> treated samples.tsv</span>
-<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-F</span> treated samples.tsv <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>A correct count is not proof that the right lines were selected.</p>
-<aside class="notes">
-<p>Compare the same two commands on the trap copy. Explain -F literal matching. This is not a full table query language and should not replace structured data checks later in R.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-line-count-depends-on-the-file-structure" class="slide level2">
-<h2>A line count depends on the file structure</h2>
+<section id="work-on-a-copy" class="slide level2">
+<h2>Work on a copy</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="header-lines.svg" height="350"></p>
-<figcaption>Five newline-terminated lines represent one header and four sample records.</figcaption>
+<p><img data-src="copy-rename.svg" height="320"></p>
+<figcaption>cp makes a second file in working/, mv renames that copy, and the original samples.tsv is untouched.</figcaption>
 </figure>
 </div>
-<p>Headers name fields; they are not an additional sample.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> working</span>
+<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> samples.tsv working/samples-copy.tsv</span>
+<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> working/samples-copy.tsv working/manifest-practice.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>cp</code> copies, <code>mv</code> renames or moves. Both silently replace an existing file with the same name.</p>
 <aside class="notes">
-<p>Use the actual manifest with a final newline. wc -l counts newline characters, not an abstract number of biological observations. A CSV may contain quoted embedded newlines in general; this controlled TSV has one record per line, which makes the simple count valid here.</p>
+<p>Ask which files exist after each line. The original stays; only the copy is renamed. Students then write working/observations.txt with today’s answers.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -427,101 +464,26 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="follow-a-manifest-path-to-a-measurement" class="slide level2">
-<h2>Follow a manifest path to a measurement</h2>
-<p>Read S04’s listed path, then locate its file.</p>
-<p>What if the record is present but the file has been renamed?</p>
-<p>Investigate the file discrepancy using the manifest and source.</p>
-<aside class="notes">
-<p>The independent exercise deliberately renames S04.csv only in a disposable received-check copy. The contents still identify S04 and length39.8mm. The manifest is an index of intended paths; it does not guarantee files currently occupy them.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-filename-can-outlive-its-correct-meaning" class="slide level2">
-<h2>A filename can outlive its correct meaning</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="overwrite-state.svg" height="350"></p>
-<figcaption>Redirection replaces a treated-named extract with control records while retaining its filename.</figcaption>
-</figure>
-</div>
-<p>Read the saved output after writing it.</p>
-<aside class="notes">
-<p>Use the disposable treated-audit.txt experiment, retaining an extract-backup.txt. Show that &gt; overwrites rather than appends. Never demonstrate input=output truncation on raw course data; explain the hazard without creating it.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="why-input-and-output-paths-must-differ" class="slide level2">
-<h2>Why input and output paths must differ</h2>
-<p>Unsafe pattern — <strong>do not run</strong>:</p>
-<pre class="text"><code>grep -F treated samples.tsv &gt; samples.tsv</code></pre>
-<p>The shell may truncate the destination before grep reads its input.</p>
-<aside class="notes">
-<p>Make the sequence explicit: the shell prepares output redirection, then starts the program. No deletion command is needed to lose data. A reproducible workflow preserves raw inputs and uses distinct informative output paths.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-discrepancy-needs-evidence-before-repair" class="slide level2">
-<h2>A discrepancy needs evidence before repair</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="manifest-path.svg" height="350"></p>
-<figcaption>The manifest expects S04.csv while a renamed file retains the S04 measurement record.</figcaption>
-</figure>
-</div>
-<p>Use the deliberately known rename as evidence to restore its path.</p>
-<aside class="notes">
-<p>This does not establish a general rule to rename any nearby file to whatever is missing. Real ambiguous identities require source records or advice. Ask students to record the discrepancy, supporting evidence, repair, and verification in audit.txt.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="audit-the-recovered-copy" class="slide level2">
-<h2>Audit the recovered copy</h2>
-<p>Keep:</p>
+<section id="when-a-listed-file-is-missing" class="slide level2">
+<h2>When a listed file is missing</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
 <ul>
-<li>Original source archive and manifest.</li>
-<li>Search command and selected IDs.</li>
-<li>The discrepancy and supported repair.</li>
-<li>A checked output and explanation of the units.</li>
+<li>The manifest lists <code>measurements/S04.csv</code>, but the folder has <code>S04-renamed.csv</code>.</li>
+<li><code>head measurements/S04.csv</code> fails: <em>No such file or directory</em>.</li>
+<li>Look inside: it contains <code>S04,39.8</code>. Now you know it is S04 and can restore the name with <code>mv</code>.</li>
+<li>If the contents did not tell you, ask the lab group rather than guess.</li>
 </ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="manifest-path.svg" style="width:100.0%"></p>
+<figcaption>The manifest expects measurements/S04.csv while the folder holds S04-renamed.csv, whose contents still say S04 and 39.8.</figcaption>
+</figure>
+</div>
+</div></div>
 <aside class="notes">
-<p>The source archive still contains the original known fixture. The exercise ends with students locating the restored measurement from the manifest and explaining why line counts alone were insufficient. Record current computer and extraction location.</p>
+<p>In the exercise students rename the file themselves in a copied folder (received-check), so they know the cause. The point: a manifest says what should be there; check that the files really are.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -534,13 +496,19 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="save-an-inspection-someone-can-explain" class="slide level2">
-<h2>Save an inspection someone can explain</h2>
-<p><a href="../../week1/04-inspect-archive.html">Open the exercises</a>.</p>
-<p>Keep the selected records, a practice manifest, and <code>working/observations.txt</code>.</p>
-<p>Explain <strong>5 lines</strong>, <strong>4 samples</strong>, and <strong>2 treated records</strong> in your own words.</p>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li><code>unzip -l</code> to look, <code>unzip -d</code> to unpack into a named folder.</li>
+<li>The manifest has <strong>5 lines</strong>: a header and <strong>4 samples</strong>.</li>
+<li><code>grep -F</code> picks lines by text: <strong>2</strong> treated, S03 and S04. Check the lines, not just the count.</li>
+<li><code>|</code> passes output on; <code>&gt;</code> saves it and replaces the destination.</li>
+<li>Work on copies; the original data stay untouched.</li>
+</ul>
+<p><strong>Next (Day 5, meet R):</strong> open the course project in RStudio and run a first calculation and plot.</p>
+<p><strong>Now:</strong> <a href="../../week1/04-inspect-archive.html">open the Day 4 exercises</a>. Leave with <code>treated-samples.txt</code>, <code>working/manifest-practice.tsv</code> and <code>working/observations.txt</code>.</p>
 <aside class="notes">
-<p>The practical also introduces the local/remote distinction via a teacher demonstration when access is ready. If service accounts are pending, complete the local file exercises and return to remote access when details are supplied.</p>
+<p>An optional exercise repeats the same commands on an organic-laboratory inventory (which samples are labelled ester? O02 and O03). Make sure everyone can find their extracted lab-data folder before leaving.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

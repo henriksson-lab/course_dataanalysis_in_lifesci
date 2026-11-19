@@ -114,7 +114,7 @@ On day 10, find who can render after restarting R. Use these as support signals,
 not grades. Collaboration can be optional, and every task must be completable independently.
 Each student practises controlling their session and locating their saved files.
 
-Keep day 25 as consolidation and catch-up. If overloaded, shorten the representations demonstration
+Keep day 25 as consolidation and catch-up. If overloaded, shorten the Day 21 DNA/image size examples
 and paired-test calculation practice while retaining the paired-design concept.
 Do not remove file literacy or fresh-session rendering to fit more methods.
 

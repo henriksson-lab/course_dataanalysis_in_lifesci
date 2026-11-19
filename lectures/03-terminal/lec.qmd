@@ -1,6 +1,6 @@
 ---
 title: "The terminal describes the same folders"
-subtitle: "Day 3 — Move with commands and check where you are"
+subtitle: "Day 3 — Move between folders with typed commands"
 author: "Data Analysis in Life Sciences"
 format:
   revealjs:
@@ -20,30 +20,56 @@ format:
 toc: false
 ---
 
-## Same folder, another interface
+## About this lecture
 
-![A file-manager window and terminal listing show the same practice folder.](two-views.svg){height=390}
+Why type commands when you can click? Because the computers that hold large biological data, such as a sequencing facility's server or a university compute cluster, often have no desktop and no mouse. You log in and type. And a command you have written once can be repeated on 200 files instead of 200 rounds of clicking.
 
-A shell reads commands; the terminal is the window we use to interact with it.
+Today you will:
+
+- open a terminal and read its prompt;
+- ask where you are (`pwd`) and what is there (`ls`);
+- create folders (`mkdir`) and move between them (`cd`);
+- recover calmly when a command fails.
+
+The folders are the same ones you clicked through on Days 1 and 2. We use these commands again on Day 4 and on the remote computer in week 5.
 
 ::: notes
-Explain why this is worth learning: repeatable file work and remote Linux access. Windows uses Ubuntu; Mac uses Terminal. Show the workspace in both interfaces. Changing the folder in one window does not automatically move the other; each has its own current location.
+Keep the motivation concrete: big data lives on remote Linux machines, and those are driven by typed commands. Do not promise that the terminal is faster for everything; for one file, clicking is fine. Windows students use Ubuntu, Mac students use Terminal, as on the setup page.
+:::
+
+## Same folders, another window
+
+:::: {.columns}
+::: {.column width="42%"}
+- The **terminal** is a window where you type. The **shell** is the program that reads and runs what you type.
+- Windows: open **Ubuntu**. Mac: open **Terminal**.
+- Nothing new is stored. The terminal shows the same folders as the file manager, described in words instead of icons.
+:::
+::: {.column width="58%"}
+![A file-manager window and a terminal listing show the same practice folder.](two-views.svg){width="100%"}
+:::
+::::
+
+::: notes
+Show the workspace in both interfaces side by side. On Windows, Ubuntu has its own home folder, separate from the Windows Documents folder; this week we deliberately work in the Ubuntu home. The R project stays in Documents.
 :::
 
 ## Read the prompt before typing
 
-![The terminal prompt, cd command, and practice destination have distinct roles.](command-anatomy.svg){height=390}
+![The terminal prompt, the cd command and the practice destination have different roles.](command-anatomy.svg){height=300}
 
-Type only the command after the prompt. Press Enter to run it.
+- The **prompt** (`anna@laptop:~$`, or ending in `%` on a Mac) means "ready". Do not type it.
+- Then comes the **command** (`cd`), then its **argument**: what it acts on (`practice`).
+- Press Enter to run it.
 
 ::: notes
-A prompt indicates readiness, not a command to copy. A Mac prompt may end in percent. Our example username is illustrative. Distinguish command from argument now; an option such as -p is an instruction modifying a command's behaviour.
+The username in the prompt is only an example. Distinguish the command from its argument now. An option such as `-p` in `mkdir -p` changes how a command behaves; `-l` in `ls -l` asks for a longer listing.
 :::
 
-## Build a small workspace
+## Where am I? What is here?
 
-Run one line at a time:
-
+:::: {.columns}
+::: {.column width="50%"}
 ```bash
 cd
 mkdir -p introcomputing-shell/practice
@@ -51,166 +77,180 @@ cd introcomputing-shell
 pwd
 ls
 ```
+:::
+::: {.column width="50%"}
+- `cd` alone takes you to your **home** folder.
+- `mkdir -p` makes the folder, and its parent if needed.
+- `pwd` prints where you are, e.g. `/home/anna/introcomputing-shell`.
+- `ls` lists what is here. You should see `practice`.
+:::
+::::
 
-`pwd` reports the location. `ls` should include `practice`.
+Run one line at a time and read what each line prints.
 
 ::: notes
-cd without a destination takes the user home. mkdir -p creates needed parent folders and accepts an existing folder. This workspace is deliberately separate from the native R project on Windows. Pause to confirm pwd and the practice name; browser Downloads may be elsewhere.
+Pause after pwd and ask several students what their path ends with. The beginning differs per person (/home/anna, /Users/anna); the end should be introcomputing-shell. Browser Downloads may be elsewhere: we are not working there.
 :::
 
-## Navigation changes the starting point
+## Move down, and back up
 
-![Forward cd commands move into child folders; cd dot-dot returns to a parent.](navigate-tree.svg){height=390}
+:::: {.columns}
+::: {.column width="42%"}
+```bash
+cd practice
+mkdir seedlings
+mkdir observations
+cd seedlings
+pwd
+cd ..
+pwd
+```
 
-`.` means here; `..` means the parent; `~` means your home directory.
+- `..` means the folder **one level up**; `~` means your home folder.
+- Before each `pwd`, predict how the path will end.
+:::
+::: {.column width="58%"}
+![cd moves into child folders; cd .. returns to the parent folder.](navigate-tree.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Walk into practice and then make seedlings and observations as in the practical. Ask students to predict the end of pwd before each command. The schematic workspace is introcomputing-shell. A path uses names already present; cd does not create a new destination.
+Expected endings: /practice/seedlings, then /practice. cd only moves into folders that already exist; it does not create anything.
 :::
 
-## Silence can be a successful result
+## Each window has its own location
 
-![An empty observations folder produces no names between the ls command and the next prompt.](empty-is-valid.svg){height=390}
-
-An empty directory exists even when `ls` prints no visible entries.
+:::: {.columns}
+::: {.column width="42%"}
+- `explorer.exe .` (Ubuntu on Windows) or `open .` (Mac) opens the current folder in the file manager. The `.` means "here".
+- Clicking into a folder there does **not** move the terminal. Check with `pwd`.
+- Two terminal windows can also stand in different folders.
+:::
+::: {.column width="58%"}
+![Two terminal windows keep separate current folders.](shell-cwd.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Run ls in a newly created directory. Contrast it with cd no-such-folder, which reports an error. The terminal is not a chat interface: commands often finish quietly. This example concerns visible entries; hidden entries are not needed for today's practical.
+Open a second terminal and run pwd in both. These opening commands are local conveniences; on a remote computer there is no file manager to open.
 :::
 
-## Recover by checking, not guessing
+## Silence often means success
 
+:::: {.columns}
+::: {.column width="42%"}
+- `ls` in an empty folder prints **nothing**. The folder exists; it is just empty.
+- Many commands, such as `mkdir`, print nothing when they work.
+- A real problem prints a **message**: read it.
+:::
+::: {.column width="58%"}
+![ls in the empty observations folder prints no names before the next prompt appears.](empty-is-valid.svg){width="100%"}
+:::
+::::
+
+::: notes
+Run ls inside observations, then contrast with cd no-such-folder on the next slide. The terminal is not a chat: it does not confirm success unless asked.
+:::
+
+## When a command fails, you stay put
+
+:::: {.columns}
+::: {.column width="42%"}
 ```bash
 cd no-such-folder
 pwd
-ls
-```
-
-- Read the error: the destination does not exist.
-- Match spelling and case to actual names.
-- Return with `cd ~/introcomputing-shell` if lost.
-
-::: notes
-The failed cd leaves the current directory unchanged. Ubuntu is case-sensitive; a default Mac disk may accept case differences. Always match names so work transfers. Don't teach deletion or broad system repair to handle a navigation typo.
-:::
-
-## Make typing easier without changing the task
-
-- **Tab:** complete an unambiguous filename or folder name.
-- **Up arrow:** recall a command; read it before rerunning.
-- **Ctrl+C:** interrupt a command or cancel partly typed input.
-- Quote a space-containing name: `mkdir "field notes"`.
-
-::: notes
-Demonstrate each on disposable course folders. Ctrl+C is not the terminal copy shortcut; local Ubuntu commonly uses Ctrl+Shift+C/V while Mac uses Command+C/V. The practical gives platform detail. Ask why two unquoted words may become two arguments.
-:::
-
-## Spaces change argument boundaries
-
-![Unquoted mkdir field notes creates separate names while quoted field notes is one name.](quoted-arguments.svg){height=350px}
-
-Quote a space-containing name, or use a simple name while learning.
-
-::: notes
-Demonstrate only inside a disposable practice tree. The shell divides unquoted words into arguments; it does not read a natural-language folder description. Tab completion helps use names actually present.
-:::
-
-## Read a command as an action with inputs
-
-```bash
-mkdir "field notes"
-cd "field notes"
-pwd
-```
-
-Name the command, destination argument, and resulting location.
-
-::: notes
-Options modify behaviour; arguments supply values. Here quotes group the two-word destination, not a new kind of folder. Type only the command after the prompt. Explain the distinction before students copy the examples.
-:::
-
-## A failed cd leaves you where you were
-
-![A failed change-directory command leaves the original current directory unchanged.](failed-cd.svg){height=350px}
-
-An error message is information about the attempted action.
-
-::: notes
-Record the failed destination and pwd result. Return to a known workspace and inspect names to recover.
-:::
-
-## Prediction: which commands create something?
-
-```bash
-pwd
-ls
-mkdir readings
-cd readings
-```
-
-Which line changes storage? Which changes the shell’s starting location?
-
-::: notes
-mkdir creates a directory; cd changes that shell’s working directory; pwd and ls inspect. Their output or silence should be connected to an action rather than judged as successful solely because text appeared.
-:::
-
-## Two shells can look at different folders
-
-![Two terminal windows have independently maintained current working directories.](shell-cwd.svg){height=350px}
-
-Moving Shell A does not automatically move Shell B.
-
-::: notes
-Open two actual windows and record each pwd. It is possible to inspect the same files from both while standing in different folders. File-manager location is another independent view. These are local shells unless an SSH connection has been made.
-:::
-
-## Recover with a named return point
-
-```bash
 cd ~/introcomputing-shell
-pwd
-ls
 ```
 
-Check the actual tree before taking the next route.
+- The error says the folder does not exist. You are still where you were.
+- Check spelling and capitals: `Observations` is not `observations` on Ubuntu.
+- Lost? `cd ~/introcomputing-shell` brings you back.
+:::
+::: {.column width="58%"}
+![A failed cd leaves the current folder unchanged.](failed-cd.svg){width="100%"}
+:::
+::::
 
 ::: notes
-The tilde refers to the current account’s home on this computer. It is not the root of the entire filesystem. This return point is useful because the course deliberately created it; a path to a missing workspace cannot conjure it into existence.
+Ubuntu distinguishes upper and lower case; a default Mac disk often does not. Match the real spelling anyway so the work transfers to other computers. Do not teach deleting or "repairing" anything to recover from a typo; ask "where am I and what is here?" (pwd, ls).
 :::
 
-## Follow the route from the stated start
+## Spaces split a name in two
 
-![A route from nested notes to neighbouring inputs must go up twice.](route-two-starts.svg){height=350px}
-
-From results/notes, reach inputs through the common parent.
+:::: {.columns}
+::: {.column width="42%"}
+- The shell splits what you type at spaces. `mkdir field notes` makes **two** folders.
+- Quotes keep the words together: `mkdir "field notes"`.
+- Easier: use names without spaces, such as `field-notes`.
+:::
+::: {.column width="58%"}
+![Unquoted mkdir field notes creates two folders; quoted "field notes" creates one.](quoted-arguments.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Have students draw the tree and predict before commands. The independent route challenge asks for root to notes, notes to inputs, and inputs to the workspace. A correct path needs the correct starting place and existing destination names.
+Demonstrate only in the practice folder. Ask students how many folders each line creates before running it.
 :::
 
-## A command log records reasoning
+## Keys that save typing
 
-For each test, save:
+- **Tab** completes a file or folder name. Type `cd pra`, press Tab.
+- **Up arrow** brings back the previous command. Read it before pressing Enter.
+- **Ctrl+C** stops a running command or clears a half-typed line. It does **not** copy.
+- Copy and paste in the terminal: Ctrl+Shift+C / Ctrl+Shift+V (Ubuntu), Command+C / Command+V (Mac).
 
-- Starting folder and command.
-- Predicted ending location.
-- Actual pwd or listing.
-- Recovery if the prediction was wrong.
+Tab completion also prevents typos: it only completes names that really exist.
 
 ::: notes
-The log can be a plain-text note edited graphically; no logging software or shell scripting is needed. Include the computer, especially if the exercise is later repeated remotely. A recorded error and successful recovery are useful evidence of understanding.
+Show each key live. Students who press Ctrl+C to copy and see their command disappear will remember this slide.
 :::
 
-## Connect words to the graphical view
+## Worked example: a route between neighbours
 
-[Open the exercises](../../week1/03-terminal.qmd).
+:::: {.columns}
+::: {.column width="42%"}
+You are in `results/notes` and want `inputs`:
 
-- Ubuntu on Windows: `explorer.exe .`
-- Mac: `open .`
-- Save `navigation-notes.txt` in the shell workspace.
+```bash
+cd ../../inputs
+pwd
+```
 
-Be able to state what `cd` changes and what it leaves unchanged.
+- Up once to `results`, up again to the workspace, then into `inputs`.
+- A route only works from the starting folder it was written for. Write down the start too.
+:::
+::: {.column width="58%"}
+![From notes, the route to inputs goes up two levels and then into inputs.](route-two-starts.svg){width="100%"}
+:::
+::::
 
 ::: notes
-These graphical-opening commands are local conveniences, not remote transfer. Have students independently reproduce the workspace tree, recover from one ordinary mistake, and identify the same folder in the file manager. Their note should give a route back from home and three command meanings.
+This is the route challenge in the exercises. Have students draw the tree and predict before running. If they run the same route from a different folder it fails or lands somewhere else: that is the point.
+:::
+
+## Check yourself
+
+1. You run `cd seedlings`. Did any file move?
+2. `ls` prints nothing. Did it fail?
+3. `cd Observations` gives an error. Where are you now?
+4. Which of `pwd`, `ls`, `mkdir`, `cd` creates something?
+
+::: notes
+Answers: 1 no, only the shell's current folder changed; 2 no, the folder is empty (an error would print a message); 3 where you were before; 4 only mkdir. pwd and ls look, cd moves.
+:::
+
+## Summary
+
+- The terminal shows the same folders as the file manager, in words.
+- `pwd` tells you where you are; `ls` what is there.
+- `mkdir` makes a folder; `cd` moves you (`..` up, `~` home). Moving changes nothing on disk.
+- No output is often success; an error message tells you what went wrong, and you stay where you were.
+- Quote names with spaces, or avoid spaces.
+
+**Next (Day 4, inspect and unzip):** use the terminal to unpack an archive of laboratory files and look inside them.
+
+**Now:** [open the Day 3 exercises](../../week1/03-terminal.qmd). Leave with the `introcomputing-shell` workspace and `navigation-notes.txt` in it: your `pwd` path, the route back from home, and three commands with their meanings.
+
+::: notes
+The exercises add a command log (prediction, result, correction) and a route challenge. Students who cannot yet return to their workspace from anywhere need help before Day 4.
 :::

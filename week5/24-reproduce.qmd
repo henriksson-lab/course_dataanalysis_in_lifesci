@@ -1,59 +1,62 @@
 ---
-title: "Day 24 — reproduce your report from saved files"
+title: "Day 24 — Reproduce and share your report"
 ---
 
 [Lecture slides](../lectures/24-reproduce/lec.qmd) · [Quiz](24-reproduce-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
-## Today's question
+## Can someone else get the same report?
 
-A result on screen may depend on console objects or files outside your project.
-Find those dependencies and test a complete project in a new location.
+Your supervisor, a lab partner, or you next year should be able to open your
+project and get exactly the same report. Today you find out whether that works:
+you render the report from a fresh R session, pack the project into a ZIP, and
+open it as the receiver would, in a new place.
 
-**You need:** yesterday's `.Rmd`, its data, and your project folder. Save the
-revised report, its HTML, and `reports/reproduction-log.txt`.
+Use the report from day 23. The examples use the duckweed study
+(`duckweed-report.Rmd` and `data/duckweed.csv`; design in
+[data/README.md](../data/README.md)): 20 flasks, 10 per group, with F17 spilled
+before weighing. For the organic alternative, substitute `organic-study.Rmd` and
+`data/organic-recovery.csv` throughout.
 
-Use the study you selected on day 23. The folder example below uses duckweed;
-for the organic alternative, substitute `organic-study.Rmd`, its HTML, and
-`data/organic-recovery.csv`. Keep the data dictionary in either case. You only
-need to reproduce one report.
+**Save today:** the corrected report and its HTML, a tested
+`report-share-v2.zip`, `algae-brief.Rmd` with its HTML, and
+`reports/reproduction-log.txt`, where you note what you tested and what you found.
 
-## 1. Close the gaps in the report
+## Does the report tell a reader what they need?
 
-Read the report as if you had not conducted the exercise. Does it identify the
-biological or laboratory question, simulated study design, independent units, data source,
-missing measurement, methods, and conclusion? Are figure axes and the comparison
-direction labelled? Can you distinguish SD among flasks from uncertainty in the
-estimated difference?
+Read your report as someone who was not in the room, and use it to find out
+whether the nutrient flasks grew more. A reader should be able to find the
+question, that each flask is one independent unit, why there are 9 nutrient
+values and not 10 (F17), the units, which group is subtracted from which, and
+your conclusion. They should also be able to tell SD (spread among flasks) from
+the confidence interval (uncertainty in the difference). The numbers to expect:
+10 control flasks with mean biomass 32.28 mg and 9 nutrient flasks with 39.63 mg.
 
-For the descriptive organic alternative, check SD among independent synthesis
-runs and the observed difference in percentage points.
+Replace any leftover notes such as "insert result here" with your interpretation.
 
-Replace notes such as “insert result here” with your interpretation. Keep enough
-code to reproduce the result, alongside an explanation of its meaning.
+## Does it render from a fresh R session?
 
-## 2. Render after restarting
+Save the `.Rmd`, choose **Session → Restart R**, and click **Knit** without running
+anything in the Console first. Restarting empties R's memory, so the report must
+now import, calculate and plot everything itself, just as it will on someone
+else's computer. If rendering stops, read the first error and the chunk it names,
+and fix one thing at a time:
 
-Save the `.Rmd`, restart R in RStudio, then use **Knit** without manually running
-analysis lines in the console first. Restarting removes session objects, while
-saved input files remain. If the render fails, locate the named chunk and read
-the first meaningful error before changing several things at once.
-
-| Failure | Likely dependency | Repair |
+| Error | Usual cause | Repair |
 | --- | --- | --- |
-| `object 'duckweed' not found` | Import happened only in the console | Put import code before analysis chunks |
-| A function is unavailable | Package was loaded only interactively | Add its `library()` call to setup |
-| Input path cannot be opened | Personal absolute path or missing project files | Use `data/duckweed.csv` and include that file |
-| Export fails | Destination directory was not included | Include the empty output folder or create it explicitly |
-| Old text contradicts new numbers | Result was manually typed and not updated | Check interpretation and use inline results where useful |
+| `object 'duckweed' not found` | The import was only run in the Console | Put the import in a chunk before it is used |
+| `could not find function` | A package was only loaded in the Console | Add its `library()` call to the setup chunk |
+| `cannot open file` | A personal path such as `C:/Users/…`, or a missing file | Use `data/duckweed.csv` and keep that file in the project |
+| Old text disagrees with new numbers | A result was typed by hand | Check the sentence, or use an inline result |
 
-List required packages in the README. Install them during setup and load them
-in the report's setup chunk.
+## Packing the project as a ZIP
 
-## 3. Package the necessary inputs and source
+A **ZIP** is one file that holds a whole folder, which makes it the simplest way
+to hand a project to someone or to submit it. First make the folder complete,
+then pack it.
 
-Create a folder named `report-share` **outside** your working project using the
-file manager. Copy the following into it:
+Use the file manager to create `report-share` **outside** your working project,
+for example in Documents, and copy in:
 
 ```text
 report-share/
@@ -68,155 +71,147 @@ report-share/
     └── README.txt
 ```
 
-Keep the data dictionary so the recipient knows the study design. The output
-folder is needed if the report explicitly saves a figure there. Exclude session
-files, credentials, and unrelated personal work. Write a short README stating
-that the data are simulated, required packages, the file to render, and the
-expected HTML output. The HTML alone is readable but is not the source analysis.
+The `.Rmd` and the CSV are the analysis; the HTML lets someone read the result
+without R; `data/README.md` describes the study. Include `output/` if your report
+saves a figure there. In `README.txt`, write that the data are simulated, which
+file to render, the packages it needs (`readr`, `dplyr`, `ggplot2`, `rmarkdown`,
+`knitr`), and what one row of the CSV is.
 
-In a **shell**, from the folder containing `report-share`, make a ZIP:
+Then, in a **shell**, go to the folder that *contains* `report-share` and pack it:
 
 ```bash
-zip -r report-share.zip report-share/
-unzip -l report-share.zip
+zip -r report-share-v1.zip report-share/
+unzip -l report-share-v1.zip
 ```
 
-On Windows you may first use File Explorer to copy `report-share` into the Ubuntu
-shell workspace. Check its location before running the command. Native RStudio
-still uses the Windows copy. If you revise that Windows copy, copy the revised
-files into Ubuntu again before creating a replacement ZIP; the copies do not
-synchronise. Copy the finished ZIP back to a normal Windows folder before
-extracting it for the native RStudio check below. Keep the archive outside the
-folder being archived.
-
-## 4. Reproduce from a different location
-
-Extract the ZIP into a new parent folder with a different path. Open its
-`.Rproj` and render the `.Rmd` in a fresh R session. Record the outcome before
-changing any source. This tests relative paths and included files on your
-laptop; it does not test every software environment.
-
-Compare the numerical results, group counts, and interpretation. Plot layout
-may vary slightly across software versions; a jitter seed helps point placement
-stay consistent. Record the software information if results differ:
-
-```r
-sessionInfo()
-```
-
-Save this output in your log when needed. R and loaded package versions help
-investigate differences.
+`-r` packs the folder with everything inside it, and `unzip -l` lists what went
+in: check that the `.Rmd`, `data/duckweed.csv` and the README are there. The ZIP
+is saved beside `report-share`, not inside it; a ZIP inside the folder it packs
+would pack an old copy of itself next time. Give every new ZIP a new name (`-v1`,
+`-v2`): re-running `zip` on an existing name updates it and can keep files you
+have since deleted.
 
 ::: {.callout-tip collapse="true"}
-## Hint: the project opens, but input is still missing
+## Hint: Windows with Ubuntu
 
-Look at the actual extracted folder tree. A `.Rproj` file does not
-contain the data; it sets the project context. A shortcut to your original data
-folder is also not a transferred dataset. Include the ordinary CSV itself.
+Copy `report-share` into your Ubuntu workspace with File Explorer before running
+`zip`. The Windows and Ubuntu copies are separate and do not update each other,
+so after any edit in Windows, copy again before zipping. Copy the finished ZIP
+back to a normal Windows folder before the receiver test below, because RStudio
+runs in Windows.
 :::
 
-## What to record
+## Does it work in a new location?
 
-In `reports/reproduction-log.txt`, write the source archive name, destination
-folder, whether rendering succeeded before fixes, any exact error, the correction,
-and whether the rerun reproduced the key values.
+Listing the ZIP shows names, not whether the report works. Extract it into a
+new, empty folder, as the receiver would, and use it to find out whether the
+report comes out the same:
+
+```bash
+unzip report-share-v1.zip -d receiver-v1
+ls receiver-v1
+```
+
+`ls` shows only `report-share`: extraction keeps the packed folder, so it adds
+one level, and the report is at `receiver-v1/report-share/duckweed-report.Rmd`.
+Open `receiver-v1/report-share/introcomputing.Rproj` (the project name in
+RStudio's corner tells you which copy you are in), restart R and Knit.
+
+You should see the same counts (10 and 9 flasks), the same means (32.28 and
+39.63 mg) and the same conclusion. Point positions in a jittered plot may shift
+slightly between computers. If numbers differ, record `sessionInfo()` in your log:
+it lists the R and package versions.
+
+::: {.callout-tip collapse="true"}
+## Hint: the project opens, but the data are missing
+
+Look at the actual extracted folder tree. The `.Rproj` file does not contain any
+data, and a shortcut to your original data folder does not travel with the ZIP.
+Copy the CSV itself into `report-share/data/` and pack again under a new name.
+:::
+
+## Correcting a ZIP you already made
+
+Your receiver test will probably show something to improve, such as a unit
+missing from the README. A ZIP is a snapshot of the folder at the moment you made
+it, so use this correction to find out what happens to the copies you already have.
+
+1. Edit `README.txt` in your ordinary `report-share` folder, for example by adding
+   "Biomass is dry mass in mg per flask."
+2. Open `receiver-v1/report-share/README.txt`. It still has the old text, and so
+   does `report-share-v1.zip`.
+3. Pack again as `report-share-v2.zip`, extract it to `receiver-v2`, and check that
+   the new sentence is really there. Add one line to the README saying what
+   changed in v2.
+
+A ZIP on the same laptop as the original is a way of **sharing**, not a backup:
+if the laptop is lost, both are gone. Put a copy of the finished project on the
+supported separate storage as well, and write in your log where it is.
+
+## What does a successful render tell you?
+
+Use two disposable copies of `report-share` to find out which mistakes stop a
+report and which do not.
+
+1. In the first copy, rename `data/duckweed.csv` to `duckweed-missing.csv`, restart
+   R and Knit. Rendering stops with an error naming the file, because the report
+   can no longer find its input. Restore the name and check that the means are
+   back to 32.28 and 39.63 mg.
+2. In the second copy, replace your sentence about F17 with "All 20 flasks had a
+   measured biomass." and Knit. The report renders without complaint, although
+   the sentence contradicts the data: only 19 flasks were weighed. (Organic route:
+   "The percentage yield shows that the product is pure.")
+
+R can tell you that a file is missing, but not that a sentence is wrong. A report
+that renders still needs a reader who checks its claims against the numbers.
+Note both cases in your log, and delete the disposable copies so the false
+sentence cannot end up in what you share.
+
+## A second report: the algae memo
+
+On day 23 you analysed `data/algae.csv` in `algae-transfer.R`: 24 cultures, 12 per
+group, with A19's biomass missing. Turn it into a small report and use the same
+steps to find out whether it reproduces.
+
+1. Create `algae-brief.Rmd` at the project root with a short question, the
+   import, the group summary, one plot of individual cultures, and a sentence on
+   the missing A19. Use inline R for the counts, so they come from the data.
+2. Restart R and Knit. You should see 12 reference cultures with mean 28.20 mg and
+   11 supplement cultures with mean 33.92 mg.
+3. Pack `algae-share` (the `.Rproj`, `algae-brief.Rmd`, its HTML, `data/algae.csv`,
+   `data/README.md` and a README) as `algae-share-v1.zip`, extract it into a new
+   folder, and Knit there. The counts and means should match step 2. If they do
+   not, compare the input and code before suspecting rounding: 33.91818 and 33.92
+   are the same mean, 34.32 would be a different one.
 
 ## Check your understanding
 
-1. Why can a report work after “Run All” but fail for a recipient?
-2. Does a ZIP stored on the same disk protect against losing that disk?
-3. What does a successful fresh-folder render establish?
+::: {.callout-note collapse="true"}
+## Why can a report work after "Run All" but fail for someone else?
+
+It may use objects created only in the Console, a personal file path, or files
+that are not in the ZIP. Restarting R and rendering in a new folder finds these.
+:::
 
 ::: {.callout-note collapse="true"}
-## Short answers
+## You fixed the README after making `report-share-v1.zip`. Does v1 contain the fix?
 
-1. It may rely on session state, personal paths, or files not included in the ZIP.
-2. No. A separate supported backup is needed for that failure.
-3. That the supplied source and inputs can regenerate the report in the tested
-   environment. It does not prove that the biological design or interpretation
-   is correct, or that every future software version will behave identically.
+No. A ZIP is a snapshot. Make a newly named ZIP, extract it into a new folder,
+and check the fix there.
 :::
 
+::: {.callout-note collapse="true"}
+## Is a ZIP on the same disk a backup?
 
-## Investigate controlled failures
-
-Use a **disposable copy of the share project**, named
-`report-investigation`, outside your original working project. Keep the original
-report and raw data intact. Use the same main study as yesterday.
-
-1. Render the unmodified copied report first. Record the input filename,
-   available group counts, one key numerical result, and the output location
-   in `reports/reproduction-cases.txt` in your original project. This is the
-   successful reference run against which later cases will be compared.
-2. In the disposable copy only, rename the required input CSV by adding
-   `-temporarily-missing` to its name, leaving the report's path unchanged. Restart
-   R, render, and record the first meaningful error and chunk. Predict whether
-   any valid new result can be produced from the now unavailable input.
-3. Restore the input's exact name, render again, and confirm that the key result
-   matches the reference. A repair is not complete just because the error
-   message disappeared; check the result and record the restored relationship.
-4. Make another fresh disposable copy. In its `.Rmd`, replace one calculated
-   result sentence with the deliberately wrong sentence “All enrolled samples
-   had an available outcome.” Render without altering the code. Compare the
-   sentence with the counts and raw data for duckweed. For the organic route,
-   use “The percentage yield independently demonstrates product purity.”
-   Rendering can succeed while this interpretation is false or unsupported.
-5. Record whether each case is an execution failure, an interpretation failure,
-   or neither. Rewrite the incorrect sentence using the evidence. Keep the
-   final source correct and label each diagnostic copy.
-6. After completing the algae exercise below, revisit one diagnostic copy.
-   Follow your written procedure to locate the input, render from a fresh
-   session, and compare prose with results. Revise ambiguous instructions.
-
-A useful case record has columns for changed item, predicted effect, observed
-error or inconsistency, repair, and confirming rerun.
-
-::: {.callout-tip collapse="true"}
-## Hint: three questions before making a repair
-
-Which computer and project are running? Is the named input actually present at
-that relative path? Does the saved source create the objects and make claims
-supported by the data? Renaming a copied CSV should cause an input error;
-replacing a sentence with a false claim may cause no software error at all.
-A successful rerun therefore checks computational reproduction, not scientific
-validity by itself.
+No. If the disk is lost, the ZIP is lost with it. Keep a copy on separate
+supported storage.
 :::
 
-## Package the algae analysis
+::: {.callout-note collapse="true"}
+## The report renders in a fresh folder. Is its conclusion therefore correct?
 
-Use yesterday's algae script and results. If the input is missing, copy
-`data/algae.csv` and its dictionary from a separately extracted course ZIP.
+It shows that the saved source and data make the same report on this computer.
+Whether the design and conclusion are sound is a separate question for the reader.
+:::
 
-1. Create `algae-brief.Rmd` at the project root. Include a short question, the
-   supplied culture design, the missing A19 account, your import/check/summary
-   code, one individual-point figure, and the interpretation.
-   All required objects and packages must be created or loaded in its chunks.
-2. Turn the stated available sample sizes into inline calculated results rather
-   than typing them independently of the data. Check the rendered counts against
-   the summary. Use HTML as before; no new document format is required.
-3. Render after restarting. Open the HTML in a browser and ask whether a reader
-   can identify biomass units, culture as the unit, what the points represent,
-   and the missingness limitation without seeing the source code.
-4. Create a new folder `algae-share` outside the working project. Include the
-   `.Rproj`, `algae-brief.Rmd`, its HTML, `data/algae.csv`, the dictionary, and
-   the output folder if your source exports there. Add a README specifying
-   the required packages and the file to render. Do not include console session
-   files, account information, or links to an untransferred local data folder.
-5. Package the folder, extract it into a different parent location, open that
-   copy's project, and render without first running console lines. On Windows,
-   preserve the explicit Windows/Ubuntu copy steps used above; a ZIP created
-   in Ubuntu must be returned to normal Windows storage for a native-RStudio
-   check. Check source, data, and rendered output in the extracted copy.
-6. Compare the available counts, two means, and observed difference with your
-   earlier memo. If they differ, inspect the inputs and code before blaming
-   rounding. Record `sessionInfo()` only if needed to explain environment
-   differences; it is a record for diagnosis, not a replacement for the data.
-7. Save `reports/algae-reproduction.txt` with what you tested, the outcome,
-   any correction, and a limitation of the test. A second folder on one laptop
-   does not establish that every other software environment will work.
-
-**Keep:** the tested main-study package, controlled-case record, algae
-source/HTML, and tested `algae-share` package.
-
-**Before you finish:** retain the corrected report, tested ZIP, and a copy on the
-supported backup storage. Next: [consolidation and error recovery](25-consolidate.qmd).
+Next: [consolidation and error recovery](25-consolidate.qmd).

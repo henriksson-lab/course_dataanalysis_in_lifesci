@@ -100,7 +100,7 @@ See `instructor/organic-exercise-contract.md` for the shared data and review sco
 ## Daily filenames
 
 Week 1: `01-files`, `02-folders-computers`, `03-terminal`, `04-inspect-archive`,
-`05-lab-files`.
+`05-meet-r`.
 
 Week 2: `06-r-basics`, `07-import`, `08-transform-plot`, `09-rmarkdown`,
 `10-first-report`.
@@ -111,5 +111,5 @@ Week 3: `11-data-quality`, `12-variation`, `13-group-summaries`,
 Week 4: `16-comparisons`, `17-welch-test`, `18-paired`, `19-calibration`,
 `20-association`.
 
-Week 5: `21-remote-workflow`, `22-data-representations`, `23-mini-study`,
+Week 5: `21-computer`, `22-remote-workflow`, `23-mini-study`,
 `24-reproduce`, `25-consolidate`.

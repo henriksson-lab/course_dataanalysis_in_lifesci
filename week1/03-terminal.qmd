@@ -5,53 +5,48 @@ title: "Day 3 — The terminal describes the same folders"
 [Lecture slides](../lectures/03-terminal/lec.qmd) · [Quiz](03-terminal-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
-## Why type commands?
+## Today's question
 
-The terminal gives us another way to ask the computer to work with files. It
-becomes useful when we repeat a task, inspect many text records, or work on a
-remote computer. The folders have not become a new kind of object: we are
-describing the same locations using words instead of clicks.
+Can you move around your folders by typing instead of clicking? The computers
+that hold large biological data, such as a sequencing facility's server, usually
+have no desktop: you log in and type commands. Today you practise those commands
+on your own laptop, in a small workspace you create yourself. Tomorrow the same
+workspace will hold files from a laboratory exercise.
 
-Today we will create a small shell workspace and move between its folders.
-Tomorrow it will hold files from a biological laboratory exercise.
+**Save today:** the `introcomputing-shell` workspace and `navigation-notes.txt` inside it.
 
-## Open the right terminal
+## Opening a terminal
 
-Follow the supported [Windows/Mac setup page](../intro/ubuntu-windows.qmd).
-Windows students use **Ubuntu** for these commands. Mac students use **Terminal**.
-If local installation is unavailable, ask the teacher for a supported environment.
-
-On Windows, Ubuntu has a different home folder from Windows itself. For this
-week's terminal exercises we deliberately use a separate folder in the Ubuntu
-home directory. Our native RStudio project will stay in the laptop Documents
-folder. We will practise transferring a file between these places explicitly.
-
-A **shell** reads a command and starts the requested program. The **terminal**
-is the window through which we interact with the shell. You might see something
-like this:
+Windows students open **Ubuntu**; Mac students open **Terminal**. The
+[Windows/Mac setup page](../intro/ubuntu-windows.qmd) shows how. A **shell** is the
+program that reads your commands and runs them, and the **terminal** is the window
+you type them into. When it is ready, it shows a **prompt**, for example:
 
 ```text
 anna@laptop:~$
 ```
 
-This is a **prompt**. It means the shell is ready. Your prompt will differ and
-may end with `%` on a Mac. Type only the command after the prompt and press Enter.
+Your prompt will look different, and on a Mac it may end in `%`. Never type the
+prompt itself: type only the command after it and press Enter.
 
-## Worked example: where am I?
+On Windows, Ubuntu has its own home folder, separate from your Windows Documents
+folder. This week we work in that Ubuntu home folder on purpose; the R project
+stays in Documents.
 
-Run each line separately:
+## Where am I?
+
+Use `pwd` (print working directory) to find out which folder the terminal is in,
+and `ls` (list) to find out what is in it:
 
 ```bash
 pwd
 ls
 ```
 
-`pwd` prints the current working directory. It might print `/home/anna` in
-Ubuntu or `/Users/anna` on a Mac. These are examples, not text to type.
-`ls` lists the names inside the current directory. Your list need not match
-anyone else's.
+`pwd` prints something like `/home/anna` (Ubuntu) or `/Users/anna` (Mac): your
+home folder. `ls` lists its contents, which will differ from your neighbour's.
 
-Now create our workspace:
+Now make a workspace for this week and move into it:
 
 ```bash
 cd
@@ -61,33 +56,21 @@ pwd
 ls
 ```
 
-`cd` means change directory; without a destination, it takes you home. `mkdir`
-means make directory. The option `-p` allows it to create the parent folder too
-and to accept folders that already exist. The final `ls` should include
-`practice`. An empty folder is still a real folder.
+`cd` (change directory) on its own takes you home. `mkdir` (make directory)
+creates folders; the option `-p` lets it create `introcomputing-shell` and
+`practice` in one go, and it does not complain if they already exist. The last
+`pwd` should end in `/introcomputing-shell`, and `ls` should show `practice`.
 
-## Check it in the file manager
+## The same folder in the file manager
 
-**In Ubuntu on Windows**, run:
+To find out whether this is really the same folder you would click through, open
+it in the file manager. In Ubuntu on Windows type `explorer.exe .`, and on a Mac
+type `open .`. The `.` means "the folder I am in". A window opens showing the
+`practice` folder: one folder, two ways of looking at it. Keep the window open.
 
-```bash
-explorer.exe .
-```
+## Moving between folders
 
-**In Mac Terminal**, run:
-
-```bash
-open .
-```
-
-The dot means the current directory. The graphical window should show the
-`practice` folder. Leave this window open for the next exercise. On a remote
-Linux system these laptop-specific commands are not the remote file-transfer
-method; follow the supplied remote instructions instead.
-
-## Make a map and follow it
-
-From `introcomputing-shell`, run:
+Make two folders for plant data and move down into one and back up again:
 
 ```bash
 cd practice
@@ -100,8 +83,9 @@ cd ..
 pwd
 ```
 
-`..` means the parent directory. The two `pwd` results should end in
-`/practice/seedlings` and `/practice`. Compare the file manager with this tree:
+`ls` shows the two new folders. `..` means the folder one level up, so the two
+`pwd` lines end in `/practice/seedlings` and then `/practice`. The workspace now
+looks like this, which you can check in the file manager:
 
 ```text
 introcomputing-shell/
@@ -110,158 +94,137 @@ introcomputing-shell/
     └── observations/
 ```
 
-Use the graphical window to open `seedlings`. Does this make the terminal move
-there too? Run `pwd` to check. Each window can have its own current location.
-Clicking in one does not automatically change the other.
+Now click into `seedlings` in the file manager and run `pwd` in the terminal.
+The terminal is still in `practice`: each window keeps its own location.
 
-## Commands, arguments, and options
+A command can also take an **option** that changes what it does. Use `ls -l` in
+`practice` to find out when each folder was last changed; the folder names are in
+the last column. Then use `cd observations` and `ls` to find out what is in the
+`observations` folder. `ls` prints nothing at all, because the folder is empty.
+Many commands work silently like this; a real problem prints a message.
 
-In `cd seedlings`, `cd` is the command and `seedlings` is its argument: the
-destination. In `ls -l`, `-l` is an option asking for a longer listing. You do
-not need to interpret every column yet; identify which column contains names.
+## When a command fails
 
-Try these from `practice`:
+Go back to `practice` with `cd ..` and try `cd Observations`, with a capital O.
+On Ubuntu this fails, because Ubuntu treats `Observations` and `observations` as
+different names. Many Macs accept it. Always type the real spelling, so that your
+commands work on every computer.
 
-```bash
-ls -l
-cd observations
-ls
-```
-
-An empty listing from `ls` means there are no visible entries to list. It does
-not mean the command failed. Many commands report success by simply returning
-to the prompt.
-
-## Recover from an ordinary mistake
-
-Return to `practice` with `cd ..`, then try `cd Observations`. We created `observations` with a
-lowercase `o`. Ubuntu distinguishes uppercase and lowercase names. Many Macs
-do not distinguish them on their default disk, so this may work there. Always
-match the actual spelling so your work transfers between computers.
-
-Now deliberately try:
+Then try a folder that does not exist:
 
 ```bash
 cd no-such-folder
+pwd
 ```
 
-Read the message. The folder is missing; your computer has not broken. Run `pwd`
-and `ls` before trying again. Ask “where am I, and what is actually here?”
+The shell says there is no such file or directory, and `pwd` shows you are still
+where you were. A failed `cd` never moves you and never creates anything. When in
+doubt, ask "where am I, and what is here?" with `pwd` and `ls`.
 
 ::: {.callout-tip collapse="true"}
-## I'm lost. How can I return to the workspace?
+## Hint: I'm lost. How do I get back to the workspace?
 
-Run `cd ~/introcomputing-shell`, then `pwd`. `~` is shorthand for your home
-directory. This route works even if you have navigated into several nested
-folders.
+Run `cd ~/introcomputing-shell`, then `pwd`. `~` is short for your home folder,
+so this works from anywhere on this computer.
 :::
 
-## Small keyboard habits that save effort
+## Names with spaces, and keys that save typing
 
-- **Tab:** type the first few letters of a folder, then Tab to complete a name
-  when it is unambiguous. Try `cd pra` then Tab from the workspace.
-- **Up arrow:** recall a previous command. Read it before running it again.
-- **Ctrl+C:** interrupt a running command or clear a partly typed command.
-  This is different from copying selected text. Ubuntu terminal windows commonly
-  use Ctrl+Shift+C/V for copying and pasting; Mac uses Command+C/V.
-- **Quotes:** keep a name containing spaces together, for example
-  `mkdir "field notes"`. Without quotes those words can become separate arguments.
+Inside `practice`, create a folder `day03`, move into it, and create two
+folders in it: `readings` and `field notes`. Type the second one with quotes:
 
+```bash
+mkdir day03
+cd day03
+mkdir readings
+mkdir "field notes"
+ls
+```
 
-## Predict, run, and recover
+`ls` shows two folders. Without the quotes, `mkdir field notes` would make two
+folders called `field` and `notes`, because the shell splits what you type at
+spaces. Quoting works, but names without spaces, such as `field-notes`, are
+easier to type.
 
-Work in `~/introcomputing-shell`, which is the shell
-workspace on the computer running this terminal. It is separate from the native
-RStudio project on Windows. A command sequence is easier to understand when you
-predict its effect on a drawn tree before running it. Save a plain-text command
-log with the command, your prediction, the observed result, and a correction if
-needed.
+Four keys make the terminal much less tiring:
 
-1. Draw the starting tree using the folders you actually have. Run `pwd` and
-   `ls` to check it. Enter `practice`, create a child `day03`, and enter that
-   child. At each step, predict the final part of `pwd` before asking for it.
-2. Create two children in `day03`: `readings` and `field notes`. For the second,
-   use `mkdir "field notes"`. Quotes keep the two words as one argument. Inspect
-   the names with `ls`, and practise tab completion to enter the spaced name.
-   Record how many directories you created, not just how many words you typed.
-3. Return to `day03`. Predict and run `cd readings`, then `cd ..`, then `pwd`.
-   Now try `cd not-present`. Read the error and run `pwd` again. Explain why a
-   failed navigation did not create a destination or take you somewhere else.
-4. Open a **second terminal window** and run `pwd` there. Navigate the first
-   window to `readings`. Check both windows again. Each shell has its own current
-   working directory; a command in one does not automatically move the other.
-   Save both locations in the log and label their windows.
-5. Use an absolute home-based route to return the first shell to the workspace:
-   `cd ~/introcomputing-shell`. Reach `day03` again with a relative route.
-   Explain what extra knowledge a relative route assumes about your starting
-   place. Test the same relative text from a different starting folder and
-   describe the result without changing your real course project.
-6. In the file manager, locate `day03` through `explorer.exe .` on Ubuntu/Windows
-   or `open .` on Mac after navigating there. Make a note graphically inside
-   `readings`, refresh the terminal listing, and identify it. Editing a file
-   through the graphical view does not make it a different kind of storage.
+- **Tab** completes a name. Type `cd fie` and press Tab: the shell fills in
+  `field\ notes/`, where the backslash keeps the space inside the name, just
+  as quotes do. Tab only completes names that exist, so it also prevents typos.
+- **Up arrow** brings back your previous command. Read it before pressing Enter.
+- **Ctrl+C** stops a running command or clears a half-typed one. It does *not*
+  copy. To copy and paste in the terminal use Ctrl+Shift+C / Ctrl+Shift+V in
+  Ubuntu and Command+C / Command+V on a Mac.
+
+## Two terminal windows
+
+Open a second terminal window and use `pwd` to find out where it starts. Then, in
+the first window, `cd` into `readings` and run `pwd` in both windows. The first
+ends in `/day03/readings`; the second is still in your home folder. Each shell has
+its own current folder, and moving one does not move the other.
+
+Return the first window to the workspace with `cd ~/introcomputing-shell`, and
+reach `day03` again with `cd practice/day03`. The first route works from anywhere,
+because it starts at your home folder. The second only works from
+`introcomputing-shell`: try it from inside `readings` and you get an error.
+
+## A route between neighbouring folders
+
+Inside your workspace, make a small project tree:
+
+```text
+route-challenge/
+├── inputs/
+└── results/
+    └── notes/
+```
+
+Create it with `mkdir -p route-challenge/inputs route-challenge/results/notes`
+and check it with `ls` in each folder.
+
+Use `cd` to find a route from `notes` to its neighbour `inputs`, and check where
+you end up with `pwd`. The route is `cd ../../inputs`: up once to `results`, up
+again to `route-challenge`, then into `inputs`.
+
+In the file manager, save a plain-text file `navigation-transfer.txt` inside
+`route-challenge`. Write down three routes, each with the folder it starts from:
+`route-challenge` to `notes`, `notes` to `inputs`, and `inputs` back to
+`introcomputing-shell`. Use `..` in at least one and `~` in at least one. Then
+open a new terminal window and follow each route from its starting folder. If a
+route fails, the starting folder in your note is usually wrong. Correct the note.
 
 ::: {.callout-tip collapse="true"}
-## Hint: return to a known location
+## Answer: the three routes
 
-Run `pwd` to establish where you actually are, then return to
-`~/introcomputing-shell`. Inspect `ls` before entering the next folder.
+- From `route-challenge`: `cd results/notes`
+- From `notes`: `cd ../../inputs`
+- From `inputs`: `cd ..` then `cd ..`, or `cd ~/introcomputing-shell` from anywhere
 :::
-
-## Write and test a route
-
-Create a new subtree called `route-challenge` under your shell workspace.
-Save its tree and tested navigation routes in `navigation-transfer.txt`.
-
-1. Inside `route-challenge`, create neighbouring `inputs` and `results` folders,
-   and place a `notes` folder inside `results`. Draw the intended tree before
-   creating it. Use only navigation, listing, and directory-creation commands
-   already taught. A path to a new nested folder needs its parent to exist or
-   the explained `mkdir -p` option.
-2. Use the graphical bridge to save a small `README.txt` in `route-challenge`.
-   State the purpose of each child and mark the data as a practice exercise.
-   Locate it from the terminal without assuming that your browser Downloads
-   happens to be the current directory.
-3. Write three navigation routes: `route-challenge` to `notes`, `notes`
-   to `inputs`, and `inputs` back to the workspace home. For each, state the
-   starting folder. Include one route with `..` and one with `~`.
-4. Open a new terminal window. Follow each route from its stated starting
-   folder, predicting the ending location and checking with `pwd`. Revise any
-   instruction that depended on an unrecorded starting location.
-5. Deliberately mistype one directory name. Record the error, actual location,
-   and recovery command. Then demonstrate how Tab or command history can reduce
-   retyping while still requiring you to check what you are about to run.
-6. Save `navigation-transfer.txt` inside `route-challenge`, with the finished
-   tree, successful routes, and the recovery example. Explain which computer the
-   paths describe. If you repeat this on a remote service later, name it as a
-   separate run of the exercise rather than assuming the local tree exists there.
-
-**Check and retain:** the command log and route challenge. A correct path from
-`results/notes` to its neighbouring `inputs` climbs two levels before entering
-`inputs`. `cd` changes the current directory of a shell; it does not move the
-folders or alter their contents.
-
 
 ## Check your understanding
 
 ::: {.callout-note collapse="true"}
 ## What changes when I run `cd`? What stays unchanged?
 
-The terminal's current working directory changes. The files do not move, and
-other windows need not change location. `pwd` checks the new starting point.
+Only the terminal's current folder changes. No file or folder moves, and other
+windows stay where they were. `pwd` shows the new location.
 :::
 
 ::: {.callout-note collapse="true"}
-## Why can `ls` work without printing any filenames?
+## Why can `ls` work without printing any names?
 
-The directory may be empty. Compare with an error, which normally includes a
-message explaining the problem. Read the output rather than assuming silence
-is failure.
+The folder is empty. An error would print a message.
 :::
 
-**Save today:** the shell workspace and its folder tree. In a plain-text file
-called `navigation-notes.txt` inside that workspace, record the full path printed
-by `pwd`, your route back from home, and three commands with their meanings.
-Create the note through the graphical window if that is easiest.
+::: {.callout-note collapse="true"}
+## Which of `pwd`, `ls`, `mkdir readings`, `cd readings` creates something?
+
+Only `mkdir readings`. `pwd` and `ls` look, and `cd` moves you.
+:::
+
+**Save today:** in `introcomputing-shell`, a plain-text note `navigation-notes.txt`
+with the full path printed by `pwd`, the command that brings you back from home,
+and three commands with what they do. You can write it in the file manager's
+text editor.
 
 Next: [open an archive of laboratory files](04-inspect-archive.qmd).

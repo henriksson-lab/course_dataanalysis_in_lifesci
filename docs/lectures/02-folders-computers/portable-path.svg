@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Absolute paths differ between computers; the relative path does not</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="40" y="40" width="480" height="300" rx="10" fill="#f8fafc" stroke="#2a7f8f" stroke-width="3"/>
+<text x="280" y="85" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">anna&#x27;s laptop</text>
+<text x="60" y="140" font-family="Consolas, Menlo, monospace" font-size="20" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">/Users/anna/Documents/</text>
+<text x="60" y="170" font-family="Consolas, Menlo, monospace" font-size="20" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">  introcomputing-course/</text>
+<text x="60" y="200" font-family="Consolas, Menlo, monospace" font-size="20" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">  data/seedlings.csv</text>
+<line x1="60" y1="235" x2="500" y2="235" stroke="#cbd5e1" stroke-width="3"/>
+<text x="60" y="275" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">from the project folder:</text>
+<text x="60" y="315" font-family="Consolas, Menlo, monospace" font-size="22" fill="#2a7f8f" text-anchor="start" font-weight="bold" xml:space="preserve">data/seedlings.csv</text>
+<rect x="580" y="40" width="480" height="300" rx="10" fill="#f8fafc" stroke="#6b4fa0" stroke-width="3"/>
+<text x="820" y="85" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">ben&#x27;s laptop</text>
+<text x="600" y="140" font-family="Consolas, Menlo, monospace" font-size="20" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">/Users/ben/Documents/</text>
+<text x="600" y="170" font-family="Consolas, Menlo, monospace" font-size="20" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">  introcomputing-course/</text>
+<text x="600" y="200" font-family="Consolas, Menlo, monospace" font-size="20" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">  data/seedlings.csv</text>
+<line x1="600" y1="235" x2="1040" y2="235" stroke="#cbd5e1" stroke-width="3"/>
+<text x="600" y="275" font-family="Arial, sans-serif" font-size="21" fill="#203247" text-anchor="start" font-weight="normal">from the project folder:</text>
+<text x="600" y="315" font-family="Consolas, Menlo, monospace" font-size="22" fill="#6b4fa0" text-anchor="start" font-weight="bold" xml:space="preserve">data/seedlings.csv</text>
+<text x="550" y="410" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">Write paths inside a project relative to the project folder.</text>
+<text x="550" y="450" font-family="Arial, sans-serif" font-size="25" fill="#203247" text-anchor="middle" font-weight="normal">Then the same instructions work on every computer.</text>
+</svg>

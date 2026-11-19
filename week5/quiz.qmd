@@ -4,8 +4,8 @@ title: "Week 5 revision — reproduce and transfer"
 
 Try each question before opening its hint or answer.
 
-Topic quizzes: [remote work](21-remote-workflow-quiz.qmd) ·
-[sequences and pixels](22-data-representations-quiz.qmd) ·
+Topic quizzes: [computers and data size](21-computer-quiz.qmd) ·
+[remote work](22-remote-workflow-quiz.qmd) ·
 [small study](23-mini-study-quiz.qmd) ·
 [reproduction](24-reproduce-quiz.qmd) ·
 [consolidation](25-consolidate-quiz.qmd).
@@ -31,39 +31,41 @@ policy. Whether a running process continues depends on the service.
 
 ---
 
-**Q2. Count the represented thing**
+**Q2. Where does R keep its objects?**
 
-`dna <- readLines("data/dna.txt")` reads one invented 40-letter line. What are
-`length(dna)` and `nchar(dna)`? Why do they differ?
+You load a table with `read_csv()`, calculate growth in the console, and then
+restart R. Which of these still exist: the CSV file, the object in the
+Environment pane, the saved script? Which part of the computer holds each?
 
 ::: {.callout-tip collapse="true" title="Hint"}
-Count strings separately from characters within them.
+RAM is fast but temporary; the disk is slower but permanent.
 :::
 
 ::: {.callout-note collapse="true" title="Answer"}
 
-`length(dna)` is **1** stored string; `nchar(dna)` is **40** characters in that
-string. Counting vector elements and counting characters answer different
-questions. The final newline in the file is not another DNA base.
+The CSV file and the saved script survive: they are on **disk**. The object was
+in **RAM** and disappears when R restarts. This is why reports are rendered
+from saved files in a fresh session.
 :::
 
 ---
 
-**Q3. Pixels are positions, not plants**
+**Q3. Will it fit?**
 
-The teaching image has 64 pixels, 24 above intensity 100. What fraction is bright?
-Does that make 64 independent biological replicates or identify one cell?
+Estimate the RAM needed for a table with 1,000,000 rows and 10 numeric columns.
+How much free RAM would you plan for? Would a single-cell table of 30,000 genes ×
+100,000 cells fit on a 16 GB laptop?
 
 ::: {.callout-tip collapse="true" title="Hint"}
-Divide bright positions by all positions; identify what those positions represent.
+One number in R takes 8 bytes. 1 MB = 1,000,000 bytes; 1 GB = 1,000 MB.
 :::
 
 ::: {.callout-note collapse="true" title="Answer"}
 
-The fraction is **24/64 = 0.375**. Pixels are related positions in one artificial
-image. Their count does not establish independent treatment replication or
-biological identity. Interpretation needs acquisition context, scale, and
-validation. The threshold count alone does not establish a cell's area in mm².
+1,000,000 × 10 × 8 = 80,000,000 bytes = **80 MB**; plan for about 2–3 times
+that (160–240 MB) as working space. The single-cell table needs
+30,000 × 100,000 × 8 bytes = **24 GB** before working space, more than a 16 GB
+laptop has: use a subset or a bigger (remote) computer.
 :::
 
 ---
@@ -170,42 +172,42 @@ Check saved contents rather than an unsaved editor buffer.
 
 ---
 
-**Q9. One changed label, one unchanged length**
+**Q9. File size is not object size**
 
-The invented DNA string has A11, C9, G9, T11. Its first A is replaced by G in
-a new object. What are the changed A/G counts, total length, and GC fraction,
-defined here as (G + C) / all letters? Did the original file necessarily change?
+A CSV of 100,000 rows × 10 numbers rounded to one decimal is 4.79 MB on disk.
+Is the loaded object in R larger or smaller? What happens to the object and the
+file when a unique text ID such as `S000001` is added to every row?
 
 ::: {.callout-tip collapse="true" title="Hint"}
-Replacement changes a label, not the number of positions.
+In a CSV, one character is one byte; in R, one number is 8 bytes. Each
+different text value in R carries its own bookkeeping.
 :::
 
 ::: {.callout-note collapse="true" title="Answer"}
 
-A10 and G10, still 40 letters, with GC fraction `(10 + 9) / 40 = 0.475`.
-The original fraction was `18 / 40 = 0.45`. Changing a new R object does not
-write a file unless a save/write operation is performed. A count-based fraction
-does not establish what a DNA sequence does biologically.
+Larger: 100,000 × 10 × 8 bytes = **8.0 MB**, because a value such as `19.3,`
+takes only 5 bytes as text. With the ID column the object grows to **14.4 MB**
+(6.4 MB for the IDs) but the file only to **5.59 MB**. Check with
+`object.size()` and `file.size()` rather than assuming the file size equals RAM.
 :::
 
 ---
 
-**Q10. A threshold can change its answer without moving an object**
+**Q10. DNA and images as bytes**
 
-The toy image has 24 pixels at 210 and 40 at 25. Add 30 to every intensity in
-a new object. Compare counts above 220 before and after. What about counts
-above 100? Explain the difference between `> 210` and `>= 210` in the original.
+`data/dna.txt` holds 40 letters and is 41 bytes. Estimate the human genome
+(about 3.1 billion letters) as a text file. Then estimate one grayscale camera
+image of 2048 × 2048 pixels as an 8-bit file and as numbers in R.
 
 ::: {.callout-tip collapse="true" title="Hint"}
-The shifted intensity levels are 55 and 240. Read strict and inclusive comparisons separately.
+One letter or one 8-bit pixel is 1 byte; one number in R is 8 bytes. The 41st
+byte of `dna.txt` is the line ending.
 :::
 
 ::: {.callout-note collapse="true" title="Answer"}
 
-Above 220 changes from zero to 24 because the bright pixels become 240. Above
-100 stays at 24. Original `> 210` excludes equality and selects zero, whereas
-`>= 210` selects 24. Matrix positions did not change, so a threshold-count change
-alone cannot establish a larger organism or a change in physical object area.
+The genome is about **3.1 GB** as text. The image has 4,194,304 pixels: about
+**4.2 MB** as an 8-bit file and **33.6 MB** as numbers in R.
 :::
 
 ---
@@ -291,6 +293,28 @@ by that rounding. Check the saved input, available counts, group selection,
 outcome definition, and calculation, then confirm which rendered file was opened.
 Changing the number of displayed digits cannot repair a different input or an
 unrecorded exclusion. Retain full-precision values for subsequent calculations.
+:::
+
+---
+
+**Q15. The receiver has the old README**
+
+You made `report-share-v1.zip`, extracted it into `receiver-v1`, and then added
+a missing unit to `report-share/README.txt`. The README in `receiver-v1` still
+lacks the unit. What happened, and how do you give your colleague the corrected
+version? Is the ZIP on your laptop also your backup?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A ZIP is a snapshot of the folder at the moment it was made.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+
+Neither the old ZIP nor its extracted copy changes when you edit the source
+folder. Make `report-share-v2.zip` from the folder that contains `report-share`,
+extract it into a new folder such as `receiver-v2`, check that the unit is there,
+and send v2. The ZIP is not a backup: it sits on the same disk as the original,
+so keep a copy on separate supported storage as well.
 :::
 
 Return to [day 25 consolidation](25-consolidate.qmd) and save your next-lab

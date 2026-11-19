@@ -42,20 +42,135 @@ def tree(stem, name, highlight="data"):
     save(d, stem, name)
 
 
-# Day 1: files, applications, copies, and finding saved work.
+# Day 1: kinds of files — plain text versus Word, Excel and other formats.
 stem = "01-files"
-d = Drawing(title="One file can be read by different applications")
-d.file(70, 150, "seedlings.csv", width=215, height=180)
-d.arrow(315, 200, 590, 110)
-d.arrow(315, 290, 590, 360)
-d.rect(620, 50, 400, 125, fill="#f1f5f9", stroke=BLUE)
-d.text(820, 95, "Text editor", anchor="middle", weight="bold")
-d.text(650, 140, "P01,control,25.7,44.3", size=23)
-d.rect(620, 295, 400, 125, fill="#f1f5f9", stroke=PURPLE)
-table(d, 645, 310, ["ID", "initial", "final"], [["P01", "25.7", "44.3"]], [105, 120, 120])
-d.text(430, 465, "The saved file is not the application window.", anchor="middle", size=27)
-save(d, stem, "file-and-applications.svg")
+
+
+def mono(d, x, y, label, size=24, fill=INK, anchor="start", weight="normal"):
+    """Monospaced text, for file contents and code."""
+    from html import escape
+    d.parts.append(f'<text x="{x}" y="{y}" font-family="Consolas, Menlo, monospace" font-size="{size}" fill="{fill}" text-anchor="{anchor}" font-weight="{weight}" xml:space="preserve">{escape(label)}</text>')
+
+
+def window(d, x, y, w, h, title, colour=BLUE):
+    d.rect(x, y, w, h, fill="#f8fafc", stroke=colour)
+    d.rect(x, y, w, 40, fill="#dceaf6", stroke=colour)
+    d.text(x + 15, y + 28, title, size=20, weight="bold")
+
+
 tree(stem, "find-the-file.svg")
+
+with open(ROOT / "data/seedlings.csv") as handle:
+    seedling_lines = [line.rstrip("\n") for line in handle][:4]
+d = Drawing(title="A plain-text file contains only characters")
+window(d, 40, 40, 560, 250, "seedlings.csv in a text editor")
+for i, line in enumerate(seedling_lines):
+    mono(d, 60, 115 + i * 44, line, size=22)
+window(d, 40, 320, 560, 120, "dna.txt in a text editor")
+mono(d, 60, 400, "ACGTACGTTTAGCCGATATACC...", size=22)
+d.text(830, 70, "Plain text, for example:", anchor="middle", weight="bold")
+for i, ext in enumerate([".csv  .tsv  tables", ".txt  notes, sequences", ".R  .Rmd  code, reports", ".md  documentation"]):
+    mono(d, 680, 130 + i * 52, ext, size=24)
+d.text(830, 380, "Every editor shows the same", anchor="middle", size=24)
+d.text(830, 415, "characters. R reads them.", anchor="middle", size=24)
+save(d, stem, "plain-text.svg")
+
+d = Drawing(title="A Word file is a ZIP package of XML files")
+d.file(40, 60, "seedling-notes.docx", width=200, height=150)
+window(d, 330, 30, 340, 190, "the .docx in a text editor", colour=RED)
+for i, line in enumerate(["PK\u25a1\u25a1\u25a1 \u25a1 \u00cbss]e\u00dd", "\u2039 q\u25a1 &\u25a1 \u25a1 [Con", "tent_Types].xml \u00ec\u00d6\u00e6"]):
+    mono(d, 350, 110 + i * 38, line, size=22, fill=RED)
+d.arrow(250, 135, 315, 120, stroke=RED)
+d.arrow(140, 255, 140, 320)
+d.text(160, 295, "copy, rename to .zip, extract", size=22)
+d.folder(40, 330, "seedling-notes", width=230, height=100)
+d.arrow(285, 380, 320, 380, stroke=GREY)
+for i, (name, role) in enumerate([("word/document.xml", "the text"), ("word/styles.xml", "fonts, headings"), ("word/theme/...", "colours"), ("docProps/core.xml", "author, dates"), ("...", "16 files in all")]):
+    mono(d, 340, 310 + i * 38, name, size=20)
+    d.text(590, 310 + i * 38, role, size=21, fill=GREY)
+d.text(760, 90, "Not readable as text:", size=24, fill=RED)
+d.text(760, 125, "it is a compressed", size=24, fill=RED)
+d.text(760, 160, "ZIP package.", size=24, fill=RED)
+d.text(790, 360, "The text is in there,", size=24, fill=TEAL)
+d.text(790, 395, "mixed with formatting", size=24, fill=TEAL)
+d.text(790, 430, "instructions.", size=24, fill=TEAL)
+save(d, stem, "docx-package.svg")
+
+d = Drawing(title="The same table as CSV and as an Excel workbook")
+window(d, 30, 30, 470, 300, "seedlings.csv")
+for i, line in enumerate(seedling_lines[:3]):
+    mono(d, 50, 110 + i * 44, line, size=19)
+d.text(265, 300, "values only", anchor="middle", size=24, fill=TEAL)
+window(d, 560, 30, 510, 300, "seedlings.xlsx", colour=PURPLE)
+cols = [("plant_id", 100), ("initial_mm", 125), ("final_mm", 110), ("growth_mm", 135)]
+x = 580
+for name, w in cols:
+    d.rect(x, 90, w, 40, fill="#cfe8e3", stroke="#cbd5e1", radius=0)
+    d.text(x + 8, 118, name, size=18, weight="bold")
+    x += w
+x = 580
+for value, w in zip(["P01", "25.7", "44.3", "=D2-C2"], [c[1] for c in cols]):
+    d.rect(x, 130, w, 40, fill="white", stroke="#cbd5e1", radius=0)
+    d.text(x + 8, 158, value, size=18, fill=PURPLE if value.startswith("=") else INK)
+    x += w
+d.rect(580, 280, 140, 34, fill="#cfe8e3", stroke=PURPLE, radius=0)
+d.text(590, 304, "measurements", size=18)
+d.rect(720, 280, 80, 34, fill="white", stroke=PURPLE, radius=0)
+d.text(730, 304, "notes", size=18)
+d.text(580, 215, "+ formatting   + formulas   + several sheets", size=21, fill=PURPLE)
+d.text(550, 390, "CSV: any program can read it, and what you see is what is stored.", anchor="middle", size=24)
+d.text(550, 430, "xlsx: you need a spreadsheet program, and the screen can hide things.", anchor="middle", size=24)
+save(d, stem, "csv-vs-xlsx.svg")
+
+d = Drawing(title="A spreadsheet turns gene symbols into dates")
+headers, before, after = ["gene", "log2FC"], [["SEPT2", "-1.31"], ["MARCH1", "-1.53"], ["TP53", "-0.07"]], [["2-Sep", "-1.31"], ["1-Mar", "-1.53"], ["TP53", "-0.07"]]
+table(d, 60, 70, headers, before, [170, 140])
+d.arrow(400, 200, 640, 200, stroke=RED)
+d.text(520, 165, "open in Excel", anchor="middle", size=23)
+table(d, 690, 70, headers, after, [170, 140], row_colours={1: "#f8dde3", 2: "#f8dde3"})
+d.text(550, 335, "Saved again, the gene names are gone for good.", anchor="middle", size=26, fill=RED)
+d.text(550, 385, "About 1 in 5 published papers with Excel gene lists had such errors", anchor="middle", size=23)
+d.text(550, 418, "(Ziemann et al. 2016). In 2020, SEPT2 was renamed SEPTIN2", anchor="middle", size=23)
+d.text(550, 451, "and MARCH1 MARCHF1, partly because of this.", anchor="middle", size=23)
+save(d, stem, "gene-dates.svg")
+
+d = Drawing(title="A Swedish-language Excel saves CSV with semicolons and decimal commas")
+window(d, 40, 40, 470, 220, "seedlings.csv  (course format)")
+for i, line in enumerate(seedling_lines[:3]):
+    mono(d, 60, 115 + i * 44, line, size=19)
+window(d, 590, 40, 470, 220, "seedlings-semicolon.csv", colour=RED)
+for i, line in enumerate(seedling_lines[:3]):
+    mono(d, 610, 115 + i * 44, line.replace(",", ";") if i == 0 else line.replace(",", ";").replace(".", ","), size=19)
+d.text(550, 320, "Same numbers. Values are separated by ;  and 25.7 is written 25,7.", anchor="middle", size=24)
+d.text(550, 370, "A program expecting commas splits the rows in the wrong places.", anchor="middle", size=24)
+d.text(550, 420, "Open a CSV in a text editor to see which kind you have.", anchor="middle", size=24, fill=TEAL)
+save(d, stem, "semicolon-csv.svg")
+
+d = Drawing(title="Word turns straight quotes into curly quotes, which R cannot read")
+window(d, 40, 40, 480, 140, "text editor (.txt, .R)", colour=TEAL)
+mono(d, 60, 135, 'read.csv("data/seedlings.csv")', size=21, fill=TEAL)
+window(d, 580, 40, 480, 140, "word processor (.docx)", colour=RED)
+mono(d, 600, 135, "read.csv(“data/seedlings.csv”)", size=21, fill=RED)
+d.text(280, 225, "works in R", anchor="middle", size=24, fill=TEAL)
+d.text(820, 225, "copy into R:", anchor="middle", size=24, fill=RED)
+d.rect(580, 250, 480, 70, fill="#fbeff2", stroke=RED)
+mono(d, 595, 293, "Error: unexpected input in \"read.csv(\u201c\"", size=18, fill=RED)
+d.text(550, 380, "Look closely: curly \u201c \u201d instead of straight \" \".", anchor="middle", size=24)
+d.text(550, 415, "Write code and data in a text editor or RStudio, not in Word.", anchor="middle", size=24)
+save(d, stem, "smart-quotes.svg")
+
+d = Drawing(title="Renaming changes the label, not the contents")
+for y, before, after, note, colour in [
+        (40, "seedlings.csv", "seedlings.xlsx", ["Still plain text inside.", "Excel refuses to open it."], RED),
+        (270, "notes.docx", "notes.zip", ["It was a ZIP all along.", "Now you can look inside."], TEAL)]:
+    d.file(40, y, before, width=150, height=120)
+    d.arrow(220, y + 60, 400, y + 60, stroke=colour)
+    d.text(310, y + 40, "rename", anchor="middle", size=22)
+    d.file(430, y, after, width=150, height=120)
+    for i, line in enumerate(note):
+        d.text(650, y + 50 + i * 36, line, size=25, fill=colour)
+save(d, stem, "extension-label.svg")
+
 d = Drawing(title="A raw file and its separate practice copy")
 d.folder(80, 40, "data")
 d.file(100, 185, "seedlings.csv", width=190, height=150)
@@ -77,7 +192,7 @@ d.arrow(700, 220, 790, 220)
 d.text(550, 430, "Check the folder and filename, then close and reopen.", anchor="middle")
 save(d, stem, "save-and-reopen.svg")
 
-# Day 2: hierarchical locations and computer components.
+# Day 2: folders and paths. (computer-components.svg is kept for Day 21.)
 stem = "02-folders-computers"
 tree(stem, "project-tree.svg")
 d = Drawing(title="A relative path depends on the starting folder")
@@ -121,6 +236,44 @@ d.arrow(345, 195, 405, 195)
 d.arrow(715, 195, 775, 195)
 d.text(550, 465, "Moving a window is not transferring a file.", anchor="middle")
 save(d, stem, "different-locations.svg")
+d = Drawing(title="Each part of a path names one folder on the route")
+mono(d, 550, 80, "/home/anna/introcomputing-course/data/seedlings.csv", size=30, anchor="middle", weight="bold")
+x = 30
+for i, (part, w) in enumerate([("/", 80), ("home", 120), ("anna", 120), ("introcomputing-course", 290), ("data", 110)]):
+    d.folder(x, 170, part, width=w, height=90)
+    d.arrow(x + w + 3, 215, x + w + 27, 215, stroke=GREY, width=3)
+    x += w + 30
+d.file(x + 5, 160, "seedlings.csv", width=110, height=110)
+d.text(550, 390, "Read from left to right: start at the top of the disk, open each folder.", anchor="middle", size=24)
+d.text(550, 430, "On Windows the start is a drive, C:\\, and the separator is \\ .", anchor="middle", size=24)
+save(d, stem, "path-parts.svg")
+
+d = Drawing(title="Absolute paths differ between computers; the relative path does not")
+for x, user, colour in [(40, "anna", TEAL), (580, "ben", PURPLE)]:
+    d.rect(x, 40, 480, 300, fill="#f8fafc", stroke=colour)
+    d.text(x + 240, 85, f"{user}'s laptop", anchor="middle", weight="bold")
+    mono(d, x + 20, 140, f"/Users/{user}/Documents/", size=20)
+    mono(d, x + 20, 170, "  introcomputing-course/", size=20)
+    mono(d, x + 20, 200, "  data/seedlings.csv", size=20)
+    d.line(x + 20, 235, x + 460, 235, stroke="#cbd5e1")
+    d.text(x + 20, 275, "from the project folder:", size=21)
+    mono(d, x + 20, 315, "data/seedlings.csv", size=22, fill=colour, weight="bold")
+d.text(550, 410, "Write paths inside a project relative to the project folder.", anchor="middle", size=25)
+d.text(550, 450, "Then the same instructions work on every computer.", anchor="middle", size=25)
+save(d, stem, "portable-path.svg")
+
+d = Drawing(title="Moving a folder changes the path, not the file")
+for x, title, rows in [(40, "Before the move", ["practice/", "  map-a/", "    note.txt", "  map-b/"]),
+                       (600, "After moving map-a into map-b", ["practice/", "  map-b/", "    map-a/", "      note.txt"])]:
+    d.text(x + 230, 60, title, anchor="middle", weight="bold")
+    d.rect(x, 80, 460, 210, fill="#f8fafc", stroke=BLUE)
+    for i, row in enumerate(rows):
+        mono(d, x + 30, 125 + i * 42, row, size=24, fill=RED if "note" in row else INK)
+d.arrow(510, 185, 590, 185)
+mono(d, 270, 350, "practice/map-a/note.txt", size=23, anchor="middle")
+mono(d, 830, 350, "practice/map-b/map-a/note.txt", size=23, anchor="middle")
+d.text(550, 420, "The note's contents are unchanged. Every written route to it must change.", anchor="middle", size=24)
+save(d, stem, "move-changes-path.svg")
 
 # Day 3: the same directory through two interfaces, and navigation.
 stem = "03-terminal"
@@ -203,7 +356,7 @@ d.text(550, 420, "Four records → matching lines → wc -l → count", anchor="
 save(d, stem, "pipe-stream.svg")
 
 # Day 5: collection for sharing, copies, and local versus remote work.
-stem = "05-lab-files"
+stem = "05-meet-r"
 d = Drawing(title="A report folder is packaged into a separate archive")
 d.folder(70, 65, "report", width=260)
 d.file(80, 230, "findings.txt", width=170, height=110)
@@ -437,35 +590,6 @@ def nodes(stem, name, labels, values=None, colours=None):
         if i<n-1: d.arrow(x+w+8,205,x+gap-12,205)
     return d
 
-stem='01-files'
-d=Drawing(title='A filename consists of a base name and an extension')
-d.file(450,40,'seedlings-practice.csv',width=190,height=145)
-d.rect(125,290,600,90,fill='#e6f3f5',stroke=TEAL);d.rect(725,290,240,90,fill='#f1eafa',stroke=PURPLE)
-d.text(425,348,'seedlings-practice',anchor='middle',size=39);d.text(845,348,'.csv',anchor='middle',size=39)
-d.arrow(550,225,425,275);d.arrow(610,225,845,275,stroke=PURPLE)
-d.text(425,435,'informative base name',anchor='middle');d.text(845,435,'format clue',anchor='middle')
-save(d,stem,'filename-parts.svg')
-d=Drawing(title='A header names columns; one record describes one plant')
-for y,label,col in [(90,'plant_id,treatment,initial_mm,final_mm',BLUE),(180,'P01,control,25.7,44.3',TEAL),(270,'P02,control,24.3,32.3',TEAL)]:
-    d.rect(45,y,675,65,fill='#f8fafc',stroke=col);d.text(65,y+43,label,size=27)
-d.arrow(730,120,870,120,stroke=BLUE);d.text(900,130,'header',size=30)
-d.arrow(730,215,870,215);d.circle(960,235,32,fill='#8fcbaa');d.line(960,265,960,320,stroke=TEAL,width=8);d.path('M925,320 h70 l-12,50 h-46 Z',fill='#c8a47a',stroke='#795438')
-d.text(950,430,'one plant record',anchor='middle',size=27)
-save(d,stem,'header-records.svg')
-d=Drawing(title='Renaming an extension preserves the same text contents')
-d.file(120,65,'name-test.csv',width=240,height=160);d.file(740,65,'name-test.txt',width=240,height=160)
-d.arrow(400,150,690,150);d.text(545,115,'rename',anchor='middle',size=30)
-for x in [100,720]:
- d.rect(x,300,280,95,fill='#f8fafc',stroke=BLUE);d.text(x+140,340,'P01,control,',anchor='middle',size=27);d.text(x+140,378,'25.7,44.3',anchor='middle',size=27)
-d.text(550,465,'Same bytes and measurements; a different filename.',anchor='middle',size=28)
-save(d,stem,'format-rename.svg')
-d=Drawing(title='Choose a known working project when several copies exist')
-d.folder(425,35,'original data',width=260);d.file(465,170,'seedlings.csv',width=180,height=100)
-for x,label in [(70,'course'),(790,'course (1)')]:
- d.folder(x,345,label,width=240);d.arrow(530,285,x+120,330,stroke=GREY)
-d.text(550,475,'Inspect paths and contents before choosing a working copy.',anchor='middle',size=25)
-save(d,stem,'canonical-copy.svg')
-
 stem='02-folders-computers'
 d=Drawing(title='A route from reports to data must first visit the parent')
 d.folder(425,30,'project root',width=260)
@@ -541,7 +665,7 @@ d.file(660,100,'S04-renamed.csv',width=230,height=155);d.text(780,380,'contents:
 d.text(550,465,'Inspect identity before restoring a name; do not delete the record.',anchor='middle',size=24)
 save(d,stem,'manifest-path.svg')
 
-stem='05-lab-files'
+stem='05-meet-r'
 d=Drawing(title='A sharing archive is a snapshot, not a live copy')
 d.file(50,85,'ordinary source',width=210,height=150);d.file(440,85,'report-v1.zip',width=210,height=150);d.file(830,85,'report-v2.zip',width=210,height=150)
 d.arrow(285,145,410,145);d.arrow(285,300,800,300,stroke=PURPLE)

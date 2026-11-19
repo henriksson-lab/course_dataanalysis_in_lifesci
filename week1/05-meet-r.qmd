@@ -1,0 +1,211 @@
+---
+title: "Day 5 — Meet R and RStudio"
+---
+
+[Lecture slides](../lectures/05-meet-r/lec.qmd) · [Quiz](05-meet-r-quiz.qmd) · [Weekly revision](quiz.qmd)
+
+
+## Today's question
+
+On days 1–4 you found files, moved through folders, and searched a small table
+in the terminal. From next week, **R** does the calculations and plots. Today you
+get to know the place where you will do that work: open the course project in
+RStudio, find your way around its window, run a first calculation and a supplied
+plot, and watch a finished report being made from saved files.
+
+Nothing today needs to be memorised. Day 6 explains objects, names and vectors
+step by step; today you only need to know where to type and where to look.
+
+**You need:** R and RStudio installed (see the
+[R and RStudio setup page](../intro/r-rstudio.qmd)), and the extracted
+`introcomputing-course` folder from day 1. If installation is not finished, follow
+the demonstration and use setup support before day 6.
+
+**Save today:** `reports/day05-notes.txt`.
+
+## R and RStudio
+
+**R** is the program that calculates. **RStudio** is the application you work
+in: it has an editor for saved files, a Console where R runs your instructions,
+and panes that show your files, plots and help. You start RStudio; RStudio
+starts R for you. You will rarely open R on its own.
+
+## Opening the course project
+
+1. In File Explorer or Finder, open your extracted `introcomputing-course` folder.
+2. Double-click `introcomputing.Rproj`. RStudio opens.
+3. Check the top-right corner of RStudio: it should say `introcomputing`.
+4. In the **Files** pane (bottom right) you should see `data`, `output`, `reports`
+   and `report.Rmd`.
+
+The `.Rproj` file marks this folder as an RStudio **project**. Opening it starts
+R *inside* this folder, so short paths such as `data/seedlings.csv` mean "the
+`data` folder of this project", exactly like the relative paths from day 2.
+
+Use `getwd()` and `file.exists()` in the **Console** (bottom left; its prompt
+is `>`) to find out whether R can see the seedling measurements. Type each line
+and press Enter:
+
+```r
+getwd()
+file.exists("data/seedlings.csv")
+```
+
+`getwd()` prints the folder R is working in, which should end with
+`introcomputing-course`. The second line should print `[1] TRUE`: the file is
+where the analysis will look for it.
+
+::: {.callout-tip collapse="true"}
+## Hint: `file.exists()` says `FALSE`
+
+- Check that RStudio's top-right corner names the project. If it says
+  *Project: (None)*, use **File → Open Project…** and choose
+  `introcomputing.Rproj`.
+- You may have opened an `.Rproj` inside a ZIP preview, or a folder with an extra
+  level (`introcomputing-course/introcomputing-course/`). Find the folder in which
+  `data`, `output` and `reports` sit directly next to the `.Rproj` file, as on day 1.
+- Type the quotation marks. Without them R looks for an object, not a file name.
+:::
+
+## The four panes
+
+The RStudio window has four areas. Their arrangement can differ slightly, but
+their jobs are the same:
+
+| Pane | What it is for |
+| --- | --- |
+| **Editor** (top left; appears when a file is open) | Saved files with instructions, such as `report.Rmd`. |
+| **Console** (bottom left) | R runs what you type after `>` and prints the answer. |
+| **Environment** (top right) | The objects R is holding in memory right now. |
+| **Files / Plots / Help** (bottom right) | The project folder, your plots, and help pages. |
+
+Next to the Console is a **Terminal** tab. That is a shell like the one you used
+on days 3–4 (on Windows it may not be your Ubuntu shell). In this course, type R
+in the Console and keep using your usual terminal for shell commands.
+
+Click `report.Rmd` in the Files pane and it opens in the Editor. Leave it
+unchanged for now: the Editor shows a saved *file*, while the Console is a
+*conversation* with R that is not saved.
+
+## Console or terminal?
+
+The prompt tells you which program is waiting: `>` is R, `$` is the shell. It
+helps to have seen the wrong-window messages once, so try both. In the
+**R Console**, `pwd` gives `Error: object 'pwd' not found`, because R does not
+know shell commands. In your **terminal**, `44.3 - 25.7` gives
+`44.3: command not found`, because the shell does not do arithmetic. Neither
+message means that anything is broken; the instruction belongs in the other window.
+
+## How much did P01 grow?
+
+Plant P01 was 25.7 mm long at the start and 44.3 mm at the end. Use the
+**Console** to find out how much it grew:
+
+```r
+44.3 - 25.7
+```
+
+R prints `[1] 18.6`: P01 grew **18.6 mm**. The `[1]` marks the first value
+printed; it is not part of the answer. P02 went from 24.3 mm to 32.3 mm; R gives `8`
+(it does not print a trailing `.0`), so P02 grew much less than P01.
+
+If you press Enter on an unfinished line such as `44.3 -`, the prompt changes
+to `+` because R is waiting for the rest. Finish the line, or press **Esc** to get
+`>` back.
+
+## Did longer seedlings stay longer?
+
+Use this supplied plot to find out whether seedlings that started long also
+ended long. Copy the lines into the Console and press Enter:
+
+```r
+seedlings <- read.csv("data/seedlings.csv")
+plot(seedlings$initial_mm, seedlings$final_mm,
+     xlab = "Initial length (mm)", ylab = "Final length (mm)")
+```
+
+The first line reads the measurement file into R and calls the table `seedlings`.
+The second line draws one point per plant. You do not need to understand every
+symbol yet: `<-`, names and columns are day 6 and day 7 topics.
+
+The plot appears in the **Plots** pane with 24 points, one per plant. The
+points are widely scattered, with at most a weak upward tendency: a seedling's
+starting length tells you little about its final length. `seedlings` now appears in the **Environment** pane as
+*24 obs. of 4 variables*: 24 plants and 4 columns. Click it to see the table; the
+file `data/seedlings.csv` itself is unchanged. The first line found the file only
+because the project is open.
+
+The vertical axis is final length, not growth. Which plants grew most is
+therefore not visible directly in this plot.
+
+::: {.callout-tip collapse="true"}
+## Hint: where is growth in this plot?
+
+Each point is one plant: its initial length across, its final length up. Growth
+is final minus initial, the calculation you did for P01. On day 8 you will
+calculate growth for every plant and plot it by group.
+:::
+
+## Where the course is heading: a report
+
+Did the treated seedlings grow more? The supplied `report.Rmd` answers that.
+Click its tab in the Editor and click **Knit**. An HTML page opens with the
+question, the code, a table of growth by group, and a plot of the individual
+plants. The table shows 12 control plants with mean growth 15.28 mm and 12
+treated plants with 21.49 mm. A new `report.html` appears next to `report.Rmd` in
+the Files pane.
+
+`report.Rmd` holds the text and the R instructions; Knit runs them from scratch
+on `data/seedlings.csv` and writes `report.html`. If the data change, you Knit
+again and the whole report updates. In week 2 you learn to read and edit this
+file, and on day 10 you make your own first report.
+
+::: {.callout-tip collapse="true"}
+## Hint: Knit fails with "there is no package called …"
+
+The report needs a few packages. Run the installation line from the
+[setup page](../intro/r-rstudio.qmd) once in the Console, then Knit again. If it
+still fails, note the exact message for setup support; you can follow the
+teacher's demonstration today.
+:::
+
+## What is still there after closing RStudio?
+
+Choose **File → New File → Text File**, write one line each on what the Editor,
+Console and Environment are for, add P01's growth, and save it as
+`reports/day05-notes.txt`. Then quit RStudio and reopen it through
+`introcomputing.Rproj` to find out what survived.
+
+The Environment pane is empty: `seedlings` lived in R's memory, which is cleared
+when R stops. Your note, `report.Rmd` and `report.html` are still in the Files
+pane, because they are saved on disk, as on day 1. That is why next week you
+save your instructions in files: they make every result again.
+
+## Check your understanding
+
+::: {.callout-note collapse="true"}
+## Where should `pwd`, `grep -F treated samples.tsv` and `44.3 - 25.7` run?
+
+`pwd` and `grep` are shell commands: run them in the terminal, at a `$` prompt.
+`44.3 - 25.7` is an R expression: run it in the R Console, at a `>` prompt. It
+gives 18.6.
+:::
+
+::: {.callout-note collapse="true"}
+## Why open `introcomputing.Rproj` rather than just starting RStudio?
+
+Opening the project makes R work inside the course folder, so short relative
+paths such as `data/seedlings.csv` find the file. Without it, R may be working in
+another folder and report that the file does not exist.
+:::
+
+::: {.callout-note collapse="true"}
+## After restarting RStudio, `seedlings` has gone. Is the data lost?
+
+No. `seedlings` was a copy in R's memory. The file `data/seedlings.csv` is still
+saved and can be read again.
+:::
+
+**Save today:** `reports/day05-notes.txt`, and `report.html` if Knit worked.
+
+Next: [R objects, calculations, and vectors](../week2/06-r-basics.qmd).

@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.7.30">
 
   <meta name="author" content="Data Analysis in Life Sciences">
-  <title>Data Analysis in Life Sciences – Folders and the working computer</title>
+  <title>Data Analysis in Life Sciences – Folders and paths</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -127,8 +127,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Folders and the working computer</h1>
-  <p class="subtitle">Day 2 — Give someone a route to your measurements</p>
+  <h1 class="title">Folders and paths</h1>
+  <p class="subtitle">Day 2 — Write down where a file is</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -139,341 +139,263 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="a-project-is-a-tree-of-locations" class="slide level2">
-<h2>A project is a tree of locations</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="project-tree.svg" height="390"></p>
-<figcaption>A project parent folder contains data, output, and reports with their respective files.</figcaption>
-</figure>
-</div>
-<p><code>data</code> and <code>reports</code> are neighbours, not one inside the other.</p>
-<aside class="notes">
-<p>Ask students to locate yesterday’s note first. Introduce parent folder and project root using the picture. Project root means the starting folder of this project, not the root of the entire computer. Have a student narrate the route from reports to data.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="an-address-can-be-absolute-or-relative" class="slide level2">
-<h2>An address can be absolute or relative</h2>
-<p>Example absolute path on Linux:</p>
-<pre class="text"><code>/home/anna/introcomputing-course/data/seedlings.csv</code></pre>
-<p>From the project root, the relative path is:</p>
-<pre class="text"><code>data/seedlings.csv</code></pre>
-<p>Your username and complete home path may differ.</p>
-<aside class="notes">
-<p>Show Windows and Mac equivalents in the practical if needed. An absolute path supplies the full route from a drive or root. A relative path starts from the current folder. The illustrative username will differ from each student’s account; personal absolute paths are one reason analyses fail when moved.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-relative-path-needs-a-starting-point" class="slide level2">
-<h2>A relative path needs a starting point</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="relative-start.svg" height="390"></p>
-<figcaption>The same relative path works from the project root but not from inside reports.</figcaption>
-</figure>
-</div>
-<p><strong>Current working directory:</strong> where relative paths start.</p>
-<aside class="notes">
-<p>Physically move between the project root and reports in the graphical window. Say the route out loud. The file remains in data; changing the current folder changes the interpretation of a relative path. Tomorrow pwd will let a shell report this starting point.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="opening-a-csv-uses-several-computer-parts" class="slide level2">
-<h2>Opening a CSV uses several computer parts</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="computer-components.svg" height="390"></p>
-<figcaption>Saved data are read from storage into working memory and processed by the CPU.</figcaption>
-</figure>
-</div>
-<p>The operating system manages files, memory, devices, and running programs.</p>
-<aside class="notes">
-<p>Link each component to an action: storage retains the CSV, RAM holds working information, CPU carries out instructions. RStudio will later be an application and a process will be a running instance of it. More RAM does not automatically mean more persistent room for photographs. Avoid hardware shopping or binary arithmetic.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="an-unsaved-change-and-a-saved-file-differ" class="slide level2">
-<h2>An unsaved change and a saved file differ</h2>
-<p>Try this only on a practice note:</p>
-<ol type="1">
-<li>Add a sentence, save, close, and reopen.</li>
-<li>Add another sentence and discard the change when closing.</li>
-<li>Inspect the actual file after reopening.</li>
-</ol>
-<p>If the editor restores unsaved state, discuss what it has restored.</p>
-<aside class="notes">
-<p>The exercise reveals the difference between storage and current application state. Autosave and recovery differ between editors. Ask the class where the saved note is and which sentence is actually stored there.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="home-folders-belong-to-particular-environments" class="slide level2">
-<h2>Home folders belong to particular environments</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="different-locations.svg" height="390"></p>
-<figcaption>Laptop storage, local Ubuntu storage on Windows, and a remote Linux home are distinct file locations.</figcaption>
-</figure>
-</div>
-<p>An explicit transfer or configured sharing is needed to connect separate copies.</p>
-<aside class="notes">
-<p>Windows students use native RStudio and a separate Ubuntu shell. Mac students do not need local Ubuntu, but remote storage remains separate for them too. A cloud copy may synchronise, but a remote desktop is not automatically a sync service. The course’s actual remote connection details are pending.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="which-claim-needs-correcting" class="slide level2">
-<h2>Which claim needs correcting?</h2>
-<p>“The note is in my editor, so I know where the file is.”</p>
-<p>“I copied the ZIP beside the folder, so the laptop is backed up.”</p>
-<p>“<code>data/seedlings.csv</code> means the same location from every folder.”</p>
-<aside class="notes">
-<p>All need correction. The editor may be displaying an unsaved or recovered version; a same-disk ZIP does not protect against loss of that disk; relative paths need a starting folder. Ask for a concrete fix to each claim rather than vocabulary alone.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-route-starts-somewhere" class="slide level2">
-<h2>A route starts somewhere</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="nested-route.svg" height="350"></p>
-<figcaption>The route from reports to data first goes up to the project root.</figcaption>
-</figure>
-</div>
-<p>From reports, data is a neighbour, not a child.</p>
-<aside class="notes">
-<p>Trace the route graphically before naming relative paths. Students should draw a parent and two children. The exact personal absolute path differs across machines; the within-project relation is portable.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="try-a-move-on-a-practice-tree" class="slide level2">
-<h2>Try a move on a practice tree</h2>
-<p>Create map-a and map-b under practice.</p>
-<p>Put a note in map-a, write its route, then move map-a into map-b.</p>
-<p>Which written route needs revising?</p>
-<aside class="notes">
-<p>Move only the disposable practice folder. Contents may remain identical while the address changes. Compare with copy: copying would leave the original route valid and create a second location. Ask students to predict before clicking.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="closing-a-process-and-saving-a-file-differ" class="slide level2">
-<h2>Closing a process and saving a file differ</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="memory-close.svg" height="350"></p>
-<figcaption>Closing a running process clears its working session while the saved note persists on storage.</figcaption>
-</figure>
-</div>
-<p>Inspect the saved file to find out which changes survived.</p>
-<aside class="notes">
-<p>Use the plain-text disposable experiment and acknowledge autosave/recovery. Some applications restore unsaved changes. RAM supports running information; storage retains deliberately saved information between sessions.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-personal-absolute-path-is-a-poor-shared-instruction" class="slide level2">
-<h2>A personal absolute path is a poor shared instruction</h2>
-<p>Illustrative laptop address:</p>
-<pre class="text"><code>/Users/anna/Documents/future-lab/data/seedlings-transfer.csv</code></pre>
-<p>Portable instruction from the agreed project root:</p>
-<pre class="text"><code>data/seedlings-transfer.csv</code></pre>
-<aside class="notes">
-<p>The second route still assumes an agreed root and an intact folder structure. It does not find data anywhere on the network. On a remote computer the same text refers to storage accessible there, not automatically to the laptop.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="installed-program-versus-running-instance" class="slide level2">
-<h2>Installed program versus running instance</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="program-process.svg" height="350"></p>
-<figcaption>One application saved on storage can be launched as running processes using memory and CPU.</figcaption>
-</figure>
-</div>
-<p>More RAM and more saved-file capacity solve different problems.</p>
-<aside class="notes">
-<p>Ask whether a closed editor remains installed. Yes, its saved program is still available to launch. A process is its current execution. Use these distinctions to explain everyday observation and recovery.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="plan-the-next-laboratory-folder" class="slide level2">
-<h2>Plan the next laboratory folder</h2>
-<p>A practical supplies measurements, photographs, and a protocol.</p>
-<p>Where would you keep originals, notes, derived figures, and the report?</p>
-<p>Write a README that another person can use.</p>
-<aside class="notes">
-<p>The independent task creates a disposable future-lab project and text placeholders explicitly marked as such. Renaming text .jpg does not make a photograph. No particular folder scheme is scientifically mandatory; consistency and clear roles are what matter.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="connections-do-not-all-mean-synchronisation" class="slide level2">
-<h2>Connections do not all mean synchronisation</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="storage-locations.svg" height="350"></p>
-<figcaption>Laptop, cloud service and remote Linux storage are distinct locations.</figcaption>
-</figure>
-</div>
-<p>Draw only the copying or sync links you actually know are configured.</p>
-<aside class="notes">
-<p>Cloud-managed folders can have local placeholders. A remote desktop is another interface, not automatic transfer. The course service details remain pending. Students can put a question mark on unknown links.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="test-portability-by-moving-the-structure" class="slide level2">
-<h2>Test portability by moving the structure</h2>
-<p>Copy the complete practice project to a new location.</p>
-<p>Find its README and data from the new root.</p>
-<p>Explain which relative routes remain valid and which old absolute routes point elsewhere.</p>
-<aside class="notes">
-<p>This is a test of organisation, not a separate backup against losing the laptop. Keep one clearly named working course project. The student output is two maps and an investigation note, tested by reopening the files along the documented routes.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="practise-explaining-the-route" class="slide level2">
-<h2>Practise explaining the route</h2>
-<p><a href="../../week1/02-folders-computers.html">Open the exercises</a>.</p>
-<p>Save <code>reports/day02-map.txt</code> with:</p>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>R will not click through folders for you. To read the seedling measurements it needs a written address: <strong>how do you write down exactly where a file is, so that it works on every computer?</strong></p>
+<p>Today you will:</p>
 <ul>
-<li>A small project tree and the route to <code>seedlings.csv</code>.</li>
-<li>One sentence distinguishing RAM from saved storage.</li>
-<li>A note naming the computer holding your project.</li>
+<li>draw the course project as a tree of folders;</li>
+<li>write absolute and relative paths;</li>
+<li>see why a relative path needs a starting folder;</li>
+<li>check that saved work is on disk.</li>
+</ul>
+<p>Tomorrow the terminal uses these paths; from week 2, R does.</p>
+<aside class="notes">
+<p>Start by asking students to find yesterday’s note, day01-notes.txt, through the folders, not through “recent files”. The folders they opened, in order, are the path. Course data are simulated.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-project-is-a-tree" class="slide level2">
+<h2>A project is a tree</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="project-tree.svg" height="380"></p>
+<figcaption>The course project folder contains data, output and reports; seedlings.csv is inside data and notes.txt inside reports.</figcaption>
+</figure>
+</div>
+<ul>
+<li><code>data</code> and <code>reports</code> are neighbours; their <strong>parent</strong> is the project folder.</li>
+<li>The project folder is where every route in this project starts.</li>
 </ul>
 <aside class="notes">
-<p>The practical also creates practice/field-notes and figures for tomorrow’s navigation. Have students write directions, close their windows, and test the routes from the stated start. Keep backup discussions tied to the supported storage route when it is announced.</p>
+<p>Open the project in the file manager and walk the tree. Project root means the starting folder of this project, not the top of the whole disk. Turn on View, Show Path Bar in Finder; show the address bar in File Explorer.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-path-names-each-folder-on-the-route" class="slide level2">
+<h2>A path names each folder on the route</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="path-parts.svg" height="360"></p>
+<figcaption>The path /home/anna/introcomputing-course/data/seedlings.csv drawn as a chain of folders from the top of the disk to the file.</figcaption>
+</figure>
+</div>
+<p>Windows writes the same idea as <code>C:\Users\anna\Documents\...\data\seedlings.csv</code>.</p>
+<aside class="notes">
+<p>Read the path left to right, opening one folder per part. Show a real path: Windows “Copy as path”, Mac right-click with Option, “Copy as Pathname”. Paste it into a text editor. Usernames will differ from anna.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="absolute-and-relative-paths" class="slide level2">
+<h2>Absolute and relative paths</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><strong>Absolute:</strong> from the top of the disk.</p>
+<pre class="text"><code>/Users/anna/Documents/
+  introcomputing-course/
+  data/seedlings.csv</code></pre>
+<p><strong>Relative:</strong> from an agreed folder, here the project folder.</p>
+<pre class="text"><code>data/seedlings.csv</code></pre>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="relative-start.svg" style="width:100.0%"></p>
+<figcaption>The same relative path works from the project folder but points to a missing folder from inside reports.</figcaption>
+</figure>
+</div>
+</div></div>
+<p>The folder a program starts from is its <strong>working directory</strong>.</p>
+<aside class="notes">
+<p>From inside reports, data/seedlings.csv asks for reports/data/seedlings.csv, which does not exist. The file did not move; the starting point changed. Tomorrow pwd prints the terminal’s working directory.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="going-up-to-the-parent" class="slide level2">
+<h2>Going up to the parent</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="nested-route.svg" height="380"></p>
+<figcaption>The route from reports to data first goes up to the project folder, then down into data.</figcaption>
+</figure>
+</div>
+<p>From <code>reports</code>, <code>data</code> is a neighbour: go up to the parent, then down.</p>
+<aside class="notes">
+<p>Trace it with the file manager: open reports, go up, enter data. In the terminal tomorrow, “up one level” is written as two dots, so the relative path from reports is ../data/seedlings.csv. Mention the notation but do not drill it today.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="relative-paths-work-on-every-computer" class="slide level2">
+<h2>Relative paths work on every computer</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="portable-path.svg" height="380"></p>
+<figcaption>Anna’s and Ben’s absolute paths differ by username, but from the project folder both use data/seedlings.csv.</figcaption>
+</figure>
+</div>
+<p>That is why our R code will say <code>data/seedlings.csv</code>.</p>
+<aside class="notes">
+<p>Ask: if you email your R code with an absolute path to a classmate, what happens? It fails, because their username differs. The relative path assumes only that the project folder is intact and that R starts in it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="moving-a-folder-changes-the-path" class="slide level2">
+<h2>Moving a folder changes the path</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="move-changes-path.svg" height="380"></p>
+<figcaption>Moving map-a into map-b changes the path to note.txt from practice/map-a/note.txt to practice/map-b/map-a/note.txt; the contents stay the same.</figcaption>
+</figure>
+</div>
+<p>Any route written before the move must be updated.</p>
+<aside class="notes">
+<p>This is the independent task: students create map-a and map-b in practice, write routes, predict, move, and correct. Copying would leave the old route valid and create a second file.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="saved-work-is-on-disk" class="slide level2">
+<h2>Saved work is on disk</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="memory-close.svg" height="360"></p>
+<figcaption>Before closing, the edited note is in working memory; after closing, only the saved note on disk remains.</figcaption>
+</figure>
+</div>
+<p>Unsaved text is in memory and disappears when the program closes. Saved work stays on disk.</p>
+<aside class="notes">
+<p>Demonstrate on a practice copy: add a sentence, save, close, reopen; then add one, close with Don’t save, reopen. Some editors autosave or restore drafts; what counts is the saved file. Hardware details come later in the course.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="different-computers-different-folders" class="slide level2">
+<h2>Different computers, different folders</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="different-locations.svg" height="360"></p>
+<figcaption>Laptop storage, local Ubuntu storage on Windows, and a remote Linux home folder are separate places.</figcaption>
+</figure>
+</div>
+<p>A path is a place on one computer. A file is elsewhere only after you copy it there.</p>
+<aside class="notes">
+<p>Windows students will have a separate Ubuntu home folder for the terminal exercises. Later a remote Linux computer has its own folders. A cloud folder may synchronise; a remote desktop does not. A second copy on the same laptop is not a backup.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="check-yourself" class="slide level2">
+<h2>Check yourself</h2>
+<ol type="1">
+<li>From the project folder, what is the path to yesterday’s note?</li>
+<li>From inside <code>reports</code>, what does <code>data/seedlings.csv</code> point to?</li>
+<li>Why does <code>C:\Users\anna\...</code> fail on Ben’s laptop?</li>
+<li>You close the editor without saving. What is in the file?</li>
+</ol>
+<aside class="notes">
+<p>Answers: 1 reports/day01-notes.txt; 2 a data folder inside reports, which does not exist; 3 his username and folders differ; 4 the last saved version.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>A project is a tree; the project folder is the starting point.</li>
+<li>A <strong>path</strong> lists the folders on the route to a file.</li>
+<li><strong>Absolute</strong> paths start at the top of the disk; <strong>relative</strong> paths start at the working directory.</li>
+<li>Relative paths inside a project work on every computer.</li>
+<li>Moving a folder changes the path, not the file. Saved work is on disk.</li>
+</ul>
+<p><strong>Next (Day 3, the terminal):</strong> the same folders, navigated by typing commands.</p>
+<p><strong>Now:</strong> <a href="../../week1/02-folders-computers.html">open the Day 2 exercises</a>. Leave with <code>reports/day02-map.txt</code> and the <code>practice</code> folder.</p>
+<aside class="notes">
+<p>Students who cannot find yesterday’s files or explain a relative path need help before the terminal day.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

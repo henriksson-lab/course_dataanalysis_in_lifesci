@@ -6,51 +6,54 @@ title: "Day 16 — What does a difference between groups mean?"
 
 ## Today's question
 
-Does the treatment change how much a seedling grows? We already know how to
-describe the plants we measured. Today we distinguish a difference **in our
-sample** from evidence about a wider process. We begin with plants and pictures,
-then introduce the equal-means question.
+Does the nutrient treatment change how much a seedling grows? Last week you
+described the plants. Today you turn that description into a comparison: you
+decide what to compare and in which direction, look at the plants, calculate the
+difference between the group means, and prepare the report that day 17 extends
+with a statistical test.
 
-Open `introcomputing.Rproj`. Use the clean, simulated `data/seedlings.csv`, not
-your data-repair exercise. Each row is one independently potted plant. Twelve
-plants were randomly assigned to each group and measured before and after the
-same growth period. The outcome is growth in millimetres. The treatment label
-describes an experimental condition; these teaching data do not establish a
-claim about any actual product or organism.
+Open `introcomputing.Rproj` and use the complete `data/seedlings.csv`; the study is
+described in the [data dictionary](../data/README.md).
 
-## Start with the question and the independent unit
+**Save today:** `comparison.Rmd` and its HTML, `output/day16-growth.png` and
+`output/day16-plan.txt`.
 
-Our comparison is **mean growth in treated plants minus mean growth in control
-plants**. State that direction now: a positive difference means greater growth
-in the treated group. Keep it the same in your code and report.
+## The question, the unit and the direction
 
-The independent experimental unit is a plant in its own pot. Measuring one plant
-three times with a ruler may improve the measurement; it does not create three
-independent plants. Similarly, the initial and final measurements belong to the
-same plant. We subtract them to obtain one growth value per plant, then compare
-growth between the two independent treatment groups.
+The outcome is growth, final minus initial length in millimetres. The unit is one
+plant in its own pot, randomly allocated to a group, so there are 12 independent
+plants per group. Each plant was measured twice, but its two lengths give one
+growth value, so it counts once.
+
+We compare **mean growth of treated plants minus mean growth of control plants**.
+A positive difference then means the treated plants grew more. Deciding the
+direction before calculating keeps the code, the numbers and the sentences in
+the report consistent.
+
+## Growth in the two groups
+
+Use `group_by()` and `summarise()` to find out how many plants are in each group
+and how much they grew:
 
 ```{r}
 library(readr)
 library(dplyr)
 library(ggplot2)
 
-seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE)
-seedlings <- seedlings |>
+seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE) |>
   mutate(growth_mm = final_mm - initial_mm)
 
 group_summary <- seedlings |>
   group_by(treatment) |>
-  summarise(n = n(), mean_growth_mm = mean(growth_mm),
-            sd_growth_mm = sd(growth_mm), .groups = "drop")
+  summarise(n = n(), mean_mm = mean(growth_mm),
+            sd_mm = sd(growth_mm), .groups = "drop")
 group_summary
 ```
 
-The control mean is about 15.28 mm; the treated mean is about 21.49 mm. Both
-groups contain 12 plants. Their observed difference is about 6.22 mm. A difference
-is a number with units, not merely a label such as “significant”.
+Each group has 12 plants. The control mean is 15.28 mm (SD 3.19 mm) and the
+treated mean 21.49 mm (SD 4.87 mm).
 
-## Show the observations before summarising the evidence
+## Looking at the plants
 
 ```{r}
 growth_plot <- ggplot(seedlings, aes(x = treatment, y = growth_mm)) +
@@ -62,41 +65,14 @@ growth_plot
 
 ![Individual growth values in the supplied simulated dataset. The slight horizontal displacement separates overlapping dots.](figures/day16-growth.png)
 
-The small horizontal displacement separates overlapping dots. It does not change
-their heights. You can see variation among individuals and overlap between the
-groups. Overlap does not automatically mean that the group means are equal;
-separated means do not mean that every treated plant grew more than every control
-plant. Compare both statements against the picture.
+The treated plants sit higher on average, but the groups overlap: the largest
+control plant (18.7 mm) grew more than the smallest treated plant (12.2 mm). So
+the treated group grew more **on average**, not every treated plant.
 
-## A sample difference is not the whole story
+## The difference in means
 
-If we repeated the experiment with another set of plants, we would get another
-difference. Random variation can produce unequal sample means even when the
-underlying group means are equal. Tomorrow's test asks whether the observed
-difference is difficult to reconcile with a particular equal-means model.
-
-The **null hypothesis** for this exercise is that the population mean growth is
-the same under the two conditions. A **two-sided alternative** allows a difference
-in either direction. We choose a two-sided question before looking for the most
-favourable result.
-
-A **p-value** describes how often a result at least as extreme as the one
-observed would arise under the null model and its assumptions. For the t-test,
-“extreme” refers to the test statistic, which compares the mean difference with
-its estimated sampling uncertainty. A p-value is not the probability that the
-null hypothesis is true, and it does not measure the biological importance of a
-difference.
-
-## Prepare a comparison report
-
-Save a copy of the root-level `report.Rmd` as `comparison.Rmd`, also at the
-project root so its `data/` paths work. Keep your earlier reports. In this new
-file:
-
-1. Write the biological question, outcome units, and independent experimental unit.
-2. Add the import, growth calculation, group summary, and individual-point plot.
-3. Calculate the treated-minus-control difference with the following explicit
-   extraction. `pull()` takes one column out of a table as a vector.
+`pull()` takes one column out of a table as a plain vector of numbers. Use it to
+make one vector per group, then find out how much more the treated plants grew:
 
 ```{r}
 treated <- seedlings |>
@@ -110,96 +86,103 @@ observed_difference <- mean(treated) - mean(control)
 observed_difference
 ```
 
-4. Describe the sample difference and what remains uncertain about the wider
-   population.
-5. Save the figure with `ggsave("output/day16-growth.png", growth_plot,
-   width = 6, height = 4)` and render the report to HTML.
+The result is **6.22 mm**: treated plants grew on average 6.22 mm more than
+controls. A difference is a number with a unit and a direction, so always write
+it as "6.22 mm (treated − control)". The sign comes from the order of the
+subtraction: `mean(control) - mean(treated)` gives −6.22 mm for the same plants.
+
+## Would another experiment give the same difference?
+
+No. Twelve other plants per group would give another difference, because plants
+vary. Even if the treatment did nothing, two groups of plants would rarely have
+exactly equal means. Day 17 asks how large a difference chance alone could
+produce, and for that we need three terms.
+
+The **null hypothesis** is that mean growth would be the same under both
+conditions if we could grow very many plants. The alternative is **two-sided**: a
+difference in either direction counts, and we decide this now, before seeing any
+test. A **p-value** says how often a difference at least as extreme as ours would
+arise if the null hypothesis were true. It is not the probability that the
+treatment works, and it does not tell you how large the effect is.
+
+## Preparing `comparison.Rmd`
+
+Save a copy of the root-level `report.Rmd` as `comparison.Rmd`, also in the
+project root so its `data/` paths work, and keep your earlier reports.
+
+1. Write the analysis plan at the top of the report and in
+   `output/day16-plan.txt`: the question, the outcome and its unit, the unit (one
+   plant), how plants were allocated, and the direction (treated − control).
+2. Add the import, `group_summary` and the plot. Use `group_by(treatment)` and
+   `summarise(mean(initial_mm))` to find out whether the groups started at the same
+   size. Controls started slightly longer (23.0 mm against 21.9 mm), which is why
+   growth, not final length, answers the question.
+3. Add the `treated`, `control` and `observed_difference` code. Reverse the
+   subtraction in a separate line to find out what changes: only the sign
+   (−6.22 mm). Keep treated − control as the result you report.
+4. Use `min(treated)` and `max(control)` to find out whether every treated plant
+   grew more than every control plant. It did not: 12.2 mm is less than 18.7 mm.
+   Write the results as a statement about means.
+5. Write a results paragraph with n, both means with SDs, the difference with its
+   direction and unit, and the overlap. End with what is still open: how uncertain
+   the difference is. Save the figure with
+   `ggsave("output/day16-growth.png", growth_plot, width = 6, height = 4)` and
+   render the report.
 
 ::: {.callout-tip collapse="true"}
-## Hint: check a surprising sign
+## Hint: a surprising sign
 
-Read `mean(treated)` and `mean(control)` separately. The order in a subtraction
-matters. A negative result from `mean(control) - mean(treated)` would describe
-the reverse comparison, not a contradictory biological result.
+Print `mean(treated)` and `mean(control)` separately. A negative difference from
+`mean(control) - mean(treated)` describes the reverse comparison, not a different
+biological result. Calling an object `treatment_effect` does not change its sign;
+the order of the subtraction does.
 :::
+
+## A second class's data
+
+The second class's experiment, `data/seedlings-transfer.csv`, has 18 plants, nine
+per randomly allocated group, measured seven days apart. Did their treated plants
+also grow more? Create `transfer-comparison.Rmd` in the project root with the same
+question and direction.
+
+1. Import the file, check it (18 rows, no repeated ID, no missing values) and
+   calculate growth. T01 grew 15.0 mm; check it by hand.
+2. Use `group_by()` and `summarise()` with `n()`, `mean()` and `sd()` to find out
+   how much each group grew, and save the table as
+   `output/day16-transfer-summary.csv`. Control: 9 plants, mean 13.66 mm (SD
+   2.53 mm). Treated: 9 plants, mean 17.87 mm (SD 1.94 mm).
+3. Calculate the difference, treated − control. You should get 4.21 mm, smaller
+   than the 6.22 mm of the first study. Different plants, grown by a different
+   class, give a different estimate; whether the two differences are really
+   different is not something we can judge yet.
+4. Suppose this class had grown all treated plants in one tray and all controls in
+   another. In two sentences in the report, say how many independently treated
+   units each group would then have (one tray) and why measuring more plants in
+   those trays would not help. Render from a fresh session; day 17 adds the test to
+   this report.
 
 ## Check your understanding
 
-- Can we conclude that every treated plant grew more? **No; look at the dots.**
-- Are 12 plants each measured twice 24 independent replicates per group?
-  **No; repeated measurements stay attached to their plant.**
-- Does an observed mean difference alone tell us its sampling uncertainty?
-  **No; variability and sample size matter as well.**
+::: {.callout-note collapse="true"}
+## Can we conclude that every treated plant grew more?
 
-## Check the comparison and its interpretation
-
-Continue `comparison.Rmd`, retaining its imports and plant-level data.
-
-1. Write the outcome, comparison direction, independent unit, allocation
-   process, and units in an analysis plan. In this study the unit is
-   an independently potted plant; twelve lengths from one shared treatment
-   container would describe a different design. A table sorted by group is
-   not itself evidence that allocation was random: use the study description.
-2. Calculate initial length, final length, and growth summaries separately.
-   Explain which quantity answers the growth question and which describes
-   starting size. Keep their names and units visible.
-3. Make two figures with common treatment labels: initial lengths by group,
-   then growth by group. Show individual points. Compare what each can reveal
-   about this particular small experiment. We are not adding an adjusted model;
-   note any limitation that would require more design or modelling expertise.
-4. Calculate treated minus control mean growth explicitly. Reverse the
-   subtraction in a separate line and check that only the sign changes. Write
-   a complete sentence for each direction without changing the biological
-   observations. This is a test of interpretation, not two different datasets.
-5. Locate the smallest treated growth and largest control growth. Use these
-   observations to check the statement “the treated group grew more”. Revise
-   it so that it distinguishes a difference in group means from a guarantee
-   about every pair of individual plants. Show where overlap appears in the
-   plot rather than treating overlap as a significance test.
-6. Draft a results paragraph with n, group means, the directed difference,
-   units, and individual spread. State what remains uncertain about the
-   population mean difference.
-7. Annotate each numerical statement with its source object or table. Save
-   the figure and `output/day16-plan.txt`.
-
-::: {.callout-tip collapse="true"}
-## Hint: a group label is not a comparison direction
-
-`mean(treated) - mean(control)` is treated minus control because of the argument
-order in that expression. Merely calling an object `treatment_effect` does not
-establish its sign. In the main dataset the difference is about **6.22 mm**.
-The point plot also contains overlapping observations; neither fact replaces
-an account of independent units or uncertainty.
+No. Look at the dots: the largest control plant grew more than the smallest
+treated plant. The treated plants grew more on average.
 :::
 
-## Compare growth in a second study
+::: {.callout-note collapse="true"}
+## Are 12 plants measured twice 24 independent replicates per group?
 
-Use `data/seedlings-transfer.csv`. The study has 18
-new independent potted plants, nine per randomly assigned group, measured in
-mm seven days apart. The question is again mean growth.
+No. The two measurements belong to the same plant and are combined into one growth
+value. Each group has 12 independent plants.
+:::
 
-1. Create `transfer-comparison.Rmd` at project root and state its question,
-   input file, units, growth formula, and treated-minus-control direction.
-   Import and check row count, unique IDs, missingness, and group labels.
-2. Derive growth in code. Verify T01 by hand, then produce a group summary
-   and plot of individual growth values. Keep the summary and raw-level table
-   as different objects; two summary rows do not supply two new plants.
-3. Calculate the two group means and directed difference. Save the descriptive
-   summary to `output/day16-transfer-summary.csv`. Give sample sizes and units
-   in the rendered output and in the figure caption.
-4. Compare the observed difference with the first study's difference. Explain
-   how different samples and conditions could contribute to the difference
-   between estimates.
-5. Write a design challenge in your notes: suppose all treated plants shared
-   one tray and all controls another. Identify which part of your current
-   independence argument would fail and what independent replication is missing.
-6. Write an interpretation ending with what you still need to know
-   before judging the uncertainty or generality of the difference. Render from
-   a fresh R session. Keep this report for day 17, when you will add an interval
-   and test using the same stated direction rather than redesigning the question.
+::: {.callout-note collapse="true"}
+## Does the difference of 6.22 mm tell us how uncertain it is?
 
-**Additional outputs:** the plan, initial/growth figure pair, descriptive results
-paragraph, and second study report.
+No. That depends on how much plants vary and how many there are, which is what the
+Welch test on day 17 uses.
+:::
 
 **Leave with:** `comparison.Rmd`, its rendered HTML, and
 `output/day16-growth.png`.

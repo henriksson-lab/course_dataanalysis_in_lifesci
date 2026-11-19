@@ -16,8 +16,8 @@ stopifnot(nrow(seedlings) == 24, anyDuplicated(seedlings$plant_id) == 0,
           !anyNA(seedlings))
 group_summary <- seedlings |>
   group_by(treatment) |>
-  summarise(n = n(), mean_growth_mm = mean(growth_mm),
-            sd_growth_mm = sd(growth_mm), .groups = "drop")
+  summarise(n = n(), mean_mm = mean(growth_mm),
+            sd_mm = sd(growth_mm), .groups = "drop")
 treated <- seedlings |> filter(treatment == "treated") |> pull(growth_mm)
 control <- seedlings |> filter(treatment == "control") |> pull(growth_mm)
 comparison <- t.test(treated, control, var.equal = FALSE,

@@ -194,7 +194,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Let R keep track of the calculation</h1>
-  <p class="subtitle">Day 6 — From plant measurements to named objects</p>
+  <p class="subtitle">Day 6 — Numbers, names and a saved script</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -205,153 +205,45 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="ask-which-quantity-you-want" class="slide level2">
-<h2>Ask which quantity you want</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="growth-is-change.svg" height="390"></p>
-<figcaption>The same plant is 20 mm initially and 37 mm finally; the increase is 17 mm.</figcaption>
-</figure>
-</div>
-<p>Change is <code>37 - 20</code>; the ratio <code>37 / 20</code> answers a different question.</p>
-<aside class="notes">
-<p>Start from the simple biological question, not an overview of programming languages. All example plants are simulated. Growth has units of mm; a ratio of two lengths in the same units is dimensionless. Ask students to predict both before running R.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="assign-a-value-to-a-name" class="slide level2">
-<h2>Assign a value to a name</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="named-object.svg" height="390"></p>
-<figcaption>An assigned object refers to a calculated value in memory, while the script stores instructions on disk.</figcaption>
-</figure>
-</div>
-<p>Read <code>&lt;-</code> as “store this under this name”.</p>
-<aside class="notes">
-<p>The Environment pane shows current session objects; the editor shows saved instructions. Show that saving alone does not execute a line and executing alone does not save editor changes. An object does not remain available after an ordinary fresh session unless the instructions recreate it.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="write-and-run-a-small-script" class="slide level2">
-<h2>Write and run a small script</h2>
-<p>Save as <code>day06.R</code> in the course project root:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>initial_mm <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>final_mm <span class="ot">&lt;-</span> <span class="dv">37</span></span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>growth_mm <span class="ot">&lt;-</span> final_mm <span class="sc">-</span> initial_mm</span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>growth_mm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>R names are case-sensitive: <code>growth_mm</code> differs from <code>Growth_mm</code>.</p>
-<aside class="notes">
-<p>Open the extracted .Rproj first. Run each line using the editor’s Run action. Explain the unit-bearing names and comments rather than requiring one preferred naming convention. The Console prompt is not typed. If an object is missing, check spelling and the line that should create it.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="several-values-can-share-one-object-name" class="slide level2">
-<h2>Several values can share one object name</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="matched-vectors.svg" height="390"></p>
-<figcaption>Three plant-specific pairs of initial and final measurements yield three matched growth values.</figcaption>
-</figure>
-</div>
-<p>The order must refer to the same plants in both vectors.</p>
-<aside class="notes">
-<p>Work through P02’s 40 minus 22 equals 18. The picture is positional arithmetic, not R automatically matching plant IDs. Later tables will preserve correspondence explicitly. Equal lengths alone do not establish matching plant identities.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="calculate-summarise-compare" class="slide level2">
-<h2>Calculate, summarise, compare</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>initial_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">19</span>)</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>final_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">37</span>, <span class="dv">40</span>, <span class="dv">34</span>)</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>growth_mm <span class="ot">&lt;-</span> final_mm <span class="sc">-</span> initial_mm</span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(growth_mm)</span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(growth_mm)</span>
-<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>growth_mm <span class="sc">&gt;</span> <span class="dv">16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Results: mean about <strong>16.67 mm</strong>, length <strong>3</strong>, comparison <strong>TRUE TRUE FALSE</strong>.</p>
-<aside class="notes">
-<p>c combines values into a vector; mean and length are functions with parentheses. Greater-than gives logical values, not new measurements. Text needs quotation marks. Plant IDs are labels, so averaging them would not answer a useful question. Keep syntax explanations tied to these operations.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-ratio-can-describe-product-yield-too" class="slide level2">
-<h2>A ratio can describe product yield too</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="yield-ratio.svg" height="390"></p>
-<figcaption>Collected mass 0.62 g fills 62 percent of the supplied maximum product mass of 1.00 g.</figcaption>
-</figure>
-</div>
-<p><strong>Percentage yield = 100 × collected dry mass / supplied maximum mass.</strong></p>
-<aside class="notes">
-<p>This is the optional substitute for the extra plant-ratio exercise. Define synthesis as making a product; supply the theoretical mass without reaction balancing. Assume collected product is pure only for this calculation. Both masses use grams. Changing collected mass to 0.70 g gives 70%.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="predict-what-survives-a-restart" class="slide level2">
-<h2>Predict what survives a restart</h2>
-<p>You have run the code but not saved the script. Then you restart R.</p>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>A seedling was 20 mm long at the start and 37 mm at the end. A calculator gives 17 mm. But a real experiment has dozens of plants, a value gets corrected, and your supervisor asks you to redo it. <strong>If the calculation is written down, you run it again. If it was done by clicking, you start over and hope you remember every step.</strong></p>
+<p>Today you will:</p>
 <ul>
-<li>Which instructions are saved?</li>
-<li>Which session objects must be recreated?</li>
-<li>What should you run first after reopening?</li>
+<li>calculate in the R Console;</li>
+<li>store results under names;</li>
+<li>keep several plants’ values together and summarise them;</li>
+<li>save a script that rebuilds everything after R restarts.</li>
+</ul>
+<p>This is the first day of writing R. From Day 7 the numbers come from a file instead of being typed.</p>
+<aside class="notes">
+<p>Start from the biological question, not from an overview of programming languages. All example plants are simulated. The point of the day: a saved, rerunnable list of steps. Students met RStudio’s panes on Day 5.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-write-the-steps-down" class="slide level2">
+<h2>Why write the steps down?</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="click-vs-script.svg" height="330"></p>
+<figcaption>A spreadsheet shows results but not how they were made; a script lists every step and can be run again.</figcaption>
+</figure>
+</div>
+<ul>
+<li>In a spreadsheet you see the answers, not which cells were typed, sorted or pasted.</li>
+<li>A <strong>script</strong> is a text file of instructions. Anyone can read it and run it again, and get the same result.</li>
 </ul>
 <aside class="notes">
-<p>The unsaved script changes may be lost or recoverable by the editor, but should not be relied upon. Save explicitly. In a fresh R session the objects need recreating from the beginning. Introduce error recovery as checking a dependency rather than running random lines until the error disappears. Esc cancels an unfinished expression marked by a plus prompt.</p>
+<p>Many published analyses cannot be repeated because they were done by clicking. Nobody, including the author, can say exactly which steps were taken. The script is the record. This is not “spreadsheets are bad”; they are fine for looking at data.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -364,17 +256,28 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="an-assignment-is-not-a-live-spreadsheet-link" class="slide level2">
-<h2>An assignment is not a live spreadsheet link</h2>
+<section id="r-as-a-calculator" class="slide level2">
+<h2>R as a calculator</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p>In the Console, after the <code>&gt;</code> prompt:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="dv">37</span> <span class="sc">-</span> <span class="dv">20</span></span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="dv">37</span> <span class="sc">/</span> <span class="dv">20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>[1] 17</code> and <code>[1] 1.85</code>. <code>[1]</code> just numbers the first value printed.</li>
+<li><strong>17 mm</strong> is the growth. <strong>1.85</strong> is a ratio with no unit: the plant ended 1.85 times as long.</li>
+<li>Both calculations are correct. Pick the one that answers your question.</li>
+</ul>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="stale-value.svg" height="350"></p>
-<figcaption>After final length changes, assigned growth stays stale until the subtraction reruns.</figcaption>
+<p><img data-src="growth-is-change.svg" style="width:100.0%"></p>
+<figcaption>The plant is 20 mm initially and 37 mm finally; the growth is 17 mm.</figcaption>
 </figure>
 </div>
-<p>Name the input, stored result, and instruction that refreshes it.</p>
+</div></div>
 <aside class="notes">
-<p>Work through 20 to 37 mm giving 17 mm. Update final to 39, then print the old stored growth before rerunning the subtraction. The script records an order of computations; reopening it does not automatically execute it.</p>
+<p>Ask students to predict both results before running. A calculation can be right and still answer the wrong biological question. Ratios of two lengths in the same unit have no unit.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -387,172 +290,304 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="predict-the-stored-result-before-rerunning" class="slide level2">
-<h2>Predict the stored result before rerunning</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>initial_mm <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>final_mm <span class="ot">&lt;-</span> <span class="dv">37</span></span>
+<section id="give-a-result-a-name" class="slide level2">
+<h2>Give a result a name</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Lengths in millimetres</span></span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>initial_mm <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>final_mm <span class="ot">&lt;-</span> <span class="dv">37</span></span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>growth_mm <span class="ot">&lt;-</span> final_mm <span class="sc">-</span> initial_mm</span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>growth_mm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Read <code>&lt;-</code> as “store this under this name”.</li>
+<li>The name now appears in the <strong>Environment</strong> pane.</li>
+<li><code>#</code> starts a comment for people; R ignores it.</li>
+<li>Capitals matter: <code>Growth_mm</code> is a different name.</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="named-object.svg" style="width:100.0%"></p>
+<figcaption>A calculation is stored in a named object in memory, while the script on disk holds the instructions.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Write this in a new script, File → New File → R Script, saved as day06.R in the project folder. Run each line with Run (Ctrl+Enter / Cmd+Enter). Putting the unit in the name (_mm) is a habit that prevents mistakes later.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-stored-result-does-not-update-itself" class="slide level2">
+<h2>A stored result does not update itself</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>final_mm <span class="ot">&lt;-</span> <span class="dv">39</span></span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>growth_mm      <span class="co"># still 17</span></span>
 <span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>growth_mm <span class="ot">&lt;-</span> final_mm <span class="sc">-</span> initial_mm</span>
-<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>final_mm <span class="ot">&lt;-</span> <span class="dv">39</span></span>
-<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>growth_mm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Now rerun the subtraction and explain the difference.</p>
-<aside class="notes">
-<p>The printed growth remains 17 until recalculation. Ask for the reason before showing 19. This is a concrete dependency exercise, not a request to write a function or build a spreadsheet application.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="equal-vector-length-is-not-enough" class="slide level2">
-<h2>Equal vector length is not enough</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="vector-shuffle.svg" height="350"></p>
-<figcaption>Reordering one measurement vector destroys the intended within-plant correspondence.</figcaption>
-</figure>
-</div>
-<p>R subtracts positions; it does not infer plant identities.</p>
-<aside class="notes">
-<p>Correct vectors are initial 20, 22, 19 and final 37, 40, 34. A reordered final copy 34, 37, 40 yields 14, 15, 21: arithmetic on the wrong pairs. Equal lengths cannot certify matching identities.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="convert-the-values-as-well-as-their-labels" class="slide level2">
-<h2>Convert the values as well as their labels</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>growth_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">18</span>, <span class="dv">15</span>)</span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>growth_cm <span class="ot">&lt;-</span> growth_mm <span class="sc">/</span> <span class="dv">10</span></span>
-<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(growth_mm)</span>
-<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(growth_cm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The means are about 16.67 mm and 1.667 cm.</p>
-<aside class="notes">
-<p>A renamed object or axis label does not convert units. Preserve original values and assign converted values to a new name. Ratios cancel compatible length units; changes retain length units.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-supplied-solution-rule-can-be-traced-through-units" class="slide level2">
-<h2>A supplied solution rule can be traced through units</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="solution-units.svg" height="350"></p>
-<figcaption>Mass divided by supplied molar mass yields amount; dividing by litres gives concentration.</figcaption>
-</figure>
-</div>
-<p>A mole is a unit of chemical amount. Molar mass gives grams per mole.</p>
-<aside class="notes">
-<p>Define molar mass as grams per mole. The supplied calculation is 0.2922 g / 58.44 g/mol = 0.005 mol; 100 mL = 0.100 L; amount divided by volume gives 0.050 mol/L, or 50 mmol/L. This is arithmetic, not laboratory preparation instructions.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="write-every-input-into-the-source" class="slide level2">
-<h2>Write every input into the source</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>mass_g <span class="ot">&lt;-</span> <span class="fl">0.2922</span></span>
-<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>molar_mass_g_mol <span class="ot">&lt;-</span> <span class="fl">58.44</span></span>
-<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>final_volume_l <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">/</span> <span class="dv">1000</span></span>
-<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>concentration_mmol_l <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="sc">*</span></span>
-<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a>  (mass_g <span class="sc">/</span> molar_mass_g_mol) <span class="sc">/</span> final_volume_l</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<aside class="notes">
-<p>All numerical rules and constants are supplied. Keep intermediate quantities visible while learning so an incorrect conversion can be located. Avoid a single expression containing unexplained magic numbers.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="change-one-input-and-predict-the-response" class="slide level2">
-<h2>Change one input and predict the response</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="scale-change.svg" height="350"></p>
-<figcaption>Original concentration is 50 mmol/L; doubling only mass gives 100, doubling only volume gives 25.</figcaption>
-</figure>
-</div>
-<p>Different input changes answer different questions.</p>
-<aside class="notes">
-<p>Restore original inputs between cases. Glucose mass 0.9008 g with supplied molar mass 180.16 g/mol in 100 mL also gives 50 mmol/L. Different weighed masses can produce the same amount concentration; no treatment effect has been inferred.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="diagnose-a-stale-or-missing-object" class="slide level2">
-<h2>Diagnose a stale or missing object</h2>
-<p>Check in order:</p>
-<ol type="1">
-<li>Which saved script and session?</li>
-<li>Were the input assignments run?</li>
-<li>Were dependent calculations rerun?</li>
-<li>Do names, units, and correspondences agree?</li>
-</ol>
-<aside class="notes">
-<p>The outputs are day06-extended.R and a calculation-check note. Retain predictions even when wrong. A saved source that recreates the result after restart is stronger evidence than a successful result following unrecorded Console experiments.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="practise-a-complete-repeatable-calculation" class="slide level2">
-<h2>Practise a complete, repeatable calculation</h2>
-<p><a href="../../week2/06-r-basics.html">Open the exercises</a>.</p>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>growth_mm      <span class="co"># now 19</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Add a fourth plant to <strong>both</strong> measurement vectors.</li>
-<li>Change an input, predict the effect, and rerun.</li>
-<li>Save <code>day06.R</code>; restart and run it from the top.</li>
+<li>A name holds a <strong>value</strong>, not a live formula as in a spreadsheet cell.</li>
+<li>Change an input, then <strong>rerun the lines that use it</strong>.</li>
+<li>Safest: run the whole script from the top.</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stale-value.svg" style="width:100.0%"></p>
+<figcaption>After the final length changes, the stored growth stays 17 until the subtraction is run again.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Ask for a prediction before printing growth_mm the first time. This is the most common source of “but I changed it!” confusion in the first weeks.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="saved-script-versus-objects-in-memory" class="slide level2">
+<h2>Saved script versus objects in memory</h2>
+<ul>
+<li><strong>Saving</strong> the script writes instructions to disk. It does not run them.</li>
+<li><strong>Running</strong> a line creates objects in memory. It does not save the script.</li>
+<li>Restart R (<strong>Session → Restart R</strong>): the objects are gone, the saved script is not.</li>
+<li>So after reopening, run the script from the top. Everything it needs must be in it.</li>
+</ul>
+<p>Test it today: save <code>day06.R</code>, restart R, run all lines. Does <code>growth_mm</code> come back?</p>
+<aside class="notes">
+<p>This is the same disk versus memory distinction from week 1. Unsaved editor changes may be recoverable, but do not rely on it. A script that works only after some unrecorded Console typing is not a complete record.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="several-plants-in-one-name" class="slide level2">
+<h2>Several plants in one name</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>initial_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">19</span>)</span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>final_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">37</span>, <span class="dv">40</span>, <span class="dv">34</span>)</span>
+<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>growth_mm <span class="ot">&lt;-</span> final_mm <span class="sc">-</span> initial_mm</span>
+<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>growth_mm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>c()</code> combines values into a <strong>vector</strong>.</li>
+<li>R subtracts <strong>position by position</strong>: 17, 18, 15 mm.</li>
+<li>This is right only if both vectors list the <strong>same plants in the same order</strong>.</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="matched-vectors.svg" style="width:100.0%"></p>
+<figcaption>Three plants each have an initial and a final length, giving three growth values.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Work through the second plant: 40 − 22 = 18. R does not know which plant is which; it only matches positions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summarise-and-compare" class="slide level2">
+<h2>Summarise and compare</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(growth_mm)</span>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(growth_mm)</span>
+<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>growth_mm <span class="sc">&gt;</span> <span class="dv">16</span></span>
+<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>plant_id <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"P01"</span>, <span class="st">"P02"</span>, <span class="st">"P03"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><code>mean()</code> gives <strong>16.67 mm</strong>; <code>length()</code> gives <strong>3</strong> plants.</li>
+<li><code>growth_mm &gt; 16</code> gives <code>TRUE TRUE FALSE</code>: yes/no answers, not new measurements.</li>
+<li>Text goes in quotes. <code>"20"</code> is text, <code>20</code> is a number.</li>
+<li><code>mean(plant_id)</code> makes no sense: IDs are labels, not measurements.</li>
+</ul>
+</div></div>
+<p>A <strong>function</strong> is a name followed by brackets: <code>mean(...)</code>. Run <code>?mean</code> to open its help page.</p>
+<aside class="notes">
+<p>Read the help’s Description and Examples, not every option. Plant IDs contain digits but are still labels; storing them as text keeps R from treating them as numbers.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="wrong-order-wrong-answer-no-warning" class="slide level2">
+<h2>Wrong order, wrong answer, no warning</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>final_wrong <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">34</span>, <span class="dv">37</span>, <span class="dv">40</span>)</span>
+<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>final_wrong <span class="sc">-</span> initial_mm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Gives <strong>14, 15, 21</strong> instead of 17, 18, 15.</li>
+<li>Same values, same length, so R raises no error.</li>
+<li>Only you know which plant each position belongs to. Keep the order matched.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="vector-shuffle.svg" style="width:100.0%"></p>
+<figcaption>Reordering one vector changes which initial and final lengths are paired.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Equal lengths are necessary but do not prove matching plants. From Day 7 we keep both lengths in the same row of a table, which protects the pairing.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="convert-the-values-not-only-the-label" class="slide level2">
+<h2>Convert the values, not only the label</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>growth_cm <span class="ot">&lt;-</span> growth_mm <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(growth_mm)   <span class="co"># 16.67</span></span>
+<span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(growth_cm)   <span class="co"># 1.667</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Dividing by 10 converts mm to cm. Store it under a <strong>new name</strong> ending <code>_cm</code>.</li>
+<li>Renaming an object or an axis to “cm” without dividing would be wrong by a factor of 10.</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../10-first-report/unit-label-check.svg" style="width:100.0%"></p>
+<figcaption>A growth of 18.6 mm relabelled as cm is wrong; converted it becomes 1.86 cm.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Keep the original values. A changed label does not change the numbers. The figure uses plant P01 from the course data (18.6 mm).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-same-habit-for-a-lab-calculation" class="slide level2">
+<h2>The same habit for a lab calculation</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a>mass_g <span class="ot">&lt;-</span> <span class="fl">0.2922</span></span>
+<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>molar_mass_g_mol <span class="ot">&lt;-</span> <span class="fl">58.44</span></span>
+<span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>volume_l <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a>amount_mol <span class="ot">&lt;-</span> mass_g <span class="sc">/</span> molar_mass_g_mol</span>
+<span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a><span class="dv">1000</span> <span class="sc">*</span> amount_mol <span class="sc">/</span> volume_l   <span class="co"># 50 mmol/L</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Every input has a name with its unit.</li>
+<li>Each step can be checked on its own.</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="solution-units.svg" style="width:100.0%"></p>
+<figcaption>Mass divided by molar mass gives amount; amount divided by volume gives concentration, 50 mmol/L.</figcaption>
+</figure>
+</div>
+</div></div>
+<p>Doubling the mass gives 100 mmol/L; doubling the volume gives 25 mmol/L.</p>
+<aside class="notes">
+<p>A mole is a unit of chemical amount; molar mass is grams per mole. All values are supplied; no chemistry background is needed. The alternative ratio exercise is a product yield: 100 × 0.62 g / 1.00 g = 62%.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="when-something-goes-wrong" class="slide level2">
+<h2>When something goes wrong</h2>
+<ul>
+<li><strong><code>object 'growth_mm' not found</code></strong>: check the spelling and capitals, then run the line that creates it.</li>
+<li><strong>A <code>+</code> prompt</strong> instead of <code>&gt;</code>: R is waiting for the rest of a line. Check quotes and brackets, or press Esc.</li>
+<li><strong>An old result</strong>: did you rerun the lines after changing an input?</li>
+<li><strong>Lost track?</strong> Restart R and run the script from the top.</li>
 </ul>
 <aside class="notes">
-<p>The worked mean uses three plants; the practical then extends to four. Keep the input values and comments in the saved source so the result can be reconstructed. Students doing the organic ratio choice still practise the matched-plant vector basics.</p>
+<p>Teach checking the dependency (which line creates this object?) instead of running random lines until the error goes away.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>A script is a saved list of instructions; it can be read and run again.</li>
+<li><code>&lt;-</code> stores a value under a name. The value does not update itself when inputs change.</li>
+<li><code>c()</code> makes a vector; R calculates position by position, so the order must match.</li>
+<li>Units belong in names and comments; converting means changing the values.</li>
+<li>Restart R and run the script from the top to check it is complete.</li>
+</ul>
+<p><strong>Next (Day 7, import):</strong> read a whole table of measurements from a file instead of typing values.</p>
+<p><strong>Now:</strong> <a href="../../week2/06-r-basics.html">open the Day 6 exercises</a>. Leave with <code>day06.R</code>: the four-plant example with comments about units, which runs from the top after a restart.</p>
+<aside class="notes">
+<p>The exercises extend to a fourth plant (21 to 39 mm) and offer a ratio or product-yield choice, then a stale-value and concentration exercise in day06-extended.R.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

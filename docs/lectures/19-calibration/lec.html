@@ -205,433 +205,19 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="a-reading-is-not-yet-a-concentration" class="slide level2">
-<h2>A reading is not yet a concentration</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="standards.svg" height="350"></p>
-<figcaption>Six known standard concentrations establish a measurement scale before an unknown is interpreted.</figcaption>
-</figure>
-</div>
-<p>Use known <strong>standards</strong> before estimating unknown samples.</p>
-<aside class="notes">
-<p>These are simulated values for a fictional colour assay; no reagent or prior chemistry course is assumed. A standard is a solution whose concentration is supplied. Absorbance describes light attenuation and is dimensionless. The standards span 0–10 mg/L.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="know-which-quantity-was-prepared-and-which-was-measured" class="slide level2">
-<h2>Know which quantity was prepared and which was measured</h2>
-<p>We <strong>prepared concentration</strong> and <strong>measured absorbance</strong>.</p>
-<p>Fit:</p>
-<p><code>absorbance = intercept + slope × concentration</code></p>
-<p>One standard is a calibration point, not a biological treatment replicate.</p>
-<aside class="notes">
-<p>This direction is deliberate. Later we rearrange the forward calibration to estimate an unknown concentration. Regressing concentration directly on absorbance would be a different fit. The zero-concentration standard includes background signal; no blank subtraction has been performed.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="fit-the-straight-line" class="slide level2">
-<h2>Fit the straight line</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>standards <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/calibration.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>calibration_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(absorbance <span class="sc">~</span> concentration_mg_l,</span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> standards)</span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(calibration_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Intercept ≈ <strong>0.03957</strong>; slope ≈ <strong>0.06489 per mg/L</strong>.</p>
-<aside class="notes">
-<p>Load readr, dplyr, ggplot2 as usual. Explain the tilde as response on the left and explanatory variable on the right. The practical supplies full precision. A nonzero intercept may represent background, so “zero concentration” does not justify forcing the fit through zero.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="does-a-line-describe-the-tested-range" class="slide level2">
-<h2>Does a line describe the tested range?</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../../week4/figures/day19-calibration.png" height="350"></p>
-<figcaption>Prepared standards are shown with their fitted linear calibration.</figcaption>
-</figure>
-</div>
-<p>A fitted line need not pass through every measured standard.</p>
-<aside class="notes">
-<p>Point to each measured value and the line’s fitted value. The fitted slope is the rise in absorbance for one mg/L increase in concentration. This is a working approximation within the tested range, not a chemical law established for every concentration.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-residual-is-observed-minus-fitted" class="slide level2">
-<h2>A residual is observed minus fitted</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../../week4/figures/day19-residuals.png" height="350"></p>
-<figcaption>Calibration residuals show measured readings minus their fitted readings.</figcaption>
-</figure>
-</div>
-<p>Look for curvature or an unusual point, not zero residuals everywhere.</p>
-<aside class="notes">
-<p>Positive means the observed absorbance is above the line. The six small residuals show no obvious curved pattern, but six standards remain limited evidence. A plot is a check on the approximation, not a guarantee of validity outside the data.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="read-backward-from-the-measured-signal" class="slide level2">
-<h2>Read backward from the measured signal</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="inverse-reading.svg" height="350"></p>
-<figcaption>A measured absorbance 0.520 intersects the fitted line near 7.40 mg/L.</figcaption>
-</figure>
-</div>
-<p>The unknown concentration is obtained by rearranging the line.</p>
-<aside class="notes">
-<p>Trace horizontally from the observed reading to the calibration line, then down to concentration. This visual separates the measured input from the estimated output. Keep the unrounded coefficients for the calculation even though slide labels are rounded.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="calculate-a-supported-point-estimate" class="slide level2">
-<h2>Calculate a supported point estimate</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>intercept <span class="ot">&lt;-</span> <span class="fu">coef</span>(calibration_fit)[<span class="dv">1</span>]</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>slope <span class="ot">&lt;-</span> <span class="fu">coef</span>(calibration_fit)[<span class="dv">2</span>]</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>concentration_mg_l <span class="ot">&lt;-</span> (<span class="fl">0.520</span> <span class="sc">-</span> intercept) <span class="sc">/</span> slope</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Result ≈ <strong>7.40 mg/L</strong>.</p>
-<p>This simple estimate omits full calibration and measurement uncertainty.</p>
-<aside class="notes">
-<p>The[1] and[2] select coefficients. The denominator is the fitted slope, with absorbance per mg/L units. The practical uses range checks to avoid pretending every numeric inversion is supported. The inverse result is an uncertain point estimate.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-number-can-be-calculable-but-unsupported" class="slide level2">
-<h2>A number can be calculable but unsupported</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="unsupported-reading.svg" height="350"></p>
-<figcaption>The U3 absorbance 0.900 is greater than every measured standard reading.</figcaption>
-</figure>
-</div>
-<p>U3 is beyond range: flag for a new suitable measurement.</p>
-<aside class="notes">
-<p>The practical assigns NA to the unsupported concentration rather than presenting an extrapolated number. A dilution correction requires a new measurement and recorded volumes. The instrument’s calibrated range is evidence, not an inconvenience to bypass.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-new-diluted-measurement-can-bring-the-signal-in-range" class="slide level2">
-<h2>A new diluted measurement can bring the signal in range</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="dilution.svg" height="350"></p>
-<figcaption>One millilitre of original sample is brought to ten millilitres total by adding solvent.</figcaption>
-</figure>
-</div>
-<p><strong>1.00 mL original → 10.00 mL total</strong> gives a dilution factor of 10.</p>
-<aside class="notes">
-<p>This is a stated new numerical example, not a wet-lab protocol or a new reading for U3. Define dilution without assuming chemical preparation knowledge. Total 10 mL does not mean adding 10 mL of solvent to the 1 mL sample. Assume no measured material is lost or reacts.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="distinguish-the-measured-and-original-concentrations" class="slide level2">
-<h2>Distinguish the measured and original concentrations</h2>
-<p>New diluted reading: <strong>0.520</strong> → <strong>7.40 mg/L</strong> diluted.</p>
-<p>Original estimate = diluted estimate × total volume / original volume.</p>
-<p><strong>7.404227 × 10 ≈ 74.04 mg/L</strong> original.</p>
-<p>The new measured reading, not the original concentration, is within calibration range.</p>
-<aside class="notes">
-<p>An original concentration above 10 mg/L can be estimated through a new in-range diluted measurement and a justified factor. That is different from extrapolating the old calibration directly to a high absorbance. Full dilution and calibration uncertainty remain outside this exercise.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="show-the-complete-quantity-map" class="slide level2">
-<h2>Show the complete quantity map</h2>
-<p>Known standards: concentration → measured absorbance. Fit: absorbance as a function of known concentration. Unknown: measured absorbance → inverse point estimate.</p>
-<p>Keep the fitted direction and requested output distinct.</p>
-<aside class="notes">
-<p>The standard concentration is prepared and the response is measured. A new direct regression of concentration on absorbance is a different fit. Students should label predictor,response,intercept,slope units,range,and unknown estimate.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="rounding-a-display-can-change-a-later-calculation" class="slide level2">
-<h2>Rounding a display can change a later calculation</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-rounded-coefficients.svg" height="350"></p>
-<figcaption>Inverse estimates differ when full coefficients are replaced by coefficients rounded to two decimals.</figcaption>
-</figure>
-</div>
-<p>Retain fitted coefficients; round results when communicating.</p>
-<aside class="notes">
-<p>For reading.310, rounding intercept and slope to.04 and.06 gives4.50 rather than4.17 mg/L. It is a deliberate diagnostic, not a recommended new calibration. Extra display precision does not remove measurement uncertainty either.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-residual-has-a-direction-and-a-scale" class="slide level2">
-<h2>A residual has a direction and a scale</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>standards<span class="sc">$</span>observed_minus_fitted <span class="ot">&lt;-</span></span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>  standards<span class="sc">$</span>absorbance <span class="sc">-</span> <span class="fu">fitted</span>(calibration_fit)</span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">residuals</span>(calibration_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Positive means the observed signal is above the line.</p>
-<aside class="notes">
-<p>Compare one value by hand. Both expressions should match. A residual is not the concentration error of an unknown and not a p-value. Use the first standard while its measured concentration and signal remain visible.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="trace-a-corrected-estimate-through-its-evidence" class="slide level2">
-<h2>Trace a corrected estimate through its evidence</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-dilution-lineage.svg" height="350"></p>
-<figcaption>A new diluted reading feeds its inverseestimate and suppliedfactor to recover an original estimate.</figcaption>
-</figure>
-</div>
-<p>The corrected original estimate is not a direct instrument reading.</p>
-<aside class="notes">
-<p>A numerical table should retain the new reading,original aliquot volume,total final volume,factor,diluted estimate,and original estimate. Nothing in this chain validates U3 without its own new measurement.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-second-calibration-needs-a-second-fit" class="slide level2">
-<h2>A second calibration needs a second fit</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-transfer-line.svg" height="350"></p>
-<figcaption>The new six-standard instrument calibration has its own intercept and slope.</figcaption>
-</figure>
-</div>
-<p>Create separate coefficient objects for the second instrument.</p>
-<aside class="notes">
-<p>Transfer standards span0–5 mg/L. Fit absorbance on known concentration. Their fitted intercept is.02161905 and slope.10008571 per mg/L. This is another empirical calibration,not a universal optical law.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="rebuild-the-transfer-fit-explicitly" class="slide level2">
-<h2>Rebuild the transfer fit explicitly</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>transfer_standards <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="st">'data/calibration-transfer.csv'</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>transfer_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(absorbance <span class="sc">~</span> concentration_mg_l,</span>
-<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> transfer_standards)</span>
-<span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(transfer_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<aside class="notes">
-<p>Load readr before this block. Keep separate names so the primary instrument report is not silently altered. The independent transfer report must contain its own import,checks,fit,and inverse calculations.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="inspect-the-new-residuals-not-the-old-picture" class="slide level2">
-<h2>Inspect the new residuals, not the old picture</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-transfer-residuals.svg" height="350"></p>
-<figcaption>Residuals fromthe new six-standard fit remain small onthe absorbance scale.</figcaption>
-</figure>
-</div>
-<p>A tidy residual plot is limited evidence with only six standards.</p>
-<aside class="notes">
-<p>Look for obvious curvature or an unusual point. Absence of an obvious pattern does not establish chemical specificity,measurement accuracy in every condition,or performance beyond the tested range.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="preserve-the-unsupported-unknown-as-a-record" class="slide level2">
-<h2>Preserve the unsupported unknown as a record</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-transfer-range.svg" height="350"></p>
-<figcaption>X1at0.270 is within the new standard range;X2at0.700 is above it.</figcaption>
-</figure>
-</div>
-<p>Keep the ID and reading; flag the unsupported concentration.</p>
-<aside class="notes">
-<p>X1 estimates about 2.48168 mg/L. X2 is not supported by the supplied standard readings. Missing estimate due to out-of-range input differs from a missing measured signal; retain the reason rather than dropping the row.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="an-algebra-check-is-useful-but-not-independent-validation" class="slide level2">
-<h2>An algebra check is useful but not independent validation</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>transfer_a <span class="ot">&lt;-</span> <span class="fu">coef</span>(transfer_fit)[<span class="dv">1</span>]</span>
-<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>transfer_b <span class="ot">&lt;-</span> <span class="fu">coef</span>(transfer_fit)[<span class="dv">2</span>]</span>
-<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>x1_mg_l <span class="ot">&lt;-</span> (<span class="fl">0.270</span> <span class="sc">-</span> transfer_a) <span class="sc">/</span> transfer_b</span>
-<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>transfer_a <span class="sc">+</span> transfer_b <span class="sc">*</span> x1_mg_l</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The forward calculation returns <strong>0.270</strong>, apart from rounding.</p>
-<aside class="notes">
-<p>The check can catch reversal or arithmetic mistakes. Because it reuses the same fitted relationship, it does not independently establish calibration validity or eliminate uncertainty.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-next-action-needs-new-information-not-an-invented-result" class="slide level2">
-<h2>A next action needs new information, not an invented result</h2>
-<p>For an unsupported sample, state what must be supplied next:</p>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>In a biochemistry lab you put your samples in a spectrophotometer or plate reader. The instrument does not report “mg/L”: it reports an <strong>absorbance</strong>, a number without units. To turn it into a concentration you first measure <strong>standards</strong> of known concentration, fit a line through them, and read your sample’s concentration backwards from that line. <strong>What concentration is in my sample, and when can I trust the number?</strong></p>
+<p>Today you will:</p>
 <ul>
-<li>A new suitable measurement.</li>
-<li>Any recorded sample and total volumes.</li>
-<li>The supported range and applicable calibration.</li>
+<li>fit a calibration line with <code>lm()</code> and read its intercept and slope, with units;</li>
+<li>check the residuals: how far each standard lies from the line;</li>
+<li>convert an unknown sample’s absorbance into a concentration;</li>
+<li>refuse to report a reading outside the standards, and use a dilution instead.</li>
 </ul>
-<p>No fabricated corrected concentration.</p>
+<p>Days 17–18 compared means. Today and on Day 20 we fit straight lines; today the line is a <strong>measuring tool</strong>.</p>
 <aside class="notes">
-<p>The transfer report should recommend a sensible information-gathering step for X2. It is not a wet-lab protocol and does not require prior chemistry. Full uncertainty propagation remains beyond this simple exercise.</p>
+<p>These are simulated readings for a fictional colour assay; no chemistry course is needed. Ask whether anyone has already used a standard curve (protein assays such as Bradford, DNA quantification, enzyme activity). Every one of those is today’s workflow.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -644,13 +230,456 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="exercises-report-the-line-and-its-limits" class="slide level2">
-<h2>Exercises: report the line and its limits</h2>
-<p>Save <strong><code>calibration-report.Rmd</code></strong>, supported concentration estimates, and both figures.</p>
-<p>Explain U3’s missing estimate and the new dilution example.</p>
-<p><a href="../../week4/19-calibration.html">Open exercises</a>.</p>
+<section id="the-problem-a-reading-is-not-a-concentration" class="slide level2">
+<h2>The problem: a reading is not a concentration</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>Unknown samples gave absorbance <strong>0.310</strong>, <strong>0.520</strong> and <strong>0.900</strong>.</li>
+<li>On its own, 0.520 means nothing: another instrument, reagent batch or day gives a different reading for the same sample.</li>
+<li>Six <strong>standards</strong> of known concentration, <strong>0 to 10 mg/L</strong>, were measured with the samples (<code>data/calibration.csv</code>).</li>
+<li>A standard is a calibration point, not a biological replicate.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="standards.svg" style="width:100.0%"></p>
+<figcaption>Six standards of known concentration from 0 to 10 mg/L next to an unknown sample whose concentration we want.</figcaption>
+</figure>
+</div>
+</div></div>
 <aside class="notes">
-<p>Students should explain the standard, slope units, residual sign, supported range, and uncertainty limitation. They need no memorised optical law. Keep the dataset and formula visible so the chemistry setting does not become a prerequisite.</p>
+<p>The standards set the scale for this run of the instrument. That is why they are measured each time, in the same run as the unknowns.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="which-variable-goes-on-which-axis" class="slide level2">
+<h2>Which variable goes on which axis?</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li><p>We <strong>prepared</strong> the concentration and <strong>measured</strong> the absorbance.</p></li>
+<li><p>So concentration goes on x and absorbance on y:</p>
+<p><code>absorbance = intercept + slope × concentration</code></p></li>
+<li><p><strong>Intercept:</strong> the fitted reading at 0 mg/L, a background signal (the blank S1 read 0.041).</p></li>
+<li><p><strong>Slope:</strong> the increase in absorbance per 1 mg/L.</p></li>
+<li><p>The line does not have to pass through every point.</p></li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../week4/figures/day19-calibration.png" style="width:100.0%"></p>
+<figcaption>Six prepared standards with absorbance rising from 0.041 to 0.687, and the fitted straight calibration line.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>The direction is deliberate: the measured quantity is the response. Later we rearrange the same line to get concentration. Fitting concentration on absorbance would be a different regression and is not used here. The nonzero intercept is a background reading: do not force the line through zero just because zero concentration sounds like nothing.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="fit-the-line-in-r" class="slide level2">
+<h2>Fit the line in R</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>standards <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/calibration.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>calibration_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(absorbance <span class="sc">~</span> concentration_mg_l, <span class="at">data =</span> standards)</span>
+<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(calibration_fit)</span>
+<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        (Intercept) concentration_mg_l</span></span>
+<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         0.03957143         0.06488571</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>~</code> reads “explained by”: response on the left, the prepared variable on the right.</li>
+<li>Line: <strong>absorbance ≈ 0.0396 + 0.0649 × concentration</strong>.</li>
+<li>Slope units: <strong>absorbance per mg/L</strong>. Every extra 1 mg/L adds about 0.065 to the reading.</li>
+</ul>
+<aside class="notes">
+<p>lm() is the same function students use again tomorrow for a biological association. coef() returns the intercept and slope; [1] and [2] select them. Keep the full-precision values in R; round only in the prose.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="check-the-residuals" class="slide level2">
+<h2>Check the residuals</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li><strong>Residual = observed − fitted</strong> reading, in absorbance units.</li>
+<li>S1: 0.041 − 0.0396 = <strong>+0.0014</strong>: just above the line.</li>
+<li>All six lie within <strong>±0.008</strong> of the line, on both sides, with no curved pattern.</li>
+<li>Six standards are limited evidence: the line is checked <strong>only between 0 and 10 mg/L</strong>.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../week4/figures/day19-residuals.png" style="width:100.0%"></p>
+<figcaption>Residuals of the six standards scatter within about 0.008 absorbance units of zero, without a curved pattern.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p><code>residuals(calibration_fit)</code> gives the same values as the hand calculation. Look for curvature (a smile or frown shape) or one point far from the others. A residual is a difference in absorbance, not a concentration error and not a p-value.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="read-the-line-backwards" class="slide level2">
+<h2>Read the line backwards</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p>Rearrange the line:</p>
+<p><code>concentration = (absorbance − intercept) / slope</code></p>
+<ul>
+<li>U2 read <strong>0.520</strong> → (0.520 − 0.0396) / 0.0649 ≈ <strong>7.40 mg/L</strong>.</li>
+<li>U1 read <strong>0.310</strong> → <strong>4.17 mg/L</strong>.</li>
+<li>These are point estimates; the standards and the readings both carry uncertainty that we do not calculate here.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="inverse-reading.svg" style="width:100.0%"></p>
+<figcaption>A reading of 0.520 is traced across to the calibration line and down to about 7.40 mg/L.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Trace with a finger: across from the measured reading to the line, then down to concentration. The input is measured; the output is estimated. Use the unrounded coefficients in the calculation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="estimate-only-inside-the-standards" class="slide level2">
+<h2>Estimate only inside the standards</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>unknowns <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/unknowns.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>intercept <span class="ot">&lt;-</span> <span class="fu">coef</span>(calibration_fit)[<span class="dv">1</span>]</span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>slope <span class="ot">&lt;-</span> <span class="fu">coef</span>(calibration_fit)[<span class="dv">2</span>]</span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>unknowns <span class="ot">&lt;-</span> unknowns <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">within_range =</span> absorbance <span class="sc">&gt;=</span> <span class="fu">min</span>(standards<span class="sc">$</span>absorbance) <span class="sc">&amp;</span></span>
+<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>                        absorbance <span class="sc">&lt;=</span> <span class="fu">max</span>(standards<span class="sc">$</span>absorbance),</span>
+<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a>         <span class="at">concentration_mg_l =</span> <span class="fu">if_else</span>(</span>
+<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a>           within_range, (absorbance <span class="sc">-</span> intercept) <span class="sc">/</span> slope, <span class="cn">NA_real_</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>sample_id</th>
+<th>absorbance</th>
+<th>within_range</th>
+<th>concentration_mg_l</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>U1</td>
+<td>0.310</td>
+<td>TRUE</td>
+<td>4.17</td>
+</tr>
+<tr class="even">
+<td>U2</td>
+<td>0.520</td>
+<td>TRUE</td>
+<td>7.40</td>
+</tr>
+<tr class="odd">
+<td>U3</td>
+<td>0.900</td>
+<td>FALSE</td>
+<td>NA</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The standards read <strong>0.041 to 0.687</strong>. U3 is above the highest standard, so it gets <code>NA</code> instead of a number.</li>
+<li>The row stays in the table with its reading, so the reason for the missing estimate is visible.</li>
+</ul>
+<aside class="notes">
+<p><code>&amp;</code> requires both conditions. <code>NA_real_</code> is a numeric missing value. This is the table saved as output/day19-unknowns.csv in the practical.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-not-just-calculate-u3" class="slide level2">
+<h2>Why not just calculate U3?</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>The formula happily returns <strong>13.3 mg/L</strong> for U3.</li>
+<li>But no standard was measured above 10 mg/L. The line might bend there: many assays <strong>flatten out</strong> at high concentration.</li>
+<li>A number you can calculate is not a number you can support.</li>
+<li>Report U3 as <strong>“above the calibration range”</strong> and measure it again, diluted.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="unsupported-reading.svg" style="width:100.0%"></p>
+<figcaption>U3’s reading of 0.900 lies above every measured standard, outside the range checked by the calibration.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>The calibrated range is evidence, not an inconvenience to bypass. Saturation at high concentration is common in absorbance assays; we do not need to know why to respect the range.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="bring-a-high-sample-into-range-by-dilution" class="slide level2">
+<h2>Bring a high sample into range by dilution</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p>A separate sample was too concentrated, so a <strong>new</strong> measurement was made:</p>
+<ul>
+<li><strong>1.00 mL</strong> of sample plus solvent up to <strong>10.00 mL total</strong> → dilution factor 10.00 / 1.00 = <strong>10</strong>.</li>
+<li>The diluted reading, <strong>0.520</strong>, is inside the standards → <strong>7.40 mg/L</strong> diluted.</li>
+<li>Original ≈ 7.404 × 10 ≈ <strong>74.04 mg/L</strong>.</li>
+</ul>
+<p>The in-range reading is what was measured; the original concentration is calculated from it and the recorded volumes.</p>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-dilution-lineage.svg" style="width:100.0%"></p>
+<figcaption>The new diluted reading 0.520 gives 7.40 mg/L, and multiplying by the factor 10 gives an original estimate of 74.04 mg/L.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>“10.00 mL total” does not mean adding 10 mL of solvent to 1 mL of sample. This is a separate example, not a new reading for U3: U3 still needs its own new measurement. Assume no substance is lost. The uncertainty of the volumes and the calibration is ignored in this simple point estimate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="pitfall-rounded-coefficients-change-the-answer" class="slide level2">
+<h2>Pitfall: rounded coefficients change the answer</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>Rounding to two decimals gives intercept <strong>0.04</strong> and slope <strong>0.06</strong>.</li>
+<li>Reading 0.310: <strong>4.17 mg/L</strong> with the full coefficients, <strong>4.50 mg/L</strong> with the rounded ones.</li>
+<li>Reading 0.520: <strong>7.40</strong> versus <strong>8.00 mg/L</strong>.</li>
+<li>Calculate from <code>coef(calibration_fit)</code>; round only the final number you write.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-rounded-coefficients.svg" style="width:100.0%"></p>
+<figcaption>Inverse estimates for readings 0.310 and 0.520 are higher when the coefficients are rounded to two decimals than with the full coefficients.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>The slope is small, so rounding it from 0.0649 to 0.06 changes it by about 8 percent, and every estimate with it. This is a deliberate diagnostic; students try it in the practical with round(intercept, 2) and round(slope, 2) in a separate expression. More decimals in a report are not more precision either.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-new-instrument-needs-its-own-line" class="slide level2">
+<h2>A new instrument needs its own line</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>A second instrument: six standards <strong>0 to 5 mg/L</strong> (<code>data/calibration-transfer.csv</code>).</li>
+<li>Its own fit: intercept <strong>0.0216</strong>, slope <strong>0.1001</strong> per mg/L. The old coefficients do not apply.</li>
+<li>X1 read <strong>0.270</strong> → <strong>2.48 mg/L</strong>, inside the standards (0.024 to 0.525).</li>
+<li>X2 read <strong>0.700</strong> → above range: keep the row, flag it, measure again diluted.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-transfer-range.svg" style="width:100.0%"></p>
+<figcaption>On the second instrument’s calibration, X1 at 0.270 lies within the standard readings and X2 at 0.700 lies above all of them.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Fit as transfer_fit with its own coefficient objects so the main report is not silently changed. Putting 2.48 mg/L back into the forward equation returns 0.270: a useful check of the algebra, but it reuses the same line, so it does not validate the calibration.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="write-the-result" class="slide level2">
+<h2>Write the result</h2>
+<p>“Absorbance increased linearly with concentration across six standards from 0 to 10 mg/L (slope <strong>0.065 absorbance units per mg/L</strong>; residuals within ±0.008). Sample U1 was estimated at <strong>4.17 mg/L</strong> and U2 at <strong>7.40 mg/L</strong>. U3 (absorbance 0.900) was above the highest standard and needs to be diluted and measured again.”</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Misreading</th>
+<th>Better</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“The line fits well, so any concentration is fine.”</td>
+<td>Only between the lowest and highest standards.</td>
+</tr>
+<tr class="even">
+<td>“U3 is 13.3 mg/L.”</td>
+<td>U3 is above the calibration range: no estimate.</td>
+</tr>
+<tr class="odd">
+<td>“The intercept should be zero.”</td>
+<td>It is the background reading; do not force it.</td>
+</tr>
+<tr class="even">
+<td>“7.40 mg/L is exact.”</td>
+<td>It is a point estimate; uncertainty is not calculated here.</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>Ask students which code produces each number in the paragraph. They should be able to point at coef(), residuals() and the unknowns table.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Key fact</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Standard</td>
+<td>Solution of known concentration, measured in the same run as the samples</td>
+</tr>
+<tr class="even">
+<td>Direction</td>
+<td>Prepared concentration on x, measured absorbance on y: <code>lm(absorbance ~ concentration_mg_l)</code></td>
+</tr>
+<tr class="odd">
+<td>Coefficients</td>
+<td>Intercept <strong>0.0396</strong> (background); slope <strong>0.0649</strong> absorbance per mg/L</td>
+</tr>
+<tr class="even">
+<td>Residual</td>
+<td>Observed − fitted reading; look for curvature or one point far away</td>
+</tr>
+<tr class="odd">
+<td>Inverse</td>
+<td><code>(absorbance − intercept) / slope</code>: U1 4.17, U2 7.40 mg/L</td>
+</tr>
+<tr class="even">
+<td>Range</td>
+<td>Estimate only between the lowest and highest standard; U3 → <code>NA</code> with a reason</td>
+</tr>
+<tr class="odd">
+<td>Dilution</td>
+<td>New in-range reading × factor; 1 → 10 mL gives ×10 (7.40 → 74.04 mg/L)</td>
+</tr>
+<tr class="even">
+<td>Precision</td>
+<td>Calculate with full coefficients; round only the reported result</td>
+</tr>
+<tr class="odd">
+<td>New instrument</td>
+<td>New standards, new fit (slope 0.1001 per mg/L for the transfer data)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Next (Day 20, association):</strong> the same <code>lm()</code> on two measured biological variables, where neither was set by us.</p>
+<p><strong>Now:</strong> <a href="../../week4/19-calibration.html">open the Day 19 exercises</a>. Make <code>calibration-report.Rmd</code> with the line and residual plots, the slope with units and the range-checked unknowns; save <code>output/day19-unknowns.csv</code> and both figures, then render.</p>
+<aside class="notes">
+<p>The exercises continue with the rounding diagnostic, the dilution table and an independent transfer-calibration.Rmd for the second instrument.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

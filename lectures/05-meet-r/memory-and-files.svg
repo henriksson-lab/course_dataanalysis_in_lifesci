@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Quitting R clears objects in memory; saved files stay on disk</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="40" y="40" width="430" height="330" rx="10" fill="#f5f0ff" stroke="#6b4fa0" stroke-width="3"/>
+<text x="255" y="85" font-family="Arial, sans-serif" font-size="25" fill="#6b4fa0" text-anchor="middle" font-weight="bold">R&#x27;s memory (Environment)</text>
+<text x="90" y="175" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="26" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">seedlings</text>
+<text x="90" y="215" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="20" fill="#64748b" text-anchor="start" font-weight="normal" xml:space="preserve">24 obs. of 4 variables</text>
+<line x1="350" y1="160" x2="410" y2="220" stroke="#a8324a" stroke-width="6"/>
+<line x1="350" y1="220" x2="410" y2="160" stroke="#a8324a" stroke-width="6"/>
+<text x="255" y="320" font-family="Arial, sans-serif" font-size="23" fill="#a8324a" text-anchor="middle" font-weight="normal">gone when R quits</text>
+<rect x="630" y="40" width="430" height="330" rx="10" fill="#fffaf0" stroke="#9a7820" stroke-width="3"/>
+<text x="845" y="85" font-family="Arial, sans-serif" font-size="25" fill="#9a7820" text-anchor="middle" font-weight="bold">Disk (Files pane)</text>
+<text x="670" y="150" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">data/seedlings.csv</text>
+<text x="670" y="195" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">report.Rmd</text>
+<text x="670" y="240" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">report.html</text>
+<text x="670" y="285" font-family="DejaVu Sans Mono, Consolas, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">reports/day05-notes.txt</text>
+<text x="845" y="345" font-family="Arial, sans-serif" font-size="23" fill="#2a7f8f" text-anchor="middle" font-weight="normal">still there next time</text>
+<line x1="620" y1="240" x2="480" y2="240" stroke="#2a7f8f" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="550" y="225" font-family="Arial, sans-serif" font-size="18" fill="#2a7f8f" text-anchor="middle" font-weight="normal">read again</text>
+<text x="550" y="450" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">Keep the instructions in a saved file, and every object can be made again.</text>
+</svg>

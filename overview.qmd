@@ -1,92 +1,70 @@
 ---
-title: "What you will learn and how to work"
+title: "About the course"
+aliases:
+  - study-plan.html
 ---
 
-Data Analysis in Life Sciences is a five-week introduction to computing and
-biological data analysis. We start with
-finding a file and end with an analysis that another person can reproduce.
-The workflow is meant to carry into later biology practicals, where R replaces
-manual spreadsheet calculations and graph preparation.
+Data Analysis in Life Sciences is a five-week introduction to computing for
+biologists. It starts with the kinds of files your data come in and ends with an
+analysis that someone else can re-run from the raw data. The aim is that in later
+lab courses and in your thesis you analyse data in R rather than by hand in a
+spreadsheet. The [course introduction slides](lectures/00-course-intro/lec.qmd)
+explain why.
 
-## What you should become able to do
+No previous experience with the terminal, programming, or statistics is assumed.
+All course datasets are simulated teaching data.
 
-- Explain files, folders, paths, applications, memory, storage, and processes
-  through the practical actions you use every day.
-- Organise and inspect lab files with a small set of command-line tools.
-- Connect to a supplied remote Linux environment and distinguish its files from
-  the files on your laptop.
-- Import and check biological measurements in R, calculate derived variables,
+## What you will be able to do
+
+- Tell plain-text data files from Word and Excel files, find files by their path,
+  and estimate how much memory a dataset needs.
+- Inspect and organise lab files with a few command-line tools, locally and on a
+  remote Linux computer.
+- Import biological measurements into R, check them, calculate new variables,
   summarise groups, and make labelled plots.
-- Interpret mean, variance, SD, and the difference between individual spread
-  and uncertainty in an estimate.
-- Interpret a guided t-test and a straight-line fit, with attention to
-  independent experimental units, units of measurement, and limitations.
-- Write and render an R Markdown report from its saved data and code.
+- Describe variation with mean, variance and SD, and tell the spread of
+  individual plants from the uncertainty of an estimate.
+- Use a t-test and a straight-line fit, reporting effect size, uncertainty,
+  units, and limitations.
+- Write an R Markdown report that renders from its saved data and code.
 
-No previous file-system, terminal, R, or statistics knowledge is assumed. We will
-practise the same actions several times, with gradually less guidance. Later
-courses will develop biological theory and bioinformatics tools; this course
-does not teach database searching, sequence alignment, or omics analysis.
+The course does not cover database searching, sequence alignment, or omics
+analysis; those come in later courses.
 
-Prior chemistry courses are not required to understand an exercise. Chemistry
-contexts supply all definitions, inputs, constants, units, and calculation
-relationships. For example, percentage yield means 100 times the collected mass
-divided by a supplied maximum possible mass. Where an exercise offers biological
-or organic-laboratory data, choose one route.
+## Weekly checkpoints
 
-## Working through a topic
+| Week | By the end of the week you can |
+| --- | --- |
+| 1 — Files and the terminal | Open a data file as plain text, give its path, find it in the terminal, and run a first calculation in R |
+| 2 — R and reports | Import a table, calculate growth, plot it, and render a report from its source |
+| 3 — Variation | Check a messy table, summarise groups, and explain SD versus uncertainty |
+| 4 — Comparisons and lines | Estimate a difference with a confidence interval, analyse paired data, and fit a calibration line |
+| 5 — Bigger data and reproducibility | Estimate a dataset's memory needs, work on a remote computer, and reproduce a small study from a fresh folder |
 
-Use each topic's **Lecture (slides)** for the explanation and worked visual
-examples, then open **Exercises** for the complete instructions and
-saved output. Slides use the arrow keys or navigation controls; the link in
-each deck opens its exercises. Each topic has a quiz with collapsible hints
-and answers. Weekly quizzes provide further review.
+## Three places where you type commands
 
-The numbered lessons follow a five-week progression. The teaching team supplies
-the contact timetable separately. Ask for setup support if an installation fails.
-
-The [five-week study plan](study-plan.qmd) lists the weekly work and checkpoints.
-Exercises include new questions and datasets to apply what you have learned.
-Keep the named outputs and check that you can regenerate them independently.
-
-For most R lessons, a useful working rhythm is:
-
-1. Open the course `.Rproj` and yesterday's source file.
-2. Read the biological question and identify what one row represents.
-3. Predict a small example, run it, and explain the result.
-4. Complete the practical, using hints and references as needed.
-5. Save code, a plot or report, and a short interpretation.
-6. Close/restart, reopen the work, and check that you can regenerate it.
-
-## Three command interfaces to distinguish
-
-| Interface | Typical commands | What it acts on |
+| Where | Typical commands | What it acts on |
 | --- | --- | --- |
-| Local shell in Ubuntu or Mac Terminal | `pwd`, `ls`, `unzip` | Files and programs on your laptop |
-| R console in RStudio | `mean()`, `read_csv()`, `ggplot()` | R objects and files accessible to that R session |
-| Remote shell after SSH | `pwd`, `ls`, the supported remote commands | Files and programs on the remote computer |
+| Terminal on your laptop (Ubuntu or Mac Terminal) | `pwd`, `ls`, `unzip` | Files and programs on your laptop |
+| R Console in RStudio | `mean()`, `read_csv()`, `ggplot()` | R objects, and files R can reach |
+| Remote terminal after `ssh` | `pwd`, `ls`, supported remote commands | Files and programs on the remote computer |
 
-The prompt and window help identify the interface, but always ask which computer
-and folder you are using. A folder called `data` does not identify the computer
-that holds it.
+A folder called `data` exists on many computers. When something cannot be found,
+first check which computer and which folder you are in.
 
 ## What to keep
 
-Preserve the raw data. Save R code or `.Rmd` source, not only a screenshot or
-printed number. Keep generated figures and HTML reports with their source and
-use the supported backup storage. Most daily exercises name a specific file to
-leave with; these are practice outputs, not a grading scheme.
+Keep the raw data unchanged. Save your R code and `.Rmd` files, not only
+screenshots or printed numbers, and keep generated figures and HTML reports next
+to their source. The [downloads page](downloads/index.qmd) has the course folder
+and a working report template.
 
-The [downloads page](downloads/index.qmd) supplies datasets and a working report
-template. Reports are `.Rmd` files; the course website uses Quarto, which you do
-not need to author. We initially render HTML to keep the software setup small.
+Some exercises offer a chemistry-lab alternative to the biology example; choose
+one. Each gives every definition, quantity, unit and formula you need, so no
+chemistry course is required.
 
 ## Getting help
 
-Record the exact error, the line or chunk that produced it, the relevant
-filename, and whether you are local or remote. Check the current folder and
-object spelling. Never send passwords, host authentication codes, or private
-account details in an error report.
-
-Start at [Day 1](week1/01-files.qmd) or return to the
-[five-week route](index.qmd#your-five-week-route).
+Note the exact error message, the line or chunk that produced it, the file name,
+and whether you were working locally or remotely. Never include passwords or
+login codes in a help request.

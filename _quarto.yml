@@ -4,7 +4,6 @@ project:
   render:
   - index.qmd
   - overview.qmd
-  - study-plan.qmd
   - intro/*.qmd
   - downloads/index.qmd
   - reference/*.qmd
@@ -25,7 +24,7 @@ website:
     - href: index.qmd
       text: Home
     - href: overview.qmd
-      text: Course overview
+      text: About the course
     - href: downloads/index.qmd
       text: Downloads
   sidebar:
@@ -36,10 +35,10 @@ website:
       text: Home
     - section: Getting started
       contents:
+      - href: lectures/00-course-intro/lec.qmd
+        text: Why biologists need computing (slides)
       - href: overview.qmd
-        text: Course overview
-      - text: Five-week study plan
-        href: study-plan.qmd
+        text: About the course
       - href: intro/ubuntu-windows.qmd
         text: 'Windows: install Ubuntu / Mac: open Terminal'
       - href: intro/r-rstudio.qmd
@@ -48,9 +47,9 @@ website:
         text: Remote Linux and SSH
       - href: downloads/index.qmd
         text: Download the course files
-    - section: 'Week 1: files and computers'
+    - section: 'Week 1: files and the terminal'
       contents:
-      - section: '1. Files: save, find, reopen'
+      - section: '1. Kinds of files'
         contents:
         - text: Lecture (slides)
           href: lectures/01-files/lec.qmd
@@ -58,7 +57,7 @@ website:
           href: week1/01-files.qmd
         - text: Quiz
           href: week1/01-files-quiz.qmd
-      - section: 2. Folders and how computers work
+      - section: 2. Folders and paths
         contents:
         - text: Lecture (slides)
           href: lectures/02-folders-computers/lec.qmd
@@ -74,7 +73,7 @@ website:
           href: week1/03-terminal.qmd
         - text: Quiz
           href: week1/03-terminal-quiz.qmd
-      - section: 4. Unpack and inspect lab data
+      - section: 4. Unzip and inspect lab data
         contents:
         - text: Lecture (slides)
           href: lectures/04-inspect-archive/lec.qmd
@@ -82,14 +81,14 @@ website:
           href: week1/04-inspect-archive.qmd
         - text: Quiz
           href: week1/04-inspect-archive-quiz.qmd
-      - section: 5. Find samples and package results
+      - section: 5. Meet R and RStudio
         contents:
         - text: Lecture (slides)
-          href: lectures/05-lab-files/lec.qmd
+          href: lectures/05-meet-r/lec.qmd
         - text: Exercises
-          href: week1/05-lab-files.qmd
+          href: week1/05-meet-r.qmd
         - text: Quiz
-          href: week1/05-lab-files-quiz.qmd
+          href: week1/05-meet-r-quiz.qmd
       - text: 'Weekly revision quiz'
         href: week1/quiz.qmd
     - section: 'Week 2: R and a first report'
@@ -224,24 +223,24 @@ website:
           href: week4/20-association-quiz.qmd
       - text: 'Weekly revision quiz'
         href: week4/quiz.qmd
-    - section: 'Week 5: reproduce and transfer'
+    - section: 'Week 5: bigger data and reproducibility'
       contents:
-      - section: 21. Work on a remote computer
+      - section: 21. How a computer works; data size
         contents:
         - text: Lecture (slides)
-          href: lectures/21-remote-workflow/lec.qmd
+          href: lectures/21-computer/lec.qmd
         - text: Exercises
-          href: week5/21-remote-workflow.qmd
+          href: week5/21-computer.qmd
         - text: Quiz
-          href: week5/21-remote-workflow-quiz.qmd
-      - section: 22. DNA and images as data
+          href: week5/21-computer-quiz.qmd
+      - section: 22. Work on a remote computer
         contents:
         - text: Lecture (slides)
-          href: lectures/22-data-representations/lec.qmd
+          href: lectures/22-remote-workflow/lec.qmd
         - text: Exercises
-          href: week5/22-data-representations.qmd
+          href: week5/22-remote-workflow.qmd
         - text: Quiz
-          href: week5/22-data-representations-quiz.qmd
+          href: week5/22-remote-workflow-quiz.qmd
       - section: 23. A small biological study
         contents:
         - text: Lecture (slides)
@@ -250,7 +249,7 @@ website:
           href: week5/23-mini-study.qmd
         - text: Quiz
           href: week5/23-mini-study-quiz.qmd
-      - section: 24. Reproduce a report
+      - section: 24. Reproduce and share a report
         contents:
         - text: Lecture (slides)
           href: lectures/24-reproduce/lec.qmd

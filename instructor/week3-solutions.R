@@ -236,7 +236,7 @@ if ("--figures" %in% commandArgs(trailingOnly = TRUE)) {
 }
 cat("Week 3 worked calculations and report rendered successfully. Artifacts:", out, "\n")
 
-# Expanded days11–15: audit consequences and independent transfer work.
+# Expanded days 11–15: audit consequences and independent transfer work.
 raw_trimmed <- read_csv('data/seedlings-messy.csv', show_col_types = FALSE,
                         col_types = cols(.default = col_character()))
 stopifnot('treated ' %in% raw$treatment,
@@ -306,13 +306,13 @@ second_means_3 <- replicate(400, mean(sample(transfer$growth_mm, size = 3, repla
 second_means_12 <- replicate(400, mean(sample(transfer$growth_mm, size = 12, replace = TRUE)))
 stopifnot(sd(second_means_12) < sd(second_means_3), !identical(means_3,second_means_3))
 writeLines(c(
-  'Day11: raw25 records; repaired24 distinct plants,23 growth measurements.',
+  'Day 11: raw 25 records; repaired 24 distinct plants, 23 growth measurements.',
   'Missing P06 is not zero: an invented zero final implies -24.7 mm growth.',
-  'Transfer study:18 unique plants,9 per group,no missing values,no supported correction.',
-  'Day12: shift changes centre; conversion changes mean/SD by 10 and variance by 100.',
-  'Day13: individual observations and grouped summaries have distinct roles.',
-  'Day14: source observations,draws per sample,and simulation repetitions differ.',
-  'Day15: report contains its own imports/checks/calculations; no self-render chunk.'
+  'Transfer study: 18 unique plants, 9 per group, no missing values, no supported correction.',
+  'Day 12: shift changes centre; conversion changes mean/SD by 10 and variance by 100.',
+  'Day 13: individual observations and grouped summaries have distinct roles.',
+  'Day 14: source observations, draws per sample, and simulation repetitions differ.',
+  'Day 15: report contains its own imports/checks/calculations; no self-render chunk.'
 ), file.path(out,'expanded-practice-anchors.txt'))
 transfer_report <- c(
   '---','title: "Transfer class: descriptive growth report"','output: html_document','---','',
@@ -339,7 +339,7 @@ transfer_report <- c(
   '```','',
   '## Interpretation','',
   'The observed treated mean is about 17.87 mm compared with 13.66 mm for controls.',
-  'Observed SD is about 1.94 mm in treated plants and2.53 mm in controls. The',
+  'Observed SD is about 1.94 mm in treated plants and 2.53 mm in controls. The',
   'groups overlap; a larger group mean is not a statement about every pair of plants.',
   'These summaries describe individual spread and do not estimate uncertainty',
   'in a population mean difference. The small simulated study cannot establish',
@@ -350,3 +350,25 @@ writeLines(transfer_report, transfer_source)
 rmarkdown::render(transfer_source, output_dir = out, knit_root_dir = root,
                   envir = new.env(parent = globalenv()), quiet = TRUE)
 cat('Expanded week3 audit, summaries, simulation and transfer report checks passed.\n')
+
+# 2026-11 practical rewrite: anchors quoted on the day 11-14 pages.
+slipped <- cleaned |>
+  mutate(final_mm = if_else(plant_id == "P21", 4.38, final_mm),
+         growth_mm = final_mm - initial_mm)
+slipped_means <- tapply(slipped$growth_mm, slipped$treatment, mean, na.rm = TRUE)
+cleaned_means <- tapply(cleaned$growth_mm, cleaned$treatment, mean, na.rm = TRUE)
+stopifnot(abs(slipped_means[["treated"]] - 18.2067) < 1e-3,
+          abs(cleaned_means[["control"]] - 15.2091) < 1e-3,
+          abs(cleaned_means[["treated"]] - 21.4917) < 1e-3)
+default_import <- read_csv("data/seedlings-messy.csv", show_col_types = FALSE)
+stopifnot(length(unique(default_import$treatment)) == 3,
+          is.character(default_import$initial_mm))
+set.seed(25)
+seed25_4 <- replicate(400, mean(sample(population_mm, size = 4, replace = TRUE)))
+seed25_16 <- replicate(400, mean(sample(population_mm, size = 16, replace = TRUE)))
+set.seed(14)
+means_4_again <- replicate(400, mean(sample(population_mm, size = 4, replace = TRUE)))
+means_16_1000 <- replicate(1000, mean(sample(population_mm, size = 16, replace = TRUE)))
+stopifnot(abs(sd(seed25_4) - 2.543) < 1e-3, abs(sd(seed25_16) - 1.301) < 1e-3,
+          abs(sd(means_16_1000) - 1.236) < 1e-3)
+cat('Practical-page anchors (days 11-14) checked.\n')

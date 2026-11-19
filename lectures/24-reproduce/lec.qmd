@@ -1,6 +1,6 @@
 ---
-title: "Reproduce the saved analysis"
-subtitle: "Day 24 — test the saved analysis"
+title: "Reproduce and share your report"
+subtitle: "Day 24 — Will it work on someone else's computer?"
 author: "Data Analysis in Life Sciences"
 format:
   revealjs:
@@ -20,280 +20,217 @@ format:
 toc: false
 ---
 
-## Your screen may contain hidden prerequisites
+## About this lecture
 
-![An interactive R object does not automatically become part of a saved report.](hidden-state.svg){height=375px}
+Your duckweed report is finished. Your supervisor wants to check it, a lab partner wants to add next month's flasks, and you will need it again for your thesis. **If someone else opens your project, do they get the same report?** Often they do not: the report quietly relied on something that only existed on your screen.
 
-“It works on my screen” is a starting observation, not a reproduction check.
+Today you will:
+
+- render the report from a fresh R session, so it cannot lean on hidden objects;
+- pack the project as a ZIP and test it as the receiver, in a new folder;
+- handle corrections: a ZIP is a snapshot, and it is not a backup;
+- separate "it renders" from "it is right".
+
+Day 23 produced the report; today makes it shareable. Day 25 consolidates the whole workflow.
 
 ::: notes
-An imported object can remain in interactive memory while its import is missing
-from the report. Put the needed imports and calculations in the saved source.
+Ask who has ever received a file that "doesn't work" or a spreadsheet whose numbers nobody could re-derive. That is today's problem. The methods are not new: restart, Knit, zip, unzip. The new thing is doing them as a deliberate test from the receiver's side.
+:::
+
+## The problem: it works on my screen
+
+:::: {.columns}
+::: {.column width="45%"}
+A report can run for you and fail for anyone else because it depends on:
+
+- an object you created in the **Console**, not in the report;
+- a package loaded only in the Console;
+- a personal path such as `C:/Users/anna/Desktop/duckweed.csv`;
+- a data file that is not in the project.
+
+You will not notice any of these on your own computer.
+:::
+::: {.column width="55%"}
+![An object imported in the interactive Console is not part of the saved report, so the report cannot find it in a fresh session.](hidden-state.svg){width="100%"}
+:::
+::::
+
+::: notes
+All four are invisible as long as you stay in the same session on the same laptop. That is why the tests today change the session (restart) and the location (new folder).
 :::
 
 ## Source and result have different jobs
 
-![Input data and R Markdown source produce an HTML result.](source-output.svg){height=380px}
+![Input data and the R Markdown source together produce the HTML result.](source-output.svg){height=330}
 
-HTML is readable. `.Rmd` plus inputs makes the analysis repeatable.
+- The **HTML** is for reading. It cannot be re-run on new data.
+- The **`.Rmd` plus the CSV** is the recipe. That is what makes the result repeatable.
+- Share both; keep the source as the master copy.
 
 ::: notes
-An HTML output does not by itself supply the original analysis recipe. Ask
-students which file they would edit when new measurements arrive and which
-they would send for someone simply to read.
+Ask: when next month's flasks arrive, which file do you edit? The .Rmd, then Knit. Someone who only receives the HTML can read the result but not check or extend it.
 :::
 
-## Restart, then render from saved files
+## Test 1: restart R, then Knit
 
-1. Save the source `.Rmd`.
-2. Restart R.
-3. Knit without manually recreating console objects first.
-4. Read the first meaningful error and named chunk, if rendering stops.
+**Session → Restart R**, then **Knit** without running anything in the Console. The report must now import, calculate and plot by itself.
 
-Keep software installation separate from every report render.
+| Error | Usual cause | Repair |
+|---|---|---|
+| `object 'duckweed' not found` | Import only run in the Console | Put the import in a chunk before it is used |
+| `could not find function` | Package loaded only in the Console | Add `library()` to the setup chunk |
+| `cannot open file` | Personal path, or file not in project | Use `data/duckweed.csv` and keep the file |
+| Old text, new numbers | Result typed by hand | Check the sentence, or use inline R |
+
+Read the **first** error and the chunk it names. Fix one thing, then Knit again.
 
 ::: notes
-The source should load its packages, import input files, and create all its
-objects. Restarting does not delete saved data files. If students use a Console
-render command, it belongs outside the report: a report must not render itself.
+Demonstrate with a report whose import line has been run only in the Console: works before restart, fails after. Restarting does not delete saved files; it only empties memory. Expected duckweed values after a correct render: 10 control flasks, mean 32.28 mg; 9 nutrient flasks, mean 39.63 mg (F17 spilled).
 :::
 
-## A recipient needs the whole small project
+## What the receiver needs
 
-![The share folder includes a project file, report source, data and dictionary, output, and README.](portable-folder.svg){height=390px}
+:::: {.columns}
+::: {.column width="42%"}
+Copy into a new `report-share` folder **outside** your project:
 
-Use the selected study's source and CSV; the `.Rproj` does not contain them.
+- `introcomputing.Rproj`
+- `duckweed-report.Rmd` and its HTML
+- `data/duckweed.csv` and `data/README.md`
+- `output/` if the report saves there
+- a `README.txt`: data simulated, file to render, packages needed
+
+The `.Rproj` contains no data; a shortcut is not a copy.
+:::
+::: {.column width="58%"}
+![The share folder holds the project file, report source and HTML, the data and its dictionary, an output folder and a README.](portable-folder.svg){width="100%"}
+:::
+::::
 
 ::: notes
-For duckweed use duckweed-report.Rmd and data/duckweed.csv. For the organic
-alternative use organic-study.Rmd and data/organic-recovery.csv. Include the
-dictionary and required output directory. A shortcut to the author's files
-is not a transferred dataset.
+For the organic alternative: organic-study.Rmd and data/organic-recovery.csv. Leave out credentials, session files and unrelated work. The README is what a supervisor reads first: what the data are and how to get the report.
 :::
 
-## Copies do not update themselves
+## Pack the folder as a ZIP
 
-![Windows and Ubuntu hold separately copied folders; edits must be recopied before packaging.](copies.svg){height=375px}
+![report-share and report-share-v1.zip sit side by side in Documents; zip -r packs the folder into the ZIP next to it.](share-zip.svg){height=300}
 
-Revised source → recopy → repackage → test the returned ZIP.
+```bash
+zip -r report-share-v1.zip report-share/
+unzip -l report-share-v1.zip
+```
+
+Run this from the folder that **contains** `report-share`, so the ZIP is saved beside it, not inside it. `-r` packs everything inside; `unzip -l` checks what went in. Use a new name for every ZIP.
 
 ::: notes
-This is especially important for Windows students using Ubuntu shell tools but
-native RStudio. After making a ZIP in Ubuntu, copy it back to a normal Windows
-folder for extraction and the native application test. Check that it contains
-the revised source and relative input paths.
+A ZIP inside the folder it packs would be packed into the next ZIP. Re-running zip with an existing name updates that archive and can keep files you have since deleted, so new names (v1, v2) are simpler. Windows students: copy report-share into Ubuntu first, and copy the finished ZIP back to Windows for the RStudio test.
 :::
 
-## Test in a different location
+## Test 2: open it as the receiver would
 
-![A complete project is zipped and extracted into a fresh location before rendering.](different-location.svg){height=370px}
+:::: {.columns}
+::: {.column width="45%"}
+```bash
+unzip report-share-v1.zip -d receiver-v1
+```
 
-Open its `.Rproj`, restart, and render the source without repairing it first.
+- Extraction keeps the packed folder: one extra level.
+- Open `receiver-v1/report-share/introcomputing.Rproj`, restart R, Knit.
+- Expect the same counts (10 and 9) and means (32.28 and 39.63 mg).
+:::
+::: {.column width="55%"}
+![Extracting into receiver-v1 adds a level: the report is at receiver-v1/report-share/duckweed-report.Rmd.](receiver-nesting.svg){width="100%"}
+:::
+::::
 
 ::: notes
-A fresh folder on the same laptop checks portability within that software
-environment. Keeping the relative data/ path tests independence from the
-original project location.
+Check the project name in RStudio's corner: it is easy to Knit the original by mistake. Jittered point positions may move slightly between computers; numbers should not. If they differ, save sessionInfo() in the log: it lists R and package versions.
 :::
 
-## Diagnose one dependency at a time
+## Two fresh starts test different things
 
-| Symptom | First check |
-| --- | --- |
-| Object not found | Was it created inside the report, before use? |
-| Function unavailable | Is its package loaded in setup? |
-| Cannot open data | Which computer, project, and relative path? |
-| Export directory missing | Include or explicitly create the destination. |
+![Restarting R tests for hidden objects; moving the project to a new folder tests for missing files and personal paths.](two-fresh-checks.svg){height=330}
+
+- **Restart R** finds objects that only lived in memory.
+- **New folder** finds missing files and paths that point back to your original.
+- Together they are the closest you can get to the receiver's computer on your own laptop.
 
 ::: notes
-Ask students to reproduce the exact failure before changing multiple things.
-The error identifies a question to investigate; it does not always identify
-the full cause. Credentials never belong in an error log or screenshot.
+Restarting in the original folder can still find a file via a personal absolute path. Moving the project but keeping the session can hide a missing import. Both together catch both. A different computer can still differ in software versions.
 :::
 
-## Review meaning as well as execution
+## A ZIP is a snapshot
 
-- What is the question and independent unit?
-- Are axes, counts, units, and comparison direction clear?
-- Does the prose agree with the actual results?
-- Are missing data and limitations explained?
-
-The organic alternative uses descriptive means and SDs.
+:::: {.columns}
+::: {.column width="45%"}
+- You fix the README after making v1. Neither `v1.zip` nor `receiver-v1` changes.
+- Make `report-share-v2.zip`, extract to `receiver-v2`, and check the fix is there.
+- A new name is not proof. Open the file.
+- Add a line to the README saying what changed in v2.
+:::
+::: {.column width="55%"}
+![After the folder is edited, report-share-v1.zip still holds the old README while a newly made v2 contains the edit.](zip-snapshot.svg){width="100%"}
+:::
+::::
 
 ::: notes
-A successful render can reproduce a mistaken analysis. Ask the reader to locate
-evidence for the conclusions, not just confirm that an HTML file exists.
+The same applies to separate copies on Windows and Ubuntu: they do not update each other. Revise, recopy, repack, retest.
 :::
 
-## A successful rerun is a bounded claim
+## Sharing is not backup
 
-It establishes that the supplied source and inputs regenerate the result in
-the **tested environment**.
+![A share folder and its ZIP on the same laptop are lost together; a copy on separate supported storage survives.](share-vs-backup.svg){height=330}
 
-It does not establish:
-
-- Correct biological design or interpretation.
-- Compatibility with every future software version.
-- Protection against losing the only storage device.
+A ZIP next to the original protects against nothing if the laptop is lost, stolen or broken. Keep a copy of the project on the supported separate storage, and note where.
 
 ::: notes
-Distinguish reproduction, scientific validity, and backup. Use sessionInfo when
-investigating software-version differences, without expecting beginners to
-interpret every field. A ZIP beside the original is not a separate backup.
+Ask students to say where their backup is. If the university storage is not set up for them yet, they should say so in the log rather than count a second folder on the same disk as a backup.
 :::
 
+## It renders ≠ it is right
 
-## Two checks, not one badge of correctness
+:::: {.columns}
+::: {.column width="45%"}
+In two disposable copies:
 
-![Execution success and supported interpretation are separate dimensions, with successful-but-misleading work possible.](runs-versus-valid.svg){height=350px}
+- Rename `data/duckweed.csv`: Knit **stops** with an error naming the file.
+- Write "All 20 flasks had a measured biomass.": Knit **succeeds**, but only 19 were weighed.
 
-A reproducible mistake is still a mistake.
+R notices a missing file. It cannot notice a wrong sentence. A reader has to check claims against the numbers.
+:::
+::: {.column width="55%"}
+![Running successfully and being scientifically supported are separate: a report can run and still make an unsupported claim.](runs-versus-valid.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Ask which check software can perform directly. It can report missing inputs or
-unavailable functions; it cannot automatically know that a scientific conclusion
-is warranted. The controlled exercise separates execution failures from false
-or unsupported prose in a document that renders successfully.
+After restoring the file name, check that the means are back to 32.28 and 39.63 mg; an absent error message is not the same as the right result. Delete the disposable copies so a deliberately false sentence never ends up in the shared ZIP.
 :::
 
-## Investigate one controlled change at a time
+## A source edit does not update the HTML
 
-Use a disposable copy:
+![The source has been revised but the HTML still shows the old version until the report is rendered again.](stale-output.svg){height=330}
 
-1. Run the working reference version.
-2. Change one known item and predict its effect.
-3. Observe the error or inconsistency.
-4. Restore, rerun, and compare the key result.
+After any change, Knit again and open the **new** HTML. Compare numbers at sensible precision: 33.91818 and 33.92 mg are the same mean; 34.32 mg is a different analysis.
 
 ::: notes
-Preserve the original project. Students record the changed item, expected and
-actual consequence, repair, and confirming rerun. Changing several things at
-once makes diagnosis harder and can conceal which correction mattered.
-This is practical error recovery, not deliberate damage to raw measurements.
+A browser tab with a familiar title may be the old file. The numbers come from the algae data (supplement mean 33.91818 mg), which students package as algae-brief in the exercises. A difference beyond rounding means checking input, exclusions and code, not the number of digits.
 :::
 
-## A copied input with another name is unavailable to this path
+## Summary
 
-![The report requests data/algae.csv while the received file has a different name.](missing-file-case.svg){height=350px}
+| Check | What it finds |
+|---|---|
+| Restart R, then Knit | Objects and packages that existed only in the Console |
+| Extract the ZIP into a new folder, then Knit | Missing files and personal paths |
+| Make v2 and check the fix in a new extraction | Old snapshots sent by mistake |
+| Copy on separate storage | Protection against losing the laptop |
+| Read the claims against the numbers | Wrong sentences that render without error |
 
-Repair the copied filename or documented path; verify the rerun.
+**Next (Day 25, consolidate):** the whole workflow once more, from files to a shared report.
 
-::: notes
-Use the current main report's actual input in the exercise, not necessarily
-algae. Temporarily renaming it in a disposable project should cause a file
-error. Restore the exact name and confirm the original counts and main result.
-The absence of an error alone is not enough evidence of a correct repair.
-:::
-
-## Match the repair to the problem
-
-A missing file, a missing measurement, and an unknown R object are different.
-
-- Restore the required input file/path.
-- Preserve an unavailable measurement as `NA`.
-- Create an object through the saved import/calculation.
+**Now:** [open the Day 24 exercises](../../week5/24-reproduce.qmd). Leave with a tested `report-share-v2.zip`, `algae-brief.Rmd` with its HTML, a backup copy, and `reports/reproduction-log.txt`.
 
 ::: notes
-These problems need different actions. A copied input renamed for an experiment
-has not become a dataset of zeros. A missing observation does not justify
-removing all objects or installing packages. Ask the learner to classify the
-problem before choosing a repair.
-:::
-
-## Wrong prose can render successfully
-
-![A false sentence in report source becomes the same false sentence in an HTML output despite a successful render.](wrong-prose-renders.svg){height=350px}
-
-Read the claims against the counts, plot, and assumptions.
-
-::: notes
-In the controlled exercise, the false duckweed sentence says all enrolled
-samples had outcomes; the organic sentence says yield independently establishes
-purity. Both can render. Students must rewrite the claim and check they did not
-accidentally share an intentionally misleading diagnostic version.
-:::
-
-## Fresh memory and fresh location test different dependencies
-
-![Restarting R checks hidden objects; moving a complete project checks paths and included files.](two-fresh-checks.svg){height=350px}
-
-Use both tests when handing work to another person.
-
-::: notes
-Restarting in the original folder may leave a personal file path accessible.
-Moving a project while retaining interactive objects may conceal a missing
-import. A fresh session in a new extracted folder tests both problems together,
-within the particular software environment being used.
-:::
-
-## A source edit does not update an old HTML
-
-![A revised source file and old HTML remain inconsistent until the render is run again.](stale-output.svg){height=350px}
-
-Locate and open the **newly generated** output after rerunning.
-
-::: notes
-The file manager, editor, and browser may each display a different stage of
-work. Ask the learner to state which artifact they inspected. A browser tab
-with a familiar title is not a version check. Reopen the known output file
-rather than accumulating copies named final2 without tracing them.
-:::
-
-## Use the fresh culture memo for a small portable report
-
-`algae-brief.Rmd` needs:
-
-- Its own imports and calculations.
-- Input and design, available counts, and one observation plot.
-- A short interpretation and missingness account.
-- A README for the recipient.
-
-::: notes
-This transfers the already completed algae script and memo; it is not a new
-full project or statistical method. Save source in the project root so data/
-paths remain consistent. Include actual inputs rather than shortcuts to the
-original project. The required available counts remain 12 and 11.
-:::
-
-## Compare numerical results with sensible precision
-
-`33.91818 mg` and `33.92 mg` can be the same result at different precision.
-
-`33.91818 mg` and `34.32 mg` require investigation.
-
-Check input, exclusions, outcome, and calculation before blaming rounding.
-
-::: notes
-A comparison should include counts and definitions as well as printed digits.
-Rounding affects display, not the intended underlying calculation. Environment
-records such as sessionInfo can help diagnosis, but do not replace the source,
-input data, or an explanation of a changed exclusion rule.
-:::
-
-## Keep the failure investigation useful
-
-Record what changed, what you predicted, what happened, and what confirmed repair.
-
-Share the corrected source, not an unresolved test case.
-
-::: notes
-Keep a case log and give revised packages clear names. Revisit a diagnostic
-case after another exercise and follow the written procedure to expose any
-undocumented steps.
-:::
-
-## Exercises: keep a reproduction log
-
-[Open exercises](../../week5/24-reproduce.qmd) · [Quiz](../../week5/24-reproduce-quiz.qmd).
-
-- Test the chosen main-study package and the brief algae-share package.
-- Record destination, first error, fix, and rerun outcome.
-- Retain source, input, HTML, and a supported backup copy.
-- Keep a controlled-failure log distinguishing execution from interpretation.
-
-Use the study you chose yesterday.
-
-::: notes
-Feedback should identify actions another person can reproduce. Keep this as
-formative practice, not a report-grading exercise. A fresh render is the endpoint.
+The exercises use the day-23 report (duckweed or organic), then repeat the procedure for the algae memo: 12 reference cultures, mean 28.20 mg; 11 supplement cultures, mean 33.92 mg (A19 missing). Formative practice, not graded.
 :::

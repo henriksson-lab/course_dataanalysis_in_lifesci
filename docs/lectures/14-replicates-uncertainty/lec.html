@@ -205,17 +205,50 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="what-received-its-own-treatment-allocation" class="slide level2">
-<h2>What received its own treatment allocation?</h2>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>A thesis student treats three plants, measures a leaf on each plant ten times, and writes <strong>n = 30</strong> in the methods. The examiner replies: “You have three plants. n = 3.” With n = 30 every later result looks far more certain than the experiment can support. <strong>Which measurements count as independent evidence, and how precisely does a mean describe the population?</strong></p>
+<ul>
+<li>The <strong>experimental unit</strong> is the thing that independently received the treatment: here, a plant in its own pot.</li>
+<li><strong>Technical replicates</strong> (re-measuring the same plant) check the measurement; <strong>biological replicates</strong> (more plants) tell us about plants.</li>
+<li>The <strong>SD</strong> describes how plants vary; a <strong>sampling distribution</strong> shows how much a <em>mean</em> would vary between repeated samples.</li>
+<li>A <strong>precise</strong> estimate can still be <strong>wrong</strong> if the sampling or measurement is biased.</li>
+</ul>
+<p>This is a reasoning day, supported by a short supplied simulation. Days 16–18 rely on counting independent units correctly.</p>
+<aside class="notes">
+<p>Inflated n from technical replicates or from many cells of one animal is one of the most common reasons manuscripts and theses are sent back. Students should leave able to say, for any design, “we have many measurements, but the number of independently treated units is …”.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-problem-more-rows-not-more-plants" class="slide level2">
+<h2>The problem: more rows, not more plants</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>Six ruler readings of <strong>P01</strong> are six numbers about <strong>one plant</strong>.</li>
+<li>They tell you how <strong>repeatable the measurement</strong> is (technical replicates).</li>
+<li>They tell you nothing about how <strong>other plants</strong> respond. For that you need more plants (biological replicates).</li>
+<li>Same trap: 100 cells from one mouse, ten time points from one culture, one product batch weighed twelve times.</li>
+</ul>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="independent-pots.svg" height="350"></p>
-<figcaption>Twelve separate pots illustrate individual plants as independently allocated units.</figcaption>
+<p><img data-src="repeated-readings.svg" style="width:100.0%"></p>
+<figcaption>Six separate ruler readings all refer to the same plant, P01.</figcaption>
 </figure>
 </div>
-<p>In our seedling study, <strong>the pot/plant is the experimental unit</strong>.</p>
+</div></div>
 <aside class="notes">
-<p>The picture illustrates separate pots, but physical separation alone is not proof of independence. The design description specifies independent allocation and handling. Ask students which entity could receive control while another receives treatment.</p>
+<p>Ask: if P01 happened to be an unusually vigorous plant, would six more readings reveal that? No.&nbsp;Technical repeats are useful, for example to check a new measuring method, but they are a different kind of information. The organic analogue is repeatedly weighing one collected product batch: one run, not twelve.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -228,17 +261,26 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="more-readings-can-still-mean-one-plant" class="slide level2">
-<h2>More readings can still mean one plant</h2>
+<section id="the-experimental-unit-what-was-treated-independently" class="slide level2">
+<h2>The experimental unit: what was treated independently?</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>In our study, each plant has <strong>its own pot</strong> and was <strong>randomly allocated</strong> to control or treated.</li>
+<li>Ask: could this plant get control while its neighbour gets treatment? If yes, it is a separate unit.</li>
+<li>So the seedling study has <strong>24 units</strong>, 12 per group, even though each plant was measured twice (initial and final).</li>
+<li>Initial and final lengths become <strong>one growth value per plant</strong>.</li>
+</ul>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="repeated-readings.svg" height="350"></p>
-<figcaption>Six separate ruler readings all refer to the same plant P01.</figcaption>
+<p><img data-src="independent-pots.svg" style="width:100.0%"></p>
+<figcaption>Twelve separate pots, each with its own plant and its own treatment allocation, illustrate individual plants as independent units.</figcaption>
 </figure>
 </div>
-<p>Technical repeats help describe measurement variation.</p>
+</div></div>
 <aside class="notes">
-<p>Rereading the same plant may reveal consistency of the measurement process. It does not create new independently allocated plants or evidence about how different plants respond. The organic analogue is repeatedly weighing one collected product batch.</p>
+<p>Physical separation alone does not prove independence; the design description in data/README.md states independent allocation and handling. Students should get the unit from the study description, not from counting rows.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -251,17 +293,26 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="a-shared-treatment-can-make-the-tray-the-unit" class="slide level2">
-<h2>A shared treatment can make the tray the unit</h2>
+<section id="when-the-tray-is-the-unit" class="slide level2">
+<h2>When the tray is the unit</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p>Suppose instead the treatment was given to <strong>whole trays</strong>: one tray of control plants, one tray of treated plants.</p>
+<ul>
+<li>Many plants per tray, but only <strong>one treatment decision per group</strong>.</li>
+<li>Any tray effect (warmer spot, more light) is <strong>mixed up with the treatment</strong>.</li>
+<li>Counting 24 independent plants would overstate the evidence. No statistical test can repair this; only more trays can.</li>
+</ul>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="shared-trays.svg" height="350"></p>
-<figcaption>Plants grouped within two trays share one treatment per tray.</figcaption>
+<p><img data-src="shared-trays.svg" style="width:100.0%"></p>
+<figcaption>Two trays of six plants each; tray A receives control and tray B receives the treatment, so plants within a tray share one treatment unit.</figcaption>
 </figure>
 </div>
-<p>Count the independently assigned trays.</p>
+</div></div>
 <aside class="notes">
-<p>This is a schematic layout, not the actual course experiment. If treatment was assigned once to each tray, plants within that tray share its allocation and environment. Ask how many treatment assignments occurred, not how many measurements fill the spreadsheet.</p>
+<p>This is a schematic counterexample, not the course experiment. Ask how many treatment assignments occurred, not how many measurements fill the spreadsheet. With several trays per treatment, the tray becomes the unit of analysis.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -274,13 +325,50 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="sd-among-plants-and-uncertainty-in-a-mean-differ" class="slide level2">
-<h2>SD among plants and uncertainty in a mean differ</h2>
-<p><strong>Spread:</strong> how much individual plants vary.</p>
-<p><strong>Sampling uncertainty:</strong> how much our mean would vary across repeated samples.</p>
-<p>A larger independent sample can stabilise its mean without making plants identical.</p>
+<section id="count-the-independent-units" class="slide level2">
+<h2>Count the independent units</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Design</th>
+<th>Measurements</th>
+<th>Independent units</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>24 plants in separate pots, randomly allocated</td>
+<td>24 growth values</td>
+<td><strong>24 plants</strong> (12 per group)</td>
+</tr>
+<tr class="even">
+<td>1 plant per treatment, measured 12 times each</td>
+<td>24 readings</td>
+<td><strong>1 plant per group</strong></td>
+</tr>
+<tr class="odd">
+<td>2 trays of 12 plants, treatment given per tray</td>
+<td>24 growth values</td>
+<td><strong>1 tray per group</strong></td>
+</tr>
+<tr class="even">
+<td>1 synthesis run, product weighed 12 times</td>
+<td>12 masses</td>
+<td><strong>1 run</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The independent units decide what the data can say about <strong>other plants or runs</strong>.</li>
+<li>Write it as: “We have <em>many</em> measurements, but our number of independently treated units is <em>…</em>.”</li>
+</ul>
 <aside class="notes">
-<p>A group SD and a standard error answer different questions. Larger sample size does not make the underlying biological distribution narrower. Repeated dependent observations do not necessarily provide the information gain promised by more independent samples.</p>
+<p>Go through each row with the class before revealing the last column. Ask in which design technical repeats would still be useful: for example, checking that the ruler reading is repeatable before starting the real experiment.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -293,17 +381,25 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="each-point-in-a-sampling-distribution-is-a-mean" class="slide level2">
-<h2>Each point in a sampling distribution is a mean</h2>
+<section id="two-kinds-of-spread" class="slide level2">
+<h2>Two kinds of spread</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><strong>SD among plants:</strong> how much individual plants differ. It does not shrink with more plants; plants are as variable as they are.</li>
+<li><strong>Sampling uncertainty:</strong> how much the <strong>mean</strong> would change if we took a new sample of plants. This <em>does</em> shrink with more independent plants.</li>
+<li>Read the horizontal axis: individual values, or <strong>means</strong>?</li>
+</ul>
+</div><div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../../week3/sampling-means.png" height="360"></p>
-<figcaption>Means of sixteen simulated draws cluster more tightly than means of four draws from the same toy distribution.</figcaption>
+<p><img data-src="values-versus-estimates.svg" style="width:100.0%"></p>
+<figcaption>Three histograms on one scale: individual growth values are widely spread, means of four draws less so, and means of sixteen draws cluster tightly.</figcaption>
 </figure>
 </div>
-<p>The source values stay fixed.</p>
+</div></div>
 <aside class="notes">
-<p>The supplied R demonstration uses the combined growth values as a fixed toy population and samples with replacement. It is not a new treatment experiment or a claim about nature. Each histogram entry summarises one simulated sample, not one freshly measured plant.</p>
+<p>This figure is generated from the course values with a fixed illustrative random generator; exact bins need not match the R demonstration. The concept is the narrower distribution of means from larger samples. Distinguish SD among means from SD among the plants within one sample.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -316,17 +412,54 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="read-the-horizontal-axis-before-comparing-spread" class="slide level2">
-<h2>Read the horizontal axis before comparing spread</h2>
+<section id="a-simulation-draw-many-samples-compute-many-means" class="slide level2">
+<h2>A simulation: draw many samples, compute many means</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>population_mm <span class="ot">&lt;-</span> seedlings<span class="sc">$</span>growth_mm          <span class="co"># 24 values used as a toy population</span></span>
+<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">14</span>)                                  <span class="co"># makes the random draws repeatable</span></span>
+<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>means_4 <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">400</span>, <span class="fu">mean</span>(<span class="fu">sample</span>(population_mm, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>means_16 <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">400</span>, <span class="fu">mean</span>(<span class="fu">sample</span>(population_mm, <span class="at">size =</span> <span class="dv">16</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(population_mm); <span class="fu">sd</span>(means_4); <span class="fu">sd</span>(means_16)  <span class="co"># 5.13  2.44  1.24</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>sample(..., size = 4, replace = TRUE)</code> draws 4 values; a value may be drawn twice.</li>
+<li><code>replicate(400, ...)</code>: repeat “draw a sample, take its mean” 400 times.</li>
+<li>The result is <strong>400 means</strong>, not 400 new plants. The 24 recorded plants never change.</li>
+</ul>
+<aside class="notes">
+<p>Load readr, dplyr and ggplot2 first, and keep the block in day14-sampling.R as in the practical; the practical also plots the two sets of means. Students are not asked to write loops or a sampling algorithm; they need to understand source, draw size, replacement, repetitions and seed. This is a teaching demonstration with a toy population, not a new experiment or a claim about nature.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="larger-samples-give-more-stable-means" class="slide level2">
+<h2>Larger samples give more stable means</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>Each bar counts <strong>simulated sample means</strong>.</li>
+<li>Means of <strong>4</strong> plants: SD <strong>2.44 mm</strong>. Means of <strong>16</strong> plants: SD <strong>1.24 mm</strong>.</li>
+<li>Four times as many plants → the spread of means roughly <strong>halves</strong>.</li>
+<li>The plants themselves still vary with SD <strong>5.13 mm</strong>. More plants make the <strong>mean</strong> more stable, not the plants more alike.</li>
+</ul>
+</div><div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="values-versus-estimates.svg" height="350"></p>
-<figcaption>Individual growth values,means of four draws,and means of sixteen draws are distinct distributions.</figcaption>
+<p><img data-src="../../week3/sampling-means.png" height="470"></p>
+<figcaption>Histograms of 400 simulated sample means: means of sixteen draws cluster more tightly than means of four draws from the same fixed source values.</figcaption>
 </figure>
 </div>
-<p>Individual values and estimated means are different objects.</p>
+</div></div>
 <aside class="notes">
-<p>This additional picture is regenerated from the course values using a fixed illustrative random generator; exact bins need not match the R demonstration. The concept is the narrower distribution of larger-sample means. Distinguish SD among means from SD among plants within a sample.</p>
+<p>The SD of the means approximates what is later called the standard error. Change the seed to 25 in the practical: exact numbers change, the relationship between sample size and spread stays. Choosing a convenient seed is not evidence for anything.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -339,63 +472,27 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="run-the-supplied-sampling-demonstration" class="slide level2">
-<h2>Run the supplied sampling demonstration</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/seedlings.csv'</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>population_mm <span class="ot">&lt;-</span> seedlings<span class="sc">$</span>growth_mm</span>
-<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">14</span>)</span>
-<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>means_4 <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">400</span>,</span>
-<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="fu">sample</span>(population_mm, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span>
-<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>means_16 <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">400</span>,</span>
-<span id="cb1-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="fu">sample</span>(population_mm, <span class="at">size =</span> <span class="dv">16</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>set.seed()</code> makes the random demonstration repeatable.</p>
-<aside class="notes">
-<p>The practical imports and defines population_mm before these lines. Explain sample as drawing values, replace=TRUE as allowing a source value again, and replicate as repeating the calculation. Students predict and interpret the result; functions and loops are not a new programming requirement.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-stable-estimate-can-still-answer-the-wrong-question" class="slide level2">
-<h2>A stable estimate can still answer the wrong question</h2>
-<p>If one unrepresentative tray is measured very precisely, have we learned the population mean accurately?</p>
-<p>Which problem would another ruler reading fix?</p>
-<p>Which problem needs another independently chosen unit?</p>
-<aside class="notes">
-<p>Precision does not remove bias, dependence, or unrepresentative sampling. Another reading may help measurement consistency; another independently allocated or sampled unit addresses a different uncertainty. Avoid claiming that sample size alone guarantees a valid study.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-new-toy-source-makes-the-same-point" class="slide level2">
-<h2>A new toy source makes the same point</h2>
+<section id="simulation-settings-are-not-sample-size" class="slide level2">
+<h2>Simulation settings are not sample size</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p>Three settings, three meanings:</p>
+<ul>
+<li><strong>Draw size</strong> (<code>size = 12</code>): plants in each simulated sample. Changes how much the means vary.</li>
+<li><strong>Repetitions</strong> (100 vs 1000): how many means we look at. Gives a smoother picture, <strong>same width</strong>.</li>
+<li><strong>Seed</strong>: which random sequence. Exact values change; the pattern does not.</li>
+</ul>
+<p>None of them adds a measured plant.</p>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="extended-transfer-sampling.svg" height="350"></p>
-<figcaption>Sample means from 12 draws vary less than means from 3 draws from the same fixed transfer source.</figcaption>
+<p><img data-src="extended-more-simulations.svg" style="width:100.0%"></p>
+<figcaption>Histograms of 100 and 1000 simulated means, each from samples of twelve draws, have the same width; more repetitions only smooth the picture.</figcaption>
 </figure>
 </div>
-<p>Both sampling processes reuse the same fixed recorded values.</p>
+</div></div>
 <aside class="notes">
-<p>This is a supplied simulation, not new biological measurement or a treatment comparison. The transfer source combines groups only to illustrate sampling. Keep the target fixed while changing sample size.</p>
+<p>Compare 100 and 1000 repeats, each using 12 draws. More repetitions do not create more measured plants or narrow the distribution the way a larger independent sample size does. Avoid trying seeds until a pretty plot appears.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -408,17 +505,25 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="number-of-repeats-is-not-sample-size" class="slide level2">
-<h2>Number of repeats is not sample size</h2>
+<section id="precise-is-not-the-same-as-correct" class="slide level2">
+<h2>Precise is not the same as correct</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>If every measurement is <strong>5 mm too high</strong> (a misread ruler, one unusually sunny tray), means of 40 plants are tightly clustered, <strong>in the wrong place</strong>.</li>
+<li>More readings or more plants from the same biased source make the estimate <strong>narrower, not truer</strong>.</li>
+<li>Another ruler reading fixes measurement noise; another <strong>independent, representative</strong> unit addresses the biology.</li>
+</ul>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="extended-more-simulations.svg" height="350"></p>
-<figcaption>Increasing simulation repeats smooths the display without changing the sample size of 12 draws.</figcaption>
+<p><img data-src="extended-precise-but-shifted.svg" style="width:100.0%"></p>
+<figcaption>Means of four draws from the correct source are widely spread around the true mean; means of forty draws from a source shifted by 5 millimetres cluster tightly around the wrong value.</figcaption>
 </figure>
 </div>
-<p>More simulated estimates improve our picture of the sampling pattern.</p>
+</div></div>
 <aside class="notes">
-<p>Compare100 and 1000 repeats, each using12 draws. More repetitions do not create more measured plants or shrink the underlying distribution as increasing independent sample size does.</p>
+<p>This schematic uses a known 5 mm shift for illustration; it does not diagnose bias in the course study. A narrow histogram describes the sampling process precisely, not whether that process answers the biological question.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -431,86 +536,33 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="follow-the-levels-of-information" class="slide level2">
-<h2>Follow the levels of information</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-source-and-draws.svg" height="350"></p>
-<figcaption>Repeated simulated samples can contain the same source identifier multiple times.</figcaption>
-</figure>
-</div>
-<p>Observed source → sampled draws → one mean → repeated estimates.</p>
-<aside class="notes">
-<p>Replacement permits a value to appear twice. A stored source plant is not remeasured each time it is drawn by sample. Students should label each row in their simulation output as an estimate, not a new organism.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-precise-estimate-can-miss-the-question" class="slide level2">
-<h2>A precise estimate can miss the question</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-precise-but-shifted.svg" height="350"></p>
-<figcaption>A shifted source produces a narrow distribution centred away from the original source mean.</figcaption>
-</figure>
-</div>
-<p>Greater precision does not remove a common measurement offset.</p>
-<aside class="notes">
-<p>This schematic uses a known5 mm shift for illustration. It does not diagnose bias in the course study. A narrow distribution can describe a biased or irrelevant process very precisely.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="adapt-a-supplied-simulation-without-inventing-a-new-method" class="slide level2">
-<h2>Adapt a supplied simulation without inventing a new method</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/seedlings-transfer.csv'</span>,</span>
+<section id="same-idea-new-source-the-second-class" class="slide level2">
+<h2>Same idea, new source: the second class</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings-transfer.csv"</span>,</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
 <span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">14</span>)</span>
 <span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>means_3 <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">400</span>, <span class="fu">mean</span>(<span class="fu">sample</span>(</span>
-<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>  transfer<span class="sc">$</span>growth_mm, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Change size to 12 in a second object; preserve the first.</p>
-<aside class="notes">
-<p>Load readr/dplyr before this supplied block. Students need to understand source, draw size, replacement, repetitions, and seed; they are not asked to author loops or a sampling algorithm.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="different-repeat-settings-answer-different-questions" class="slide level2">
-<h2>Different repeat settings answer different questions</h2>
-<p>Change one setting at a time:</p>
+<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>  transfer<span class="sc">$</span>growth_mm, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a>means_12 <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">400</span>, <span class="fu">mean</span>(<span class="fu">sample</span>(</span>
+<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a>  transfer<span class="sc">$</span>growth_mm, <span class="at">size =</span> <span class="dv">12</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb2-9"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(means_3); <span class="fu">sd</span>(means_12)   <span class="co"># 1.69  0.83</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Seed: another reproducible random sequence.</li>
-<li>Draw size: more values in each estimated mean.</li>
-<li>Repetitions: more simulated means to inspect.</li>
+<li>18 recorded plants (SD <strong>3.08 mm</strong>) as a toy source.</li>
+<li>Means of 3 draws vary about <strong>twice</strong> as much as means of 12.</li>
 </ul>
-<p>Which change alters the original recorded plants? <strong>None.</strong></p>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-transfer-sampling.svg" style="width:100.0%"></p>
+<figcaption>Histograms of simulated sample means from the transfer source: means of 12 draws vary less than means of 3 draws.</figcaption>
+</figure>
+</div>
+</div></div>
 <aside class="notes">
-<p>Avoid a recipe of trying seeds until a pretty plot appears. The saved source is unchanged, and the simulation is conditional on that source distribution.</p>
+<p>The transfer source combines both groups only to illustrate sampling; it is not a treatment comparison or a confidence interval. Students keep the two results in separate objects and save them as output/day14-transfer-sampling.csv.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -523,50 +575,58 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="choose-independent-units-before-counting-rows" class="slide level2">
-<h2>Choose independent units before counting rows</h2>
-<p>One plant measured twenty times and twenty independent plants are different designs.</p>
-<p><strong>What could technical repeats help assess?</strong> <strong>What needs additional independently sampled or assigned units?</strong></p>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Key fact</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Experimental unit</td>
+<td>What independently received the treatment; seedling study: 24 potted plants</td>
+</tr>
+<tr class="even">
+<td>Technical replicate</td>
+<td>Re-measuring the same material; checks the measurement, not the biology</td>
+</tr>
+<tr class="odd">
+<td>Biological replicate</td>
+<td>Another independent unit; informs how plants (or runs) respond</td>
+</tr>
+<tr class="even">
+<td>Shared trays</td>
+<td>Treatment per tray → the tray is the unit; a test cannot repair the design</td>
+</tr>
+<tr class="odd">
+<td>SD among plants</td>
+<td>Spread of individuals (5.13 mm); does not shrink with more plants</td>
+</tr>
+<tr class="even">
+<td>Sampling uncertainty</td>
+<td>Spread of means: 2.44 mm (n = 4) vs 1.24 mm (n = 16)</td>
+</tr>
+<tr class="odd">
+<td>Simulation settings</td>
+<td>Draw size changes precision; repetitions and seed do not add plants</td>
+</tr>
+<tr class="even">
+<td>Precision vs bias</td>
+<td>A narrow distribution can sit in the wrong place</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Next (Day 15, descriptive report):</strong> put the checked data, summaries, figure and an honest statement of the units and limits into one report that renders from scratch.</p>
+<p><strong>Now:</strong> <a href="../../week3/14-replicates-uncertainty.html">open the Day 14 exercises</a>. Leave with <code>day14-sampling.R</code>, your replicate diagrams and a short explanation of what was repeated and what increased the independent information.</p>
 <aside class="notes">
-<p>Technical repeats can assess measurement repeatability under appropriate conditions. Questions about variation among plants or treatment allocations need independent biological units. This is why repeating balance readings of one synthesis does not create more independent runs.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-defensible-simulation-explanation-has-boundaries" class="slide level2">
-<h2>A defensible simulation explanation has boundaries</h2>
-<p>State the fixed source, sampling rule, estimate, and comparison.</p>
-<p>Then state what the demonstration <strong>does not establish</strong> about a natural population or treatment.</p>
-<aside class="notes">
-<p>The required transfer note should distinguish source SD from SD among means, stable patterns from exact seed-dependent values, and a toy combined-treatment source from a real inferential design.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="exercises-draw-the-design-and-explain-the-mean" class="slide level2">
-<h2>Exercises: draw the design and explain the mean</h2>
-<p>Label independently treated units in three designs.</p>
-<p>Run the supplied sampling demonstration and explain the axis.</p>
-<p>Keep your diagrams and <strong><code>day14-sampling.R</code></strong>.</p>
-<p><a href="../../week3/14-replicates-uncertainty.html">Open exercises</a>.</p>
-<aside class="notes">
-<p>Protect time for diagrams and discussion. The organic diagram can substitute for one plant example, not add another simulation. A useful explanation identifies what was repeated, what remained the same, and what increased the independent information.</p>
+<p>Design question to end with: measure each of two plants twenty more times, or obtain ten additional independent plants? For a population mean, the ten plants, assuming comparable measurements; checking measurement repeatability first can still be useful.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

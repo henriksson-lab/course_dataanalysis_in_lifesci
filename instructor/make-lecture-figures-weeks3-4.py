@@ -483,7 +483,7 @@ raw_missing=[float(r['final_mm'])-float(r['initial_mm']) for r in plants if r['p
 wrong_missing=raw_missing+[-24.7]
 fig,ax=plt.subplots(figsize=(10,4))
 ax.scatter([0,1],[statistics.mean(raw_missing),statistics.mean(wrong_missing)],s=150,color=[TEAL,RED])
-ax.set(xticks=[0,1],xticklabels=['Unknown retained\n23 available growths','Final length invented as0\n24 calculated growths'],ylabel='Overall mean growth (mm)',ylim=(15,20))
+ax.set(xticks=[0,1],xticklabels=['Unknown retained\n23 available growths','Final length invented as 0\n24 calculated growths'],ylabel='Overall mean growth (mm)',ylim=(15,20))
 for i,values in enumerate([raw_missing,wrong_missing]):ax.text(i,statistics.mean(values)+.35,f'{statistics.mean(values):.2f}',ha='center',fontsize=21)
 save_plot(fig,11,'extended-zero-consequence.svg')
 route(11,'extended-audit-chain.svg','source record','specific correction','checked output','Evidence should connect the changed value to its source.')
@@ -504,7 +504,7 @@ group_plot(12,'extended-shift.svg',[[12,14,16],[22,24,26]],['original','every va
 fig,axes=plt.subplots(1,2,figsize=(11,4))
 for ax,values,unit in [(axes[0],[12,14,16],'mm'),(axes[1],[1.2,1.4,1.6],'cm')]:
     ax.scatter(values,[1,1,1],s=100,color=TEAL);ax.axvline(statistics.mean(values),color=RED,ls='--');ax.set(yticks=[],xlabel=f'Growth ({unit})',ylim=(.5,1.5))
-axes[0].set_title('SD2 mm; variance4mm²');axes[1].set_title('SD0.2 cm; variance0.04cm²');save_plot(fig,12,'extended-units.svg')
+axes[0].set_title('SD 2 mm; variance 4 mm²');axes[1].set_title('SD 0.2 cm; variance 0.04 cm²');save_plot(fig,12,'extended-units.svg')
 group_plot(12,'extended-transfer-variation.svg',[transfer_control,transfer_treated],['control','treated'],'Seven-day growth (mm)','New study: greater mean need not mean greater SD')
 
 #13: readers need observations, display choices and explicit units.
@@ -516,7 +516,7 @@ for ax in axes:ax.set(xticks=[0,1],xticklabels=['control','treated'],ylabel='Gro
 axes[0].set_title('Means alone');axes[1].set_title('Same means and observed plants');save_plot(fig,13,'extended-means-and-points.svg')
 fig,axes=plt.subplots(1,3,figsize=(12,4),sharex=True,sharey=True)
 for ax,width in zip(axes,[2,4,6]):
-    ax.hist(transfer_control+transfer_treated,bins=np.arange(8,26,width),color=TEAL,edgecolor='white');ax.set(title=f'Bin width{width} mm',xlabel='Growth (mm)')
+    ax.hist(transfer_control+transfer_treated,bins=np.arange(8,26,width),color=TEAL,edgecolor='white');ax.set(title=f'Bin width {width} mm',xlabel='Growth (mm)')
 axes[0].set_ylabel('Number of plants');save_plot(fig,13,'extended-binwidth.svg')
 fig,axes=plt.subplots(1,2,figsize=(11,4))
 for ax,limits in zip(axes,[(0,35),(10,32)]):
@@ -589,7 +589,7 @@ ax.axvline(0,color=GREY,ls='--');ax.set(yticks=[0,1],yticklabels=['treated − c
 fig,ax=plt.subplots(figsize=(10,4))
 transfer_diff=transfer_means[1]-transfer_means[0]
 for y,lower,upper,estimate in [(0,lo,hi,diff),(1,1.948441,6.473782,transfer_diff)]:ax.plot([lower,upper],[y,y],lw=4,color=[TEAL,PURPLE][y]);ax.scatter(estimate,y,s=90,color=INK)
-ax.axvline(0,color=GREY,ls='--');ax.set(yticks=[0,1],yticklabels=['main study:12+12 plants','transfer study:9+9 plants'],xlabel='Treated − control mean growth (mm)',ylim=(-.5,1.5));save_plot(fig,17,'extended-two-studies.svg')
+ax.axvline(0,color=GREY,ls='--');ax.set(yticks=[0,1],yticklabels=['main study: 12 + 12 plants','transfer study: 9 + 9 plants'],xlabel='Treated − control mean growth (mm)',ylim=(-.5,1.5));save_plot(fig,17,'extended-two-studies.svg')
 fig,ax=plt.subplots(figsize=(10,4))
 ax.axvline(0,color=GREY,ls='--');ax.errorbar(2,1,xerr=3,fmt='D',ms=12,color=PURPLE,capsize=12,lw=3);ax.set(xlim=(-3,7),ylim=(.5,1.5),yticks=[],xlabel='Supplied illustrative mean difference (mm)');ax.text(2,1.25,'estimate 2; interval −1 to 5',ha='center',fontsize=22);save_plot(fig,17,'extended-uncertain-case.svg')
 
@@ -647,4 +647,4 @@ d.text(185,435,'mean difference',size=26,anchor='middle');d.text(555,435,'within
 fig,axes=plt.subplots(1,2,figsize=(11,4));formula_x=np.array([.2922,.5844,.8766]);formula_y=1000*(formula_x/58.44)/.1
 axes[0].plot(formula_x,formula_y,marker='o',color=TEAL);axes[0].set(xlabel='Supplied NaCl mass (g)',ylabel='Calculated concentration (mmol/L)',title='A defined arithmetic relationship')
 axes[1].scatter(lx,ly,color=PURPLE,s=45);axes[1].plot(lx,la+lb*lx,color=BLUE);axes[1].set(xlabel='Measured leaf area (cm²)',ylabel='Measured dry mass (mg)',title='Empirical association with residuals');save_plot(fig,20,'extended-formula-versus-data.svg')
-print('Expanded lecture diagrams regenerated for days11–20.')
+print('Expanded lecture diagrams regenerated for days 11–20.')

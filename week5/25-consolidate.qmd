@@ -5,39 +5,43 @@ title: "Day 25 — practise the complete workflow"
 [Lecture slides](../lectures/25-consolidate/lec.qmd) · [Quiz](25-consolidate-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
-## Today's purpose
+## Today's question
 
-Practise the workflow for later biology laboratories: locate measurements,
-check them, make a figure, explain variation, and produce a reproducible report.
+In a later lab course or thesis project, someone will hand you a data file and
+ask what it shows. Can you find the files, check them, make a figure, explain
+the result and produce a report that someone else can render, without the
+course telling you each step? Today you practise exactly that on familiar data,
+using the [reference pages](../reference/r.qmd) whenever you need them.
 
-Choose the station where you need practice first. Everyone should eventually
-complete the file recovery, R recovery, and interpretation checks. Use the
-reference pages when needed.
+Start with the station where you feel least sure. Over the day, do stations 1–3,
+then the A11 investigation and the handover.
 
-## Station 1 — find and inspect the laboratory files
+**Save today:** `recovery.R`, `reports/final-investigation.txt`, a tested handover
+package, `reports/next-lab.txt` and `reports/readiness-review.txt`.
 
-Download a fresh copy of [lab-data.zip](../downloads/lab-data.zip) and locate it.
-In your shell workspace, inspect the archive, extract it into a new folder, read
-the README, locate the sample manifest, and find the treated records. Before
-running a pipe, predict how many matching records it should count.
+## Station 1: finding and inspecting lab files
 
-Save an extract named `treated-samples.txt`, then locate it in a file manager.
-Explain what `>` changed and whether the source manifest was modified. Package
-the extracted folder into a new archive placed outside it; list the archive and
-confirm the text extract was included.
+Download a fresh copy of [lab-data.zip](../downloads/lab-data.zip). In your shell,
+list the archive, extract it into a new folder and read its README. Then use
+`grep -F treated` on the sample manifest, piped into `wc -l`, to find out how
+many samples were treated; predict the number before you run it. Save the
+matching lines as `treated-samples.txt`, and finally pack the extracted folder
+into a new ZIP placed outside it.
 
 ::: {.callout-tip collapse="true"}
-## Hint: the small vocabulary is enough
+## Hint and answer check
 
-Use `pwd`, `ls`, `cd`, `unzip -l`, `unzip … -d …`, `less`, `grep -F`, `wc -l`,
-and `zip -r`. Check the [terminal reference](../reference/terminal.qmd). The
-manifest has two treated records; its header is not one of them.
+The commands from days 3–4 are enough: `pwd`, `ls`, `cd`, `unzip -l`,
+`unzip … -d …`, `less`, `grep -F`, `wc -l` and `zip -r`; see the
+[terminal reference](../reference/terminal.qmd). The manifest has two treated
+records; the header line does not match. `>` writes only to
+`treated-samples.txt`; the manifest itself is unchanged.
 :::
 
-## Station 2 — repair a small R analysis
+## Station 2: repairing a broken analysis
 
-The following code contains errors. Identify them and write a corrected
-version in `recovery.R` in your project root:
+This code is meant to calculate the mean growth of the seedlings, but it
+contains several errors:
 
 ```text
 seedling <- read_csv("seedlings.csv")
@@ -45,9 +49,9 @@ seedlings <- mutate(seedlings, growth_mm = final_mm + initial_mm)
 mean(seedlings$Growth_mm)
 ```
 
-Consider package loading, file location, object names, case, and the meaning of
-growth. Confirm the repaired calculation using P01: initial length 25.7 mm,
-final length 44.3 mm. Save a labelled plot without changing raw data.
+Write a working version in `recovery.R` in your project root. Use P01 to find
+out whether your repaired growth calculation is right: it started at 25.7 mm and
+ended at 44.3 mm. Then save a labelled plot of growth by treatment.
 
 ::: {.callout-note collapse="true"}
 ## A working repair
@@ -62,166 +66,131 @@ seedlings <- seedlings |>
 mean(seedlings$growth_mm)
 ```
 
-P01 grew 18.6 mm. The original used a wrong relative path, inconsistent object
-names, addition rather than subtraction, and inconsistent column case. It also
-did not establish that `readr` and `dplyr` were loaded in this session.
+P01 grew 18.6 mm. The original had no `library()` calls, a path without
+`data/`, two different object names (`seedling` and `seedlings`), addition
+instead of subtraction, and `Growth_mm` with a capital G, which R treats as a
+different name. The fourth error is the dangerous one: code that adds instead
+of subtracts runs without any error message, which is why checking one row by
+hand matters.
 :::
 
-## Station 3 — explain before calculating
+## Station 3: explaining results
 
-Explain each situation:
+Answer each question in one or two sentences, then compare with the answers.
 
-1. One treated plant has 100 cells measured; one control plant also has 100.
-   A student says there are 100 independent replicates per group. What is wrong?
-2. Two groups have the same mean but one has twice the SD. What can you say
-   about their observations?
-3. A missing biomass value is replaced with zero. Why can that change the
-   biological meaning of the analysis?
-4. A treatment-minus-control estimate is 3 mm with a 95% interval of −2 to 8 mm.
-   Does this establish no effect?
-5. An unknown sample gives absorbance greater than the largest calibration
-   standard. What should happen before reporting its concentration?
-6. A fitted leaf-area/mass slope is positive. Does it prove that changing area
-   experimentally will produce the same change in mass?
+1. One treated plant has 100 cells measured, and so does one control plant. Are
+   there 100 replicates per group?
+2. Two groups have the same mean, but one has twice the SD. What do their
+   observations look like?
+3. A missing biomass value is replaced by zero. What happens to the group mean?
+4. A treatment-minus-control estimate is 3 mm with a 95% interval from −2 to
+   8 mm. Does this show that the treatment has no effect?
+5. An unknown sample reads a higher absorbance than the highest calibration
+   standard. What should happen before its concentration is reported?
+6. Leaf mass rises with leaf area. Would enlarging a leaf add the same mass?
 
 ::: {.callout-note collapse="true"}
-## Compare your reasoning
+## Answers
 
-1. There is only one independent treated and one independent control plant;
-   cells within them do not supply independent treatment allocation.
-2. Spread differs even though the means match. Equal means do not imply
-   identical observations or distributions.
-3. Unknown biomass and genuinely absent biomass are different observations.
-   Zero invents a value and can shift the mean, SD, and comparison.
-4. No: the interval includes zero and effects in both directions. Explain the
-   range of compatible values rather than declaring equality.
-5. Flag it as beyond range; dilute and remeasure using the assay protocol.
-6. No: this is an observational association. Other plant properties may vary too.
+1. No. There is one treated and one control plant; the cells inside a plant
+   share its treatment, so they are not independent replicates.
+2. The values in the second group are spread much more widely around the same
+   centre.
+3. The mean drops, because zero is an invented, very low value. Leave it as `NA`
+   and report one fewer measurement.
+4. No. The interval includes zero but also effects in both directions up to
+   8 mm, so the study cannot tell. Report it as inconclusive.
+5. Flag it as above the range; dilute the sample and measure it again.
+6. Not necessarily. Area was measured, not changed, and older or better-lit plants
+   may have both larger and heavier leaves.
 :::
 
-## Station 4 — your complete report
+## Station 4: your complete report
 
-Return to the report from day 23 or one that still needs work. Starting from a
-fresh session, render it without running console code first. Check that it has:
+Open your report from day 23 (`duckweed-report.Rmd` or `organic-study.Rmd`).
+Restart R and render it without running anything in the Console first. Then read
+the HTML as a stranger would, and find out whether it tells you:
 
-- A biological or laboratory question and the correct independent experimental
-  unit: a flask for duckweed or a synthesis run for the organic alternative.
-- The input filename, measurement units, and missing-data account.
-- A readable plot of observations and a small relevant summary.
-- An appropriately directed comparison or a line fit, if the question needs it.
-- An interpretation with size, variation or uncertainty, and a limitation.
-- Relative input paths, all required code, and an HTML output you can locate
-  beside the source or in the documented `reports/` output folder.
+- the question and the independent unit (a flask, or a synthesis run);
+- the input file, the units and what happened to missing values;
+- a plot of individual units and a small summary;
+- the comparison in a stated direction, with size, spread or uncertainty, and a
+  limitation.
 
-Repeat the workflow on an earlier dataset. Record which steps would change
-for a new biology practical and which would stay the same.
+Fix whatever is missing and render again. The organic study stays descriptive:
+group means and SDs are enough.
 
-If you chose the organic alternative on day 23, use `organic-study.Rmd` and
-`data/organic-recovery.csv` here. Its descriptive group means and SD are enough;
-a new test is not needed. Higher yield alone cannot demonstrate higher purity.
+## Station 5: the remote computer
 
-## Station 5 — local and remote, when available
+If remote access works, repeat day 22: log in, find out which computer and
+folder you are in, locate a supplied file, disconnect, reconnect and find it
+again, then copy one output to your laptop. If access is still pending, note it
+in your readiness review as a skill still to practise.
 
-Identify the computer and folder behind an SSH session, locate a supplied file,
-disconnect, reconnect, and find it again. Locate the designated shared folder
-through remote desktop and transfer one output to your laptop. If access is
-still pending, record this as an outstanding practical skill; completing local
-stations does not complete the remote-access task.
+## Is A11 a mistake?
 
-## Your handover to the next biology course
+In the algae data from days 23–24, reference culture **A11** has the largest
+biomass of all, 41.7 mg. A high value like this is tempting to remove. Find out
+whether there is a reason to remove it, and how much it changes the result.
+Record each step in `reports/final-investigation.txt`.
 
-Save `reports/next-lab.txt` with a short workflow you can reuse: where to store
-raw data, how to open a project, which checks to make, how to choose a figure,
-and how to render and back up your report. Include one question you would ask a
-lab teacher before analysing a dataset, such as “what was independently assigned
-to treatment?” or “what do blank cells mean?”
+1. Without using "recent files", find your project, `algae-transfer.R`,
+   `algae-brief.Rmd`, `data/algae.csv` and the HTML, and write their paths.
+2. Read the algae section of [data/README.md](../data/README.md). It records
+   that A19 was spilled, and says nothing wrong about A11, so A11 belongs in the
+   primary result.
+3. Use your summary code on all available measurements to find out the
+   supplement-minus-reference difference. Label it "primary, all available
+   measurements".
+4. Make a separate object without A11 and repeat the calculation to find out how
+   much this one culture moves the difference:
 
+```r
+algae_without_a11 <- filter(algae, culture_id != "A11")
+```
 
-## Investigate a high measurement
-
-Use your algae script and brief report from days 23–24,
-so the final day consolidates familiar methods. Work in copies for diagnostic
-changes, keep the primary result from all available measurements, and record
-what you changed in `reports/final-investigation.txt`.
-
-1. From the file manager, locate the project, `algae-transfer.R`,
-   `algae-brief.Rmd`, input CSV, and generated HTML without using recent files.
-   Write their project-relative paths. If one is missing, repair that part of
-   the portfolio before changing the analysis.
-2. Open the supplied algae CSV without editing it. Identify the largest
-   reference-group measurement and its culture ID. Check the dictionary for
-   evidence that it is erroneous. There is none: a large value is a question
-   to investigate, not permission to remove an observation.
-3. Recreate the primary group summaries from all available measurements. State
-   the observed supplement-minus-reference mean difference in mg. Label this
-   result “primary, all available measurements”. A19 remains unavailable.
-4. Create a separately named diagnostic object that omits **A11**, and repeat
-   the group means and observed difference. The aim is to see how one high
-   reference value influences a small-sample summary. Label the diagnostic
-   result “sensitivity check, A11 omitted without evidence of error”. This
-   label distinguishes it from the primary result.
-5. Compare the two differences and reference means. Explain why the supplement
-   mean is unchanged, why the reference mean changes, and why the diagnostic
-   sample count is different.
-6. In a copied report, add a short limitations paragraph distinguishing
-   unavailable A19, unusually high but recorded A11, and the simplifying
-   assumptions of the study. These are three different issues. Restore or
-   retain the primary analysis as the main result, with the diagnostic clearly
-   marked if included at all.
-7. Render, close, and reopen the report. Confirm the prose, counts, and plotted
-   observations all refer to the primary dataset. A diagnostic object left in
-   memory must not accidentally change the main figure or inline results.
+5. In a copy of `algae-brief.Rmd`, add a limitations paragraph that separates
+   three things: A19 is missing, A11 is high but recorded, and the study is small
+   and simulated. Render it and check that the main figure and numbers still use
+   all available measurements.
 
 ::: {.callout-tip collapse="true"}
-## Hint: separate objects make the decision visible
+## Answer check
 
-Start from the imported `algae` object and use a name such as
-`algae_without_a11 <- filter(algae, culture_id != "A11")` for the diagnostic.
-Use `na.rm = TRUE` in a summary while still reporting available counts. Save
-derived output separately from `data/algae.csv`. The primary reference mean is about
-28.20 mg and the available supplement mean about 33.92 mg; use your unrounded
-values for the difference. Omitting a high reference value will lower that
-reference mean and increase the observed difference, without establishing that
-the altered estimate is more scientifically justified.
+Primary: reference **28.20 mg** (12 cultures), supplement **33.92 mg** (11),
+difference **5.72 mg**. Without A11: reference **26.97 mg** (11 cultures),
+difference **6.95 mg**. The supplement mean does not change, because A11 is a
+reference culture. Report the primary result; if you show the second one, label
+it "A11 omitted without evidence of error".
 :::
 
-## Test a laboratory handover
+## Can someone else follow your instructions?
 
-Write a workflow from the question and saved files, then test it. Use references
-when needed.
+Write a short `README.txt` for your report: the question, where the raw data are,
+what one row means, what blank cells mean, which file to render and what the
+result should look like. For the organic study, include the yield formula.
 
-1. Write handover instructions for a future reader: the
-   scientific question, where the original data are, what one row means, and
-   which report should be rendered. Include the missing-value meaning and
-   expected output. If using your organic main report, restate the supplied
-   theoretical maximum, collected mass, and percentage formula.
-2. Close RStudio and reopen the project from its saved location. Starting in a
-   fresh session, run your chosen source from the top or Knit the report.
-   Record the first point at which you needed a reference and how it helped.
-3. Independently verify one input record and one group summary using a small
-   separate calculation. For the algae memo, count the available values in
-   each group; for an organic report, check one yield's numerator, denominator,
-   and units. Explain how an arithmetic check differs from validating the
-   experimental design.
-4. Extract the tested package into a new parent folder. Follow the handover
-   instructions to locate the input, render the source, and identify the main
-   result and a limitation.
-5. If you find an ambiguity, revise the source or README and make
-   a new clearly named package. Extract and check that replacement too. An
-   edit in the original Windows copy does not update an Ubuntu copy already
-   packaged; use the transfer/version checks from day 21.
-6. Open the returned HTML as a reader. Find the axes' units, figure's
-   observational unit, available counts, and limitation. Explain why a
-   successful render alone cannot supply those meanings.
-7. Save `reports/readiness-review.txt`: three actions you can now
-   perform reliably, two actions needing another rehearsal, and the concrete
-   next practice task for each. List remote login/desktop/transfer as pending
-   if you have not used the actual service. Store your final source, data,
-   results, and retrievable backup according to the supported course route.
+Then test it. Pack the project, extract it into a new folder, and follow only
+your README: open the `.Rproj`, restart R, render, and find the main result and
+a limitation in the HTML. If something is unclear, fix the README or the report,
+make a new, clearly named package and test that one too. A copy you edited in
+one place, for example on Windows, does not update a copy already packed or
+moved elsewhere; use the version checks from day 22.
 
-**Keep:** the primary report, labelled diagnostic calculation, investigation log,
-verified handover package, and readiness review.
+## What will you take to your next lab?
 
-**Before you finish:** locate the final report, source, input, and backup without
-using a recent-files menu. Keep the [reference pages](../reference/r.qmd) and your
-working project template for later practicals.
+Save `reports/next-lab.txt` with your own workflow for a new dataset: where raw
+data go, how to open the project, which checks to make, how to choose a figure,
+and how to render and back up the report. Add the questions you would ask a lab
+teacher first, such as "What was randomly assigned?" and "What do blank cells
+mean?"
+
+Finally, save `reports/readiness-review.txt`: three things you can now do
+reliably, two that need more practice, and one concrete practice task for each
+of those two. List remote login and file transfer as pending if you have not
+used the real service.
+
+**Leave with:** `recovery.R`, `reports/final-investigation.txt` with the primary
+and A11-omitted results, a tested handover package, `reports/next-lab.txt` and
+`reports/readiness-review.txt`. Keep the [reference pages](../reference/r.qmd)
+and your project for later lab courses.

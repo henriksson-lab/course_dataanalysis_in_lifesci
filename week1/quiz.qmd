@@ -5,21 +5,21 @@ title: "Week 1 revision — files and computers"
 Try each question before opening its answer. Use your file manager, terminal, and
 [terminal reference](../reference/terminal.qmd) to check actions as well as words.
 
-Topic quizzes: [1](01-files-quiz.qmd) · [2](02-folders-computers-quiz.qmd) · [3](03-terminal-quiz.qmd) · [4](04-inspect-archive-quiz.qmd) · [5](05-lab-files-quiz.qmd)
+Topic quizzes: [1](01-files-quiz.qmd) · [2](02-folders-computers-quiz.qmd) · [3](03-terminal-quiz.qmd) · [4](04-inspect-archive-quiz.qmd) · [5](05-meet-r-quiz.qmd)
 
-## 1. Find the saved work
+## 1. Plain text or not?
 
-You edited a note in an application, closed it, and cannot find it in the
-application's recent-files list. What should you be able to identify, and why
-does the application name alone not tell you where the file is?
+You open `seedlings.csv`, `seedlings.xlsx` and `report.Rmd` in Notepad or
+TextEdit (plain-text mode). Which show readable text, and which file could R
+read directly as a table?
 
 ::: {.callout-note collapse="true"}
 ## Answer and check
 
-Identify the computer, folder, and filename where the note was saved. An
-application can open files from many locations. Navigate to the saved folder in
-the file manager and reopen the ordinary file. If the changes were not saved,
-the saved contents may differ from the previous screen.
+`seedlings.csv` and `report.Rmd` are plain text: only characters, readable in any
+editor. `seedlings.xlsx` shows `PK` and unreadable symbols, because it is a ZIP
+package of XML files. R reads `seedlings.csv` directly; that is why the course
+keeps data as CSV.
 :::
 
 ## 2. A relative path needs a starting place
@@ -72,18 +72,17 @@ the ordinary folder and files needed for the project. Locate the actual extracte
 `.Rproj`, rather than opening one inside an archive preview.
 :::
 
-## 5. Memory and storage
+## 5. A path on someone else's laptop
 
-Would adding RAM automatically provide more room for saved photographs? Why
-can restarting R remove objects while leaving a saved CSV intact?
+Anna's code reads `/Users/anna/Documents/introcomputing-course/data/seedlings.csv`.
+Why does it fail on Ben's laptop, and which path works for both?
 
 ::: {.callout-note collapse="true"}
 ## Answer and check
 
-RAM supports running work; persistent storage holds saved files. They have
-different roles. An R object in session memory must be recreated after restart;
-the CSV remains on storage and can be imported again. Saving a script preserves
-the instructions, not an automatically running process.
+The absolute path contains Anna's username, so the folder does not exist on
+Ben's laptop. The relative path `data/seedlings.csv`, read from the project
+folder, works on any computer that has the project.
 :::
 
 ## 6. The same filename on two computers
@@ -101,14 +100,19 @@ destination. A ZIP on the same disk is a convenient sharing package; use support
 separate storage for protection against losing that disk.
 :::
 
-## 7. A renamed extension
+## 7. Gene names and Swedish CSV files
 
-A practice copy of seedlings.csv is renamed name-test.txt. Did its plant measurements become a different format? What would you inspect?
+A gene list opened and saved in Excel shows `2-Sep` where `SEPT2` used to be. A
+classmate's "CSV" contains `P01;control;25,7;44,3`. What happened in each case?
 
 ::: {.callout-note collapse="true"}
 ## Worked answer
 
-The name changed; renaming did not convert the contents. Open the practice copy as plain text and inspect its comma-separated header and records. Use actual conversion software only when a task calls for conversion; no conversion is needed here. Keep the original CSV unchanged.
+Excel turned the gene symbol into a date, and saving made it permanent; about
+one in five papers with Excel gene lists had such errors (Ziemann et al. 2016).
+The second file was saved by Excel set to Swedish, which uses semicolons between
+values and decimal commas. Look at data files in a text editor, and close raw
+data in a spreadsheet without saving.
 :::
 
 ## 8. Two terminal windows
@@ -151,15 +155,20 @@ The manifest lists measurements/S04.csv, but the copied folder contains S04-rena
 Investigate. In the deliberate classroom rename, the file contents still identify S04 and 39.8 mm, and the known rename supports restoring its filename. In a real ambiguous case, obtain source evidence.
 :::
 
-## 12. The recipient has the old correction
+## 12. Console or terminal?
 
-You edited ordinary report/findings.txt after creating report-v1.zip. You extract v1 and see the old sentence. What happened, and what is a useful verification?
+You type `pwd` in RStudio's Console and get `Error: object 'pwd' not found`.
+Then you type `44.3 - 25.7` in the terminal and get `44.3: command not found`.
+What went wrong, and where does each instruction belong?
 
 ::: {.callout-note collapse="true"}
 ## Worked answer
 
-The archive is a snapshot and did not update when the source changed. Create a newly named package, extract it into a fresh receiver location, and inspect the actual corrected sentence. Confirm both archive version and extracted folder before assuming editing failed.
+Each instruction went to the wrong program. `pwd` is a shell command and belongs
+in the terminal, at a `$` prompt. `44.3 - 25.7` is R and belongs in the Console,
+at a `>` prompt, where it gives 18.6 (P01's growth in mm). Neither error means
+the computer is broken.
 :::
 
-Return to [day 5 exercises](05-lab-files.qmd) for a complete file workflow, or
+Return to [day 5 exercises](05-meet-r.qmd) to practise in RStudio, or
 continue to [week 2](../week2/06-r-basics.qmd).

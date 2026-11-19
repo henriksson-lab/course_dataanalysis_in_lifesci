@@ -1,6 +1,6 @@
 ---
-title: "Folders and the working computer"
-subtitle: "Day 2 — Give someone a route to your measurements"
+title: "Folders and paths"
+subtitle: "Day 2 — Write down where a file is"
 author: "Data Analysis in Life Sciences"
 format:
   revealjs:
@@ -20,196 +20,146 @@ format:
 toc: false
 ---
 
-## A project is a tree of locations
+## About this lecture
 
-![A project parent folder contains data, output, and reports with their respective files.](project-tree.svg){height=390}
+R will not click through folders for you. To read the seedling measurements it needs a written address: **how do you write down exactly where a file is, so that it works on every computer?**
 
-`data` and `reports` are neighbours, not one inside the other.
+Today you will:
+
+- draw the course project as a tree of folders;
+- write absolute and relative paths;
+- see why a relative path needs a starting folder;
+- check that saved work is on disk.
+
+Tomorrow the terminal uses these paths; from week 2, R does.
 
 ::: notes
-Ask students to locate yesterday's note first. Introduce parent folder and project root using the picture. Project root means the starting folder of this project, not the root of the entire computer. Have a student narrate the route from reports to data.
+Start by asking students to find yesterday's note, day01-notes.txt, through the folders, not through "recent files". The folders they opened, in order, are the path. Course data are simulated.
 :::
 
-## An address can be absolute or relative
+## A project is a tree
 
-Example absolute path on Linux:
+![The course project folder contains data, output and reports; seedlings.csv is inside data and notes.txt inside reports.](project-tree.svg){height=380}
+
+- `data` and `reports` are neighbours; their **parent** is the project folder.
+- The project folder is where every route in this project starts.
+
+::: notes
+Open the project in the file manager and walk the tree. Project root means the starting folder of this project, not the top of the whole disk. Turn on View, Show Path Bar in Finder; show the address bar in File Explorer.
+:::
+
+## A path names each folder on the route
+
+![The path /home/anna/introcomputing-course/data/seedlings.csv drawn as a chain of folders from the top of the disk to the file.](path-parts.svg){height=360}
+
+Windows writes the same idea as `C:\Users\anna\Documents\...\data\seedlings.csv`.
+
+::: notes
+Read the path left to right, opening one folder per part. Show a real path: Windows "Copy as path", Mac right-click with Option, "Copy as Pathname". Paste it into a text editor. Usernames will differ from anna.
+:::
+
+## Absolute and relative paths
+
+:::: {.columns}
+::: {.column width="45%"}
+**Absolute:** from the top of the disk.
 
 ```text
-/home/anna/introcomputing-course/data/seedlings.csv
+/Users/anna/Documents/
+  introcomputing-course/
+  data/seedlings.csv
 ```
 
-From the project root, the relative path is:
+**Relative:** from an agreed folder, here the project folder.
 
 ```text
 data/seedlings.csv
 ```
+:::
+::: {.column width="55%"}
+![The same relative path works from the project folder but points to a missing folder from inside reports.](relative-start.svg){width="100%"}
+:::
+::::
 
-Your username and complete home path may differ.
+The folder a program starts from is its **working directory**.
 
 ::: notes
-Show Windows and Mac equivalents in the practical if needed. An absolute path supplies the full route from a drive or root. A relative path starts from the current folder. The illustrative username will differ from each student's account; personal absolute paths are one reason analyses fail when moved.
+From inside reports, data/seedlings.csv asks for reports/data/seedlings.csv, which does not exist. The file did not move; the starting point changed. Tomorrow pwd prints the terminal's working directory.
 :::
 
-## A relative path needs a starting point
+## Going up to the parent
 
-![The same relative path works from the project root but not from inside reports.](relative-start.svg){height=390}
+![The route from reports to data first goes up to the project folder, then down into data.](nested-route.svg){height=380}
 
-**Current working directory:** where relative paths start.
+From `reports`, `data` is a neighbour: go up to the parent, then down.
 
 ::: notes
-Physically move between the project root and reports in the graphical window. Say the route out loud. The file remains in data; changing the current folder changes the interpretation of a relative path. Tomorrow pwd will let a shell report this starting point.
+Trace it with the file manager: open reports, go up, enter data. In the terminal tomorrow, "up one level" is written as two dots, so the relative path from reports is ../data/seedlings.csv. Mention the notation but do not drill it today.
 :::
 
-## Opening a CSV uses several computer parts
+## Relative paths work on every computer
 
-![Saved data are read from storage into working memory and processed by the CPU.](computer-components.svg){height=390}
+![Anna's and Ben's absolute paths differ by username, but from the project folder both use data/seedlings.csv.](portable-path.svg){height=380}
 
-The operating system manages files, memory, devices, and running programs.
+That is why our R code will say `data/seedlings.csv`.
 
 ::: notes
-Link each component to an action: storage retains the CSV, RAM holds working information, CPU carries out instructions. RStudio will later be an application and a process will be a running instance of it. More RAM does not automatically mean more persistent room for photographs. Avoid hardware shopping or binary arithmetic.
+Ask: if you email your R code with an absolute path to a classmate, what happens? It fails, because their username differs. The relative path assumes only that the project folder is intact and that R starts in it.
 :::
 
-## An unsaved change and a saved file differ
+## Moving a folder changes the path
 
-Try this only on a practice note:
+![Moving map-a into map-b changes the path to note.txt from practice/map-a/note.txt to practice/map-b/map-a/note.txt; the contents stay the same.](move-changes-path.svg){height=380}
 
-1. Add a sentence, save, close, and reopen.
-2. Add another sentence and discard the change when closing.
-3. Inspect the actual file after reopening.
-
-If the editor restores unsaved state, discuss what it has restored.
+Any route written before the move must be updated.
 
 ::: notes
-The exercise reveals the difference between storage and current application state. Autosave and recovery differ between editors. Ask the class where the saved note is and which sentence is actually stored there.
+This is the independent task: students create map-a and map-b in practice, write routes, predict, move, and correct. Copying would leave the old route valid and create a second file.
 :::
 
-## Home folders belong to particular environments
+## Saved work is on disk
 
-![Laptop storage, local Ubuntu storage on Windows, and a remote Linux home are distinct file locations.](different-locations.svg){height=390}
+![Before closing, the edited note is in working memory; after closing, only the saved note on disk remains.](memory-close.svg){height=360}
 
-An explicit transfer or configured sharing is needed to connect separate copies.
+Unsaved text is in memory and disappears when the program closes. Saved work stays on disk.
 
 ::: notes
-Windows students use native RStudio and a separate Ubuntu shell. Mac students do not need local Ubuntu, but remote storage remains separate for them too. A cloud copy may synchronise, but a remote desktop is not automatically a sync service. The course's actual remote connection details are pending.
+Demonstrate on a practice copy: add a sentence, save, close, reopen; then add one, close with Don't save, reopen. Some editors autosave or restore drafts; what counts is the saved file. Hardware details come later in the course.
 :::
 
-## Which claim needs correcting?
+## Different computers, different folders
 
-“The note is in my editor, so I know where the file is.”
+![Laptop storage, local Ubuntu storage on Windows, and a remote Linux home folder are separate places.](different-locations.svg){height=360}
 
-“I copied the ZIP beside the folder, so the laptop is backed up.”
-
-“`data/seedlings.csv` means the same location from every folder.”
+A path is a place on one computer. A file is elsewhere only after you copy it there.
 
 ::: notes
-All need correction. The editor may be displaying an unsaved or recovered version; a same-disk ZIP does not protect against loss of that disk; relative paths need a starting folder. Ask for a concrete fix to each claim rather than vocabulary alone.
+Windows students will have a separate Ubuntu home folder for the terminal exercises. Later a remote Linux computer has its own folders. A cloud folder may synchronise; a remote desktop does not. A second copy on the same laptop is not a backup.
 :::
 
-## A route starts somewhere
+## Check yourself
 
-![The route from reports to data first goes up to the project root.](nested-route.svg){height=350px}
-
-From reports, data is a neighbour, not a child.
+1. From the project folder, what is the path to yesterday's note?
+2. From inside `reports`, what does `data/seedlings.csv` point to?
+3. Why does `C:\Users\anna\...` fail on Ben's laptop?
+4. You close the editor without saving. What is in the file?
 
 ::: notes
-Trace the route graphically before naming relative paths. Students should draw a parent and two children. The exact personal absolute path differs across machines; the within-project relation is portable.
+Answers: 1 reports/day01-notes.txt; 2 a data folder inside reports, which does not exist; 3 his username and folders differ; 4 the last saved version.
 :::
 
-## Try a move on a practice tree
+## Summary
 
-Create map-a and map-b under practice.
+- A project is a tree; the project folder is the starting point.
+- A **path** lists the folders on the route to a file.
+- **Absolute** paths start at the top of the disk; **relative** paths start at the working directory.
+- Relative paths inside a project work on every computer.
+- Moving a folder changes the path, not the file. Saved work is on disk.
 
-Put a note in map-a, write its route, then move map-a into map-b.
+**Next (Day 3, the terminal):** the same folders, navigated by typing commands.
 
-Which written route needs revising?
-
-::: notes
-Move only the disposable practice folder. Contents may remain identical while the address changes. Compare with copy: copying would leave the original route valid and create a second location. Ask students to predict before clicking.
-:::
-
-## Closing a process and saving a file differ
-
-![Closing a running process clears its working session while the saved note persists on storage.](memory-close.svg){height=350px}
-
-Inspect the saved file to find out which changes survived.
+**Now:** [open the Day 2 exercises](../../week1/02-folders-computers.qmd). Leave with `reports/day02-map.txt` and the `practice` folder.
 
 ::: notes
-Use the plain-text disposable experiment and acknowledge autosave/recovery. Some applications restore unsaved changes. RAM supports running information; storage retains deliberately saved information between sessions.
-:::
-
-## A personal absolute path is a poor shared instruction
-
-Illustrative laptop address:
-
-```text
-/Users/anna/Documents/future-lab/data/seedlings-transfer.csv
-```
-
-Portable instruction from the agreed project root:
-
-```text
-data/seedlings-transfer.csv
-```
-
-::: notes
-The second route still assumes an agreed root and an intact folder structure. It does not find data anywhere on the network. On a remote computer the same text refers to storage accessible there, not automatically to the laptop.
-:::
-
-## Installed program versus running instance
-
-![One application saved on storage can be launched as running processes using memory and CPU.](program-process.svg){height=350px}
-
-More RAM and more saved-file capacity solve different problems.
-
-::: notes
-Ask whether a closed editor remains installed. Yes, its saved program is still available to launch. A process is its current execution. Use these distinctions to explain everyday observation and recovery.
-:::
-
-## Plan the next laboratory folder
-
-A practical supplies measurements, photographs, and a protocol.
-
-Where would you keep originals, notes, derived figures, and the report?
-
-Write a README that another person can use.
-
-::: notes
-The independent task creates a disposable future-lab project and text placeholders explicitly marked as such. Renaming text .jpg does not make a photograph. No particular folder scheme is scientifically mandatory; consistency and clear roles are what matter.
-:::
-
-## Connections do not all mean synchronisation
-
-![Laptop, cloud service and remote Linux storage are distinct locations.](storage-locations.svg){height=350px}
-
-Draw only the copying or sync links you actually know are configured.
-
-::: notes
-Cloud-managed folders can have local placeholders. A remote desktop is another interface, not automatic transfer. The course service details remain pending. Students can put a question mark on unknown links.
-:::
-
-## Test portability by moving the structure
-
-Copy the complete practice project to a new location.
-
-Find its README and data from the new root.
-
-Explain which relative routes remain valid and which old absolute routes point elsewhere.
-
-::: notes
-This is a test of organisation, not a separate backup against losing the laptop. Keep one clearly named working course project. The student output is two maps and an investigation note, tested by reopening the files along the documented routes.
-:::
-
-## Practise explaining the route
-
-[Open the exercises](../../week1/02-folders-computers.qmd).
-
-Save `reports/day02-map.txt` with:
-
-- A small project tree and the route to `seedlings.csv`.
-- One sentence distinguishing RAM from saved storage.
-- A note naming the computer holding your project.
-
-::: notes
-The practical also creates practice/field-notes and figures for tomorrow's navigation. Have students write directions, close their windows, and test the routes from the stated start. Keep backup discussions tied to the supported storage route when it is announced.
+Students who cannot find yesterday's files or explain a relative path need help before the terminal day.
 :::

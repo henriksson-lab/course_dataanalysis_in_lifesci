@@ -1,24 +1,22 @@
 ---
-title: "Day 2 — Folders, paths, and the working computer"
+title: "Day 2 — Folders and paths"
 ---
 
 [Lecture slides](../lectures/02-folders-computers/lec.qmd) · [Quiz](02-folders-computers-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
-## Start by finding yesterday's work
+## Where is yesterday's note?
 
-Open the file manager and find `day01-notes.txt` using the folders, rather than
-the editor's recent-file list. Record the route you took; it will help you
-investigate “file not found” errors.
+Open the file manager and find `day01-notes.txt` by opening folders, not through
+the editor's list of recent files, and write down the folders you opened, in
+order. That list is the note's address. Today we learn to write such addresses
+down precisely, so that you, a classmate and R can all find the seedling
+measurements.
 
-Our biological question is still about seedling growth. Today we organise the
-experiment so that someone else can identify the original observations and the
-results we produce from them.
+## The project as a tree
 
-## Folders form a tree
-
-A folder can contain files and more folders. We can draw part of our project
-as a tree. Indentation shows what is inside what:
+A folder can contain files and more folders, so a project can be drawn as a
+tree in which indentation shows what is inside what:
 
 ```text
 introcomputing-course/
@@ -27,25 +25,28 @@ introcomputing-course/
 ├── data/
 │   ├── README.md
 │   └── seedlings.csv
+├── examples/
 ├── output/
 │   └── seedlings-practice.csv
 └── reports/
-    └── day01-notes.txt
+    ├── day01-notes.txt
+    └── file-types.txt
 ```
 
-This drawing omits other supplied datasets. `data` and `reports` are neighbours:
-neither is inside the other. Their **parent folder** is `introcomputing-course`.
-That folder is the **project root** because it is the starting point for this
-project's organisation. It is not the root of the entire computer.
+The drawing leaves out most supplied files. `data` and `reports` are neighbours:
+neither is inside the other, and their **parent folder** is
+`introcomputing-course`. That folder is the **project folder** (also called the
+project root), the starting point for everything in the project.
 
-In the file manager, open `reports`, go up to its parent, and then enter `data`.
-Watch the address bar on Windows or the folder path in Finder. In Finder,
-**View → Show Path Bar** can make the route easier to see.
+In the file manager, open `reports`, go up to its parent and enter `data`, and
+watch the address bar in Windows File Explorer. In Finder, choose
+**View → Show Path Bar** to see the route at the bottom of the window.
 
-## A path gives the route to a file
+## Paths
 
-A **path** describes a location. These examples are illustrations: your username
-and exact Documents location will differ.
+A **path** lists the folders on the route to a file, separated by `/` (or `\`
+on Windows), and ends with the filename. Your username and the location of
+Documents will differ from these examples:
 
 ```text
 Windows: C:\Users\anna\Documents\introcomputing-course\data\seedlings.csv
@@ -53,179 +54,116 @@ Mac:     /Users/anna/Documents/introcomputing-course/data/seedlings.csv
 Linux:   /home/anna/introcomputing-course/data/seedlings.csv
 ```
 
-An **absolute path** starts from the file system's root or drive and specifies
-the whole route. A **relative path** starts from an agreed current folder. From
-inside `introcomputing-course`, `data/seedlings.csv` means “enter `data`, then
-find `seedlings.csv`”. From inside `reports`, that same relative path would ask
-for a `data` folder *inside reports*, where it does not exist.
+Read a path from left to right: start at the top of the disk (`/`, or the drive
+`C:\` on Windows) and open each folder in turn.
 
-This is why we need to know our **current working directory**: the folder from
-which a program interprets relative paths. Next lesson we will ask the terminal
-to print it. Relative paths will let us move a whole project without changing
-every filename in the analysis.
+Find out the full path of `seedlings.csv` on your own laptop. On Windows,
+select the file and choose **Copy as path**; on Mac, right-click it, hold the
+Option key and choose **Copy "seedlings.csv" as Pathname**. Paste the path into
+a text file. It should end in `introcomputing-course/data/seedlings.csv`, with
+your own username near the start.
 
-## Give directions through the tree
+## Absolute and relative paths
 
-Use the file manager to follow these routes.
+The paths above are **absolute**: they start at the top of the disk and give the
+whole route. A **relative path** starts from a folder you have agreed on. From
+the project folder, `data/seedlings.csv` means "enter `data`, then find
+`seedlings.csv`". From inside `reports`, the same words ask for a `data` folder
+inside `reports`, which does not exist. The folder from which a program reads
+relative paths is its **working directory**; tomorrow the terminal will tell us
+its working directory, and later RStudio will start in the project folder.
 
-1. Start in the project root. Find the original seedling table.
-2. Start in `reports`. Find the practice copy in `output`.
-3. Return to the project root. Create a folder called `practice`.
-4. Inside it, create `field-notes` and `figures`.
-5. Copy yesterday's note into `field-notes` and rename the copy
-   `seedling-observations.txt`.
-6. Draw the new part of the tree. Close the file-manager window, reopen it,
-   and navigate to the copied note using your drawing.
+The absolute path contains your username and the place you chose for the
+folder, so it differs on every laptop. The relative path `data/seedlings.csv` is
+the same for everyone who has the project folder, which is why our R code will
+use relative paths.
 
-Prefer informative names with simple letters, numbers, and hyphens for this
-course. `seedling-observations.txt` is easier to interpret than `new2.txt`.
-We will learn to handle spaces too; simple names reduce avoidable typing errors.
+## Finding files from different starting folders
 
-::: {.callout-tip collapse="true"}
-## I moved the whole project and now see two copies
+Use the file manager to find out which route leads from `reports` to the
+practice copy `output/seedlings-practice.csv`. You have to go up to the project
+folder first, because `output` is a neighbour of `reports`, not inside it.
 
-First locate each copy and inspect its contents. A copy operation leaves the
-original in place; a move changes the location. Ask the teacher to help choose
-one working project before continuing.
-:::
+Then make a place for notes: create a folder `practice` in the project folder,
+with `field-notes` and `figures` inside it, and copy yesterday's note into
+`field-notes` under the name `seedling-observations.txt`. Write down its
+relative path from the project folder, close the file manager, and follow your
+path to open the note again. The path is
+`practice/field-notes/seedling-observations.txt`.
 
-## What happens when you open a file?
+Names made of simple letters, numbers and hyphens, such as
+`seedling-observations.txt`, say what a file holds and are easy to type in the
+terminal and in R. Spaces and å, ä, ö cause trouble there.
 
-Your laptop has several parts with different jobs:
+## Saved and unsaved work
 
-| Part | Job in our seedling example |
-| --- | --- |
-| Storage, such as an SSD | Holds the saved CSV and report between sessions. |
-| Memory, or RAM | Holds information the running application is using now. |
-| Processor, or CPU | Carries out instructions, such as calculating increases. |
-| Operating system | Manages files, memory, devices, and running programs; Windows, macOS, and Linux are examples. |
-| Application | Provides a particular tool, such as an editor, browser, or RStudio. |
+While you type, the text lives in the computer's **working memory**, which is
+cleared when the program closes. **Saving** writes the text to a file on the
+**disk**, where it stays after the program closes or the computer is switched
+off. Use the copy `practice/field-notes/seedling-observations.txt` to see the
+difference. Add "The plants were measured twice.", save, close and reopen: the
+sentence is there. Then add "This line is not saved.", close the editor and
+choose **Don't save**: after reopening, that line is gone. Some editors save
+automatically or restore unsaved text; what counts is what is in the saved file.
 
-Opening a CSV lets an application read its saved contents. Editing text changes
-the application's current working version. Saving writes that version to a file.
-An unsaved change may disappear when an application closes, even though the
-previously saved file remains. A **process** is a running instance of a program.
-An application installed on storage and a process using memory are related but
-different things.
+## Files on other computers
 
-## Test the difference between editing and saving
+A path describes a place on one computer. A cloud folder (OneDrive, iCloud) may
+keep a copy elsewhere and synchronise it. Later in the course you will log into
+a remote Linux computer whose folders are separate from your laptop's, even if
+the names look the same, so a file is there only after you have copied it there.
+For the same reason, a second copy on the same laptop is not a backup: keep
+important work in the university's supported storage as well.
 
-Use `practice/field-notes/seedling-observations.txt`, not the original note.
+## What happens to a path when a folder moves?
 
-1. Open the practice note and add “The plants were measured twice.”
-2. Save, close, and reopen it. Confirm that the sentence remains.
-3. Add “This line is an unsaved experiment.” Close the editor and choose to
-   discard the change if asked. Reopen the file and inspect the result.
+Use the `practice` folder to find out which written routes break when a folder
+is moved. Create `practice/map-a` and `practice/map-b`, and put a copy of your
+note in `map-a` as `note.txt`. In a new plain-text file `reports/day02-map.txt`,
+write two routes to `note.txt`: one from the project folder, and one from inside
+`map-b`, which must first go up to `practice`. Write down how you expect both
+routes to change, then move `map-a` into `map-b` with the file manager, follow
+the routes and correct them. Open `note.txt` to see whether its contents
+changed.
 
-Some editors save automatically or restore unsaved documents. If yours restores
-the sentence, discuss that behaviour with a teacher rather than treating it as
-proof that saving never matters. The important check is what is actually in the
-saved file, and where the editor saved it.
-
-## Where do local, cloud, and remote files live?
-
-A **local** file is on the computer you are using. A cloud service may keep a
-copy elsewhere and synchronise it with your laptop. A **remote Linux computer**
-is another computer we will log into. Its home folder is separate from yours.
-Opening its desktop does not automatically copy your downloads to it.
-
-An archive in the same folder as the originals is convenient for sharing, but
-it is not protection against losing the whole laptop. Keep another copy using
-the university's supported backup or storage service once the teaching team
-identifies it. Check that a copy completed and that you can retrieve it.
-
-
-## Explain the computer through saved work
-
-Use disposable notes under `practice` to compare saved files with application
-state and to test how moving folders changes paths.
-
-1. Draw the project tree on paper with `data`, `output`, `reports`, and your
-   `practice` folder. Circle the project root. Mark the original seedling table,
-   one derived practice copy, and yesterday's audit note. Follow the tree in the
-   file manager and correct any branch your drawing put in the wrong place.
-2. Make `practice/memory-test.txt` containing “version saved to storage”. Save,
-   close, and reopen it. Then add “unsaved change” without choosing Save. Describe
-   what happens when you close and reopen. If the application autosaves or
-   restores the draft, record that behaviour.
-3. Save a second copy as `practice/saved-copy.txt`. Close the application, then
-   open this ordinary file from the file manager. Identify what persisted after
-   the program stopped. Explain why an installed editor, its running process,
-   and a saved note are three related but different things.
-4. Create `practice/map-a` and `practice/map-b`. Put a copy of your note in
-   `map-a`. Write directions to it starting from the project root, then write
-   different directions starting inside `map-b`. Use the parent folder in your
-   second route.
-5. Move the **practice** `map-a` folder into `map-b`, using the file manager.
-   Predict how both written routes must change. Test them and revise your map.
-   The note's contents need not change when its
-   address changes.
-6. Write `reports/day02-investigation.txt` with your before/after tree, what you
-   observed about saving, and an explanation of why RAM capacity and disk
-   capacity answer different practical questions. Include what you are unsure
-   about, rather than treating the editor's recovery feature as understood.
+Finally, add to `reports/day02-map.txt` a small tree of the project folder with
+`data`, `output`, `reports` and `practice`, and the relative path from the
+project folder to `seedlings.csv`.
 
 ::: {.callout-tip collapse="true"}
-## Hint: decide whether an observation concerns contents or location
+## Hint: going up
 
-If a sentence in the note changed, you are checking contents. If a route no
-longer reaches the same note, you are checking location. Copying can leave two
-sets of contents in two locations; moving changes the route. Use the file
-manager to inspect the actual folders before renaming or moving anything else.
+From inside `map-b`, the route to `map-a` goes up one level to `practice` and
+then down into `map-a`. In the terminal tomorrow, "up one level" is written `..`.
 :::
 
-## Plan a portable laboratory project
+::: {.callout-note collapse="true"}
+## Check your routes
 
-Imagine your next laboratory exercise gives you a CSV of measurements, three
-photographs, and a protocol document. Design folders that keep these inputs
-recognisable alongside your analysis and report.
-
-1. Create `practice/future-lab` with `data`, `images`, `reports`, and `output`
-   folders. Make three small plain-text placeholder notes in suitable folders,
-   explicitly labelling them placeholders. Explain where actual image files
-   would go.
-2. Copy `data/seedlings-transfer.csv` from the course project into this practice
-   project's `data` folder. Treat that file as its supplied measurement input.
-   Write a README note at the practice root describing the folder roles and
-   identifying that the copied input is simulated course data.
-3. Give the measurement file's relative path starting at `future-lab`, then
-   starting inside its `reports` folder. Draw the routes. Explain why a route
-   containing your own account name would be inconvenient for a classmate.
-4. Make a separate copy of `future-lab` under another disposable folder you
-   choose. Reopen its README and data through that copy's tree. Does the relative
-   route from the new project root still work? Compare with an absolute route
-   written before copying. Record which project you will use for this test.
-5. Add three labelled boxes to your map: laptop, cloud storage if used, and a
-   remote Linux computer. Draw only the copying or synchronising links you
-   actually know exist. Put a question mark where service details are pending.
-   A remote desktop is a view of another machine, not proof that two folders
-   share contents.
-
-**Check and retain:** your README, two folder maps, and `day02-investigation.txt`.
-From `future-lab` the measurement path is `data/seedlings-transfer.csv`; from
-its `reports` folder a route goes up to the parent before entering `data`.
-These are practice projects, so leave the original course project untouched.
-
+Before the move, the note is at `practice/map-a/note.txt` from the project
+folder, and at `../map-a/note.txt` (up to `practice`, then into `map-a`) from
+inside `map-b`. After the move, it is at `practice/map-b/map-a/note.txt` from
+the project folder and at `map-a/note.txt` from inside `map-b`. The contents of
+`note.txt` are unchanged; only its location changed. The path to the
+measurements is `data/seedlings.csv`.
+:::
 
 ## Check your understanding
 
 ::: {.callout-note collapse="true"}
-## From the project root, what is the relative path to yesterday's note?
+## From the project folder, what is the relative path to yesterday's note?
 
-`reports/day01-notes.txt`. From inside `reports`, its name alone is sufficient:
-`day01-notes.txt`. The file did not move; your starting location changed.
+`reports/day01-notes.txt`. From inside `reports`, its name alone is enough,
+`day01-notes.txt`, because the starting point changed while the file stayed put.
 :::
 
 ::: {.callout-note collapse="true"}
-## Does more RAM automatically provide more room for saved photographs?
+## Why does R code in this course use `data/seedlings.csv` rather than `C:\Users\anna\…`?
 
-No. RAM supports running work; persistent storage holds saved files. They have
-different jobs. We will see this again when R objects disappear after restarting
-R but the saved data file is still present.
+The absolute path works only on Anna's laptop. The relative path works on any
+computer that has the project folder, as long as R starts in that folder.
 :::
 
-**Save today:** add `reports/day02-map.txt` with a simple folder tree, the path
-to `seedlings.csv`, and one sentence distinguishing RAM from storage. Keep the
-`practice` folder for later navigation exercises.
+**Save today:** `reports/day02-map.txt` and the `practice` folder.
 
-Next: [navigate these ideas in a terminal](03-terminal.qmd).
+Next: [navigate these folders in a terminal](03-terminal.qmd).

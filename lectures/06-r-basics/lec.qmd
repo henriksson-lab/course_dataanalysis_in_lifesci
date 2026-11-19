@@ -1,6 +1,6 @@
 ---
 title: "Let R keep track of the calculation"
-subtitle: "Day 6 — From plant measurements to named objects"
+subtitle: "Day 6 — Numbers, names and a saved script"
 author: "Data Analysis in Life Sciences"
 format:
   revealjs:
@@ -20,198 +20,263 @@ format:
 toc: false
 ---
 
-## Ask which quantity you want
+## About this lecture
 
-![The same plant is 20 mm initially and 37 mm finally; the increase is 17 mm.](growth-is-change.svg){height=390}
+A seedling was 20 mm long at the start and 37 mm at the end. A calculator gives 17 mm. But a real experiment has dozens of plants, a value gets corrected, and your supervisor asks you to redo it. **If the calculation is written down, you run it again. If it was done by clicking, you start over and hope you remember every step.**
 
-Change is `37 - 20`; the ratio `37 / 20` answers a different question.
+Today you will:
 
-::: notes
-Start from the simple biological question, not an overview of programming languages. All example plants are simulated. Growth has units of mm; a ratio of two lengths in the same units is dimensionless. Ask students to predict both before running R.
-:::
+- calculate in the R Console;
+- store results under names;
+- keep several plants' values together and summarise them;
+- save a script that rebuilds everything after R restarts.
 
-## Assign a value to a name
-
-![An assigned object refers to a calculated value in memory, while the script stores instructions on disk.](named-object.svg){height=390}
-
-Read `<-` as “store this under this name”.
+This is the first day of writing R. From Day 7 the numbers come from a file instead of being typed.
 
 ::: notes
-The Environment pane shows current session objects; the editor shows saved instructions. Show that saving alone does not execute a line and executing alone does not save editor changes. An object does not remain available after an ordinary fresh session unless the instructions recreate it.
+Start from the biological question, not from an overview of programming languages. All example plants are simulated. The point of the day: a saved, rerunnable list of steps. Students met RStudio's panes on Day 5.
 :::
 
-## Write and run a small script
+## Why write the steps down?
 
-Save as `day06.R` in the course project root:
+![A spreadsheet shows results but not how they were made; a script lists every step and can be run again.](click-vs-script.svg){height=330}
+
+- In a spreadsheet you see the answers, not which cells were typed, sorted or pasted.
+- A **script** is a text file of instructions. Anyone can read it and run it again, and get the same result.
+
+::: notes
+Many published analyses cannot be repeated because they were done by clicking. Nobody, including the author, can say exactly which steps were taken. The script is the record. This is not "spreadsheets are bad"; they are fine for looking at data.
+:::
+
+## R as a calculator
+
+:::: {.columns}
+::: {.column width="42%"}
+In the Console, after the `>` prompt:
 
 ```r
+37 - 20
+37 / 20
+```
+
+- `[1] 17` and `[1] 1.85`. `[1]` just numbers the first value printed.
+- **17 mm** is the growth. **1.85** is a ratio with no unit: the plant ended 1.85 times as long.
+- Both calculations are correct. Pick the one that answers your question.
+:::
+::: {.column width="58%"}
+![The plant is 20 mm initially and 37 mm finally; the growth is 17 mm.](growth-is-change.svg){width="100%"}
+:::
+::::
+
+::: notes
+Ask students to predict both results before running. A calculation can be right and still answer the wrong biological question. Ratios of two lengths in the same unit have no unit.
+:::
+
+## Give a result a name
+
+:::: {.columns}
+::: {.column width="45%"}
+```r
+# Lengths in millimetres
 initial_mm <- 20
 final_mm <- 37
 growth_mm <- final_mm - initial_mm
 growth_mm
 ```
 
-R names are case-sensitive: `growth_mm` differs from `Growth_mm`.
+- Read `<-` as "store this under this name".
+- The name now appears in the **Environment** pane.
+- `#` starts a comment for people; R ignores it.
+- Capitals matter: `Growth_mm` is a different name.
+:::
+::: {.column width="55%"}
+![A calculation is stored in a named object in memory, while the script on disk holds the instructions.](named-object.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Open the extracted .Rproj first. Run each line using the editor's Run action. Explain the unit-bearing names and comments rather than requiring one preferred naming convention. The Console prompt is not typed. If an object is missing, check spelling and the line that should create it.
+Write this in a new script, File → New File → R Script, saved as day06.R in the project folder. Run each line with Run (Ctrl+Enter / Cmd+Enter). Putting the unit in the name (_mm) is a habit that prevents mistakes later.
 :::
 
-## Several values can share one object name
+## A stored result does not update itself
 
-![Three plant-specific pairs of initial and final measurements yield three matched growth values.](matched-vectors.svg){height=390}
+:::: {.columns}
+::: {.column width="45%"}
+```r
+final_mm <- 39
+growth_mm      # still 17
+growth_mm <- final_mm - initial_mm
+growth_mm      # now 19
+```
 
-The order must refer to the same plants in both vectors.
+- A name holds a **value**, not a live formula as in a spreadsheet cell.
+- Change an input, then **rerun the lines that use it**.
+- Safest: run the whole script from the top.
+:::
+::: {.column width="55%"}
+![After the final length changes, the stored growth stays 17 until the subtraction is run again.](stale-value.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Work through P02's 40 minus 22 equals 18. The picture is positional arithmetic, not R automatically matching plant IDs. Later tables will preserve correspondence explicitly. Equal lengths alone do not establish matching plant identities.
+Ask for a prediction before printing growth_mm the first time. This is the most common source of "but I changed it!" confusion in the first weeks.
 :::
 
-## Calculate, summarise, compare
+## Saved script versus objects in memory
 
+- **Saving** the script writes instructions to disk. It does not run them.
+- **Running** a line creates objects in memory. It does not save the script.
+- Restart R (**Session → Restart R**): the objects are gone, the saved script is not.
+- So after reopening, run the script from the top. Everything it needs must be in it.
+
+Test it today: save `day06.R`, restart R, run all lines. Does `growth_mm` come back?
+
+::: notes
+This is the same disk versus memory distinction from week 1. Unsaved editor changes may be recoverable, but do not rely on it. A script that works only after some unrecorded Console typing is not a complete record.
+:::
+
+## Several plants in one name
+
+:::: {.columns}
+::: {.column width="45%"}
 ```r
 initial_mm <- c(20, 22, 19)
 final_mm <- c(37, 40, 34)
 growth_mm <- final_mm - initial_mm
-mean(growth_mm)
-length(growth_mm)
-growth_mm > 16
-```
-
-Results: mean about **16.67 mm**, length **3**, comparison **TRUE TRUE FALSE**.
-
-::: notes
-c combines values into a vector; mean and length are functions with parentheses. Greater-than gives logical values, not new measurements. Text needs quotation marks. Plant IDs are labels, so averaging them would not answer a useful question. Keep syntax explanations tied to these operations.
-:::
-
-## A ratio can describe product yield too
-
-![Collected mass 0.62 g fills 62 percent of the supplied maximum product mass of 1.00 g.](yield-ratio.svg){height=390}
-
-**Percentage yield = 100 × collected dry mass / supplied maximum mass.**
-
-::: notes
-This is the optional substitute for the extra plant-ratio exercise. Define synthesis as making a product; supply the theoretical mass without reaction balancing. Assume collected product is pure only for this calculation. Both masses use grams. Changing collected mass to 0.70 g gives 70%.
-:::
-
-## Predict what survives a restart
-
-You have run the code but not saved the script. Then you restart R.
-
-- Which instructions are saved?
-- Which session objects must be recreated?
-- What should you run first after reopening?
-
-::: notes
-The unsaved script changes may be lost or recoverable by the editor, but should not be relied upon. Save explicitly. In a fresh R session the objects need recreating from the beginning. Introduce error recovery as checking a dependency rather than running random lines until the error disappears. Esc cancels an unfinished expression marked by a plus prompt.
-:::
-
-## An assignment is not a live spreadsheet link
-
-![After final length changes, assigned growth stays stale until the subtraction reruns.](stale-value.svg){height=350px}
-
-Name the input, stored result, and instruction that refreshes it.
-
-::: notes
-Work through 20 to 37 mm giving 17 mm. Update final to 39, then print the old stored growth before rerunning the subtraction. The script records an order of computations; reopening it does not automatically execute it.
-:::
-
-## Predict the stored result before rerunning
-
-```r
-initial_mm <- 20
-final_mm <- 37
-growth_mm <- final_mm - initial_mm
-final_mm <- 39
 growth_mm
 ```
 
-Now rerun the subtraction and explain the difference.
+- `c()` combines values into a **vector**.
+- R subtracts **position by position**: 17, 18, 15 mm.
+- This is right only if both vectors list the **same plants in the same order**.
+:::
+::: {.column width="55%"}
+![Three plants each have an initial and a final length, giving three growth values.](matched-vectors.svg){width="100%"}
+:::
+::::
 
 ::: notes
-The printed growth remains 17 until recalculation. Ask for the reason before showing 19. This is a concrete dependency exercise, not a request to write a function or build a spreadsheet application.
+Work through the second plant: 40 − 22 = 18. R does not know which plant is which; it only matches positions.
 :::
 
-## Equal vector length is not enough
+## Summarise and compare
 
-![Reordering one measurement vector destroys the intended within-plant correspondence.](vector-shuffle.svg){height=350px}
-
-R subtracts positions; it does not infer plant identities.
-
-::: notes
-Correct vectors are initial 20, 22, 19 and final 37, 40, 34. A reordered final copy 34, 37, 40 yields 14, 15, 21: arithmetic on the wrong pairs. Equal lengths cannot certify matching identities.
-:::
-
-## Convert the values as well as their labels
-
+:::: {.columns}
+::: {.column width="50%"}
 ```r
-growth_mm <- c(17, 18, 15)
-growth_cm <- growth_mm / 10
 mean(growth_mm)
-mean(growth_cm)
+length(growth_mm)
+growth_mm > 16
+plant_id <- c("P01", "P02", "P03")
+```
+:::
+::: {.column width="50%"}
+- `mean()` gives **16.67 mm**; `length()` gives **3** plants.
+- `growth_mm > 16` gives `TRUE TRUE FALSE`: yes/no answers, not new measurements.
+- Text goes in quotes. `"20"` is text, `20` is a number.
+- `mean(plant_id)` makes no sense: IDs are labels, not measurements.
+:::
+::::
+
+A **function** is a name followed by brackets: `mean(...)`. Run `?mean` to open its help page.
+
+::: notes
+Read the help's Description and Examples, not every option. Plant IDs contain digits but are still labels; storing them as text keeps R from treating them as numbers.
+:::
+
+## Wrong order, wrong answer, no warning
+
+:::: {.columns}
+::: {.column width="42%"}
+```r
+final_wrong <- c(34, 37, 40)
+final_wrong - initial_mm
 ```
 
-The means are about 16.67 mm and 1.667 cm.
+- Gives **14, 15, 21** instead of 17, 18, 15.
+- Same values, same length, so R raises no error.
+- Only you know which plant each position belongs to. Keep the order matched.
+:::
+::: {.column width="58%"}
+![Reordering one vector changes which initial and final lengths are paired.](vector-shuffle.svg){width="100%"}
+:::
+::::
 
 ::: notes
-A renamed object or axis label does not convert units. Preserve original values and assign converted values to a new name. Ratios cancel compatible length units; changes retain length units.
+Equal lengths are necessary but do not prove matching plants. From Day 7 we keep both lengths in the same row of a table, which protects the pairing.
 :::
 
-## A supplied solution rule can be traced through units
+## Convert the values, not only the label
 
-![Mass divided by supplied molar mass yields amount; dividing by litres gives concentration.](solution-units.svg){height=350px}
+:::: {.columns}
+::: {.column width="45%"}
+```r
+growth_cm <- growth_mm / 10
+mean(growth_mm)   # 16.67
+mean(growth_cm)   # 1.667
+```
 
-A mole is a unit of chemical amount. Molar mass gives grams per mole.
+- Dividing by 10 converts mm to cm. Store it under a **new name** ending `_cm`.
+- Renaming an object or an axis to "cm" without dividing would be wrong by a factor of 10.
+:::
+::: {.column width="55%"}
+![A growth of 18.6 mm relabelled as cm is wrong; converted it becomes 1.86 cm.](../10-first-report/unit-label-check.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Define molar mass as grams per mole. The supplied calculation is 0.2922 g / 58.44 g/mol = 0.005 mol; 100 mL = 0.100 L; amount divided by volume gives 0.050 mol/L, or 50 mmol/L. This is arithmetic, not laboratory preparation instructions.
+Keep the original values. A changed label does not change the numbers. The figure uses plant P01 from the course data (18.6 mm).
 :::
 
-## Write every input into the source
+## The same habit for a lab calculation
 
+:::: {.columns}
+::: {.column width="45%"}
 ```r
 mass_g <- 0.2922
 molar_mass_g_mol <- 58.44
-final_volume_l <- 100 / 1000
-concentration_mmol_l <- 1000 *
-  (mass_g / molar_mass_g_mol) / final_volume_l
+volume_l <- 100 / 1000
+amount_mol <- mass_g / molar_mass_g_mol
+1000 * amount_mol / volume_l   # 50 mmol/L
 ```
 
+- Every input has a name with its unit.
+- Each step can be checked on its own.
+:::
+::: {.column width="55%"}
+![Mass divided by molar mass gives amount; amount divided by volume gives concentration, 50 mmol/L.](solution-units.svg){width="100%"}
+:::
+::::
+
+Doubling the mass gives 100 mmol/L; doubling the volume gives 25 mmol/L.
+
 ::: notes
-All numerical rules and constants are supplied. Keep intermediate quantities visible while learning so an incorrect conversion can be located. Avoid a single expression containing unexplained magic numbers.
+A mole is a unit of chemical amount; molar mass is grams per mole. All values are supplied; no chemistry background is needed. The alternative ratio exercise is a product yield: 100 × 0.62 g / 1.00 g = 62%.
 :::
 
-## Change one input and predict the response
+## When something goes wrong
 
-![Original concentration is 50 mmol/L; doubling only mass gives 100, doubling only volume gives 25.](scale-change.svg){height=350px}
-
-Different input changes answer different questions.
+- **`object 'growth_mm' not found`**: check the spelling and capitals, then run the line that creates it.
+- **A `+` prompt** instead of `>`: R is waiting for the rest of a line. Check quotes and brackets, or press Esc.
+- **An old result**: did you rerun the lines after changing an input?
+- **Lost track?** Restart R and run the script from the top.
 
 ::: notes
-Restore original inputs between cases. Glucose mass 0.9008 g with supplied molar mass 180.16 g/mol in 100 mL also gives 50 mmol/L. Different weighed masses can produce the same amount concentration; no treatment effect has been inferred.
+Teach checking the dependency (which line creates this object?) instead of running random lines until the error goes away.
 :::
 
-## Diagnose a stale or missing object
+## Summary
 
-Check in order:
+- A script is a saved list of instructions; it can be read and run again.
+- `<-` stores a value under a name. The value does not update itself when inputs change.
+- `c()` makes a vector; R calculates position by position, so the order must match.
+- Units belong in names and comments; converting means changing the values.
+- Restart R and run the script from the top to check it is complete.
 
-1. Which saved script and session?
-2. Were the input assignments run?
-3. Were dependent calculations rerun?
-4. Do names, units, and correspondences agree?
+**Next (Day 7, import):** read a whole table of measurements from a file instead of typing values.
 
-::: notes
-The outputs are day06-extended.R and a calculation-check note. Retain predictions even when wrong. A saved source that recreates the result after restart is stronger evidence than a successful result following unrecorded Console experiments.
-:::
-
-## Practise a complete, repeatable calculation
-
-[Open the exercises](../../week2/06-r-basics.qmd).
-
-- Add a fourth plant to **both** measurement vectors.
-- Change an input, predict the effect, and rerun.
-- Save `day06.R`; restart and run it from the top.
+**Now:** [open the Day 6 exercises](../../week2/06-r-basics.qmd). Leave with `day06.R`: the four-plant example with comments about units, which runs from the top after a restart.
 
 ::: notes
-The worked mean uses three plants; the practical then extends to four. Keep the input values and comments in the saved source so the result can be reconstructed. Students doing the organic ratio choice still practise the matched-plant vector basics.
+The exercises extend to a fourth plant (21 to 39 mm) and offer a ratio or product-yield choice, then a stale-value and concentration exercise in day06-extended.R.
 :::

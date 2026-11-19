@@ -1,94 +1,67 @@
 ---
-title: "Day 1 — Find, save, and reopen your laboratory files"
+title: "Day 1 — Kinds of files: plain text, Word and Excel"
 ---
 
 [Lecture slides](../lectures/01-files/lec.qmd) · [Quiz](01-files-quiz.qmd) · [Weekly revision](quiz.qmd)
 
 
-## Today's biological question
+## Which kind of file holds the measurements?
 
-Did seedlings grow differently after a treatment? Before we calculate anything,
-we need to know which measurements belong to which plant and where those
-measurements are saved. A useful analysis starts with finding the right file.
+Did seedlings grow differently after a nutrient treatment? The measurements are
+**simulated teaching data** from 24 seedlings in separate pots, 12 treated and 12
+controls, each measured at the start and after seven days; `data/README.md`
+describes the study. Before we analyse them we look at the file they are stored
+in. Some files are plain text, which any program can read. Others, such as Word
+and Excel files, are packages that only particular programs understand, and
+spreadsheets can even change the data. No programming today.
 
-Our measurements are **simulated teaching data**, not observations from an actual
-experiment. Imagine 24 seedlings, each in its own pot. Twelve pots received a
-treatment and twelve were controls. We measured each plant at the beginning and
-end. The treatment was assigned randomly. A control is a comparison group: it
-helps us judge what might have happened without the treatment.
-
-Today you will download the course files, identify a table of measurements, and
-find your work again after closing every window. No programming is needed.
-
-## A file is different from the application that opens it
-
-A **file** is a saved collection of information with a name. A photograph, a
-table of measurements, and a written report can each be files. An
-**application** is a program that opens or changes files. The same table can be
-opened by several applications.
-
-For example, `seedlings.csv` is a file. Excel, a text editor, and R can all read
-it. Closing Excel does not delete the saved file. Deleting the saved file is a
-different action. A file can also exist without any application displaying it.
-
-A **folder**, also called a directory, groups files and other folders. Your
-computer's **file system** organises these folders and records where files are
-stored. You can explore it using **File Explorer** on Windows or **Finder** on
-Mac. A browser such as Firefox or Safari displays websites; it is a different
-application from the file manager.
-
-## Download and locate the course folder
+## Downloading the course folder
 
 1. Download [the course files](../downloads/course-files.zip).
-2. Open the browser's downloads list. Use its option to show the download in
-   File Explorer or Finder. Notice the folder's name, usually **Downloads**.
-3. Find `course-files.zip`. A ZIP archive is a package containing files and
-   folders. On Windows, right-click it and choose **Extract All**. On Mac,
-   double-click it to extract it. If the browser already extracted it, locate
-   the resulting folder instead.
-4. Find the extracted folder called `introcomputing-course`. Move this ordinary
-   folder into **Documents** using the file manager. Work in this extracted folder.
-5. Open `introcomputing-course`. You should see a `data` folder, an `output`
-   folder, a `reports` folder, `report.Rmd`, and `introcomputing.Rproj`.
-6. Open `data` and find `seedlings.csv`. Keep this file unchanged.
-
-Your computer may have a cloud-managed Documents folder. Tell the teacher if it
-does: we will check that your course files are actually available on the laptop,
-including when the network is disconnected. A shortcut or a cloud icon is not
-the same thing as a complete local copy.
+2. In the browser's downloads list, choose **Show in folder** (Windows) or
+   **Show in Finder** (Mac). The file is usually in **Downloads**.
+3. **Extract** the ZIP: on Windows, right-click `course-files.zip` and choose
+   **Extract All**; on Mac, double-click it.
+4. Move the extracted folder `introcomputing-course` into **Documents** and work
+   there, never inside the ZIP. It contains the folders `data`, `examples`,
+   `output` and `reports`, and the files `report.Rmd` and `introcomputing.Rproj`.
 
 ::: {.callout-tip collapse="true"}
 ## I see two course folders. Which should I use?
 
-Extraction can create an extra outer folder. Open folders until you find the one
-that directly contains `data`, `output`, and `introcomputing.Rproj`. That is the
-project folder. Move that whole folder together. Ask for help if filenames end
-in `(1)` because you downloaded several copies; choose one working copy rather
-than guessing between them later.
+Extraction can create an extra outer folder, and downloading twice gives names
+ending in `(1)`. Open folders until you find the one that directly contains
+`data`, `output` and `introcomputing.Rproj`, and use that one. Ask before
+deleting the other.
 :::
 
-## Reading names and extensions
+::: {.callout-warning collapse="true"}
+## My Documents folder is in OneDrive or iCloud
 
-The final part of a filename, such as `.csv` or `.jpg`, is its **extension**.
-It gives a clue about the format of the saved information. A CSV is a text table
-in which commas separate values. Changing the name `seedlings.csv` to
-`seedlings.jpg` would not turn measurements into a photograph.
+Tell the teacher. A cloud-managed Documents folder can show a file (with a cloud
+icon) that is not yet on the laptop, so we check that the course files open
+with the network turned off.
+:::
 
-Make extensions visible. In Windows File Explorer, look for **View → Show →
-File name extensions**; older versions place the checkbox directly under View.
-In Finder, use **Settings → Advanced → Show all filename extensions**.
-Menu wording can vary. Ask for help if you cannot find the setting.
+The ending of a filename, such as `.csv` or `.docx`, is its **extension**. File
+managers often hide it, so turn it on: in Windows File Explorer choose
+**View → Show → File name extensions**; in Mac Finder choose
+**Finder → Settings → Advanced → Show all filename extensions**.
 
-## Open a copy in two ways
+## A plain-text editor
 
-1. Copy `data/seedlings.csv` and paste the copy into `output`.
-2. Rename the copy `seedlings-practice.csv`. Confirm that it still ends in `.csv`.
-3. Open this practice copy. If a spreadsheet opens automatically, notice its
-   rows and columns, then close it **without saving changes**.
-4. Right-click the practice file and choose **Open with** a text editor, such as
-   Notepad on Windows or TextEdit on Mac. Close it without saving changes.
+A **text editor** shows exactly the characters stored in a file, with no
+formatting. On Windows, use Notepad: right-click a file and choose
+**Open with → Notepad**. On Mac, use TextEdit, set to plain text under
+**TextEdit → Settings → New Document → Plain text**. TextEdit tries to display
+Word files as documents, so to see what is really inside a file use
+**File → Open**, click **Options** and tick **Ignore rich text commands**.
+Later in the course, RStudio will be our text editor.
 
-The first lines should contain the following information:
+## What is inside seedlings.csv?
+
+Open `data/seedlings.csv` in the text editor to find out how much plant P01
+grew. The first lines are:
 
 ```text
 plant_id,treatment,initial_mm,final_mm
@@ -96,120 +69,192 @@ P01,control,25.7,44.3
 P02,control,24.3,32.3
 ```
 
-The first line is a **header** naming the columns. The next line describes plant
-P01. Its initial length was 25.7 millimetres and its final length was 44.3
-millimetres. A spreadsheet displays the commas as column boundaries; the text
-editor displays the commas themselves. Both applications opened the same file.
+The first line is a **header** that names the columns, and each following line
+describes one plant. P01 started at 25.7 mm and ended at 44.3 mm, so it grew
+44.3 − 25.7 = 18.6 mm. Nothing else is in the file: only letters, digits,
+commas and line breaks. Such a file is **plain text**, and a **CSV**
+("comma-separated values") file is a table written as plain text. Every editor
+shows the same characters, and R can read them directly.
 
-Did P01 grow by 44.3 mm, or did it end at 44.3 mm? Its increase was
-44.3 − 25.7 = 18.6 mm. Keeping the meaning and units of a measurement matters
-as much as knowing how to open its file.
+Plain text works for anything that can be written as characters. Open
+`data/dna.txt` and you see a DNA sequence of the letters A, C, G and T. The
+plain-text files you will meet in this course are:
 
-## Save a note you can find again
+| Extension | What it holds | Example |
+| --- | --- | --- |
+| `.csv`, `.tsv` | tables (commas or tabs between values) | `data/seedlings.csv` |
+| `.txt` | notes, DNA sequences | `data/dna.txt`, `data/field-notes.txt` |
+| `.md` | documentation, with simple marks such as `#` for headings | `data/README.md` |
+| `.R`, `.Rmd` | R code, and R Markdown reports | `report.Rmd` |
 
-Open a plain-text editor and describe what a row represents,
-what the length units are, and where the original measurements are stored. Use
-**Save As** and save the note as `day01-notes.txt` in `reports`.
+## What is inside a Word file?
 
-On Mac, choose **Format → Make Plain Text** in TextEdit before saving. On either
-system, check the resulting filename in the file manager. It should not secretly
-end in `.txt.txt` or `.rtf`.
+The folder `examples` holds the same short note about the experiment as
+`seedling-notes.txt` and as `seedling-notes.docx`, saved by a word processor.
+Open both in the text editor (not in Word) to find out where the Word file keeps
+the text. The `.txt` shows the note; the `.docx` starts with `PK` followed by
+unreadable symbols, because a `.docx` file is a compressed **ZIP package**.
 
-Close the editor and all file-manager windows. Open the file manager again and
-navigate from Documents to your note. Open it. If you can only find it through
-an application's “recent files” list, repeat the folder route once more.
-
-
-## Build a record you can audit
-
-
-Work in the graphical file manager and a plain-text editor. Keep original
-measurements under `data` and practice copies under `output`.
-
-1. Create `reports/file-audit.txt`. In it, record the project folder's name and
-   the route you take to reach it from Documents. Include the computer you are
-   using; the name of the application alone is not an address.
-2. In the file manager, inspect `data/seedlings.csv`, `report.Rmd`, and
-   `introcomputing.Rproj`. Record each full filename and its extension. Use the
-   type or kind column, where available, to distinguish a folder from a file.
-   Explain why `data` is a folder although it has no filename extension.
-3. Open `data/seedlings.csv` in the text editor without changing it. Copy its
-   **header line** and the P01 record into your audit note. Label the copied lines
-   as a description, not a replacement dataset. Write the meaning of all four
-   fields in P01's record, including the millimetre units.
-4. Copy `output/seedlings-practice.csv` to another practice file named
-   `output/name-test.txt`. Open it as plain text. Do you still see commas and the
-   same plant measurements? Rename that copy `name-test.csv` again. Record the
-   observation: changing the extension changes the name, not the saved information.
-5. Open `reports/file-audit.txt`, add today's progress, and save explicitly.
-   Close the editor. Locate and reopen the note from the file manager rather
-   than from a recent-files list. Check that the last sentence is present. If
-   it is absent, investigate whether you saved another copy or an unexpected
-   extension before writing the sentence again.
-6. Close all windows and follow the route written in your note. Revise any
-   instruction that does not identify a folder or file clearly.
+To look inside, copy `examples/seedling-notes.docx` into `output`, rename the
+copy `seedling-notes.zip` (accept the warning) and extract it. Inside the folder
+`word`, open `document.xml` in the text editor. The sentences of the note are
+there, surrounded by tags such as `<w:p>` and `<w:t>` that mark paragraphs and
+text. The package holds 16 files, among them `styles.xml` with fonts and
+headings and `docProps/core.xml` with the author and dates, and Word puts them
+together when it opens the document.
 
 ::: {.callout-tip collapse="true"}
-## Hint: comparing names is easier when extensions are visible
+## TextEdit shows the formatted note instead of `PK`
 
-The file manager may hide extensions even while a text editor displays them.
-Show them before deciding that two names are identical. A name such as
-`file-audit.txt.rtf` is a formatted document, not the plain-text note requested.
-Use the editor's plain-text mode and Save As, then inspect the resulting file
-again.
+Use **File → Open → Options → Ignore rich text commands**. If that does not
+help, copy the `.docx` into `output`, rename the copy to end in `.txt`, and open
+the copy.
 :::
 
-## Receive a second measurement file
+Excel files (`.xlsx`) are packages of the same kind. PDF files and pictures are
+not text either: open `examples/seedling-notes.pdf` and
+`examples/seedlings-plot.png` in the text editor, and the first characters,
+`%PDF` and `PNG`, tell programs which format follows.
 
-The new `data/seedlings-transfer.csv` is another
-**simulated** study: 18 separate potted seedlings, nine randomly assigned to each
-of `control` and `treated`, with initial and final lengths seven days apart.
-Its columns have the same definitions as the first seedling table.
+## The same table as CSV and as Excel
 
-1. Locate this second file and make a copy called
-   `output/transfer-inspection.csv`. State in your audit which remains the
-   original. Open the copy in a text editor and find its header and first record.
-2. Find T01: initial length 25.3 mm and final length 40.3 mm. Write a
-   sentence saying what was measured. Compute the increase by ordinary arithmetic
-   and explain why 40.3 mm is not the increase. Put your answer in the note.
-3. Inspect T18 near the end of the file. Record its treatment and two lengths,
-   and record where you found it. The table has one header and 18 plant records.
-4. In `reports/transfer-receipt.txt`, record:
-   source filename, copy filename, number of plants stated in the study, length
-   units, and the difference between initial length, final length, and change.
-   Include a sentence explaining that these numbers are teaching data.
-5. Close the applications and recover both the receipt and the practice copy.
-   Confirm that the original filenames under `data` remain as supplied. Explain
-   why a screenshot of a table would be harder to update or calculate from than
-   the ordinary CSV. A screenshot may help show a problem; it does not replace
-   the measurement file.
+Open `examples/seedlings.xlsx` in a spreadsheet program (Excel or LibreOffice
+Calc) to find out what an Excel file stores beyond the measurements. It holds
+the same 24 plants as `data/seedlings.csv`, plus a bold, coloured header row, a
+column `growth_mm` whose cells are **formulas** (click E2 and you see `=D2-C2`
+while the cell shows 18.6), and a second **sheet** called `notes`.
 
-**Check and retain:** T01's increase is 15.0 mm. T18 is treated, 21.6 mm initially
-and 43.0 mm finally. Keep the notes and practice copies, with the original input
-and your interpretation in separate files.
+A CSV file can store none of these: it holds values only, one table per file.
+That is why this course keeps data as CSV. Any program can read it, including R
+and a text editor, and what the text editor shows is exactly what is stored.
+Formatting and calculations belong in R code, where every step is written down;
+a coloured cell is information that R never sees.
 
+## Can a spreadsheet change the data?
+
+Open `examples/genes.csv` in the text editor and then in Excel to find out what
+Excel does to the gene symbols `SEPT2` and `MARCH1`. Excel guesses that they are
+dates and shows `2-Sep` and `1-Mar`. If the file is saved, the gene names are
+replaced for good. (LibreOffice usually keeps the names; the lecture slides show
+what Excel does.) Ziemann and colleagues (2016) found such errors in about
+**one in five** published papers that had gene lists as Excel files, and in 2020
+the human gene naming committee (HGNC) renamed these genes, for example to
+`SEPTIN2` and `MARCHF1`, partly for this reason. Older data files still use the
+old names.
+
+Then open `examples/seedlings-semicolon.csv` in the text editor and compare it
+with `data/seedlings.csv`:
+
+```text
+plant_id;treatment;initial_mm;final_mm
+P01;control;25,7;44,3
+```
+
+This is how Excel saves "CSV" on a computer set to Swedish (and many other
+European languages): the comma is the decimal sign, so semicolons separate the
+values. A program that expects commas splits these rows in the wrong places, so
+look at every CSV in a text editor before analysing it.
+
+For this course: if you look at raw data in a spreadsheet, close it **without
+saving**.
+
+## Text editor or word processor?
+
+A **word processor** (Word, Pages, Google Docs) is made for formatted documents
+and changes what you type. Compare the last line of the two notes from
+`examples` to find out what Word did to a line of R code:
+
+```text
+seedling-notes.txt:   seedlings <- read.csv("data/seedlings.csv")
+seedling-notes.docx:  seedlings <- read.csv(“data/seedlings.csv”)
+```
+
+Word replaced the straight quotes `"` with curly quotes `“ ”`. R understands only
+straight quotes, so code copied from the Word file stops with
+`Error: unexpected input`. Write code, data and notes for analysis in a text
+editor, and later in RStudio. TextEdit on Mac is a word processor too unless you
+choose **Format → Make Plain Text** before saving; otherwise it saves a
+formatted `.rtf` file.
+
+## Renaming and file extensions
+
+Renaming a file changes its name, not its contents. Renaming the `.docx` to
+`.zip` worked because the file was a ZIP package all along. Renaming
+`seedlings.csv` to `seedlings.xlsx` does not make an Excel file, and Excel
+refuses to open it because the contents are still plain text. Changing a format
+needs a program that rewrites the file, such as **Save As** with another format.
+
+## A practice copy of the measurements
+
+The files in `data` stay exactly as supplied, so that you can always start again
+from what was measured. Copy `data/seedlings.csv` into `output` and rename the
+copy `seedlings-practice.csv`, checking that the name still ends in `.csv`. Open
+the copy in a spreadsheet program to see the same 24 plants as a table, then
+close it without saving. Tomorrow's exercises use this copy.
+
+## Your first plain-text note
+
+Create a new plain-text file in the text editor (on Mac, **Format → Make Plain
+Text**) and write a few sentences: what one row of `data/seedlings.csv`
+describes and in which units, one thing an `.xlsx` file can store that a `.csv`
+file cannot, and why raw data should not be saved from a spreadsheet. Use
+**Save As** to save it as `day01-notes.txt` in `reports`, and check in the file
+manager that the name ends in `.txt` and not `.txt.txt` or `.rtf`. Then close
+the editor, go to `reports` in the file manager and open the note again to
+check that your last sentence was saved.
+
+## Which files in the course folder are plain text?
+
+Open each file in the text editor to find out which files in the course folder
+R could read directly. Check every file in `data` and in `examples`, and
+`report.Rmd`, `introcomputing.Rproj` and `START-HERE.txt` in the project folder,
+without changing or saving any of them. Write the result in a new plain-text
+file `reports/file-types.txt`, one line per file, with the kind of program meant
+to open each file that is not plain text:
+
+```text
+data/seedlings.csv       plain text   table, commas between values
+examples/seedlings.xlsx  not text     spreadsheet program (ZIP package)
+```
+
+If a file shows only readable words and numbers, it is plain text; if it starts
+with `PK`, `%PDF` or `PNG` and then unreadable symbols, it is not.
+
+::: {.callout-note collapse="true"}
+## Check your list
+
+Plain text: every file in `data`, `report.Rmd`, `introcomputing.Rproj` (a few
+RStudio settings written as text), `START-HERE.txt`, and in `examples` the files
+`README.txt`, `seedling-notes.txt`, `genes.csv` and `seedlings-semicolon.csv`.
+Not plain text: `seedling-notes.docx` (word processor), `seedlings.xlsx`
+(spreadsheet), `seedling-notes.pdf` (PDF reader) and `seedlings-plot.png`
+(image viewer).
+:::
 
 ## Check your understanding
 
-Try answering before opening the explanation.
-
 ::: {.callout-note collapse="true"}
-## Does closing an application delete the file? What did copying create?
+## You open a `.docx` file in Notepad and see `PK` and strange symbols. Is the file broken?
 
-Closing an application does not delete a saved file. Copying created another
-file. Changes to your practice copy would not automatically change the original.
-Neither copy is protected against losing the computer if both are stored only
-on that computer.
+No. A `.docx` is a compressed ZIP package of XML files, so Notepad shows its raw
+bytes, while Word unpacks the package and shows the formatted document.
 :::
 
 ::: {.callout-note collapse="true"}
-## Why keep `data/seedlings.csv` unchanged?
+## A colleague sends a gene list as `.xlsx` and `MARCH1` appears as `1-Mar`. What happened?
 
-It is our starting record. Later we will describe changes in code so that someone
-else can repeat the analysis and see what happened to the original measurements.
+A spreadsheet converted the gene symbol to a date when the list was opened and
+saved, and the name cannot be recovered from the date. Ask for the original file.
 :::
 
-**Save today:** `reports/day01-notes.txt` and `output/seedlings-practice.csv`.
-Be ready to show their locations without relying on “recent files”.
+::: {.callout-note collapse="true"}
+## You rename `seedlings-practice.csv` to `seedlings-practice.txt`. What changed?
 
-Next: [folders, paths, and what a computer does](02-folders-computers.qmd).
+Only the name. The file still holds the same commas and numbers, and a text
+editor shows the same contents.
+:::
+
+**Save today:** `reports/day01-notes.txt`, `reports/file-types.txt` and
+`output/seedlings-practice.csv`.
+
+Next: [folders and paths](02-folders-computers.qmd).

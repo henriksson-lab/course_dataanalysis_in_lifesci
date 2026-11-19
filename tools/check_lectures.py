@@ -36,7 +36,7 @@ def visible_source(source):
 def check():
     practicals = sorted(p for p in ROOT.glob("week[1-5]/[0-9][0-9]-*.qmd")
                        if not p.stem.endswith("-quiz"))
-    decks = sorted(ROOT.glob("lectures/*/lec.qmd"))
+    decks = sorted(d for d in ROOT.glob("lectures/*/lec.qmd") if d.parent.name != "00-course-intro")
     assert len(practicals) == len(decks) == 25
     config = (ROOT / "_quarto.yml").read_text()
     print("Day  Slides  Visual slides (excluding title)")

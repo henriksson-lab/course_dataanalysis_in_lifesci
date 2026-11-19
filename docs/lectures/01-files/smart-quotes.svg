@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>Word turns straight quotes into curly quotes, which R cannot read</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="40" y="40" width="480" height="140" rx="10" fill="#f8fafc" stroke="#2a7f8f" stroke-width="3"/>
+<rect x="40" y="40" width="480" height="40" rx="10" fill="#dceaf6" stroke="#2a7f8f" stroke-width="3"/>
+<text x="55" y="68" font-family="Arial, sans-serif" font-size="20" fill="#203247" text-anchor="start" font-weight="bold">text editor (.txt, .R)</text>
+<text x="60" y="135" font-family="Consolas, Menlo, monospace" font-size="21" fill="#2a7f8f" text-anchor="start" font-weight="normal" xml:space="preserve">read.csv(&quot;data/seedlings.csv&quot;)</text>
+<rect x="580" y="40" width="480" height="140" rx="10" fill="#f8fafc" stroke="#a8324a" stroke-width="3"/>
+<rect x="580" y="40" width="480" height="40" rx="10" fill="#dceaf6" stroke="#a8324a" stroke-width="3"/>
+<text x="595" y="68" font-family="Arial, sans-serif" font-size="20" fill="#203247" text-anchor="start" font-weight="bold">word processor (.docx)</text>
+<text x="600" y="135" font-family="Consolas, Menlo, monospace" font-size="21" fill="#a8324a" text-anchor="start" font-weight="normal" xml:space="preserve">read.csv(“data/seedlings.csv”)</text>
+<text x="280" y="225" font-family="Arial, sans-serif" font-size="24" fill="#2a7f8f" text-anchor="middle" font-weight="normal">works in R</text>
+<text x="820" y="225" font-family="Arial, sans-serif" font-size="24" fill="#a8324a" text-anchor="middle" font-weight="normal">copy into R:</text>
+<rect x="580" y="250" width="480" height="70" rx="10" fill="#fbeff2" stroke="#a8324a" stroke-width="3"/>
+<text x="595" y="293" font-family="Consolas, Menlo, monospace" font-size="18" fill="#a8324a" text-anchor="start" font-weight="normal" xml:space="preserve">Error: unexpected input in &quot;read.csv(“&quot;</text>
+<text x="550" y="380" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">Look closely: curly “ ” instead of straight &quot; &quot;.</text>
+<text x="550" y="415" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">Write code and data in a text editor or RStudio, not in Word.</text>
+</svg>

@@ -194,7 +194,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Calculate a variable, then show the observations</h1>
-  <p class="subtitle">Day 8 — What do our seedling measurements tell us?</p>
+  <p class="subtitle">Day 8 — A new column and a figure, made by code</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -205,17 +205,19 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="growth-is-a-derived-measurement" class="slide level2">
-<h2>Growth is a derived measurement</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="derived-column.svg" height="390"></p>
-<figcaption>A growth column is derived from each plant’s final and initial measurements, preserving the original inputs.</figcaption>
-</figure>
-</div>
-<p>For P01: <strong>44.3 − 25.7 = 18.6 mm</strong>.</p>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>The seedling table is in R. The question is: <strong>how much did each plant grow, and did treated plants grow more?</strong> In a spreadsheet you would drag a formula down a new column and click a chart together. When a value is corrected next week, you would repeat every step by hand. Here, the new column and the figure come from a few lines of code that you simply run again.</p>
+<p>Today you will:</p>
+<ul>
+<li>add a calculated column (growth) with <code>mutate()</code>;</li>
+<li>keep the rows you want with <code>filter()</code> and the columns you want with <code>select()</code>;</li>
+<li>draw a labelled figure with <code>ggplot()</code>, where each point is one plant;</li>
+<li>save the figure and the table as files other programs can open.</li>
+</ul>
+<p>This builds on Day 7’s import. On Day 9 the code and the figure go into one report.</p>
 <aside class="notes">
-<p>The raw file records two lengths. Growth is their difference for the same plant, not a change to the source CSV. Distinguish final size from growth: a plant can start larger and still grow less. A negative change deserves checking, not automatic deletion.</p>
+<p>The biological question drives the day: growth per plant and a first look at the groups. No statistics today; we describe what we see. The organic-yield and dilution tables in the exercises use the same steps on lab calculations.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -228,241 +230,232 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="add-the-column-in-code" class="slide level2">
-<h2>Add the column in code</h2>
+<section id="growth-is-a-new-column-not-an-edit" class="slide level2">
+<h2>Growth is a new column, not an edit</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings.csv"</span>,</span>
 <span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>                      <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">mutate</span>(seedlings,</span>
-<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Save the calculation in <code>day08.R</code>.</p>
-<aside class="notes">
-<p>mutate returns a modified table that is assigned back to an object name. It finds the named columns in the supplied table. The packages must be loaded in this session. Ask students to inspect the new column and check P02’s growth, 8 mm, by hand.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="selecting-rows-is-different-from-selecting-columns" class="slide level2">
-<h2>Selecting rows is different from selecting columns</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="rows-and-columns.svg" height="390"></p>
-<figcaption>Highlighted treated rows are filtered, and then only ID and growth columns are selected.</figcaption>
-</figure>
-</div>
-<p><code>filter()</code> asks <strong>which observations?</strong> <code>select()</code> asks <strong>which variables?</strong></p>
-<aside class="notes">
-<p>Use control_plants &lt;- filter(seedlings, treatment == “control”) and growth_table &lt;- select(seedlings, plant_id, treatment, growth_mm) in the live demonstration. Explain that == compares while &lt;- assigns. A pipe is a readable sequence of operations; it does not change their biological meaning.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="each-plot-answers-a-particular-question" class="slide level2">
-<h2>Each plot answers a particular question</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="initial-final.svg" height="390"></p>
-<figcaption>Actual simulated seedling data plotted with initial length on x and final length on y, coloured by allocation.</figcaption>
-</figure>
-</div>
-<p>This shows final size against initial size, <strong>not growth against treatment</strong>.</p>
-<aside class="notes">
-<p>Read the axes before discussing the pattern. Every point is a plant and colour is a group label. The plot is generated from the actual course CSV. It does not establish that starting larger causes a particular final size. The corresponding plotting code is in the practical.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="show-growth-for-each-plant" class="slide level2">
-<h2>Show growth for each plant</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../../week2/seedling-growth.png" height="390"></p>
-<figcaption>Individual seedling growth values overlap between the control and treated groups.</figcaption>
-</figure>
-</div>
-<p>Horizontal jitter separates overlapping points; vertical values stay unchanged.</p>
-<aside class="notes">
-<p>The practical’s position_jitter uses height = 0 and a seed for repeatable display. Ask the class what higher/lower means on this axis and whether the groups overlap. Describe the pattern and overlap; formal comparison and uncertainty come later.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="name-the-objects-before-exporting-them" class="slide level2">
-<h2>Name the objects before exporting them</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>growth_table <span class="ot">&lt;-</span> <span class="fu">select</span>(seedlings, plant_id, treatment, growth_mm)</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>growth_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(seedlings, <span class="fu">aes</span>(treatment, growth_mm)) <span class="sc">+</span></span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">seed =</span> <span class="dv">8</span>)) <span class="sc">+</span></span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Allocation"</span>, <span class="at">y =</span> <span class="st">"Growth (mm)"</span>) <span class="sc">+</span></span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>growth_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Assigning creates the object; printing displays it; exporting writes a file.</p>
-<aside class="notes">
-<p>This supplies the objects needed by the following export slide. The complete sequence can run from the imports at the start of the deck. Separate selecting columns from mapping them to a figure; both retain the recorded raw input.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-plot-object-and-an-image-file-differ" class="slide level2">
-<h2>A plot object and an image file differ</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/seedling-growth.png"</span>,</span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">plot =</span> growth_plot, <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>)</span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(growth_table, <span class="st">"output/seedling-growth.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The output folder must exist. Locate the saved PNG and CSV in the file manager.</p>
-<aside class="notes">
-<p>The preceding code creates growth_plot and growth_table before export. Naming a plot object does not save an image. An image does not contain the full source analysis. Both export operations can replace an existing destination, so use intentional names and keep raw inputs unchanged.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="transfer-choice-percentage-yield" class="slide level2">
-<h2>Transfer choice: percentage yield</h2>
-<p>For the optional organic-laboratory table, both masses are supplied in grams:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>organic <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/organic-recovery.csv"</span>,</span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>                   <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>organic <span class="ot">&lt;-</span> <span class="fu">mutate</span>(organic, <span class="at">yield_percent =</span></span>
-<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>                    <span class="dv">100</span> <span class="sc">*</span> isolated_mass_g <span class="sc">/</span> theoretical_mass_g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Compare percentages when starting scales differ; a larger mass alone is insufficient.</p>
-<aside class="notes">
-<p>Define theoretical mass as the supplied maximum and isolated mass as dry collected product assumed pure for this numerical task. No reaction equation is required. Y01 is 62%. This choice substitutes for an extra plant-plot variation, not the main seedling workflow. Higher yield does not establish higher purity or general protocol superiority.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="rows-and-columns-are-separate-decisions" class="slide level2">
-<h2>Rows and columns are separate decisions</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="table-operations.svg" height="350"></p>
-<figcaption>Filtering retains observations while selecting retains variables.</figcaption>
-</figure>
-</div>
-<p>Predict the row and column counts before running the selection.</p>
-<aside class="notes">
-<p>Use the eighteen-plant transfer dataset. The full derived table has 18 rows; the treated subset has nine. Adding a growth column should not remove plants. Select using the supplied allocation label.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="derive-from-recorded-values-preserve-the-input" class="slide level2">
-<h2>Derive from recorded values, preserve the input</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings-transfer.csv"</span>,</span>
-<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> transfer <span class="sc">|&gt;</span></span>
-<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>T01:40.3−25.3=15.0mm.</p>
-<aside class="notes">
-<p>Load the familiar packages and inspect names and types first. Derived values remain separate from the original CSV. Export the full derived table and selected subsets under informative filenames.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="the-same-plants-can-answer-different-plotted-questions" class="slide level2">
-<h2>The same plants can answer different plotted questions</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="two-outcomes.svg" height="350"></p>
-<figcaption>Initial versus final length and initial versus growth have different vertical quantities.</figcaption>
-</figure>
-</div>
-<p>Read the axes before interpreting a pattern.</p>
-<aside class="notes">
-<p>A final-size plot is not directly a growth plot. Both may be useful, but the scientific question determines the choice. An association plot alone does not establish causality.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="save-reopen-and-interpret-the-derived-result" class="slide level2">
-<h2>Save, reopen, and interpret the derived result</h2>
-<p>Export a CSV and two useful PNGs under a transfer-prefix.</p>
-<p>Then open the saved files outside R and explain:</p>
+<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Which are values, and which are pictures?</li>
-<li>What does one point represent?</li>
+<li>P01: 44.3 − 25.7 = <strong>18.6 mm</strong>. P02: <strong>8.0 mm</strong>.</li>
+<li>The CSV on disk is unchanged; the table in R gains a fifth column.</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="derived-column.svg" style="width:100.0%"></p>
+<figcaption>A growth column is calculated from each plant’s final and initial lengths, keeping the original columns.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Save in day08.R. mutate() looks for final_mm and initial_mm inside the table and returns a new table, which we assign back to seedlings. Ask students to check P02 by hand. Growth is change; final_mm is size: a plant can start large and grow little. A negative growth would deserve checking, not deletion.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="which-plants-which-columns" class="slide level2">
+<h2>Which plants? Which columns?</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>control_plants <span class="ot">&lt;-</span> <span class="fu">filter</span>(seedlings,</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>  treatment <span class="sc">==</span> <span class="st">"control"</span>)</span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>growth_table <span class="ot">&lt;-</span> <span class="fu">select</span>(seedlings,</span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>  plant_id, treatment, growth_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>filter()</code> keeps <strong>rows</strong> (plants): <code>control_plants</code> has <strong>12 rows</strong>.</li>
+<li><code>select()</code> keeps <strong>columns</strong> (variables): <code>growth_table</code> is <strong>24 × 3</strong>.</li>
+<li><code>==</code> asks “is it equal?”; <code>&lt;-</code> stores. Do not mix them up.</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="rows-and-columns.svg" style="width:100.0%"></p>
+<figcaption>Treated rows are kept by filtering, then only the ID and growth columns are kept by selecting.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Predict the row and column counts before running each line. Quotes mark the text label “control”; it must match the spelling in the data exactly.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="read-the-steps-from-left-to-right" class="slide level2">
+<h2>Read the steps from left to right</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>longer_control <span class="ot">&lt;-</span> seedlings <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="st">"control"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(growth_mm <span class="sc">&gt;</span> <span class="dv">15</span>)</span>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(longer_control)   <span class="co"># 7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>|&gt;</code> (the <strong>pipe</strong>) passes the table on to the next step.</li>
+<li>Read it as: take seedlings, <em>then</em> keep controls, <em>then</em> keep growth above 15 mm.</li>
+<li>7 of the 12 control plants grew more than 15 mm.</li>
+</ul>
+</div><div class="column" style="width:52%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="table-operations.svg" style="width:100.0%"></p>
+<figcaption>Filtering keeps whole rows; selecting keeps whole columns.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>The pipe is a convenience for writing steps in order; it does not change what they do. When something goes wrong, run the chain one step at a time.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-plot-maps-columns-to-positions" class="slide level2">
+<h2>A plot maps columns to positions</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>size_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(seedlings,</span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> initial_mm, <span class="at">y =</span> final_mm,</span>
+<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>        <span class="at">colour =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Initial seedling length (mm)"</span>,</span>
+<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Final seedling length (mm)"</span>,</span>
+<span id="cb4-7"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">"Treatment"</span>) <span class="sc">+</span></span>
+<span id="cb4-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb4-9"><a aria-hidden="true" tabindex="-1"></a>size_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:52%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="initial-final.svg" style="width:100.0%"></p>
+<figcaption>Final against initial length for the 24 seedlings, coloured by treatment.</figcaption>
+</figure>
+</div>
+</div></div>
+<p><code>aes()</code> says which column goes where. Each point is one plant. <code>+</code> adds a layer; <code>labs()</code> gives axis names <strong>with units</strong>.</p>
+<aside class="notes">
+<p>Read the axes before the pattern. Colour shows a group label, not a measurement. This plot is about final size; it does not show growth directly, and it cannot show that starting longer causes ending longer.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="pick-the-plot-that-answers-your-question" class="slide level2">
+<h2>Pick the plot that answers your question</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>Same plants, same x-axis, different y-axis.</li>
+<li><strong>Left:</strong> final length. Plants that started long tended to end long.</li>
+<li><strong>Right:</strong> growth. Here, plants that started long tended to grow <em>less</em>.</li>
+<li>“Bigger at the end” is not “grew more”. Read the y-axis label before you interpret.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="two-outcomes.svg" style="width:100.0%"></p>
+<figcaption>For the transfer study, initial length against final length (left) and against growth (right).</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>These panels use the 18-plant transfer study, which students work with in the exercises. The question decides the plot: for a treatment effect on growth, growth belongs on the y-axis.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="show-every-plants-growth" class="slide level2">
+<h2>Show every plant’s growth</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>growth_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(seedlings,</span>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> growth_mm)) <span class="sc">+</span></span>
+<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(</span>
+<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">seed =</span> <span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Treatment"</span>,</span>
+<span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Change in seedling length (mm)"</span>) <span class="sc">+</span></span>
+<span id="cb5-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb5-8"><a aria-hidden="true" tabindex="-1"></a>growth_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>Jitter</strong> spreads points sideways so they don’t hide each other. <code>height = 0</code>: no value moves up or down.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../week2/seedling-growth.png" style="width:100.0%"></p>
+<figcaption>Growth of each seedling by treatment; the two groups overlap.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Ask: what is one dot? (one plant). What does higher mean? (more growth, mm). Do the groups overlap? (yes: control 8.0 to 18.7 mm, treated 12.2 to 30.8 mm). Treated values tend to be higher; whether that is more than chance is a question for week 4. seed = 8 makes the sideways spread the same every time.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="jitter-must-never-change-a-measurement" class="slide level2">
+<h2>Jitter must never change a measurement</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="jitter-invariance.svg" height="340"></p>
+<figcaption>Without and with horizontal jitter: the same growth values, spread sideways so that overlapping points become visible.</figcaption>
+</figure>
+</div>
+<ul>
+<li>Sideways spread makes hidden points visible. The number of points and their heights stay the same.</li>
+<li>Never add vertical jitter, and never drop points to make a plot look tidier.</li>
 </ul>
 <aside class="notes">
-<p>Printing a plot object does not automatically save an image. write_csv exports a table, not a figure. Captions identify units and independent observations; the surrounding prose explains pattern and limitation.</p>
+<p>Transfer-study data. In the exercises students change only the width and confirm the y values are unchanged.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -475,103 +468,157 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="a-calculated-request-can-be-impossible" class="slide level2">
-<h2>A calculated request can be impossible</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="dilution-feasibility.svg" height="350"></p>
-<figcaption>The D04 calculated stock volume exceeds the final requested volume.</figcaption>
-</figure>
-</div>
-<p>Retain and flag the impossible request.</p>
-<aside class="notes">
-<p>Define stock as known concentration and dilution as adding solvent to a final total volume while conserving solute. D01–D03 need 2.5, 5 and 10 mL. D04 targets 200 from a stock of 100 mmol/L, so dilution alone cannot satisfy it.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="add-the-supplied-rule-and-a-clear-flag" class="slide level2">
-<h2>Add the supplied rule and a clear flag</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>dilutions <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/dilutions.csv"</span>,</span>
-<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>                      <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>dilutions <span class="ot">&lt;-</span> dilutions <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
-<span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">stock_volume_ml =</span> target_mmol_l <span class="sc">*</span> final_volume_ml <span class="sc">/</span> stock_mmol_l,</span>
-<span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">possible_by_dilution =</span> target_mmol_l <span class="sc">&lt;=</span> stock_mmol_l)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<aside class="notes">
-<p>Explain &lt;= and logical columns. Both concentrations use mmol/L; final mL gives stock mL. Positive inputs are supplied. This numerical check needs neither a student-written conditional statement nor a new package.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="jitter-changes-visibility-not-measurement" class="slide level2">
-<h2>Jitter changes visibility, not measurement</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="jitter-invariance.svg" height="350"></p>
-<figcaption>Horizontal jitter separates overlapping points while retaining every growth value.</figcaption>
-</figure>
-</div>
-<p>Keep vertical jitter at zero for these plots.</p>
-<aside class="notes">
-<p>Use actual transfer measurements. Different horizontal widths must not change measured y values or plant count. A prettier plot is not a reason to move measured values or hide observations.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="interpret-calculated-and-observed-relations-differently" class="slide level2">
-<h2>Interpret calculated and observed relations differently</h2>
-<p>A dilution plot follows a supplied formula.</p>
-<p>A plant scatter plot shows measured observations.</p>
-<p>Which needs an explanation of the input rule, and which needs a description of observed variation?</p>
-<aside class="notes">
-<p>These dilution cases illustrate supplied formulas rather than independent biological evidence. Save the complete flagged table, supported subset, plot and explanation of the impossible request.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="make-a-figure-someone-can-read" class="slide level2">
-<h2>Make a figure someone can read</h2>
-<p><a href="../../week2/08-transform-plot.html">Open the exercises</a>.</p>
+<section id="save-files-other-programs-can-open" class="slide level2">
+<h2>Save files other programs can open</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/seedling-growth.png"</span>, <span class="at">plot =</span> growth_plot,</span>
+<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">dpi =</span> <span class="dv">150</span>)</span>
+<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(growth_table, <span class="st">"output/seedling-growth.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Use the intended table and columns.</li>
-<li>Label axes with quantities and units.</li>
-<li>Explain what one point represents and one limitation.</li>
-<li>Save the source script, derived table, and figure.</li>
+<li><code>growth_plot</code> is an object in memory. <code>ggsave()</code> writes a <strong>PNG image</strong> to disk.</li>
+<li><code>write_csv()</code> writes a <strong>table</strong> to disk. An image is not a table, and vice versa.</li>
+<li>Both overwrite a file with the same name without asking. Use clear names; never write into <code>data/</code>.</li>
+<li>Open both files from the file manager to check they exist.</li>
 </ul>
 <aside class="notes">
-<p>Have students close and reopen the saved outputs, then rerun the script from a fresh session. A useful recovery question is whether a missing column was calculated earlier. Keep interpretation short and concrete; no new test or regression is needed in this lesson.</p>
+<p>The output/ folder is part of the supplied project. If saving fails, check getwd() and dir.exists(“output”).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="worked-example-the-same-steps-on-new-data" class="slide level2">
+<h2>Worked example: the same steps on new data</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings-transfer.csv"</span>,</span>
+<span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
+<span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(transfer)                       <span class="co"># 18</span></span>
+<span id="cb7-5"><a aria-hidden="true" tabindex="-1"></a>treated <span class="ot">&lt;-</span> <span class="fu">filter</span>(transfer, treatment <span class="sc">==</span> <span class="st">"treated"</span>)</span>
+<span id="cb7-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(treated)                        <span class="co"># 9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:45%;">
+<ul>
+<li>T01: 40.3 − 25.3 = <strong>15.0 mm</strong>. Check one plant by hand.</li>
+<li>Adding a column keeps all 18 plants.</li>
+<li>Change the names, labels and file names; the steps stay the same.</li>
+</ul>
+</div></div>
+<p>Then plot growth by group and save as <code>output/transfer-...</code> so nothing from the main study is overwritten.</p>
+<aside class="notes">
+<p>This is day08-transfer.R in the exercises. Compare with the main study: what changed (object names, row counts, file names), what stayed the same (operations).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="same-steps-for-a-lab-calculation" class="slide level2">
+<h2>Same steps for a lab calculation</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a>dilutions <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/dilutions.csv"</span>,</span>
+<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>                      <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stock_volume_ml =</span></span>
+<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a>           target_mmol_l <span class="sc">*</span> final_volume_ml <span class="sc">/</span></span>
+<span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a>           stock_mmol_l,</span>
+<span id="cb8-6"><a aria-hidden="true" tabindex="-1"></a>         <span class="at">possible_by_dilution =</span></span>
+<span id="cb8-7"><a aria-hidden="true" tabindex="-1"></a>           target_mmol_l <span class="sc">&lt;=</span> stock_mmol_l)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>D01–D03 need <strong>2.5, 5 and 10 mL</strong> stock.</li>
+<li>D04 needs <strong>100 mL</strong> for a 50 mL final volume: impossible. Keep the row and <strong>flag</strong> it.</li>
+</ul>
+</div><div class="column" style="width:52%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="dilution-feasibility.svg" style="width:100.0%"></p>
+<figcaption>Calculated stock volume against final volume for four dilution requests; D04 needs more stock than its final volume.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>A stock is a solution of known concentration; dilution adds solvent up to a final total volume. D04’s target, 200 mmol/L, is above its stock, 100 mmol/L. A formula can produce a number for a request that cannot be carried out. The organic-yield alternative uses the same mutate step: Y01 yield = 100 × 0.62 / 1.00 = 62%.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Function</th>
+<th>What to check</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>New column</td>
+<td><code>mutate(growth_mm = final_mm - initial_mm)</code></td>
+<td>One plant by hand (P01: 18.6 mm); the CSV is unchanged</td>
+</tr>
+<tr class="even">
+<td>Keep rows</td>
+<td><code>filter(treatment == "control")</code></td>
+<td>Row count (12)</td>
+</tr>
+<tr class="odd">
+<td>Keep columns</td>
+<td><code>select(plant_id, treatment, growth_mm)</code></td>
+<td>Column count (3); all 24 plants remain</td>
+</tr>
+<tr class="even">
+<td>Chain steps</td>
+<td><code>|&gt;</code> (pipe)</td>
+<td>Run one step at a time when something breaks</td>
+</tr>
+<tr class="odd">
+<td>Plot</td>
+<td><code>ggplot(aes(x, y)) + geom_point() + labs()</code></td>
+<td>One point = one plant; y-axis is the quantity you ask about; units in labels</td>
+</tr>
+<tr class="even">
+<td>Jitter</td>
+<td><code>position_jitter(width = 0.08, height = 0)</code></td>
+<td>Heights unchanged, no points lost</td>
+</tr>
+<tr class="odd">
+<td>Save</td>
+<td><code>ggsave()</code> for images, <code>write_csv()</code> for tables</td>
+<td>Open the files outside R</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Next (Day 9, R Markdown):</strong> put the explanation, the code and the figure into one report that rebuilds itself from the data.</p>
+<p><strong>Now:</strong> <a href="../../week2/08-transform-plot.html">open the Day 8 exercises</a>. Leave with <code>day08.R</code>, <code>output/seedling-growth.png</code> and <code>output/seedling-growth.csv</code>, all recreated after restarting R.</p>
+<aside class="notes">
+<p>Exercises: a treated-only table, an initial-versus-growth plot or the organic-yield alternative, then the transfer study and the dilution check. Keep interpretation descriptive: pattern, overlap, one thing the plot cannot settle.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

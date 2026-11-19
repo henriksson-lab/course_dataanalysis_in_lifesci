@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+<title>A plain-text file contains only characters</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs>
+<rect width="1100" height="500" fill="white"/>
+<rect x="40" y="40" width="560" height="250" rx="10" fill="#f8fafc" stroke="#3b5bab" stroke-width="3"/>
+<rect x="40" y="40" width="560" height="40" rx="10" fill="#dceaf6" stroke="#3b5bab" stroke-width="3"/>
+<text x="55" y="68" font-family="Arial, sans-serif" font-size="20" fill="#203247" text-anchor="start" font-weight="bold">seedlings.csv in a text editor</text>
+<text x="60" y="115" font-family="Consolas, Menlo, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">plant_id,treatment,initial_mm,final_mm</text>
+<text x="60" y="159" font-family="Consolas, Menlo, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">P01,control,25.7,44.3</text>
+<text x="60" y="203" font-family="Consolas, Menlo, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">P02,control,24.3,32.3</text>
+<text x="60" y="247" font-family="Consolas, Menlo, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">P03,control,18.0,32.9</text>
+<rect x="40" y="320" width="560" height="120" rx="10" fill="#f8fafc" stroke="#3b5bab" stroke-width="3"/>
+<rect x="40" y="320" width="560" height="40" rx="10" fill="#dceaf6" stroke="#3b5bab" stroke-width="3"/>
+<text x="55" y="348" font-family="Arial, sans-serif" font-size="20" fill="#203247" text-anchor="start" font-weight="bold">dna.txt in a text editor</text>
+<text x="60" y="400" font-family="Consolas, Menlo, monospace" font-size="22" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">ACGTACGTTTAGCCGATATACC...</text>
+<text x="830" y="70" font-family="Arial, sans-serif" font-size="26" fill="#203247" text-anchor="middle" font-weight="bold">Plain text, for example:</text>
+<text x="680" y="130" font-family="Consolas, Menlo, monospace" font-size="24" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">.csv  .tsv  tables</text>
+<text x="680" y="182" font-family="Consolas, Menlo, monospace" font-size="24" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">.txt  notes, sequences</text>
+<text x="680" y="234" font-family="Consolas, Menlo, monospace" font-size="24" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">.R  .Rmd  code, reports</text>
+<text x="680" y="286" font-family="Consolas, Menlo, monospace" font-size="24" fill="#203247" text-anchor="start" font-weight="normal" xml:space="preserve">.md  documentation</text>
+<text x="830" y="380" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">Every editor shows the same</text>
+<text x="830" y="415" font-family="Arial, sans-serif" font-size="24" fill="#203247" text-anchor="middle" font-weight="normal">characters. R reads them.</text>
+</svg>

@@ -20,158 +20,259 @@ format:
 toc: false
 ---
 
-## One question, one short evidence trail
+## About this lecture
 
-![A biological question connects measured data to a readable report.](question-to-report.svg){height=350px}
+You send your supervisor a figure and one line: "treated plants grew more." The replies come back: Which data file? How many plants? What are the dots? Did any values go missing? Can I rerun it? Every one of those questions is fair, and a short report can answer all of them at once. **How do we write a report that a reader can understand, check, and regenerate?**
 
-How does seedling growth vary among plants and groups?
+Today you will:
+
+- give each part of a short report a **job**: question, data and methods, results, interpretation;
+- **name the input file and the checks**, so every number has a visible origin;
+- **render from a fresh session** at the project root, so the report rebuilds itself from saved files;
+- keep **claims at the level of the evidence**: describe the sample, without claiming a tested effect.
+
+This day pulls together Days 11–14. The same report becomes the starting point for the comparisons in week 4.
 
 ::: notes
-This briefing consolidates descriptive analysis. The reader should learn the question, how the measurements arose, and what the observations show. An organic-yield report may replace this context, but is not an extra required report.
+The point is not formatting or length. A good descriptive report is short, specific, and reproducible. The practical has a core seedling report (descriptive-report.Rmd) and an organic-yield alternative (organic-report.Rmd); students produce one, chosen by the teacher.
+:::
+
+## One question, one evidence trail
+
+:::: {.columns}
+::: {.column width="42%"}
+**Question:** how does seven-day growth vary among plants, and between control and treated seedlings?
+
+- **Input:** `data/seedlings.csv`, 24 plants in separate pots, 12 per group, lengths in mm.
+- **Source:** `descriptive-report.Rmd` at the project root.
+- **Output:** an HTML file that anyone can open.
+- Each step can be traced to the one before it: question → data → code → result.
+:::
+::: {.column width="58%"}
+![A biological question leads to the measured data file, which leads to a rendered report.](question-to-report.svg){width="100%"}
+:::
+::::
+
+::: notes
+The supplied measurements are simulated; plants received control or a nutrient treatment, and the formulation is unspecified. An organic-yield report may replace this context but is not an extra required report. If the teacher asks for the repaired Day 11 data instead, the report must say so and carry 23 usable growth values through all counts.
 :::
 
 ## Give each part of the report a job
 
-![A short report has a question,data and methods,results with a figure,and an interpretation.](report-anatomy.svg){height=350px}
-
-The plot shows the result; your words explain its meaning.
+:::: {.columns}
+::: {.column width="45%"}
+- **Question:** one or two sentences: what and why.
+- **Data and methods:** input file, independent unit (one plant), outcome and units, checks, how growth was calculated.
+- **Results:** a table with n, mean, median and SD; a figure with individual plants and means; a caption.
+- **Interpretation and limitation:** what the numbers show, in words, and what they cannot show yet.
+:::
+::: {.column width="55%"}
+![A short report divided into question, data and methods, results with a figure, and interpretation and limitation.](report-anatomy.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Walk through the drawing as a structure, not as a required page count or formatting template. Distinguish methods from results. A caption identifies the unit and visual encodings. Interpretation describes direction, variation and limits rather than repeating all printed output.
+Distinguish methods (what was done) from results (what was found). A caption names the unit and the symbols. The interpretation describes direction, variation and limits; it does not repeat all printed output.
 :::
 
-## Choose and name the actual input
+## Data and methods: show the checks
 
-Use **`data/seedlings.csv`** for the complete core example.
+```r
+library(readr)
+library(dplyr)
+seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE)
+anyDuplicated(seedlings$plant_id)   # 0: each plant ID appears once
+seedlings |> count(treatment)       # control 12, treated 12
+sum(is.na(seedlings$initial_mm))    # 0 missing
+sum(is.na(seedlings$final_mm))      # 0 missing
+seedlings <- mutate(seedlings, growth_mm = final_mm - initial_mm)
+```
 
-- 24 independently potted plants; 12 per group.
-- Initial and final lengths are measured in mm.
-- Growth is final minus initial length.
-- State explicitly if you choose the repaired incomplete file instead.
+- These are Day 11's checks, now **inside the report**: a reader sees what was checked and the result.
+- `anyDuplicated()` returns 0 when there is no repeated ID; a positive number is the **position** of the first repeat.
+- In the text: "24 plants (12 per group), no missing lengths, growth = final − initial length (mm)."
 
 ::: notes
-The complete and repaired datasets have different available counts. Keep those distinctions visible. The existing practical uses the complete file for the main report. The alternative organic-report.Rmd must identify independent synthesis runs and yield percentage units throughout.
+Include only checking output that helps the reader; keep the code in the source either way. If the repaired Day 11 file is used, the methods must state the source and that P06 is unavailable, and every count must use 23 usable growths.
 :::
 
-## Keep the source where its relative paths make sense
+## Results: a table and a figure that agree
 
-![The report sits at the project root beside its data and output subfolders.](portable-project.svg){height=350px}
+:::: {.columns}
+::: {.column width="48%"}
+```r
+group_summary <- seedlings |>
+  group_by(treatment) |>
+  summarise(n_observed = sum(!is.na(growth_mm)),
+    mean_mm = mean(growth_mm, na.rm = TRUE),
+    median_mm = median(growth_mm, na.rm = TRUE),
+    sd_mm = sd(growth_mm, na.rm = TRUE),
+    .groups = "drop")
+knitr::kable(group_summary, digits = 2,
+  caption = "Growth by treatment; lengths in mm.")
+```
 
-Save the `.Rmd` at the project root, not inside `reports/`.
+- `knitr::kable()` prints a tidy table, rounded to 2 decimals.
+- The table is made **by code**: if the data change, the table changes too.
+:::
+::: {.column width="52%"}
+![Individual growth measurements as small dots, with red diamonds marking the control mean of 15.28 and the treated mean of 21.49 millimetres.](../13-group-summaries/individuals-and-means.svg){width="100%"}
+
+Reuse the Day 13 figure: plants as dots, means as diamonds, a caption with n and units.
+:::
+::::
 
 ::: notes
-Knit normally resolves relative data paths from the source report’s folder. Moving the source into reports/ would change where data/ points. An output_dir argument can place the generated HTML in reports/ while leaving the source at root.
+Control: n 12, mean 15.28, median 15.65, SD 3.19 mm; treated: n 12, mean 21.49, median 20.85, SD 4.87 mm. A caption must make clear that SD describes spread among plants; this report has no confidence intervals. Do not paste a screenshot of the Environment pane.
 :::
 
-## Render from files, not from your memory of the session
+## Interpretation: claims at the level of the evidence
 
-![A fresh session rebuilds results from the saved data and saved report source.](fresh-session.svg){height=350px}
+:::: {.columns}
+::: {.column width="50%"}
+**Supported:** "Treated plants grew a mean of 21.5 mm and controls 15.3 mm (n = 12 each). Treated plants also varied more (SD 4.9 vs 3.2 mm), and the groups overlap."
 
-Restart, then Knit without running console calculations first.
+| Weak sentence | Repair |
+|---|---|
+| "The results were good." | Name the pattern and its size. |
+| "The treated group had more error." | "Treated plants varied more (SD 4.9 mm)." |
+| "Every treated plant grew more." | False: the groups overlap. |
+:::
+::: {.column width="50%"}
+![Measured plants support a sample description; a further jump to a universal cause is crossed out.](extended-claim-limits.svg){width="100%"}
+
+We **described the sample**. Estimating how uncertain the difference is comes in week 4.
+:::
+::::
 
 ::: notes
-The report needs its own library calls, import and derived columns. An object existing only in the Environment pane is not a reproducible report dependency. Installation commands belong in setup, not inside an analysis that should run repeatedly.
+The smallest treated plant grew 12.2 mm, less than most controls, so "every treated plant" fails. "The computer removed the bad values" is another weak sentence from the exercises: say which value was changed and which source evidence justified it. In the organic alternative, a higher mean yield does not establish greater purity or a better method in general.
 :::
 
-## Check the interpretation against the figure
+## Every number has a visible origin
 
-“Mean treated growth was about 21.5 mm; control growth about 15.3 mm.
-Individual observations overlap.”
+:::: {.columns}
+::: {.column width="45%"}
+- A reader should be able to trace each number in the text back to a **saved input** and a **chunk of code**.
+- **Inline R** puts a calculated value straight into a sentence. In the source:
 
-What would be wrong with “every treated plant grew more”?
+  <code>We measured &#96;r nrow(seedlings)&#96; plants.</code>
 
-We have described the sample; we have not estimated uncertainty in the difference.
+  renders as "We measured 24 plants."
+- The object must be created **earlier in the report**. The sentence still needs units and meaning.
+:::
+::: {.column width="55%"}
+![A saved input CSV feeds analysis chunks, which produce the table and the prose in the report.](extended-result-lineage.svg){width="100%"}
+:::
+::::
 
 ::: notes
-The individual-point plot shows overlap. Keep SD as spread, not uncertainty in a group mean. In the optional organic context, standard mean yield 68.67% and modified 77% describe independent runs; higher yield does not verify purity or general protocol superiority.
+The literal inline code is shown with escaped characters so this slide does not try to run it. When students render their report, the inline expression is calculated. In the exercises they add two inline values: one count and one mean or SD.
 :::
 
-## A result should have a visible lineage
+## Keep the report where its paths work
 
-![Saved data feed reportcode that produces the numerical table and results prose.](extended-result-lineage.svg){height=350px}
+:::: {.columns}
+::: {.column width="42%"}
+- Save `descriptive-report.Rmd` at the **project root**, beside `data/` and `output/`.
+- Then `"data/seedlings.csv"` means the same file on every computer that has the project.
+- A path like `C:/Users/anna/Downloads/...` works only on Anna's laptop.
+- Render from the **R Console**, putting the HTML into `reports/`:
 
-Trace each reported number back to a saved input and calculation.
+`rmarkdown::render("descriptive-report.Rmd", output_dir = "reports")`
+:::
+::: {.column width="58%"}
+![The report source sits at the project root beside its data and output folders; a personal absolute path would not move with the folder.](portable-project.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Ask a reader to identify where the mean came from, which rows contributed, and which units apply. A report with an impressive table but an unidentified input is not complete.
+Knitting resolves relative paths from the report's own folder, so moving the .Rmd into reports/ would break data/ paths. The output_dir argument places the HTML in reports/ while the source stays at the root. Never put a render call inside the report itself: a report must not try to render itself.
 :::
 
-## The project file does not contain every dependency
+## Render from files, not from memory
 
-![A missing input file breaks the path fromreport source to a newly rendered output.](extended-missing-dependency.svg){height=350px}
-
-Include the ordinary input CSV, not just a shortcut to its old location.
+:::: {.columns}
+::: {.column width="42%"}
+- Restart R, then render. The report must load its own packages, import its data and create every object.
+- An object that exists only in your Environment pane is **not** part of the report; on another computer it is missing.
+- Best test: copy the project to a **new folder**, render there. Record any failure, fix it, rerun.
+- A `.Rproj` file does not contain the data. The CSV must travel with the report.
+:::
+::: {.column width="58%"}
+![A fresh session rebuilds the new HTML from the saved data and saved report source; old console objects are not an input.](fresh-session.svg){width="100%"}
+:::
+::::
 
 ::: notes
-An Rproj provides context; it does not package data. Reproduction in a newly named folder tests personal paths and omitted files. Record any failure before fixing it, then rerun.
+Installation commands belong in setup, not in an analysis that should run repeatedly. If rendering fails, read the first meaningful error and the chunk name. A rendered report on a supervisor's computer is the real test.
 :::
 
-## Keep claims at the level supported by the work
+## Adapt the structure to a new study, not the old conclusion
 
-![Measurements support a sample description; an unsupported jump to universal causation is blocked.](extended-claim-limits.svg){height=350px}
+:::: {.columns}
+::: {.column width="42%"}
+The second class's data, `data/seedlings-transfer.csv`, go into `transfer-description.Rmd`.
 
-Descriptive work is useful even before a hypothesis test.
+- 18 plants, **9 per group**; treated mean **17.87 mm** (SD 1.94), control **13.66 mm** (SD 2.53).
+- Here the treated plants vary **less**, the opposite of the first study.
+- Replace imports, counts, numbers, captions and sentences **together**. A new title on an old report is still the old report.
+:::
+::: {.column width="58%"}
+![In the transfer study, treated plants have a higher mean growth than controls but their points are less spread out.](../12-variation/extended-transfer-variation.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Repair sentences such as results were good or computer removed bad values. Identify a measurement pattern, a defined summary, or a documented correction. Current day15 reports do not quantify uncertainty in a treatment difference.
+If students used the transfer data in earlier scripts, they recreate its objects inside the new report rather than relying on the Environment pane. A sentence copied from the first report ("treated plants varied more") would now be false.
 :::
 
-## Adapt a structure, not an old conclusion
+## Two reviews before you hand it in
 
-![The transfer study has different individual values,means and spread from the firststudy.](../12-variation/extended-transfer-variation.svg){height=350px}
+:::: {.columns}
+::: {.column width="50%"}
+**Reader review** (code closed, HTML only)
 
-A changed title alone does not create a report about new observations.
+- What was the question?
+- What is one unit, and how many were there?
+- Which file, which outcome, which units?
+- What do the dots and diamonds mean?
+- What is the main pattern and its main limitation?
+:::
+::: {.column width="50%"}
+**Analyst review** (source open)
+
+- Does every number match a table or chunk?
+- Is n the number of **usable** values?
+- Were all transformations written in code?
+- Does it render after restarting R, in a fresh folder?
+- Is there a change log: issue, correction, rerun?
+:::
+::::
+
+Remove a redundant printout before you remove a unit label or a limitation.
 
 ::: notes
-The new source is seedlings-transfer.csv with 18 plants,9 per group. Replace old imports, descriptions, counts, and labels together. If using a previously saved analysis, recreate its objects inside the new report.
+The exercises include a revision log in reports/day15-revision.txt. The organic alternative has 12 runs, six per protocol, with yields in percent and SD in percentage points; the same reviews apply.
 :::
 
-## Inline results keep prose connected to code
+## Summary {.smaller}
 
-A count or mean can be calculated inline after its object is created.
+| Concept | Key fact |
+|---|---|
+| Structure | Question → data and methods → results (table + figure) → interpretation and limitation |
+| Input | Name the file; show checks for IDs, labels, missing values; state n (24 plants, 12 per group) |
+| Results | Table from code (`knitr::kable()`), figure with plants and means, caption with n and units |
+| Claims | Describe the sample (means 21.5 vs 15.3 mm, overlap, SD); no tested effect yet |
+| Lineage | Every number traceable to data and code; inline R for counts and means |
+| Location | `.Rmd` at project root; render from the Console with `output_dir = "reports"` |
+| Fresh session | Restart R and render; test in a new folder; the data travel with the report |
+| New study | Adapt the structure; replace every number, caption and sentence |
 
-Literal source example: <code>&#96;r nrow(transfer)&#96;</code>
+**Next (Day 16, comparisons):** turn the description into a comparison: state the question, the direction (treated − control) and the independent units before calculating a difference.
 
-The sentence still needs a quantity, units, and interpretation.
-
-::: notes
-Use escaped entities to display literal R Markdown code in these slides. During a student report render the inline expression executes. Installing packages or rendering the report from inside itself is not a solution to missing objects.
-:::
-
-## Do a reader review and an analyst review
-
-Reader review: question, unit, outcome, figure meaning, conclusion.
-
-Analyst review: input, checks, transformations, available n, regeneration.
-
-A change log records the issue, correction, and rerun result.
+**Now:** [open the Day 15 exercises](../../week3/15-descriptive-report.qmd). Leave with `descriptive-report.Rmd` (or `organic-report.Rmd`) and its rendered HTML, with the data needed to render it.
 
 ::: notes
-The exercises include a revision of the selected report and a report on the second seedling study.
-:::
-
-## A short report can contain strong evidence
-
-Keep one relevant table, one useful figure, and a specific interpretation.
-
-Remove a redundant printout before removing a limitation or a unit label.
-
-Can another person regenerate and explain the result?
-
-::: notes
-Review the saved checks, interpretation, and fresh-session render.
-:::
-
-## Exercises: one report that reopens and renders
-
-Save **`descriptive-report.Rmd`** or the chosen **`organic-report.Rmd`**, plus HTML.
-
-Put explicit rendering commands in the **R Console**, not inside the report.
-
-Check that the HTML states the question, independent unit, measurement units, and limitation.
-
-[Open exercises](../../week3/15-descriptive-report.qmd).
-
-::: notes
-Have students locate both source and rendered output. No hypothesis test is required today. If rendering fails, use the first meaningful error and chunk name to recover. Avoid spending the entire session on cosmetic formatting while inputs or interpretation remain unclear.
+No hypothesis test is required today. Avoid spending the session on cosmetic formatting while inputs or interpretation remain unclear.
 :::

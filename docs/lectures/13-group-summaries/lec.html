@@ -205,66 +205,19 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="a-summary-row-is-not-a-new-observation" class="slide level2">
-<h2>A summary row is not a new observation</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="observations-to-summary.svg" height="350"></p>
-<figcaption>Twenty-four plant measurements become two group summary values, with information necessarily compressed.</figcaption>
-</figure>
-</div>
-<p>Keep the measurement table as well as its summary.</p>
-<aside class="notes">
-<p>A table with two group means is not a dataset with two newly measured plants. Show the original and summary objects in R. Summarisation deliberately compresses information, which is why an individual-point plot remains useful.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="tell-r-which-groups-to-summarise" class="slide level2">
-<h2>Tell R which groups to summarise</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>group_summary <span class="ot">&lt;-</span> seedlings <span class="sc">|&gt;</span></span>
-<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(treatment) <span class="sc">|&gt;</span></span>
-<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_plants =</span> <span class="fu">n</span>(),</span>
-<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">n_observed =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(growth_mm)),</span>
-<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_mm =</span> <span class="fu">mean</span>(growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-10"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_mm =</span> <span class="fu">sd</span>(growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The result has one row per treatment.</p>
-<aside class="notes">
-<p>Recreate the clean import and growth calculation in the practical before this code. Read the pipe aloud. n counts plant records; !is.na selects available measurements. .groups=“drop” leaves an ordinary ungrouped summary table. No missing growths occur in today’s clean data.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="how-many-plants-contributed" class="slide level2">
-<h2>How many plants contributed?</h2>
-<p>In the complete teaching file:</p>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>A thesis draft shows a bar chart with two bars: mean growth of control and treated seedlings. The examiner asks: how many plants are behind each bar? How much did they vary? Is one bar pulled up by a single unusual plant? The chart cannot answer, because the plants have disappeared into two numbers. <strong>How do we summarise groups and still let the reader see the plants?</strong></p>
+<p>Today you will:</p>
 <ul>
-<li>Control: <strong>12 plants, 12 available growth values</strong>.</li>
-<li>Treated: <strong>12 plants, 12 available growth values</strong>.</li>
+<li>make a <strong>summary table</strong> with one row per group, including <strong>how many plants</strong> contributed;</li>
+<li>plot <strong>individual plants with a mean marker</strong>, and define any whiskers you draw;</li>
+<li>use a <strong>histogram</strong> to see a distribution, and notice how much the bin width shapes it;</li>
+<li>save the table and the figure as files, with a caption a reader can check.</li>
 </ul>
-<p>The repaired file from day 11 has only <strong>11 available control growths</strong>.</p>
+<p>This builds on Day 12’s mean and SD; the table and figure go straight into the descriptive report on Day 15.</p>
 <aside class="notes">
-<p>Explicitly distinguish the two supplied files. Missingness changes the contributing count without inventing a zero measurement. The counts belong beside the summaries, not hidden in an undocumented filter.</p>
+<p>Many published figures still show bars of means only. Journals increasingly ask for individual data points for small samples, exactly because of the examiner’s questions above. Today’s practical file is day13-groups.R.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -277,17 +230,26 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="show-observations-and-identify-the-mean" class="slide level2">
-<h2>Show observations and identify the mean</h2>
+<section id="the-problem-means-alone-hide-the-plants" class="slide level2">
+<h2>The problem: means alone hide the plants</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><strong>Left:</strong> only the two group means, 15.28 and 21.49 mm.</li>
+<li><strong>Right:</strong> the same means with the <strong>24 plants</strong> behind them.</li>
+<li>Now you can see that the groups <strong>overlap</strong>, that one treated plant grew only <strong>12.2 mm</strong>, and that two treated plants grew about <strong>30 mm</strong>.</li>
+<li>You can also count the plants: 12 per group.</li>
+</ul>
+</div><div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="individuals-and-means.svg" height="350"></p>
-<figcaption>Individual growth measurements are shown with red diamonds marking group means.</figcaption>
+<p><img data-src="extended-means-and-points.svg" style="width:100.0%"></p>
+<figcaption>Left panel shows two group means alone; right panel shows the same means together with the individual plant growth values, which overlap between groups.</figcaption>
 </figure>
 </div>
-<p>Small dots = plants. Red diamonds = group means.</p>
+</div></div>
 <aside class="notes">
-<p>Control mean 15.275 mm; treated mean 21.49167 mm. Overlap means the larger group mean is not a claim that every treated plant outgrew every control. Horizontal jitter only separates overlapping dots; measured vertical values remain unchanged.</p>
+<p>Ask which panel lets a reader check the claim “treated plants grew more”. With the points, they can see it is true of the means but not of every plant. The point plot does not need to be cluttered: a small horizontal jitter separates overlapping dots without changing their measured heights.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -300,17 +262,26 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="if-you-draw-whiskers-define-them" class="slide level2">
-<h2>If you draw whiskers, define them</h2>
+<section id="a-summary-is-a-new-smaller-table" class="slide level2">
+<h2>A summary is a new, smaller table</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><code>seedlings</code>: <strong>24 rows</strong>, one per plant.</li>
+<li><code>group_summary</code>: <strong>2 rows</strong>, one per treatment.</li>
+<li>The two summary rows are <strong>not two new plants</strong>; they describe groups.</li>
+<li>Keep both tables. The plant table feeds the individual points; the summary feeds the mean markers.</li>
+</ul>
+</div><div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="sd-bars.svg" height="350"></p>
-<figcaption>Mean plus or minus sample SD is drawn alongside individual plant measurements.</figcaption>
+<p><img data-src="observations-to-summary.svg" style="width:100.0%"></p>
+<figcaption>Twenty-four plant measurements on the left are compressed into two group summary values on the right.</figcaption>
 </figure>
 </div>
-<p>These whiskers show <strong>mean ± SD</strong>, not confidence intervals.</p>
+</div></div>
 <aside class="notes">
-<p>Ask what a reader could infer if the caption simply said “error bars”. The answer is too little. SD describes spread among plants. A confidence interval for an estimate has another interpretation, introduced later. It is acceptable to omit whiskers today and show observations and means.</p>
+<p>Show both objects in the RStudio Environment pane and compare their dimensions. Summarising deliberately throws away detail; that is why we keep the plant-level table for plotting and for any later test.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -323,17 +294,87 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="a-histogram-describes-the-distribution" class="slide level2">
-<h2>A histogram describes the distribution</h2>
+<section id="one-row-per-group-with-group_by-and-summarise" class="slide level2">
+<h2>One row per group with <code>group_by()</code> and <code>summarise()</code></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>group_summary <span class="ot">&lt;-</span> seedlings <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(treatment) <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_plants =</span> <span class="fu">n</span>(),</span>
+<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">n_observed =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(growth_mm)),</span>
+<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_mm =</span> <span class="fu">mean</span>(growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">median_mm =</span> <span class="fu">median</span>(growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_mm =</span> <span class="fu">sd</span>(growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-10"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>treatment</th>
+<th>n_plants</th>
+<th>n_observed</th>
+<th>mean_mm</th>
+<th>median_mm</th>
+<th>sd_mm</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>control</td>
+<td>12</td>
+<td>12</td>
+<td>15.28</td>
+<td>15.65</td>
+<td>3.19</td>
+</tr>
+<tr class="even">
+<td>treated</td>
+<td>12</td>
+<td>12</td>
+<td>21.49</td>
+<td>20.85</td>
+<td>4.87</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>group_by(treatment)</code>: do the next step <strong>separately for each treatment</strong>. <code>summarise()</code> returns one row per group.</li>
+<li><code>n()</code> counts rows (plant records); <code>sum(!is.na(growth_mm))</code> counts <strong>usable measurements</strong> (<code>!</code> means “not”).</li>
+<li><code>.groups = "drop"</code> leaves an ordinary table. Check one mean by hand: <code>mean(filter(seedlings, treatment == "control")$growth_mm)</code>.</li>
+</ul>
+<aside class="notes">
+<p>Start day13-groups.R with library(readr), library(dplyr) and library(ggplot2), as in the practical. Read the pipe aloud: take seedlings, then group by treatment, then summarise. The names on the left of = become column names. The values in the table are rounded for display; the object keeps full precision.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="always-report-how-many-plants-contributed" class="slide level2">
+<h2>Always report how many plants contributed</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ul>
+<li>In the complete file both groups have <strong>12 plants and 12 growths</strong>.</li>
+<li>Summarise the repaired Day 11 file (<code>output/seedlings-cleaned.csv</code>) and control has <strong>12 plants but 11 growths</strong>: P06 is unknown.</li>
+<li>Its control mean is <strong>15.21 mm</strong>, not 15.28 mm: a different set of plants contributed.</li>
+<li>That is why the table has both <code>n_plants</code> and <code>n_observed</code>. A reader needs the n next to every mean.</li>
+</ul>
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="group-histograms.svg" height="350"></p>
-<figcaption>Separate histograms show the counts of control and treated growth values in four-millimetre bins.</figcaption>
+<p><img data-src="../11-data-quality/available-counts.svg" style="width:100.0%"></p>
+<figcaption>In the repaired file both groups keep twelve plant records, but one control plant has no usable growth value, leaving eleven.</figcaption>
 </figure>
 </div>
-<p>The vertical axis counts observations, not a biological response.</p>
+</div></div>
 <aside class="notes">
-<p>The horizontal axis contains growth intervals; the height counts plants in each bin. The panels use comparable scales. With 12 plants per group, apparent shape is unstable. A histogram does not show measurement order or the identities of plants.</p>
+<p>Missingness changes the contributing count without inventing a zero. The counts belong beside the summaries, not hidden in an undocumented filter. The control SD in the repaired file is 3.34 mm.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -346,17 +387,36 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="a-bin-boundary-can-change-the-picture" class="slide level2">
-<h2>A bin boundary can change the picture</h2>
+<section id="plot-the-plants-then-add-the-means" class="slide level2">
+<h2>Plot the plants, then add the means</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>group_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(seedlings,</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> growth_mm)) <span class="sc">+</span></span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(</span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">seed =</span> <span class="dv">13</span>),</span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> group_summary,</span>
+<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> mean_mm),</span>
+<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">shape =</span> <span class="dv">18</span>,</span>
+<span id="cb2-9"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">4</span>, <span class="at">colour =</span> <span class="st">"darkred"</span>) <span class="sc">+</span></span>
+<span id="cb2-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Treatment"</span>,</span>
+<span id="cb2-11"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Change in seedling length (mm)"</span>) <span class="sc">+</span></span>
+<span id="cb2-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="histogram-bins.svg" height="350"></p>
-<figcaption>The same twelve control values produce different histogram detail under bin widths two,four,six millimetres.</figcaption>
+<p><img data-src="individuals-and-means.svg" style="width:100.0%"></p>
+<figcaption>Individual growth measurements as small dots, with red diamonds marking the control mean of 15.28 and the treated mean of 21.49 millimetres.</figcaption>
 </figure>
 </div>
-<p>Describe stable features; be cautious with tiny samples.</p>
+<ul>
+<li>First layer: <strong>plants</strong> from <code>seedlings</code>. Second layer: <strong>means</strong> from <code>group_summary</code>.</li>
+<li><code>height = 0</code>: dots move sideways only; their measured heights never change.</li>
+</ul>
+</div></div>
 <aside class="notes">
-<p>Nothing about the plants changed between panels. Changing a display choice changes what detail looks prominent. Invite students to compare the raw dot plot with all three histograms before interpreting an apparent peak or gap.</p>
+<p>inherit.aes = FALSE means the second layer gets its own mapping, because group_summary has no growth_mm column. The seed makes the jitter identical each time the script runs. Ask students to find one plant above and one below each mean.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -369,35 +429,26 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="save-the-right-object-for-the-intended-use" class="slide level2">
-<h2>Save the right object for the intended use</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(group_summary, <span class="st">"output/growth-summary.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>A CSV stores numbers; a PNG stores a figure. Keep both traceable to raw data.</p>
-<aside class="notes">
-<p>The practical defines group_plot and output/ already exists in the supplied project. Assigning an R object does not export it. After saving, ask students to find the two ordinary files in a file manager and explain which application could open each.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-summary-can-hide-the-very-observations-it-describes" class="slide level2">
-<h2>A summary can hide the very observations it describes</h2>
+<section id="if-you-draw-whiskers-say-what-they-are" class="slide level2">
+<h2>If you draw whiskers, say what they are</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>These whiskers show <strong>mean ± SD</strong>: how much plants vary around the mean.</li>
+<li>Another figure’s whiskers may show a <strong>confidence interval</strong> (Day 17): how uncertain the mean is. They can look identical.</li>
+<li>A caption that says only “error bars” leaves the reader guessing.</li>
+<li>Fine choice for today: show the points and the means, <strong>no whiskers</strong>.</li>
+</ul>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="extended-means-and-points.svg" height="350"></p>
-<figcaption>Means alone conceal the individual measurements and overlap shown by a point plot.</figcaption>
+<p><img data-src="sd-bars.svg" style="width:100.0%"></p>
+<figcaption>Diamonds with whiskers show mean plus or minus sample standard deviation beside the individual plant measurements.</figcaption>
 </figure>
 </div>
-<p>Both panels use the same group means.</p>
+</div></div>
 <aside class="notes">
-<p>Ask which panel permits inspecting overlap and unusual values. The point plot need not become cluttered: horizontal jitter can separate overlapping dots without changing their measured vertical positions.</p>
+<p>Ask: what could a reader infer from a caption that simply says “error bars”? Too little. The treated whisker is longer because the treated SD (4.87 mm) is larger than the control SD (3.19 mm). The CI comes later in the course with a different meaning.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -410,36 +461,29 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="summary-rows-are-not-new-plants" class="slide level2">
-<h2>Summary rows are not new plants</h2>
-<p>The original table has <strong>24 plant rows</strong>. The grouped table has <strong>two summary rows</strong>.</p>
-<p>These are different objects answering different questions.</p>
-<p>Which table should supply individual points? Which supplies mean markers?</p>
-<aside class="notes">
-<p>Individual-point layer uses the raw/derived plant table. Mean-marker layer uses group_summary with explicit mappings. A two-row summary cannot substitute for the individual observations in a treatment test.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="histogram-details-depend-on-display-choices" class="slide level2">
-<h2>Histogram details depend on display choices</h2>
+<section id="a-histogram-shows-the-shape-of-a-distribution" class="slide level2">
+<h2>A histogram shows the shape of a distribution</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(seedlings, <span class="fu">aes</span>(<span class="at">x =</span> growth_mm)) <span class="sc">+</span></span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">4</span>,</span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">boundary =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> treatment, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Growth is cut into <strong>4 mm bins</strong>; bar height = <strong>number of plants</strong> in each bin.</li>
+<li><code>facet_wrap()</code> gives one panel per group on a shared axis.</li>
+<li>A histogram shows shape and gaps, but not individual plants or their identities.</li>
+</ul>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="extended-binwidth.svg" height="350"></p>
-<figcaption>Three histograms of the same transfer growth values use different bin widths.</figcaption>
+<p><img data-src="group-histograms.svg" style="width:100.0%"></p>
+<figcaption>Separate histograms show the counts of control and treated growth values in four-millimetre bins on a common axis.</figcaption>
 </figure>
 </div>
-<p>Record the bin width and distinguish stable patterns from unstable detail.</p>
+</div></div>
 <aside class="notes">
-<p>The underlying18 measurements are unchanged. Small samples can look multimodal or gapped depending on bins. Compare broad stable patterns across bin widths.</p>
+<p>The vertical axis counts plants, not a biological response. With 12 plants per group, every bin has only a few plants. In the treated panel, the two plants near 30 mm form their own bar.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -452,17 +496,26 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="an-axis-range-changes-the-visual-emphasis" class="slide level2">
-<h2>An axis range changes the visual emphasis</h2>
+<section id="the-bin-width-shapes-the-picture" class="slide level2">
+<h2>The bin width shapes the picture</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>The <strong>same 12 control values</strong> with bins of 2, 4 and 6 mm.</li>
+<li>With 2 mm bins there appear to be gaps and peaks; with 6 mm the shape looks smooth.</li>
+<li>Nothing about the plants changed: only a <strong>display choice</strong>.</li>
+<li>With small samples, describe only features that survive several bin widths, and state the bin width you used.</li>
+</ul>
+</div><div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="extended-axis-choice.svg" height="350"></p>
-<figcaption>The same individual growth observations appear under broader and narrower vertical ranges.</figcaption>
+<p><img data-src="histogram-bins.svg" style="width:100.0%"></p>
+<figcaption>The same twelve control growth values drawn as histograms with bin widths of 2, 4 and 6 millimetres look noticeably different.</figcaption>
 </figure>
 </div>
-<p>Read values and axis labels when comparing effects.</p>
+</div></div>
 <aside class="notes">
-<p>Both displays can be useful with clear axes, but a reader should not mistake a changed scale for changed observations. This is particularly important when comparing figures from different groups or experiments.</p>
+<p>The same caution applies to axis ranges: stretching the vertical axis can make a difference look larger or smaller without changing a single measurement. Compare figures by reading their axes, not their visual impression. Invite students to compare the dot plot with all three histograms.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -475,40 +528,28 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="repair-the-caption-precisely" class="slide level2">
-<h2>Repair the caption precisely</h2>
-<p>Weak caption: <strong>“Treatment makes everything larger; error is shown.”</strong></p>
-<p>Repair it by naming:</p>
+<section id="write-a-caption-the-reader-can-check" class="slide level2">
+<h2>Write a caption the reader can check</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><strong>Weak:</strong> “Treatment makes everything larger; error is shown.”</p>
+<p><strong>Better:</strong> “Seven-day growth (mm) of individually potted seedlings. Each dot is one plant (n = 9 per group); diamonds are group means. No error bars are shown.”</p>
+<p>A caption names:</p>
 <ol type="1">
-<li>Independent unit and outcome/units.</li>
-<li>Individual points and any mean symbol.</li>
-<li>Available n and the actual meaning of any error bars.</li>
+<li>the <strong>unit</strong> (one plant) and outcome with <strong>units</strong>;</li>
+<li>what each <strong>symbol</strong> means;</li>
+<li>the <strong>n</strong>, and what any whiskers represent.</li>
 </ol>
-<aside class="notes">
-<p>Identify only the symbols actually plotted. Mean±SD describes individual spread. A confidence interval describes uncertainty in an estimate. Neither phrase can be replaced by a generic word error.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-new-class-needs-a-complete-figure-package" class="slide level2">
-<h2>A new class needs a complete figure package</h2>
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="extended-transfer-caption.svg" height="350"></p>
-<figcaption>A point plot of the transfer data identifies points asplants and diamonds asgroup means.</figcaption>
+<p><img data-src="extended-transfer-caption.svg" style="width:100.0%"></p>
+<figcaption>Point plot of the transfer study: dots are individual plants and diamonds are group means, nine plants per group.</figcaption>
 </figure>
 </div>
-<p>Keep the input, summary CSV, figure, and analysis script distinct.</p>
+</div></div>
 <aside class="notes">
-<p>Transfer data have9 plants per group. Students export the summary and plot, verify one mean using a filtered vector, and write a handover request listing actual file dependencies.</p>
+<p>The figure is from the second class’s study (data/seedlings-transfer.csv), which students summarise independently in the exercises. “Everything larger” is contradicted by the overlap; “error” is undefined. Ask students to repair a weak caption in three specific places.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -521,42 +562,17 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="a-script-should-name-the-files-it-creates" class="slide level2">
-<h2>A script should name the files it creates</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>group_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(seedlings, <span class="fu">aes</span>(treatment, growth_mm)) <span class="sc">+</span></span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(</span>
-<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">seed =</span> <span class="dv">13</span>)) <span class="sc">+</span></span>
-<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Treatment'</span>, <span class="at">y =</span> <span class="st">'Seven-day growth (mm)'</span>) <span class="sc">+</span></span>
-<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb3-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">'output/growth-summary.png'</span>, <span class="at">plot =</span> group_plot,</span>
-<span id="cb3-8"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Use distinct output filenames for the two studies.</p>
-<aside class="notes">
-<p>In the independent task students create transfer_summary and transfer_plot with analogous exports. Explain why a plot object in memory, a PNG, and a summary CSV are not interchangeable outputs.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-reader-test-is-more-specific-than-does-this-look-good" class="slide level2">
-<h2>A reader test is more specific than “does this look good?”</h2>
-<p>Check the exported figure for:</p>
+<section id="save-the-table-and-the-figure-as-files" class="slide level2">
+<h2>Save the table and the figure as files</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(group_summary, <span class="st">"output/growth-summary.csv"</span>)</span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/growth-summary.png"</span>, <span class="at">plot =</span> group_plot, <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>One observation and the mean marker.</li>
-<li>Units, available sample size, and independent unit.</li>
-<li>A pattern supported by both the table and figure.</li>
+<li>A <strong>CSV</strong> stores the numbers; a <strong>PNG</strong> stores the picture. The object in R is neither until you save it.</li>
+<li>Use different file names for each study, e.g.&nbsp;<code>output/day13-transfer-summary.csv</code>.</li>
+<li><strong>Reader test:</strong> close RStudio, open the PNG and CSV from the file manager. Can you find one plant, a mean, the units and the n?</li>
 </ul>
-<p>Record the ambiguity and the correction.</p>
 <aside class="notes">
-<p>The exercises include a caption-repair log and reproducible outputs. Reread the figure with the code closed. Biological claims need numerical meaning, not just attractive layout.</p>
+<p>After saving, ask students to find the two ordinary files in a file manager and say which application could open each. Restarting R and rerunning the script confirms the outputs come from the script and the raw data.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -569,14 +585,58 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="exercises-describe-the-sample-before-testing-it" class="slide level2">
-<h2>Exercises: describe the sample before testing it</h2>
-<p>Write a caption that identifies the unit, units, and symbols.</p>
-<p>Choose a transfer summary: repaired seedlings <strong>or</strong> supplied organic yields.</p>
-<p>Save the script, summary CSV, and figure.</p>
-<p><a href="../../week3/13-group-summaries.html">Open exercises</a>.</p>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Key fact</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Summary table</td>
+<td><code>group_by()</code> + <code>summarise()</code>: one row per group; 2 rows are not 2 new plants</td>
+</tr>
+<tr class="even">
+<td>Counts</td>
+<td><code>n()</code> counts records, <code>sum(!is.na())</code> counts usable values; report n with every mean</td>
+</tr>
+<tr class="odd">
+<td>Seedlings</td>
+<td>Control 15.28 mm (SD 3.19), treated 21.49 mm (SD 4.87), 12 each</td>
+</tr>
+<tr class="even">
+<td>Points + means</td>
+<td>Plant table for dots, summary table for diamonds; jitter sideways only</td>
+</tr>
+<tr class="odd">
+<td>Whiskers</td>
+<td>Mean ± SD and a confidence interval look alike: always say which</td>
+</tr>
+<tr class="even">
+<td>Histogram</td>
+<td>Counts per bin; with small n the bin width changes the apparent shape</td>
+</tr>
+<tr class="odd">
+<td>Caption</td>
+<td>Unit, outcome and units, symbols, n, meaning of any whiskers</td>
+</tr>
+<tr class="even">
+<td>Outputs</td>
+<td>CSV for numbers, PNG for figures, both regenerated by the script</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Next (Day 14, replicates and uncertainty):</strong> what counts as an independent plant, and how much a mean would change if we repeated the sampling.</p>
+<p><strong>Now:</strong> <a href="../../week3/13-group-summaries.html">open the Day 13 exercises</a>. Leave with <code>day13-groups.R</code>, <code>output/growth-summary.csv</code>, <code>output/growth-summary.png</code> and a caption.</p>
 <aside class="notes">
-<p>The organic option reuses the same computations, not a second required practical. Each row is an independently prepared run; yield uses supplied theoretical and isolated masses. SD is expressed in percentage points. No t-test is introduced here.</p>
+<p>The organic-yield option in the practical reuses exactly the same steps (group_by(protocol)), with SD in percentage points; it replaces, not adds to, the repaired-seedling summary. No test is introduced today.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

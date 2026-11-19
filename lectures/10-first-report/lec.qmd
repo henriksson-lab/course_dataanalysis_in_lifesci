@@ -1,6 +1,6 @@
 ---
 title: "Your first biological report"
-subtitle: "Day 10 — A short briefing for independent practice"
+subtitle: "Day 10 — A short report that answers a question and runs again"
 author: "Data Analysis in Life Sciences"
 format:
   revealjs:
@@ -20,169 +20,220 @@ format:
 toc: false
 ---
 
-## Describe what was independently measured
+## About this lecture
 
-![A schematic shows separate control and treated pots; the actual study has twelve independent plants per group.](independent-pots.svg){height=390}
+A lab report, a thesis chapter or a paper is read by someone who was not in the room and will not run your code first. They need to know what was measured, how, what you saw, and what you cannot conclude. A report that announces "the treatment works!" from two overlapping clouds of points, or that only renders on your own laptop, fails that reader. **Today you write a short report that answers a biological question honestly and that someone else can rerun.**
 
-The simulated study measures 24 plants twice, seven days apart.
+Today you will:
 
-::: notes
-This briefing consolidates import, calculation, plotting, and reporting. Each plant has its own pot and a randomly allocated control/nutrient treatment. The nutrient formulation is unspecified. Two time measurements on the same plant are not two separate plants.
-:::
+- build a report from four short sections: question and data, methods, results, interpretation;
+- explain a method in biological words, with the code underneath;
+- describe a figure honestly: pattern, overlap and one limitation;
+- check that the project renders from a fresh session and from another folder.
 
-## Explain the method in biological terms
-
-“Growth was calculated as final minus initial length for each plant, in mm.”
-
-That explains more than “we called `mutate()`”.
-
-The report still needs the import and calculation code so someone can rerun it.
+This day brings together Days 6–9. Day 11 asks what to do when the table itself contains errors.
 
 ::: notes
-Distinguish a scientific methods explanation from a transcript of function names. The reader should understand the operation without speaking R. Students already have working code from previous days; their job is to place it in a self-contained report and explain it.
+This is a consolidation day: no new R functions. The skill is putting existing pieces together for a reader. Keep the bar realistic: four short, correct sections beat a long formal document.
 :::
 
-## A readable figure shows the observations
+## Four sections, four jobs
 
-![Individual simulated growth measurements vary within both groups and overlap between allocations.](../../week2/seedling-growth.png){height=390}
+:::: {.columns}
+::: {.column width="45%"}
+1. **Question and data:** what was asked, what was measured, what one row is.
+2. **Methods:** how the file was read and how growth was calculated.
+3. **Results:** a labelled figure and a few calculated facts.
+4. **Interpretation:** what the pattern is, how much plants vary, one limitation.
+:::
+::: {.column width="55%"}
+![A report leads from the data through an analysis to a readable result.](report-story.svg){width="100%"}
+:::
+::::
 
-What is one dot? What does the vertical axis measure? Where is the overlap?
+Every sentence should be backed by the data, a figure or the study description.
 
 ::: notes
-Expect one independently potted plant and change in length in mm. Ask for a concrete visible pattern and a limitation. Avoid p-values or an unsupported declaration that the treatment works. A mean across both groups would not answer whether groups differ; group summaries come next week.
+Save report.Rmd as first-report.Rmd in the project root. Students already have most of the code from Days 8 and 9.
 :::
 
-## Connect evidence to an interpretation
+## Question and data: what was measured?
 
-![A biological growth question leads to observations and then a written pattern with a stated limitation.](evidence-to-interpretation.svg){height=390}
-
-Say what you observe and what the observations alone cannot settle.
+:::: {.columns}
+::: {.column width="42%"}
+- **24 seedlings** in separate pots; 12 randomly allocated to a nutrient treatment, 12 controls.
+- Length measured at the start and after **seven days**, in mm.
+- One row = one plant. Two lengths of the same plant are not two plants.
+- Simulated teaching data: say so.
+:::
+::: {.column width="58%"}
+![Separate control and treated pots; each plant is its own independent unit.](independent-pots.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Possible prose: growth varied among plants in both groups, and treated values tended to be higher but overlapped controls. The small simulated sample and lack of a quantified uncertainty comparison limit conclusions. Ask what evidence supports the student's wording.
+All of this comes from data/README.md, not from R. The nutrient formulation is unspecified; do not invent one.
 :::
 
-## Keep the project portable
+## Methods: biology first, code underneath
 
-![A whole project can move to another folder while retaining the relative route from report source to its data subfolder.](portable-project.svg){height=390}
+> "Growth was calculated as final minus initial length for each plant, in mm."
 
-`data/seedlings.csv` should not contain your personal username.
-
-::: notes
-The .Rmd stays at the project root. Generated HTML can be next to it or in the documented reports/ output folder. A project file sets a working context; it does not embed the data. The diagram motivates testing the project from another folder.
-:::
-
-## Test it after restarting R
-
-In the **R Console**, after saving `first-report.Rmd`:
+That tells a reader more than "we used `mutate()`". The code still belongs in the report so the calculation can be rerun:
 
 ```r
-rmarkdown::render("first-report.Rmd", output_dir = "reports")
+seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE)
+seedlings <- mutate(seedlings, growth_mm = final_mm - initial_mm)
+nrow(seedlings)                    # 24
+sum(is.na(seedlings$growth_mm))    # 0
+range(seedlings$growth_mm)         # 8.0 30.8
 ```
 
-If an object is missing, repair the source rather than hiding the gap in Console state.
+Simple checks like these tell the reader the data are complete: 24 plants, nothing missing.
 
 ::: notes
-Run this render command in the Console. Work from the first relevant error and its chunk. Check file paths, package loading, and the growth calculation before rewriting the whole report. A successful fresh-session render is evidence of reproducibility in this environment, not proof the interpretation is correct.
+The range describes these 24 plants, not all seedlings in nature, and is sensitive to a single unusual plant. Keep library() calls in the first chunk.
 :::
 
-## Descriptions need evidence
+## Results: a figure the reader can read
 
-![Individual transfer-study growth values show overlap between the groups.](claim-evidence.svg){height=350px}
-
-A difference in typical growth does not mean every treated plant outgrew every control.
+:::: {.columns}
+::: {.column width="42%"}
+- **One dot = one plant.** Say so in the caption.
+- **y-axis:** change in length (mm). Not final size.
+- Every plant shown, so the reader sees the spread, not only a summary.
+- The figure answers the question; one good figure beats three unexplained ones.
+:::
+::: {.column width="58%"}
+![Growth of each seedling by treatment; values vary within both groups and the groups overlap.](../../week2/seedling-growth.png){width="100%"}
+:::
+::::
 
 ::: notes
-Use the actual transfer data. Read three draft claims and identify a supporting figure, recorded value, or supplied design fact. Revise universal or causal claims that this descriptive exercise cannot establish.
+If students also made the initial-versus-final plot on Day 8, ask which figure answers "did treated plants grow more?". Keep the second only if it answers a stated question.
 :::
 
-## Audit the report as a reader
+## Interpretation: say what you see, and no more
 
-Can the HTML alone identify:
+| Sentence | OK? |
+|---|---|
+| "Growth varied among plants in both groups." | Yes: visible in the figure |
+| "Treated plants tended to grow more, but the groups overlap: control 8.0–18.7 mm, treated 12.2–30.8 mm." | Yes: describes these data |
+| "Every treated plant grew more than every control." | No: P17 (treated) grew 12.2 mm, less than many controls |
+| "The treatment works." | Not yet: we have not measured how uncertain the difference is (week 4) |
 
-- The question and independent unit?
-- The input and measurement units?
-- The calculation and plotted quantity?
-- A defensible conclusion and limitation?
+End with one limitation, e.g. a small simulated study, or no uncertainty assessed yet.
 
 ::: notes
-Read without the source first to find communication gaps. Then locate the code and dictionary supporting each fact. Revise the R Markdown source, not only the generated HTML.
+Ask students which sentence in their own draft is closest to the last row, and rewrite it. "The graph shows a difference" is vague: say what is higher, by roughly how much, and with how much overlap.
 :::
 
-## Connect the question to the recorded evidence
+## A unit slip runs without warning
 
-![A report traces a question through supplied data, analysis and a readable result.](report-story.svg){height=350px}
-
-Each section has a job in the reasoning.
+:::: {.columns}
+::: {.column width="42%"}
+- Relabelling the axis "cm" without dividing by 10 makes P01's 18.6 mm into "18.6 cm".
+- R gives no error: it does not know units.
+- Check together: the values, the column name (`_mm`), the axis label and the text.
+:::
+::: {.column width="58%"}
+![P01's growth of 18.6 mm only relabelled as cm is wrong; converted it is 1.86 cm.](unit-label-check.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Methods identify what was done; results describe what was observed; interpretation connects observations to the question within limits. Four clear short sections may communicate better than a long formal document.
+The same check as Day 6: conversion changes values, not only labels. A reader trusts the axis label.
 :::
 
-## Choose a figure because it answers a question
+## Make the project portable
 
-Compare final-size and growth plots.
-
-Keep one as the main evidence. Retain another only if it answers a stated useful question.
+:::: {.columns}
+::: {.column width="42%"}
+- Paths start from the project folder: `data/seedlings.csv`, not a personal path such as `C:/Users/anna/Desktop`.
+- The `.Rmd` stays in the project folder; the HTML can go to `reports/`.
+- Then the whole folder can move to another place or person and still work.
+:::
+::: {.column width="58%"}
+![The whole project moves to a new location and the report still finds data/seedlings.csv.](portable-project.svg){width="100%"}
+:::
+::::
 
 ::: notes
-More figures are not automatically better. This session expands revision and transfer rather than adding a statistical test. Have students identify which measured or derived quantity the vertical axis shows.
+The .Rproj file sets the working folder; it does not contain the data. Personal absolute paths are the most common reason a report fails on someone else's computer.
 :::
 
-## The received project needs the same internal structure
+## Test it like a stranger would
 
-![A complete report and data folder retain their relative relationship after copying.](portable-root.svg){height=350px}
+:::: {.columns}
+::: {.column width="45%"}
+Restart R, then in the **Console**:
 
-Test from the received copy’s root in a fresh session.
+```r
+rmarkdown::render("first-report.Rmd",
+                  output_dir = "reports")
+```
+
+- Fails? Fix the source, not the Console.
+- Then copy the project to another folder, open **that** `.Rproj`, and render again.
+:::
+::: {.column width="55%"}
+![A copied project keeps the report and its data folder together and is tested with a fresh render.](portable-root.svg){width="100%"}
+:::
+::::
 
 ::: notes
-A working original project is not proof that the received package reproduces it. Include the ordinary CSV and dictionary rather than a shortcut. Native Windows RStudio should use the extracted Windows project, not an unnoticed Ubuntu copy.
+A successful fresh render shows the report is reproducible here; it does not show the interpretation is right. On Windows, use the native project in Documents, not a copy inside Ubuntu.
 :::
 
-## A smaller brief tests transfer without new methods
+## Read the HTML as the reader
 
-Choose the transfer seedlings or the supplied solutions table.
+Open the HTML in a browser, without the source. Can you find:
 
-Import, check, calculate, plot, and write a short laboratory brief.
+- the question, and what one plant (one row, one dot) is?
+- the input file and the units?
+- how growth was calculated, and what the y-axis shows?
+- the main pattern, the overlap, and one limitation?
 
-Save one selected brief, not both contexts.
+Anything missing: add it to the `.Rmd` and render again. Never edit the HTML.
 
 ::: notes
-For plants derive growth. For solutions, every formula and molar mass is given. The row roles differ: plants are experimental units, while solutions are numerical preparation cases. Distinguish a supplied formula relation from an observed biological effect.
+The extended exercise turns this into a revision log, reports/report-revision.txt: issue, correction, evidence the corrected report reruns.
 :::
 
-## Converting a label is not converting values
+## Then: a second, smaller brief
 
-![A value of 18.6 mm becomes 1.86 cm, not 18.6 cm.](unit-label-check.svg){height=350px}
+:::: {.columns}
+::: {.column width="42%"}
+Pick one table and write `laboratory-brief.Rmd` with the same four sections:
 
-Check the values, variable names and axis units together.
+- **18-plant transfer study:** T01 grew 15.0 mm; 9 plants per group.
+- **Or `solutions.csv`:** calculated concentrations of 50, 100 and 150 mmol/L for each solute.
+:::
+::: {.column width="58%"}
+![Individual growth values in the transfer study overlap between the groups.](claim-evidence.svg){width="100%"}
+:::
+::::
+
+Same skills, new data: check every number and every sentence against this table, not the old one.
 
 ::: notes
-A unit-label error can leave R code running without warnings. Conversion needs a numerical change as well as a changed label. Encourage explicit comments and independent checks, not evaluation of appearance alone.
+For solutions, rows are calculation cases, not independent experimental units; concentrations follow from a supplied formula, not from measured variation among plants. The leaf-mass scatter plot (leaf-first-look.R) is a further optional transfer.
 :::
 
-## Leave a revision trail and a working brief
+## Summary {.smaller}
 
-Retain:
+| Section | What it must contain |
+|---|---|
+| Question and data | Question; 24 plants, 12 per group, random allocation; one row = one plant; units; simulated |
+| Methods | Growth = final − initial length (mm), in words, plus the code with relative paths |
+| Results | A labelled figure with every plant; a few checked facts (24 plants, none missing) |
+| Interpretation | Pattern, overlap and variation, one limitation; no "the treatment works" yet |
+| Reproducible | Renders after restarting R, and from a copy of the project in another folder |
 
-- A revised earlier report and its source.
-- One laboratory-brief.Rmd and HTML.
-- Saved table/figure and a revision log.
-- A successfully tested practice package.
+**Next (Day 11, data quality):** what to do when the table itself has typos, wrong units, duplicates and missing values.
 
-::: notes
-The solution checks are 50, 100 and 150 mmol/L for each solute. The transfer plant input has 18 records and T01 growth of 15.0 mm. These are practice products, not a grading rubric or an examination design.
-:::
-
-## Give the reader four short sections
-
-[Open the exercises](../../week2/10-first-report.qmd).
-
-1. **Question and data:** design, measurements, independent unit.
-2. **Methods:** import and growth calculation.
-3. **Results:** a labelled figure and relevant calculated facts.
-4. **Interpretation:** pattern, variation, and one limitation.
+**Now:** [open the Day 10 exercises](../../week2/10-first-report.qmd). Leave with `first-report.Rmd` and its HTML in `reports/`, rendered after restarting R.
 
 ::: notes
-Save first-report.Rmd and its HTML. Open the HTML in a browser and identify the units and meaning of a point. The leaf-area/mass table provides practice transferring the import and scatter-plot workflow to different measurements.
+Self-check: the .Rmd contains imports, the derived column and the plot; the HTML makes sense without reading every code line; no personal paths.
 :::

@@ -1,0 +1,278 @@
+---
+title: "One workflow, two computers"
+subtitle: "Day 22 — work on a remote computer and bring the result back"
+author: "Data Analysis in Life Sciences"
+format:
+  revealjs:
+    theme: [simple, ../../theme.scss]
+    slide-number: c/t
+    width: 1280
+    height: 720
+    transition: none
+    history: false
+    highlight-style: github
+    code-overflow: wrap
+    code-line-numbers: false
+    incremental: false
+    chalkboard: false
+    menu: true
+    html-math-method: katex
+toc: false
+---
+
+## About this lecture
+
+Yesterday's single-cell table needs about 24 GB of RAM; your laptop has 16 GB or less. Research groups solve this by logging in to a **bigger, shared Linux computer** and running the same R analysis there. But then there are two computers, each with its own files. **You rendered a report remotely: where is it, and how do you get it back?**
+
+Today you will:
+
+- connect to a remote computer and find out which computer and folder you are in;
+- copy a project there, check that the copy is complete, and render a report;
+- bring the result back and keep a short record of what is where.
+
+This is a hands-on day. The remote service details (host, login, transfer method) will be supplied separately; until then you rehearse locally. On Day 23 you run a small study from question to report.
+
+::: notes
+Link back to Day 21: estimate first, and if the data do not fit, use a bigger computer. HPC2N or another Linux environment will be used; do not invent hostnames or login steps. Students only need to understand the ideas today and practise on the real service when the guide is issued.
+:::
+
+## Two computers, two sets of files
+
+:::: {.columns}
+::: {.column width="40%"}
+- The laptop and the remote computer each have their **own disk**.
+- Both may contain a folder called `course project` with a `report.Rmd`. They are **separate copies**.
+- A filename means little without saying **which computer** and **which folder**.
+:::
+::: {.column width="60%"}
+![A laptop and a remote computer each hold their own separate course-project folder.](two-computers.svg){width="100%"}
+:::
+::::
+
+::: notes
+Ask where a browser download normally lands. Then ask whether logging in to a remote desktop changes that. It does not. Two identically named folders on different computers do not synchronise.
+:::
+
+## Two ways in: a terminal or a desktop
+
+:::: {.columns}
+::: {.column width="40%"}
+- **SSH** gives a terminal on the remote computer: the same shell commands as Day 3.
+- A **remote desktop** shows the remote computer's screen in a window.
+- Neither one copies files for you.
+- The service guide will say whether both see the same home folder.
+:::
+::: {.column width="60%"}
+![SSH and remote desktop lead to the same remote environment through two different interfaces.](two-interfaces.svg){width="100%"}
+:::
+::::
+
+::: notes
+The general SSH form is ssh your-course-username@the-provided-host; replace the placeholders from the service guide when it is issued. Host-key checks and authentication follow that guide. Never write passwords or login codes in notes or logs.
+:::
+
+## Which computer? Which folder?
+
+After connecting, run in the **remote shell**:
+
+```bash
+hostname   # which computer answered?
+pwd        # which folder am I in on that computer?
+ls         # what is in that folder?
+```
+
+- Write the answers in `reports/remote-log.txt`. A large service may have several computers with different names.
+- `exit` ends the connection and returns you to your laptop's shell. Run `pwd` again: now it shows a laptop folder.
+
+::: notes
+Demonstrate only on the approved environment. Then make a practice folder with mkdir -p introcomputing-practice, cd into it, exit, reconnect, and find it again. Saved files belong to the disk, not to the terminal window.
+:::
+
+## Leaving does not delete your files
+
+:::: {.columns}
+::: {.column width="40%"}
+- `exit` closes the **session** (the connection), not the remote disk.
+- Reconnect, `cd` to the folder, and the saved files are still there.
+- Same idea as Day 21: closing a process empties its RAM; saved files stay on disk.
+- Whether a running program keeps running after you leave depends on the service.
+:::
+::: {.column width="60%"}
+![Ending an SSH session closes the connection while the saved project remains in storage.](session-storage.svg){width="100%"}
+:::
+::::
+
+::: notes
+Ask: if R was running a long analysis in that session, does it continue after exit? Not necessarily: the service guide will explain how to run work that keeps going. Today we only work interactively.
+:::
+
+## Moving files: a transfer makes a copy
+
+:::: {.columns}
+::: {.column width="40%"}
+- Uploading or downloading creates a **second copy** in a named place.
+- Before transferring, write down the **source**, the **destination**, and the direction.
+- Editing one copy afterwards does **not** change the other.
+- Transfer the whole project (ZIP), not single files, so relative paths still work.
+:::
+::: {.column width="60%"}
+![A deliberate transfer copies a report between laptop and remote storage.](transfer.svg){width="100%"}
+:::
+::::
+
+::: notes
+Use the service's supported upload/download method; if scp turns out to be the route, its exact syntax belongs in the service guide. Extract the ZIP on the remote side and open its .Rproj, exactly as on Day 1.
+:::
+
+## Check the copy before you analyse
+
+:::: {.columns}
+::: {.column width="45%"}
+In the **remote R console**:
+
+```r
+getwd()
+file.exists("data/algae.csv")
+algae <- readr::read_csv("data/algae.csv",
+                         show_col_types = FALSE)
+nrow(algae)                      # 24
+sum(!is.na(algae$biomass_mg))    # 23
+algae$biomass_mg[algae$culture_id == "A19"]  # NA
+```
+
+Same checks on both computers, same answers: **24, 23, NA**.
+:::
+::: {.column width="55%"}
+![Twenty-four separate culture records, with one unavailable supplement measurement, A19.](algae-counts.svg){width="100%"}
+:::
+::::
+
+::: notes
+data/algae.csv: 24 separately grown cultures, 12 reference and 12 supplement, harvested once; A19 spilled before weighing, so its biomass is unavailable (NA, not zero). FALSE from file.exists means R did not find that path from its working directory: check computer, project and folder before typing an absolute laptop path. Matching counts are good evidence but do not prove every value matches.
+:::
+
+## Render remotely, then bring the result back
+
+:::: {.columns}
+::: {.column width="42%"}
+- Open the remote project and render `report.Rmd` in the provided R application.
+- If R is set up in the remote shell, from the project root:
+  `Rscript -e 'rmarkdown::render("report.Rmd")'`
+- Download the HTML into a folder you can name, and open **that** copy.
+- To recalculate later you need the source and the data, not only the HTML.
+:::
+::: {.column width="58%"}
+![Source and data are transferred in, the report is rendered remotely, and the output is transferred back.](roundtrip.svg){width="100%"}
+:::
+::::
+
+::: notes
+Rscript starts a fresh R process and renders the saved document: the same fresh-session idea as restarting R. Run it only on the permitted execution host named in the service guide. On Windows, keep using native RStudio locally; the Rscript line is for a configured remote shell.
+:::
+
+## The report is missing on my laptop
+
+The report rendered remotely, but local Downloads is empty. Before rendering again, check:
+
+1. Where did rendering write the HTML **on the remote computer**?
+2. Was that file actually **transferred**?
+3. Which **destination folder** received it?
+4. Which copy did the browser open?
+
+An empty Downloads folder does not mean the render failed. Rendering again only makes another copy in the same unexpected place.
+
+::: notes
+Ask students to answer before showing the list. Distinguish three different failures: the calculation failed, the transfer did not happen, or the result is somewhere other than where you looked. Avoid making final2.html, final3.html while the real problem is location.
+:::
+
+## Plan the copy before you make it
+
+:::: {.columns}
+::: {.column width="40%"}
+Write `reports/transfer-plan.txt` first:
+
+- source computer and project path;
+- destination computer and project path;
+- the input file (`data/algae.csv`) and the checks to repeat;
+- the output you expect back.
+:::
+::: {.column width="60%"}
+![Source and destination copies name the algae file and the content checks to repeat on each side.](transfer-plan.svg){width="100%"}
+:::
+::::
+
+::: notes
+For the local rehearsal, use two different parent folders, both labelled local. Paths are not secrets, but passwords and login codes never belong in these files. A plan written afterwards can hide a wrong assumption.
+:::
+
+## Same filename, different contents
+
+:::: {.columns}
+::: {.column width="40%"}
+- Two copies of `receipt.txt` can hold different versions.
+- Change one copy, save it, and reopen both: the other copy does **not** change.
+- Open the saved files and compare the text before deciding which copy to send.
+:::
+::: {.column width="60%"}
+![Two files named receipt.txt contain a first and a second revision.](same-name-versions.svg){width="100%"}
+:::
+::::
+
+::: notes
+Demonstrate with a disposable receipt, not raw data. Keep both versions until you know which is which, rather than deleting an unfamiliar folder.
+:::
+
+## An unsaved edit has not travelled
+
+:::: {.columns}
+::: {.column width="40%"}
+- What you see in an editor can differ from the saved file.
+- A transfer copies the **saved** file.
+- Save, close, reopen, then transfer.
+- Likewise, editing `report.Rmd` does not change an old HTML until you render again.
+:::
+::: {.column width="60%"}
+![A changed editor buffer and the saved receipt contain different revisions until the file is saved.](buffer-and-file.svg){width="100%"}
+:::
+::::
+
+::: notes
+This is the RAM/disk split from Day 21 again: the editor buffer is in RAM, the file on disk. Some editors autosave or restore unsaved text, so the test is the saved file.
+:::
+
+## Equal size is not equal contents
+
+:::: {.columns}
+::: {.column width="40%"}
+- `version 1` and `version 2` have the same number of characters, so the same file size.
+- Equal row counts are a useful check, but two tables can have equal sizes and different values.
+- For small text files, open both and read them; in R, `identical(readLines(a), readLines(b))`.
+:::
+::: {.column width="60%"}
+![Two notes with different version text occupy the same number of character positions.](size-is-limited.svg){width="100%"}
+:::
+::::
+
+::: notes
+Yesterday file.size counted bytes; here that is exactly why it is not enough: one character per byte, and the same number of characters. Replace a and b with the real paths of the two copies. No hashing theory needed.
+:::
+
+## Summary {.smaller}
+
+| Idea | Key fact |
+|---|---|
+| Why remote | data larger than laptop RAM need a bigger computer (Day 21) |
+| Two computers | each has its own disk; same folder names are separate copies |
+| SSH / remote desktop | a terminal or a screen on the remote computer; neither copies files |
+| `hostname`, `pwd`, `exit` | which computer, which folder; leave without deleting saved files |
+| Transfer | makes a copy; name source, destination and direction |
+| Checks | repeat `nrow`, available counts and named records after copying; equal size ≠ equal contents |
+| Missing result | find it on the remote side, then check the transfer and destination |
+
+**Next (Day 23, mini-study):** plan and analyse a small biological study from question to report.
+
+**Now:** [Open exercises](../../week5/22-remote-workflow.qmd) · [Quiz](../../week5/22-remote-workflow-quiz.qmd). Leave with `reports/remote-log.txt`, `reports/transfer-plan.txt`, the receipt and the audit. Until access details arrive, do the local rehearsal and mark the remote steps pending.
+
+::: notes
+A local rehearsal checks portable paths and project structure; connecting, authenticating and transferring still need practice on the real service once the guide is issued.
+:::

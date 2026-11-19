@@ -28,6 +28,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -139,17 +205,52 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="one-question-one-short-evidence-trail" class="slide level2">
-<h2>One question, one short evidence trail</h2>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>You send your supervisor a figure and one line: “treated plants grew more.” The replies come back: Which data file? How many plants? What are the dots? Did any values go missing? Can I rerun it? Every one of those questions is fair, and a short report can answer all of them at once. <strong>How do we write a report that a reader can understand, check, and regenerate?</strong></p>
+<p>Today you will:</p>
+<ul>
+<li>give each part of a short report a <strong>job</strong>: question, data and methods, results, interpretation;</li>
+<li><strong>name the input file and the checks</strong>, so every number has a visible origin;</li>
+<li><strong>render from a fresh session</strong> at the project root, so the report rebuilds itself from saved files;</li>
+<li>keep <strong>claims at the level of the evidence</strong>: describe the sample, without claiming a tested effect.</li>
+</ul>
+<p>This day pulls together Days 11–14. The same report becomes the starting point for the comparisons in week 4.</p>
+<aside class="notes">
+<p>The point is not formatting or length. A good descriptive report is short, specific, and reproducible. The practical has a core seedling report (descriptive-report.Rmd) and an organic-yield alternative (organic-report.Rmd); students produce one, chosen by the teacher.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="one-question-one-evidence-trail" class="slide level2">
+<h2>One question, one evidence trail</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><strong>Question:</strong> how does seven-day growth vary among plants, and between control and treated seedlings?</p>
+<ul>
+<li><strong>Input:</strong> <code>data/seedlings.csv</code>, 24 plants in separate pots, 12 per group, lengths in mm.</li>
+<li><strong>Source:</strong> <code>descriptive-report.Rmd</code> at the project root.</li>
+<li><strong>Output:</strong> an HTML file that anyone can open.</li>
+<li>Each step can be traced to the one before it: question → data → code → result.</li>
+</ul>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="question-to-report.svg" height="350"></p>
-<figcaption>A biological question connects measured data to a readable report.</figcaption>
+<p><img data-src="question-to-report.svg" style="width:100.0%"></p>
+<figcaption>A biological question leads to the measured data file, which leads to a rendered report.</figcaption>
 </figure>
 </div>
-<p>How does seedling growth vary among plants and groups?</p>
+</div></div>
 <aside class="notes">
-<p>This briefing consolidates descriptive analysis. The reader should learn the question, how the measurements arose, and what the observations show. An organic-yield report may replace this context, but is not an extra required report.</p>
+<p>The supplied measurements are simulated; plants received control or a nutrient treatment, and the formulation is unspecified. An organic-yield report may replace this context but is not an extra required report. If the teacher asks for the repaired Day 11 data instead, the report must say so and carry 23 usable growth values through all counts.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -164,15 +265,24 @@ Data Analysis in Life Sciences
 </section>
 <section id="give-each-part-of-the-report-a-job" class="slide level2">
 <h2>Give each part of the report a job</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ul>
+<li><strong>Question:</strong> one or two sentences: what and why.</li>
+<li><strong>Data and methods:</strong> input file, independent unit (one plant), outcome and units, checks, how growth was calculated.</li>
+<li><strong>Results:</strong> a table with n, mean, median and SD; a figure with individual plants and means; a caption.</li>
+<li><strong>Interpretation and limitation:</strong> what the numbers show, in words, and what they cannot show yet.</li>
+</ul>
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="report-anatomy.svg" height="350"></p>
-<figcaption>A short report has a question,data and methods,results with a figure,and an interpretation.</figcaption>
+<p><img data-src="report-anatomy.svg" style="width:100.0%"></p>
+<figcaption>A short report divided into question, data and methods, results with a figure, and interpretation and limitation.</figcaption>
 </figure>
 </div>
-<p>The plot shows the result; your words explain its meaning.</p>
+</div></div>
 <aside class="notes">
-<p>Walk through the drawing as a structure, not as a required page count or formatting template. Distinguish methods from results. A caption identifies the unit and visual encodings. Interpretation describes direction, variation and limits rather than repeating all printed output.</p>
+<p>Distinguish methods (what was done) from results (what was found). A caption names the unit and the symbols. The interpretation describes direction, variation and limits; it does not repeat all printed output.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -185,17 +295,23 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="choose-and-name-the-actual-input" class="slide level2">
-<h2>Choose and name the actual input</h2>
-<p>Use <strong><code>data/seedlings.csv</code></strong> for the complete core example.</p>
+<section id="data-and-methods-show-the-checks" class="slide level2">
+<h2>Data and methods: show the checks</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">anyDuplicated</span>(seedlings<span class="sc">$</span>plant_id)   <span class="co"># 0: each plant ID appears once</span></span>
+<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="sc">|&gt;</span> <span class="fu">count</span>(treatment)       <span class="co"># control 12, treated 12</span></span>
+<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(seedlings<span class="sc">$</span>initial_mm))    <span class="co"># 0 missing</span></span>
+<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(seedlings<span class="sc">$</span>final_mm))      <span class="co"># 0 missing</span></span>
+<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">mutate</span>(seedlings, <span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>24 independently potted plants; 12 per group.</li>
-<li>Initial and final lengths are measured in mm.</li>
-<li>Growth is final minus initial length.</li>
-<li>State explicitly if you choose the repaired incomplete file instead.</li>
+<li>These are Day 11’s checks, now <strong>inside the report</strong>: a reader sees what was checked and the result.</li>
+<li><code>anyDuplicated()</code> returns 0 when there is no repeated ID; a positive number is the <strong>position</strong> of the first repeat.</li>
+<li>In the text: “24 plants (12 per group), no missing lengths, growth = final − initial length (mm).”</li>
 </ul>
 <aside class="notes">
-<p>The complete and repaired datasets have different available counts. Keep those distinctions visible. The existing practical uses the complete file for the main report. The alternative organic-report.Rmd must identify independent synthesis runs and yield percentage units throughout.</p>
+<p>Include only checking output that helps the reader; keep the code in the source either way. If the repaired Day 11 file is used, the methods must state the source and that P06 is unavailable, and every count must use 23 usable growths.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -208,17 +324,34 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="keep-the-source-where-its-relative-paths-make-sense" class="slide level2">
-<h2>Keep the source where its relative paths make sense</h2>
+<section id="results-a-table-and-a-figure-that-agree" class="slide level2">
+<h2>Results: a table and a figure that agree</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>group_summary <span class="ot">&lt;-</span> seedlings <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(treatment) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_observed =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(growth_mm)),</span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_mm =</span> <span class="fu">mean</span>(growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">median_mm =</span> <span class="fu">median</span>(growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_mm =</span> <span class="fu">sd</span>(growth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(group_summary, <span class="at">digits =</span> <span class="dv">2</span>,</span>
+<span id="cb2-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Growth by treatment; lengths in mm."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>knitr::kable()</code> prints a tidy table, rounded to 2 decimals.</li>
+<li>The table is made <strong>by code</strong>: if the data change, the table changes too.</li>
+</ul>
+</div><div class="column" style="width:52%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="portable-project.svg" height="350"></p>
-<figcaption>The report sits at the project root beside its data and output subfolders.</figcaption>
+<p><img data-src="../13-group-summaries/individuals-and-means.svg" style="width:100.0%"></p>
+<figcaption>Individual growth measurements as small dots, with red diamonds marking the control mean of 15.28 and the treated mean of 21.49 millimetres.</figcaption>
 </figure>
 </div>
-<p>Save the <code>.Rmd</code> at the project root, not inside <code>reports/</code>.</p>
+<p>Reuse the Day 13 figure: plants as dots, means as diamonds, a caption with n and units.</p>
+</div></div>
 <aside class="notes">
-<p>Knit normally resolves relative data paths from the source report’s folder. Moving the source into reports/ would change where data/ points. An output_dir argument can place the generated HTML in reports/ while leaving the source at root.</p>
+<p>Control: n 12, mean 15.28, median 15.65, SD 3.19 mm; treated: n 12, mean 21.49, median 20.85, SD 4.87 mm. A caption must make clear that SD describes spread among plants; this report has no confidence intervals. Do not paste a screenshot of the Environment pane.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -231,17 +364,48 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="render-from-files-not-from-your-memory-of-the-session" class="slide level2">
-<h2>Render from files, not from your memory of the session</h2>
+<section id="interpretation-claims-at-the-level-of-the-evidence" class="slide level2">
+<h2>Interpretation: claims at the level of the evidence</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Supported:</strong> “Treated plants grew a mean of 21.5 mm and controls 15.3 mm (n = 12 each). Treated plants also varied more (SD 4.9 vs 3.2 mm), and the groups overlap.”</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Weak sentence</th>
+<th>Repair</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“The results were good.”</td>
+<td>Name the pattern and its size.</td>
+</tr>
+<tr class="even">
+<td>“The treated group had more error.”</td>
+<td>“Treated plants varied more (SD 4.9 mm).”</td>
+</tr>
+<tr class="odd">
+<td>“Every treated plant grew more.”</td>
+<td>False: the groups overlap.</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="fresh-session.svg" height="350"></p>
-<figcaption>A fresh session rebuilds results from the saved data and saved report source.</figcaption>
+<p><img data-src="extended-claim-limits.svg" style="width:100.0%"></p>
+<figcaption>Measured plants support a sample description; a further jump to a universal cause is crossed out.</figcaption>
 </figure>
 </div>
-<p>Restart, then Knit without running console calculations first.</p>
+<p>We <strong>described the sample</strong>. Estimating how uncertain the difference is comes in week 4.</p>
+</div></div>
 <aside class="notes">
-<p>The report needs its own library calls, import and derived columns. An object existing only in the Environment pane is not a reproducible report dependency. Installation commands belong in setup, not inside an analysis that should run repeatedly.</p>
+<p>The smallest treated plant grew 12.2 mm, less than most controls, so “every treated plant” fails. “The computer removed the bad values” is another weak sentence from the exercises: say which value was changed and which source evidence justified it. In the organic alternative, a higher mean yield does not establish greater purity or a better method in general.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -254,36 +418,27 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="check-the-interpretation-against-the-figure" class="slide level2">
-<h2>Check the interpretation against the figure</h2>
-<p>“Mean treated growth was about 21.5 mm; control growth about 15.3 mm. Individual observations overlap.”</p>
-<p>What would be wrong with “every treated plant grew more”?</p>
-<p>We have described the sample; we have not estimated uncertainty in the difference.</p>
-<aside class="notes">
-<p>The individual-point plot shows overlap. Keep SD as spread, not uncertainty in a group mean. In the optional organic context, standard mean yield 68.67% and modified 77% describe independent runs; higher yield does not verify purity or general protocol superiority.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-result-should-have-a-visible-lineage" class="slide level2">
-<h2>A result should have a visible lineage</h2>
+<section id="every-number-has-a-visible-origin" class="slide level2">
+<h2>Every number has a visible origin</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ul>
+<li><p>A reader should be able to trace each number in the text back to a <strong>saved input</strong> and a <strong>chunk of code</strong>.</p></li>
+<li><p><strong>Inline R</strong> puts a calculated value straight into a sentence. In the source:</p>
+<p><code>We measured `r nrow(seedlings)` plants.</code></p>
+<p>renders as “We measured 24 plants.”</p></li>
+<li><p>The object must be created <strong>earlier in the report</strong>. The sentence still needs units and meaning.</p></li>
+</ul>
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="extended-result-lineage.svg" height="350"></p>
-<figcaption>Saved data feed reportcode that produces the numerical table and results prose.</figcaption>
+<p><img data-src="extended-result-lineage.svg" style="width:100.0%"></p>
+<figcaption>A saved input CSV feeds analysis chunks, which produce the table and the prose in the report.</figcaption>
 </figure>
 </div>
-<p>Trace each reported number back to a saved input and calculation.</p>
+</div></div>
 <aside class="notes">
-<p>Ask a reader to identify where the mean came from, which rows contributed, and which units apply. A report with an impressive table but an unidentified input is not complete.</p>
+<p>The literal inline code is shown with escaped characters so this slide does not try to run it. When students render their report, the inline expression is calculated. In the exercises they add two inline values: one count and one mean or SD.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -296,17 +451,27 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-project-file-does-not-contain-every-dependency" class="slide level2">
-<h2>The project file does not contain every dependency</h2>
+<section id="keep-the-report-where-its-paths-work" class="slide level2">
+<h2>Keep the report where its paths work</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>Save <code>descriptive-report.Rmd</code> at the <strong>project root</strong>, beside <code>data/</code> and <code>output/</code>.</li>
+<li>Then <code>"data/seedlings.csv"</code> means the same file on every computer that has the project.</li>
+<li>A path like <code>C:/Users/anna/Downloads/...</code> works only on Anna’s laptop.</li>
+<li>Render from the <strong>R Console</strong>, putting the HTML into <code>reports/</code>:</li>
+</ul>
+<p><code>rmarkdown::render("descriptive-report.Rmd", output_dir = "reports")</code></p>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="extended-missing-dependency.svg" height="350"></p>
-<figcaption>A missing input file breaks the path fromreport source to a newly rendered output.</figcaption>
+<p><img data-src="portable-project.svg" style="width:100.0%"></p>
+<figcaption>The report source sits at the project root beside its data and output folders; a personal absolute path would not move with the folder.</figcaption>
 </figure>
 </div>
-<p>Include the ordinary input CSV, not just a shortcut to its old location.</p>
+</div></div>
 <aside class="notes">
-<p>An Rproj provides context; it does not package data. Reproduction in a newly named folder tests personal paths and omitted files. Record any failure before fixing it, then rerun.</p>
+<p>Knitting resolves relative paths from the report’s own folder, so moving the .Rmd into reports/ would break data/ paths. The output_dir argument places the HTML in reports/ while the source stays at the root. Never put a render call inside the report itself: a report must not try to render itself.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -319,17 +484,26 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="keep-claims-at-the-level-supported-by-the-work" class="slide level2">
-<h2>Keep claims at the level supported by the work</h2>
+<section id="render-from-files-not-from-memory" class="slide level2">
+<h2>Render from files, not from memory</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>Restart R, then render. The report must load its own packages, import its data and create every object.</li>
+<li>An object that exists only in your Environment pane is <strong>not</strong> part of the report; on another computer it is missing.</li>
+<li>Best test: copy the project to a <strong>new folder</strong>, render there. Record any failure, fix it, rerun.</li>
+<li>A <code>.Rproj</code> file does not contain the data. The CSV must travel with the report.</li>
+</ul>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="extended-claim-limits.svg" height="350"></p>
-<figcaption>Measurements support a sample description; an unsupported jump to universal causation is blocked.</figcaption>
+<p><img data-src="fresh-session.svg" style="width:100.0%"></p>
+<figcaption>A fresh session rebuilds the new HTML from the saved data and saved report source; old console objects are not an input.</figcaption>
 </figure>
 </div>
-<p>Descriptive work is useful even before a hypothesis test.</p>
+</div></div>
 <aside class="notes">
-<p>Repair sentences such as results were good or computer removed bad values. Identify a measurement pattern, a defined summary, or a documented correction. Current day15 reports do not quantify uncertainty in a treatment difference.</p>
+<p>Installation commands belong in setup, not in an analysis that should run repeatedly. If rendering fails, read the first meaningful error and the chunk name. A rendered report on a supervisor’s computer is the real test.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -342,17 +516,26 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="adapt-a-structure-not-an-old-conclusion" class="slide level2">
-<h2>Adapt a structure, not an old conclusion</h2>
+<section id="adapt-the-structure-to-a-new-study-not-the-old-conclusion" class="slide level2">
+<h2>Adapt the structure to a new study, not the old conclusion</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p>The second class’s data, <code>data/seedlings-transfer.csv</code>, go into <code>transfer-description.Rmd</code>.</p>
+<ul>
+<li>18 plants, <strong>9 per group</strong>; treated mean <strong>17.87 mm</strong> (SD 1.94), control <strong>13.66 mm</strong> (SD 2.53).</li>
+<li>Here the treated plants vary <strong>less</strong>, the opposite of the first study.</li>
+<li>Replace imports, counts, numbers, captions and sentences <strong>together</strong>. A new title on an old report is still the old report.</li>
+</ul>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../12-variation/extended-transfer-variation.svg" height="350"></p>
-<figcaption>The transfer study has different individual values,means and spread from the firststudy.</figcaption>
+<p><img data-src="../12-variation/extended-transfer-variation.svg" style="width:100.0%"></p>
+<figcaption>In the transfer study, treated plants have a higher mean growth than controls but their points are less spread out.</figcaption>
 </figure>
 </div>
-<p>A changed title alone does not create a report about new observations.</p>
+</div></div>
 <aside class="notes">
-<p>The new source is seedlings-transfer.csv with 18 plants,9 per group. Replace old imports, descriptions, counts, and labels together. If using a previously saved analysis, recreate its objects inside the new report.</p>
+<p>If students used the transfer data in earlier scripts, they recreate its objects inside the new report rather than relying on the Environment pane. A sentence copied from the first report (“treated plants varied more”) would now be false.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -365,13 +548,31 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="inline-results-keep-prose-connected-to-code" class="slide level2">
-<h2>Inline results keep prose connected to code</h2>
-<p>A count or mean can be calculated inline after its object is created.</p>
-<p>Literal source example: <code>`r nrow(transfer)`</code></p>
-<p>The sentence still needs a quantity, units, and interpretation.</p>
+<section id="two-reviews-before-you-hand-it-in" class="slide level2">
+<h2>Two reviews before you hand it in</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Reader review</strong> (code closed, HTML only)</p>
+<ul>
+<li>What was the question?</li>
+<li>What is one unit, and how many were there?</li>
+<li>Which file, which outcome, which units?</li>
+<li>What do the dots and diamonds mean?</li>
+<li>What is the main pattern and its main limitation?</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Analyst review</strong> (source open)</p>
+<ul>
+<li>Does every number match a table or chunk?</li>
+<li>Is n the number of <strong>usable</strong> values?</li>
+<li>Were all transformations written in code?</li>
+<li>Does it render after restarting R, in a fresh folder?</li>
+<li>Is there a change log: issue, correction, rerun?</li>
+</ul>
+</div></div>
+<p>Remove a redundant printout before you remove a unit label or a limitation.</p>
 <aside class="notes">
-<p>Use escaped entities to display literal R Markdown code in these slides. During a student report render the inline expression executes. Installing packages or rendering the report from inside itself is not a solution to missing objects.</p>
+<p>The exercises include a revision log in reports/day15-revision.txt. The organic alternative has 12 runs, six per protocol, with yields in percent and SD in percentage points; the same reviews apply.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -384,52 +585,58 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="do-a-reader-review-and-an-analyst-review" class="slide level2">
-<h2>Do a reader review and an analyst review</h2>
-<p>Reader review: question, unit, outcome, figure meaning, conclusion.</p>
-<p>Analyst review: input, checks, transformations, available n, regeneration.</p>
-<p>A change log records the issue, correction, and rerun result.</p>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Key fact</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Structure</td>
+<td>Question → data and methods → results (table + figure) → interpretation and limitation</td>
+</tr>
+<tr class="even">
+<td>Input</td>
+<td>Name the file; show checks for IDs, labels, missing values; state n (24 plants, 12 per group)</td>
+</tr>
+<tr class="odd">
+<td>Results</td>
+<td>Table from code (<code>knitr::kable()</code>), figure with plants and means, caption with n and units</td>
+</tr>
+<tr class="even">
+<td>Claims</td>
+<td>Describe the sample (means 21.5 vs 15.3 mm, overlap, SD); no tested effect yet</td>
+</tr>
+<tr class="odd">
+<td>Lineage</td>
+<td>Every number traceable to data and code; inline R for counts and means</td>
+</tr>
+<tr class="even">
+<td>Location</td>
+<td><code>.Rmd</code> at project root; render from the Console with <code>output_dir = "reports"</code></td>
+</tr>
+<tr class="odd">
+<td>Fresh session</td>
+<td>Restart R and render; test in a new folder; the data travel with the report</td>
+</tr>
+<tr class="even">
+<td>New study</td>
+<td>Adapt the structure; replace every number, caption and sentence</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Next (Day 16, comparisons):</strong> turn the description into a comparison: state the question, the direction (treated − control) and the independent units before calculating a difference.</p>
+<p><strong>Now:</strong> <a href="../../week3/15-descriptive-report.html">open the Day 15 exercises</a>. Leave with <code>descriptive-report.Rmd</code> (or <code>organic-report.Rmd</code>) and its rendered HTML, with the data needed to render it.</p>
 <aside class="notes">
-<p>The exercises include a revision of the selected report and a report on the second seedling study.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-short-report-can-contain-strong-evidence" class="slide level2">
-<h2>A short report can contain strong evidence</h2>
-<p>Keep one relevant table, one useful figure, and a specific interpretation.</p>
-<p>Remove a redundant printout before removing a limitation or a unit label.</p>
-<p>Can another person regenerate and explain the result?</p>
-<aside class="notes">
-<p>Review the saved checks, interpretation, and fresh-session render.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="exercises-one-report-that-reopens-and-renders" class="slide level2">
-<h2>Exercises: one report that reopens and renders</h2>
-<p>Save <strong><code>descriptive-report.Rmd</code></strong> or the chosen <strong><code>organic-report.Rmd</code></strong>, plus HTML.</p>
-<p>Put explicit rendering commands in the <strong>R Console</strong>, not inside the report.</p>
-<p>Check that the HTML states the question, independent unit, measurement units, and limitation.</p>
-<p><a href="../../week3/15-descriptive-report.html">Open exercises</a>.</p>
-<aside class="notes">
-<p>Have students locate both source and rendered output. No hypothesis test is required today. If rendering fails, use the first meaningful error and chunk name to recover. Avoid spending the entire session on cosmetic formatting while inputs or interpretation remain unclear.</p>
+<p>No hypothesis test is required today. Avoid spending the session on cosmetic formatting while inputs or interpretation remain unclear.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

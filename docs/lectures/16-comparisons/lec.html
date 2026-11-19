@@ -205,17 +205,83 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="does-nutrient-allocation-change-seven-day-growth" class="slide level2">
-<h2>Does nutrient allocation change seven-day growth?</h2>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>Your descriptive report says treated seedlings grew more on average. Your supervisor asks: “More than what, by how many millimetres, measured how, and could the set-up itself have produced that?” Before any statistical test, a comparison has to be <strong>defined</strong>: the outcome, the units, the direction, and which plants count as independent. <strong>What exactly are we comparing, and what can the design support?</strong></p>
+<ul>
+<li>Name the <strong>question, outcome, unit and direction</strong> (treated − control) <em>before</em> calculating.</li>
+<li><strong>Look at the plants</strong> first: a difference in means is not a claim about every plant.</li>
+<li>Check the <strong>design</strong>: independent groups or paired measurements? Plants or shared trays?</li>
+<li>A sample difference is <strong>one estimate</strong>; another experiment would give another number.</li>
+</ul>
+<p>Week 4 is about comparisons. Today defines the comparison; Day 17 adds how uncertain it is.</p>
+<aside class="notes">
+<p>Motivate from the reader’s side: every results section in biology compares groups, and the first thing a careful reader checks is what was compared, in which direction, and on how many independent units. Students prepare comparison.Rmd today; Day 17 adds a confidence interval and p-value to the same file.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-question-and-the-design" class="slide level2">
+<h2>The question and the design</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><strong>Does the nutrient treatment change seven-day seedling growth?</strong></p>
+<ul>
+<li><strong>Outcome:</strong> growth = final − initial length, in <strong>mm</strong>, one value per plant.</li>
+<li><strong>Unit:</strong> one plant in its own pot; <strong>12 + 12</strong>, randomly allocated.</li>
+<li><strong>Direction:</strong> <strong>treated − control</strong>. A positive number means treated plants grew more.</li>
+<li>Random allocation comes from the <strong>study description</strong>, not from the order of rows in the file.</li>
+</ul>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="randomised-groups.svg" height="350"></p>
-<figcaption>Twelve controls and twelve treated seedlings represent independent pot allocations.</figcaption>
+<p><img data-src="randomised-groups.svg" style="width:100.0%"></p>
+<figcaption>Twelve control and twelve treated seedlings in separate pots represent independent random allocations.</figcaption>
 </figure>
 </div>
-<p>Name the question, outcome, units, and independently allocated unit.</p>
+</div></div>
 <aside class="notes">
-<p>The course data are simulated. The study description supplies the random-allocation assumption; row order does not prove it. Growth is final minus initial length in millimetres. There are 12 plants per group, measured twice but contributing one growth value each.</p>
+<p>The course data are simulated (data/README.md). Each plant is measured twice, but its two lengths are reduced to one growth value, so it contributes one observation. Writing the plan before the output exists prevents choosing a direction or an outcome after seeing which looks best. Students save it as output/day16-plan.txt.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="choose-the-outcome-that-answers-the-question" class="slide level2">
+<h2>Choose the outcome that answers the question</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li><strong>Left:</strong> initial lengths. Controls started slightly larger (mean <strong>23.0 mm</strong> vs <strong>21.9 mm</strong>).</li>
+<li><strong>Right:</strong> growth over seven days, the outcome for our question.</li>
+<li>Final length alone would mix starting size with growth.</li>
+<li>A starting difference is worth noting as a <strong>limitation</strong>; adjusting for it is beyond this course.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-start-and-growth.svg" style="width:100.0%"></p>
+<figcaption>Initial lengths and seven-day growth shown separately for control and treated plants; growth is the outcome for the treatment question.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Random allocation means a starting difference like this is due to chance, but with 12 plants per group it can still be noticeable. Ask students which quantity answers “does treatment change growth?” before computing any summaries.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -230,149 +296,233 @@ Data Analysis in Life Sciences
 </section>
 <section id="start-with-the-observations" class="slide level2">
 <h2>Start with the observations</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../../week4/figures/day16-growth.png" height="350"></p>
-<figcaption>Individual plants show overlap and different group locations in growth.</figcaption>
-</figure>
-</div>
-<p>A group mean does not describe every plant.</p>
-<aside class="notes">
-<p>Ask students what a dot represents and whether any value obviously contradicts the documented measurement process. There is no known source error in this complete table. Keep valid measurements in the main analysis.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="state-the-direction-before-calculating" class="slide level2">
-<h2>State the direction before calculating</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="difference-direction.svg" height="350"></p>
-<figcaption>The treated mean exceeds the control mean by about 6.22 millimetres.</figcaption>
-</figure>
-</div>
-<p><strong>Treated minus control</strong> is our reported difference.</p>
-<aside class="notes">
-<p>Control mean 15.275 mm, treated mean 21.49167 mm, difference 6.21667 mm. Reversing subtraction changes the sign without changing the observed experiment. A reader needs the direction and units to interpret an estimate.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="one-change-per-independently-treated-plant" class="slide level2">
-<h2>One change per independently treated plant</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>treated <span class="ot">&lt;-</span> seedlings <span class="sc">|&gt;</span> <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="st">"treated"</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(growth_mm)</span>
-<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> seedlings <span class="sc">|&gt;</span> <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="st">"control"</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(growth_mm)</span>
-<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(treated) <span class="sc">-</span> <span class="fu">mean</span>(control)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Keep this preparation in <strong><code>comparison.Rmd</code></strong>.</p>
-<aside class="notes">
-<p>Load readr, dplyr, ggplot2 before these lines, as in the practical. pull extracts the numeric column. These objects are vectors here, not the full group tables. Tomorrow’s lecture and test use exactly these definitions and direction.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="paired-observations-require-a-real-identity" class="slide level2">
-<h2>Paired observations require a real identity</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="independent-or-paired.svg" height="350"></p>
-<figcaption>Different plants form independent groups; the same plant measured twice forms a pair.</figcaption>
-</figure>
-</div>
-<p>Two columns or two labels alone do not establish pairing.</p>
-<aside class="notes">
-<p>Today compares separate plants. Later, the same plant measured before and after a light change will require within-plant matching. Pairing requires matching subject identity, not matching row positions.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="do-we-have-plants-or-shared-treatment-units" class="slide level2">
-<h2>Do we have plants or shared treatment units?</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../14-replicates-uncertainty/shared-trays.svg" height="350"></p>
-<figcaption>A tray-wide allocation creates shared treatment units even when many plants are measured.</figcaption>
-</figure>
-</div>
-<p>The design determines whether the group comparison is justified.</p>
-<aside class="notes">
-<p>Revisit the replication concept before running inference. The shown tray layout is a counterexample, not the course study. One tray per treatment would not provide twelve independent treatment assignments per group. A function cannot repair that limitation.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="size-of-an-effect-and-variability-are-separate-questions" class="slide level2">
-<h2>Size of an effect and variability are separate questions</h2>
-<p>The sample difference is about <strong>6.22 mm</strong>.</p>
-<p>The group SDs describe how much plants vary within each group.</p>
-<p>Tomorrow we estimate uncertainty in the population mean difference.</p>
-<aside class="notes">
-<p>Within-group SD and a confidence interval for the difference describe different quantities. Variation among measurements is the starting information for uncertainty, but the quantities answer different questions. Avoid introducing an extra formula today.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="what-might-weaken-the-interpretation" class="slide level2">
-<h2>What might weaken the interpretation?</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings.csv"</span>,</span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>                      <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
+<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>growth_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(seedlings,</span>
+<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> growth_mm)) <span class="sc">+</span></span>
+<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(</span>
+<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">seed =</span> <span class="dv">16</span>)) <span class="sc">+</span></span>
+<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Treatment group"</span>,</span>
+<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Growth over the study period (mm)"</span>) <span class="sc">+</span></span>
+<span id="cb1-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Non-independent units or biased allocation.</li>
-<li>Recording mistakes or a dominant questionable observation.</li>
-<li>A small sample with severe skew.</li>
-<li>An outcome that does not answer the biological question.</li>
+<li>The treated group sits higher, but the groups <strong>overlap</strong>.</li>
+<li>The largest control (<strong>18.7 mm</strong>) grew more than the smallest treated plant (<strong>12.2 mm</strong>).</li>
+<li>So “every treated plant grew more” is false, even if the treated mean is higher.</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../week4/figures/day16-growth.png" style="width:100.0%"></p>
+<figcaption>Individual growth values for 12 control and 12 treated plants; the groups overlap although treated plants tend to be higher.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Ask students what one dot represents and whether any value contradicts the documented measurement process. There is no known source error in this complete table; keep all valid measurements. Overlap does not mean the means are equal, and separated means do not mean every pair of plants differs. Save with ggsave(“output/day16-growth.png”, growth_plot, width = 6, height = 4).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="compute-the-difference-in-the-stated-direction" class="slide level2">
+<h2>Compute the difference in the stated direction</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>treated <span class="ot">&lt;-</span> seedlings <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="st">"treated"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(growth_mm)</span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> seedlings <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="st">"control"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(growth_mm)</span>
+<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a>observed_difference <span class="ot">&lt;-</span> <span class="fu">mean</span>(treated) <span class="sc">-</span> <span class="fu">mean</span>(control)</span>
+<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a>observed_difference   <span class="co"># 6.22</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>pull()</code> takes one column out as a plain vector of 12 numbers.</li>
+</ul>
+</div><div class="column" style="width:52%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="difference-direction.svg" style="width:100.0%"></p>
+<figcaption>The treated mean of 21.49 millimetres exceeds the control mean of 15.28 millimetres by 6.22 millimetres.</figcaption>
+</figure>
+</div>
+<ul>
+<li>Control <strong>15.28 mm</strong>, treated <strong>21.49 mm</strong>.</li>
+<li>Treated − control = <strong>6.22 mm</strong>: a number with <strong>units and a sign</strong>.</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>Load readr, dplyr and ggplot2 first, as in the practical. These vectors are exactly what Day 17’s t.test(treated, control) uses, so the direction carries over. Ask students to read the result aloud: “treated plants grew on average 6.22 mm more than controls”.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-sign-comes-from-the-subtraction-not-the-name" class="slide level2">
+<h2>The sign comes from the subtraction, not the name</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li><code>mean(treated) - mean(control)</code> = <strong>+6.22 mm</strong>.</li>
+<li><code>mean(control) - mean(treated)</code> = <strong>−6.22 mm</strong>.</li>
+<li>Same plants, same experiment: only the description changes.</li>
+<li>Calling an object <code>treatment_effect</code> does not fix its sign. State the direction <strong>in words</strong> next to the number.</li>
+<li>A report that says one direction and computes the other is wrong.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-direction.svg" style="width:100.0%"></p>
+<figcaption>The same two group means produce +6.22 mm as treated minus control and −6.22 mm as control minus treated.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>If a result comes out negative unexpectedly, print mean(treated) and mean(control) separately before concluding anything about the biology. Neither direction is wrong when it is labelled; we chose treated − control in advance and keep it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="independent-groups-or-pairs" class="slide level2">
+<h2>Independent groups or pairs?</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li><strong>Today:</strong> different plants in each group (P01 control, P13 treated). The groups are <strong>independent</strong>.</li>
+<li><strong>Day 18:</strong> the same plant measured before and after a change (L01 before, L01 after). Those readings form a <strong>pair</strong> and must stay together.</li>
+<li>Two columns in a table do not make a pair; <strong>the same individual</strong> does.</li>
+<li>Within one plant, initial and final are already combined into growth, so each plant gives one value.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="independent-or-paired.svg" style="width:100.0%"></p>
+<figcaption>On the left, two different plants belong to separate groups; on the right, the same plant measured twice forms a pair.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Pairing requires matching subject identity, not matching row positions. Getting this wrong changes the analysis: a paired design needs the within-plant differences, which comes on Day 18.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="plants-or-shared-trays" class="slide level2">
+<h2>Plants or shared trays?</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p>Imagine all treated plants shared <strong>one tray</strong> and all controls another.</p>
+<ul>
+<li>The plants are still measured, but there is only <strong>one treatment assignment per group</strong>.</li>
+<li>A warmer or brighter tray would look exactly like a treatment effect.</li>
+<li>Counting 24 independent plants would overstate the evidence. <strong>No test can repair this</strong>; only more independent trays.</li>
+<li>Our study allocated plants <strong>individually</strong>, so the plant is the unit.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../14-replicates-uncertainty/shared-trays.svg" style="width:100.0%"></p>
+<figcaption>A hypothetical layout in which tray A receives control and tray B receives treatment, so each tray is one shared treatment unit.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>This is the Day 14 counterexample, not the course study. Other things that weaken a comparison: biased allocation, recording mistakes, one dominating questionable value, or an outcome that does not answer the question. If a real design looks unsuitable, asking for advice is a good outcome; deleting genuine values until a test “works” is not.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="another-sample-another-difference" class="slide level2">
+<h2>Another sample, another difference</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings-transfer.csv"</span>,</span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="sc">|&gt;</span> <span class="fu">group_by</span>(treatment) <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean_mm =</span> <span class="fu">mean</span>(growth_mm),</span>
+<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_mm =</span> <span class="fu">sd</span>(growth_mm),</span>
+<span id="cb3-7"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Second class: <strong>9 plants per group</strong>; control <strong>13.66 mm</strong>, treated <strong>17.87 mm</strong>.</li>
+<li>Treated − control = <strong>4.21 mm</strong>, not 6.22 mm.</li>
+<li>Different plants and conditions give a different estimate. That alone is not evidence that the treatment “failed”.</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extended-transfer-difference.svg" style="width:100.0%"></p>
+<figcaption>Transfer study growth values: treated plants have a higher mean, and the observed treated-minus-control difference is 4.21 millimetres.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Students analyse this in transfer-comparison.Rmd with the same direction, and save output/day16-transfer-summary.csv. Confirm 18 rows, 9 per group, no missing values. The two simulated studies differ in values, spread and sample size; descriptive work cannot settle why their differences differ.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-we-can-say-today-and-what-remains-open" class="slide level2">
+<h2>What we can say today, and what remains open</h2>
+<p><strong>Results paragraph:</strong> “Treated seedlings grew a mean of 21.49 mm (SD 4.87) and controls 15.28 mm (SD 3.19), 12 plants each: a difference of <strong>6.22 mm (treated − control)</strong>. Growth overlapped between the groups.”</p>
+<p>Still open: <strong>would another set of plants give a similar difference, or could chance alone produce 6 mm?</strong></p>
+<ul>
+<li>The <strong>null hypothesis</strong> for Day 17: the population mean growth is the <strong>same</strong> under both conditions.</li>
+<li><strong>Two-sided:</strong> a difference in either direction counts. We decide this now, before seeing a test.</li>
+<li>A <strong>p-value</strong> will say how surprising our data are <em>if</em> the means were equal. It is not the probability that the treatment works, and not the size of the effect.</li>
 </ul>
 <aside class="notes">
-<p>This list guides inspection, not a mechanical test-selection algorithm. For this introductory example the supplied design supports independent groups. If an actual practical looks unsuitable, seeking advice is a successful outcome; deleting genuine observations until a test works is not.</p>
+<p>Students should have a meaningful results paragraph before Day 17; the test adds an interval and p-value to it but does not replace it. The within-group SDs describe plants; uncertainty in the difference is a different quantity that also depends on sample size.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -385,182 +535,58 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="starting-size-and-growth-answer-different-questions" class="slide level2">
-<h2>Starting size and growth answer different questions</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-start-and-growth.svg" height="350"></p>
-<figcaption>Initial lengths and seven-day growth are displayed separately for the two groups.</figcaption>
-</figure>
-</div>
-<p>Choose the outcome before choosing a summary or a test.</p>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Key fact</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Plan first</td>
+<td>Question, outcome (growth, mm), unit (potted plant), direction (treated − control), before calculating</td>
+</tr>
+<tr class="even">
+<td>Outcome</td>
+<td>Growth answers the question; initial length is a possible limitation (23.0 vs 21.9 mm)</td>
+</tr>
+<tr class="odd">
+<td>Observations</td>
+<td>Plot the plants; groups overlap, so a mean difference is not “every plant”</td>
+</tr>
+<tr class="even">
+<td>Difference</td>
+<td>21.49 − 15.28 = <strong>6.22 mm</strong>; the sign comes from the subtraction order</td>
+</tr>
+<tr class="odd">
+<td>Independent vs paired</td>
+<td>Different plants are independent; the same plant twice is a pair (Day 18)</td>
+</tr>
+<tr class="even">
+<td>Design</td>
+<td>Shared trays → the tray is the unit; a test cannot repair the design</td>
+</tr>
+<tr class="odd">
+<td>One estimate</td>
+<td>Another study gave 4.21 mm; samples vary</td>
+</tr>
+<tr class="even">
+<td>Open question</td>
+<td>Is 6.22 mm larger than chance variation could produce? (Day 17)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Next (Day 17, Welch test):</strong> how uncertain is the 6.22 mm difference? We add a confidence interval and a p-value, using the same <code>treated</code> and <code>control</code> vectors and the same direction.</p>
+<p><strong>Now:</strong> <a href="../../week4/16-comparisons.html">open the Day 16 exercises</a>. Leave with <code>comparison.Rmd</code>, its rendered HTML, and <code>output/day16-growth.png</code>.</p>
 <aside class="notes">
-<p>The study records two lengths per plant. Growth is final minus initial, not final size alone. Starting-size patterns can inform a limitation, but we are not adding an adjusted regression in this introductory course.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="write-the-analysis-plan-before-the-output-exists" class="slide level2">
-<h2>Write the analysis plan before the output exists</h2>
-<p>State the outcome, direction, unit, allocation, and units.</p>
-<p>For this study: mean seven-day growth; treated minus control; plant/pot; randomly assigned allocation; mm.</p>
-<aside class="notes">
-<p>A group-sorted file does not establish random assignment. That information comes from the supplied design. Ask what would differ if all treated plants shared one tray and all controls another.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="direction-is-an-arithmetic-choice-you-must-explain" class="slide level2">
-<h2>Direction is an arithmetic choice you must explain</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-direction.svg" height="350"></p>
-<figcaption>The same two group means produce opposite signed differences when subtraction order is reversed.</figcaption>
-</figure>
-</div>
-<p>Changing subtraction order does not change the observations.</p>
-<aside class="notes">
-<p>Treated minus control is+6.2167 mm; control minus treated is−6.2167 mm. Neither direction is intrinsically wrong if labelled. A report that states one direction and calculates the other is wrong.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-difference-in-means-is-not-a-claim-about-every-plant" class="slide level2">
-<h2>A difference in means is not a claim about every plant</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-overlap.svg" height="350"></p>
-<figcaption>Individual control and treated growth values overlap even when group means differ.</figcaption>
-</figure>
-</div>
-<p>Use individual points to check the word “every”.</p>
-<aside class="notes">
-<p>The largest control growth exceeds some treated values. Rewrite the group statement to say greater mean growth in these observations, not that every treated plant outgrew every control. Overlap itself is not a significance test.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="describe-the-result-without-a-threshold-label" class="slide level2">
-<h2>Describe the result without a threshold label</h2>
-<p>Include n, group means, directed difference, units, and individual variation.</p>
-<p>Then name the unanswered question: <strong>how uncertain is the estimated population difference?</strong></p>
-<aside class="notes">
-<p>Students should have a meaningful results paragraph before day17. Keep the experimental question and observed difference clear before introducing test output.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="an-independent-study-gives-another-estimate" class="slide level2">
-<h2>An independent study gives another estimate</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extended-transfer-difference.svg" height="350"></p>
-<figcaption>The transfer study has 18 plants and an observed treated-minus-control difference near 4.21 mm.</figcaption>
-</figure>
-</div>
-<p>Another observed estimate is not automatically evidence that a mechanism changed.</p>
-<aside class="notes">
-<p>The two simulated studies differ in actual values, group spread, and sample sizes. A smaller observed difference is not proof of no effect or failed treatment. Current descriptive work cannot resolve every comparison between studies.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="keep-transfer-inputs-and-outputs-under-new-names" class="slide level2">
-<h2>Keep transfer inputs and outputs under new names</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/seedlings-transfer.csv'</span>,</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="sc">|&gt;</span> <span class="fu">group_by</span>(treatment) <span class="sc">|&gt;</span></span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean_mm =</span> <span class="fu">mean</span>(growth_mm),</span>
-<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_mm =</span> <span class="fu">sd</span>(growth_mm), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<aside class="notes">
-<p>Load readr and dplyr as in the main study. Confirm18 rows,9 per group, no missing values. Use transfer-comparison.Rmd rather than overwriting the main report; preserve the comparison direction.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="inspect-a-hypothetical-design-failure" class="slide level2">
-<h2>Inspect a hypothetical design failure</h2>
-<p>Suppose the label was assigned to <strong>one tray per group</strong>.</p>
-<p>What remains observable? What independent treatment information is missing?</p>
-<p>A different test cannot manufacture independently assigned trays.</p>
-<aside class="notes">
-<p>The observed plant lengths still exist, but treating24 plants as24 independent treatment allocations would be misleading. Keep a design limitation separate from a data-entry error or computational bug.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="exercises-prepare-before-testing" class="slide level2">
-<h2>Exercises: prepare before testing</h2>
-<p>Create <strong><code>comparison.Rmd</code></strong> with design, growth calculation, observations, and the directed difference.</p>
-<p>Explain why the two groups are independent.</p>
-<p><a href="../../week4/16-comparisons.html">Open exercises</a>.</p>
-<aside class="notes">
-<p>Ask students to read their difference aloud with units and direction. Tomorrow the report gains an interval and p-value; today’s work should already be scientifically intelligible without either.</p>
+<p>Ask students to read their difference aloud with units and direction. Today’s report should already be scientifically intelligible without any test.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

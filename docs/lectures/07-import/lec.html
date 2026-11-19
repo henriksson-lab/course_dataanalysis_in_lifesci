@@ -194,7 +194,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Read a table without losing its meaning</h1>
-  <p class="subtitle">Day 7 — From saved measurements to an R object</p>
+  <p class="subtitle">Day 7 — From a saved file to a table in R</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -205,17 +205,81 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="importing-creates-an-object-in-this-session" class="slide level2">
-<h2>Importing creates an object in this session</h2>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>Your supervisor sends a CSV file with lengths of 24 seedlings, and later a results file with many thousands of rows. Remember Day 1: opening a table in a spreadsheet and saving it again can quietly change the data. <strong>How do we bring a table into R unchanged, and check that it contains what we think it contains?</strong></p>
+<p>Today you will:</p>
+<ul>
+<li>make sure R is looking in the right folder for the file;</li>
+<li>import a CSV file into a table and inspect its size, columns and types;</li>
+<li>tell labels from measurements, and a missing value from a zero;</li>
+<li>write down what you checked, so someone else can trust the table.</li>
+</ul>
+<p>Day 6 typed values by hand. From today the values come from files. Day 8 calculates and plots from the imported table.</p>
+<aside class="notes">
+<p>Day 1 showed gene names such as SEPT2 turned into dates; only call back to it here. The new example is real: in October 2020 Public Health England missed about 16,000 positive COVID-19 results because results were passed through the old .xls format, which holds at most 65,536 rows. Neither is a reason to fear spreadsheets for looking at data; they are reasons not to let a program silently rewrite your only copy.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-not-just-open-it-in-a-spreadsheet" class="slide level2">
+<h2>Why not just open it in a spreadsheet?</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ul>
+<li>Day 1: a spreadsheet turned the gene name <em>SEPT2</em> into the date 2-Sep.</li>
+<li>Size limits fail silently too. The old <code>.xls</code> format stops at 65,536 rows; in 2020 this hid about 16,000 positive COVID-19 tests in the UK.</li>
+<li><code>read_csv()</code> reads the file and leaves it unchanged on disk. Every check, such as the number of rows, is a line in your script.</li>
+</ul>
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="file-to-object.svg" height="390"></p>
+<p><img data-src="row-limit.svg" style="width:100.0%"></p>
+<figcaption>An old .xls sheet holds at most 65,536 rows; the rows beyond the limit are not saved, without any warning.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>The data were not wrong; the container was too small and nothing warned anyone. In R, the size of a table is checked with one line (dim), which we do shortly.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-file-on-disk-a-table-in-memory" class="slide level2">
+<h2>A file on disk, a table in memory</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>As on Day 1, a <strong>CSV</strong> is plain text: a header line with column names, then one line per row.</li>
+<li><code>read_csv()</code> reads it and creates a <strong>table object</strong> in R’s memory.</li>
+<li>Changing the object does not change the file. Changing the file does not change the object until you import again.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="file-to-object.svg" style="width:100.0%"></p>
 <figcaption>read_csv reads the saved seedling file into a 24-row, four-column object in R memory.</figcaption>
 </figure>
 </div>
-<p>The saved input is separate from the imported object.</p>
+</div></div>
 <aside class="notes">
-<p>Open the course project before importing. A CSV is text; importing interprets it as a table. Editing the object leaves the CSV unchanged. Conversely, changing the CSV does not update an already imported object until reread. These are the same disk/memory distinctions from week 1.</p>
+<p>Same disk versus memory distinction as week 1 and Day 6. Open seedlings.csv in a text editor once so students see the commas. The raw file stays exactly as supplied all course.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -228,133 +292,118 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="columns-have-roles-and-types" class="slide level2">
-<h2>Columns have roles and types</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="column-roles.svg" height="390"></p>
-<figcaption>Plant IDs and treatments are labels, while initial and final length columns contain numeric measurements in millimetres.</figcaption>
-</figure>
-</div>
-<p>One row is one plant. The column header is not another observation.</p>
-<aside class="notes">
-<p>Read P01’s entire row aloud. The two length readings refer to the same plant seven days apart, not two independent plants. Numeric-looking IDs remain labels. The file’s contents cannot establish units or randomisation; use the data dictionary’s study description.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="load-the-importer-then-inspect-the-result" class="slide level2">
-<h2>Load the importer, then inspect the result</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings.csv"</span>,</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>                      <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(seedlings)</span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(seedlings)</span>
-<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(seedlings)</span>
-<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(seedlings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Expect <strong>24 rows × 4 columns</strong> in this complete teaching dataset.</p>
-<aside class="notes">
-<p>A package is installed on storage but loaded in each session. read_csv returns a tibble, a table format; head prints only its first rows. Suppressing the importer message does not replace checking types. Point students at names rather than expecting exact column names from memory.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="start-paths-from-the-project-root" class="slide level2">
-<h2>Start paths from the project root</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="project-relative-path.svg" height="390"></p>
-<figcaption>The course folder contains data with seedlings.csv, alongside output and reports.</figcaption>
-</figure>
-</div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">file.exists</span>(<span class="st">"data/seedlings.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<aside class="notes">
-<p>The second command should give TRUE. If not, identify the current folder, the actual extracted tree, and the computer holding the file. Common causes are an extra extraction folder or opening a ZIP preview. Reopen the intended project before retrying the relative path.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="an-unavailable-value-is-not-a-measured-zero" class="slide level2">
-<h2>An unavailable value is not a measured zero</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="missing-not-zero.svg" height="390"></p>
-<figcaption>Two measured lengths surround an unavailable value; the available-value mean is based on two readings.</figcaption>
-</figure>
-</div>
-<p><code>NA</code> means not available. Explain missingness when reporting a result.</p>
-<aside class="notes">
-<p>This is a separate toy vector, not a missing entry in seedlings.csv, which is complete. Replacing the unknown value by zero would invent a length measurement. A denominator should count what was actually observed for that summary. The practical later explains missing values more fully.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="ask-r-how-the-calculation-handles-missingness" class="slide level2">
-<h2>Ask R how the calculation handles missingness</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>example_mm <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="cn">NA</span>, <span class="dv">18</span>)</span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(example_mm)</span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(example_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(example_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The first mean is <code>NA</code>; the second is <strong>15 mm from two available values</strong>.</p>
-<aside class="notes">
-<p>na.rm is an argument to the calculation, not deletion of the original row or an explanation of why data are missing. Ask students to read the is.na result. Later exercises will count missing observations explicitly and retain evidence for data corrections.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-computation-needs-a-biological-description" class="slide level2">
-<h2>A computation needs a biological description</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>seedlings<span class="sc">$</span>initial_mm</span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(seedlings<span class="sc">$</span>initial_mm)</span>
-<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(seedlings<span class="sc">$</span>initial_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="first-is-r-looking-in-the-right-folder" class="slide level2">
+<h2>First: is R looking in the right folder?</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">file.exists</span>(<span class="st">"data/seedlings.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li><code>$</code> selects one column as a vector.</li>
-<li>Count plants, not the header.</li>
-<li>Describe an average length <strong>in mm</strong>, not only a number.</li>
+<li><code>getwd()</code> should print your <strong>project folder</strong>, not <code>data</code>.</li>
+<li>The second line should print <code>TRUE</code>.</li>
+<li><code>data/seedlings.csv</code> is a <strong>relative path</strong>: it starts from the project folder, so it works on a classmate’s computer too.</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="project-relative-path.svg" style="width:100.0%"></p>
+<figcaption>The course project folder contains data with seedlings.csv, next to output and reports.</figcaption>
+</figure>
+</div>
+</div></div>
+<p>If you get <code>FALSE</code>: open <code>introcomputing.Rproj</code> from the extracted folder. Do not paste your personal path into the code.</p>
+<aside class="notes">
+<p>Common causes of FALSE: working inside the ZIP preview, an extra folder level from extraction, or a different project open. Fix by opening the right project, not by writing C:/Users/anna/… into every line.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="import-and-inspect" class="slide level2">
+<h2>Import and inspect</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings.csv"</span>,</span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>                      <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(seedlings)</span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(seedlings)</span>
+<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(seedlings)</span>
+<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(seedlings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><code>library(readr)</code> loads the importer. Installed once; loaded in every new session.</li>
+<li><code>head()</code> shows the first 6 rows only, not the whole table.</li>
+<li><code>dim()</code>: <strong>24 rows, 4 columns</strong>.</li>
+<li><code>str()</code>: <code>plant_id</code> and <code>treatment</code> are text (<code>chr</code>); the lengths are numbers (<code>num</code>).</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>read_csv returns a tibble, a kind of table. show_col_types = FALSE only hides a message; it does not replace looking at the types with str(). Have students copy column names from names() rather than typing from memory.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-does-one-row-mean" class="slide level2">
+<h2>What does one row mean?</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>One row is <strong>one plant</strong>. P01: control, 25.7 mm at the start, 44.3 mm seven days later.</li>
+<li>Two lengths in one row are the same plant measured twice, not two plants.</li>
+<li><code>plant_id</code> and <code>treatment</code> are <strong>labels</strong>; the <code>_mm</code> columns are <strong>measurements</strong>.</li>
+<li>The file does not say “mm” or “seven days”: that comes from <code>data/README.md</code>.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="column-roles.svg" style="width:100.0%"></p>
+<figcaption>Plant IDs and treatments are labels; initial and final lengths are numeric measurements in millimetres.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Read P01’s row aloud. The header is not an observation. Units, random allocation and the fact that the data are simulated are all in the data dictionary, not in anything R can compute.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="one-column-one-vector" class="slide level2">
+<h2>One column, one vector</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>seedlings<span class="sc">$</span>initial_mm</span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(seedlings<span class="sc">$</span>initial_mm)    <span class="co"># 24</span></span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(seedlings<span class="sc">$</span>initial_mm)      <span class="co"># 22.47</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>$</code> picks one column by name and gives a vector, like those on Day 6.</li>
+<li>24 values: one per plant. The header is not counted.</li>
+<li>The mean initial length is <strong>22.47 mm</strong>. Always give the unit: R only sees numbers.</li>
+<li>This mean mixes both groups, so it says nothing yet about the treatment.</li>
 </ul>
 <aside class="notes">
-<p>Have students distinguish the count from the mean. The mean initial length combines both allocations; it does not estimate a treatment difference. No hypothesis testing is needed today. The code only answers a meaningful question when the variable and observational unit are understood.</p>
+<p>Ask students to say the result as a full sentence with unit and what was averaged. Comparing the groups is Day 8 and week 3.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -367,17 +416,29 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="type-and-meaning-are-different-checks" class="slide level2">
-<h2>Type and meaning are different checks</h2>
+<section id="missing-is-not-zero" class="slide level2">
+<h2>Missing is not zero</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="cn">NA</span>, <span class="dv">20</span>))                <span class="co"># NA</span></span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="cn">NA</span>, <span class="dv">20</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)  <span class="co"># 15</span></span>
+<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">20</span>))                 <span class="co"># 10</span></span>
+<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(seedlings<span class="sc">$</span>final_mm))     <span class="co"># 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>NA</code> = not available: no reading exists.</li>
+<li><code>na.rm = TRUE</code> leaves it out: mean of <strong>two</strong> values.</li>
+<li>Writing 0 instead invents a plant of zero length.</li>
+</ul>
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="import-roles.svg" height="350"></p>
-<figcaption>Imported fields include identifier labels and measurements with stated units.</figcaption>
+<p><img data-src="missing-zero-means.svg" style="width:100.0%"></p>
+<figcaption>Leaving out one unavailable reading gives a mean of 15; a genuine zero gives a mean of 10.</figcaption>
 </figure>
 </div>
-<p>Numeric storage alone does not authorise averaging or dividing columns.</p>
+</div></div>
 <aside class="notes">
-<p>The solutions table has IDs and names as labels, with numeric mass, molar mass and volume. A supplied chemical name is context, not a request to identify a structure. The dictionary establishes units and row meaning.</p>
+<p>R refuses to give a mean when a value is NA unless asked: it will not pretend all values are known. In a report, say how many values were missing and why if known. seedlings.csv is complete; the messy version on Day 11 is not.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -390,103 +451,31 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="inspect-more-than-the-first-displayed-rows" class="slide level2">
-<h2>Inspect more than the first displayed rows</h2>
+<section id="worked-example-a-second-study" class="slide level2">
+<h2>Worked example: a second study</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
 <div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings-transfer.csv"</span>,</span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(transfer)</span>
-<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(transfer)</span>
-<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(transfer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>head() is a preview, not the sample-size definition.</p>
-<aside class="notes">
-<p>The imported table is 18 by 4; initial and final measurements belong to the same plant in each row. Inspect both ends and object structure rather than inferring 24 plants from the preceding lesson.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="check-the-supplied-studys-expected-structure" class="slide level2">
-<h2>Check the supplied study’s expected structure</h2>
+<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(transfer)                       <span class="co"># 18 4</span></span>
+<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(transfer)</span>
+<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(transfer<span class="sc">$</span>plant_id))   <span class="co"># 18</span></span>
+<span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(transfer<span class="sc">$</span>treatment)           <span class="co"># 9 9</span></span>
+<span id="cb5-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(transfer<span class="sc">$</span>final_mm))       <span class="co"># 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:52%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="transfer-inventory.svg" height="350"></p>
-<figcaption>The independent transfer study has 18 plants split nine per group.</figcaption>
+<p><img data-src="transfer-inventory.svg" style="width:100.0%"></p>
+<figcaption>The transfer study has 18 plants, nine per group.</figcaption>
 </figure>
 </div>
-<p>Row counts, unique IDs, and group counts answer related but distinct questions.</p>
-<aside class="notes">
-<p>Use length(plant_id), length(unique(plant_id)), and table(treatment). Repeated IDs can be legitimate in another design; here one row per plant sets the expectation. Random allocation is stated in the design, not demonstrated by sorted rows.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-filename-that-opens-is-not-the-whole-audit" class="slide level2">
-<h2>A filename that opens is not the whole audit</h2>
-<p>Record the source path, dimensions, types, identifiers, groups, and missing counts.</p>
-<p>Name two facts that only the dictionary provides.</p>
-<aside class="notes">
-<p>Units, random allocation, experimental unit, elapsed time and simulation status are not established by a successful import. Suppressing the type message does not replace inspection.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="zero-and-unavailable-give-different-calculations" class="slide level2">
-<h2>Zero and unavailable give different calculations</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="missing-zero-means.svg" height="350"></p>
-<figcaption>Ignoring one unavailable reading gives mean 15, while recording a genuine zero gives mean 10.</figcaption>
-</figure>
-</div>
-<p>The number of available measurements changes too.</p>
-<aside class="notes">
-<p>For c(10, NA, 20), ordinary mean returns NA; na.rm = TRUE gives 15 from two available values. The vector c(10, 0, 20) has mean 10 from three measurements. Replacing missing by zero invents a value.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="read-the-next-table-before-choosing-operations" class="slide level2">
-<h2>Read the next table before choosing operations</h2>
-<p>Import solutions.csv, then inspect:</p>
+</div></div>
 <ul>
-<li>Six rows and five columns.</li>
-<li>Unique solution IDs and two solute labels.</li>
-<li>Numeric mass, molar mass, and final volume.</li>
-<li>Units and row meaning from the supplied dictionary.</li>
+<li>A new name, <code>transfer</code>, so the 24-plant <code>seedlings</code> table is not overwritten.</li>
+<li>18 rows, 18 distinct IDs, 9 per group, nothing missing: what the study description promises.</li>
 </ul>
 <aside class="notes">
-<p>Define a mole as a chemical amount unit and molar mass as grams per mole. Today the learner audits inputs; the next lesson derives concentrations. These are numerical preparation cases, not independently allocated experimental groups.</p>
+<p>tail shows the last rows; head alone could hide problems at the end. unique() counts distinct IDs; repeated IDs would prompt investigation here because the design has one row per plant. Random allocation is stated in the design, not visible in the rows.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -499,17 +488,25 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-same-kind-of-project-may-hold-different-inputs" class="slide level2">
-<h2>The same kind of project may hold different inputs</h2>
+<section id="a-plausible-table-can-still-be-the-wrong-one" class="slide level2">
+<h2>A plausible table can still be the wrong one</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>Two studies can have the <strong>same column names</strong>. Both import without errors.</li>
+<li>Check the numbers against the description: 24 plants or 18? 12 or 9 per group?</li>
+<li>Same for a lab table: <code>solutions.csv</code> has <strong>6 rows, 5 columns</strong>. Mass (g) and molar mass (g/mol) are both numbers, but adding them is meaningless.</li>
+</ul>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="project-identity.svg" height="350"></p>
-<figcaption>Separate study folders may contain 24 or 18 records with similar column names.</figcaption>
+<p><img data-src="project-identity.svg" style="width:100.0%"></p>
+<figcaption>Two study folders hold measurement tables with similar columns, one with 24 and one with 18 plant records.</figcaption>
 </figure>
 </div>
-<p>Check which input produced the result before changing the written sample size.</p>
+</div></div>
 <aside class="notes">
-<p>A wrong project with a plausible-looking filename can produce plausible output. Restart R, rerun the script, and identify the input behind each audit. Source provenance matters even when file.exists returns TRUE.</p>
+<p>A wrong file with a plausible name produces plausible output. A numeric type tells you R can do arithmetic, not that the arithmetic makes sense; the dictionary says what each column means.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -522,13 +519,18 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="keep-the-import-audit-useful-to-another-person" class="slide level2">
-<h2>Keep the import audit useful to another person</h2>
-<p>A strong audit gives evidence:</p>
-<p>“18 rows, 18 distinct IDs, nine per group, no missing lengths.”</p>
-<p>It also states what was supplied by the study design.</p>
+<section id="write-down-what-you-checked" class="slide level2">
+<h2>Write down what you checked</h2>
+<p>A useful import note gives evidence, not just “checked”:</p>
+<blockquote>
+<p><code>data/seedlings-transfer.csv</code>: 18 rows × 4 columns, 18 distinct plant IDs, 9 control and 9 treated, no missing lengths. Lengths in mm, seven days apart (from <code>data/README.md</code>). Simulated teaching data.</p>
+</blockquote>
+<ul>
+<li>Facts from R: rows, columns, types, IDs, group counts, missing values.</li>
+<li>Facts from the dictionary: units, what one row is, how plants were allocated.</li>
+</ul>
 <aside class="notes">
-<p>A useful audit records specific evidence rather than simply saying checked. Save the two audit notes and script. Unusual range values prompt questions and source inspection, not automatic deletion.</p>
+<p>The practical asks for reports/transfer-import-audit.txt and reports/solutions-import-audit.txt. Unusual values prompt questions, never silent deletion.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -541,13 +543,54 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="import-a-second-table-deliberately" class="slide level2">
-<h2>Import a second table deliberately</h2>
-<p><a href="../../week2/07-import.html">Open the exercises</a>.</p>
-<p>Save <code>day07.R</code>, then inspect <code>data/leaf-mass.csv</code> too.</p>
-<p>Which columns and units differ? What does one row represent there?</p>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Idea</th>
+<th>Key fact</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Why code, not a spreadsheet</td>
+<td><code>read_csv()</code> leaves the file unchanged; spreadsheets can silently convert or drop data (row limits)</td>
+</tr>
+<tr class="even">
+<td>File vs object</td>
+<td>The CSV stays on disk; the imported table lives in R’s memory</td>
+</tr>
+<tr class="odd">
+<td>Relative path</td>
+<td><code>data/seedlings.csv</code> from the project folder; check with <code>file.exists()</code></td>
+</tr>
+<tr class="even">
+<td>Inspect</td>
+<td><code>dim()</code>, <code>names()</code>, <code>str()</code>, <code>head()</code>, <code>tail()</code>: 24 × 4 for <code>seedlings.csv</code></td>
+</tr>
+<tr class="odd">
+<td>Rows and columns</td>
+<td>One row = one plant; IDs and groups are labels; lengths are measurements in mm</td>
+</tr>
+<tr class="even">
+<td>Missing</td>
+<td><code>NA</code> is not 0; <code>na.rm = TRUE</code> leaves it out of that calculation; report how many</td>
+</tr>
+<tr class="odd">
+<td>Meaning</td>
+<td>Units and design come from <code>data/README.md</code>, not from R</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Next (Day 8, transform and plot):</strong> calculate each plant’s growth as a new column and draw a figure where every point is a plant.</p>
+<p><strong>Now:</strong> <a href="../../week2/07-import.html">open the Day 7 exercises</a>. Leave with <code>day07.R</code>, which imports and inspects <code>seedlings.csv</code> and <code>leaf-mass.csv</code> and runs from the top after a restart.</p>
 <aside class="notes">
-<p>The leaf table has eighteen independent plants, one leaf each, area in square centimetres and dry mass in milligrams. A scatter plot can describe association without establishing causation. Reuse the import/inspect workflow while reading that dataset’s dictionary rather than assuming the seedling schema applies.</p>
+<p>The extended exercises inspect the 18-plant transfer study and solutions.csv and save two short audit notes in reports/.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

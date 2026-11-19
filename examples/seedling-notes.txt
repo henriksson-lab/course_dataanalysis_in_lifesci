@@ -1,0 +1,13 @@
+Seedling experiment notes
+
+These are simulated teaching data, not a real experiment.
+
+24 seedlings were grown in separate pots. 12 received a nutrient treatment and 12 were controls. Each plant was measured at the start and after seven days. Lengths are in millimetres.
+
+The measurements are in data/seedlings.csv. One row describes one plant.
+
+Example: plant P01 grew from 25.7 mm to 44.3 mm, so it grew 18.6 mm.
+
+R code to read the table:
+
+seedlings <- read.csv("data/seedlings.csv")

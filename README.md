@@ -22,8 +22,7 @@ guides, references, and instructor solutions. Datasets are simulated. The
 sidebar and slide theme are copied from the Quantitative Biology scaffold:
 coloured week bands, green lecture links, blue quizzes, and italic practicals.
 
-The [five-week study plan](study-plan.qmd) allocates structured practice and
-independent transfer alongside explanation. The instructor
+The [course page](overview.qmd) lists outcomes and weekly checkpoints. The instructor
 [expansion record](instructor/workload-expansion.md) compares the larger version
 with the original draft. The subsequent [wording and quiz audit](instructor/audit-results.md)
 removes prescribed timings, required collaboration, and writing quotas while

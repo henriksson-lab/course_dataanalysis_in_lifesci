@@ -20,253 +20,257 @@ format:
 toc: false
 ---
 
-## A reading is not yet a concentration
+## About this lecture
 
-![Six known standard concentrations establish a measurement scale before an unknown is interpreted.](standards.svg){height=350px}
+In a biochemistry lab you put your samples in a spectrophotometer or plate reader. The instrument does not report "mg/L": it reports an **absorbance**, a number without units. To turn it into a concentration you first measure **standards** of known concentration, fit a line through them, and read your sample's concentration backwards from that line. **What concentration is in my sample, and when can I trust the number?**
 
-Use known **standards** before estimating unknown samples.
+Today you will:
 
-::: notes
-These are simulated values for a fictional colour assay; no reagent or prior chemistry course is assumed. A standard is a solution whose concentration is supplied. Absorbance describes light attenuation and is dimensionless. The standards span 0–10 mg/L.
-:::
+- fit a calibration line with `lm()` and read its intercept and slope, with units;
+- check the residuals: how far each standard lies from the line;
+- convert an unknown sample's absorbance into a concentration;
+- refuse to report a reading outside the standards, and use a dilution instead.
 
-## Know which quantity was prepared and which was measured
-
-We **prepared concentration** and **measured absorbance**.
-
-Fit:
-
-`absorbance = intercept + slope × concentration`
-
-One standard is a calibration point, not a biological treatment replicate.
+Days 17–18 compared means. Today and on Day 20 we fit straight lines; today the line is a **measuring tool**.
 
 ::: notes
-This direction is deliberate. Later we rearrange the forward calibration to estimate an unknown concentration. Regressing concentration directly on absorbance would be a different fit. The zero-concentration standard includes background signal; no blank subtraction has been performed.
+These are simulated readings for a fictional colour assay; no chemistry course is needed. Ask whether anyone has already used a standard curve (protein assays such as Bradford, DNA quantification, enzyme activity). Every one of those is today's workflow.
 :::
 
-## Fit the straight line
+## The problem: a reading is not a concentration
+
+:::: {.columns}
+::: {.column width="42%"}
+- Unknown samples gave absorbance **0.310**, **0.520** and **0.900**.
+- On its own, 0.520 means nothing: another instrument, reagent batch or day gives a different reading for the same sample.
+- Six **standards** of known concentration, **0 to 10 mg/L**, were measured with the samples (`data/calibration.csv`).
+- A standard is a calibration point, not a biological replicate.
+:::
+::: {.column width="58%"}
+![Six standards of known concentration from 0 to 10 mg/L next to an unknown sample whose concentration we want.](standards.svg){width="100%"}
+:::
+::::
+
+::: notes
+The standards set the scale for this run of the instrument. That is why they are measured each time, in the same run as the unknowns.
+:::
+
+## Which variable goes on which axis?
+
+:::: {.columns}
+::: {.column width="42%"}
+- We **prepared** the concentration and **measured** the absorbance.
+- So concentration goes on x and absorbance on y:
+
+  `absorbance = intercept + slope × concentration`
+
+- **Intercept:** the fitted reading at 0 mg/L, a background signal (the blank S1 read 0.041).
+- **Slope:** the increase in absorbance per 1 mg/L.
+- The line does not have to pass through every point.
+:::
+::: {.column width="58%"}
+![Six prepared standards with absorbance rising from 0.041 to 0.687, and the fitted straight calibration line.](../../week4/figures/day19-calibration.png){width="100%"}
+:::
+::::
+
+::: notes
+The direction is deliberate: the measured quantity is the response. Later we rearrange the same line to get concentration. Fitting concentration on absorbance would be a different regression and is not used here. The nonzero intercept is a background reading: do not force the line through zero just because zero concentration sounds like nothing.
+:::
+
+## Fit the line in R
 
 ```r
 library(readr)
+library(dplyr)
+library(ggplot2)
 standards <- read_csv("data/calibration.csv", show_col_types = FALSE)
-calibration_fit <- lm(absorbance ~ concentration_mg_l,
-                      data = standards)
+calibration_fit <- lm(absorbance ~ concentration_mg_l, data = standards)
 coef(calibration_fit)
+#>        (Intercept) concentration_mg_l
+#>         0.03957143         0.06488571
 ```
 
-Intercept ≈ **0.03957**; slope ≈ **0.06489 per mg/L**.
+- `~` reads "explained by": response on the left, the prepared variable on the right.
+- Line: **absorbance ≈ 0.0396 + 0.0649 × concentration**.
+- Slope units: **absorbance per mg/L**. Every extra 1 mg/L adds about 0.065 to the reading.
 
 ::: notes
-Load readr, dplyr, ggplot2 as usual. Explain the tilde as response on the left and explanatory variable on the right. The practical supplies full precision. A nonzero intercept may represent background, so “zero concentration” does not justify forcing the fit through zero.
+lm() is the same function students use again tomorrow for a biological association. coef() returns the intercept and slope; [1] and [2] select them. Keep the full-precision values in R; round only in the prose.
 :::
 
-## Does a line describe the tested range?
+## Check the residuals
 
-![Prepared standards are shown with their fitted linear calibration.](../../week4/figures/day19-calibration.png){height=350px}
-
-A fitted line need not pass through every measured standard.
+:::: {.columns}
+::: {.column width="42%"}
+- **Residual = observed − fitted** reading, in absorbance units.
+- S1: 0.041 − 0.0396 = **+0.0014**: just above the line.
+- All six lie within **±0.008** of the line, on both sides, with no curved pattern.
+- Six standards are limited evidence: the line is checked **only between 0 and 10 mg/L**.
+:::
+::: {.column width="58%"}
+![Residuals of the six standards scatter within about 0.008 absorbance units of zero, without a curved pattern.](../../week4/figures/day19-residuals.png){width="100%"}
+:::
+::::
 
 ::: notes
-Point to each measured value and the line’s fitted value. The fitted slope is the rise in absorbance for one mg/L increase in concentration. This is a working approximation within the tested range, not a chemical law established for every concentration.
+`residuals(calibration_fit)` gives the same values as the hand calculation. Look for curvature (a smile or frown shape) or one point far from the others. A residual is a difference in absorbance, not a concentration error and not a p-value.
 :::
 
-## A residual is observed minus fitted
+## Read the line backwards
 
-![Calibration residuals show measured readings minus their fitted readings.](../../week4/figures/day19-residuals.png){height=350px}
+:::: {.columns}
+::: {.column width="42%"}
+Rearrange the line:
 
-Look for curvature or an unusual point, not zero residuals everywhere.
+`concentration = (absorbance − intercept) / slope`
+
+- U2 read **0.520** → (0.520 − 0.0396) / 0.0649 ≈ **7.40 mg/L**.
+- U1 read **0.310** → **4.17 mg/L**.
+- These are point estimates; the standards and the readings both carry uncertainty that we do not calculate here.
+:::
+::: {.column width="58%"}
+![A reading of 0.520 is traced across to the calibration line and down to about 7.40 mg/L.](inverse-reading.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Positive means the observed absorbance is above the line. The six small residuals show no obvious curved pattern, but six standards remain limited evidence. A plot is a check on the approximation, not a guarantee of validity outside the data.
+Trace with a finger: across from the measured reading to the line, then down to concentration. The input is measured; the output is estimated. Use the unrounded coefficients in the calculation.
 :::
 
-## Read backward from the measured signal
-
-![A measured absorbance 0.520 intersects the fitted line near 7.40 mg/L.](inverse-reading.svg){height=350px}
-
-The unknown concentration is obtained by rearranging the line.
-
-::: notes
-Trace horizontally from the observed reading to the calibration line, then down to concentration. This visual separates the measured input from the estimated output. Keep the unrounded coefficients for the calculation even though slide labels are rounded.
-:::
-
-## Calculate a supported point estimate
+## Estimate only inside the standards
 
 ```r
+unknowns <- read_csv("data/unknowns.csv", show_col_types = FALSE)
 intercept <- coef(calibration_fit)[1]
 slope <- coef(calibration_fit)[2]
-concentration_mg_l <- (0.520 - intercept) / slope
+unknowns <- unknowns |>
+  mutate(within_range = absorbance >= min(standards$absorbance) &
+                        absorbance <= max(standards$absorbance),
+         concentration_mg_l = if_else(
+           within_range, (absorbance - intercept) / slope, NA_real_))
 ```
 
-Result ≈ **7.40 mg/L**.
+| sample_id | absorbance | within_range | concentration_mg_l |
+|---|---|---|---|
+| U1 | 0.310 | TRUE | 4.17 |
+| U2 | 0.520 | TRUE | 7.40 |
+| U3 | 0.900 | FALSE | NA |
 
-This simple estimate omits full calibration and measurement uncertainty.
+- The standards read **0.041 to 0.687**. U3 is above the highest standard, so it gets `NA` instead of a number.
+- The row stays in the table with its reading, so the reason for the missing estimate is visible.
 
 ::: notes
-The[1] and[2] select coefficients. The denominator is the fitted slope, with absorbance per mg/L units. The practical uses range checks to avoid pretending every numeric inversion is supported. The inverse result is an uncertain point estimate.
+`&` requires both conditions. `NA_real_` is a numeric missing value. This is the table saved as output/day19-unknowns.csv in the practical.
 :::
 
-## A number can be calculable but unsupported
+## Why not just calculate U3?
 
-![The U3 absorbance 0.900 is greater than every measured standard reading.](unsupported-reading.svg){height=350px}
-
-U3 is beyond range: flag for a new suitable measurement.
+:::: {.columns}
+::: {.column width="42%"}
+- The formula happily returns **13.3 mg/L** for U3.
+- But no standard was measured above 10 mg/L. The line might bend there: many assays **flatten out** at high concentration.
+- A number you can calculate is not a number you can support.
+- Report U3 as **"above the calibration range"** and measure it again, diluted.
+:::
+::: {.column width="58%"}
+![U3's reading of 0.900 lies above every measured standard, outside the range checked by the calibration.](unsupported-reading.svg){width="100%"}
+:::
+::::
 
 ::: notes
-The practical assigns NA to the unsupported concentration rather than presenting an extrapolated number. A dilution correction requires a new measurement and recorded volumes. The instrument’s calibrated range is evidence, not an inconvenience to bypass.
+The calibrated range is evidence, not an inconvenience to bypass. Saturation at high concentration is common in absorbance assays; we do not need to know why to respect the range.
 :::
 
-## A new diluted measurement can bring the signal in range
+## Bring a high sample into range by dilution
 
-![One millilitre of original sample is brought to ten millilitres total by adding solvent.](dilution.svg){height=350px}
+:::: {.columns}
+::: {.column width="42%"}
+A separate sample was too concentrated, so a **new** measurement was made:
 
-**1.00 mL original → 10.00 mL total** gives a dilution factor of 10.
+- **1.00 mL** of sample plus solvent up to **10.00 mL total** → dilution factor 10.00 / 1.00 = **10**.
+- The diluted reading, **0.520**, is inside the standards → **7.40 mg/L** diluted.
+- Original ≈ 7.404 × 10 ≈ **74.04 mg/L**.
+
+The in-range reading is what was measured; the original concentration is calculated from it and the recorded volumes.
+:::
+::: {.column width="58%"}
+![The new diluted reading 0.520 gives 7.40 mg/L, and multiplying by the factor 10 gives an original estimate of 74.04 mg/L.](extended-dilution-lineage.svg){width="100%"}
+:::
+::::
 
 ::: notes
-This is a stated new numerical example, not a wet-lab protocol or a new reading for U3. Define dilution without assuming chemical preparation knowledge. Total 10 mL does not mean adding 10 mL of solvent to the 1 mL sample. Assume no measured material is lost or reacts.
+"10.00 mL total" does not mean adding 10 mL of solvent to 1 mL of sample. This is a separate example, not a new reading for U3: U3 still needs its own new measurement. Assume no substance is lost. The uncertainty of the volumes and the calibration is ignored in this simple point estimate.
 :::
 
-## Distinguish the measured and original concentrations
+## Pitfall: rounded coefficients change the answer
 
-New diluted reading: **0.520** → **7.40 mg/L** diluted.
-
-Original estimate = diluted estimate × total volume / original volume.
-
-**7.404227 × 10 ≈ 74.04 mg/L** original.
-
-The new measured reading, not the original concentration, is within calibration range.
+:::: {.columns}
+::: {.column width="42%"}
+- Rounding to two decimals gives intercept **0.04** and slope **0.06**.
+- Reading 0.310: **4.17 mg/L** with the full coefficients, **4.50 mg/L** with the rounded ones.
+- Reading 0.520: **7.40** versus **8.00 mg/L**.
+- Calculate from `coef(calibration_fit)`; round only the final number you write.
+:::
+::: {.column width="58%"}
+![Inverse estimates for readings 0.310 and 0.520 are higher when the coefficients are rounded to two decimals than with the full coefficients.](extended-rounded-coefficients.svg){width="100%"}
+:::
+::::
 
 ::: notes
-An original concentration above 10 mg/L can be estimated through a new in-range diluted measurement and a justified factor. That is different from extrapolating the old calibration directly to a high absorbance. Full dilution and calibration uncertainty remain outside this exercise.
+The slope is small, so rounding it from 0.0649 to 0.06 changes it by about 8 percent, and every estimate with it. This is a deliberate diagnostic; students try it in the practical with round(intercept, 2) and round(slope, 2) in a separate expression. More decimals in a report are not more precision either.
 :::
 
-## Show the complete quantity map
+## A new instrument needs its own line
 
-Known standards: concentration → measured absorbance.
-Fit: absorbance as a function of known concentration.
-Unknown: measured absorbance → inverse point estimate.
-
-Keep the fitted direction and requested output distinct.
+:::: {.columns}
+::: {.column width="42%"}
+- A second instrument: six standards **0 to 5 mg/L** (`data/calibration-transfer.csv`).
+- Its own fit: intercept **0.0216**, slope **0.1001** per mg/L. The old coefficients do not apply.
+- X1 read **0.270** → **2.48 mg/L**, inside the standards (0.024 to 0.525).
+- X2 read **0.700** → above range: keep the row, flag it, measure again diluted.
+:::
+::: {.column width="58%"}
+![On the second instrument's calibration, X1 at 0.270 lies within the standard readings and X2 at 0.700 lies above all of them.](extended-transfer-range.svg){width="100%"}
+:::
+::::
 
 ::: notes
-The standard concentration is prepared and the response is measured. A new direct regression of concentration on absorbance is a different fit. Students should label predictor,response,intercept,slope units,range,and unknown estimate.
+Fit as transfer_fit with its own coefficient objects so the main report is not silently changed. Putting 2.48 mg/L back into the forward equation returns 0.270: a useful check of the algebra, but it reuses the same line, so it does not validate the calibration.
 :::
 
-## Rounding a display can change a later calculation
+## Write the result
 
-![Inverse estimates differ when full coefficients are replaced by coefficients rounded to two decimals.](extended-rounded-coefficients.svg){height=350px}
+"Absorbance increased linearly with concentration across six standards from 0 to 10 mg/L (slope **0.065 absorbance units per mg/L**; residuals within ±0.008). Sample U1 was estimated at **4.17 mg/L** and U2 at **7.40 mg/L**. U3 (absorbance 0.900) was above the highest standard and needs to be diluted and measured again."
 
-Retain fitted coefficients; round results when communicating.
+| Misreading | Better |
+|---|---|
+| "The line fits well, so any concentration is fine." | Only between the lowest and highest standards. |
+| "U3 is 13.3 mg/L." | U3 is above the calibration range: no estimate. |
+| "The intercept should be zero." | It is the background reading; do not force it. |
+| "7.40 mg/L is exact." | It is a point estimate; uncertainty is not calculated here. |
 
 ::: notes
-For reading.310, rounding intercept and slope to.04 and.06 gives4.50 rather than4.17 mg/L. It is a deliberate diagnostic, not a recommended new calibration. Extra display precision does not remove measurement uncertainty either.
+Ask students which code produces each number in the paragraph. They should be able to point at coef(), residuals() and the unknowns table.
 :::
 
-## A residual has a direction and a scale
+## Summary {.smaller}
 
-```r
-standards$observed_minus_fitted <-
-  standards$absorbance - fitted(calibration_fit)
-residuals(calibration_fit)
-```
+| Concept | Key fact |
+|---|---|
+| Standard | Solution of known concentration, measured in the same run as the samples |
+| Direction | Prepared concentration on x, measured absorbance on y: `lm(absorbance ~ concentration_mg_l)` |
+| Coefficients | Intercept **0.0396** (background); slope **0.0649** absorbance per mg/L |
+| Residual | Observed − fitted reading; look for curvature or one point far away |
+| Inverse | `(absorbance − intercept) / slope`: U1 4.17, U2 7.40 mg/L |
+| Range | Estimate only between the lowest and highest standard; U3 → `NA` with a reason |
+| Dilution | New in-range reading × factor; 1 → 10 mL gives ×10 (7.40 → 74.04 mg/L) |
+| Precision | Calculate with full coefficients; round only the reported result |
+| New instrument | New standards, new fit (slope 0.1001 per mg/L for the transfer data) |
 
-Positive means the observed signal is above the line.
+**Next (Day 20, association):** the same `lm()` on two measured biological variables, where neither was set by us.
 
-::: notes
-Compare one value by hand. Both expressions should match. A residual is not the concentration error of an unknown and not a p-value. Use the first standard while its measured concentration and signal remain visible.
-:::
-
-## Trace a corrected estimate through its evidence
-
-![A new diluted reading feeds its inverseestimate and suppliedfactor to recover an original estimate.](extended-dilution-lineage.svg){height=350px}
-
-The corrected original estimate is not a direct instrument reading.
+**Now:** [open the Day 19 exercises](../../week4/19-calibration.qmd). Make `calibration-report.Rmd` with the line and residual plots, the slope with units and the range-checked unknowns; save `output/day19-unknowns.csv` and both figures, then render.
 
 ::: notes
-A numerical table should retain the new reading,original aliquot volume,total final volume,factor,diluted estimate,and original estimate. Nothing in this chain validates U3 without its own new measurement.
-:::
-
-## A second calibration needs a second fit
-
-![The new six-standard instrument calibration has its own intercept and slope.](extended-transfer-line.svg){height=350px}
-
-Create separate coefficient objects for the second instrument.
-
-::: notes
-Transfer standards span0–5 mg/L. Fit absorbance on known concentration. Their fitted intercept is.02161905 and slope.10008571 per mg/L. This is another empirical calibration,not a universal optical law.
-:::
-
-## Rebuild the transfer fit explicitly
-
-```r
-transfer_standards <- read_csv(
-  'data/calibration-transfer.csv', show_col_types = FALSE)
-transfer_fit <- lm(absorbance ~ concentration_mg_l,
-                   data = transfer_standards)
-coef(transfer_fit)
-```
-
-::: notes
-Load readr before this block. Keep separate names so the primary instrument report is not silently altered. The independent transfer report must contain its own import,checks,fit,and inverse calculations.
-:::
-
-## Inspect the new residuals, not the old picture
-
-![Residuals fromthe new six-standard fit remain small onthe absorbance scale.](extended-transfer-residuals.svg){height=350px}
-
-A tidy residual plot is limited evidence with only six standards.
-
-::: notes
-Look for obvious curvature or an unusual point. Absence of an obvious pattern does not establish chemical specificity,measurement accuracy in every condition,or performance beyond the tested range.
-:::
-
-## Preserve the unsupported unknown as a record
-
-![X1at0.270 is within the new standard range;X2at0.700 is above it.](extended-transfer-range.svg){height=350px}
-
-Keep the ID and reading; flag the unsupported concentration.
-
-::: notes
-X1 estimates about 2.48168 mg/L. X2 is not supported by the supplied standard readings. Missing estimate due to out-of-range input differs from a missing measured signal; retain the reason rather than dropping the row.
-:::
-
-## An algebra check is useful but not independent validation
-
-```r
-transfer_a <- coef(transfer_fit)[1]
-transfer_b <- coef(transfer_fit)[2]
-x1_mg_l <- (0.270 - transfer_a) / transfer_b
-transfer_a + transfer_b * x1_mg_l
-```
-
-The forward calculation returns **0.270**, apart from rounding.
-
-::: notes
-The check can catch reversal or arithmetic mistakes. Because it reuses the same fitted relationship, it does not independently establish calibration validity or eliminate uncertainty.
-:::
-
-## A next action needs new information, not an invented result
-
-For an unsupported sample, state what must be supplied next:
-
-- A new suitable measurement.
-- Any recorded sample and total volumes.
-- The supported range and applicable calibration.
-
-No fabricated corrected concentration.
-
-::: notes
-The transfer report should recommend a sensible information-gathering step for X2. It is not a wet-lab protocol and does not require prior chemistry. Full uncertainty propagation remains beyond this simple exercise.
-:::
-
-## Exercises: report the line and its limits
-
-Save **`calibration-report.Rmd`**, supported concentration estimates, and both figures.
-
-Explain U3’s missing estimate and the new dilution example.
-
-[Open exercises](../../week4/19-calibration.qmd).
-
-::: notes
-Students should explain the standard, slope units, residual sign, supported range, and uncertainty limitation. They need no memorised optical law. Keep the dataset and formula visible so the chemistry setting does not become a prerequisite.
+The exercises continue with the rounding diagnostic, the dilution table and an independent transfer-calibration.Rmd for the second instrument.
 :::

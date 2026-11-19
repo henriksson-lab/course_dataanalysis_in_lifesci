@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.7.30">
 
   <meta name="author" content="Data Analysis in Life Sciences">
-  <title>Data Analysis in Life Sciences – Reproduce the saved analysis</title>
+  <title>Data Analysis in Life Sciences – Reproduce and share your report</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -28,6 +28,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-bf56578b9c06c165c166475cd19dbcd1.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -127,8 +193,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Reproduce the saved analysis</h1>
-  <p class="subtitle">Day 24 — test the saved analysis</p>
+  <h1 class="title">Reproduce and share your report</h1>
+  <p class="subtitle">Day 24 — Will it work on someone else’s computer?</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -139,17 +205,53 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="your-screen-may-contain-hidden-prerequisites" class="slide level2">
-<h2>Your screen may contain hidden prerequisites</h2>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>Your duckweed report is finished. Your supervisor wants to check it, a lab partner wants to add next month’s flasks, and you will need it again for your thesis. <strong>If someone else opens your project, do they get the same report?</strong> Often they do not: the report quietly relied on something that only existed on your screen.</p>
+<p>Today you will:</p>
+<ul>
+<li>render the report from a fresh R session, so it cannot lean on hidden objects;</li>
+<li>pack the project as a ZIP and test it as the receiver, in a new folder;</li>
+<li>handle corrections: a ZIP is a snapshot, and it is not a backup;</li>
+<li>separate “it renders” from “it is right”.</li>
+</ul>
+<p>Day 23 produced the report; today makes it shareable. Day 25 consolidates the whole workflow.</p>
+<aside class="notes">
+<p>Ask who has ever received a file that “doesn’t work” or a spreadsheet whose numbers nobody could re-derive. That is today’s problem. The methods are not new: restart, Knit, zip, unzip. The new thing is doing them as a deliberate test from the receiver’s side.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-problem-it-works-on-my-screen" class="slide level2">
+<h2>The problem: it works on my screen</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p>A report can run for you and fail for anyone else because it depends on:</p>
+<ul>
+<li>an object you created in the <strong>Console</strong>, not in the report;</li>
+<li>a package loaded only in the Console;</li>
+<li>a personal path such as <code>C:/Users/anna/Desktop/duckweed.csv</code>;</li>
+<li>a data file that is not in the project.</li>
+</ul>
+<p>You will not notice any of these on your own computer.</p>
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="hidden-state.svg" height="375"></p>
-<figcaption>An interactive R object does not automatically become part of a saved report.</figcaption>
+<p><img data-src="hidden-state.svg" style="width:100.0%"></p>
+<figcaption>An object imported in the interactive Console is not part of the saved report, so the report cannot find it in a fresh session.</figcaption>
 </figure>
 </div>
-<p>“It works on my screen” is a starting observation, not a reproduction check.</p>
+</div></div>
 <aside class="notes">
-<p>An imported object can remain in interactive memory while its import is missing from the report. Put the needed imports and calculations in the saved source.</p>
+<p>All four are invisible as long as you stay in the same session on the same laptop. That is why the tests today change the session (restart) and the location (new folder).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -166,13 +268,17 @@ Data Analysis in Life Sciences
 <h2>Source and result have different jobs</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="source-output.svg" height="380"></p>
-<figcaption>Input data and R Markdown source produce an HTML result.</figcaption>
+<p><img data-src="source-output.svg" height="330"></p>
+<figcaption>Input data and the R Markdown source together produce the HTML result.</figcaption>
 </figure>
 </div>
-<p>HTML is readable. <code>.Rmd</code> plus inputs makes the analysis repeatable.</p>
+<ul>
+<li>The <strong>HTML</strong> is for reading. It cannot be re-run on new data.</li>
+<li>The <strong><code>.Rmd</code> plus the CSV</strong> is the recipe. That is what makes the result repeatable.</li>
+<li>Share both; keep the source as the master copy.</li>
+</ul>
 <aside class="notes">
-<p>An HTML output does not by itself supply the original analysis recipe. Ask students which file they would edit when new measurements arrive and which they would send for someone simply to read.</p>
+<p>Ask: when next month’s flasks arrive, which file do you edit? The .Rmd, then Knit. Someone who only receives the HTML can read the result but not check or extend it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -185,17 +291,48 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="restart-then-render-from-saved-files" class="slide level2">
-<h2>Restart, then render from saved files</h2>
-<ol type="1">
-<li>Save the source <code>.Rmd</code>.</li>
-<li>Restart R.</li>
-<li>Knit without manually recreating console objects first.</li>
-<li>Read the first meaningful error and named chunk, if rendering stops.</li>
-</ol>
-<p>Keep software installation separate from every report render.</p>
+<section id="test-1-restart-r-then-knit" class="slide level2">
+<h2>Test 1: restart R, then Knit</h2>
+<p><strong>Session → Restart R</strong>, then <strong>Knit</strong> without running anything in the Console. The report must now import, calculate and plot by itself.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Error</th>
+<th>Usual cause</th>
+<th>Repair</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>object 'duckweed' not found</code></td>
+<td>Import only run in the Console</td>
+<td>Put the import in a chunk before it is used</td>
+</tr>
+<tr class="even">
+<td><code>could not find function</code></td>
+<td>Package loaded only in the Console</td>
+<td>Add <code>library()</code> to the setup chunk</td>
+</tr>
+<tr class="odd">
+<td><code>cannot open file</code></td>
+<td>Personal path, or file not in project</td>
+<td>Use <code>data/duckweed.csv</code> and keep the file</td>
+</tr>
+<tr class="even">
+<td>Old text, new numbers</td>
+<td>Result typed by hand</td>
+<td>Check the sentence, or use inline R</td>
+</tr>
+</tbody>
+</table>
+<p>Read the <strong>first</strong> error and the chunk it names. Fix one thing, then Knit again.</p>
 <aside class="notes">
-<p>The source should load its packages, import input files, and create all its objects. Restarting does not delete saved data files. If students use a Console render command, it belongs outside the report: a report must not render itself.</p>
+<p>Demonstrate with a report whose import line has been run only in the Console: works before restart, fails after. Restarting does not delete saved files; it only empties memory. Expected duckweed values after a correct render: 10 control flasks, mean 32.28 mg; 9 nutrient flasks, mean 39.63 mg (F17 spilled).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -208,17 +345,29 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="a-recipient-needs-the-whole-small-project" class="slide level2">
-<h2>A recipient needs the whole small project</h2>
+<section id="what-the-receiver-needs" class="slide level2">
+<h2>What the receiver needs</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p>Copy into a new <code>report-share</code> folder <strong>outside</strong> your project:</p>
+<ul>
+<li><code>introcomputing.Rproj</code></li>
+<li><code>duckweed-report.Rmd</code> and its HTML</li>
+<li><code>data/duckweed.csv</code> and <code>data/README.md</code></li>
+<li><code>output/</code> if the report saves there</li>
+<li>a <code>README.txt</code>: data simulated, file to render, packages needed</li>
+</ul>
+<p>The <code>.Rproj</code> contains no data; a shortcut is not a copy.</p>
+</div><div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="portable-folder.svg" height="390"></p>
-<figcaption>The share folder includes a project file, report source, data and dictionary, output, and README.</figcaption>
+<p><img data-src="portable-folder.svg" style="width:100.0%"></p>
+<figcaption>The share folder holds the project file, report source and HTML, the data and its dictionary, an output folder and a README.</figcaption>
 </figure>
 </div>
-<p>Use the selected study’s source and CSV; the <code>.Rproj</code> does not contain them.</p>
+</div></div>
 <aside class="notes">
-<p>For duckweed use duckweed-report.Rmd and data/duckweed.csv. For the organic alternative use organic-study.Rmd and data/organic-recovery.csv. Include the dictionary and required output directory. A shortcut to the author’s files is not a transferred dataset.</p>
+<p>For the organic alternative: organic-study.Rmd and data/organic-recovery.csv. Leave out credentials, session files and unrelated work. The README is what a supervisor reads first: what the data are and how to get the report.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -231,17 +380,19 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="copies-do-not-update-themselves" class="slide level2">
-<h2>Copies do not update themselves</h2>
+<section id="pack-the-folder-as-a-zip" class="slide level2">
+<h2>Pack the folder as a ZIP</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="copies.svg" height="375"></p>
-<figcaption>Windows and Ubuntu hold separately copied folders; edits must be recopied before packaging.</figcaption>
+<p><img data-src="share-zip.svg" height="300"></p>
+<figcaption>report-share and report-share-v1.zip sit side by side in Documents; zip -r packs the folder into the ZIP next to it.</figcaption>
 </figure>
 </div>
-<p>Revised source → recopy → repackage → test the returned ZIP.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">zip</span> <span class="at">-r</span> report-share-v1.zip report-share/</span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> <span class="at">-l</span> report-share-v1.zip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Run this from the folder that <strong>contains</strong> <code>report-share</code>, so the ZIP is saved beside it, not inside it. <code>-r</code> packs everything inside; <code>unzip -l</code> checks what went in. Use a new name for every ZIP.</p>
 <aside class="notes">
-<p>This is especially important for Windows students using Ubuntu shell tools but native RStudio. After making a ZIP in Ubuntu, copy it back to a normal Windows folder for extraction and the native application test. Check that it contains the revised source and relative input paths.</p>
+<p>A ZIP inside the folder it packs would be packed into the next ZIP. Re-running zip with an existing name updates that archive and can keep files you have since deleted, so new names (v1, v2) are simpler. Windows students: copy report-share into Ubuntu first, and copy the finished ZIP back to Windows for the RStudio test.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -254,17 +405,26 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="test-in-a-different-location" class="slide level2">
-<h2>Test in a different location</h2>
+<section id="test-2-open-it-as-the-receiver-would" class="slide level2">
+<h2>Test 2: open it as the receiver would</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> report-share-v1.zip <span class="at">-d</span> receiver-v1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Extraction keeps the packed folder: one extra level.</li>
+<li>Open <code>receiver-v1/report-share/introcomputing.Rproj</code>, restart R, Knit.</li>
+<li>Expect the same counts (10 and 9) and means (32.28 and 39.63 mg).</li>
+</ul>
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="different-location.svg" height="370"></p>
-<figcaption>A complete project is zipped and extracted into a fresh location before rendering.</figcaption>
+<p><img data-src="receiver-nesting.svg" style="width:100.0%"></p>
+<figcaption>Extracting into receiver-v1 adds a level: the report is at receiver-v1/report-share/duckweed-report.Rmd.</figcaption>
 </figure>
 </div>
-<p>Open its <code>.Rproj</code>, restart, and render the source without repairing it first.</p>
+</div></div>
 <aside class="notes">
-<p>A fresh folder on the same laptop checks portability within that software environment. Keeping the relative data/ path tests independence from the original project location.</p>
+<p>Check the project name in RStudio’s corner: it is easy to Knit the original by mistake. Jittered point positions may move slightly between computers; numbers should not. If they differ, save sessionInfo() in the log: it lists R and package versions.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -277,8 +437,145 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="diagnose-one-dependency-at-a-time" class="slide level2">
-<h2>Diagnose one dependency at a time</h2>
+<section id="two-fresh-starts-test-different-things" class="slide level2">
+<h2>Two fresh starts test different things</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="two-fresh-checks.svg" height="330"></p>
+<figcaption>Restarting R tests for hidden objects; moving the project to a new folder tests for missing files and personal paths.</figcaption>
+</figure>
+</div>
+<ul>
+<li><strong>Restart R</strong> finds objects that only lived in memory.</li>
+<li><strong>New folder</strong> finds missing files and paths that point back to your original.</li>
+<li>Together they are the closest you can get to the receiver’s computer on your own laptop.</li>
+</ul>
+<aside class="notes">
+<p>Restarting in the original folder can still find a file via a personal absolute path. Moving the project but keeping the session can hide a missing import. Both together catch both. A different computer can still differ in software versions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-zip-is-a-snapshot" class="slide level2">
+<h2>A ZIP is a snapshot</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ul>
+<li>You fix the README after making v1. Neither <code>v1.zip</code> nor <code>receiver-v1</code> changes.</li>
+<li>Make <code>report-share-v2.zip</code>, extract to <code>receiver-v2</code>, and check the fix is there.</li>
+<li>A new name is not proof. Open the file.</li>
+<li>Add a line to the README saying what changed in v2.</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="zip-snapshot.svg" style="width:100.0%"></p>
+<figcaption>After the folder is edited, report-share-v1.zip still holds the old README while a newly made v2 contains the edit.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>The same applies to separate copies on Windows and Ubuntu: they do not update each other. Revise, recopy, repack, retest.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="sharing-is-not-backup" class="slide level2">
+<h2>Sharing is not backup</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="share-vs-backup.svg" height="330"></p>
+<figcaption>A share folder and its ZIP on the same laptop are lost together; a copy on separate supported storage survives.</figcaption>
+</figure>
+</div>
+<p>A ZIP next to the original protects against nothing if the laptop is lost, stolen or broken. Keep a copy of the project on the supported separate storage, and note where.</p>
+<aside class="notes">
+<p>Ask students to say where their backup is. If the university storage is not set up for them yet, they should say so in the log rather than count a second folder on the same disk as a backup.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="it-renders-it-is-right" class="slide level2">
+<h2>It renders ≠ it is right</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p>In two disposable copies:</p>
+<ul>
+<li>Rename <code>data/duckweed.csv</code>: Knit <strong>stops</strong> with an error naming the file.</li>
+<li>Write “All 20 flasks had a measured biomass.”: Knit <strong>succeeds</strong>, but only 19 were weighed.</li>
+</ul>
+<p>R notices a missing file. It cannot notice a wrong sentence. A reader has to check claims against the numbers.</p>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="runs-versus-valid.svg" style="width:100.0%"></p>
+<figcaption>Running successfully and being scientifically supported are separate: a report can run and still make an unsupported claim.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>After restoring the file name, check that the means are back to 32.28 and 39.63 mg; an absent error message is not the same as the right result. Delete the disposable copies so a deliberately false sentence never ends up in the shared ZIP.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-source-edit-does-not-update-the-html" class="slide level2">
+<h2>A source edit does not update the HTML</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stale-output.svg" height="330"></p>
+<figcaption>The source has been revised but the HTML still shows the old version until the report is rendered again.</figcaption>
+</figure>
+</div>
+<p>After any change, Knit again and open the <strong>new</strong> HTML. Compare numbers at sensible precision: 33.91818 and 33.92 mg are the same mean; 34.32 mg is a different analysis.</p>
+<aside class="notes">
+<p>A browser tab with a familiar title may be the old file. The numbers come from the algae data (supplement mean 33.91818 mg), which students package as algae-brief in the exercises. A difference beyond rounding means checking input, exclusions and code, not the number of digits.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
 <table class="caption-top">
 <colgroup>
 <col style="width: 50%">
@@ -286,321 +583,37 @@ Data Analysis in Life Sciences
 </colgroup>
 <thead>
 <tr class="header">
-<th>Symptom</th>
-<th>First check</th>
+<th>Check</th>
+<th>What it finds</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Object not found</td>
-<td>Was it created inside the report, before use?</td>
+<td>Restart R, then Knit</td>
+<td>Objects and packages that existed only in the Console</td>
 </tr>
 <tr class="even">
-<td>Function unavailable</td>
-<td>Is its package loaded in setup?</td>
+<td>Extract the ZIP into a new folder, then Knit</td>
+<td>Missing files and personal paths</td>
 </tr>
 <tr class="odd">
-<td>Cannot open data</td>
-<td>Which computer, project, and relative path?</td>
+<td>Make v2 and check the fix in a new extraction</td>
+<td>Old snapshots sent by mistake</td>
 </tr>
 <tr class="even">
-<td>Export directory missing</td>
-<td>Include or explicitly create the destination.</td>
+<td>Copy on separate storage</td>
+<td>Protection against losing the laptop</td>
+</tr>
+<tr class="odd">
+<td>Read the claims against the numbers</td>
+<td>Wrong sentences that render without error</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Next (Day 25, consolidate):</strong> the whole workflow once more, from files to a shared report.</p>
+<p><strong>Now:</strong> <a href="../../week5/24-reproduce.html">open the Day 24 exercises</a>. Leave with a tested <code>report-share-v2.zip</code>, <code>algae-brief.Rmd</code> with its HTML, a backup copy, and <code>reports/reproduction-log.txt</code>.</p>
 <aside class="notes">
-<p>Ask students to reproduce the exact failure before changing multiple things. The error identifies a question to investigate; it does not always identify the full cause. Credentials never belong in an error log or screenshot.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="review-meaning-as-well-as-execution" class="slide level2">
-<h2>Review meaning as well as execution</h2>
-<ul>
-<li>What is the question and independent unit?</li>
-<li>Are axes, counts, units, and comparison direction clear?</li>
-<li>Does the prose agree with the actual results?</li>
-<li>Are missing data and limitations explained?</li>
-</ul>
-<p>The organic alternative uses descriptive means and SDs.</p>
-<aside class="notes">
-<p>A successful render can reproduce a mistaken analysis. Ask the reader to locate evidence for the conclusions, not just confirm that an HTML file exists.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-successful-rerun-is-a-bounded-claim" class="slide level2">
-<h2>A successful rerun is a bounded claim</h2>
-<p>It establishes that the supplied source and inputs regenerate the result in the <strong>tested environment</strong>.</p>
-<p>It does not establish:</p>
-<ul>
-<li>Correct biological design or interpretation.</li>
-<li>Compatibility with every future software version.</li>
-<li>Protection against losing the only storage device.</li>
-</ul>
-<aside class="notes">
-<p>Distinguish reproduction, scientific validity, and backup. Use sessionInfo when investigating software-version differences, without expecting beginners to interpret every field. A ZIP beside the original is not a separate backup.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="two-checks-not-one-badge-of-correctness" class="slide level2">
-<h2>Two checks, not one badge of correctness</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="runs-versus-valid.svg" height="350"></p>
-<figcaption>Execution success and supported interpretation are separate dimensions, with successful-but-misleading work possible.</figcaption>
-</figure>
-</div>
-<p>A reproducible mistake is still a mistake.</p>
-<aside class="notes">
-<p>Ask which check software can perform directly. It can report missing inputs or unavailable functions; it cannot automatically know that a scientific conclusion is warranted. The controlled exercise separates execution failures from false or unsupported prose in a document that renders successfully.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="investigate-one-controlled-change-at-a-time" class="slide level2">
-<h2>Investigate one controlled change at a time</h2>
-<p>Use a disposable copy:</p>
-<ol type="1">
-<li>Run the working reference version.</li>
-<li>Change one known item and predict its effect.</li>
-<li>Observe the error or inconsistency.</li>
-<li>Restore, rerun, and compare the key result.</li>
-</ol>
-<aside class="notes">
-<p>Preserve the original project. Students record the changed item, expected and actual consequence, repair, and confirming rerun. Changing several things at once makes diagnosis harder and can conceal which correction mattered. This is practical error recovery, not deliberate damage to raw measurements.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-copied-input-with-another-name-is-unavailable-to-this-path" class="slide level2">
-<h2>A copied input with another name is unavailable to this path</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="missing-file-case.svg" height="350"></p>
-<figcaption>The report requests data/algae.csv while the received file has a different name.</figcaption>
-</figure>
-</div>
-<p>Repair the copied filename or documented path; verify the rerun.</p>
-<aside class="notes">
-<p>Use the current main report’s actual input in the exercise, not necessarily algae. Temporarily renaming it in a disposable project should cause a file error. Restore the exact name and confirm the original counts and main result. The absence of an error alone is not enough evidence of a correct repair.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="match-the-repair-to-the-problem" class="slide level2">
-<h2>Match the repair to the problem</h2>
-<p>A missing file, a missing measurement, and an unknown R object are different.</p>
-<ul>
-<li>Restore the required input file/path.</li>
-<li>Preserve an unavailable measurement as <code>NA</code>.</li>
-<li>Create an object through the saved import/calculation.</li>
-</ul>
-<aside class="notes">
-<p>These problems need different actions. A copied input renamed for an experiment has not become a dataset of zeros. A missing observation does not justify removing all objects or installing packages. Ask the learner to classify the problem before choosing a repair.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="wrong-prose-can-render-successfully" class="slide level2">
-<h2>Wrong prose can render successfully</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="wrong-prose-renders.svg" height="350"></p>
-<figcaption>A false sentence in report source becomes the same false sentence in an HTML output despite a successful render.</figcaption>
-</figure>
-</div>
-<p>Read the claims against the counts, plot, and assumptions.</p>
-<aside class="notes">
-<p>In the controlled exercise, the false duckweed sentence says all enrolled samples had outcomes; the organic sentence says yield independently establishes purity. Both can render. Students must rewrite the claim and check they did not accidentally share an intentionally misleading diagnostic version.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="fresh-memory-and-fresh-location-test-different-dependencies" class="slide level2">
-<h2>Fresh memory and fresh location test different dependencies</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="two-fresh-checks.svg" height="350"></p>
-<figcaption>Restarting R checks hidden objects; moving a complete project checks paths and included files.</figcaption>
-</figure>
-</div>
-<p>Use both tests when handing work to another person.</p>
-<aside class="notes">
-<p>Restarting in the original folder may leave a personal file path accessible. Moving a project while retaining interactive objects may conceal a missing import. A fresh session in a new extracted folder tests both problems together, within the particular software environment being used.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-source-edit-does-not-update-an-old-html" class="slide level2">
-<h2>A source edit does not update an old HTML</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stale-output.svg" height="350"></p>
-<figcaption>A revised source file and old HTML remain inconsistent until the render is run again.</figcaption>
-</figure>
-</div>
-<p>Locate and open the <strong>newly generated</strong> output after rerunning.</p>
-<aside class="notes">
-<p>The file manager, editor, and browser may each display a different stage of work. Ask the learner to state which artifact they inspected. A browser tab with a familiar title is not a version check. Reopen the known output file rather than accumulating copies named final2 without tracing them.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="use-the-fresh-culture-memo-for-a-small-portable-report" class="slide level2">
-<h2>Use the fresh culture memo for a small portable report</h2>
-<p><code>algae-brief.Rmd</code> needs:</p>
-<ul>
-<li>Its own imports and calculations.</li>
-<li>Input and design, available counts, and one observation plot.</li>
-<li>A short interpretation and missingness account.</li>
-<li>A README for the recipient.</li>
-</ul>
-<aside class="notes">
-<p>This transfers the already completed algae script and memo; it is not a new full project or statistical method. Save source in the project root so data/ paths remain consistent. Include actual inputs rather than shortcuts to the original project. The required available counts remain 12 and 11.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="compare-numerical-results-with-sensible-precision" class="slide level2">
-<h2>Compare numerical results with sensible precision</h2>
-<p><code>33.91818 mg</code> and <code>33.92 mg</code> can be the same result at different precision.</p>
-<p><code>33.91818 mg</code> and <code>34.32 mg</code> require investigation.</p>
-<p>Check input, exclusions, outcome, and calculation before blaming rounding.</p>
-<aside class="notes">
-<p>A comparison should include counts and definitions as well as printed digits. Rounding affects display, not the intended underlying calculation. Environment records such as sessionInfo can help diagnosis, but do not replace the source, input data, or an explanation of a changed exclusion rule.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="keep-the-failure-investigation-useful" class="slide level2">
-<h2>Keep the failure investigation useful</h2>
-<p>Record what changed, what you predicted, what happened, and what confirmed repair.</p>
-<p>Share the corrected source, not an unresolved test case.</p>
-<aside class="notes">
-<p>Keep a case log and give revised packages clear names. Revisit a diagnostic case after another exercise and follow the written procedure to expose any undocumented steps.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="exercises-keep-a-reproduction-log" class="slide level2">
-<h2>Exercises: keep a reproduction log</h2>
-<p><a href="../../week5/24-reproduce.html">Open exercises</a> · <a href="../../week5/24-reproduce-quiz.html">Quiz</a>.</p>
-<ul>
-<li>Test the chosen main-study package and the brief algae-share package.</li>
-<li>Record destination, first error, fix, and rerun outcome.</li>
-<li>Retain source, input, HTML, and a supported backup copy.</li>
-<li>Keep a controlled-failure log distinguishing execution from interpretation.</li>
-</ul>
-<p>Use the study you chose yesterday.</p>
-<aside class="notes">
-<p>Feedback should identify actions another person can reproduce. Keep this as formative practice, not a report-grading exercise. A fresh render is the endpoint.</p>
+<p>The exercises use the day-23 report (duckweed or organic), then repeat the procedure for the algae memo: 12 reference cultures, mean 28.20 mg; 11 supplement cultures, mean 33.92 mg (A19 missing). Formative practice, not graded.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

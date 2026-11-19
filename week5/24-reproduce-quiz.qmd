@@ -1,8 +1,8 @@
 ---
-title: "Quiz: reproduce a saved analysis"
+title: "Quiz: reproduce and share a report"
 ---
 
-[Exercises](24-reproduce.qmd) · [Weekly revision](quiz.qmd)
+[Lecture](../lectures/24-reproduce/lec.qmd) · [Exercises](24-reproduce.qmd) · [Weekly revision](quiz.qmd)
 
 Try each question before opening its hint or answer.
 
@@ -65,3 +65,40 @@ Reproduction, scientific validity and backup are separate checks.
 ::: {.callout-note collapse="true" title="Answer"}
 (i). Successful reproduction is evidence about the tested source, inputs and environment. Design and interpretation still need review, and disk loss needs a separately stored backup.
 :::
+
+---
+
+**Q5.** You make `report-share-v1.zip`, then correct a sentence in `report-share/README.txt`. A colleague extracts v1. Do they see the correction?
+
+::: {.callout-tip collapse="true" title="Hint"}
+A ZIP stores the folder as it was when the ZIP was made.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+No. Make a new, newly named ZIP (`report-share-v2.zip`), extract it into a new folder, and check that the corrected sentence is there before sending it.
+:::
+
+---
+
+**Q6.** You run `unzip report-share-v1.zip -d receiver-v1`. Where is `duckweed-report.Rmd`, and why?
+
+::: {.callout-tip collapse="true" title="Hint"}
+The ZIP was made from the folder `report-share/`.
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+At `receiver-v1/report-share/duckweed-report.Rmd`. Extraction keeps the packed folder, so it adds one level inside the destination. Open `receiver-v1/report-share/introcomputing.Rproj` to test it.
+:::
+
+---
+
+**Q7.** You run `zip -r report-share-v1.zip report-share/` from Documents, the folder that contains `report-share`. Where is the ZIP saved, and why is that better than saving it inside `report-share`?
+
+::: {.callout-tip collapse="true" title="Hint"}
+Where is the new ZIP saved?
+:::
+
+::: {.callout-note collapse="true" title="Answer"}
+In Documents, beside `report-share`, because a new ZIP is saved in the current folder. A ZIP kept inside the folder it packs would be packed into the next ZIP, which would then contain an old copy of itself.
+:::
+

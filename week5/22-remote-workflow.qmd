@@ -1,0 +1,181 @@
+---
+title: "Day 22 — the same workflow on a remote computer"
+---
+
+[Lecture slides](../lectures/22-remote-workflow/lec.qmd) · [Quiz](22-remote-workflow-quiz.qmd) · [Weekly revision](quiz.qmd)
+
+
+## Why a bigger computer?
+
+On [Day 21](21-computer.qmd) you estimated that a single-cell table of 30,000
+genes × 100,000 cells needs about 24 GB of RAM, more than a 16 GB laptop has.
+Universities and research centres therefore run shared Linux computers with far
+more RAM and CPU cores, which you log in to over the network. The analysis is the
+same R and the same project; what changes is **which computer** runs it and
+**where** the files are.
+
+Today's question: you render a report on the remote computer. Where is it, and
+how do you get it back to your laptop?
+
+Keep a short log, `reports/remote-log.txt`, of which computer and folder each
+file is in. Never write passwords or login codes in it.
+
+::: {.callout-note}
+## Remote connection details are pending
+
+HPC2N or another Linux environment will be used. The hostname, account route,
+authentication, remote desktop, transfer method, permitted execution location,
+and supported R application will be provided separately. Use those instructions
+for remote work. Until access is available, do the local rehearsal below and
+mark the connection tasks pending.
+:::
+
+## 1. Two computers, two sets of files
+
+A path names a place **on one particular computer**. Your laptop and the remote
+computer each have their own disk, so a folder called `course project` on each
+of them holds two separate copies that do not update each other:
+
+```text
+Laptop                         Remote Linux computer
+course project                 course project (a separate copy)
+  data/seedlings.csv              data/seedlings.csv
+  report.Rmd                     report.Rmd
+  report.html                    report.html
+          -- supported transfer -->
+          <-- supported transfer --
+```
+
+There are two ways in. **SSH** gives you a terminal on the remote computer, with
+the same shell commands as Day 3, and a **remote desktop** shows its screen in a
+window. Neither copies files for you. The service guide will say whether both
+see the same home folder.
+
+## 2. Which computer and folder am I in?
+
+Connect with the SSH command from the service guide, in Ubuntu on Windows or
+Terminal on Mac. Its general form is `ssh your-course-username@the-provided-host`,
+with both placeholders replaced from the guide. Then use `hostname` to find out
+which computer answered, and `pwd` to find out which folder you are in there:
+
+```bash
+hostname
+pwd
+ls
+```
+
+Write both answers in your log. Make a practice folder with
+`mkdir -p introcomputing-practice`, then type `exit`. You are back in your
+laptop's shell, and `pwd` now shows a laptop folder. Reconnect and use `ls` to
+find out whether the practice folder is still there: it is, because it was saved
+on the remote disk and `exit` only ends the connection.
+
+## 3. Does R on the remote computer see the project?
+
+Transfer the course ZIP with the supported upload method, extract it, and open
+its `.Rproj` in the provided R application. Then, in the **remote R console**,
+use `file.exists()` to find out whether R can see the seedling data:
+
+```r
+getwd()
+file.exists("data/seedlings.csv")
+```
+
+You should get the remote project folder and `TRUE`. If you get `FALSE`, R is
+looking in the wrong folder: check `getwd()` and look for an extra folder level
+created during extraction, rather than typing a path from your laptop.
+
+## 4. Rendering remotely and getting the report back
+
+Open `report.Rmd` and render it in the provided R application. If R is set up
+in the remote shell, the teaching team may instead ask you to run this from the
+project root:
+
+```bash
+Rscript -e 'rmarkdown::render("report.Rmd")'
+```
+
+`Rscript` starts a fresh R process and renders the saved document, the same
+fresh-session idea as restarting R. The HTML now exists only on the remote disk,
+so download it to a folder on your laptop that you can name, and open that copy
+in your browser. Write the remote path, the laptop path, and the direction of the
+transfer in your log. If the laptop folder is empty, the render probably did not
+fail: find the HTML on the remote computer first, then check where the transfer
+put it.
+
+## Local rehearsal while remote access is pending
+
+Copy the whole extracted course folder to a folder called
+`introcomputing-rehearsal`, open that copy's `.Rproj`, and repeat sections 3
+and 4 there: `getwd()`, `file.exists()`, render, and find the HTML. This checks
+that the project works wherever it is copied. Write "local rehearsal only" in
+your log, with the remote steps still to do.
+
+## 5. Did the algae table arrive complete?
+
+`data/algae.csv` holds dry biomass (mg) of 24 separately grown algae cultures,
+12 reference and 12 supplement; culture A19 spilled before weighing (see
+`data/README.md`). Before copying, write `reports/transfer-plan.txt` with the
+source computer and project path, the destination computer and project path,
+and the file you will move.
+
+Then use `nrow()` and `is.na()` to find out whether the copy holds every culture
+and every available measurement. Run the same lines in the source project and
+in the destination project:
+
+```r
+library(readr)
+algae <- read_csv("data/algae.csv", show_col_types = FALSE)
+nrow(algae)
+sum(!is.na(algae$biomass_mg))
+algae$biomass_mg[algae$culture_id == "A19"]
+```
+
+Both copies should give 24 cultures, 23 measurements, and `NA` for A19. Write a
+short `reports/transfer-receipt.txt` **in the destination copy** with the date,
+the destination path, and these three results, then bring the receipt back to
+the source project with the supported transfer.
+
+## 6. Which copy is the latest?
+
+You now have two files called `transfer-receipt.txt`. In a disposable copy,
+change the returned receipt to say "second revision", save it, and reopen both
+copies. The other copy is unchanged, because each copy is a separate file on
+its own disk. Equal names, and even equal file sizes, do not mean equal
+contents; for small text files, open both and read them, or in R use
+`identical(readLines("first-path"), readLines("second-path"))` with your real
+paths.
+
+Finish with `reports/transfer-audit.txt`: source, destination, the three checks,
+which receipt is the latest, and which remote steps are still pending.
+
+::: {.callout-tip collapse="true"}
+## Hint: the file exists, but R cannot find it
+
+Check which computer R is running on, then `getwd()`, then the actual path
+beneath that folder. An extra folder created during extraction is the most
+common cause. Keep report paths relative to the project root.
+:::
+
+## Check your understanding
+
+1. Does `exit` delete the files you saved remotely?
+2. You rendered remotely, but local Downloads is empty. Did the render fail?
+3. Can R on the remote computer read your laptop's `data/` folder without a
+   transfer?
+
+::: {.callout-note collapse="true"}
+## Short answers
+
+1. No. It ends the connection; saved files stay on the remote disk, subject to
+   the service's storage policy.
+2. Probably not. The output is on the remote computer until you transfer it.
+3. No. Each computer reads its own disk, so the files must be transferred.
+:::
+
+**Keep:** `reports/remote-log.txt`, `reports/transfer-plan.txt`, both receipts,
+and `reports/transfer-audit.txt`.
+
+**Before you finish:** mark any steps still waiting for remote access, and end
+the remote session as the service guide describes. Next:
+[Day 23 — a small integrated study](23-mini-study.qmd).

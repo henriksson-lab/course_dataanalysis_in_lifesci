@@ -20,206 +20,241 @@ format:
 toc: false
 ---
 
-## Which two readings belong together?
+## About this lecture
 
-![Plant IDs connect before and after observations even when their row order differs.](match-identities.svg){height=350px}
+In a plant physiology lab you measure the photosynthesis rate of ten plants, then raise the light and measure **the same ten plants** again. The plants differ a lot from each other before anything changes. **Did the rate go up, and by how much?** The same design appears whenever a patient, an animal or a culture is measured before and after something: blood pressure before and after exercise, a leaf before and after shading.
 
-Pair by **identity**, not accidental row position.
+Today you will:
 
-::: notes
-The file paired.csv stores one plant per row with both readings, so matching is preserved. The diagram imagines two differently ordered lists to make the identity principle visible. The example teaches identity matching using the supplied single-table layout.
-:::
+- keep the two readings of each plant together, using its identifier;
+- turn each pair into one **change** and look at the ten changes;
+- run a **paired t-test** and read its estimate, interval and p-value;
+- say what a before/after design can and cannot show.
 
-## Read the within-plant paths
-
-![Each of ten independent plants connects its before and after photosynthesis readings.](paired-lines.svg){height=350px}
-
-Ten plants, ten pairs; not twenty independent plants.
+Day 17 compared two **separate** groups. Today each unit is measured **twice**, which needs a different analysis. Day 19 moves on to calibration lines.
 
 ::: notes
-Photosynthesis rate is measured in micromoles CO2 per square metre per second. Each line links one plant’s non-destructive reading before and after increasing illumination. The prepared data show positive changes for every plant, but other datasets could have mixed directions.
+Open with the design, not the test. Ask the room for other before/after examples from their own biology courses. The aim of the day is that students recognise a paired design when they see one, keep the identity of each unit, and do not report the result as if light alone caused the change.
 :::
 
-## Subtract within each plant first
+## The problem: twenty readings, ten plants
 
-![Three example plants show their after-minus-before change on the original measurement scale.](within-plant-change.svg){height=350px}
+:::: {.columns}
+::: {.column width="42%"}
+- `data/paired.csv`: ten plants, each measured **before** and **after** the light was increased (µmol CO₂ m⁻² s⁻¹).
+- Before readings range from **5.20 to 8.81**: plants differ from each other.
+- Yet almost every line goes up by a similar amount.
+- The two readings of one plant are **not independent**: a high plant before is likely high after.
 
-Positive change means the measured rate increased.
+**Question:** how large is the change **within** a plant?
+:::
+::: {.column width="58%"}
+![Each of ten plants has a line from its before reading to its after reading; starting levels differ, but every line rises.](paired-lines.svg){width="100%"}
+:::
+::::
 
 ::: notes
-L01 changes 6.95−5.87=1.08; L02 changes 11.92−7.75=4.17; L03 changes 10.12−8.81=1.31. These examples show why pairing concerns each plant’s change, not merely comparing two unlabelled collections of readings.
+Point at the lowest and highest starting plant. The differences between plants are larger than many of the changes. If we treat the 20 readings as two separate groups, that plant-to-plant variation hides the change we care about. This is the motivation for the whole day. The data are simulated teaching data.
 :::
 
-## One paired comparison in R
+## Pair by identity, not by position
+
+:::: {.columns}
+::: {.column width="42%"}
+- `plant_id` says which two readings belong together.
+- In `paired.csv` each row holds one plant's **before** and **after**, so the pair is already kept together.
+- If the readings came in two files, **match them by ID** before subtracting. Ten rows in each file is not enough.
+- Sorting the **whole table** is safe: rows move together. Sorting **one column** on its own breaks the pairs.
+:::
+::: {.column width="58%"}
+![Plant identifiers connect before and after readings even when the two lists are in different orders.](match-identities.svg){width="100%"}
+:::
+::::
+
+::: notes
+The diagram imagines two lists in different orders to make the point visible. With the course file this cannot happen, but students will meet two-file data in lab courses (for example a plate-reader export before and after treatment). Ask: what would go wrong if you subtracted row 1 from row 1 here?
+:::
+
+## One change per plant
+
+![Three example plants show their after-minus-before change: L01 +1.08, L02 +4.17, L03 +1.31.](within-plant-change.svg){height=320 fig-align="center"}
+
+- **Change = after − before** for the same plant. Positive means the rate went up.
+- L01: 6.95 − 5.87 = **+1.08**. L02: 11.92 − 7.75 = **+4.17**. L03: 10.12 − 8.81 = **+1.31**.
+- Each plant is its own reference, so differences in starting level drop out.
+
+::: notes
+Do one subtraction on the board. Insist on writing the direction in words ("after minus before") before any code is run; the sign of every later number depends on it. Units stay µmol CO2 m-2 s-1.
+:::
+
+## In R: check the pairs, then compute the change
 
 ```r
 library(readr)
 library(dplyr)
-paired_data <- read_csv("data/paired.csv", show_col_types = FALSE)
-paired_data <- paired_data |>
-  mutate(change = after_umol_m2_s - before_umol_m2_s)
-paired_comparison <- t.test(
-  paired_data$after_umol_m2_s, paired_data$before_umol_m2_s,
-  paired = TRUE)
+library(ggplot2)
+paired <- read_csv("data/paired.csv", show_col_types = FALSE)
+anyDuplicated(paired$plant_id)        # 0: every plant appears once
+
+paired <- paired |>
+  mutate(change_umol_m2_s = after_umol_m2_s - before_umol_m2_s)
+mean(paired$change_umol_m2_s)         # 1.983
 ```
 
-After minus before is the direction of the result.
+- `anyDuplicated()` returns 0 when no identifier is repeated: ten rows, ten plants.
+- The new column holds **one change per plant**; L01's should be +1.08. Check one by hand.
+- The mean change is **1.983 µmol m⁻² s⁻¹**.
 
 ::: notes
-Load readr and dplyr first in the report. The paired argument tells t.test that each position in the first vector belongs with the corresponding position in the second. Keeping both readings in one ID-checked table prevents independent sorting. This is not a method for pairing arbitrary groups.
+These are the object and column names used in the practical page and paired-report.Rmd. Have students run it and compare L01 with the hand calculation before going further.
 :::
 
-## Changes differ among plants
+## Look at the ten changes
 
-![The ten within-plant changes are plotted against plant identifiers.](../../week4/figures/day18-changes.png){height=350px}
-
-Mean change ≈ **1.983 µmol CO₂ m⁻² s⁻¹**.
+:::: {.columns}
+::: {.column width="42%"}
+- All ten changes are **positive**, from **+1.08 to +4.17**.
+- Mean change **1.983**; SD of the changes **1.02**.
+- The dashed line is **no change**.
+- L02 changed much more than the others. That alone is not an error: keep it.
+:::
+::: {.column width="58%"}
+![Each point is one plant's after-minus-before change, all above the dashed zero line.](../../week4/figures/day18-changes.png){width="100%"}
+:::
+::::
 
 ::: notes
-The y-axis is the difference, not the after reading. Its zero line means no recorded within-plant change. L02 has a larger change than several others; this alone is not a recording error. The mean change and its uncertainty use 10 independent pairs.
+The y-axis is the change, not the after reading. This is the plot students save as change_plot in the practical. A large valid value must not be removed because it is inconvenient; there is no recording note saying L02 is wrong.
 :::
 
-## Pairing changes the information used
-
-A paired comparison asks whether the **mean within-plant change** is zero.
-
-A one-sample comparison of those changes gives the same result:
+## The paired t-test
 
 ```r
-t.test(paired_data$change, mu = 0)
+paired_comparison <- t.test(paired$after_umol_m2_s,
+                            paired$before_umol_m2_s,
+                            paired = TRUE)
+paired_comparison
 ```
 
-Keep before and after readings matched by plant ID.
+| R prints | Value | Meaning |
+|---|---|---|
+| `mean difference` | **1.983** µmol m⁻² s⁻¹ | Estimated mean change, after − before |
+| `95 percent confidence interval` | **1.255 to 2.711** µmol m⁻² s⁻¹ | Uncertainty in the **mean** change |
+| `t`, `df` | 6.16, 9 | df = 10 pairs − 1 |
+| `p-value` | **0.00017** | How surprising, if the true mean change were zero |
+
+- `paired = TRUE` matches position 1 with position 1, and so on. That is why the rows must hold true pairs.
+- The same numbers come from `t.test(paired$change_umol_m2_s, mu = 0)`: a paired test **is** a test of the changes against zero. It is one analysis, not two pieces of evidence.
+- The interval is about the **mean** change; individual plants changed from 1.08 to 4.17.
 
 ::: notes
-This equivalence supports understanding, not a demand to learn another method. The subject-to-subject differences in starting level are accounted for through within-subject subtraction. Pairing must be justified by design, and the pairs still need to be independent of one another.
+First vector after, second before, so the estimate is after minus before. Ten independent units, not twenty. Run the one-sample version live and show that estimate, interval and p agree to the last digit. Do not present the second call as confirming evidence.
 :::
 
-## The design has a limit the test cannot remove
+## Why not use Day 17's Welch test?
 
-![The study changes light condition while time passes between the before and after readings.](order-confounding.svg){height=350px}
-
-No unchanged-light group; the same order was used for every plant.
+:::: {.columns}
+::: {.column width="42%"}
+- Treating before and after as **two separate groups** gives the same estimate, 1.98, but an interval of **0.74 to 3.23**.
+- That interval is wider because plant-to-plant differences stay in the calculation.
+- The paired analysis removes them: each plant is compared with itself.
+- The **design** decides which test to use, not which result looks better.
+:::
+::: {.column width="58%"}
+![The paired interval 1.25 to 2.71 is narrower than the 0.74 to 3.23 interval from wrongly treating the readings as two separate groups.](pairing-intervals.svg){width="100%"}
+:::
+::::
 
 ::: notes
-We observe a change after the procedure, but light, elapsed time and measurement order accompany one another. The paired t-test does not separate them. A small p-value does not isolate light as the cause.
+Welch on the two columns: t.test(after, before) without paired = TRUE gives 0.74 to 3.23, p about 0.004. It is not wrong arithmetic, it answers a question about two separate groups of plants that this study does not have. Conversely, two unrelated groups can never become paired by putting them side by side.
 :::
 
-## Report change, uncertainty, and the ordering limit
+## Pitfall: sorting the columns separately
 
-Mean after-minus-before change: **1.983 µmol CO₂ m⁻² s⁻¹**.
-
-95% CI: **1.255 to 2.711**; paired two-sided **p ≈ 0.000166**.
-
-These describe a change under the study conditions, not an isolated light effect.
+:::: {.columns}
+::: {.column width="42%"}
+- Sorting `before` and `after` **one column at a time** matches the smallest with the smallest, not plant with plant.
+- The mean change is still **1.983**: means cannot detect the mistake.
+- But the SD of the changes drops from **1.02 to 0.50**, and p shrinks to about 0.0000006.
+- A smaller p after breaking the pairs is **not better evidence**; it is a wrong analysis.
+:::
+::: {.column width="58%"}
+![Left: correct within-plant pairings cross each other. Right: matching by rank gives parallel lines that connect readings from different plants.](extended-identity-lines.svg){width="100%"}
+:::
+::::
 
 ::: notes
-The confidence interval concerns the population mean change, under the assumptions. It does not describe the range of most plants’ individual changes. Sensible precision and a direct order/time limitation matter more than copying every decimal from the console.
+In the practical, students build this deliberately as a separate object, wrong_sorted, and keep paired unchanged. Ask why mean(after) − mean(before) equals mean(after − before) yet tells us nothing about whether the pairs were preserved. The uncertainty depends on the spread of the true within-plant changes.
 :::
 
-## The same marginal means do not validate a pairing
+## Pitfall: few pairs leave much uncertainty
 
-![Valid pairings and independently sorted columns have identical mean change but different change variability.](extended-sorted-pairs.svg){height=350px}
-
-Identity influences the uncertainty calculation, even when the mean agrees.
+:::: {.columns}
+::: {.column width="42%"}
+- Illustrative example: three plants, before 5, 8, 6 and after 7, 9, 9.
+- Changes **+2, +1, +3**: all positive, mean **2**.
+- 95% interval for the mean change: **−0.48 to 4.48** (p ≈ 0.07).
+- With three pairs we cannot even be sure of the direction. That is **not** proof of no effect: report the uncertainty.
+:::
+::: {.column width="58%"}
+![Three observed changes of 1, 2 and 3 have a mean of 2, but the 95 percent interval for the mean change runs from about −0.48 to 4.48 and includes zero.](extended-three-pair-case.svg){width="100%"}
+:::
+::::
 
 ::: notes
-For the actual source, correct SD of change is about 1.018 rate units; independently sorted columns give about.505. The changed uncertainty is artificial. A smaller p-value after sorting is not improved evidence.
+These are supplied illustrative values (plants D1–D3), not a measured dataset; students put them into paired-transfer.Rmd. Keep this example separate from the ten-plant study; do not pool them. More independent plants is what narrows the interval.
 :::
 
-## Look at which measurements the lines connect
+## What the design cannot show
 
-![Originalplant pairings and artificialrank matchings connect different before-and-after values.](extended-identity-lines.svg){height=350px}
-
-Keep a plant identifier attached to both of its measurements.
+:::: {.columns}
+::: {.column width="42%"}
+- Every plant was measured **before, then after**. Light changed, but **time also passed**: acclimation, time of day or instrument drift could contribute.
+- There is no group of plants measured twice **without** a light change.
+- A small p-value does not separate light from time.
+- **Better design:** add plants measured twice under unchanged light, and use more plants.
+:::
+::: {.column width="58%"}
+![Plants are measured in lower light and later in higher light; light and elapsed time change together.](order-confounding.svg){width="100%"}
+:::
+::::
 
 ::: notes
-Sorting whole rows preserves pairs; sorting columns separately destroys identity. A matching based on numerical rank is not a replacement for the recorded subject identifier.
+Distinguish three improvements: more independent plants gives more pairs and a narrower interval; repeat readings of one plant only tell us about measurement repeatability; a control group measured twice separates light from time. These are different fixes for different limitations.
 :::
 
-## A deliberately wrong object exposes the trap
+## Write the result
 
-```r
-wrong_sorted_change <- sort(paired_data$after_umol_m2_s) -
-  sort(paired_data$before_umol_m2_s)
-mean(paired_data$change)
-mean(wrong_sorted_change)
-sd(paired_data$change)
-sd(wrong_sorted_change)
-```
+"Across **10 plants**, photosynthesis rate was on average **1.98 µmol m⁻² s⁻¹ higher after** the light was increased than before (95% CI **1.25 to 2.71**; paired t-test, **p ≈ 0.0002**). Light and measurement order changed together, so the change cannot be attributed to light alone."
 
-Never overwrite the valid paired object with this demonstration.
+| Misreading | Better |
+|---|---|
+| "We had 20 observations." | 10 plants, each measured twice: **10 pairs**. |
+| "Most plants changed by 1.25 to 2.71." | The interval is for the **mean** change; plants changed by 1.08 to 4.17. |
+| "Light caused the increase." | Light and time changed together; no unchanged-light group. |
+| "Sorting the columns gave a smaller p, so it is better." | Sorting destroyed the pairs; the result is invalid. |
 
 ::: notes
-The first two means agree. The SDs differ. Ask why subtracting marginal means cannot check whether identities were preserved. Keep the source CSV untouched and label the wrong demonstration unambiguously.
+Have students write their own sentence before revealing this one. Precision: two or three significant digits is enough in prose; keep the full numbers in R.
 :::
 
-## One analysis, two equivalent computations
+## Summary {.smaller}
 
-Paired comparison of before and after:
-` t.test(after, before, paired = TRUE) `
+| Concept | Key fact |
+|---|---|
+| Paired design | Each unit measured twice; the **unit**, not the reading, is independent (10 plants, not 20 readings) |
+| Identity | Match readings by `plant_id`; never sort one column on its own |
+| Change | `after − before` per plant; the direction is a choice you write down first |
+| Paired t-test | `t.test(after, before, paired = TRUE)` = one-sample test of the changes against 0 |
+| Estimate and CI | Mean change **1.98**, 95% CI **1.25 to 2.71** µmol m⁻² s⁻¹; about the **mean** change |
+| Why pair | Removes plant-to-plant differences: narrower than treating the columns as two groups |
+| Few pairs | Three pairs: CI −0.48 to 4.48; uncertain, not "no effect" |
+| Design limit | Fixed before/after order: light and time are mixed; a test cannot separate them |
 
-One-sample comparison of correctly matched changes with zero:
-` t.test(change, mu = 0) `
+**Next (Day 19, calibration):** a straight line that turns an instrument reading into a concentration.
 
-These analyse the same within-unit differences.
-
-::: notes
-The estimate,interval, and p-value agree when the exact same complete differences are supplied. They are not two independent pieces of evidence and should not be reported as separate confirming experiments.
-:::
-
-## Few pairs can leave substantial uncertainty
-
-![Threechanges of 2,1,and 3 have a mean of 2,but a95%mean-change interval spanning about−0.48 to 4.48.](extended-three-pair-case.svg){height=350px}
-
-Three plants are limited support for a population inference.
+**Now:** [open the Day 18 exercises](../../week4/18-paired.qmd). Make `paired-report.Rmd` with the ID check, the change plot, the paired test and a limitation; save `output/day18-changes.png` and render.
 
 ::: notes
-The three illustrative plants had before5,8,6 and after7,9,9 in the stated rate units. Mean change2,SD 1. The interval is provided to practise interpretation. The tiny sample provides limited support for model-based inference.
-:::
-
-## A positive observed change does not prove a universal change
-
-For the illustrative case:
-
-- Describe all three individual changes.
-- Interpret uncertainty in the population mean.
-- Name the small-sample and design limitations separately.
-
-::: notes
-All supplied individual changes are positive, yet the model-based95% mean interval includes zero. This does not make the data erroneous or establish equality. Retain the stated analysis and explain its uncertainty.
-:::
-
-## Pairing does not remove an order effect
-
-![Both light and elapsed time change between the two readings in a fixed-order experiment.](extended-order-effects.svg){height=350px}
-
-Preserved identity and a valid causal comparison are different requirements.
-
-::: notes
-The source study always measures before then after increased illumination, without an unchanged-light parallel group. The mean change is describable, but light cannot be isolated from every time/order influence.
-:::
-
-## Plan the next experiment by limitation
-
-More independent plants → more independent pairs.
-Repeat readings of one plant → measurement repeatability.
-A suitable comparison/design → better separation of treatment from time.
-
-These are different improvements.
-
-::: notes
-Students create paired-transfer.Rmd from the supplied three-row example, including its values/code and a limitation. They should not pool this illustrative case with the unrelated ten-plant study or claim a new measured dataset.
-:::
-
-## Exercises: keep the pair visible
-
-Make **`paired-report.Rmd`** with the design, matched changes, a figure, result, and limitation.
-
-Could a reader identify what counted as one independent pair?
-
-[Open exercises](../../week4/18-paired.qmd).
-
-::: notes
-Check the practical’s chosen source report filename and use its code from the top. Ask students to explain why two unrelated groups cannot become paired by putting them beside one another. No new biology or chemical prerequisite is needed.
+Ask: could a reader of your report tell what counted as one independent pair? The exercises also include the matching check with the wrong_sorted object and the three-plant paired-transfer.Rmd.
 :::

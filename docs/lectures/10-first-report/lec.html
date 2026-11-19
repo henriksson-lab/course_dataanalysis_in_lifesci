@@ -194,7 +194,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Your first biological report</h1>
-  <p class="subtitle">Day 10 — A short briefing for independent practice</p>
+  <p class="subtitle">Day 10 — A short report that answers a question and runs again</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -205,170 +205,19 @@ Data Analysis in Life Sciences
 </div>
 
 </section>
-<section id="describe-what-was-independently-measured" class="slide level2">
-<h2>Describe what was independently measured</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="independent-pots.svg" height="390"></p>
-<figcaption>A schematic shows separate control and treated pots; the actual study has twelve independent plants per group.</figcaption>
-</figure>
-</div>
-<p>The simulated study measures 24 plants twice, seven days apart.</p>
-<aside class="notes">
-<p>This briefing consolidates import, calculation, plotting, and reporting. Each plant has its own pot and a randomly allocated control/nutrient treatment. The nutrient formulation is unspecified. Two time measurements on the same plant are not two separate plants.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="explain-the-method-in-biological-terms" class="slide level2">
-<h2>Explain the method in biological terms</h2>
-<p>“Growth was calculated as final minus initial length for each plant, in mm.”</p>
-<p>That explains more than “we called <code>mutate()</code>”.</p>
-<p>The report still needs the import and calculation code so someone can rerun it.</p>
-<aside class="notes">
-<p>Distinguish a scientific methods explanation from a transcript of function names. The reader should understand the operation without speaking R. Students already have working code from previous days; their job is to place it in a self-contained report and explain it.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-readable-figure-shows-the-observations" class="slide level2">
-<h2>A readable figure shows the observations</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../../week2/seedling-growth.png" height="390"></p>
-<figcaption>Individual simulated growth measurements vary within both groups and overlap between allocations.</figcaption>
-</figure>
-</div>
-<p>What is one dot? What does the vertical axis measure? Where is the overlap?</p>
-<aside class="notes">
-<p>Expect one independently potted plant and change in length in mm. Ask for a concrete visible pattern and a limitation. Avoid p-values or an unsupported declaration that the treatment works. A mean across both groups would not answer whether groups differ; group summaries come next week.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="connect-evidence-to-an-interpretation" class="slide level2">
-<h2>Connect evidence to an interpretation</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="evidence-to-interpretation.svg" height="390"></p>
-<figcaption>A biological growth question leads to observations and then a written pattern with a stated limitation.</figcaption>
-</figure>
-</div>
-<p>Say what you observe and what the observations alone cannot settle.</p>
-<aside class="notes">
-<p>Possible prose: growth varied among plants in both groups, and treated values tended to be higher but overlapped controls. The small simulated sample and lack of a quantified uncertainty comparison limit conclusions. Ask what evidence supports the student’s wording.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="keep-the-project-portable" class="slide level2">
-<h2>Keep the project portable</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="portable-project.svg" height="390"></p>
-<figcaption>A whole project can move to another folder while retaining the relative route from report source to its data subfolder.</figcaption>
-</figure>
-</div>
-<p><code>data/seedlings.csv</code> should not contain your personal username.</p>
-<aside class="notes">
-<p>The .Rmd stays at the project root. Generated HTML can be next to it or in the documented reports/ output folder. A project file sets a working context; it does not embed the data. The diagram motivates testing the project from another folder.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="test-it-after-restarting-r" class="slide level2">
-<h2>Test it after restarting R</h2>
-<p>In the <strong>R Console</strong>, after saving <code>first-report.Rmd</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"first-report.Rmd"</span>, <span class="at">output_dir =</span> <span class="st">"reports"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If an object is missing, repair the source rather than hiding the gap in Console state.</p>
-<aside class="notes">
-<p>Run this render command in the Console. Work from the first relevant error and its chunk. Check file paths, package loading, and the growth calculation before rewriting the whole report. A successful fresh-session render is evidence of reproducibility in this environment, not proof the interpretation is correct.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="descriptions-need-evidence" class="slide level2">
-<h2>Descriptions need evidence</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="claim-evidence.svg" height="350"></p>
-<figcaption>Individual transfer-study growth values show overlap between the groups.</figcaption>
-</figure>
-</div>
-<p>A difference in typical growth does not mean every treated plant outgrew every control.</p>
-<aside class="notes">
-<p>Use the actual transfer data. Read three draft claims and identify a supporting figure, recorded value, or supplied design fact. Revise universal or causal claims that this descriptive exercise cannot establish.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="audit-the-report-as-a-reader" class="slide level2">
-<h2>Audit the report as a reader</h2>
-<p>Can the HTML alone identify:</p>
+<section id="about-this-lecture" class="slide level2">
+<h2>About this lecture</h2>
+<p>A lab report, a thesis chapter or a paper is read by someone who was not in the room and will not run your code first. They need to know what was measured, how, what you saw, and what you cannot conclude. A report that announces “the treatment works!” from two overlapping clouds of points, or that only renders on your own laptop, fails that reader. <strong>Today you write a short report that answers a biological question honestly and that someone else can rerun.</strong></p>
+<p>Today you will:</p>
 <ul>
-<li>The question and independent unit?</li>
-<li>The input and measurement units?</li>
-<li>The calculation and plotted quantity?</li>
-<li>A defensible conclusion and limitation?</li>
+<li>build a report from four short sections: question and data, methods, results, interpretation;</li>
+<li>explain a method in biological words, with the code underneath;</li>
+<li>describe a figure honestly: pattern, overlap and one limitation;</li>
+<li>check that the project renders from a fresh session and from another folder.</li>
 </ul>
+<p>This day brings together Days 6–9. Day 11 asks what to do when the table itself contains errors.</p>
 <aside class="notes">
-<p>Read without the source first to find communication gaps. Then locate the code and dictionary supporting each fact. Revise the R Markdown source, not only the generated HTML.</p>
+<p>This is a consolidation day: no new R functions. The skill is putting existing pieces together for a reader. Keep the bar realistic: four short, correct sections beat a long formal document.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -381,146 +230,367 @@ Data Analysis in Life Sciences
           display:block!important;
       }</style></aside>
 </section>
-<section id="connect-the-question-to-the-recorded-evidence" class="slide level2">
-<h2>Connect the question to the recorded evidence</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="report-story.svg" height="350"></p>
-<figcaption>A report traces a question through supplied data, analysis and a readable result.</figcaption>
-</figure>
-</div>
-<p>Each section has a job in the reasoning.</p>
-<aside class="notes">
-<p>Methods identify what was done; results describe what was observed; interpretation connects observations to the question within limits. Four clear short sections may communicate better than a long formal document.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="choose-a-figure-because-it-answers-a-question" class="slide level2">
-<h2>Choose a figure because it answers a question</h2>
-<p>Compare final-size and growth plots.</p>
-<p>Keep one as the main evidence. Retain another only if it answers a stated useful question.</p>
-<aside class="notes">
-<p>More figures are not automatically better. This session expands revision and transfer rather than adding a statistical test. Have students identify which measured or derived quantity the vertical axis shows.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="the-received-project-needs-the-same-internal-structure" class="slide level2">
-<h2>The received project needs the same internal structure</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="portable-root.svg" height="350"></p>
-<figcaption>A complete report and data folder retain their relative relationship after copying.</figcaption>
-</figure>
-</div>
-<p>Test from the received copy’s root in a fresh session.</p>
-<aside class="notes">
-<p>A working original project is not proof that the received package reproduces it. Include the ordinary CSV and dictionary rather than a shortcut. Native Windows RStudio should use the extracted Windows project, not an unnoticed Ubuntu copy.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-smaller-brief-tests-transfer-without-new-methods" class="slide level2">
-<h2>A smaller brief tests transfer without new methods</h2>
-<p>Choose the transfer seedlings or the supplied solutions table.</p>
-<p>Import, check, calculate, plot, and write a short laboratory brief.</p>
-<p>Save one selected brief, not both contexts.</p>
-<aside class="notes">
-<p>For plants derive growth. For solutions, every formula and molar mass is given. The row roles differ: plants are experimental units, while solutions are numerical preparation cases. Distinguish a supplied formula relation from an observed biological effect.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="converting-a-label-is-not-converting-values" class="slide level2">
-<h2>Converting a label is not converting values</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="unit-label-check.svg" height="350"></p>
-<figcaption>A value of 18.6 mm becomes 1.86 cm, not 18.6 cm.</figcaption>
-</figure>
-</div>
-<p>Check the values, variable names and axis units together.</p>
-<aside class="notes">
-<p>A unit-label error can leave R code running without warnings. Conversion needs a numerical change as well as a changed label. Encourage explicit comments and independent checks, not evaluation of appearance alone.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="leave-a-revision-trail-and-a-working-brief" class="slide level2">
-<h2>Leave a revision trail and a working brief</h2>
-<p>Retain:</p>
-<ul>
-<li>A revised earlier report and its source.</li>
-<li>One laboratory-brief.Rmd and HTML.</li>
-<li>Saved table/figure and a revision log.</li>
-<li>A successfully tested practice package.</li>
-</ul>
-<aside class="notes">
-<p>The solution checks are 50, 100 and 150 mmol/L for each solute. The transfer plant input has 18 records and T01 growth of 15.0 mm. These are practice products, not a grading rubric or an examination design.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="give-the-reader-four-short-sections" class="slide level2">
-<h2>Give the reader four short sections</h2>
-<p><a href="../../week2/10-first-report.html">Open the exercises</a>.</p>
+<section id="four-sections-four-jobs" class="slide level2">
+<h2>Four sections, four jobs</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
 <ol type="1">
-<li><strong>Question and data:</strong> design, measurements, independent unit.</li>
-<li><strong>Methods:</strong> import and growth calculation.</li>
-<li><strong>Results:</strong> a labelled figure and relevant calculated facts.</li>
-<li><strong>Interpretation:</strong> pattern, variation, and one limitation.</li>
+<li><strong>Question and data:</strong> what was asked, what was measured, what one row is.</li>
+<li><strong>Methods:</strong> how the file was read and how growth was calculated.</li>
+<li><strong>Results:</strong> a labelled figure and a few calculated facts.</li>
+<li><strong>Interpretation:</strong> what the pattern is, how much plants vary, one limitation.</li>
 </ol>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="report-story.svg" style="width:100.0%"></p>
+<figcaption>A report leads from the data through an analysis to a readable result.</figcaption>
+</figure>
+</div>
+</div></div>
+<p>Every sentence should be backed by the data, a figure or the study description.</p>
 <aside class="notes">
-<p>Save first-report.Rmd and its HTML. Open the HTML in a browser and identify the units and meaning of a point. The leaf-area/mass table provides practice transferring the import and scatter-plot workflow to different measurements.</p>
+<p>Save report.Rmd as first-report.Rmd in the project root. Students already have most of the code from Days 8 and 9.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="question-and-data-what-was-measured" class="slide level2">
+<h2>Question and data: what was measured?</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li><strong>24 seedlings</strong> in separate pots; 12 randomly allocated to a nutrient treatment, 12 controls.</li>
+<li>Length measured at the start and after <strong>seven days</strong>, in mm.</li>
+<li>One row = one plant. Two lengths of the same plant are not two plants.</li>
+<li>Simulated teaching data: say so.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="independent-pots.svg" style="width:100.0%"></p>
+<figcaption>Separate control and treated pots; each plant is its own independent unit.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>All of this comes from data/README.md, not from R. The nutrient formulation is unspecified; do not invent one.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="methods-biology-first-code-underneath" class="slide level2">
+<h2>Methods: biology first, code underneath</h2>
+<blockquote>
+<p>“Growth was calculated as final minus initial length for each plant, in mm.”</p>
+</blockquote>
+<p>That tells a reader more than “we used <code>mutate()</code>”. The code still belongs in the report so the calculation can be rerun:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/seedlings.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>seedlings <span class="ot">&lt;-</span> <span class="fu">mutate</span>(seedlings, <span class="at">growth_mm =</span> final_mm <span class="sc">-</span> initial_mm)</span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(seedlings)                    <span class="co"># 24</span></span>
+<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(seedlings<span class="sc">$</span>growth_mm))    <span class="co"># 0</span></span>
+<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(seedlings<span class="sc">$</span>growth_mm)         <span class="co"># 8.0 30.8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Simple checks like these tell the reader the data are complete: 24 plants, nothing missing.</p>
+<aside class="notes">
+<p>The range describes these 24 plants, not all seedlings in nature, and is sensitive to a single unusual plant. Keep library() calls in the first chunk.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="results-a-figure-the-reader-can-read" class="slide level2">
+<h2>Results: a figure the reader can read</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li><strong>One dot = one plant.</strong> Say so in the caption.</li>
+<li><strong>y-axis:</strong> change in length (mm). Not final size.</li>
+<li>Every plant shown, so the reader sees the spread, not only a summary.</li>
+<li>The figure answers the question; one good figure beats three unexplained ones.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../week2/seedling-growth.png" style="width:100.0%"></p>
+<figcaption>Growth of each seedling by treatment; values vary within both groups and the groups overlap.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>If students also made the initial-versus-final plot on Day 8, ask which figure answers “did treated plants grow more?”. Keep the second only if it answers a stated question.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="interpretation-say-what-you-see-and-no-more" class="slide level2">
+<h2>Interpretation: say what you see, and no more</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Sentence</th>
+<th>OK?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“Growth varied among plants in both groups.”</td>
+<td>Yes: visible in the figure</td>
+</tr>
+<tr class="even">
+<td>“Treated plants tended to grow more, but the groups overlap: control 8.0–18.7 mm, treated 12.2–30.8 mm.”</td>
+<td>Yes: describes these data</td>
+</tr>
+<tr class="odd">
+<td>“Every treated plant grew more than every control.”</td>
+<td>No: P17 (treated) grew 12.2 mm, less than many controls</td>
+</tr>
+<tr class="even">
+<td>“The treatment works.”</td>
+<td>Not yet: we have not measured how uncertain the difference is (week 4)</td>
+</tr>
+</tbody>
+</table>
+<p>End with one limitation, e.g.&nbsp;a small simulated study, or no uncertainty assessed yet.</p>
+<aside class="notes">
+<p>Ask students which sentence in their own draft is closest to the last row, and rewrite it. “The graph shows a difference” is vague: say what is higher, by roughly how much, and with how much overlap.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-unit-slip-runs-without-warning" class="slide level2">
+<h2>A unit slip runs without warning</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>Relabelling the axis “cm” without dividing by 10 makes P01’s 18.6 mm into “18.6 cm”.</li>
+<li>R gives no error: it does not know units.</li>
+<li>Check together: the values, the column name (<code>_mm</code>), the axis label and the text.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="unit-label-check.svg" style="width:100.0%"></p>
+<figcaption>P01’s growth of 18.6 mm only relabelled as cm is wrong; converted it is 1.86 cm.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>The same check as Day 6: conversion changes values, not only labels. A reader trusts the axis label.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="make-the-project-portable" class="slide level2">
+<h2>Make the project portable</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li>Paths start from the project folder: <code>data/seedlings.csv</code>, not a personal path such as <code>C:/Users/anna/Desktop</code>.</li>
+<li>The <code>.Rmd</code> stays in the project folder; the HTML can go to <code>reports/</code>.</li>
+<li>Then the whole folder can move to another place or person and still work.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="portable-project.svg" style="width:100.0%"></p>
+<figcaption>The whole project moves to a new location and the report still finds data/seedlings.csv.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>The .Rproj file sets the working folder; it does not contain the data. Personal absolute paths are the most common reason a report fails on someone else’s computer.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="test-it-like-a-stranger-would" class="slide level2">
+<h2>Test it like a stranger would</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p>Restart R, then in the <strong>Console</strong>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"first-report.Rmd"</span>,</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>                  <span class="at">output_dir =</span> <span class="st">"reports"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Fails? Fix the source, not the Console.</li>
+<li>Then copy the project to another folder, open <strong>that</strong> <code>.Rproj</code>, and render again.</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="portable-root.svg" style="width:100.0%"></p>
+<figcaption>A copied project keeps the report and its data folder together and is tested with a fresh render.</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>A successful fresh render shows the report is reproducible here; it does not show the interpretation is right. On Windows, use the native project in Documents, not a copy inside Ubuntu.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="read-the-html-as-the-reader" class="slide level2">
+<h2>Read the HTML as the reader</h2>
+<p>Open the HTML in a browser, without the source. Can you find:</p>
+<ul>
+<li>the question, and what one plant (one row, one dot) is?</li>
+<li>the input file and the units?</li>
+<li>how growth was calculated, and what the y-axis shows?</li>
+<li>the main pattern, the overlap, and one limitation?</li>
+</ul>
+<p>Anything missing: add it to the <code>.Rmd</code> and render again. Never edit the HTML.</p>
+<aside class="notes">
+<p>The extended exercise turns this into a revision log, reports/report-revision.txt: issue, correction, evidence the corrected report reruns.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="then-a-second-smaller-brief" class="slide level2">
+<h2>Then: a second, smaller brief</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p>Pick one table and write <code>laboratory-brief.Rmd</code> with the same four sections:</p>
+<ul>
+<li><strong>18-plant transfer study:</strong> T01 grew 15.0 mm; 9 plants per group.</li>
+<li><strong>Or <code>solutions.csv</code>:</strong> calculated concentrations of 50, 100 and 150 mmol/L for each solute.</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="claim-evidence.svg" style="width:100.0%"></p>
+<figcaption>Individual growth values in the transfer study overlap between the groups.</figcaption>
+</figure>
+</div>
+</div></div>
+<p>Same skills, new data: check every number and every sentence against this table, not the old one.</p>
+<aside class="notes">
+<p>For solutions, rows are calculation cases, not independent experimental units; concentrations follow from a supplied formula, not from measured variation among plants. The leaf-mass scatter plot (leaf-first-look.R) is a further optional transfer.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>What it must contain</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Question and data</td>
+<td>Question; 24 plants, 12 per group, random allocation; one row = one plant; units; simulated</td>
+</tr>
+<tr class="even">
+<td>Methods</td>
+<td>Growth = final − initial length (mm), in words, plus the code with relative paths</td>
+</tr>
+<tr class="odd">
+<td>Results</td>
+<td>A labelled figure with every plant; a few checked facts (24 plants, none missing)</td>
+</tr>
+<tr class="even">
+<td>Interpretation</td>
+<td>Pattern, overlap and variation, one limitation; no “the treatment works” yet</td>
+</tr>
+<tr class="odd">
+<td>Reproducible</td>
+<td>Renders after restarting R, and from a copy of the project in another folder</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Next (Day 11, data quality):</strong> what to do when the table itself has typos, wrong units, duplicates and missing values.</p>
+<p><strong>Now:</strong> <a href="../../week2/10-first-report.html">open the Day 10 exercises</a>. Leave with <code>first-report.Rmd</code> and its HTML in <code>reports/</code>, rendered after restarting R.</p>
+<aside class="notes">
+<p>Self-check: the .Rmd contains imports, the derived column and the plot; the HTML makes sense without reading every code line; no personal paths.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

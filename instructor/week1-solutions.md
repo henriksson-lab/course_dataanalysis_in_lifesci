@@ -22,21 +22,51 @@ confirmed course service.
 
 ## Day 1
 
-Expected files: unchanged `data/seedlings.csv`, practice copy at
-`output/seedlings-practice.csv`, and a plain-text `reports/day01-notes.txt`.
+Topic: kinds of files, especially plain text versus Word/Excel. Example files
+are in `examples/` (built by `tools/build_examples.py`; see `examples/README.txt`).
 
-Accept notes equivalent to: one row describes one seedling; lengths are in mm;
-original file is inside project `data/`. Initial/final are two observations of
-the same plant, not two independent plants. P01 grows 18.6 mm, not 44.3 mm.
+Expected files: unchanged `data/seedlings.csv`, practice copy
+`output/seedlings-practice.csv`, plain-text `reports/day01-notes.txt`, and
+`reports/file-types.txt`. Day 2 relies on the first two.
 
-Watch students perform closing and reopening rather than accepting an already
-open window. Show file extensions on a projected machine, and explain that
-changing an extension does not convert the format. If a spreadsheet autoformats
-on open, closing without saving protects the supplied raw file. TextEdit needs
-plain-text mode. Avoid silently repairing students' locations for them: narrate
-each folder choice.
+Accept notes equivalent to: one row describes one seedling; lengths in mm; an
+`.xlsx` can store formatting, formulas or several sheets; saving raw data from
+a spreadsheet can change it (gene names to dates, semicolon/decimal-comma CSV).
+P01 grows 44.3 − 25.7 = 18.6 mm.
+
+`file-types.txt` solution. Plain text: all of `data/`, `report.Rmd`,
+`introcomputing.Rproj` (RStudio settings as text; often a surprise),
+`START-HERE.txt`, `examples/README.txt`, `seedling-notes.txt`, `genes.csv`,
+`seedlings-semicolon.csv`. Not text: `seedling-notes.docx` (16-file ZIP; the
+text is in `word/document.xml`), `seedlings.xlsx` (bold coloured header,
+formula `growth_mm` = `=D2-C2` showing 18.6 in E2, second sheet `notes`),
+`seedling-notes.pdf` (starts `%PDF`), `seedlings-plot.png` (starts `PNG`).
+
+Teaching points and pitfalls:
+
+- Test the Mac route before class. TextEdit renders `.docx` as a formatted
+  document; **File → Open → Options → Ignore rich text commands** should show
+  the raw content, and renaming a copy to `.txt` is the fallback. Notepad on
+  Windows shows `PK...` directly.
+- `genes.csv`: Excel (English locale) shows `SEPT2` as `2-Sep` and `MARCH1` as
+  `1-Mar`. LibreOffice 7.3 kept the symbols as text in our test, and Swedish
+  Excel may behave differently; the lecture figure is the fallback. Source:
+  Ziemann, Eren & El-Osta (2016), *Genome Biology* 17:177 (704 of 3,597 papers,
+  about 20%). HGNC renamed SEPT/MARCH genes (SEPTIN2, MARCHF1) in 2020.
+- `seedlings-semicolon.csv`: R's `read.csv()` stops with "more columns than
+  column names"; `read.csv2()` reads it. Mention only; R comes later.
+- The `.docx` has curly quotes in its R line (pandoc's smart quotes, as Word's
+  autocorrect would do). Pasting it into R gives `Error: unexpected input`.
+- Renaming a `.csv` to `.xlsx` makes Excel refuse to open it; renaming the
+  `.docx` copy to `.zip` works because it is a ZIP.
+- Watch students reopen the note from the file manager, and check the name ends
+  in `.txt` (not `.rtf` or `.txt.txt`).
 
 ## Day 2
+
+Topic: folders and paths. Hardware (CPU, RAM, storage, processes) moved to a
+later day; keep only "unsaved work is in memory and disappears; saved work is
+on disk".
 
 Expected tree extension:
 
@@ -45,21 +75,25 @@ introcomputing-course/
 ├── practice/
 │   ├── field-notes/
 │   │   └── seedling-observations.txt
-│   └── figures/
+│   ├── figures/
+│   └── map-b/
+│       └── map-a/
+│           └── note.txt
 └── reports/
     └── day02-map.txt
 ```
 
-From project root, original table is `data/seedlings.csv`. Relative paths depend
-on the starting folder; a path that works in the project root need not work
-inside `reports`. Introduce this verbally before syntax involving `..`.
+From the project folder, the original table is `data/seedlings.csv`; from
+`reports` it is `../data/seedlings.csv` (introduce `..` verbally; the terminal
+day uses it). Map task: before the move `practice/map-a/note.txt` and, from
+inside `map-b`, `../map-a/note.txt`; after the move
+`practice/map-b/map-a/note.txt` and `map-a/note.txt`. The note's contents are
+unchanged.
 
-RAM is working memory for running programs; persistent storage retains saved
-files. CPU executes instructions. OS manages resources. A process is a running
-instance. Do not imply cloud files always have full local copies or that the
-application closing always discards unsaved text: many editors recover sessions
-or autosave. Compare saved contents explicitly. No specific backup service has
-yet been approved; supply the university-supported route before teaching it.
+Do not imply that cloud files always have full local copies, or that closing an
+editor always discards unsaved text: many editors autosave or restore drafts.
+Compare saved contents explicitly. No specific backup service has yet been
+approved; supply the university-supported route before teaching it.
 
 ## Day 3
 
@@ -119,48 +153,9 @@ Expected `working/observations.txt`: four records; S03/S04 treated; S04
 measurements at `measurements/S04.csv`; five lines includes one header. A result
 with five plants indicates a header was interpreted biologically.
 
-## Day 5
+### Day 4 optional organic-laboratory inventory
 
-Full repeat and package sequence, starting where `lab-data.zip` is located:
-
-```bash
-cd ~/introcomputing-shell
-mkdir day5
-cp lab-data.zip day5/
-cd day5
-unzip -l lab-data.zip
-unzip lab-data.zip -d lab-data
-cd lab-data
-less README.txt
-grep -F treated samples.tsv > treated-samples.txt
-grep -F treated samples.tsv | wc -l
-mkdir report
-cp treated-samples.txt report/
-cp README.txt report/context.txt
-```
-
-Students create `report/findings.txt` in a plain-text editor, then:
-
-```bash
-zip -r report-bundle.zip report/
-unzip -l report-bundle.zip
-unzip report-bundle.zip -d review
-ls review/report
-```
-
-Check extracted `context.txt`, `findings.txt`, `treated-samples.txt`. Exact archive
-dates and size summaries need not match. A ZIP next to source files is not an
-independent backup. Re-running `zip` can update an archive; using a new name
-after revisions is simpler for novices than teaching archive-update semantics.
-
-R calculation: 18.6 mm. Supplied scatter plot contains three points, initial
-length on horizontal axis and final length on vertical axis. These three P01–P03
-records are controls; do not present their plot as a treatment comparison. The
-purpose is distinguishing R console, editor, and shell and seeing a future result.
-
-### Day 5 alternative inventory task
-
-This replaces the seedling inventory route.
+Optional transfer task at the end of the Day 4 practical.
 Use the separate `organic-lab.zip` download so the original `lab-data.zip`
 fixture and its treated-sample answers stay unchanged. Students must first use
 the file manager to copy the downloaded ZIP into `~/introcomputing-shell`,
@@ -185,6 +180,37 @@ Students locate their saved extract and the untouched inventory. The other
 archive file, organic-recovery.csv, is for later numerical work, not a hidden
 week1 calculation requirement.
 
+## Day 5 — meet R and RStudio
+
+Orientation only; Day 6 teaches objects, assignment and vectors. Students open
+`introcomputing.Rproj` from the extracted course folder (not a ZIP preview, not
+RStudio's recent list). Expected Console output:
+
+```r
+getwd()                              # ends in introcomputing-course
+file.exists("data/seedlings.csv")    # [1] TRUE
+44.3 - 25.7                          # [1] 18.6  (P01 growth, mm)
+32.3 - 24.3                          # [1] 8     (P02)
+pwd                                  # Error: object 'pwd' not found
+```
+
+In the shell, `44.3 - 25.7` gives `44.3: command not found`. The supplied plot
+(`read.csv` + base `plot`) shows 24 points, final against initial length; the
+correlation is weak (r = 0.23), so the plot does not show a strong relationship
+and does not show growth. The Environment lists `seedlings` as 24 obs. of 4
+variables. Knitting `report.Rmd` gives 12 control plants (mean growth 15.28 mm,
+SD 3.19) and 12 treated (21.49 mm, SD 4.87). After quitting and reopening via the
+`.Rproj`, the Environment is empty (`SaveWorkspace: No`) while
+`reports/day05-notes.txt` and `report.html` remain.
+
+Common problems: `file.exists()` FALSE because the project is not open or an
+extra nested folder; `+` prompt after an unfinished line (Esc); Knit fails for a
+missing package (installation line on the setup page). RStudio's Terminal tab on
+Windows may not be the Ubuntu shell; students keep using their usual terminal.
+
+ZIP packaging (formerly on Day 5) is now taught on Day 24, where a report is
+shared; see `week5-notes.md`.
+
 ## Quick formative observations
 
 Ask a student to show the actual folder, identify an unchanged source file,
@@ -201,18 +227,17 @@ completed independently.
 
 | Day | Expected evidence and checks |
 | --- | --- |
-| 1 | file-audit.txt gives computer/folder/full names; header versus P01 record distinguished; renamed copy still contains CSV text; raw files preserved. Transfer T01 is 25.3 to 40.3 mm, growth 15.0 mm; T18 treated 21.6 to 43.0 mm. Student reopens the receipt without recent-files help. |
-| 2 | Saved/discarded observations acknowledge autosave if present; tree changes when map-a moves into map-b; ordinary saved note persists separately from a process. Future-lab contains explicitly labelled placeholders, ordinary copied input, README and documented internal paths; copy tests portability but is not a second-machine backup. |
+| 1 | file-types.txt classifies every file in data/, examples/ and the project root (see Day 1 solution); the .xlsx extras (formatting, formula, second sheet) and the semicolon/decimal-comma CSV are named; day01-notes.txt is plain text and reopened from the file manager; raw files preserved. |
+| 2 | Routes to note.txt before and after moving map-a into map-b are correct (practice/map-b/map-a/note.txt; map-a/note.txt from inside map-b); note contents unchanged; saved/discarded sentence test acknowledges autosave if present; day02-map.txt has a project tree and data/seedlings.csv. |
 | 3 | Quoted field notes is one folder; unquoted words may become separate arguments. Failed cd leaves pwd unchanged. Two shells retain different current folders. From results/notes to neighbouring inputs use the common ancestor: up twice, then inputs. Log states computer and predicted versus observed location. |
-| 4 | Source manifest: 5 lines / 4 records / 2 treated. Trap copy: untreated makes a third substring match. Overwriting the disposable extract changes contents without changing its name; source is never used as output. Deliberate rename of S04 breaks its manifest path; contents S04, 39.8 plus the known action support restoring the filename. |
-| 5 | Version1 archive retains old sentence after ordinary source edit; new version2 extracted elsewhere contains correction. Receiver README identifies selection, units and missing source dependencies. Both fixture routes match 2 records. Shell/R classification correct; R arithmetic 18.6 and mean 14. Logs do not claim a local rehearsal verifies remote access. |
+| 4 | Source manifest: 5 lines / 4 records / 2 treated (S03 42.4 mm, S04 39.8 mm; controls S01 32.1, S02 35.2). Trap copy: untreated makes a third substring match. Deliberate rename of S04 breaks its manifest path; contents S04, 39.8 plus the known action support restoring the filename. Optional organic inventory: 2 ester records (O02, O03). |
+| 5 | Project opens from the `.Rproj`; `file.exists("data/seedlings.csv")` TRUE; `pwd`/arithmetic placed in the right program; P01 18.6 mm; plot has 24 points and y is final length, not growth; report.Rmd knits; note survives restart while objects do not. |
 
 A representative safe shell check in a temporary directory follows the same
 operations as the student work: create nested directories and a quoted name;
 inspect and extract the actual archive; make a manifest copy with S01 labelled
 untreated; verify three substring matches; preserve the original; rename and
-restore S04 in a copied extraction; package a report snapshot and verify a
-subsequent source edit is absent from its old extracted copy. Do not demonstrate
+restore S04 in a copied extraction. Do not demonstrate
 input-equals-output redirection on originals. GUI actions and OS-specific
 extension/autosave behaviour still need a supported student-machine pilot.
 

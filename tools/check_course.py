@@ -50,8 +50,9 @@ with ZipFile(ROOT / "downloads/course-files.zip") as archive:
     names = archive.namelist()
     assert all(name.startswith("introcomputing-course/") for name in names)
     assert not any("instructor" in name or "/.git" in name for name in names)
-    for source in (ROOT / "data").glob("*"):
-        assert archive.read("introcomputing-course/data/" + source.name) == source.read_bytes()
+    for folder in ["data", "examples"]:
+        for source in (ROOT / folder).glob("*"):
+            assert archive.read(f"introcomputing-course/{folder}/" + source.name) == source.read_bytes()
     assert archive.read("introcomputing-course/report.Rmd") == (ROOT / "report.Rmd").read_bytes()
 
 # Run the actual shell commands against the actual download, in a disposable dir.

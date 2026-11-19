@@ -9,23 +9,75 @@ root <- normalizePath(getwd())
 out <- file.path(root, "output", "instructor-week5")
 dir.create(out, recursive = TRUE, showWarnings = FALSE)
 
-# Day 21: validate portable inputs; a local test cannot verify SSH/desktop access.
-stopifnot(file.exists("data/seedlings.csv"), file.exists("report.Rmd"))
-
-# Day 22: the supplied representation demonstration.
+# Day 21: how big is your data? Worked estimates checked against R.
+# Sizes use 1 MB = 1e6 bytes. Object sizes are from object.size() (R >= 4.0).
+x <- rnorm(1e6)
+stopifnot(as.numeric(object.size(x)) == 8000048,
+          format(object.size(x), units = "MB", standard = "SI") == "8 MB")
+rm(x)
+seedlings_raw <- read_csv("data/seedlings.csv", show_col_types = FALSE)
+stopifnot(file.size("data/seedlings.csv") == 592, nrow(seedlings_raw) == 24,
+          as.numeric(object.size(seedlings_raw)) > 2000)  # bookkeeping dominates
+set.seed(21)
+n <- 100000
+big <- data.frame(matrix(round(rnorm(n * 10, mean = 20, sd = 4), 1), ncol = 10))
+big_csv <- file.path(out, "big-measurements.csv")
+write_csv(big, big_csv)
+size_rounded <- c(file = file.size(big_csv) / 1e6, object = as.numeric(object.size(big)) / 1e6)
+big_back <- read_csv(big_csv, show_col_types = FALSE)
+big$sample_id <- sprintf("S%06d", 1:n)
+write_csv(big, big_csv)
+size_ids <- c(file = file.size(big_csv) / 1e6, object = as.numeric(object.size(big)) / 1e6,
+              ids = as.numeric(object.size(big$sample_id)) / 1e6)
+set.seed(21)
+full_csv <- file.path(out, "unrounded-numbers.csv")
+write_csv(data.frame(x = rnorm(1e6, 20, 4)), full_csv)
+size_full <- file.size(full_csv) / 1e6
+print(round(rbind(size_rounded, size_ids = size_ids[1:2]), 2))
+stopifnot(round(size_rounded[["file"]], 2) == 4.79, round(size_rounded[["object"]], 2) == 8.00,
+          round(as.numeric(object.size(big_back)) / 1e6, 1) == 8.0,
+          round(size_ids[["file"]], 2) == 5.59, round(size_ids[["object"]], 1) == 14.4,
+          round(size_ids[["ids"]], 1) == 6.4, round(size_full, 1) == 18.6,
+          as.numeric(object.size(rep(c("treated", "control"), length.out = n))) < 1e6)
+unlink(full_csv)
 dna <- readLines("data/dna.txt")
 bases <- strsplit(dna, split = "")[[1]]
 print(table(bases))
-stopifnot(length(dna) == 1, nchar(dna) == 40, length(bases) == 40,
-          identical(as.integer(table(bases)), c(11L, 9L, 9L, 11L)))
-pixels <- as.matrix(read.csv("data/pixels.csv"))
-stopifnot(identical(dim(pixels), c(8L, 8L)),
-          sum(pixels > 100) == 24, mean(pixels > 100) == 0.375,
-          sum(pixels > 50) == 24, sum(pixels > 220) == 0)
+stopifnot(length(dna) == 1, nchar(dna) == 40, file.size("data/dna.txt") == 41,
+          length(bases) == 40, identical(as.integer(table(bases)), c(11L, 9L, 9L, 11L)),
+          object.size(bases) > object.size(dna))
+pixels <- as.matrix(read_csv("data/pixels.csv", show_col_types = FALSE))
+stopifnot(identical(dim(pixels), c(8L, 8L)), typeof(pixels) == "double",
+          sum(pixels > 100) == 24, mean(pixels > 100) == 0.375)
 png(file.path(out, "pixel-demonstration.png"), width = 500, height = 500)
 plot.new()
 rasterImage(as.raster(pixels / 255), 0, 0, 1, 1)
 invisible(dev.off())
+estimates <- c(table_1e6_x10_MB = 1e6 * 10 * 8 / 1e6,       # 80 MB
+               table_2e6_x5_MB = 2e6 * 5 * 8 / 1e6,         # 80 MB (topic quiz/practical)
+               table_5e5_x20_MB = 5e5 * 20 * 8 / 1e6,       # 80 MB (topic quiz)
+               genome_text_GB = 3.1e9 / 1e9,                # 3.1 GB
+               genome_letters_R_GB = 3.1e9 * 8 / 1e9,       # 24.8 GB, "about 25 GB"
+               image_pixels = 2048 * 2048,                  # 4,194,304
+               image_file_MB = 2048 * 2048 / 1e6,           # 4.2 MB
+               image_R_MB = 2048 * 2048 * 8 / 1e6,          # 33.6 MB
+               images_100_R_GB = 100 * 2048 * 2048 * 8 / 1e9, # 3.4 GB
+               single_cell_GB = 30000 * 100000 * 8 / 1e9)   # 24 GB
+print(estimates)
+stopifnot(estimates[["table_1e6_x10_MB"]] == 80, estimates[["single_cell_GB"]] == 24,
+          round(estimates[["image_R_MB"]], 1) == 33.6, round(estimates[["image_file_MB"]], 1) == 4.2,
+          round(estimates[["images_100_R_GB"]], 1) == 3.4, estimates[["image_pixels"]] == 4194304)
+writeLines(c("Day 21 worked estimates (1 MB = 1e6 bytes):",
+             sprintf("%s: %s", names(estimates), sapply(estimates, format, big.mark = ",", scientific = FALSE, digits = 7)),
+             sprintf("100,000 x 10 rounded: CSV %.2f MB, object %.2f MB", size_rounded[1], size_rounded[2]),
+             sprintf("with unique IDs: CSV %.2f MB, object %.2f MB (IDs %.2f MB)",
+                     size_ids[1], size_ids[2], size_ids[3]),
+             sprintf("1e6 unrounded numbers: CSV %.2f MB, object 8.00 MB", size_full)),
+           file.path(out, "data-size.txt"))
+rm(big, big_back)
+
+# Day 22: validate portable inputs; a local test cannot verify SSH/desktop access.
+stopifnot(file.exists("data/seedlings.csv"), file.exists("report.Rmd"))
 
 # Day 23: available measurements and an explicitly directed Welch comparison.
 duckweed <- read_csv("data/duckweed.csv", show_col_types = FALSE)
@@ -185,7 +237,7 @@ seedlings <- read_csv("data/seedlings.csv", show_col_types = FALSE) |>
   mutate(growth_mm = final_mm - initial_mm)
 stopifnot(abs(seedlings$growth_mm[seedlings$plant_id == "P01"] - 18.6) < 1e-10)
 
-# Expanded day 21: content/version checks in disposable local transfer fixtures.
+# Expanded day 22: content/version checks in disposable local transfer fixtures.
 # This never claims SSH, desktop or real remote access was tested.
 audit_dir <- file.path(out, "transfer-rehearsal")
 dir.create(audit_dir, recursive = TRUE, showWarnings = FALSE)
@@ -209,64 +261,6 @@ writeLines(c("Local rehearsal only: no SSH or desktop service was tested.",
              "Two equal-size receipts differ in contents; filenames and size alone are insufficient.",
              "The received algae CSV has been checked against the source text."),
            file.path(audit_dir, "audit.txt"))
-
-# Expanded day 22: controlled object changes and a report from saved inputs.
-bases_changed <- bases
-bases_changed[1] <- "G"
-gc_fraction <- sum(bases == "G" | bases == "C") / length(bases)
-changed_gc <- sum(bases_changed == "G" | bases_changed == "C") / length(bases_changed)
-stopifnot(identical(as.integer(table(bases_changed)), c(10L, 9L, 10L, 11L)),
-          gc_fraction == 0.45, changed_gc == 0.475,
-          identical(as.integer(table(bases)), c(11L, 9L, 9L, 11L)))
-writeLines(paste(bases_changed, collapse = ""), file.path(out, "changed-dna.txt"))
-stopifnot(nchar(readLines(file.path(out, "changed-dna.txt"))) == 40)
-pixels_shifted <- pixels + 30
-thresholds <- c(0, 25, 100, 209, 210, 255)
-threshold_counts <- c(sum(pixels > 0), sum(pixels > 25), sum(pixels > 100),
-                      sum(pixels > 209), sum(pixels > 210), sum(pixels > 255))
-threshold_table <- data.frame(threshold = thresholds, count = threshold_counts,
-                               fraction = threshold_counts / length(pixels))
-stopifnot(identical(as.numeric(threshold_counts), c(64, 24, 24, 24, 0, 0)),
-          sum(pixels >= 210) == 24, sum(pixels_shifted > 220) == 24,
-          sum(pixels_shifted > 100) == 24, identical(dim(pixels), dim(pixels_shifted)),
-          min(pixels_shifted) == 55, max(pixels_shifted) == 240)
-write_csv(threshold_table, file.path(out, "threshold-results.csv"))
-four_bases <- data.frame(position = 1:4, base = c("A", "C", "G", "T"))
-write_csv(four_bases, file.path(out, "four-bases.csv"))
-stopifnot(nrow(read_csv(file.path(out, "four-bases.csv"), show_col_types = FALSE)) == 4)
-representation_source <- file.path(out, "representation-report.Rmd")
-writeLines(c(
-  '---', 'title: "Controlled representation changes"', 'output: html_document', '---', '',
-  '# Question and inputs', '',
-  'How do counts change when one stored label or each brightness value changes?',
-  'The sequence and image are artificial teaching data, not measured organisms.', '',
-  '```{r input}',
-  'dna <- readLines("data/dna.txt")',
-  'bases <- strsplit(dna, split = "")[[1]]',
-  'bases_changed <- bases', 'bases_changed[1] <- "G"',
-  'pixels <- as.matrix(read.csv("data/pixels.csv"))',
-  'pixels_shifted <- pixels + 30', '```', '',
-  'The original GC fraction is `r sum(bases == "G" | bases == "C") / length(bases)`.',
-  'After the change it is `r sum(bases_changed == "G" | bases_changed == "C") / length(bases_changed)`.', '',
-  '# Results', '',
-  '```{r threshold-table}',
-  'threshold_counts <- c(sum(pixels > 0), sum(pixels > 25), sum(pixels > 100),',
-  '                      sum(pixels > 209), sum(pixels > 210), sum(pixels > 255))',
-  'results <- data.frame(threshold = c(0,25,100,209,210,255),',
-  '                      count = threshold_counts, fraction = threshold_counts / 64)',
-  'knitr::kable(results)', '```', '',
-  '```{r original, fig.cap="Original toy image, intensities 25 and 210 on a zero-to-255 scale."}',
-  'plot.new()', 'rasterImage(as.raster(pixels / 255), 0, 0, 1, 1)', '```', '',
-  '```{r shifted, fig.cap="Same positions after adding 30; intensities 55 and 240 on the same scale."}',
-  'plot.new()', 'rasterImage(as.raster(pixels_shifted / 255), 0, 0, 1, 1)', '```', '',
-  '# Interpretation', '',
-  'The label change alters two counts but preserves the sequence length.',
-  'Adding thirty changes the threshold 220 count without moving matrix positions.',
-  'Pixel counts do not establish cell identity, physical area, or independent',
-  'biological replication; sequence counts do not establish function.'
-), representation_source)
-rmarkdown::render(representation_source, output_dir = out, knit_root_dir = root,
-                  envir = new.env(parent = globalenv()), quiet = TRUE)
 
 # Expanded days 23–25: genuinely fresh transfer data, primary and diagnostic.
 algae <- read_csv("data/algae.csv", show_col_types = FALSE)
@@ -416,6 +410,6 @@ unzip(archive_path, exdir = extracted)
 recipient_source <- file.path(extracted, "portable-algae/algae-brief.Rmd")
 rmarkdown::render(recipient_source, quiet = TRUE, envir = new.env(parent = globalenv()))
 stopifnot(file.exists(sub("\\.Rmd$", ".html", recipient_source)))
-cat("Expanded week 5 transfer, representation, fresh-culture reports, controlled failure, sensitivity and extracted-project checks passed.\n")
+cat("Expanded week 5 data-size, transfer, fresh-culture reports, controlled failure, sensitivity and extracted-project checks passed.\n")
 
 cat("Week 5 reference computations and report passed. Artifacts:", out, "\n")

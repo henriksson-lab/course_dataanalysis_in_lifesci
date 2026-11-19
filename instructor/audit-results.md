@@ -50,7 +50,7 @@ included. Quiz counts report coverage; they are not writing targets.
 | [02-folders-computers](../week1/02-folders-computers.qmd) | Checked | Checked | 5 |
 | [03-terminal](../week1/03-terminal.qmd) | Checked | Checked | 5 |
 | [04-inspect-archive](../week1/04-inspect-archive.qmd) | Checked | Checked | 5 |
-| [05-lab-files](../week1/05-lab-files.qmd) | Checked | Checked | 5 |
+| [05-meet-r](../week1/05-meet-r.qmd) | Checked | Checked | 5 |
 | [06-r-basics](../week2/06-r-basics.qmd) | Checked | Checked | 6 |
 | [07-import](../week2/07-import.qmd) | Checked | Checked | 5 |
 | [08-transform-plot](../week2/08-transform-plot.qmd) | Checked | Checked | 5 |
@@ -66,8 +66,8 @@ included. Quiz counts report coverage; they are not writing targets.
 | [18-paired](../week4/18-paired.qmd) | Checked | Checked | 5 |
 | [19-calibration](../week4/19-calibration.qmd) | Checked | Checked | 5 |
 | [20-association](../week4/20-association.qmd) | Checked | Checked | 6 |
-| [21-remote-workflow](../week5/21-remote-workflow.qmd) | Checked | Checked | 5 |
-| [22-data-representations](../week5/22-data-representations.qmd) | Checked | Checked | 5 |
+| [21-computer](../week5/21-computer.qmd) | New (2026-11) | New (2026-11) | 7 |
+| [22-remote-workflow](../week5/22-remote-workflow.qmd) | Checked | Checked | 5 |
 | [23-mini-study](../week5/23-mini-study.qmd) | Checked | Checked | 5 |
 | [24-reproduce](../week5/24-reproduce.qmd) | Checked | Checked | 4 |
 | [25-consolidate](../week5/25-consolidate.qmd) | Checked | Checked | 4 |

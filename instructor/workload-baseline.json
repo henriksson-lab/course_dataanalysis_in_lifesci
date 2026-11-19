@@ -25,7 +25,7 @@
       "content_slides": 8,
       "visual_slides": 4
     },
-    "05-lab-files": {
+    "05-meet-r": {
       "practical_words": 1484,
       "numbered_steps": 10,
       "content_slides": 8,
@@ -121,15 +121,15 @@
       "content_slides": 10,
       "visual_slides": 6
     },
-    "21-remote-workflow": {
-      "practical_words": 1007,
-      "numbered_steps": 6,
+    "21-computer": {
+      "practical_words": 977,
+      "numbered_steps": 3,
       "content_slides": 10,
       "visual_slides": 5
     },
-    "22-data-representations": {
-      "practical_words": 977,
-      "numbered_steps": 3,
+    "22-remote-workflow": {
+      "practical_words": 1007,
+      "numbered_steps": 6,
       "content_slides": 10,
       "visual_slides": 5
     },

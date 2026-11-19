@@ -8,33 +8,35 @@ title: "Day 6 — Let R keep track of a calculation"
 ## Today's question
 
 A seedling was 20 mm long at the start of an experiment and 37 mm long at the
-end. How much did it grow? Save a calculation that reproduces the answer.
-The measurements are simulated teaching data.
+end. How much did it grow, and how much did three, then four, plants grow? Today
+you write the answer as a saved R script, so that you can run the whole
+calculation again whenever a value changes. The measurements are simulated
+teaching data.
 
-Open the extracted `introcomputing-course` folder and double-click
-`introcomputing.Rproj`. R is the program that calculates. RStudio is the workspace
-we use to write instructions, run R, inspect results, and prepare reports. Its
-**Console** accepts R instructions. An **R script** is a saved text file containing
-instructions. Use the R Console for R expressions and the terminal from week 1
-for shell commands such as `ls`.
+Open the course project by double-clicking `introcomputing.Rproj`, as on day 5.
+Keep the [R reference sheet](../reference/r.qmd) open while you work.
 
-## Start with a calculation
+**Save today:** `day06.R` in the project folder.
 
-Type the following in the R Console, pressing Enter after each line. The Console
-already supplies the `>` prompt. The `[1]` in an answer labels the first printed element;
-it is not part of your measurement.
+## A first calculation
+
+Type these lines in the **Console**, pressing Enter after each:
 
 ```{r}
 37 - 20
-20 * 2
 37 / 20
 ```
 
-You should obtain 17, 40, and 1.85. The last value is a ratio, not a change in mm.
-The calculation can be correct while answering the wrong biological question.
+R prints `[1] 17` and `[1] 1.85`. The `[1]` only numbers the first value printed.
+The two answers say different things about the plant: it grew **17 mm**, and its
+final length is **1.85 times** its initial length. The ratio has no unit, because
+mm divided by mm cancels. Both calculations are correct; which one you want
+depends on your question.
 
-Now choose **File → New File → R Script**, save it as `day06.R` in the project
-folder, and put this in the script:
+## A script that remembers the calculation
+
+Choose **File → New File → R Script** and save it as `day06.R` in the project
+folder. Write these lines in the script:
 
 ```{r}
 # Measurements are lengths in millimetres.
@@ -44,24 +46,23 @@ growth_mm <- final_mm - initial_mm
 growth_mm
 ```
 
-`<-` assigns the result on its right to a named **object** on its left. Read it as
-“store this value under this name”. A line beginning with `#` is a comment for
-people. R ignores the comment. To run a line from the editor, place the cursor
-on it and use **Run**. Saving a script does not run it; running a script does not
-save changes in the editor.
+Put the cursor on the first line and click **Run** (or press Ctrl+Enter, or
+Cmd+Enter on a Mac) to run it, then run each following line the same way. `<-`
+stores the value on its right under the name on its left, so read
+`growth_mm <- final_mm - initial_mm` as "store final minus initial under the name
+`growth_mm`". The names appear in the **Environment** pane, and the last line
+prints `17`. A line starting with `#` is a comment for people; R skips it.
 
-If RStudio is not ready, use the [R and RStudio setup page](../intro/r-rstudio.qmd).
-Keep the [R reference sheet](../reference/r.qmd) open while practising.
+Names must be typed exactly: `growth_mm` and `Growth_mm` are different names.
+Saving the script and running it are separate actions. Saving writes the
+instructions to disk; running creates the objects in R's memory. That is why the
+script is what you keep: the objects disappear when R stops, and the script makes
+them again.
 
-Object names are case-sensitive. `growth_mm` and `Growth_mm` are different names.
-An object in the Environment pane is in this R session's memory. The script is a
-file on storage. Reopening the script does not recreate the object until you run
-the instructions.
+## Three plants at once
 
-## One name can hold several values
-
-`c()` combines values into a **vector**, an ordered collection. Functions have
-names followed by parentheses; the values inside are their arguments.
+`c()` combines several values into a **vector**, so one name can hold the lengths
+of three plants. Replace the single values in your script with:
 
 ```{r}
 initial_mm <- c(20, 22, 19)
@@ -72,47 +73,50 @@ mean(growth_mm)
 length(growth_mm)
 ```
 
-The growth values are 17, 18, and 15 mm. R subtracts position by position here.
-`mean()` calculates their average, approximately 16.67 mm. `length()` counts
-values and gives 3. This only makes biological sense because both vectors list
-the same three plants in the same order. Matching observations matters.
+R subtracts position by position, so the plants grew **17, 18 and 15 mm**. `mean()`
+and `length()` are **functions**: a name followed by brackets, with the values to
+work on inside. The mean growth is about **16.67 mm**, and `length()` counts **3**
+plants. The subtraction only makes sense because both vectors list the same three
+plants in the same order.
 
-Numbers, text, and logical values are different kinds of data:
+Use a comparison to find out which plants grew more than 16 mm:
 
 ```{r}
-plant_id <- c("P01", "P02", "P03")
 growth_mm > 16
 ```
 
-The comparison gives `TRUE TRUE FALSE`. Quotation marks identify text; `"20"` is
-text whereas `20` is a number. Plant IDs belong in text even if they contain
-numbers. To open help for a function, run `?mean` in the Console and read its
-Description and Examples rather than every option.
+The answer, `TRUE TRUE FALSE`, says that the first two plants did and the third
+did not. Plant labels are text and go in quotes, `plant_id <- c("P01", "P02", "P03")`;
+`"20"` in quotes is text too, not a number. To read about a function, type
+`?mean` in the Console and look at the Description and Examples.
 
-## Calculate growth and a ratio
+## How much did four plants grow?
 
-1. Keep the three-plant calculation in `day06.R` and explain the units in comments.
-2. Add a fourth plant that grew from 21 to 39 mm. Extend **both** vectors, rerun
-   the calculation, and check `length(growth_mm)`.
-3. Choose one ratio exercise: calculate each plant's final/initial ratio in an
-   object called `length_ratio`, explaining how it differs from growth in mm;
-   **or** use the product-yield calculation below.
-4. Change the first final length from 37 to 38 mm. Predict which growth value
-   changes and check your prediction.
-5. Save the script, restart R through **Session → Restart R**, and run its lines
-   from the top. Everything it needs should be in the script.
+Continue in `day06.R`. Write a comment above each part saying what it calculates
+and in which unit.
 
-### Alternative ratio exercise: how much product was collected?
+1. A fourth plant grew from 21 to 39 mm. Add it to **both** vectors and use
+   `length()` to check that each now has 4 values. The growth values are
+   17, 18, 15 and 18 mm, with a mean of **17 mm**.
+2. Use division to find out how many times longer each plant became, and store
+   the result as `length_ratio`. The values are about 1.85, 1.82, 1.79 and 1.86.
+   Plants 2 and 4 both grew 18 mm, but plant 2 has the smaller ratio because it
+   started longer (22 mm against 21 mm).
+   If you prefer chemistry, do the product-yield calculation below instead.
+3. The first plant was re-measured: its final length is 38 mm, not 37. Predict
+   which growth value changes, then edit the script and run it from the top. The
+   first growth value becomes 18; the others stay the same.
+4. Find out whether your script is complete: save it, choose **Session → Restart R**,
+   and run all lines from the top. You should get the same results, because
+   everything the calculation needs is in the script.
 
-In a synthesis, starting materials are used to make a product. For this
-simulated example, the maximum possible product mass has already been calculated
-for you: **1.00 g**. Call it `theoretical_mass_g`. The collected dry product has
-mass **0.62 g**, called `isolated_mass_g`. Assume this collected material is pure
-product for this simplified calculation.
+### Alternative: how much product was collected?
 
-**Percentage yield** means the collected product as a percentage of the supplied
-maximum. Compute `100 × isolated mass / theoretical mass`, using the same mass
-unit for both. Put this calculation in `day06.R` if you chose this alternative:
+In a chemical synthesis, starting materials are turned into a product. For this
+simulated example the largest possible product mass is given: **1.00 g**, stored as
+`theoretical_mass_g`. The dry product collected weighs **0.62 g**, stored as
+`isolated_mass_g`; assume it is pure. The **percentage yield** is the collected mass as
+a percentage of the largest possible mass:
 
 ```{r}
 theoretical_mass_g <- 1.00
@@ -121,108 +125,104 @@ yield_percent <- 100 * isolated_mass_g / theoretical_mass_g
 yield_percent
 ```
 
-The answer is **62%**. The gram units cancel in the ratio. Predict the result
-if collected mass changes to 0.70 g, then rerun; it should be **70%**. Add a
-comment explaining why 0.62 g is a mass and 62% is a proportion relative to a
-maximum.
+The yield is **62%**; the gram units cancel. Change the collected mass to 0.70 g
+and run the lines again to find out the new yield: **70%**.
 
 ::: {.callout-tip collapse="true"}
-## Hint: an object is not found
+## Hint: `object not found`, or a `+` prompt
 
-Check the spelling, including capitals, and run the line that creates the object.
-An editor line has no effect until it runs. If the Console shows `+`, an expression
-is unfinished: check quotes or parentheses, or press Esc to cancel it.
+`Error: object 'growth_mm' not found` means R has no object with that name yet.
+Check the spelling and capitals, then run the line that creates it. A line in the
+editor does nothing until you run it. If the Console shows `+` instead of `>`, R
+is waiting for the end of a line: check quotes and brackets, or press Esc.
 :::
 
+## When a stored result goes stale
 
-## Trace a calculation through its inputs
+In a spreadsheet, a cell with a formula updates itself when its inputs change. An
+R object does not. Create a new script, `day06-extended.R`, to see what that
+means and why the order of plants matters.
 
-Create `day06-extended.R` at the
-project root. Keep all numerical inputs and comments in that file. Use the
-Console to inspect results, then recreate them from the saved script after a
-restart. Record predictions before running each changed calculation.
-
-1. Begin with `initial_mm <- 20`, `final_mm <- 37`, and
-   `growth_mm <- final_mm - initial_mm`. Print all three objects. Now change only
-   `final_mm` to 39 and print `growth_mm` **without rerunning the subtraction**.
-   Explain the stale value: assigning a number to one object does not make every
-   previous calculation update automatically like a spreadsheet formula.
-2. Rerun the subtraction, check the new answer, and add a comment identifying
-   the dependency. Put the lines in their correct order and run the script from
-   the top. A reliable source creates inputs before it uses them.
-3. Recreate the three-plant vectors from the demonstration. Make a deliberately
-   reordered **copy** of the final vector, `c(34, 37, 40)`, and calculate apparent
-   changes. Compare these with the correctly paired changes and explain the
-   difference.
-4. Return to the correctly ordered vectors. Print `length(initial_mm)` and
-   `length(final_mm)` before subtracting. Extend both to four plants as in the
-   earlier practical. Explain why equal lengths are necessary here but do not
-   prove that the same plant occupies each position.
-5. Convert the correctly calculated growth vector from millimetres to centimetres
-   using division by ten. Store it under a new name ending `_cm`, print it, and
-   compare its mean with the mean in mm.
-6. Calculate the final/initial ratio for the corrected vectors, or the supplied
-   product-yield ratio from the alternative task. Describe in comments which
-   operation is subtraction and which is division, what quantity each produces,
-   and why its units differ. Keep the input masses or lengths alongside the
-   calculation so a reader can repeat it.
+1. Write `initial_mm <- 20`, `final_mm <- 37` and
+   `growth_mm <- final_mm - initial_mm`, and run them. Then set `final_mm <- 39`
+   and print `growth_mm` **without** rerunning the subtraction. It still says 17,
+   because `growth_mm` holds a number, not a formula. Rerun the subtraction and it
+   says 19. Add a comment explaining this.
+2. Recreate the three-plant vectors from above. Suppose the final lengths had been
+   typed in a different order, `c(34, 37, 40)`. Store them as `final_wrong` and use
+   `final_wrong - initial_mm` to find out what growth R reports: **14, 15 and 21 mm**
+   instead of 17, 18 and 15. R gives no warning, because both vectors still have
+   three values; only you know which plant each position belongs to.
+3. Use division by 10 to convert the correct growth from mm to cm, and store it
+   as `growth_cm`. Compare `mean(growth_mm)` and `mean(growth_cm)`:
+   **16.67 mm** and **1.667 cm**, the same growth in different units. Keep the
+   original vector; give the converted one its own name.
 
 ::: {.callout-tip collapse="true"}
-## Hint: a name stores the current result, not a live recipe
+## Hint: R recycled my vector
 
-With initial 20 and final 37, the assigned growth is 17. Updating final to 39
-leaves that stored growth at 17 until you execute the subtraction again; it then
-becomes 19 mm. A script supplies an order of operations you can rerun. R may
-recycle a shorter vector; check both vector lengths and plant correspondence.
+If one vector is shorter than the other, R may reuse its values to fill the gap
+and give a result of the wrong length, sometimes with only a warning. Check both
+lengths with `length()` before subtracting.
 :::
 
-## Calculate a solution concentration
+## How concentrated is the solution?
 
-A solution contains a
-substance in a solvent. A **mole**, abbreviated mol, is a unit of chemical amount.
-**Molar mass** tells us how many grams correspond to one mole. A concentration
-in mol/L is the amount per litre of **final solution**, not the amount per litre
-of solvent before adding the substance.
+The same habit, every input named with its unit, works for laboratory
+calculations. A **solution** is a substance dissolved in a liquid. A **mole** (mol)
+is a unit of amount of substance, and the **molar mass** says how many grams one
+mole weighs (g/mol). The concentration in mol/L is the amount of substance divided
+by the **final volume** of solution in litres. All the values below are supplied.
 
-1. Use these supplied values: sodium chloride mass **0.2922 g**, molar mass
-   **58.44 g/mol**, final volume **100 mL**. Write them as named R objects with
-   units in comments.
-2. Convert final volume to litres by dividing by 1000. Calculate amount in mol
-   as mass in g divided by molar mass in g/mol. Divide that amount by final
-   volume in litres to obtain mol/L. Print the intermediate values so the unit
-   conversions can be checked separately.
-3. Multiply mol/L by 1000 to obtain mmol/L; one mmol is one-thousandth of a mol.
-   Write the complete result and units in a comment. Predict the effect of
-   doubling mass while keeping final volume fixed, then check with the script.
-4. Instead restore the original mass and double final volume. Predict whether
-   the concentration doubles or halves. Run the changed calculation from its
-   inputs and explain how this differs from the previous experiment.
-5. Repeat the original calculation for glucose using supplied mass **0.9008 g**,
-   molar mass **180.16 g/mol**, and final volume **100 mL**. Compare its mmol/L
-   result with the sodium-chloride result. Different masses can correspond to
-   the same amount concentration because the molar masses differ.
-6. Save the source, restart R, and reproduce both original results. Add a short
-   `reports/calculation-check.txt` stating the formula in words, the conversion
-   factors, the meaning of final volume, and any error you corrected.
+Add this to `day06-extended.R` to find out the concentration of 0.2922 g sodium
+chloride (molar mass 58.44 g/mol) in a final volume of 100 mL:
 
-**Check and retain:** the original sodium-chloride and glucose examples each give
-0.005 mol in 0.100 L: **0.050 mol/L = 50 mmol/L**. Doubling only mass gives
-100 mmol/L; doubling only volume gives 25 mmol/L. Keep these results in a saved
-script with inputs, not only a copied Console printout.
+```{r}
+mass_g <- 0.2922
+molar_mass_g_mol <- 58.44
+final_volume_ml <- 100
+amount_mol <- mass_g / molar_mass_g_mol
+final_volume_l <- final_volume_ml / 1000
+concentration_mmol_l <- 1000 * amount_mol / final_volume_l
+concentration_mmol_l
+```
 
+The amount is 0.005 mol in 0.100 L, so the concentration is **50 mmol/L**
+(1 mmol is one thousandth of a mol). Keeping each step separate lets you check
+each conversion on its own.
+
+1. Predict what happens if you double the mass to 0.5844 g, then check: the
+   concentration doubles to **100 mmol/L**.
+2. Restore the mass and double the final volume to 200 mL instead. The same
+   amount is now spread over twice the volume, so the concentration halves to
+   **25 mmol/L**.
+3. Use the same lines to find out the concentration of 0.9008 g glucose (molar
+   mass 180.16 g/mol) in 100 mL. It is also **50 mmol/L**: a glucose molecule is
+   heavier, so the same number of moles weighs more.
+4. Save `reports/calculation-check.txt` with the formula in words, the conversion
+   factors you used, and your three results. Then restart R and check that
+   `day06-extended.R` reproduces them.
 
 ## Check your understanding
 
-- What survives restarting R: an unsaved object or a saved script?
-- Why is `mean(plant_id)` not a useful operation?
-- What must be true for two vectors to be subtracted position by position?
+::: {.callout-note collapse="true"}
+## What survives restarting R: an unsaved object or a saved script?
+
+The saved script. Objects live in R's memory and disappear when R restarts; run
+the script again to recreate them.
+:::
 
 ::: {.callout-note collapse="true"}
-## Check your answers
+## Why is `mean(plant_id)` not useful?
 
-The saved script survives; objects must be recreated. IDs name plants rather
-than measure quantities, so an average ID has no meaning. The vectors must refer
-to corresponding observations in the same order and have compatible lengths.
+Plant IDs are labels that name plants, not measurements. An average label has no
+meaning: R returns `NA` with a warning.
+:::
+
+::: {.callout-note collapse="true"}
+## What must be true before two vectors are subtracted position by position?
+
+They must have the same length and list the same plants in the same order.
 :::
 
 **Keep:** `day06.R`, with the four-plant example and comments about units.

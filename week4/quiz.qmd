@@ -165,4 +165,4 @@ The slope becomes about 0.0411 mg/mm², a factor of 100 smaller numerically. The
 :::
 
 Return to [association practice](20-association.qmd), or continue to
-[remote workflow](../week5/21-remote-workflow.qmd).
+[how a computer works](../week5/21-computer.qmd).

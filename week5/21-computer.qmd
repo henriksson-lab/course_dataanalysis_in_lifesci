@@ -1,0 +1,288 @@
+---
+title: "Day 21 — how a computer works, and how big is your data?"
+---
+
+[Lecture slides](../lectures/21-computer/lec.qmd) · [Quiz](21-computer-quiz.qmd) · [Weekly revision](quiz.qmd)
+
+
+## Today's question
+
+A colleague sends you a single-cell RNA-seq table: 30,000 genes measured in
+100,000 cells. Will it open in R on your laptop? To answer that you need a rough
+picture of what is inside a computer, and a way to **estimate how much memory a
+dataset needs before you load it**.
+
+Save your code as `data-size.R` in the project root and your answers in
+`reports/data-size.txt`. Write each estimate down before R gives you the real
+value, so you can see how close you were.
+
+## 1. The parts of your computer
+
+| Part | What it does | In this course |
+| --- | --- | --- |
+| **CPU** (processor) | Carries out calculations. It has a few **cores**, each able to work on its own task. | Runs R. |
+| **RAM** (memory) | Fast, temporary working space. Emptied when a program closes or the computer turns off. | Holds the objects in R's Environment pane. |
+| **Disk** (SSD) | Slower, permanent storage. Usually much larger than RAM. | Holds saved files: CSVs, scripts, reports. |
+| **GPU** (graphics processor) | Thousands of simple cores doing the same small calculation at once. | Not needed. Used for images, video and deep learning. |
+
+An installed **program** is a file on disk. When you start it, the operating
+system creates a **process**: a running copy that uses CPU and RAM. Closing the
+window ends the process; the program stays installed.
+
+How much RAM, disk and how many cores does your own laptop have? Look it up and
+write it in `reports/data-size.txt`:
+
+- **Windows:** Settings → System → About. Read "Installed RAM". Task Manager
+  (Ctrl+Shift+Esc) → Performance shows CPU cores and disk size.
+- **Mac:** Apple menu → About This Mac. Read "Memory". For disk size,
+  Apple menu → System Settings → General → Storage.
+
+Use `parallel::detectCores()` in the R console to find out how many cores R
+can see. `parallel` is a package that comes with R, and `::` uses one function
+from it without loading the whole package. The answer counts logical cores,
+which can be twice the number printed on the box.
+
+## 2. How much memory does R use?
+
+Open **Task Manager** (Windows: Processes tab) or **Activity Monitor** (Mac:
+Memory tab) and find the R process, called `rsession` or `R` (on Windows it may
+sit inside RStudio's entry). Note how much memory it uses. Then make one million
+random numbers in the R console with `x <- rnorm(1000000)` and look again: the
+process has grown by roughly 8 MB, because the numbers now sit in RAM.
+`rm(x)` removes the object and `gc()` ("garbage collection") tidies up memory R
+no longer needs.
+
+## 3. Objects in RAM, files on disk
+
+Everything in R's **Environment** pane is in RAM. It disappears when R closes or
+restarts. Only what you **save** to disk survives.
+
+Load the seedlings with `seedlings <- readr::read_csv("data/seedlings.csv")`
+and the object appears in the Environment pane. Restart R (**Session → Restart
+R**) and the pane is empty, because the object was in RAM, while
+`data/seedlings.csv` is still in the Files pane, because it is on disk. This is
+why we render reports from saved files in a fresh session: a result that exists
+only in RAM cannot be repeated, not even by you tomorrow.
+
+## 4. How many bytes is a number?
+
+A **byte** is 8 bits and can hold one of 256 patterns (0–255). Sizes use
+1 kB = 1,000 bytes, 1 MB = 1,000,000 bytes, and 1 GB = 1,000,000,000 bytes.
+
+**One number in R takes 8 bytes.** That gives a quick estimate for any table of
+numbers:
+
+$$\text{RAM} \approx \text{rows} \times \text{numeric columns} \times 8 \text{ bytes}$$
+
+For example, 1,000,000 rows × 10 columns × 8 bytes = 80,000,000 bytes = **80 MB**.
+R also needs **working space** for copies and calculations, so plan for roughly
+**2–3 times** the object: here about 160–240 MB free RAM.
+
+Use `object.size()` to find out how much memory one million numbers take:
+
+```r
+x <- rnorm(1000000)
+object.size(x)
+format(object.size(x), units = "MB", standard = "SI")
+```
+
+`format(..., units = "MB", standard = "SI")` converts bytes to MB with
+1 MB = 1,000,000 bytes. You should get 8,000,048 bytes, about 8 MB: 8 bytes per
+number plus a small fixed overhead.
+
+## 5. File size versus object size
+
+A CSV stores numbers as **text**: one byte per character. The value `25.7,` is 5
+characters, so 5 bytes on disk, while the same number takes 8 bytes in R. A
+long value such as `23.172052685196473,` takes 19 bytes as text. So a CSV can be
+**smaller or larger** than its object in R.
+
+Use `file.size("data/seedlings.csv")` to find out how much disk space the
+seedling table takes, and `object.size(seedlings)` to find out how much memory
+it takes once loaded. The file is 592 bytes, but the object is a few thousand
+bytes, because for a tiny table R's bookkeeping (column names, types, row
+information) is larger than the 96 measurements themselves. The 8-byte rule is
+for **large** tables, where the data dominate.
+
+## 6. A larger table
+
+Real experiments are much bigger than 24 plants. Simulate a table of 100,000
+rows and 10 numeric columns of measurements, rounded to one decimal:
+
+```r
+set.seed(21)
+n <- 100000
+big <- data.frame(matrix(round(rnorm(n * 10, mean = 20, sd = 4), 1), ncol = 10))
+dim(big)
+head(big)
+```
+
+`set.seed(21)` makes the random numbers the same for everyone. `matrix(...,
+ncol = 10)` arranges the numbers into 10 columns, and `data.frame()` turns them
+into a table with columns `X1` to `X10`.
+
+Estimate with the 8-byte rule how much memory `big` needs, then use
+`object.size(big)` to find out whether you were right. Next, estimate how large
+the table will be as a CSV: most values look like `19.3`, four characters plus
+a comma or line ending. Save it and use `file.size()` to check:
+
+```r
+library(readr)
+write_csv(big, "output/big-measurements.csv")
+file.size("output/big-measurements.csv") / 1e6
+```
+
+::: {.callout-tip collapse="true"}
+## Answer check
+
+Estimate: 100,000 × 10 × 8 = 8,000,000 bytes = 8 MB, and R reports 8.0 MB.
+CSV: about 100,000 × 10 × 5 = 5,000,000 bytes; the real file is 4.79 MB
+because some values, such as `9.8`, are only three characters. Here the CSV is
+**smaller** than the object, so a file of a given size can need more RAM than
+its size suggests.
+:::
+
+## 7. Text columns
+
+Most real tables also have an identifier for each sample. Add one, a unique
+text value per row, and use `object.size()` and `file.size()` to find out what it
+costs in memory and on disk:
+
+```r
+big$sample_id <- sprintf("S%06d", 1:n)
+head(big$sample_id)
+object.size(big$sample_id)
+object.size(big)
+write_csv(big, "output/big-measurements.csv")
+file.size("output/big-measurements.csv") / 1e6
+```
+
+`sprintf("S%06d", 1:n)` writes the numbers 1 to 100,000 as text with six
+digits: `S000001`, `S000002`, ….
+
+On disk each ID adds 8 characters (7 plus a comma), so expect about 0.8 MB
+more. In RAM every different text value is stored separately with its own
+bookkeeping, about 64 bytes per ID here.
+
+::: {.callout-tip collapse="true"}
+## Answer check
+
+The ID column alone uses 6.4 MB in R; the whole object grows to 14.4 MB. The CSV
+grows only to 5.59 MB. A column of **repeated** labels such as `treated` /
+`control` is cheap (about 8 bytes per row), because R stores each different
+text value once. Many **unique** text values are expensive.
+:::
+
+## 8. DNA as text
+
+```r
+dna <- readLines("data/dna.txt")
+nchar(dna)
+file.size("data/dna.txt")
+bases <- strsplit(dna, split = "")[[1]]
+table(bases)
+```
+
+`readLines()` reads the one line of text and `nchar()` counts its 40 letters,
+so the file is 41 bytes: 40 letters plus the line ending. `strsplit()` separates
+the letters (`[[1]]` takes the first result) and `table()` counts them: A 11,
+C 9, G 9, T 11. The sequence is invented teaching data.
+
+The human genome is about **3.1 billion letters**. How large is it as a text
+file? Then use `object.size(dna)` and `object.size(bases)` to find out what
+splitting the sequence into separate letters costs in R, and estimate the human
+genome stored that way.
+
+::: {.callout-tip collapse="true"}
+## Answer check
+
+As text: 3.1 × 10⁹ bytes ≈ **3.1 GB**. One string in R is 152 bytes; the 40
+separate letters are 592 bytes. At 8 bytes per letter the genome would need
+3.1 × 10⁹ × 8 ≈ **25 GB**: more than most laptops have. Genome software
+therefore stores sequences compactly and reads them piece by piece.
+:::
+
+## 9. Images
+
+A grayscale image is a table of brightness values. Our tiny teaching image has
+8 × 8 pixels on a 0–255 scale (0 is black, 255 is white), so each pixel fits in
+one byte in an image file.
+
+```r
+pixels <- as.matrix(read_csv("data/pixels.csv", show_col_types = FALSE))
+dim(pixels)
+pixels
+sum(pixels > 100)
+plot.new()
+rasterImage(as.raster(pixels / 255), 0, 0, 1, 1)
+```
+
+`as.matrix()` turns the all-number table into a grid, `sum(pixels > 100)` counts
+the 24 bright pixels (each `TRUE` counts as 1), and the last two lines draw the
+grid as an image.
+
+A microscope camera image is often **2048 × 2048** pixels. How large is one such
+image as an 8-bit file (1 byte per pixel), and as numbers in R (8 bytes per
+pixel)? How much RAM would 100 images from a time-lapse experiment need in R?
+Use R as a calculator, for example `2048 * 2048 * 8 / 1e6` for MB.
+
+::: {.callout-tip collapse="true"}
+## Answer check
+
+2048 × 2048 = 4,194,304 pixels. As a file: about 4.2 MB. In R: about 33.6 MB.
+One hundred images in R: about 3.4 GB. A colour image has three values per
+pixel (red, green, blue), so three times as much.
+:::
+
+## 10. Will the single-cell table fit on your laptop?
+
+The table has one number per gene and cell, so `30000 * 100000 * 8 / 1e9`
+gives its size in GB: **24 GB** before any working space, more than a 16 GB
+laptop has in total, and the operating system, browser and RStudio need RAM
+too.
+
+When R needs more RAM than is free, one of two things happens:
+
+- The computer **swaps**: it moves parts of RAM to the much slower disk. Everything
+  crawls, including the mouse and other programs.
+- R **stops** with an error such as `cannot allocate vector of size …`, or the R
+  session crashes and the Environment is lost.
+
+So estimate first, and do not try it on your laptop. If 2–3 times the estimate
+is close to or above your RAM, load fewer rows or columns, use a format that
+stores data more compactly, or use a **bigger computer**. Tomorrow we use a
+remote computer with more RAM and cores.
+
+## Check your understanding
+
+Complete `reports/data-size.txt` with:
+
+- your laptop's RAM, cores and disk size;
+- each prediction and the value R gave (sections 4–9);
+- one sentence on whether the single-cell table fits on your laptop, and why.
+
+1. You restart R. Which of these survive: the object `big`, the file
+   `output/big-measurements.csv`, the script `data-size.R` (saved)?
+2. A CSV of 2,000,000 rows and 5 numeric columns. Roughly how much RAM does the
+   loaded table need, and how much free RAM would you want?
+3. Your colleague says "the CSV is only 500 MB, so it needs 500 MB of RAM". Why
+   might that be wrong in both directions?
+4. Does a GPU help with today's R work?
+
+::: {.callout-note collapse="true"}
+## Short answers
+
+1. The file and the saved script survive (disk). The object `big` is gone (RAM).
+2. 2,000,000 × 5 × 8 = 80,000,000 bytes = 80 MB; plan for about 160–240 MB free.
+3. Short rounded numbers take fewer bytes as text than in R, so the object can be
+   larger. Long decimals take more bytes as text, so it can be smaller. Unique
+   text columns cost much more in RAM. Then add working space.
+4. No. R's ordinary calculations run on the CPU. GPUs matter for image analysis
+   and deep learning.
+:::
+
+**Keep:** `data-size.R`, `output/big-measurements.csv`, and
+`reports/data-size.txt`.
+
+**Before you finish:** restart R and run `data-size.R` from the top. Check that
+your saved numbers match. Next: [Day 22 — work on a remote computer](22-remote-workflow.qmd).

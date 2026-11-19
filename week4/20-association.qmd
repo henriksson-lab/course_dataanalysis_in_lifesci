@@ -6,19 +6,21 @@ title: "Day 20 — A biological association"
 
 ## Today's question
 
-Do larger leaves tend to have greater dry mass? We now fit a line to observations
-of different plants, rather than prepared calibration standards. The R function
-is familiar, but the biological interpretation changes. A relationship between
-two measurements does not by itself establish that changing one causes the other.
+Do larger leaves have more dry mass, and how much more per cm² of leaf? Leaf
+area is easy to measure from a photo, while dry mass means drying and weighing
+the leaf, so a relation between the two is useful in plant ecology. You fit a
+line with the same `lm()` as on day 19, but this time neither variable was set
+by us: both were measured on leaves as they were found.
 
-`data/leaf-mass.csv` contains simulated data from one sampled leaf on each of
-18 independent plants. `leaf_area_cm2` measures area and `dry_mass_mg` measures
-mass after drying. The study is observational: leaf area was not randomly
-assigned. Species, age, environment, and other features could influence both
-measurements. We begin with the simple question about association within the
-observed range.
+`data/leaf-mass.csv` contains one leaf from each of 18 plants, with its area
+(`leaf_area_cm2`) and dry mass (`dry_mass_mg`); see
+[data/README.md](../data/README.md). The data are simulated.
 
-## Plot first, then fit
+**Save today:** `association-report.Rmd` and its HTML, `output/day20-leaf-line.png`,
+and `transfer-association.Rmd` with its HTML. Create `association-report.Rmd` at
+the project root and put the code below into it.
+
+## Plotting leaf mass against area
 
 ```{r}
 library(readr)
@@ -31,32 +33,55 @@ leaf_plot <- ggplot(leaves, aes(x = leaf_area_cm2, y = dry_mass_mg)) +
   labs(x = "Leaf area (cm²)", y = "Leaf dry mass (mg)") +
   theme_minimal()
 leaf_plot
-
-leaf_fit <- lm(dry_mass_mg ~ leaf_area_cm2, data = leaves)
-coef(leaf_fit)
+range(leaves$leaf_area_cm2)
 ```
 
-Read the formula aloud: explain dry mass using leaf area. The fitted intercept
-is about 9.48 mg and slope about 4.11 mg/cm². In these observations, a one cm²
-difference in leaf area is associated with a fitted mean difference of about
-4.11 mg in dry mass. The line summarises a tendency, not a fixed ratio that every
-leaf obeys.
+Larger leaves tend to be heavier, but leaves of similar area still differ in
+mass by several mg. The areas range from **2.96 to 14.68 cm²**.
+
+## How much mass per cm²?
+
+Use `lm()` to find out how much dry mass goes with each extra cm² of leaf area:
 
 ```{r}
+leaf_fit <- lm(dry_mass_mg ~ leaf_area_cm2, data = leaves)
+coef(leaf_fit)
+
 leaf_plot <- leaf_plot +
   geom_abline(intercept = coef(leaf_fit)[1], slope = coef(leaf_fit)[2],
               colour = "steelblue")
 leaf_plot
-range(leaves$leaf_area_cm2)
+ggsave("output/day20-leaf-line.png", leaf_plot, width = 6, height = 4)
 ```
 
 ![One leaf from each of eighteen plants, with the fitted dry-mass relationship.](figures/day20-leaf-line.png)
 
-The observed areas range from 2.96 to 14.68 cm². An intercept is mathematically
-the fitted mass at zero area, outside the observed range. Its role here is to
-position the line over the measured areas; it is not a measurement of a zero-area leaf.
+The slope is **4.11 mg per cm²**: in these plants, a leaf with 1 cm² more area
+had on average about 4.11 mg more dry mass. The intercept, 9.48 mg, is where the
+line would cross zero area. No leaf has zero area and the smallest one measured
+is 2.96 cm², so the intercept only positions the line.
 
-## A line leaves individual differences
+Because leaf area was not assigned to the plants, the line describes how area
+and mass **go together** in this sample. Older or better-lit plants might have
+both larger and heavier leaves, so the line does not show that making a leaf
+larger would add 4.11 mg.
+
+## What mass does the line predict for an 8 cm² leaf?
+
+Use the two coefficients to find out the fitted mass at 8 cm²:
+
+```{r}
+coef(leaf_fit)[1] + coef(leaf_fit)[2] * 8
+```
+
+The answer is **42.36 mg**: the average mass the line expects for leaves of that
+size. Single 8 cm² leaves will be somewhat lighter or heavier. A leaf of 80 cm²
+is far outside the measured areas; the formula would give 338 mg, but nothing
+tells us that the line continues that far.
+
+## Which leaves lie far from the line?
+
+Use `residuals()` to find out how far each leaf lies above or below the line:
 
 ```{r}
 leaves <- leaves |>
@@ -73,14 +98,17 @@ leaf_residual_plot
 
 ![Individual dry-mass residuals around the leaf-area relationship.](figures/day20-residuals.png)
 
-Describe the residual pattern in ordinary language. Are points on both sides of
-zero? Is there obvious curvature? Does spread appear much greater at one end?
-These checks help identify limitations; they are not proof that every model
-assumption is satisfied. Independence still comes from how the plants were
-sampled, not from the residual plot.
+Check one by hand: A01 has area 2.96 cm² and mass 21.19 mg, the line predicts
+9.48 + 4.11 × 2.96 = 21.64 mg, so its residual is **−0.45 mg**, just below the
+line. The largest residuals are A17 (**8.42 mg below**) and A14 (**6.31 mg
+above**). The points lie on both sides of zero without a curve, so a straight
+line is a fair summary.
 
-Unusual points can influence the line, especially near the ends of the area
-range. We can explore that influence without deleting data from the main analysis:
+## Does one leaf decide the slope?
+
+A18 is the largest leaf, at the end of the range, where one point can tilt a
+line the most. Use a second fit without A18 to find out how much the slope
+depends on it:
 
 ```{r}
 without_a18 <- leaves |> filter(plant_id != "A18")
@@ -89,134 +117,88 @@ coef(leaf_fit)
 coef(sensitivity_fit)
 ```
 
-This is a demonstration, not a search for the slope we prefer. A18 has no known
-recording error and belongs in the main result. Compare the slopes and note
-whether omitting it changes the broad description.
+Without A18 the slope is **4.065** instead of 4.110 mg per cm², a small change,
+so the conclusion does not hinge on one leaf. Nothing in the records says A18
+was measured wrongly, so it stays in the main result; the second fit is only a
+check, and you label it as one.
 
-## Keep prediction within the evidence
+## The association report
 
-For an area of 8 cm², calculate the fitted mean mass using the line:
+In `association-report.Rmd`, describe the study (one leaf from each of 18
+plants, area and dry mass measured, nothing assigned), show the plot with the
+line and the residual plot, and answer three questions in the conclusion:
 
-```{r}
-coef(leaf_fit)[1] + coef(leaf_fit)[2] * 8
-```
+1. What association did you see?
+2. What does the slope mean, in numbers with units?
+3. What would this study need in order to show that leaf area *causes* mass?
 
-The result is about 42.36 mg. It is a fitted mean, not a promise that the next
-leaf will have that mass. There is individual variation around the line and
-uncertainty in the line itself. An area of 80 cm² is far outside the measured
-range; extrapolating there would rely on an untested assumption that the same
-relationship continues.
-
-## Write an association report
-
-Create `association-report.Rmd` at the project root. Include the study design,
-point plot with fitted line, residual plot, slope interpretation with units,
-and observed range. Add a short sensitivity note explaining what the A18
-exercise showed, while retaining all observations in the main model. Save the
-main figure as `output/day20-leaf-line.png` and render the report.
-
-Answer these questions in the conclusion:
-
-1. What association did we observe?
-2. What does the fitted slope mean numerically and biologically?
-3. What causal claim would this design fail to establish?
-
-Then compare your reports from days 17 and 19. A two-group treatment question
-motivated a comparison of means; a concentration measurement motivated a
-calibration line; today's two measured variables motivate an association. The
-biological question and design come before the choice of R function.
+Add one sentence about the A18 check, restart R and render.
 
 ::: {.callout-tip collapse="true"}
-## Hint: a precise slope sentence
+## Hint: a slope sentence
 
-Use “Within the observed area range, an additional 1 cm² of leaf area was
-associated with approximately … mg greater fitted mean dry mass.” Avoid “making
-the leaf larger causes …”, because this study did not manipulate area.
+"Within the measured range of 2.96 to 14.68 cm², each additional 1 cm² of leaf
+area was associated with about 4.11 mg more dry mass on average." Avoid "making
+the leaf larger causes …", because area was measured, not changed.
 :::
+
+## Does the slope change if area is in mm²?
+
+1 cm² is 100 mm². Use `mutate(leaf_area_mm2 = 100 * leaf_area_cm2)` and a new
+fit, `unit_fit <- lm(dry_mass_mg ~ leaf_area_mm2, data = leaves)`, to find out
+whether changing the unit changes the line.
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+The slope becomes **0.0411 mg per mm²**, 100 times smaller, while the intercept
+and every fitted mass stay the same: `max(abs(fitted(leaf_fit) - fitted(unit_fit)))`
+is essentially zero. The number changes with the unit; the relation between the
+leaves does not. Always write the unit next to a slope.
+:::
+
+## Did larger seedlings stay larger?
+
+In the second seedling study, `data/seedlings-transfer.csv`, each of 18 plants
+was measured at the start and seven days later. Create
+`transfer-association.Rmd` and use `lm(final_mm ~ initial_mm, data = transfer)`
+to find out how strongly a seedling's final length goes with its initial length.
+Colour the points by `treatment`, add the combined line, and make a residual
+plot.
+
+::: {.callout-tip collapse="true"}
+## Answer check
+
+Initial lengths range from 20.0 to 28.8 mm. The slope is **0.51**: a seedling
+1 mm longer at the start was on average about 0.5 mm longer at the end. A
+seedling starting at 24 mm has a fitted final length of 40.0 mm. The colours
+show that the treated plants lie mostly above the line, so the treatment adds
+to the pattern. This is a different question from day 17's, which compared
+mean growth between the randomly allocated groups; that comparison remains the
+way to judge the treatment.
+:::
+
+## Week 4 in one table
+
+At the end of `association-report.Rmd`, add a table comparing the four analyses
+of this week, for use in later lab courses:
+
+| Question | Design | Day | What R gives |
+| --- | --- | --- | --- |
+| Did treated plants grow more? | Two independent groups | 16–17 | Mean difference, Welch CI and p-value |
+| Did each plant's rate change? | Same plants measured twice | 18 | Mean change, paired CI and p-value |
+| What concentration is in my sample? | Prepared standards | 19 | Calibration line, estimate within range |
+| Do two measurements go together? | Two variables measured on each unit | 20 | Slope with units, residuals |
 
 ## Check your understanding
 
 - Is the slope measured in mg, cm², or mg/cm²? **mg/cm².**
-- Does a strong relationship establish causation? **No.**
-- Would 18 leaves from one plant provide the same independent sample as 18
-  plants? **No; leaves sharing a plant may be dependent.**
+- Does a strong relationship show that one variable causes the other? **No;
+  here area was measured, not changed.**
+- Would 18 leaves from one plant give 18 independent units? **No; leaves of the
+  same plant share its conditions.**
 
-## Check units, predictions, and influence
+**Leave with:** `association-report.Rmd`, its HTML, `output/day20-leaf-line.png`,
+and `transfer-association.Rmd` with its HTML.
 
-Continue the leaf report, retaining all observations in the main analysis.
-
-1. Write a complete slope sentence before discussing a test: the fitted change
-   in dry mass for a one-cm² increase in area in this observed sample. Include
-   units. Explain why a slope of about 4.11 does not mean 4.11%, 4.11 cm²,
-   or a guaranteed increment for every individual leaf.
-2. Read the minimum and maximum observed areas from the data. Choose a value
-   inside that range, calculate fitted mass from intercept and slope, and
-   mark it on a plot. Distinguish the fitted mean relationship from an exact
-   prediction of an individual mass.
-3. Select a measured leaf and calculate observed minus fitted mass manually.
-   Compare with its residual. Identify whether it lies above or below the
-   line. Inspect residuals for pattern without claiming that a small sample
-   can validate every assumption through a picture.
-4. Repeat the supplied sensitivity fit leaving A18 out in a separate object.
-   Keep the full fit as primary and show both slopes and their difference.
-   Explain why influence is a diagnostic question, not permission to exclude
-   a valid observation because the preferred line looks tidier without it.
-5. Convert the area column to mm² by multiplying cm² by 100. Fit the same
-   relationship using the converted predictor and compare slopes and fitted
-   values. The fitted masses should agree, while the slope's numeric value
-   and units change. Preserve both area columns for this demonstration.
-6. Compare three claims: “larger leaves tended to have more dry mass”; “adding
-   one cm² of area caused 4.11 mg extra mass”; “all leaves at this area have
-   the same mass.” Retain the supported descriptive claim and explain the
-   separate causal and individual-variation errors in the others.
-7. Add a short recommendation for a future study to investigate a causal
-   biological mechanism. State that this would require design and subject
-   knowledge beyond a new `lm()` call. Save your sensitivity and unit checks
-   with the source, then render the complete report afresh.
-
-::: {.callout-tip collapse="true"}
-## Hint: a unit change should not change fitted masses
-
-Keep `leaf_area_cm2` and create `leaf_area_mm2 = 100 * leaf_area_cm2`. The
-mg-per-mm² slope should be the mg-per-cm² slope divided by 100. The intercept
-and fitted masses are unchanged apart from numerical precision. A18 is retained
-in the main analysis; the separate fit only illustrates sensitivity.
-:::
-
-## Relate initial and final length
-
-Use `data/seedlings-transfer.csv`, containing 18
-independent plants, initial and final lengths in mm, and a supplied allocation
-label. Explore initial versus final length as an observational association.
-This is a different question from the mean treatment effect on growth. A line
-through the combined data does not adjust for allocation or establish causation.
-
-1. In `transfer-association.Rmd`, state that final length is the response and
-   initial length the predictor for this descriptive question. Import and check
-   the data, retaining the allocation labels and the meaning of each row.
-2. Draw a scatter plot coloured by allocation. Identify what the colour adds
-   to a combined plot.
-3. Fit the simple final-on-initial line using `lm()`. Report slope and intercept
-   meanings with units. Explain why the intercept at zero initial length may
-   be outside the meaningful observed range even though R calculates it.
-4. Produce a residual plot and choose one observation to check observed minus
-   fitted by hand. Calculate a fitted value at an initial length inside the
-   measured range, while distinguishing that estimate from a measured plant.
-5. Write two brief explanations: what the association describes in this sample,
-   and why it cannot replace the independently allocated group comparison.
-   Starting size, allocation, and other plant differences can contribute to
-   the observed pattern. No causal intervention on initial size was performed.
-6. Make a final comparison table describing three questions and outputs:
-   independent mean growth comparison, paired before/after change, and a simple
-   observational line. Give the experimental unit, outcome, units, appropriate
-   supplied dataset, and one limitation for each. This is selection by question
-   and design.
-
-**Additional outputs:** the unit/sensitivity check, revised leaf report,
-transfer association report with figures, and the three-question comparison
-sheet. Keep both source and HTML and verify the input paths from a fresh session.
-
-**Leave with:** a rendered association report and a clear explanation of how
-its question differs from a treatment comparison or instrument calibration.
-
-Next: [Day 21 — Work across local and remote computers](../week5/21-remote-workflow.qmd).
+Next: [Day 21 — How a computer works, and how big is your data?](../week5/21-computer.qmd).
