@@ -84,7 +84,14 @@ and `lectures/17-welch-test/lec.qmd`.
 6. **Summary.** A concept/key-fact table, then `**Next (Day N, topic):**` and
    `**Now:**` with the exercise link and the files to leave with.
 
-Aim for about 12–16 content slides. Use `{.smaller}` only for slides with code
+**Match the weight of the structure to the topic.** Hands-on basics (weeks 1–2:
+files, folders, terminal, first R) stay plain: "Today you will: …", step-by-step
+slides with one figure and one or two lines, and a plain-bullet summary; no
+invented failure tables, no abstract framing (see the Day 1 deck). Conceptual
+and statistical decks can use the full pattern with problem slides,
+misreading tables and a key-fact summary table (see the Day 17 deck).
+
+Aim for about 10–16 content slides. Use `{.smaller}` only for slides with code
 plus a table, or the Summary; otherwise normal text size fills the slide.
 Speaker notes add narration and demonstration instructions; they must not be
 the only place where an idea is explained. Never state how long anything takes.
