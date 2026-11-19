@@ -300,9 +300,9 @@ area and label counts from sequence function. The required short conclusions
 matter more than another elaborate plotting layer.
 :::
 
-## Practical: explain the representation
+## Exercises: explain the representation
 
-[Open day 22 practical and notes](../../week5/22-data-representations.qmd).
+[Open day 22 exercises](../../week5/22-data-representations.qmd).
 
 - Save `representations.R`, controlled copies, and the threshold table.
 - Render `representation-report.Rmd` with two figures and interpretation.

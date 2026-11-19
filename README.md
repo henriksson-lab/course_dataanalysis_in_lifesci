@@ -16,7 +16,7 @@ are not copied. Student reports will use **R Markdown (`.Rmd`)**; the teaching
 website uses Quarto (`.qmd`).
 
 The draft contains 25 separate RevealJS lecture decks paired with 25 daily
-practical/notes pages, five weekly self-check quizzes, worked examples, hints,
+Exercises pages, five weekly self-check quizzes, worked examples, hints,
 biological datasets and dictionaries, a working R Markdown template, setup
 guides, references, and instructor solutions. Datasets are simulated. The
 sidebar and slide theme are copied from the Quantitative Biology scaffold:

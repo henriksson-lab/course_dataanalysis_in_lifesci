@@ -206,7 +206,7 @@ The outputs are day06-extended.R and a calculation-check note. Retain prediction
 
 ## Practise a complete, repeatable calculation
 
-[Open the practical and notes](../../week2/06-r-basics.qmd).
+[Open the exercises](../../week2/06-r-basics.qmd).
 
 - Add a fourth plant to **both** measurement vectors.
 - Change an input, predict the effect, and rerun.

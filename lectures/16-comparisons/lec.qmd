@@ -198,13 +198,13 @@ A different test cannot manufacture independently assigned trays.
 The observed plant lengths still exist, but treating24 plants as24 independent treatment allocations would be misleading. Keep a design limitation separate from a data-entry error or computational bug.
 :::
 
-## Practical: prepare before testing
+## Exercises: prepare before testing
 
 Create **`comparison.Rmd`** with design, growth calculation, observations, and the directed difference.
 
 Explain why the two groups are independent.
 
-[Open the practical](../../week4/16-comparisons.qmd).
+[Open exercises](../../week4/16-comparisons.qmd).
 
 ::: notes
 Ask students to read their difference aloud with units and direction. Tomorrow the report gains an interval and p-value; today’s work should already be scientifically intelligible without either.

@@ -162,7 +162,7 @@ Can another person regenerate and explain the result?
 Wordiness is not workload quality. Students spend time inspecting, drafting, checking, revising, and reproducing. Their saved outputs demonstrate those actions rather than the number of headings.
 :::
 
-## Practical: one report that reopens and renders
+## Exercises: one report that reopens and renders
 
 Save **`descriptive-report.Rmd`** or the chosen **`organic-report.Rmd`**, plus HTML.
 
@@ -170,7 +170,7 @@ Put explicit rendering commands in the **R Console**, not inside the report.
 
 Ask a partner to identify the question, unit, units, and limitation.
 
-[Open the report practical](../../week3/15-descriptive-report.qmd).
+[Open exercises](../../week3/15-descriptive-report.qmd).
 
 ::: notes
 Have students locate both source and rendered output. No hypothesis test is required today. If rendering fails, use the first meaningful error and chunk name to recover. Avoid spending the entire session on cosmetic formatting while inputs or interpretation remain unclear.

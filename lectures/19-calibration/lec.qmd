@@ -259,13 +259,13 @@ No fabricated corrected concentration.
 The transfer report should recommend a sensible information-gathering step for X2. It is not a wet-lab protocol and does not require prior chemistry. Full uncertainty propagation remains beyond this simple exercise.
 :::
 
-## Practical: report the line and its limits
+## Exercises: report the line and its limits
 
 Save **`calibration-report.Rmd`**, supported concentration estimates, and both figures.
 
 Explain U3’s missing estimate and the new dilution example.
 
-[Open the practical](../../week4/19-calibration.qmd).
+[Open exercises](../../week4/19-calibration.qmd).
 
 ::: notes
 Students should explain the standard, slope units, residual sign, supported range, and uncertainty limitation. They need no memorised optical law. Keep the dataset and formula visible so the chemistry setting does not become a prerequisite.

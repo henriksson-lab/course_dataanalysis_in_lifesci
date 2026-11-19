@@ -212,13 +212,13 @@ These are different improvements.
 Students create paired-transfer.Rmd from the supplied three-row example, including its values/code and a limitation. They should not pool this illustrative case with the unrelated ten-plant study or claim a new measured dataset.
 :::
 
-## Practical: keep the pair visible
+## Exercises: keep the pair visible
 
 Make **`paired-report.Rmd`** with the design, matched changes, a figure, result, and limitation.
 
 Could a reader identify what counted as one independent pair?
 
-[Open the practical](../../week4/18-paired.qmd).
+[Open exercises](../../week4/18-paired.qmd).
 
 ::: notes
 Check the practical’s chosen source report filename and use its code from the top. Ask students to explain why two unrelated groups cannot become paired by putting them beside one another. No new biology or chemical prerequisite is needed.

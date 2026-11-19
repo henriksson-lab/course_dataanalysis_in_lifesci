@@ -226,13 +226,13 @@ Keep source, data, figure, and report together.
 Students revise the leaf report and independently write transfer-association.Rmd. Their three-question sheet becomes a practical reference for future labs. Do not turn this consolidation into a survey of advanced models.
 :::
 
-## Practical: explain the line, the residuals, and one limit
+## Exercises: explain the line, the residuals, and one limit
 
 Create **`association-report.Rmd`** with observations, fitted line, slope units, and residuals.
 
 Keep the full-data result and label any sensitivity check.
 
-[Open the practical](../../week4/20-association.qmd).
+[Open exercises](../../week4/20-association.qmd).
 
 ::: notes
 Check the exact source filename in the practical; use the root project convention. Ask students to choose one actual point and explain its residual sign. Their final report should distinguish descriptive association, supported range and a causal claim.

@@ -183,7 +183,7 @@ Use the new eighteen-plant table only after defining its study. T01 is 25.3 to 4
 
 ## Now practise the complete route
 
-[Open the practical and notes](../../week1/01-files.qmd).
+[Open the exercises](../../week1/01-files.qmd).
 
 Leave with:
 

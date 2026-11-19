@@ -213,7 +213,7 @@ If you convert to cm, revise the mean, SD, variance units, and axis together.
 The ordering of group means and relative spread should remain consistent under a common positive conversion. A data table with correct numbers but wrong unit labels is still a misleading report.
 :::
 
-## Practical: explain the number you calculate
+## Exercises: explain the number you calculate
 
 Choose one short transfer task and keep **`day12-variation.R`**.
 
@@ -221,7 +221,7 @@ What would stay the same if every measurement increased by 10 mm?
 
 What changes when mm become cm?
 
-[Open the practical and answer checks](../../week3/12-variation.qmd).
+[Open exercises](../../week3/12-variation.qmd).
 
 ::: notes
 Keep the by-hand three-number example before the full dataset. Ask for a two-sentence explanation of centre and spread. Students should retain the measurement unit and recognise that SD among plants is not uncertainty in a treatment difference.

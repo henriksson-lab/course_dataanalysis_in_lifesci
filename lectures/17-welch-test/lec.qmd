@@ -226,13 +226,13 @@ A printout alone does not answer all three.
 Students extend transfer-comparison.Rmd with a concise results paragraph, then peer-check direction and units in rendered HTML. Earlier descriptive work remains useful and should not disappear after adding a test.
 :::
 
-## Practical: add interpretation to the report
+## Exercises: add interpretation to the report
 
 Keep the individual-point plot. Add the method, directed estimate, interval, sample sizes and p-value.
 
 Restart R and render **`comparison.Rmd`**.
 
-[Open the guided practical](../../week4/17-welch-test.qmd).
+[Open exercises](../../week4/17-welch-test.qmd).
 
 ::: notes
 Have students find comparison$conf.int and comparison$p.value and relate them to the printed output. They should report the two group means and available sample sizes as well. The written interpretation should be understandable without seeing R’s long printout.

@@ -216,7 +216,7 @@ Record the ambiguity and the correction.
 The practical requires a caption-repair log and reproducible outputs. Working alone, reread the figure after closing the code. Biological claims need numerical meaning, not just attractive layout.
 :::
 
-## Practical: describe the sample before testing it
+## Exercises: describe the sample before testing it
 
 Write a caption that identifies the unit, units, and symbols.
 
@@ -224,7 +224,7 @@ Choose a transfer summary: repaired seedlings **or** supplied organic yields.
 
 Save the script, summary CSV, and figure.
 
-[Open the practical](../../week3/13-group-summaries.qmd).
+[Open exercises](../../week3/13-group-summaries.qmd).
 
 ::: notes
 The organic option reuses the same computations, not a second required practical. Each row is an independently prepared run; yield uses supplied theoretical and isolated masses. SD is expressed in percentage points. No t-test is introduced here.

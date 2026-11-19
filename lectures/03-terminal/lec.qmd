@@ -203,7 +203,7 @@ The log can be a plain-text note edited graphically; no logging software or shel
 
 ## Connect words to the graphical view
 
-[Open the practical and notes](../../week1/03-terminal.qmd).
+[Open the exercises](../../week1/03-terminal.qmd).
 
 - Ubuntu on Windows: `explorer.exe .`
 - Mac: `open .`

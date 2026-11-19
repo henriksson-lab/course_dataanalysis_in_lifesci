@@ -176,7 +176,7 @@ The solution checks are 50, 100 and 150 mmol/L for each solute. The transfer pla
 
 ## Give the reader four short sections
 
-[Open the practical and notes](../../week2/10-first-report.qmd).
+[Open the exercises](../../week2/10-first-report.qmd).
 
 1. **Question and data:** design, measurements, independent unit.
 2. **Methods:** import and growth calculation.

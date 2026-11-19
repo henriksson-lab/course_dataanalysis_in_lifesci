@@ -284,9 +284,9 @@ case for another task and then follow only the written directions; this helps
 expose instructions that rely on remembered undocumented actions.
 :::
 
-## Practical: keep a reproduction log
+## Exercises: keep a reproduction log
 
-[Open day 24 practical and notes](../../week5/24-reproduce.qmd).
+[Open day 24 exercises](../../week5/24-reproduce.qmd).
 
 - Test the chosen main-study package and the brief algae-share package.
 - Record destination, first error, fix, and rerun outcome.

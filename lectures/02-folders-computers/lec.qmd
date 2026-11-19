@@ -202,7 +202,7 @@ This is a test of organisation, not a separate backup against losing the laptop.
 
 ## Practise explaining the route
 
-[Open the practical and notes](../../week1/02-folders-computers.qmd).
+[Open the exercises](../../week1/02-folders-computers.qmd).
 
 Save `reports/day02-map.txt` with:
 

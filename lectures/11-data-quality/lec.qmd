@@ -215,7 +215,7 @@ Do not change it merely because it is far from the others.
 Ask students to distinguish a diagnostic flag from an authorised correction. Their independent transfer output must explicitly state that no correction is supported in the supplied complete transfer file.
 :::
 
-## Practical: leave a repair trail
+## Exercises: leave a repair trail
 
 Save **`day11-cleaning.R`**, a derived CSV, and short cleaning notes.
 
@@ -223,7 +223,7 @@ Save **`day11-cleaning.R`**, a derived CSV, and short cleaning notes.
 - Which measurement stayed unknown?
 - Can the script recreate the corrected file after restarting R?
 
-[Open the practical and worked repair](../../week3/11-data-quality.qmd).
+[Open exercises](../../week3/11-data-quality.qmd).
 
 ::: notes
 Students should run inspection first, then the repairs, then verify counts. Ask a partner to locate the original, script, field notes, and output. Do not add an outlier-removal exercise: distinguishing evidence from convenience is the main outcome.

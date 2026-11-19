@@ -239,9 +239,9 @@ time belongs to the weak step. Do not fill it with an advanced topic merely
 because some students finish earlier.
 :::
 
-## Practical: leave with work you can find again
+## Exercises: leave with work you can find again
 
-[Open day 25 practical and notes](../../week5/25-consolidate.qmd).
+[Open day 25 exercises](../../week5/25-consolidate.qmd).
 
 - Locate your project without a recent-files menu.
 - Render your chosen report from a fresh session.

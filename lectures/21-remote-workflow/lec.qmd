@@ -307,9 +307,9 @@ desktop access. Likewise a successful transfer does not establish a backup
 policy or guarantee that a disconnected process continues running.
 :::
 
-## Practical: locate, render, return
+## Exercises: locate, render, return
 
-[Open day 21 practical and notes](../../week5/21-remote-workflow.qmd).
+[Open day 21 exercises](../../week5/21-remote-workflow.qmd).
 
 - Save `reports/remote-log.txt` with computer names and project locations.
 - Connect, disconnect, reconnect, and find saved work.

@@ -22,7 +22,7 @@ they are not evidence about actual biological effects.
 ## Your five-week route
 
 Each topic in the left menu has separate **Lecture (slides)** and
-**Practical and notes** links. Lecture links are green; practicals are italic;
+**Exercises** links. Lecture links are green; practicals are italic;
 weekly quiz links are blue. Coloured week bands follow the Quantitative Biology
 course scaffold. The labels identify their roles even without colour.
 

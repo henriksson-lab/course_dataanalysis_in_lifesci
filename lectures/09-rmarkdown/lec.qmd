@@ -193,7 +193,7 @@ Keep report-workshop.Rmd, transfer-report.Rmd, their HTML outputs and render-rec
 
 ## Make one change and check it
 
-[Open the practical and notes](../../week2/09-rmarkdown.qmd).
+[Open the exercises](../../week2/09-rmarkdown.qmd).
 
 Render the unchanged template first. Then add your question, methods, labelled
 figure, and interpretation. Restart and render the saved source again.

@@ -1,7 +1,7 @@
 # Lecture scaffold and authoring contract
 
 The course must follow the quantbio scaffold: topic sections link separately to
-lecture slides and practical/notes pages. Preserve the 25 existing daily pages
+lecture slides and Exercises pages. Preserve the 25 existing daily pages
 and their URLs. New decks live at `lectures/<daily-stem>/lec.qmd`.
 
 User requirements: decks may be up to **45 slides**, but favour fewer slides and

@@ -207,7 +207,7 @@ Then state what the demonstration **does not establish** about a natural populat
 The required transfer note should distinguish source SD from SD among means, stable patterns from exact seed-dependent values, and a toy combined-treatment source from a real inferential design.
 :::
 
-## Practical: draw the design and explain the mean
+## Exercises: draw the design and explain the mean
 
 Label independently treated units in three designs.
 
@@ -215,7 +215,7 @@ Run the supplied sampling demonstration and explain the axis.
 
 Keep your diagrams and **`day14-sampling.R`**.
 
-[Open the practical](../../week3/14-replicates-uncertainty.qmd).
+[Open exercises](../../week3/14-replicates-uncertainty.qmd).
 
 ::: notes
 Protect time for diagrams and discussion. The organic diagram can substitute for one plant example, not add another simulation. A useful explanation identifies what was repeated, what remained the same, and what increased the independent information.

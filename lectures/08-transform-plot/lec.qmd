@@ -224,7 +224,7 @@ Do not fit a hypothesis test to these formula-generated dilution cases as though
 
 ## Make a figure someone can read
 
-[Open the practical and notes](../../week2/08-transform-plot.qmd).
+[Open the exercises](../../week2/08-transform-plot.qmd).
 
 - Use the intended table and columns.
 - Label axes with quantities and units.

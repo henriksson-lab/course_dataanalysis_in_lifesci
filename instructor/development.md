@@ -1,5 +1,18 @@
 # Shared teaching contract
 
+## Current editing requirements
+
+- Student tasks have no expected completion times.
+- Exercises are completable independently; collaboration is optional.
+- Give concise tasks, supplied quantities/formulas, and checks. Remove redundant
+  prohibitions and reassurance; do not add prose to satisfy a length quota.
+- The student-facing role label is **Exercises**.
+- The planned audit in `instructor/audit-plan.md` covers topic-level quizzes
+  matching Quantbio's public question/hint/answer format. That quiz restructure
+  and the course-wide wording rewrite are planned, not yet implemented.
+
+## Course background
+
 This is a first teaching draft, not an approved syllabus or an examination plan.
 Students have no assumed file-system or programming knowledge. The current
 five-week sequence is in `contentplan.md`.

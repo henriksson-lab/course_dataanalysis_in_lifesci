@@ -203,7 +203,7 @@ The source archive still contains the original known fixture. The practical shou
 
 ## Save an inspection someone can explain
 
-[Open the practical and notes](../../week1/04-inspect-archive.qmd).
+[Open the exercises](../../week1/04-inspect-archive.qmd).
 
 Keep the selected records, a practice manifest, and `working/observations.txt`.
 

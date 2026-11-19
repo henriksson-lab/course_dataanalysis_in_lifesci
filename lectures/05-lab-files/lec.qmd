@@ -200,7 +200,7 @@ The current week5 R work has not happened yet; students are meeting R, not requi
 
 ## Finish with a clear handover
 
-[Open the practical and notes](../../week1/05-lab-files.qmd).
+[Open the exercises](../../week1/05-lab-files.qmd).
 
 - Retain the ordinary report folder and a tested `report-bundle.zip`.
 - Explain which files were inputs and which were derived.

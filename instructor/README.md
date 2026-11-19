@@ -38,7 +38,7 @@ For a quick cross-section, read these student pages in order:
 | `week5/24-reproduce.qmd` | Does the project work when another student receives it? |
 
 Each daily topic now pairs a separate RevealJS lecture deck with its existing
-practical/notes page. The slide theme and coloured sidebar follow the Quantitative
+Exercises page. The slide theme and coloured sidebar follow the Quantitative
 Biology scaffold. Lecture links are green, quizzes blue, and practical links
 italic; week bands use the scaffold's five colours. The weekly quizzes are
 formative self-checks with worked explanations, not a grading scheme.
@@ -59,7 +59,7 @@ not a claim of 40 contact hours or examination requirements.
 
 ## What's supplied
 
-- 25 lecture decks and 25 practical/notes pages with biological context, examples, practicals, hints,
+- 25 lecture decks and 25 Exercises pages with biological context, examples, practicals, hints,
   completion questions, and explicitly named saved outputs.
 - A Quarto website using the sibling course's actual sidebar CSS, slide theme,
   RevealJS format, lecture/practical pairing, navigation controls, and week colours.

@@ -336,9 +336,9 @@ fresh culture memo supplies transfer evidence and becomes a small
 reproducibility task on the following day.
 :::
 
-## Practical: a first complete version today
+## Exercises: a first complete version today
 
-[Open day 23 practical and notes](../../week5/23-mini-study.qmd).
+[Open day 23 exercises](../../week5/23-mini-study.qmd).
 
 - Default: `duckweed-report.Rmd` plus HTML.
 - Alternative: `organic-study.Rmd` plus HTML.

@@ -54,31 +54,31 @@ website:
         contents:
         - text: Lecture (slides)
           href: lectures/01-files/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week1/01-files.qmd
       - section: 2. Folders and how computers work
         contents:
         - text: Lecture (slides)
           href: lectures/02-folders-computers/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week1/02-folders-computers.qmd
       - section: 3. The terminal
         contents:
         - text: Lecture (slides)
           href: lectures/03-terminal/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week1/03-terminal.qmd
       - section: 4. Unpack and inspect lab data
         contents:
         - text: Lecture (slides)
           href: lectures/04-inspect-archive/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week1/04-inspect-archive.qmd
       - section: 5. Find samples and package results
         contents:
         - text: Lecture (slides)
           href: lectures/05-lab-files/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week1/05-lab-files.qmd
       - text: 'Quiz: check your understanding'
         href: week1/quiz.qmd
@@ -88,31 +88,31 @@ website:
         contents:
         - text: Lecture (slides)
           href: lectures/06-r-basics/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week2/06-r-basics.qmd
       - section: 7. Import a biological table
         contents:
         - text: Lecture (slides)
           href: lectures/07-import/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week2/07-import.qmd
       - section: 8. Calculate and plot growth
         contents:
         - text: Lecture (slides)
           href: lectures/08-transform-plot/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week2/08-transform-plot.qmd
       - section: 9. R Markdown
         contents:
         - text: Lecture (slides)
           href: lectures/09-rmarkdown/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week2/09-rmarkdown.qmd
       - section: 10. Your first complete report
         contents:
         - text: Lecture (slides)
           href: lectures/10-first-report/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week2/10-first-report.qmd
       - text: 'Quiz: check your understanding'
         href: week2/quiz.qmd
@@ -122,31 +122,31 @@ website:
         contents:
         - text: Lecture (slides)
           href: lectures/11-data-quality/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week3/11-data-quality.qmd
       - section: 12. Mean, variance, and SD
         contents:
         - text: Lecture (slides)
           href: lectures/12-variation/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week3/12-variation.qmd
       - section: 13. Group summaries and figures
         contents:
         - text: Lecture (slides)
           href: lectures/13-group-summaries/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week3/13-group-summaries.qmd
       - section: 14. Replicates and uncertainty
         contents:
         - text: Lecture (slides)
           href: lectures/14-replicates-uncertainty/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week3/14-replicates-uncertainty.qmd
       - section: 15. A descriptive biological report
         contents:
         - text: Lecture (slides)
           href: lectures/15-descriptive-report/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week3/15-descriptive-report.qmd
       - text: 'Quiz: check your understanding'
         href: week3/quiz.qmd
@@ -156,31 +156,31 @@ website:
         contents:
         - text: Lecture (slides)
           href: lectures/16-comparisons/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week4/16-comparisons.qmd
       - section: 17. A guided Welch t-test
         contents:
         - text: Lecture (slides)
           href: lectures/17-welch-test/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week4/17-welch-test.qmd
       - section: 18. The same plants measured twice
         contents:
         - text: Lecture (slides)
           href: lectures/18-paired/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week4/18-paired.qmd
       - section: 19. Fit a calibration line
         contents:
         - text: Lecture (slides)
           href: lectures/19-calibration/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week4/19-calibration.qmd
       - section: 20. Leaf area and mass
         contents:
         - text: Lecture (slides)
           href: lectures/20-association/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week4/20-association.qmd
       - text: 'Quiz: check your understanding'
         href: week4/quiz.qmd
@@ -190,31 +190,31 @@ website:
         contents:
         - text: Lecture (slides)
           href: lectures/21-remote-workflow/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week5/21-remote-workflow.qmd
       - section: 22. DNA and images as data
         contents:
         - text: Lecture (slides)
           href: lectures/22-data-representations/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week5/22-data-representations.qmd
       - section: 23. A small biological study
         contents:
         - text: Lecture (slides)
           href: lectures/23-mini-study/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week5/23-mini-study.qmd
       - section: 24. Reproduce a report
         contents:
         - text: Lecture (slides)
           href: lectures/24-reproduce/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week5/24-reproduce.qmd
       - section: 25. Practise the full workflow
         contents:
         - text: Lecture (slides)
           href: lectures/25-consolidate/lec.qmd
-        - text: Practical and notes
+        - text: Exercises
           href: week5/25-consolidate.qmd
       - text: 'Quiz: check your understanding'
         href: week5/quiz.qmd

@@ -208,11 +208,11 @@
     ]
   },
   {
-    "objectID": "lectures/25-consolidate/lec.html#practical-leave-with-work-you-can-find-again",
-    "href": "lectures/25-consolidate/lec.html#practical-leave-with-work-you-can-find-again",
+    "objectID": "lectures/25-consolidate/lec.html#exercises-leave-with-work-you-can-find-again",
+    "href": "lectures/25-consolidate/lec.html#exercises-leave-with-work-you-can-find-again",
     "title": "A workflow for the next laboratory",
-    "section": "Practical: leave with work you can find again",
-    "text": "Practical: leave with work you can find again\nOpen day 25 practical and notes.\n\nLocate your project without a recent-files menu.\nRender your chosen report from a fresh session.\nSave reports/next-lab.txt as your reusable workflow.\nIdentify the supported backup and any pending remote-access skill.\nKeep a labelled sensitivity check, handover, and readiness review.\n\n\nStop adding topics. Use the time to make these tasks dependable. The descriptive organic alternative stays descriptive; higher yield alone does not prove higher purity. The course’s written examination design remains outside these materials.",
+    "section": "Exercises: leave with work you can find again",
+    "text": "Exercises: leave with work you can find again\nOpen day 25 exercises.\n\nLocate your project without a recent-files menu.\nRender your chosen report from a fresh session.\nSave reports/next-lab.txt as your reusable workflow.\nIdentify the supported backup and any pending remote-access skill.\nKeep a labelled sensitivity check, handover, and readiness review.\n\n\nStop adding topics. Use the time to make these tasks dependable. The descriptive organic alternative stays descriptive; higher yield alone does not prove higher purity. The course’s written examination design remains outside these materials.",
     "crumbs": [
       "Home",
       "Week 5: reproduce and transfer",
@@ -507,11 +507,11 @@
     ]
   },
   {
-    "objectID": "lectures/23-mini-study/lec.html#practical-a-first-complete-version-today",
-    "href": "lectures/23-mini-study/lec.html#practical-a-first-complete-version-today",
+    "objectID": "lectures/23-mini-study/lec.html#exercises-a-first-complete-version-today",
+    "href": "lectures/23-mini-study/lec.html#exercises-a-first-complete-version-today",
     "title": "From a question to a report",
-    "section": "Practical: a first complete version today",
-    "text": "Practical: a first complete version today\nOpen day 23 practical and notes.\n\nDefault: duckweed-report.Rmd plus HTML.\nAlternative: organic-study.Rmd plus HTML.\nKeep the chosen source and HTML in the project, with raw data intact.\nRetain the analysis plan and short algae transfer memo/script.\n\nIf extending day 15’s organic-report.Rmd, use Save As to preserve it.\n\nThe immediate goal is a complete first version, not decorative perfection. Tomorrow’s peer or fresh-folder reproduction will reveal hidden dependencies. Students should save a note of any failed step rather than conceal it.",
+    "section": "Exercises: a first complete version today",
+    "text": "Exercises: a first complete version today\nOpen day 23 exercises.\n\nDefault: duckweed-report.Rmd plus HTML.\nAlternative: organic-study.Rmd plus HTML.\nKeep the chosen source and HTML in the project, with raw data intact.\nRetain the analysis plan and short algae transfer memo/script.\n\nIf extending day 15’s organic-report.Rmd, use Save As to preserve it.\n\nThe immediate goal is a complete first version, not decorative perfection. Tomorrow’s peer or fresh-folder reproduction will reveal hidden dependencies. Students should save a note of any failed step rather than conceal it.",
     "crumbs": [
       "Home",
       "Week 5: reproduce and transfer",
@@ -767,11 +767,11 @@
     ]
   },
   {
-    "objectID": "lectures/21-remote-workflow/lec.html#practical-locate-render-return",
-    "href": "lectures/21-remote-workflow/lec.html#practical-locate-render-return",
+    "objectID": "lectures/21-remote-workflow/lec.html#exercises-locate-render-return",
+    "href": "lectures/21-remote-workflow/lec.html#exercises-locate-render-return",
     "title": "One workflow, two computers",
-    "section": "Practical: locate, render, return",
-    "text": "Practical: locate, render, return\nOpen day 21 practical and notes.\n\nSave reports/remote-log.txt with computer names and project locations.\nConnect, disconnect, reconnect, and find saved work.\nTransfer and identify one output copy.\nRetain the transfer plan, receipt, version checks, and audit.\n\nUntil access is provided, complete the local rehearsal and mark remote steps pending.\n\nDo not mark local rehearsal as a completed remote skill. It can check portable paths and project structure while service-specific details are pending.",
+    "section": "Exercises: locate, render, return",
+    "text": "Exercises: locate, render, return\nOpen day 21 exercises.\n\nSave reports/remote-log.txt with computer names and project locations.\nConnect, disconnect, reconnect, and find saved work.\nTransfer and identify one output copy.\nRetain the transfer plan, receipt, version checks, and audit.\n\nUntil access is provided, complete the local rehearsal and mark remote steps pending.\n\nDo not mark local rehearsal as a completed remote skill. It can check portable paths and project structure while service-specific details are pending.",
     "crumbs": [
       "Home",
       "Week 5: reproduce and transfer",
@@ -1040,11 +1040,11 @@
     ]
   },
   {
-    "objectID": "lectures/19-calibration/lec.html#practical-report-the-line-and-its-limits",
-    "href": "lectures/19-calibration/lec.html#practical-report-the-line-and-its-limits",
+    "objectID": "lectures/19-calibration/lec.html#exercises-report-the-line-and-its-limits",
+    "href": "lectures/19-calibration/lec.html#exercises-report-the-line-and-its-limits",
     "title": "Turn an instrument reading into a concentration",
-    "section": "Practical: report the line and its limits",
-    "text": "Practical: report the line and its limits\nSave calibration-report.Rmd, supported concentration estimates, and both figures.\nExplain U3’s missing estimate and the new dilution example.\nOpen the practical.\n\nStudents should explain the standard, slope units, residual sign, supported range, and uncertainty limitation. They need no memorised optical law. Keep the dataset and formula visible so the chemistry setting does not become a prerequisite.",
+    "section": "Exercises: report the line and its limits",
+    "text": "Exercises: report the line and its limits\nSave calibration-report.Rmd, supported concentration estimates, and both figures.\nExplain U3’s missing estimate and the new dilution example.\nOpen exercises.\n\nStudents should explain the standard, slope units, residual sign, supported range, and uncertainty limitation. They need no memorised optical law. Keep the dataset and formula visible so the chemistry setting does not become a prerequisite.",
     "crumbs": [
       "Home",
       "Week 4: comparisons and lines",
@@ -1274,11 +1274,11 @@
     ]
   },
   {
-    "objectID": "lectures/17-welch-test/lec.html#practical-add-interpretation-to-the-report",
-    "href": "lectures/17-welch-test/lec.html#practical-add-interpretation-to-the-report",
+    "objectID": "lectures/17-welch-test/lec.html#exercises-add-interpretation-to-the-report",
+    "href": "lectures/17-welch-test/lec.html#exercises-add-interpretation-to-the-report",
     "title": "How uncertain is the difference?",
-    "section": "Practical: add interpretation to the report",
-    "text": "Practical: add interpretation to the report\nKeep the individual-point plot. Add the method, directed estimate, interval, sample sizes and p-value.\nRestart R and render comparison.Rmd.\nOpen the guided practical.\n\nHave students find comparisonconf.int and comparisonp.value and relate them to the printed output. They should report the two group means and available sample sizes as well. The written interpretation should be understandable without seeing R’s long printout.",
+    "section": "Exercises: add interpretation to the report",
+    "text": "Exercises: add interpretation to the report\nKeep the individual-point plot. Add the method, directed estimate, interval, sample sizes and p-value.\nRestart R and render comparison.Rmd.\nOpen exercises.\n\nHave students find comparisonconf.int and comparisonp.value and relate them to the printed output. They should report the two group means and available sample sizes as well. The written interpretation should be understandable without seeing R’s long printout.",
     "crumbs": [
       "Home",
       "Week 4: comparisons and lines",
@@ -1456,11 +1456,11 @@
     ]
   },
   {
-    "objectID": "lectures/15-descriptive-report/lec.html#practical-one-report-that-reopens-and-renders",
-    "href": "lectures/15-descriptive-report/lec.html#practical-one-report-that-reopens-and-renders",
+    "objectID": "lectures/15-descriptive-report/lec.html#exercises-one-report-that-reopens-and-renders",
+    "href": "lectures/15-descriptive-report/lec.html#exercises-one-report-that-reopens-and-renders",
     "title": "Tell the reader what was measured",
-    "section": "Practical: one report that reopens and renders",
-    "text": "Practical: one report that reopens and renders\nSave descriptive-report.Rmd or the chosen organic-report.Rmd, plus HTML.\nPut explicit rendering commands in the R Console, not inside the report.\nAsk a partner to identify the question, unit, units, and limitation.\nOpen the report practical.\n\nHave students locate both source and rendered output. No hypothesis test is required today. If rendering fails, use the first meaningful error and chunk name to recover. Avoid spending the entire session on cosmetic formatting while inputs or interpretation remain unclear.",
+    "section": "Exercises: one report that reopens and renders",
+    "text": "Exercises: one report that reopens and renders\nSave descriptive-report.Rmd or the chosen organic-report.Rmd, plus HTML.\nPut explicit rendering commands in the R Console, not inside the report.\nAsk a partner to identify the question, unit, units, and limitation.\nOpen exercises.\n\nHave students locate both source and rendered output. No hypothesis test is required today. If rendering fails, use the first meaningful error and chunk name to recover. Avoid spending the entire session on cosmetic formatting while inputs or interpretation remain unclear.",
     "crumbs": [
       "Home",
       "Week 3: measurements and variation",
@@ -1677,11 +1677,11 @@
     ]
   },
   {
-    "objectID": "lectures/13-group-summaries/lec.html#practical-describe-the-sample-before-testing-it",
-    "href": "lectures/13-group-summaries/lec.html#practical-describe-the-sample-before-testing-it",
+    "objectID": "lectures/13-group-summaries/lec.html#exercises-describe-the-sample-before-testing-it",
+    "href": "lectures/13-group-summaries/lec.html#exercises-describe-the-sample-before-testing-it",
     "title": "Summarise without hiding the observations",
-    "section": "Practical: describe the sample before testing it",
-    "text": "Practical: describe the sample before testing it\nWrite a caption that identifies the unit, units, and symbols.\nChoose a transfer summary: repaired seedlings or supplied organic yields.\nSave the script, summary CSV, and figure.\nOpen the practical.\n\nThe organic option reuses the same computations, not a second required practical. Each row is an independently prepared run; yield uses supplied theoretical and isolated masses. SD is expressed in percentage points. No t-test is introduced here.",
+    "section": "Exercises: describe the sample before testing it",
+    "text": "Exercises: describe the sample before testing it\nWrite a caption that identifies the unit, units, and symbols.\nChoose a transfer summary: repaired seedlings or supplied organic yields.\nSave the script, summary CSV, and figure.\nOpen exercises.\n\nThe organic option reuses the same computations, not a second required practical. Each row is an independently prepared run; yield uses supplied theoretical and isolated masses. SD is expressed in percentage points. No t-test is introduced here.",
     "crumbs": [
       "Home",
       "Week 3: measurements and variation",
@@ -1898,11 +1898,11 @@
     ]
   },
   {
-    "objectID": "lectures/11-data-quality/lec.html#practical-leave-a-repair-trail",
-    "href": "lectures/11-data-quality/lec.html#practical-leave-a-repair-trail",
+    "objectID": "lectures/11-data-quality/lec.html#exercises-leave-a-repair-trail",
+    "href": "lectures/11-data-quality/lec.html#exercises-leave-a-repair-trail",
     "title": "Check the measurement, then calculate",
-    "section": "Practical: leave a repair trail",
-    "text": "Practical: leave a repair trail\nSave day11-cleaning.R, a derived CSV, and short cleaning notes.\n\nWhich source fact justified each change?\nWhich measurement stayed unknown?\nCan the script recreate the corrected file after restarting R?\n\nOpen the practical and worked repair.\n\nStudents should run inspection first, then the repairs, then verify counts. Ask a partner to locate the original, script, field notes, and output. Do not add an outlier-removal exercise: distinguishing evidence from convenience is the main outcome.",
+    "section": "Exercises: leave a repair trail",
+    "text": "Exercises: leave a repair trail\nSave day11-cleaning.R, a derived CSV, and short cleaning notes.\n\nWhich source fact justified each change?\nWhich measurement stayed unknown?\nCan the script recreate the corrected file after restarting R?\n\nOpen exercises.\n\nStudents should run inspection first, then the repairs, then verify counts. Ask a partner to locate the original, script, field notes, and output. Do not add an outlier-removal exercise: distinguishing evidence from convenience is the main outcome.",
     "crumbs": [
       "Home",
       "Week 3: measurements and variation",
@@ -2110,7 +2110,7 @@
     "href": "lectures/09-rmarkdown/lec.html#make-one-change-and-check-it",
     "title": "A report that runs its calculations",
     "section": "Make one change and check it",
-    "text": "Make one change and check it\nOpen the practical and notes.\nRender the unchanged template first. Then add your question, methods, labelled figure, and interpretation. Restart and render the saved source again.\n\nBegin with a known-working baseline. Ask the student to name the source, output, and input locations before editing. The practical supplies a complete minimal report and error-recovery hints. A short caption plus clear prose is more useful than formatting additions that obscure the calculation.",
+    "text": "Make one change and check it\nOpen the exercises.\nRender the unchanged template first. Then add your question, methods, labelled figure, and interpretation. Restart and render the saved source again.\n\nBegin with a known-working baseline. Ask the student to name the source, output, and input locations before editing. The practical supplies a complete minimal report and error-recovery hints. A short caption plus clear prose is more useful than formatting additions that obscure the calculation.",
     "crumbs": [
       "Home",
       "Week 2: R and a first report",
@@ -2236,11 +2236,11 @@
     ]
   },
   {
-    "objectID": "lectures/07-import/lec.html#check-the-supplied-studys-expected-units",
-    "href": "lectures/07-import/lec.html#check-the-supplied-studys-expected-units",
+    "objectID": "lectures/07-import/lec.html#check-the-supplied-studys-expected-structure",
+    "href": "lectures/07-import/lec.html#check-the-supplied-studys-expected-structure",
     "title": "Read a table without losing its meaning",
-    "section": "Check the supplied study’s expected units",
-    "text": "Check the supplied study’s expected units\n\n\n\nThe independent transfer study has 18 plants split nine per group.\n\n\nRow counts, unique IDs, and group counts answer related but distinct questions.\n\nUse length(plant_id), length(unique(plant_id)), and table(treatment). Repeated IDs can be legitimate in another design; here one row per plant sets the expectation. Random allocation is stated in the design, not demonstrated by sorted rows.",
+    "section": "Check the supplied study’s expected structure",
+    "text": "Check the supplied study’s expected structure\n\n\n\nThe independent transfer study has 18 plants split nine per group.\n\n\nRow counts, unique IDs, and group counts answer related but distinct questions.\n\nUse length(plant_id), length(unique(plant_id)), and table(treatment). Repeated IDs can be legitimate in another design; here one row per plant sets the expectation. Random allocation is stated in the design, not demonstrated by sorted rows.",
     "crumbs": [
       "Home",
       "Week 2: R and a first report",
@@ -2318,7 +2318,7 @@
     "href": "lectures/07-import/lec.html#import-a-second-table-deliberately",
     "title": "Read a table without losing its meaning",
     "section": "Import a second table deliberately",
-    "text": "Import a second table deliberately\nOpen the practical and notes.\nSave day07.R, then inspect data/leaf-mass.csv too.\nWhich columns and units differ? What does one row represent there?\n\nThe leaf table has eighteen independent plants, one leaf each, area in square centimetres and dry mass in milligrams. Students need not infer any causal relationship. Reuse the import/inspect workflow while reading that dataset’s dictionary rather than assuming the seedling schema applies.",
+    "text": "Import a second table deliberately\nOpen the exercises.\nSave day07.R, then inspect data/leaf-mass.csv too.\nWhich columns and units differ? What does one row represent there?\n\nThe leaf table has eighteen independent plants, one leaf each, area in square centimetres and dry mass in milligrams. Students need not infer any causal relationship. Reuse the import/inspect workflow while reading that dataset’s dictionary rather than assuming the seedling schema applies.",
     "crumbs": [
       "Home",
       "Week 2: R and a first report",
@@ -2526,7 +2526,7 @@
     "href": "lectures/05-lab-files/lec.html#finish-with-a-clear-handover",
     "title": "Share files, then meet R",
     "section": "Finish with a clear handover",
-    "text": "Finish with a clear handover\nOpen the practical and notes.\n\nRetain the ordinary report folder and a tested report-bundle.zip.\nExplain which files were inputs and which were derived.\nFollow the R/RStudio setup guide if installation support is needed.\n\n\nAsk students to find all the relevant files after closing their windows. Save the optional ester extract if that route was chosen. Leave enough time for unresolved file-location problems; those are prerequisites for next week’s R work.",
+    "text": "Finish with a clear handover\nOpen the exercises.\n\nRetain the ordinary report folder and a tested report-bundle.zip.\nExplain which files were inputs and which were derived.\nFollow the R/RStudio setup guide if installation support is needed.\n\n\nAsk students to find all the relevant files after closing their windows. Save the optional ester extract if that route was chosen. Leave enough time for unresolved file-location problems; those are prerequisites for next week’s R work.",
     "crumbs": [
       "Home",
       "Week 1: files and computers",
@@ -2734,7 +2734,7 @@
     "href": "lectures/03-terminal/lec.html#connect-words-to-the-graphical-view",
     "title": "The terminal describes the same folders",
     "section": "Connect words to the graphical view",
-    "text": "Connect words to the graphical view\nOpen the practical and notes.\n\nUbuntu on Windows: explorer.exe .\nMac: open .\nSave navigation-notes.txt in the shell workspace.\n\nBe able to state what cd changes and what it leaves unchanged.\n\nThese graphical-opening commands are local conveniences, not remote transfer. Have students independently reproduce the workspace tree, recover from one ordinary mistake, and identify the same folder in the file manager. Their note should give a route back from home and three command meanings.",
+    "text": "Connect words to the graphical view\nOpen the exercises.\n\nUbuntu on Windows: explorer.exe .\nMac: open .\nSave navigation-notes.txt in the shell workspace.\n\nBe able to state what cd changes and what it leaves unchanged.\n\nThese graphical-opening commands are local conveniences, not remote transfer. Have students independently reproduce the workspace tree, recover from one ordinary mistake, and identify the same folder in the file manager. Their note should give a route back from home and three command meanings.",
     "crumbs": [
       "Home",
       "Week 1: files and computers",
@@ -2942,7 +2942,7 @@
     "href": "lectures/01-files/lec.html#now-practise-the-complete-route",
     "title": "Find, save, and reopen",
     "section": "Now practise the complete route",
-    "text": "Now practise the complete route\nOpen the practical and notes.\nLeave with:\n\nreports/day01-notes.txt.\noutput/seedlings-practice.csv.\nThe ability to locate both after closing their applications.\n\n\nThe practical supplies the detailed click sequence and hints. Give time for independent reopening. A student unable to locate their files needs support before tomorrow’s path lesson; finishing a screenshot alone does not establish this skill.",
+    "text": "Now practise the complete route\nOpen the exercises.\nLeave with:\n\nreports/day01-notes.txt.\noutput/seedlings-practice.csv.\nThe ability to locate both after closing their applications.\n\n\nThe practical supplies the detailed click sequence and hints. Give time for independent reopening. A student unable to locate their files needs support before tomorrow’s path lesson; finishing a screenshot alone does not establish this skill.",
     "crumbs": [
       "Home",
       "Week 1: files and computers",
@@ -2960,7 +2960,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "25. Practise the full workflow",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -2973,7 +2973,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "25. Practise the full workflow",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -2986,7 +2986,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "25. Practise the full workflow",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -2999,7 +2999,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "25. Practise the full workflow",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3012,7 +3012,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "25. Practise the full workflow",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3025,7 +3025,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "25. Practise the full workflow",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3038,7 +3038,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "25. Practise the full workflow",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3051,7 +3051,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "25. Practise the full workflow",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3064,7 +3064,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "25. Practise the full workflow",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3077,7 +3077,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "25. Practise the full workflow",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3090,7 +3090,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "23. A small biological study",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3103,7 +3103,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "23. A small biological study",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3116,7 +3116,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "23. A small biological study",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3129,7 +3129,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "23. A small biological study",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3142,7 +3142,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "23. A small biological study",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3155,7 +3155,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "23. A small biological study",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3168,7 +3168,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "23. A small biological study",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3181,7 +3181,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "23. A small biological study",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3194,7 +3194,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "23. A small biological study",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3207,7 +3207,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "23. A small biological study",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3220,7 +3220,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "23. A small biological study",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3233,7 +3233,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "21. Work on a remote computer",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3246,7 +3246,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "21. Work on a remote computer",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3259,7 +3259,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "21. Work on a remote computer",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3272,7 +3272,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "21. Work on a remote computer",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3285,7 +3285,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "21. Work on a remote computer",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3298,7 +3298,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "21. Work on a remote computer",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3311,7 +3311,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "21. Work on a remote computer",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3324,7 +3324,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "21. Work on a remote computer",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3337,7 +3337,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "21. Work on a remote computer",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3350,7 +3350,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "21. Work on a remote computer",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3363,7 +3363,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "20. Leaf area and mass",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3376,7 +3376,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "20. Leaf area and mass",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3389,7 +3389,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "20. Leaf area and mass",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3402,7 +3402,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "20. Leaf area and mass",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3415,7 +3415,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "20. Leaf area and mass",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3428,7 +3428,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "20. Leaf area and mass",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3441,7 +3441,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "20. Leaf area and mass",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3454,7 +3454,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "20. Leaf area and mass",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3467,7 +3467,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "20. Leaf area and mass",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3480,7 +3480,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "18. The same plants measured twice",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3493,7 +3493,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "18. The same plants measured twice",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3506,7 +3506,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "18. The same plants measured twice",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3519,7 +3519,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "18. The same plants measured twice",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3532,7 +3532,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "18. The same plants measured twice",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3545,7 +3545,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "18. The same plants measured twice",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3558,7 +3558,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "18. The same plants measured twice",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3571,7 +3571,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "18. The same plants measured twice",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3584,7 +3584,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "18. The same plants measured twice",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3597,7 +3597,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "18. The same plants measured twice",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3610,7 +3610,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "16. Compare independent groups",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3623,7 +3623,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "16. Compare independent groups",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3636,7 +3636,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "16. Compare independent groups",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3649,7 +3649,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "16. Compare independent groups",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3662,7 +3662,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "16. Compare independent groups",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3675,7 +3675,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "16. Compare independent groups",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3688,7 +3688,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "16. Compare independent groups",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3701,7 +3701,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "16. Compare independent groups",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3714,7 +3714,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "16. Compare independent groups",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3727,7 +3727,7 @@
       "Home",
       "Week 3: measurements and variation",
       "15. A descriptive biological report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3740,7 +3740,7 @@
       "Home",
       "Week 3: measurements and variation",
       "15. A descriptive biological report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3753,7 +3753,7 @@
       "Home",
       "Week 3: measurements and variation",
       "15. A descriptive biological report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3766,7 +3766,7 @@
       "Home",
       "Week 3: measurements and variation",
       "15. A descriptive biological report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3779,7 +3779,7 @@
       "Home",
       "Week 3: measurements and variation",
       "15. A descriptive biological report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3792,7 +3792,7 @@
       "Home",
       "Week 3: measurements and variation",
       "15. A descriptive biological report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3805,7 +3805,7 @@
       "Home",
       "Week 3: measurements and variation",
       "15. A descriptive biological report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3818,7 +3818,7 @@
       "Home",
       "Week 3: measurements and variation",
       "15. A descriptive biological report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3831,7 +3831,7 @@
       "Home",
       "Week 3: measurements and variation",
       "15. A descriptive biological report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3844,7 +3844,7 @@
       "Home",
       "Week 3: measurements and variation",
       "15. A descriptive biological report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3857,7 +3857,7 @@
       "Home",
       "Week 3: measurements and variation",
       "13. Group summaries and figures",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3870,7 +3870,7 @@
       "Home",
       "Week 3: measurements and variation",
       "13. Group summaries and figures",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3883,7 +3883,7 @@
       "Home",
       "Week 3: measurements and variation",
       "13. Group summaries and figures",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3896,7 +3896,7 @@
       "Home",
       "Week 3: measurements and variation",
       "13. Group summaries and figures",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3909,7 +3909,7 @@
       "Home",
       "Week 3: measurements and variation",
       "13. Group summaries and figures",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3922,7 +3922,7 @@
       "Home",
       "Week 3: measurements and variation",
       "13. Group summaries and figures",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3935,7 +3935,7 @@
       "Home",
       "Week 3: measurements and variation",
       "13. Group summaries and figures",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3948,7 +3948,7 @@
       "Home",
       "Week 3: measurements and variation",
       "13. Group summaries and figures",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3961,7 +3961,7 @@
       "Home",
       "Week 3: measurements and variation",
       "13. Group summaries and figures",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3974,7 +3974,7 @@
       "Home",
       "Week 3: measurements and variation",
       "13. Group summaries and figures",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -3987,7 +3987,7 @@
       "Home",
       "Week 3: measurements and variation",
       "11. Check and repair data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4000,7 +4000,7 @@
       "Home",
       "Week 3: measurements and variation",
       "11. Check and repair data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4013,7 +4013,7 @@
       "Home",
       "Week 3: measurements and variation",
       "11. Check and repair data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4026,7 +4026,7 @@
       "Home",
       "Week 3: measurements and variation",
       "11. Check and repair data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4039,7 +4039,7 @@
       "Home",
       "Week 3: measurements and variation",
       "11. Check and repair data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4052,7 +4052,7 @@
       "Home",
       "Week 3: measurements and variation",
       "11. Check and repair data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4065,7 +4065,7 @@
       "Home",
       "Week 3: measurements and variation",
       "11. Check and repair data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4078,7 +4078,7 @@
       "Home",
       "Week 3: measurements and variation",
       "11. Check and repair data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4091,7 +4091,7 @@
       "Home",
       "Week 3: measurements and variation",
       "11. Check and repair data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4104,7 +4104,7 @@
       "Home",
       "Week 2: R and a first report",
       "10. Your first complete report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4117,7 +4117,7 @@
       "Home",
       "Week 2: R and a first report",
       "10. Your first complete report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4130,7 +4130,7 @@
       "Home",
       "Week 2: R and a first report",
       "10. Your first complete report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4143,7 +4143,7 @@
       "Home",
       "Week 2: R and a first report",
       "10. Your first complete report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4156,7 +4156,7 @@
       "Home",
       "Week 2: R and a first report",
       "10. Your first complete report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4169,7 +4169,7 @@
       "Home",
       "Week 2: R and a first report",
       "10. Your first complete report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4182,7 +4182,7 @@
       "Home",
       "Week 2: R and a first report",
       "10. Your first complete report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4195,7 +4195,7 @@
       "Home",
       "Week 2: R and a first report",
       "10. Your first complete report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4208,7 +4208,7 @@
       "Home",
       "Week 2: R and a first report",
       "10. Your first complete report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4221,7 +4221,7 @@
       "Home",
       "Week 2: R and a first report",
       "8. Calculate and plot growth",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4234,7 +4234,7 @@
       "Home",
       "Week 2: R and a first report",
       "8. Calculate and plot growth",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4247,7 +4247,7 @@
       "Home",
       "Week 2: R and a first report",
       "8. Calculate and plot growth",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4260,7 +4260,7 @@
       "Home",
       "Week 2: R and a first report",
       "8. Calculate and plot growth",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4273,7 +4273,7 @@
       "Home",
       "Week 2: R and a first report",
       "8. Calculate and plot growth",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4286,7 +4286,7 @@
       "Home",
       "Week 2: R and a first report",
       "8. Calculate and plot growth",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4299,7 +4299,7 @@
       "Home",
       "Week 2: R and a first report",
       "8. Calculate and plot growth",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4312,7 +4312,7 @@
       "Home",
       "Week 2: R and a first report",
       "8. Calculate and plot growth",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4325,7 +4325,7 @@
       "Home",
       "Week 2: R and a first report",
       "8. Calculate and plot growth",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4338,7 +4338,7 @@
       "Home",
       "Week 2: R and a first report",
       "8. Calculate and plot growth",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4351,7 +4351,7 @@
       "Home",
       "Week 2: R and a first report",
       "6. First calculations in R",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4364,7 +4364,7 @@
       "Home",
       "Week 2: R and a first report",
       "6. First calculations in R",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4377,7 +4377,7 @@
       "Home",
       "Week 2: R and a first report",
       "6. First calculations in R",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4390,7 +4390,7 @@
       "Home",
       "Week 2: R and a first report",
       "6. First calculations in R",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4403,7 +4403,7 @@
       "Home",
       "Week 2: R and a first report",
       "6. First calculations in R",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4416,7 +4416,7 @@
       "Home",
       "Week 2: R and a first report",
       "6. First calculations in R",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4429,7 +4429,7 @@
       "Home",
       "Week 2: R and a first report",
       "6. First calculations in R",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4442,7 +4442,7 @@
       "Home",
       "Week 2: R and a first report",
       "6. First calculations in R",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4455,7 +4455,7 @@
       "Home",
       "Week 1: files and computers",
       "5. Find samples and package results",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4468,7 +4468,7 @@
       "Home",
       "Week 1: files and computers",
       "5. Find samples and package results",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4481,7 +4481,7 @@
       "Home",
       "Week 1: files and computers",
       "5. Find samples and package results",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4494,7 +4494,7 @@
       "Home",
       "Week 1: files and computers",
       "5. Find samples and package results",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4507,7 +4507,7 @@
       "Home",
       "Week 1: files and computers",
       "5. Find samples and package results",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4520,7 +4520,7 @@
       "Home",
       "Week 1: files and computers",
       "5. Find samples and package results",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4533,7 +4533,7 @@
       "Home",
       "Week 1: files and computers",
       "5. Find samples and package results",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4546,7 +4546,7 @@
       "Home",
       "Week 1: files and computers",
       "5. Find samples and package results",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4559,7 +4559,7 @@
       "Home",
       "Week 1: files and computers",
       "5. Find samples and package results",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4572,7 +4572,7 @@
       "Home",
       "Week 1: files and computers",
       "5. Find samples and package results",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4585,7 +4585,7 @@
       "Home",
       "Week 1: files and computers",
       "3. The terminal",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4598,7 +4598,7 @@
       "Home",
       "Week 1: files and computers",
       "3. The terminal",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4611,7 +4611,7 @@
       "Home",
       "Week 1: files and computers",
       "3. The terminal",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4624,7 +4624,7 @@
       "Home",
       "Week 1: files and computers",
       "3. The terminal",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4637,7 +4637,7 @@
       "Home",
       "Week 1: files and computers",
       "3. The terminal",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4650,7 +4650,7 @@
       "Home",
       "Week 1: files and computers",
       "3. The terminal",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4663,7 +4663,7 @@
       "Home",
       "Week 1: files and computers",
       "3. The terminal",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4676,7 +4676,7 @@
       "Home",
       "Week 1: files and computers",
       "3. The terminal",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4689,7 +4689,7 @@
       "Home",
       "Week 1: files and computers",
       "3. The terminal",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4702,7 +4702,7 @@
       "Home",
       "Week 1: files and computers",
       "3. The terminal",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4715,7 +4715,7 @@
       "Home",
       "Week 1: files and computers",
       "3. The terminal",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4728,7 +4728,7 @@
       "Home",
       "Week 1: files and computers",
       "3. The terminal",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4741,7 +4741,7 @@
       "Home",
       "Week 1: files and computers",
       "1. Files: save, find, reopen",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4754,7 +4754,7 @@
       "Home",
       "Week 1: files and computers",
       "1. Files: save, find, reopen",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4767,7 +4767,7 @@
       "Home",
       "Week 1: files and computers",
       "1. Files: save, find, reopen",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4780,7 +4780,7 @@
       "Home",
       "Week 1: files and computers",
       "1. Files: save, find, reopen",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4793,7 +4793,7 @@
       "Home",
       "Week 1: files and computers",
       "1. Files: save, find, reopen",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4806,7 +4806,7 @@
       "Home",
       "Week 1: files and computers",
       "1. Files: save, find, reopen",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4819,7 +4819,7 @@
       "Home",
       "Week 1: files and computers",
       "1. Files: save, find, reopen",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4832,7 +4832,7 @@
       "Home",
       "Week 1: files and computers",
       "1. Files: save, find, reopen",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4845,7 +4845,7 @@
       "Home",
       "Week 1: files and computers",
       "1. Files: save, find, reopen",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -4858,7 +4858,7 @@
       "Home",
       "Week 1: files and computers",
       "1. Files: save, find, reopen",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5106,7 +5106,7 @@
     "href": "overview.html#a-lesson-is-a-study-unit-not-a-full-day-of-new-lectures",
     "title": "What you will learn and how to work",
     "section": "A lesson is a study unit, not a full day of new lectures",
-    "text": "A lesson is a study unit, not a full day of new lectures\nUse each topic’s Lecture (slides) for the explanation and worked visual examples, then open Practical and notes for the complete instructions and saved deliverable. Slides use the arrow keys or navigation controls; return to the practical using the link in the deck. Each week has a short self-check quiz with explanations, for practice rather than an additional examination.\nThe numbered lessons suggest a five-week progression. Spend substantial time running examples, explaining results, recovering from mistakes, and returning to work after closing the applications. The exact contact timetable is arranged by the teaching team. If an installation fails, ask for support rather than spending the whole study unit trying unrelated system changes.\nThe five-week study plan sets out lecture/demonstration, guided work, extended practice, independent transfer, writing/recovery, and review time. It plans about 35 structured learner hours plus 5 flexible hours per week, not 40 contact hours. The estimates need a beginner pilot. Complete the extended and transfer blocks on your chosen context as part of the course; they are not optional advanced tails. Keep the named outputs and checks so you can judge what you can now do independently.\nFor most R lessons, a useful working rhythm is:\n\nOpen the course .Rproj and yesterday’s source file.\nRead the biological question and identify what one row represents.\nPredict a small example, run it, and explain the result.\nComplete the practical, using hints and references as needed.\nSave code, a plot or report, and a short interpretation.\nClose/restart, reopen the work, and check that you can regenerate it.",
+    "text": "A lesson is a study unit, not a full day of new lectures\nUse each topic’s Lecture (slides) for the explanation and worked visual examples, then open Exercises for the complete instructions and saved deliverable. Slides use the arrow keys or navigation controls; return to the practical using the link in the deck. Each week has a short self-check quiz with explanations, for practice rather than an additional examination.\nThe numbered lessons suggest a five-week progression. Spend substantial time running examples, explaining results, recovering from mistakes, and returning to work after closing the applications. The exact contact timetable is arranged by the teaching team. If an installation fails, ask for support rather than spending the whole study unit trying unrelated system changes.\nThe five-week study plan sets out lecture/demonstration, guided work, extended practice, independent transfer, writing/recovery, and review time. It plans about 35 structured learner hours plus 5 flexible hours per week, not 40 contact hours. The estimates need a beginner pilot. Complete the extended and transfer blocks on your chosen context as part of the course; they are not optional advanced tails. Keep the named outputs and checks so you can judge what you can now do independently.\nFor most R lessons, a useful working rhythm is:\n\nOpen the course .Rproj and yesterday’s source file.\nRead the biological question and identify what one row represents.\nPredict a small example, run it, and explain the result.\nComplete the practical, using hints and references as needed.\nSave code, a plot or report, and a short interpretation.\nClose/restart, reopen the work, and check that you can regenerate it.",
     "crumbs": [
       "Home",
       "Getting started",
@@ -5164,7 +5164,7 @@
     "href": "index.html#your-five-week-route",
     "title": "Data Analysis in Life Sciences",
     "section": "Your five-week route",
-    "text": "Your five-week route\nEach topic in the left menu has separate Lecture (slides) and Practical and notes links. Lecture links are green; practicals are italic; weekly quiz links are blue. Coloured week bands follow the Quantitative Biology course scaffold. The labels identify their roles even without colour.\nUse the five-week study plan to organise the work. Each daily practical includes Extended practical and Independent transfer blocks: apply the taught ideas to a changed problem, save the result, explain it, and reproduce it from a fresh start. These are core practice, with gradually fewer prompts. Weekly self-checks and protected review/support time complete the plan.\n\n\n\nWeek\nBiological question\nWhat you will do\n\n\n\n\n1 — Files and computers\nWhere are the seedling measurements?\nSave and find files, use a terminal, unpack ZIPs, and search lab records\n\n\n2 — R and reports\nHow much did the seedlings grow?\nImport a table, calculate growth, plot it, and render R Markdown\n\n\n3 — Variation\nHow much do individual plants differ?\nCheck data, summarise groups, understand mean, variance, SD, and replication\n\n\n4 — Comparisons and lines\nHow do treatments and measurements relate?\nInterpret a t-test, handle pairs, fit a calibration line, and describe an association\n\n\n5 — Reproducibility\nCan someone repeat our analysis?\nWork remotely, analyse another dataset, package a report, and test it in a fresh session",
+    "text": "Your five-week route\nEach topic in the left menu has separate Lecture (slides) and Exercises links. Lecture links are green; practicals are italic; weekly quiz links are blue. Coloured week bands follow the Quantitative Biology course scaffold. The labels identify their roles even without colour.\nUse the five-week study plan to organise the work. Each daily practical includes Extended practical and Independent transfer blocks: apply the taught ideas to a changed problem, save the result, explain it, and reproduce it from a fresh start. These are core practice, with gradually fewer prompts. Weekly self-checks and protected review/support time complete the plan.\n\n\n\nWeek\nBiological question\nWhat you will do\n\n\n\n\n1 — Files and computers\nWhere are the seedling measurements?\nSave and find files, use a terminal, unpack ZIPs, and search lab records\n\n\n2 — R and reports\nHow much did the seedlings grow?\nImport a table, calculate growth, plot it, and render R Markdown\n\n\n3 — Variation\nHow much do individual plants differ?\nCheck data, summarise groups, understand mean, variance, SD, and replication\n\n\n4 — Comparisons and lines\nHow do treatments and measurements relate?\nInterpret a t-test, handle pairs, fit a calibration line, and describe an association\n\n\n5 — Reproducibility\nCan someone repeat our analysis?\nWork remotely, analyse another dataset, package a report, and test it in a fresh session",
     "crumbs": [
       "Home"
     ]
@@ -5453,7 +5453,7 @@
       "Home",
       "Week 1: files and computers",
       "2. Folders and how computers work",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5466,7 +5466,7 @@
       "Home",
       "Week 1: files and computers",
       "2. Folders and how computers work",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5479,7 +5479,7 @@
       "Home",
       "Week 1: files and computers",
       "2. Folders and how computers work",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5492,7 +5492,7 @@
       "Home",
       "Week 1: files and computers",
       "2. Folders and how computers work",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5505,7 +5505,7 @@
       "Home",
       "Week 1: files and computers",
       "2. Folders and how computers work",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5518,7 +5518,7 @@
       "Home",
       "Week 1: files and computers",
       "2. Folders and how computers work",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5531,7 +5531,7 @@
       "Home",
       "Week 1: files and computers",
       "2. Folders and how computers work",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5544,7 +5544,7 @@
       "Home",
       "Week 1: files and computers",
       "2. Folders and how computers work",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5557,7 +5557,7 @@
       "Home",
       "Week 1: files and computers",
       "2. Folders and how computers work",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5570,7 +5570,7 @@
       "Home",
       "Week 1: files and computers",
       "2. Folders and how computers work",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5583,7 +5583,7 @@
       "Home",
       "Week 1: files and computers",
       "2. Folders and how computers work",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5596,7 +5596,7 @@
       "Home",
       "Week 1: files and computers",
       "4. Unpack and inspect lab data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5609,7 +5609,7 @@
       "Home",
       "Week 1: files and computers",
       "4. Unpack and inspect lab data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5622,7 +5622,7 @@
       "Home",
       "Week 1: files and computers",
       "4. Unpack and inspect lab data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5635,7 +5635,7 @@
       "Home",
       "Week 1: files and computers",
       "4. Unpack and inspect lab data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5648,7 +5648,7 @@
       "Home",
       "Week 1: files and computers",
       "4. Unpack and inspect lab data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5661,7 +5661,7 @@
       "Home",
       "Week 1: files and computers",
       "4. Unpack and inspect lab data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5674,7 +5674,7 @@
       "Home",
       "Week 1: files and computers",
       "4. Unpack and inspect lab data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5687,7 +5687,7 @@
       "Home",
       "Week 1: files and computers",
       "4. Unpack and inspect lab data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5700,7 +5700,7 @@
       "Home",
       "Week 1: files and computers",
       "4. Unpack and inspect lab data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5713,7 +5713,7 @@
       "Home",
       "Week 1: files and computers",
       "4. Unpack and inspect lab data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5726,7 +5726,7 @@
       "Home",
       "Week 1: files and computers",
       "4. Unpack and inspect lab data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5739,7 +5739,7 @@
       "Home",
       "Week 1: files and computers",
       "4. Unpack and inspect lab data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5908,7 +5908,7 @@
       "Home",
       "Week 2: R and a first report",
       "7. Import a biological table",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5921,7 +5921,7 @@
       "Home",
       "Week 2: R and a first report",
       "7. Import a biological table",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5934,7 +5934,7 @@
       "Home",
       "Week 2: R and a first report",
       "7. Import a biological table",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5947,7 +5947,7 @@
       "Home",
       "Week 2: R and a first report",
       "7. Import a biological table",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5960,7 +5960,7 @@
       "Home",
       "Week 2: R and a first report",
       "7. Import a biological table",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5973,7 +5973,7 @@
       "Home",
       "Week 2: R and a first report",
       "7. Import a biological table",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5986,7 +5986,7 @@
       "Home",
       "Week 2: R and a first report",
       "7. Import a biological table",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -5999,7 +5999,7 @@
       "Home",
       "Week 2: R and a first report",
       "7. Import a biological table",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6012,7 +6012,7 @@
       "Home",
       "Week 2: R and a first report",
       "7. Import a biological table",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6025,7 +6025,7 @@
       "Home",
       "Week 2: R and a first report",
       "9. R Markdown",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6038,7 +6038,7 @@
       "Home",
       "Week 2: R and a first report",
       "9. R Markdown",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6051,7 +6051,7 @@
       "Home",
       "Week 2: R and a first report",
       "9. R Markdown",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6064,7 +6064,7 @@
       "Home",
       "Week 2: R and a first report",
       "9. R Markdown",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6077,7 +6077,7 @@
       "Home",
       "Week 2: R and a first report",
       "9. R Markdown",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6090,7 +6090,7 @@
       "Home",
       "Week 2: R and a first report",
       "9. R Markdown",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6103,7 +6103,7 @@
       "Home",
       "Week 2: R and a first report",
       "9. R Markdown",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6116,7 +6116,7 @@
       "Home",
       "Week 2: R and a first report",
       "9. R Markdown",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6129,7 +6129,7 @@
       "Home",
       "Week 2: R and a first report",
       "9. R Markdown",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6298,7 +6298,7 @@
       "Home",
       "Week 3: measurements and variation",
       "12. Mean, variance, and SD",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6311,7 +6311,7 @@
       "Home",
       "Week 3: measurements and variation",
       "12. Mean, variance, and SD",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6324,7 +6324,7 @@
       "Home",
       "Week 3: measurements and variation",
       "12. Mean, variance, and SD",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6337,7 +6337,7 @@
       "Home",
       "Week 3: measurements and variation",
       "12. Mean, variance, and SD",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6350,7 +6350,7 @@
       "Home",
       "Week 3: measurements and variation",
       "12. Mean, variance, and SD",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6363,7 +6363,7 @@
       "Home",
       "Week 3: measurements and variation",
       "12. Mean, variance, and SD",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6376,7 +6376,7 @@
       "Home",
       "Week 3: measurements and variation",
       "12. Mean, variance, and SD",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6389,7 +6389,7 @@
       "Home",
       "Week 3: measurements and variation",
       "12. Mean, variance, and SD",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6402,7 +6402,7 @@
       "Home",
       "Week 3: measurements and variation",
       "12. Mean, variance, and SD",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6415,7 +6415,7 @@
       "Home",
       "Week 3: measurements and variation",
       "12. Mean, variance, and SD",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6428,7 +6428,7 @@
       "Home",
       "Week 3: measurements and variation",
       "14. Replicates and uncertainty",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6441,7 +6441,7 @@
       "Home",
       "Week 3: measurements and variation",
       "14. Replicates and uncertainty",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6454,7 +6454,7 @@
       "Home",
       "Week 3: measurements and variation",
       "14. Replicates and uncertainty",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6467,7 +6467,7 @@
       "Home",
       "Week 3: measurements and variation",
       "14. Replicates and uncertainty",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6480,7 +6480,7 @@
       "Home",
       "Week 3: measurements and variation",
       "14. Replicates and uncertainty",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6493,7 +6493,7 @@
       "Home",
       "Week 3: measurements and variation",
       "14. Replicates and uncertainty",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6506,7 +6506,7 @@
       "Home",
       "Week 3: measurements and variation",
       "14. Replicates and uncertainty",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6519,7 +6519,7 @@
       "Home",
       "Week 3: measurements and variation",
       "14. Replicates and uncertainty",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6688,7 +6688,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "17. A guided Welch t-test",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6701,7 +6701,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "17. A guided Welch t-test",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6714,7 +6714,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "17. A guided Welch t-test",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6727,7 +6727,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "17. A guided Welch t-test",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6740,7 +6740,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "17. A guided Welch t-test",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6753,7 +6753,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "17. A guided Welch t-test",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6766,7 +6766,20 @@
       "Home",
       "Week 4: comparisons and lines",
       "17. A guided Welch t-test",
-      "Practical and notes"
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "week4/17-welch-test.html#extended-practical-read-and-challenge-the-complete-test-output",
+    "href": "week4/17-welch-test.html#extended-practical-read-and-challenge-the-complete-test-output",
+    "title": "Day 17 — A guided Welch t-test",
+    "section": "Extended practical — read and challenge the complete test output",
+    "text": "Extended practical — read and challenge the complete test output\nAllow about 75–90 minutes. Keep the question and plant-level figure from day 16. Work in the saved report and a small day17-checks.R script. We are using one guided model, not learning a catalogue of tests or a rule based on automatic normality testing. Every claim remains conditional on the independent units, measurement quality, and appropriateness of the small-sample model.\n\nPredict the sign of the estimated difference from the group means before calling t.test(). Run it in the stated treated-minus-control order. Locate the mean estimates, confidence interval, p-value, and number of input observations. Explain which parts have units of mm and which do not.\nReverse the vector order in a second, clearly labelled calculation. Check the mean difference and interval endpoints. The two-sided p-value should be unchanged, while direction reverses. Write a sentence explaining why a negative sign here does not mean that the data changed.\nCreate a small output-reading table: quantity, value, units, and a plain language interpretation. Include both group means, their difference, the 95% interval, and the p-value. Keep SD among plants separate from the interval for the population mean difference.\nUsing the same observations, compare 90%, 95%, and 99% intervals by changing only conf.level. State which procedure gives the widest interval and why a higher coverage target costs precision. Do not choose a confidence level after looking for one that permits a preferred conclusion. Keep the original 95% result as the main reported analysis.\nRepair these statements in your own words: “There is a 0.15% probability that the treatment has no effect”; “95% of treated plants gained between 2.70 and 9.73 mm more”; “the test shows this difference matters in any biological setting.” Identify the conditioning, individual-versus-mean, and generalisation errors separately.\nDiscuss a supplied different study with a mean difference of 2 mm and a 95% interval from −1 to 5 mm. No new calculation is required. Explain whether equality has been established, whether positive differences remain compatible with the interval, and what information would help decide if such a difference would matter biologically.\nRevise comparison.Rmd so the methods, figure, numerical results, and interpretation agree. Render after restarting, without creating the vectors manually in the Console first. Add a short note describing the checks you performed and retain the code that produced them.\n\n\n\n\n\n\n\nHint: separate an interval’s level from the data\n\n\n\n\n\nUse t.test(treated, control, conf.level = 0.90) and compare its conf.int with the existing result and with conf.level = 0.99. Changing the level does not change the observed means. Reversing the two vectors reverses and negates interval endpoints, while a two-sided test asks the same equal-means question.",
+    "crumbs": [
+      "Home",
+      "Week 4: comparisons and lines",
+      "17. A guided Welch t-test",
+      "Exercises"
     ]
   },
   {
@@ -6779,7 +6792,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "17. A guided Welch t-test",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6792,7 +6805,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "19. Fit a calibration line",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6805,7 +6818,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "19. Fit a calibration line",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6818,7 +6831,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "19. Fit a calibration line",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6831,7 +6844,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "19. Fit a calibration line",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6844,7 +6857,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "19. Fit a calibration line",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6857,7 +6870,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "19. Fit a calibration line",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6870,7 +6883,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "19. Fit a calibration line",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6883,7 +6896,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "19. Fit a calibration line",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6896,7 +6909,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "19. Fit a calibration line",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6909,7 +6922,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "19. Fit a calibration line",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -6922,7 +6935,7 @@
       "Home",
       "Week 4: comparisons and lines",
       "19. Fit a calibration line",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7091,7 +7104,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "22. DNA and images as data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7104,7 +7117,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "22. DNA and images as data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7117,7 +7130,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "22. DNA and images as data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7130,7 +7143,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "22. DNA and images as data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7143,7 +7156,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "22. DNA and images as data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7156,7 +7169,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "22. DNA and images as data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7169,7 +7182,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "22. DNA and images as data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7182,7 +7195,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "22. DNA and images as data",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7195,7 +7208,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "24. Reproduce a report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7208,7 +7221,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "24. Reproduce a report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7221,7 +7234,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "24. Reproduce a report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7234,7 +7247,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "24. Reproduce a report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7247,7 +7260,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "24. Reproduce a report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7260,7 +7273,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "24. Reproduce a report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7273,7 +7286,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "24. Reproduce a report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7286,7 +7299,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "24. Reproduce a report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7299,7 +7312,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "24. Reproduce a report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7312,7 +7325,7 @@
       "Home",
       "Week 5: reproduce and transfer",
       "24. Reproduce a report",
-      "Practical and notes"
+      "Exercises"
     ]
   },
   {
@@ -7695,7 +7708,7 @@
     "href": "lectures/02-folders-computers/lec.html#practise-explaining-the-route",
     "title": "Folders and the working computer",
     "section": "Practise explaining the route",
-    "text": "Practise explaining the route\nOpen the practical and notes.\nSave reports/day02-map.txt with:\n\nA small project tree and the route to seedlings.csv.\nOne sentence distinguishing RAM from saved storage.\nA note naming the computer holding your project.\n\n\nThe practical also creates practice/field-notes and figures for tomorrow’s navigation. Let pairs give directions without pointing or touching the other’s computer, then swap. Keep backup discussions tied to the supported storage route when it is announced.",
+    "text": "Practise explaining the route\nOpen the exercises.\nSave reports/day02-map.txt with:\n\nA small project tree and the route to seedlings.csv.\nOne sentence distinguishing RAM from saved storage.\nA note naming the computer holding your project.\n\n\nThe practical also creates practice/field-notes and figures for tomorrow’s navigation. Let pairs give directions without pointing or touching the other’s computer, then swap. Keep backup discussions tied to the supported storage route when it is announced.",
     "crumbs": [
       "Home",
       "Week 1: files and computers",
@@ -7903,7 +7916,7 @@
     "href": "lectures/04-inspect-archive/lec.html#save-an-inspection-someone-can-explain",
     "title": "Inspect laboratory data before calculating",
     "section": "Save an inspection someone can explain",
-    "text": "Save an inspection someone can explain\nOpen the practical and notes.\nKeep the selected records, a practice manifest, and working/observations.txt.\nExplain 5 lines, 4 samples, and 2 treated records in your own words.\n\nThe practical also introduces the local/remote distinction via a teacher demonstration when access is ready. If service accounts are pending, complete local file skills; do not invent a remote address or treat a local rehearsal as completed SSH access.",
+    "text": "Save an inspection someone can explain\nOpen the exercises.\nKeep the selected records, a practice manifest, and working/observations.txt.\nExplain 5 lines, 4 samples, and 2 treated records in your own words.\n\nThe practical also introduces the local/remote distinction via a teacher demonstration when access is ready. If service accounts are pending, complete local file skills; do not invent a remote address or treat a local rehearsal as completed SSH access.",
     "crumbs": [
       "Home",
       "Week 1: files and computers",
@@ -8111,7 +8124,7 @@
     "href": "lectures/06-r-basics/lec.html#practise-a-complete-repeatable-calculation",
     "title": "Let R keep track of the calculation",
     "section": "Practise a complete, repeatable calculation",
-    "text": "Practise a complete, repeatable calculation\nOpen the practical and notes.\n\nAdd a fourth plant to both measurement vectors.\nChange an input, predict the effect, and rerun.\nSave day06.R; restart and run it from the top.\n\n\nThe worked mean uses three plants; the practical then extends to four. Keep the input values and comments in the saved source so the result can be reconstructed. Students doing the organic ratio choice still practise the matched-plant vector basics.",
+    "text": "Practise a complete, repeatable calculation\nOpen the exercises.\n\nAdd a fourth plant to both measurement vectors.\nChange an input, predict the effect, and rerun.\nSave day06.R; restart and run it from the top.\n\n\nThe worked mean uses three plants; the practical then extends to four. Keep the input values and comments in the saved source so the result can be reconstructed. Students doing the organic ratio choice still practise the matched-plant vector basics.",
     "crumbs": [
       "Home",
       "Week 2: R and a first report",
@@ -8332,7 +8345,7 @@
     "href": "lectures/08-transform-plot/lec.html#make-a-figure-someone-can-read",
     "title": "Calculate a variable, then show the observations",
     "section": "Make a figure someone can read",
-    "text": "Make a figure someone can read\nOpen the practical and notes.\n\nUse the intended table and columns.\nLabel axes with quantities and units.\nExplain what one point represents and one limitation.\nSave the source script, derived table, and figure.\n\n\nHave students close and reopen the saved outputs, then rerun the script from a fresh session. A useful recovery question is whether a missing column was calculated earlier. Keep interpretation short and concrete; no new test or regression is needed in this lesson.",
+    "text": "Make a figure someone can read\nOpen the exercises.\n\nUse the intended table and columns.\nLabel axes with quantities and units.\nExplain what one point represents and one limitation.\nSave the source script, derived table, and figure.\n\n\nHave students close and reopen the saved outputs, then rerun the script from a fresh session. A useful recovery question is whether a missing column was calculated earlier. Keep interpretation short and concrete; no new test or regression is needed in this lesson.",
     "crumbs": [
       "Home",
       "Week 2: R and a first report",
@@ -8527,7 +8540,7 @@
     "href": "lectures/10-first-report/lec.html#give-the-reader-four-short-sections",
     "title": "Your first biological report",
     "section": "Give the reader four short sections",
-    "text": "Give the reader four short sections\nOpen the practical and notes.\n\nQuestion and data: design, measurements, independent unit.\nMethods: import and growth calculation.\nResults: a labelled figure and relevant calculated facts.\nInterpretation: pattern, variation, and one limitation.\n\n\nSave first-report.Rmd and its HTML. A partner should be able to read the HTML without RStudio and identify the units and meaning of a point. With spare practice time, the provided leaf-area/mass table offers a transfer exercise; it does not require fitting a line today. Keep time for support rather than extending the deck.",
+    "text": "Give the reader four short sections\nOpen the exercises.\n\nQuestion and data: design, measurements, independent unit.\nMethods: import and growth calculation.\nResults: a labelled figure and relevant calculated facts.\nInterpretation: pattern, variation, and one limitation.\n\n\nSave first-report.Rmd and its HTML. A partner should be able to read the HTML without RStudio and identify the units and meaning of a point. With spare practice time, the provided leaf-area/mass table offers a transfer exercise; it does not require fitting a line today. Keep time for support rather than extending the deck.",
     "crumbs": [
       "Home",
       "Week 2: R and a first report",
@@ -8744,11 +8757,11 @@
     ]
   },
   {
-    "objectID": "lectures/12-variation/lec.html#practical-explain-the-number-you-calculate",
-    "href": "lectures/12-variation/lec.html#practical-explain-the-number-you-calculate",
+    "objectID": "lectures/12-variation/lec.html#exercises-explain-the-number-you-calculate",
+    "href": "lectures/12-variation/lec.html#exercises-explain-the-number-you-calculate",
     "title": "An average is not every plant",
-    "section": "Practical: explain the number you calculate",
-    "text": "Practical: explain the number you calculate\nChoose one short transfer task and keep day12-variation.R.\nWhat would stay the same if every measurement increased by 10 mm?\nWhat changes when mm become cm?\nOpen the practical and answer checks.\n\nKeep the by-hand three-number example before the full dataset. Ask for a two-sentence explanation of centre and spread. Students should retain the measurement unit and recognise that SD among plants is not uncertainty in a treatment difference.",
+    "section": "Exercises: explain the number you calculate",
+    "text": "Exercises: explain the number you calculate\nChoose one short transfer task and keep day12-variation.R.\nWhat would stay the same if every measurement increased by 10 mm?\nWhat changes when mm become cm?\nOpen exercises.\n\nKeep the by-hand three-number example before the full dataset. Ask for a two-sentence explanation of centre and spread. Students should retain the measurement unit and recognise that SD among plants is not uncertainty in a treatment difference.",
     "crumbs": [
       "Home",
       "Week 3: measurements and variation",
@@ -8965,11 +8978,11 @@
     ]
   },
   {
-    "objectID": "lectures/14-replicates-uncertainty/lec.html#practical-draw-the-design-and-explain-the-mean",
-    "href": "lectures/14-replicates-uncertainty/lec.html#practical-draw-the-design-and-explain-the-mean",
+    "objectID": "lectures/14-replicates-uncertainty/lec.html#exercises-draw-the-design-and-explain-the-mean",
+    "href": "lectures/14-replicates-uncertainty/lec.html#exercises-draw-the-design-and-explain-the-mean",
     "title": "What counts as independent evidence?",
-    "section": "Practical: draw the design and explain the mean",
-    "text": "Practical: draw the design and explain the mean\nLabel independently treated units in three designs.\nRun the supplied sampling demonstration and explain the axis.\nKeep your diagrams and day14-sampling.R.\nOpen the practical.\n\nProtect time for diagrams and discussion. The organic diagram can substitute for one plant example, not add another simulation. A useful explanation identifies what was repeated, what remained the same, and what increased the independent information.",
+    "section": "Exercises: draw the design and explain the mean",
+    "text": "Exercises: draw the design and explain the mean\nLabel independently treated units in three designs.\nRun the supplied sampling demonstration and explain the axis.\nKeep your diagrams and day14-sampling.R.\nOpen exercises.\n\nProtect time for diagrams and discussion. The organic diagram can substitute for one plant example, not add another simulation. A useful explanation identifies what was repeated, what remained the same, and what increased the independent information.",
     "crumbs": [
       "Home",
       "Week 3: measurements and variation",
@@ -9186,11 +9199,11 @@
     ]
   },
   {
-    "objectID": "lectures/16-comparisons/lec.html#practical-prepare-before-testing",
-    "href": "lectures/16-comparisons/lec.html#practical-prepare-before-testing",
+    "objectID": "lectures/16-comparisons/lec.html#exercises-prepare-before-testing",
+    "href": "lectures/16-comparisons/lec.html#exercises-prepare-before-testing",
     "title": "What difference are we estimating?",
-    "section": "Practical: prepare before testing",
-    "text": "Practical: prepare before testing\nCreate comparison.Rmd with design, growth calculation, observations, and the directed difference.\nExplain why the two groups are independent.\nOpen the practical.\n\nAsk students to read their difference aloud with units and direction. Tomorrow the report gains an interval and p-value; today’s work should already be scientifically intelligible without either.",
+    "section": "Exercises: prepare before testing",
+    "text": "Exercises: prepare before testing\nCreate comparison.Rmd with design, growth calculation, observations, and the directed difference.\nExplain why the two groups are independent.\nOpen exercises.\n\nAsk students to read their difference aloud with units and direction. Tomorrow the report gains an interval and p-value; today’s work should already be scientifically intelligible without either.",
     "crumbs": [
       "Home",
       "Week 4: comparisons and lines",
@@ -9407,11 +9420,11 @@
     ]
   },
   {
-    "objectID": "lectures/18-paired/lec.html#practical-keep-the-pair-visible",
-    "href": "lectures/18-paired/lec.html#practical-keep-the-pair-visible",
+    "objectID": "lectures/18-paired/lec.html#exercises-keep-the-pair-visible",
+    "href": "lectures/18-paired/lec.html#exercises-keep-the-pair-visible",
     "title": "The same plant measured twice",
-    "section": "Practical: keep the pair visible",
-    "text": "Practical: keep the pair visible\nMake paired-report.Rmd with the design, matched changes, a figure, result, and limitation.\nCould a reader identify what counted as one independent pair?\nOpen the practical.\n\nCheck the practical’s chosen source report filename and use its code from the top. Ask students to explain why two unrelated groups cannot become paired by putting them beside one another. No new biology or chemical prerequisite is needed.",
+    "section": "Exercises: keep the pair visible",
+    "text": "Exercises: keep the pair visible\nMake paired-report.Rmd with the design, matched changes, a figure, result, and limitation.\nCould a reader identify what counted as one independent pair?\nOpen exercises.\n\nCheck the practical’s chosen source report filename and use its code from the top. Ask students to explain why two unrelated groups cannot become paired by putting them beside one another. No new biology or chemical prerequisite is needed.",
     "crumbs": [
       "Home",
       "Week 4: comparisons and lines",
@@ -9654,11 +9667,11 @@
     ]
   },
   {
-    "objectID": "lectures/20-association/lec.html#practical-explain-the-line-the-residuals-and-one-limit",
-    "href": "lectures/20-association/lec.html#practical-explain-the-line-the-residuals-and-one-limit",
+    "objectID": "lectures/20-association/lec.html#exercises-explain-the-line-the-residuals-and-one-limit",
+    "href": "lectures/20-association/lec.html#exercises-explain-the-line-the-residuals-and-one-limit",
     "title": "A line through biological measurements",
-    "section": "Practical: explain the line, the residuals, and one limit",
-    "text": "Practical: explain the line, the residuals, and one limit\nCreate association-report.Rmd with observations, fitted line, slope units, and residuals.\nKeep the full-data result and label any sensitivity check.\nOpen the practical.\n\nCheck the exact source filename in the practical; use the root project convention. Ask students to choose one actual point and explain its residual sign. Their final report should distinguish descriptive association, supported range and a causal claim.",
+    "section": "Exercises: explain the line, the residuals, and one limit",
+    "text": "Exercises: explain the line, the residuals, and one limit\nCreate association-report.Rmd with observations, fitted line, slope units, and residuals.\nKeep the full-data result and label any sensitivity check.\nOpen exercises.\n\nCheck the exact source filename in the practical; use the root project convention. Ask students to choose one actual point and explain its residual sign. Their final report should distinguish descriptive association, supported range and a causal claim.",
     "crumbs": [
       "Home",
       "Week 4: comparisons and lines",
@@ -9914,11 +9927,11 @@
     ]
   },
   {
-    "objectID": "lectures/22-data-representations/lec.html#practical-explain-the-representation",
-    "href": "lectures/22-data-representations/lec.html#practical-explain-the-representation",
+    "objectID": "lectures/22-data-representations/lec.html#exercises-explain-the-representation",
+    "href": "lectures/22-data-representations/lec.html#exercises-explain-the-representation",
     "title": "Text, pixels, and measurements",
-    "section": "Practical: explain the representation",
-    "text": "Practical: explain the representation\nOpen day 22 practical and notes.\n\nSave representations.R, controlled copies, and the threshold table.\nRender representation-report.Rmd with two figures and interpretation.\nExplain the difference between one text string and a four-row CSV.\nKeep original files intact and rerun from a fresh session.\n\n\nKeep operations at the level already taught. The added depth is predicting controlled changes, interpreting the result, and testing the saved report; it should not become a third specialist software unit.",
+    "section": "Exercises: explain the representation",
+    "text": "Exercises: explain the representation\nOpen day 22 exercises.\n\nSave representations.R, controlled copies, and the threshold table.\nRender representation-report.Rmd with two figures and interpretation.\nExplain the difference between one text string and a four-row CSV.\nKeep original files intact and rerun from a fresh session.\n\n\nKeep operations at the level already taught. The added depth is predicting controlled changes, interpreting the result, and testing the saved report; it should not become a third specialist software unit.",
     "crumbs": [
       "Home",
       "Week 5: reproduce and transfer",
@@ -10174,42 +10187,16 @@
     ]
   },
   {
-    "objectID": "lectures/24-reproduce/lec.html#practical-keep-a-reproduction-log",
-    "href": "lectures/24-reproduce/lec.html#practical-keep-a-reproduction-log",
+    "objectID": "lectures/24-reproduce/lec.html#exercises-keep-a-reproduction-log",
+    "href": "lectures/24-reproduce/lec.html#exercises-keep-a-reproduction-log",
     "title": "Can someone else reproduce it?",
-    "section": "Practical: keep a reproduction log",
-    "text": "Practical: keep a reproduction log\nOpen day 24 practical and notes.\n\nTest the chosen main-study package and the brief algae-share package.\nRecord destination, first error, fix, and rerun outcome.\nRetain source, input, HTML, and a supported backup copy.\nKeep a controlled-failure log distinguishing execution from interpretation.\n\nUse the study you chose yesterday.\n\nFeedback should identify actions another person can reproduce. Keep this as formative practice, not a report-grading exercise. A fresh render is the endpoint.",
+    "section": "Exercises: keep a reproduction log",
+    "text": "Exercises: keep a reproduction log\nOpen day 24 exercises.\n\nTest the chosen main-study package and the brief algae-share package.\nRecord destination, first error, fix, and rerun outcome.\nRetain source, input, HTML, and a supported backup copy.\nKeep a controlled-failure log distinguishing execution from interpretation.\n\nUse the study you chose yesterday.\n\nFeedback should identify actions another person can reproduce. Keep this as formative practice, not a report-grading exercise. A fresh render is the endpoint.",
     "crumbs": [
       "Home",
       "Week 5: reproduce and transfer",
       "24. Reproduce a report",
       "Lecture (slides)"
-    ]
-  },
-  {
-    "objectID": "lectures/07-import/lec.html#check-the-supplied-studys-expected-structure",
-    "href": "lectures/07-import/lec.html#check-the-supplied-studys-expected-structure",
-    "title": "Read a table without losing its meaning",
-    "section": "Check the supplied study’s expected structure",
-    "text": "Check the supplied study’s expected structure\n\n\n\nThe independent transfer study has 18 plants split nine per group.\n\n\nRow counts, unique IDs, and group counts answer related but distinct questions.\n\nUse length(plant_id), length(unique(plant_id)), and table(treatment). Repeated IDs can be legitimate in another design; here one row per plant sets the expectation. Random allocation is stated in the design, not demonstrated by sorted rows.",
-    "crumbs": [
-      "Home",
-      "Week 2: R and a first report",
-      "7. Import a biological table",
-      "Lecture (slides)"
-    ]
-  },
-  {
-    "objectID": "week4/17-welch-test.html#extended-practical-read-and-challenge-the-complete-test-output",
-    "href": "week4/17-welch-test.html#extended-practical-read-and-challenge-the-complete-test-output",
-    "title": "Day 17 — A guided Welch t-test",
-    "section": "Extended practical — read and challenge the complete test output",
-    "text": "Extended practical — read and challenge the complete test output\nAllow about 75–90 minutes. Keep the question and plant-level figure from day 16. Work in the saved report and a small day17-checks.R script. We are using one guided model, not learning a catalogue of tests or a rule based on automatic normality testing. Every claim remains conditional on the independent units, measurement quality, and appropriateness of the small-sample model.\n\nPredict the sign of the estimated difference from the group means before calling t.test(). Run it in the stated treated-minus-control order. Locate the mean estimates, confidence interval, p-value, and number of input observations. Explain which parts have units of mm and which do not.\nReverse the vector order in a second, clearly labelled calculation. Check the mean difference and interval endpoints. The two-sided p-value should be unchanged, while direction reverses. Write a sentence explaining why a negative sign here does not mean that the data changed.\nCreate a small output-reading table: quantity, value, units, and a plain language interpretation. Include both group means, their difference, the 95% interval, and the p-value. Keep SD among plants separate from the interval for the population mean difference.\nUsing the same observations, compare 90%, 95%, and 99% intervals by changing only conf.level. State which procedure gives the widest interval and why a higher coverage target costs precision. Do not choose a confidence level after looking for one that permits a preferred conclusion. Keep the original 95% result as the main reported analysis.\nRepair these statements in your own words: “There is a 0.15% probability that the treatment has no effect”; “95% of treated plants gained between 2.70 and 9.73 mm more”; “the test shows this difference matters in any biological setting.” Identify the conditioning, individual-versus-mean, and generalisation errors separately.\nDiscuss a supplied different study with a mean difference of 2 mm and a 95% interval from −1 to 5 mm. No new calculation is required. Explain whether equality has been established, whether positive differences remain compatible with the interval, and what information would help decide if such a difference would matter biologically.\nRevise comparison.Rmd so the methods, figure, numerical results, and interpretation agree. Render after restarting, without creating the vectors manually in the Console first. Add a short note describing the checks you performed and retain the code that produced them.\n\n\n\n\n\n\n\nHint: separate an interval’s level from the data\n\n\n\n\n\nUse t.test(treated, control, conf.level = 0.90) and compare its conf.int with the existing result and with conf.level = 0.99. Changing the level does not change the observed means. Reversing the two vectors reverses and negates interval endpoints, while a two-sided test asks the same equal-means question.",
-    "crumbs": [
-      "Home",
-      "Week 4: comparisons and lines",
-      "17. A guided Welch t-test",
-      "Practical and notes"
     ]
   }
 ]

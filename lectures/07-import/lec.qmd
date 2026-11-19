@@ -205,7 +205,7 @@ A useful audit records specific evidence rather than simply saying checked. Save
 
 ## Import a second table deliberately
 
-[Open the practical and notes](../../week2/07-import.qmd).
+[Open the exercises](../../week2/07-import.qmd).
 
 Save `day07.R`, then inspect `data/leaf-mass.csv` too.
 
